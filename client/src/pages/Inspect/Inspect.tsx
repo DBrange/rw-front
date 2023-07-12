@@ -2,12 +2,12 @@ import { useForm } from "react-hook-form";
 import { z, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ElectronicData, VehicleData } from "../../interfaces";
+import { FormInput, FormSelect } from "../../components";
 
 function Inspect() {
   type FormData = VehicleData | ElectronicData;
 
-
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   const schema: ZodType<FormData> = z.object({
     firstName: z.string().min(1).max(20),
@@ -35,10 +35,14 @@ function Inspect() {
     type: z.enum(["normal", "premium"]),
   });
 
-  const { handleSubmit, register, formState, reset } = useForm<FormData>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-  console.log(formState.errors);
 
   const submitData = (data: FormData) => {
     console.log(data);
@@ -68,18 +72,75 @@ function Inspect() {
       type: "normal",
     });
   };
-
   return (
-    <form onSubmit={handleSubmit(submitData)}>
-      <label htmlFor="">Nombre</label>
-      <input type="text" {...register("firstName")} />
-      <label htmlFor="">Apellido</label>
-      <input type="text" {...register("lastName")} />
-      <label htmlFor="">Numero de telefono</label>
-      <input
-        type="number"
-        {...register("phoneNumber", { valueAsNumber: true })}
+    <form
+      className="w-full bg-slate-600 mx-auto gap-5 flex flex-col items-center"
+      onSubmit={handleSubmit(submitData)}
+    >
+      <FormInput
+        register={register("firstName")}
+        error={errors.firstName?.message}
+        type="text"
+        id="name"
+        label="Nombre"
+        placeholder="Ingrese su nombre"
       />
+      <FormInput
+        register={register("lastName")}
+        error={errors.lastName?.message}
+        type="text"
+        id="lastName"
+        label="Apellido"
+        placeholder="Ingrese su Apellido"
+      />
+      <FormInput
+        register={register("phoneNumber", { valueAsNumber: true })}
+        error={errors.phoneNumber?.message}
+        type="number"
+        id="phoneNumber"
+        label="Numero de telefono"
+        placeholder="Ingrese su numero de telefono"
+      />
+      <FormInput
+        register={register("email")}
+        error={errors.email?.message}
+        type="text"
+        id="email"
+        label="Email"
+        placeholder="Ingrese su email"
+      />
+      <FormInput
+        register={register("altEmail")}
+        error={errors.altEmail?.message}
+        type="text"
+        id="altEmail"
+        label="Email alternativo"
+        placeholder="Ingrese su email"
+      />
+      <FormSelect
+        register={register("gender")}
+        error={errors.gender?.message}
+        id="role"
+        label="Genero"
+        options={["hombre", "mujer", "otro"]}
+      />
+      <FormInput
+        register={register("dni")}
+        error={errors.dni?.message}
+        type="number"
+        id="dni"
+        label="DNI"
+        placeholder="Ingrese su DNI"
+      />
+      <FormInput
+        register={register("address")}
+        error={errors.address?.message}
+        type="text"
+        id="address"
+        label="Direccion"
+        placeholder="Ingrese su direccion"
+      />
+
       <button type="submit">Enviar</button>
     </form>
   );
