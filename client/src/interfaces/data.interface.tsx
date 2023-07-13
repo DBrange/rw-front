@@ -1,4 +1,4 @@
-interface PersonalData {
+export interface PersonalData {
   firstName: string;
   lastName: string;
   phoneNumber: number;
@@ -24,12 +24,12 @@ export interface VehicleData extends PersonalData{
   engine: any;
   model: any;
   fuel: 'diesel' | 'gasoline'
-  type: 'normal' | 'premium'
+  fuelType: 'normal' | 'premium'
 }
 
-export interface ElectronicData extends PersonalData{
-  type: 'celular' | 'tablet' | 'notebook'
-  phoneNumber: number;
+export interface ElectronicData extends PersonalData {
+  electronicType: "celular" | "tablet" | "notebook";
+  phoneNumberCel: number;
   phoneService: string;
   brand: any;
   model: any;

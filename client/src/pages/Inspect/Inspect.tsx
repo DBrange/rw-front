@@ -1,23 +1,29 @@
 import { useForm } from "react-hook-form";
-import { z, ZodType } from "zod";
+import { z, ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ElectronicData, VehicleData } from "../../interfaces";
-import { FormInput, FormSelect } from "../../components";
+import { FormElectronicData, FormPersonalData, FormVehicleData } from "../../components";
+import { useState } from "react";
 
 function Inspect() {
-  type FormData = VehicleData | ElectronicData;
+
+
 
   const currentYear = new Date().getFullYear();
 
-  const schema: ZodType<FormData> = z.object({
+  const schemaPersonal = {
     firstName: z.string().min(1).max(20),
     lastName: z.string().min(1).max(20),
-    phoneNumber: z.number().lte(10),
+    phoneNumber: z.number(),
     email: z.string().email().max(30),
     altEmail: z.string().email().max(30),
     gender: z.enum(["hombre", "mujer", "otro"]),
-    dni: z.number().gte(7).lte(8).int(),
+    dni: z.number(),
     address: z.string().min(1).max(50),
+  };
+
+  const schemaVehicle: ZodType<VehicleData> = z.object({
+    ...schemaPersonal,
     year: z.number().lte(currentYear),
     color: z.string().min(1).max(20),
     tireBrand: z.string(),
@@ -32,19 +38,37 @@ function Inspect() {
     engine: z.string(),
     model: z.string(),
     fuel: z.enum(["diesel", "gasoline"]),
-    type: z.enum(["normal", "premium"]),
+    fuelType: z.enum(["normal", "premium"]),
   });
+
+  const schemaElectronic: ZodType<ElectronicData> = z.object({
+    ...schemaPersonal,
+    electronicType: z.enum(["celular", "tablet", "notebook"]),
+    phoneNumberCel: z.number(),
+    phoneService: z.string().min(1).max(20),
+    brand: z.string(),
+    model: z.string(),
+    IMEI: z.string(),
+  });
+
+const [state, setState] =
+    useState<ZodType<VehicleData | ElectronicData>>(schemaVehicle);
+  
+const selectFormSchema = <T extends ZodTypeAny>(data: T) => {
+  setState(data);
+};
 
   const {
     handleSubmit,
     register,
     formState: { errors },
     reset,
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
+  } = useForm<VehicleData>({
+    resolver: zodResolver(state),
   });
 
-  const submitData = (data: FormData) => {
+  console.log(errors);
+  const submitData = (data: VehicleData) => {
     console.log(data);
     reset({
       firstName: "",
@@ -69,77 +93,29 @@ function Inspect() {
       engine: "",
       model: "",
       fuel: "diesel",
-      type: "normal",
+      fuelType: "normal",
     });
+    
   };
+
   return (
     <form
       className="w-full bg-slate-600 mx-auto gap-5 flex flex-col items-center"
       onSubmit={handleSubmit(submitData)}
     >
-      <FormInput
-        register={register("firstName")}
-        error={errors.firstName?.message}
-        type="text"
-        id="name"
-        label="Nombre"
-        placeholder="Ingrese su nombre"
-      />
-      <FormInput
-        register={register("lastName")}
-        error={errors.lastName?.message}
-        type="text"
-        id="lastName"
-        label="Apellido"
-        placeholder="Ingrese su Apellido"
-      />
-      <FormInput
-        register={register("phoneNumber", { valueAsNumber: true })}
-        error={errors.phoneNumber?.message}
-        type="number"
-        id="phoneNumber"
-        label="Numero de telefono"
-        placeholder="Ingrese su numero de telefono"
-      />
-      <FormInput
-        register={register("email")}
-        error={errors.email?.message}
-        type="text"
-        id="email"
-        label="Email"
-        placeholder="Ingrese su email"
-      />
-      <FormInput
-        register={register("altEmail")}
-        error={errors.altEmail?.message}
-        type="text"
-        id="altEmail"
-        label="Email alternativo"
-        placeholder="Ingrese su email"
-      />
-      <FormSelect
-        register={register("gender")}
-        error={errors.gender?.message}
-        id="role"
-        label="Genero"
-        options={["hombre", "mujer", "otro"]}
-      />
-      <FormInput
-        register={register("dni")}
-        error={errors.dni?.message}
-        type="number"
-        id="dni"
-        label="DNI"
-        placeholder="Ingrese su DNI"
-      />
-      <FormInput
-        register={register("address")}
-        error={errors.address?.message}
-        type="text"
-        id="address"
-        label="Direccion"
-        placeholder="Ingrese su direccion"
-      />
+      <button onClick={() => selectFormSchema(schemaVehicle)}>
+        Vehiculo
+      </button>
+      <button
+        onClick={() => selectFormSchema(schemaElectronic)}
+      >
+        Electrodomestico
+      </button>
+      <FormPersonalData register={register} errors={errors} />
+
+      <FormVehicleData register={register} errors={errors} />
+
+      <FormElectronicData register={register} errors={errors} />
 
       <button type="submit">Enviar</button>
     </form>

@@ -3,7 +3,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 interface Props {
   register: any;
   error: string | undefined;
-  type: string;
+  type: string ;
   id: string;
   label: string;
   placeholder: string;
