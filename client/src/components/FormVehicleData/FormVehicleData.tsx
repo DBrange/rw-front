@@ -108,9 +108,9 @@ function FormVehicleData({ register, errors }: Props) {
         options={["diesel", "gasoline"]}
       />
       <FormSelect
-        register={register("fuelType")}
-        error={errors.fuelType?.message}
-        id="fuelType"
+        register={register("vehicleType")}
+        error={errors.vehicleType?.message}
+        id="vehicleType"
         label="Tipo de combustible"
         options={["normal", "premium"]}
       />

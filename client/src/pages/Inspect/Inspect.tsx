@@ -1,14 +1,20 @@
 import { useForm } from "react-hook-form";
 import { z, ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ElectronicData, VehicleData } from "../../interfaces";
-import { FormElectronicData, FormPersonalData, FormVehicleData } from "../../components";
+import {
+  ElectronicData,
+  LegalPersonalData,
+  PersonalData,
+  VehicleData,
+} from "../../interfaces";
+import {
+  FormElectronicData,
+  FormPersonalData,
+  FormVehicleData,
+} from "../../components";
 import { useState } from "react";
 
 function Inspect() {
-
-
-
   const currentYear = new Date().getFullYear();
 
   const schemaPersonal = {
@@ -21,6 +27,24 @@ function Inspect() {
     dni: z.number(),
     address: z.string().min(1).max(50),
   };
+
+  const schemaLegalPersonal = {
+    companyName: z.string().min(1).max(20),
+    cuit: z.string().min(1).max(20),
+    phoneNumber: z.number(),
+    email: z.string().email().max(30),
+    altEmail: z.string().email().max(30),
+    address: z.string().min(1).max(50),
+  };
+  const [userActiveForm, setUserActiveForm] = useState<string>();
+
+  const selectFormUserSchema = (name: string) => {
+    setUserActiveForm(name);
+  };
+
+  // const schemaUser =
+  //   userActiveForm === "personal" ? schemaPersonal : schemaLegalPersonal;
+
 
   const schemaVehicle: ZodType<VehicleData> = z.object({
     ...schemaPersonal,
@@ -38,7 +62,7 @@ function Inspect() {
     engine: z.string(),
     model: z.string(),
     fuel: z.enum(["diesel", "gasoline"]),
-    fuelType: z.enum(["normal", "premium"]),
+    vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
   });
 
   const schemaElectronic: ZodType<ElectronicData> = z.object({
@@ -51,12 +75,15 @@ function Inspect() {
     IMEI: z.string(),
   });
 
-const [state, setState] =
+  const [schema, setSchema] =
     useState<ZodType<VehicleData | ElectronicData>>(schemaVehicle);
-  
-const selectFormSchema = <T extends ZodTypeAny>(data: T) => {
-  setState(data);
-};
+
+  const [activeForm, setActiveForm] = useState<string>();
+
+  const selectFormSchema = <T extends ZodTypeAny>(data: T, name: string) => {
+    setSchema(data);
+    setActiveForm(name);
+  };
 
   const {
     handleSubmit,
@@ -64,11 +91,11 @@ const selectFormSchema = <T extends ZodTypeAny>(data: T) => {
     formState: { errors },
     reset,
   } = useForm<VehicleData>({
-    resolver: zodResolver(state),
+    resolver: zodResolver(schema),
   });
 
   console.log(errors);
-  const submitData = (data: VehicleData) => {
+  const submitData = (data: VehicleData | ElectronicData) => {
     console.log(data);
     reset({
       firstName: "",
@@ -93,9 +120,8 @@ const selectFormSchema = <T extends ZodTypeAny>(data: T) => {
       engine: "",
       model: "",
       fuel: "diesel",
-      fuelType: "normal",
+      vehicleType: "automovil",
     });
-    
   };
 
   return (
@@ -103,20 +129,30 @@ const selectFormSchema = <T extends ZodTypeAny>(data: T) => {
       className="w-full bg-slate-600 mx-auto gap-5 flex flex-col items-center"
       onSubmit={handleSubmit(submitData)}
     >
-      <button onClick={() => selectFormSchema(schemaVehicle)}>
-        Vehiculo
-      </button>
-      <button
-        onClick={() => selectFormSchema(schemaElectronic)}
-      >
-        Electrodomestico
-      </button>
+      <div>
+        <button onClick={() => selectFormUserSchema("person")}>
+          Persona particular
+        </button>
+        <button onClick={() => selectFormUserSchema("legal")}>
+          Persona juridica
+        </button>
+      </div>
+      <div>
+        <button onClick={() => selectFormSchema(schemaVehicle, "vehicle")}>
+          Vehiculo
+        </button>
+        <button
+          onClick={() => selectFormSchema(schemaElectronic, "electronic")}
+        >
+          Electrodomestico
+        </button>
+      </div>
       <FormPersonalData register={register} errors={errors} />
-
-      <FormVehicleData register={register} errors={errors} />
-
-      <FormElectronicData register={register} errors={errors} />
-
+      {activeForm === "vehicle" ? (
+        <FormVehicleData register={register} errors={errors} />
+      ) : (
+        <FormElectronicData register={register} errors={errors} />
+      )}
       <button type="submit">Enviar</button>
     </form>
   );

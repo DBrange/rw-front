@@ -9,7 +9,16 @@ export interface PersonalData {
   address: string;
 }
 
-export interface VehicleData extends PersonalData{
+export interface LegalPersonalData {
+  companyName: string;
+  cuit: number;
+  phoneNumber: number;
+  email: string;
+  altEmail?: string;
+  address: string;
+}
+
+export interface VehicleData extends PersonalData {
   year: number;
   color: string;
   tireBrand: string;
@@ -24,7 +33,24 @@ export interface VehicleData extends PersonalData{
   engine: any;
   model: any;
   fuel: 'diesel' | 'gasoline'
-  fuelType: 'normal' | 'premium'
+  vehicleType: 'camion' | 'automovil' | 'motocicleta'
+}
+export interface LegalVehicleData extends LegalPersonalData {
+  year: number;
+  color: string;
+  tireBrand: string;
+  tireZise: string;
+  tireWear: string;
+  damage: boolean;
+  damageLocation: string;
+  images: string;
+  plate: string;
+  gnc: boolean;
+  brand: any;
+  engine: any;
+  model: any;
+  fuel: 'diesel' | 'gasoline'
+  vehicleType: 'camion' | 'automovil' | 'motocicleta'
 }
 
 export interface ElectronicData extends PersonalData {
