@@ -1,12 +1,9 @@
 import { FormInput, FormSelect } from "..";
-
-interface Props {
-  register: any;
-  errors: any;
-}
+import { useInspectContext } from "../../pages";
 
 
-function FormVehicleData({ register, errors }: Props) {
+function FormVehicleData() {
+  const { register, errors } = useInspectContext();
   return (
     <>
       <FormInput
