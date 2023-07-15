@@ -7,11 +7,17 @@ interface Props {
   id: string;
   label: string;
   placeholder: string;
+  touched: boolean;
+  checked?: boolean
 }
 
-function FormInput({ register, error, type, id, label, placeholder }: Props) {
+function FormInput({ register, error, type, id, label, placeholder, touched, checked }: Props) {
   return (
-    <div className="w-[90%] flex flex-col ">
+    <div
+      className={`${
+        checked ? "w-full" : "w-[90%]"
+      }  flex flex-col border overflow-hidden`}
+    >
       <label className="mb-1" htmlFor={id}>
         {label}
       </label>
@@ -28,7 +34,11 @@ function FormInput({ register, error, type, id, label, placeholder }: Props) {
         </i>
       </div>
       <span>
-        <p className=" text-red-400 text-xs">{error || "a"}</p>
+        <p
+          className={`${touched && error ? "text-red-400" : "text-transparent"} text-xs`}
+        >
+          {error || "a"}
+        </p>
       </span>
     </div>
   );

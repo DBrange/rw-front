@@ -2,7 +2,7 @@ import { FormInput, FormSelect } from "..";
 import { useInspectContext } from "../../pages";
 
 function FormPersonalData() {
-  const {register, errors} = useInspectContext()
+  const {register, errors, touchedFields} = useInspectContext()
   return (
     <>
       <FormInput
@@ -12,7 +12,8 @@ function FormPersonalData() {
         id="name"
         label="Nombre"
         placeholder="Ingrese su nombre"
-      /> 
+        touched={touchedFields.firstName}
+      />
       <FormInput
         register={register("lastName")}
         error={errors.lastName?.message}
@@ -20,6 +21,7 @@ function FormPersonalData() {
         id="lastName"
         label="Apellido"
         placeholder="Ingrese su Apellido"
+        touched={touchedFields.lastName}
       />
       <FormInput
         register={register("phoneNumber", { valueAsNumber: true })}
@@ -28,6 +30,7 @@ function FormPersonalData() {
         id="phoneNumber"
         label="Numero de telefono"
         placeholder="Ingrese su numero de telefono"
+        touched={touchedFields.phoneNumber}
       />
       <FormInput
         register={register("email")}
@@ -36,6 +39,7 @@ function FormPersonalData() {
         id="email"
         label="Email"
         placeholder="Ingrese su email"
+        touched={touchedFields.email}
       />
       <FormInput
         register={register("altEmail")}
@@ -44,6 +48,7 @@ function FormPersonalData() {
         id="altEmail"
         label="Email alternativo"
         placeholder="Ingrese su email"
+        touched={touchedFields.altEmail}
       />
       <FormSelect
         register={register("gender")}
@@ -51,6 +56,7 @@ function FormPersonalData() {
         id="role"
         label="Genero"
         options={["hombre", "mujer", "otro"]}
+        touched={touchedFields.gender}
       />
       <FormInput
         register={register("dni", { valueAsNumber: true })}
@@ -59,6 +65,7 @@ function FormPersonalData() {
         id="dni"
         label="DNI"
         placeholder="Ingrese su DNI"
+        touched={touchedFields.dni}
       />
       <FormInput
         register={register("address")}
@@ -67,6 +74,7 @@ function FormPersonalData() {
         id="address"
         label="Direccion"
         placeholder="Ingrese su direccion"
+        touched={touchedFields.address}
       />
     </>
   );

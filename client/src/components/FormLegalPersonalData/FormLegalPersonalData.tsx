@@ -2,7 +2,7 @@ import { FormInput } from "..";
 import { useInspectContext } from "../../pages";
 
 function FormLegalPersonalData() {
-  const { register, errors } = useInspectContext();
+  const { register, errors, touchedFields } = useInspectContext();
   return (
     <>
       <FormInput
@@ -12,6 +12,7 @@ function FormLegalPersonalData() {
         id="companyName"
         label="Nombre de la compania"
         placeholder="Ingrese su nombre"
+        touched={touchedFields.companyName}
       />
       <FormInput
         register={register("cuit")}
@@ -20,6 +21,7 @@ function FormLegalPersonalData() {
         id="cuit"
         label="CUIT"
         placeholder="Ingrese su CUIT"
+        touched={touchedFields.cuit}
       />
       <FormInput
         register={register("phoneNumber", { valueAsNumber: true })}
@@ -28,6 +30,7 @@ function FormLegalPersonalData() {
         id="phoneNumber"
         label="Numero de telefono"
         placeholder="Ingrese numero de telefonico"
+        touched={touchedFields.phoneNumber}
       />
       <FormInput
         register={register("email")}
@@ -36,6 +39,7 @@ function FormLegalPersonalData() {
         id="email"
         label="Email"
         placeholder="Ingrese email"
+        touched={touchedFields.email}
       />
       <FormInput
         register={register("altEmail")}
@@ -44,6 +48,7 @@ function FormLegalPersonalData() {
         id="altEmail"
         label="Email alternativo"
         placeholder="Ingrese email alternativo"
+        touched={touchedFields.altEmail}
       />
       <FormInput
         register={register("address")}
@@ -52,6 +57,7 @@ function FormLegalPersonalData() {
         id="address"
         label="Direccion"
         placeholder="Ingrese su direccion"
+        touched={touchedFields.address}
       />
     </>
   );

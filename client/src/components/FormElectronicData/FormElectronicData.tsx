@@ -2,7 +2,7 @@ import { FormInput, FormSelect } from "..";
 import { useInspectContext } from "../../pages";
 
 function FormElectronicData() {
-  const { register, errors } = useInspectContext();
+  const { register, errors, touchedFields } = useInspectContext();
   return (
     <>
       <FormSelect
@@ -10,7 +10,8 @@ function FormElectronicData() {
         error={errors.electrodomesticType?.message}
         id="electronicType"
         label="Tipo de electrodomestico"
-        options={["normal", "premium"]}
+        options={["celular", "tablet", 'notebook']}
+        touched={touchedFields.electronicType}
       />
       <FormInput
         register={register("phoneNumberCel", { valueAsNumber: true })}
@@ -19,6 +20,7 @@ function FormElectronicData() {
         id="phoneNumberCel"
         label="Numero del movil"
         placeholder="Numero del movil"
+        touched={touchedFields.phoneNumberCel}
       />
       <FormInput
         register={register("phoneService")}
@@ -27,6 +29,7 @@ function FormElectronicData() {
         id="phoneService"
         label="Servicio del movil"
         placeholder="Servicio del movil"
+        touched={touchedFields.phoneService}
       />
       {/* <FormInput
         register={register("phoneService")}

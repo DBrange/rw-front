@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ElectronicData,
   LegalElectronicData,
-  LegalPersonalData,
+  LegalPersonalData,  
   LegalVehicleData,
   PersonalData,
   VehicleData,
@@ -27,7 +27,8 @@ export interface IInspectContext {
   selectFormSchema: (name: string) => void;
   handleSubmit: any;
   register: any;
-  algo: () => void
+  algo: () => void;
+  touchedFields: any
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -43,6 +44,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   const [activeForm, setActiveForm] = useState<string>("vehicle");
 
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
+
 
   const currentYear = new Date().getFullYear();
 
@@ -142,7 +144,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, touchedFields },
     reset,
   } = useForm<VehicleData>({
     resolver: zodResolver(algomasquemas),
@@ -152,7 +154,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
    algo();
    console.log(errors)
   }, [errors]);
-  console.log(errors)
+  
   const submitData = (data: nose) => {
     console.log(data);
     reset({
@@ -191,7 +193,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     selectFormSchema,
     handleSubmit,
     register,
-    algo
+    algo,
+    touchedFields
   };
 
   

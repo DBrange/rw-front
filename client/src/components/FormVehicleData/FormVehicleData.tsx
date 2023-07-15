@@ -1,9 +1,11 @@
-import { FormInput, FormSelect } from "..";
+import { useState } from "react";
+import { FormCheckbox, FormInput, FormInputOptional, FormSelect } from "..";
 import { useInspectContext } from "../../pages";
 
-
 function FormVehicleData() {
-  const { register, errors } = useInspectContext();
+  const { register, errors, touchedFields } = useInspectContext();
+
+  const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   return (
     <>
       <FormInput
@@ -13,6 +15,7 @@ function FormVehicleData() {
         id="year"
         label="Año"
         placeholder="Ingrese el Año"
+        touched={touchedFields.year}
       />
       <FormInput
         register={register("color")}
@@ -21,6 +24,7 @@ function FormVehicleData() {
         id="color"
         label="Color"
         placeholder="Ingrese el color"
+        touched={touchedFields.color}
       />
       <FormInput
         register={register("tireBrand")}
@@ -29,6 +33,7 @@ function FormVehicleData() {
         id="tireBrand"
         label="Marca de las ruedas"
         placeholder="Ingrese la marca"
+        touched={touchedFields.tireBrand}
       />
       <FormInput
         register={register("tireZise")}
@@ -37,6 +42,7 @@ function FormVehicleData() {
         id="tireZise"
         label="Tamaño de la rueda"
         placeholder="Ingrese el tamaño"
+        touched={touchedFields.tireZise}
       />
       <FormInput
         register={register("tireWear")}
@@ -45,18 +51,25 @@ function FormVehicleData() {
         id="tireWear"
         label="Desgaste de la rueda"
         placeholder="Ingrese el desgaste"
+        touched={touchedFields.tireWear}
       />
 
-      <label htmlFor="">Daño</label>
-      <input type="checkbox" {...register("damage")} />
+      <FormCheckbox
+        register={register("damage")}
+        setChecked={setIsCheckedDamage}
+        id={"damage"}
+        label={"daño"}
+      />
 
-      <FormInput
+      <FormInputOptional
         register={register("damageLocation")}
         error={errors.damageLocation?.message}
+        checked={isCheckedDamage}
         type="text"
         id="damageLocation"
         label="Lugar dañado"
         placeholder="Ingrese el lugar"
+        touched={touchedFields.damageLocation}
       />
 
       {/* <input type="file" /> */}
@@ -68,10 +81,13 @@ function FormVehicleData() {
         id="plate"
         label="Patente"
         placeholder="Ingrese la patente"
+        touched={touchedFields.plate}
       />
 
-      <label htmlFor="">GNC</label>
-      <input type="checkbox" {...register("gnc")} />
+      <div>
+        <label htmlFor="">GNC</label>
+        <input type="checkbox" {...register("gnc")} />
+      </div>
 
       {/* <FormInput
         register={register("address")}
@@ -103,15 +119,17 @@ function FormVehicleData() {
         id="fuel"
         label="Combustible"
         options={["diesel", "gasoline"]}
+        touched={touchedFields.fuel}
       />
       <FormSelect
         register={register("vehicleType")}
         error={errors.vehicleType?.message}
         id="vehicleType"
-        label="Tipo de combustible"
-        options={["normal", "premium"]}
+        label="Tipo de vehiculo"
+        options={["camion", "automovil", "motocicleta"]}
+        touched={touchedFields.vehicleType}
       />
     </>
   );
 }
-export default FormVehicleData
+export default FormVehicleData;
