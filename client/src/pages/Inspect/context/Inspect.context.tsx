@@ -3,24 +3,31 @@ import { z, ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ElectronicData,
+  LegalElectronicData,
   LegalPersonalData,
+  LegalVehicleData,
   PersonalData,
   VehicleData,
 } from "../../../interfaces";
 
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
+
+  type nose =
+    | VehicleData
+    | ElectronicData
+    | LegalVehicleData
+    | LegalElectronicData;
 
 export interface IInspectContext {
   userActiveForm: string;
   activeForm: string;
   errors: any;
-  submitData: (data: VehicleData | ElectronicData) => void;
+  submitData: (data: nose) => void;
   selectFormUserSchema: (name: string) => void;
-  selectFormSchema: <T extends ZodTypeAny>(data: T, name: string) => void;
+  selectFormSchema: (name: string) => void;
   handleSubmit: any;
   register: any;
-  schemaElectronic: ZodType<ElectronicData>;
-  schemaVehicle: ZodType<VehicleData>;
+  algo: () => void
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -32,6 +39,7 @@ type ChildrenType = {
 };
 
 export const InspectProvider = ({ children }: ChildrenType) => {
+  
   const [activeForm, setActiveForm] = useState<string>("vehicle");
 
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
@@ -51,7 +59,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
   const schemaLegalPersonal = {
     companyName: z.string().min(1).max(20),
-    cuit: z.string().min(1).max(20),
+    cuit: z.number(),
     phoneNumber: z.number(),
     email: z.string().email().max(30),
     altEmail: z.string().email().max(30),
@@ -65,8 +73,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   // const schemaUser =
   //   userActiveForm === "personal" ? schemaPersonal : schemaLegalPersonal;
 
-  const schemaVehicle: ZodType<VehicleData> = z.object({
-    ...schemaPersonal,
+  const schemaVehicle = {
     year: z.number().lte(currentYear),
     color: z.string().min(1).max(20),
     tireBrand: z.string(),
@@ -82,23 +89,53 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     model: z.string(),
     fuel: z.enum(["diesel", "gasoline"]),
     vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
-  });
+  };
 
-  const schemaElectronic: ZodType<ElectronicData> = z.object({
-    ...schemaPersonal,
+  const schemaElectronic = {
     electronicType: z.enum(["celular", "tablet", "notebook"]),
     phoneNumberCel: z.number(),
     phoneService: z.string().min(1).max(20),
     brand: z.string(),
     model: z.string(),
     IMEI: z.string(),
-  });
+  };
 
-  const [schema, setSchema] =
-    useState<ZodType<VehicleData | ElectronicData>>(schemaVehicle);
+  const algo = () => {
+    let schemaUser;
+    let schemaElement;
+    if (userActiveForm === "person") {
+      schemaUser = schemaPersonal;
+      if (activeForm === "vehicle") {
+        schemaElement = schemaVehicle;
+        algomas<VehicleData>(schemaUser, schemaElement);
+      } else if (activeForm === "electronic") {
+        schemaElement = schemaElectronic;
+        algomas<ElectronicData>(schemaUser, schemaElement);
+      }
+    } else if (userActiveForm === "legal") {
+      schemaUser = schemaLegalPersonal;
+      if (activeForm === "vehicle") {
+        schemaElement = schemaVehicle;
+        algomas<LegalVehicleData>(schemaUser, schemaElement);
+      } else if (activeForm === "electronic") {
+        schemaElement = schemaElectronic;
+        algomas<LegalElectronicData>(schemaUser, schemaElement);
+      }
+    }
+  };
 
-  const selectFormSchema = <T extends ZodTypeAny>(data: T, name: string) => {
-    setSchema(data);
+  const [algomasquemas, setAlgomasquemas] = useState<any>();
+
+  const algomas = <T,>(schemaUser: any, schemaElement: any) => {
+    const schema: any = z.object({ ...schemaUser, ...schemaElement });
+    setAlgomasquemas(schema);
+  };
+
+
+  
+  // const [schema, setSchema] = useState<ZodType<nose>>(algomasquemas);
+
+  const selectFormSchema = (name: string) => {
     setActiveForm(name);
   };
 
@@ -108,11 +145,15 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     formState: { errors },
     reset,
   } = useForm<VehicleData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(algomasquemas),
   });
 
-  console.log(errors);
-  const submitData = (data: VehicleData | ElectronicData) => {
+ useEffect(() => {
+   algo();
+   console.log(errors)
+  }, [errors]);
+  console.log(errors)
+  const submitData = (data: nose) => {
     console.log(data);
     reset({
       firstName: "",
@@ -150,9 +191,10 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     selectFormSchema,
     handleSubmit,
     register,
-    schemaElectronic,
-    schemaVehicle,
+    algo
   };
+
+  
 
   return (
     <InspectContext.Provider value={values}>{children}</InspectContext.Provider>

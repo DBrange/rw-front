@@ -61,3 +61,11 @@ export interface ElectronicData extends PersonalData {
   model: any;
   IMEI: any;
 }
+export interface LegalElectronicData extends LegalPersonalData {
+  electronicType: "celular" | "tablet" | "notebook";
+  phoneNumberCel: number;
+  phoneService: string;
+  brand: any;
+  model: any;
+  IMEI: any;
+}
