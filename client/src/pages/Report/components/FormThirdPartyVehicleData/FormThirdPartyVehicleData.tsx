@@ -3,7 +3,7 @@ import { FormInput } from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormThirdPartyVehicleData() {
-  const { register, errors, touchedFields, textaValue } = useReportContext();
+  const { register, errors, touchedFields } = useReportContext();
   return (
     <>
       <FormInput
@@ -114,7 +114,8 @@ function FormThirdPartyVehicleData() {
         placeholder="Ingresar numero telefonico"
         touched={touchedFields.phoneNumber}
       />
-      // image
+
+      <FormUploadImage register={register("licencePhoto")} />
       <FormInput
         register={register("email")}
         error={errors.email?.message}
@@ -124,7 +125,6 @@ function FormThirdPartyVehicleData() {
         placeholder="Ingresar email"
         touched={touchedFields.email}
       />
-      <FormUploadImage register={register("licencePhoto")} />
     </>
   );
 }
