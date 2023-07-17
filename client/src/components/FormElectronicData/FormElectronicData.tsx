@@ -1,60 +1,82 @@
-import { FormInput, FormSelect } from "..";
-import { useInspectContext } from "../../pages";
+import { useState } from "react";
+import { FormInput, FormInputOptional } from "..";
+import { FormSelectElecType } from "../../pages";
 
-function FormElectronicData() {
-  const { register, errors, touchedFields } = useInspectContext();
+interface Props {
+  register: any;
+  errors: any;
+  touchedFields: any;
+}
+
+function FormElectronicData({ register, errors, touchedFields }: Props) {
+  const [isPhone, setIsPhone] = useState<boolean>(false);
+
+  const electronicType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    if (value === "celular") {
+      setIsPhone(true);
+    } else {
+      setIsPhone(false);
+    }
+  };
+
   return (
     <>
-      <FormSelect
+      <FormSelectElecType
         register={register("electronicType")}
         error={errors.electrodomesticType?.message}
-        id="electronicType"
-        label="Tipo de electrodomestico"
-        options={["celular", "tablet", 'notebook']}
         touched={touchedFields.electronicType}
+        electronicType={electronicType}
       />
-      <FormInput
-        register={register("phoneNumberCel", { valueAsNumber: true })}
+      <FormInputOptional
+        register={register("phoneNumberCel")}
         error={errors.phoneNumberCel?.message}
-        type="number"
+        checked={isPhone}
+        type="text"
         id="phoneNumberCel"
         label="Numero del movil"
         placeholder="Numero del movil"
         touched={touchedFields.phoneNumberCel}
       />
-      <FormInput
+      <FormInputOptional
         register={register("phoneService")}
         error={errors.phoneService?.message}
-        type="number"
+        checked={isPhone}
+        type="text"
         id="phoneService"
         label="Servicio del movil"
         placeholder="Servicio del movil"
         touched={touchedFields.phoneService}
       />
-      {/* <FormInput
-        register={register("phoneService")}
-        error={errors.year?.message}
+      <FormInputOptional
+        register={register("imei")}
+        error={errors.imei?.message}
+        checked={isPhone}
         type="number"
-        id="year"
-        label="Año"
+        id="imei"
+        label="IMEI"
         placeholder="Ingrese el Año"
+        touched={touchedFields.imei}
       />
       <FormInput
-        register={register("year")}
-        error={errors.year?.message}
-        type="number"
-        id="year"
-        label="Año"
+        register={register("brand")}
+        error={errors.brand?.message}
+        type="text"
+        id="brand"
+        label="Marca"
         placeholder="Ingrese el Año"
+        touched={touchedFields.brand}
       />
       <FormInput
-        register={register("year")}
-        error={errors.year?.message}
-        type="number"
-        id="year"
-        label="Año"
+        register={register("model")}
+        error={errors.model?.message}
+        type="text"
+        id="model"
+        label="Modelo"
         placeholder="Ingrese el Año"
-      /> */}
+        touched={touchedFields.model}
+      />
     </>
   );
 }

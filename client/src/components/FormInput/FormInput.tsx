@@ -1,4 +1,8 @@
 import { AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCheckCircle } from "react-icons/ai";
+
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 interface Props {
   register: any;
@@ -18,24 +22,33 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
         checked ? "w-full" : "w-[90%]"
       }  flex flex-col border overflow-hidden`}
     >
-      <label className="mb-1" htmlFor={id}>
+      <label
+        className={`${touched && error && "text-red-400"} mb-1`}
+        htmlFor={id}
+      >
         {label}
       </label>
       <div className=" relative">
         <input
-          className="w-full h-8 pl-2 rounded"
+          className={`${
+            touched && error && "border-red-400"
+          } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
           type={type}
           id={id}
           {...register}
           placeholder={placeholder}
         />
-        <i className="absolute right-2 top-2">
-          <AiFillCloseCircle size={16} />
-        </i>
+        {touched && error && (
+          <i className="text-red-400 absolute right-2 top-2">
+            <AiFillCloseCircle size={16} />
+          </i>
+        )}
       </div>
       <span>
         <p
-          className={`${touched && error ? "text-red-400" : "text-transparent"} text-xs`}
+          className={`${
+            touched && error ? "text-red-400" : "text-transparent"
+          } text-xs`}
         >
           {error || "a"}
         </p>

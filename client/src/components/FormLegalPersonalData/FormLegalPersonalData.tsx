@@ -1,8 +1,12 @@
 import { FormInput } from "..";
-import { useInspectContext } from "../../pages";
 
-function FormLegalPersonalData() {
-  const { register, errors, touchedFields } = useInspectContext();
+interface Props {
+  register: any;
+  errors: any;
+  touchedFields: any;
+}
+
+function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
   return (
     <>
       <FormInput
@@ -15,9 +19,9 @@ function FormLegalPersonalData() {
         touched={touchedFields.companyName}
       />
       <FormInput
-        register={register("cuit")}
+        register={register("cuit", { valueAsNumber: true })}
         error={errors.cuit?.message}
-        type="text"
+        type="number"
         id="cuit"
         label="CUIT"
         placeholder="Ingrese su CUIT"

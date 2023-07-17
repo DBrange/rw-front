@@ -13,7 +13,12 @@ function FormSelect({ register, error, id, label, options, touched }: Props) {
       <label className="mb-1" htmlFor={id}>
         {label}
       </label>
-      <select className="w-full h-8 pl-2 rounded" id={id} {...register}>
+      <select
+        defaultValue="default"
+        className="w-full h-8 pl-2 rounded"
+        id={id}
+        {...register}
+      >
         <option value="default" hidden>
           Seleccionar
         </option>

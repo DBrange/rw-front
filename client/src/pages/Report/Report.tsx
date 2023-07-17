@@ -1,6 +1,11 @@
+import { FormReport } from "."
+import { ReportProvider } from "./context"
+
 function Report() {
   return (
-    <div>Report</div>
+    <ReportProvider>
+      <FormReport />
+    </ReportProvider>
   )
 }
 export default Report

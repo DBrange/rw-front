@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { FormCheckbox, FormInput, FormInputOptional, FormSelect } from "..";
-import { useInspectContext } from "../../pages";
+import { FormUploadImage } from "../../pages";
 
-function FormVehicleData() {
-  const { register, errors, touchedFields } = useInspectContext();
+interface Props {
+  register: any;
+  errors: any;
+  touchedFields: any;
+}
 
+function FormVehicleData({ register, errors, touchedFields }: Props) {
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   return (
     <>
@@ -14,7 +18,7 @@ function FormVehicleData() {
         type="number"
         id="year"
         label="Año"
-        placeholder="Ingrese el Año"
+        placeholder="Ano del vehiculo"
         touched={touchedFields.year}
       />
       <FormInput
@@ -23,7 +27,7 @@ function FormVehicleData() {
         type="text"
         id="color"
         label="Color"
-        placeholder="Ingrese el color"
+        placeholder="Color del vehiculo"
         touched={touchedFields.color}
       />
       <FormInput
@@ -72,7 +76,7 @@ function FormVehicleData() {
         touched={touchedFields.damageLocation}
       />
 
-      {/* <input type="file" /> */}
+      <FormUploadImage register={register("images")} />
 
       <FormInput
         register={register("plate")}
@@ -89,30 +93,33 @@ function FormVehicleData() {
         <input type="checkbox" {...register("gnc")} />
       </div>
 
-      {/* <FormInput
-        register={register("address")}
-        error={errors.address?.message}
+      <FormInput
+        register={register("brand")}
+        error={errors.brand?.message}
         type="text"
-        id="address"
-        label="Direccion"
-        placeholder="Ingrese su direccion"
+        id="brand"
+        label="Marca"
+        placeholder="Ingresar marca"
+        touched={touchedFields.brand}
       />
       <FormInput
-        register={register("address")}
-        error={errors.address?.message}
+        register={register("model")}
+        error={errors.model?.message}
         type="text"
-        id="address"
-        label="Direccion"
-        placeholder="Ingrese su direccion"
+        id="model"
+        label="Modelo"
+        placeholder="Ingresar modelo"
+        touched={touchedFields.model}
       />
       <FormInput
-        register={register("address")}
-        error={errors.address?.message}
+        register={register("engine")}
+        error={errors.engine?.message}
         type="text"
-        id="address"
-        label="Direccion"
-        placeholder="Ingrese su direccion"
-      /> */}
+        id="engine"
+        label="Motor"
+        placeholder="Ingresar motor"
+        touched={touchedFields.ingine}
+      />
       <FormSelect
         register={register("fuel")}
         error={errors.fuel?.message}

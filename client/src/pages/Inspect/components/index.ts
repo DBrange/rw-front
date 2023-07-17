@@ -1,1 +1,3 @@
-export { default as FormInspect } from './FormInspect';
+export * from './FormInspect';
+export { default as FormSelectElecType } from './FormSelectElecType/FormSelectElecType';
+export * from './FormUploadImage';

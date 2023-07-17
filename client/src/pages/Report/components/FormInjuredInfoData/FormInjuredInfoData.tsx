@@ -1,16 +1,14 @@
-import { FormInput, FormSelect } from "..";
+import { FormInput, FormSelect } from "../../../../components";
+import { useReportContext } from "../../context";
 
-interface Props {
-  register: any;
-  errors: any;
-  touchedFields: any;
-}
-
-function FormPersonalData({ register, errors, touchedFields }: Props) {
+function FormInjuredInfoData({person}: {person: number}) {
+  const { register, errors, touchedFields } = useReportContext();
   return (
     <>
+      <h3>{`Persona ${person}`}</h3>
+
       <FormInput
-        register={register("firstName")}
+        register={register("thridParty.firstName")}
         error={errors.firstName?.message}
         type="text"
         id="name"
@@ -19,7 +17,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.firstName}
       />
       <FormInput
-        register={register("lastName")}
+        register={register("thridParty.lastName")}
         error={errors.lastName?.message}
         type="text"
         id="lastName"
@@ -28,7 +26,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.lastName}
       />
       <FormInput
-        register={register("phoneNumber", { valueAsNumber: true })}
+        register={register("thridParty.phoneNumber", { valueAsNumber: true })}
         error={errors.phoneNumber?.message}
         type="number"
         id="phoneNumber"
@@ -37,7 +35,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.phoneNumber}
       />
       <FormInput
-        register={register("email")}
+        register={register("thridParty.email")}
         error={errors.email?.message}
         type="text"
         id="email"
@@ -45,17 +43,8 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         placeholder="Ingrese su email"
         touched={touchedFields.email}
       />
-      <FormInput
-        register={register("altEmail")}
-        error={errors.altEmail?.message}
-        type="text"
-        id="altEmail"
-        label="Email alternativo"
-        placeholder="Ingrese su email"
-        touched={touchedFields.altEmail}
-      />
       <FormSelect
-        register={register("gender")}
+        register={register("thridParty.gender")}
         error={errors.gender?.message}
         id="role"
         label="Genero"
@@ -63,7 +52,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.gender}
       />
       <FormInput
-        register={register("dni", { valueAsNumber: true })}
+        register={register("thridParty.dni", { valueAsNumber: true })}
         error={errors.dni?.message}
         type="number"
         id="dni"
@@ -72,15 +61,15 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.dni}
       />
       <FormInput
-        register={register("address")}
-        error={errors.address?.message}
+        register={register("thridParty.injuries")}
+        error={errors.injuries?.message}
         type="text"
-        id="address"
+        id="injuries"
         label="Direccion"
         placeholder="Ingrese su direccion"
-        touched={touchedFields.address}
+        touched={touchedFields.injuries}
       />
     </>
   );
 }
-export default FormPersonalData;
+export default FormInjuredInfoData

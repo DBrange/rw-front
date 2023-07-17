@@ -12,6 +12,7 @@ import {
 } from "../../../interfaces";
 
 import { useState, createContext, useContext, useEffect } from "react";
+import { IsOpen } from "../interfaces";
 
 type nose =
   | VehicleData
@@ -19,7 +20,7 @@ type nose =
   | LegalVehicleData
   | LegalElectronicData;
 
-export interface IInspectContext {
+export interface IReportContext {
   userActiveForm: string;
   activeForm: string;
   errors: any;
@@ -30,9 +31,12 @@ export interface IInspectContext {
   register: any;
   algo: () => void;
   touchedFields: any;
+  textaValue: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  isOpen: IsOpen;
+  typeComplaint: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-export const InspectContext = createContext<IInspectContext | undefined>(
+export const ReportContext = createContext<IReportContext | undefined>(
   undefined
 );
 
@@ -40,10 +44,26 @@ type ChildrenType = {
   children: React.ReactElement[] | React.ReactElement;
 };
 
-export const InspectProvider = ({ children }: ChildrenType) => {
+export const ReportProvider = ({ children }: ChildrenType) => {
   const [activeForm, setActiveForm] = useState<string>("vehicle");
 
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
+
+    const [isOpen, setIsOpen] = useState<IsOpen>({
+      crash: false,
+      theft: false,
+      fire: false,
+    });
+
+    const typeComplaint = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      const { value } = e.currentTarget;
+      setIsOpen({
+        ...isOpen,
+        [value]: true,
+      });
+    };
 
   const currentYear = new Date().getFullYear();
 
@@ -92,19 +112,54 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
   };
 
-const numberOrEmpty = z
-  .string()
-  .refine((value) => value === "" || /^\d*$/.test(value), {
-    message: "Solo se permiten números o el campo puede estar vacío",
+  const ZodNumberOrEmpty = z
+    .string()
+    .refine((value) => value === "" || /^\d*$/.test(value), {
+      message: "Solo se permiten números o el campo puede estar vacío",
+    });
+
+  const schemaInjuredInfo = z.object({
+    name: z.string(),
+    lastName: z.string(),
+    phoneNumber: z.number(),
+    email: z.string(),
+    gender: z.enum(["hombre", "mujer", "otro"]),
+    dni: z.number(),
+    injuries: z.string(),
   });
 
   const schemaElectronic = {
     electronicType: z.enum(["celular", "tablet", "notebook"]),
-    phoneNumberCel: numberOrEmpty,
+    phoneNumberCel: ZodNumberOrEmpty,
     phoneService: z.string().max(20),
     brand: z.string(),
     model: z.string(),
     imei: z.string(),
+  };
+
+  const schemaVehicleCrashReport = z.object({
+    time: z.string(),
+    date: z.date(),
+    location: z.string(),
+    injured: z.boolean(),
+    injures: z.string(),
+    ambulance: z.boolean(),
+    ambulanceTo: z.string(),
+    thridInjured: z.boolean(),
+    thridParty: z.object({
+      amount: z.number(),
+      injuredInfo: z.array(schemaInjuredInfo),
+    }),
+  });
+
+  const validateTexta = (value: string) => {
+    schemaVehicleCrashReport.safeParse({ details: value });
+  }
+
+  const textaValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value
+    validateTexta(value)
+    console.log(value)
   };
 
   const algo = () => {
@@ -149,7 +204,7 @@ const numberOrEmpty = z
     register,
     formState: { errors, touchedFields },
     reset,
-  } = useForm<AllDataInspect>({
+  } = useForm<any>({
     resolver: zodResolver(algomasquemas),
   });
 
@@ -204,17 +259,20 @@ const numberOrEmpty = z
     register,
     algo,
     touchedFields,
+    textaValue,
+    isOpen,
+    typeComplaint,
   };
 
   return (
-    <InspectContext.Provider value={values}>{children}</InspectContext.Provider>
+    <ReportContext.Provider value={values}>{children}</ReportContext.Provider>
   );
 };
 
-export const useInspectContext = () => {
-  const context = useContext(InspectContext);
+export const useReportContext = () => {
+  const context = useContext(ReportContext);
   if (!context)
-    throw new Error("useLoginContext can only be used inside LoginProvider");
+    throw new Error("useReportContext can only be used inside ReportProvider");
 
   return context;
 };
