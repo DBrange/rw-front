@@ -13,7 +13,7 @@ interface Props {
 
 function FormInputOptional({ register, checked, error, type, id, label, placeholder, touched }: Props) {
   return (
-    <div className="overflow-hidden w-[90%] flex">
+    <div className="overflow-hidden w-[100%] flex">
       <div
         className={`${
           checked ? "h-full opacity-1" : "h-0 -translate-y-full opacity-0"

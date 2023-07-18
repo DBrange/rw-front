@@ -9,13 +9,18 @@ interface Props {
 
 function FormSelect({ register, error, id, label, options, touched }: Props) {
   return (
-    <div className="w-[90%] flex flex-col">
-      <label className="mb-1" htmlFor={id}>
+    <div className="w-[100%] flex flex-col">
+      <label
+        className={`${touched && error && "text-red-400"} mb-1`}
+        htmlFor={id}
+      >
         {label}
       </label>
       <select
         defaultValue="default"
-        className="w-full h-8 pl-2 rounded"
+        className={`${
+          touched && error && "border-red-400"
+        } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
         id={id}
         {...register}
       >

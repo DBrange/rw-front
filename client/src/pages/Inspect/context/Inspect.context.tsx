@@ -8,6 +8,7 @@ import {
   LegalPersonalData,
   LegalVehicleData,
   PersonalData,
+  UserBtnActive,
   VehicleData,
 } from "../../../interfaces";
 
@@ -30,6 +31,7 @@ export interface IInspectContext {
   register: any;
   algo: () => void;
   touchedFields: any;
+  userBtnActive: UserBtnActive;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -44,6 +46,12 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   const [activeForm, setActiveForm] = useState<string>("vehicle");
 
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
+  const [userBtnActive, setuserBtnActive] = useState<UserBtnActive>({
+    person: false,
+    legal: false,
+    vehicle: false,
+    electronic: false,
+  });
 
   const currentYear = new Date().getFullYear();
 
@@ -69,6 +77,20 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
+    console.log(name)
+    if (name === userActiveForm) {
+      setuserBtnActive({
+        ...userBtnActive,
+        person: true,
+        legal: false,
+      });
+    } else{
+      setuserBtnActive({
+        ...userBtnActive,
+        person: false,
+        legal: true,
+      });
+    }
   };
 
   // const schemaUser =
@@ -135,13 +157,26 @@ const numberOrEmpty = z
 
   const algomas = <T,>(schemaUser: any, schemaElement: any) => {
     const schema: any = z.object({ ...schemaUser, ...schemaElement });
-    setAlgomasquemas(schema);
+    // setAlgomasquemas(schema);
   };
 
   // const [schema, setSchema] = useState<ZodType<nose>>(algomasquemas);
 
   const selectFormSchema = (name: string) => {
     setActiveForm(name);
+      if (name === activeForm) {
+        setuserBtnActive({
+          ...userBtnActive,
+          vehicle: true,
+          electronic: false,
+        });
+      } else {
+        setuserBtnActive({
+          ...userBtnActive,
+          vehicle: false,
+          electronic: true,
+        });
+      }
   };
 
   const {
@@ -204,6 +239,7 @@ const numberOrEmpty = z
     register,
     algo,
     touchedFields,
+    userBtnActive,
   };
 
   return (

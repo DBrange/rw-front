@@ -7,7 +7,7 @@ interface Props {
 
 function FormSelectElecType({ register, error, touched, electronicType }: Props) {
   return (
-    <div className="w-[90%] flex flex-col">
+    <div className="w-[100%] flex flex-col">
   <label className="mb-1" htmlFor={"electronicType"}>
     {"Tipo de electrodomestico"}
   </label>

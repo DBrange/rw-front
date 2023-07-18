@@ -19,8 +19,8 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
   return (
     <div
       className={`${
-        checked ? "w-full" : "w-[90%]"
-      }  flex flex-col border overflow-hidden`}
+        checked ? "w-full" : "w-[100%]"
+      }  flex flex-col overflow-hidden`}
     >
       <label
         className={`${touched && error && "text-red-400"} mb-1`}

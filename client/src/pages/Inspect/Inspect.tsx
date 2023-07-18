@@ -1,13 +1,13 @@
-
 import { InspectProvider } from ".";
 
-import { FormInspect } from "./components";
+import { FormInspect, InspectContainer } from "./components";
 
 function Inspect() {
-  
   return (
     <InspectProvider>
-      <FormInspect />
+      <InspectContainer>
+        <FormInspect />
+      </InspectContainer>
     </InspectProvider>
   );
 }

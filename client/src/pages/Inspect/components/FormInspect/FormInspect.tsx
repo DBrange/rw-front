@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { useInspectContext } from "../..";
 import {
+  ButtonChoice,
+  FormEffectOpenClose,
   FormElectronicData,
   FormLegalPersonalData,
   FormPersonalData,
   FormVehicleData,
+  PageButton,
 } from "../../../../components";
+
 
 function FormInspect() {
   const {
@@ -16,55 +21,126 @@ function FormInspect() {
     activeForm,
     errors,
     register,
-    touchedFields
+    touchedFields,
+    userBtnActive,
   } = useInspectContext();
+
+  const [page, setPage] = useState<number>(0);
+
+  const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { value } = e.currentTarget
+    if (value === 'next') {
+      setPage(page + 1)
+    } else {
+      setPage(page - 1)
+    }
+  }
 
   return (
     <form
-      className="w-full bg-gray-200 mx-auto gap-5 flex flex-col items-center"
+      className="w-[100%] mx-auto gap-5 flex flex-col items-center"
       onSubmit={handleSubmit(submitData)}
     >
-      <div>
-        <button onClick={() => selectFormUserSchema("person")}>
-          Persona particular
-        </button>
-        <button onClick={() => selectFormUserSchema("legal")}>
-          Persona juridica
-        </button>
-      </div>
-      <div>
-        <button onClick={() => selectFormSchema("vehicle")}>Vehiculo</button>
-        <button onClick={() => selectFormSchema("electronic")}>
-          Electrodomestico
-        </button>
-      </div>
-      {userActiveForm === "person" ? (
-        <FormPersonalData
-          errors={errors}
-          register={register}
-          touchedFields={touchedFields}
+      <FormEffectOpenClose
+        formName={"Persona particular"}
+        isActive={page === 0}
+        form={
+          <>
+            <div className="w-full flex flex-col justify-center items-center gap-4">
+              <ButtonChoice
+                btnOne={"Persona particular"}
+                btnTwo={"Persona juridica"}
+                isActiveOne={userBtnActive.person}
+                isActiveTwo={userBtnActive.legal}
+                selectedSchemaOne={() => selectFormUserSchema("person")}
+                selectedSchemaTwo={() => selectFormUserSchema("legal")}
+              />
+
+              <ButtonChoice
+                btnOne={"Vehiculo"}
+                btnTwo={"Electrodomestico"}
+                isActiveOne={userBtnActive.vehicle}
+                isActiveTwo={userBtnActive.electronic}
+                selectedSchemaOne={() => selectFormSchema("vehicle")}
+                selectedSchemaTwo={() => selectFormSchema("electronic")}
+              />
+              <div className="w-full">
+                <PageButton changePage={changePage} page={page} />
+              </div>
+            </div>
+          </>
+        }
+      />
+
+      <section className="">
+        <div className="">
+          <FormEffectOpenClose
+            formName={"Persona particular"}
+            isActive={userActiveForm === "person" && page === 1}
+            form={
+              <>
+                <FormPersonalData
+                  errors={errors}
+                  register={register}
+                  touchedFields={touchedFields}
+                />
+                <div className="w-full">
+                  <PageButton changePage={changePage} page={page} />
+                </div>
+              </>
+            }
+          />
+          <FormEffectOpenClose
+            formName={"Persona juridica"}
+            isActive={userActiveForm === "legal" && page === 1}
+            form={
+              <>
+                <FormLegalPersonalData
+                  errors={errors}
+                  register={register}
+                  touchedFields={touchedFields}
+                />
+                <div className="w-full">
+                  <PageButton changePage={changePage} page={page} />
+                </div>
+              </>
+            }
+          />
+        </div>
+        <FormEffectOpenClose
+          formName={"Vehiculo"}
+          isActive={activeForm === "vehicle" && page === 2}
+          form={
+            <>
+              <FormVehicleData
+                errors={errors}
+                register={register}
+                touchedFields={touchedFields}
+              />
+              <div className="w-full">
+                <PageButton changePage={changePage} page={page} />
+              </div>
+            </>
+          }
         />
-      ) : (
-        <FormLegalPersonalData
-          errors={errors}
-          register={register}
-          touchedFields={touchedFields}
+        <FormEffectOpenClose
+          formName={"Electrodomestico"}
+          isActive={activeForm === "electronic" && page === 2}
+          form={
+            <>
+              <FormElectronicData
+                errors={errors}
+                register={register}
+                touchedFields={touchedFields}
+              />
+              <div className="w-full">
+                <PageButton changePage={changePage} page={page} />
+              </div>
+            </>
+          }
         />
-      )}
-      {activeForm === "vehicle" ? (
-        <FormVehicleData
-          errors={errors}
-          register={register}
-          touchedFields={touchedFields}
-        />
-      ) : (
-        <FormElectronicData
-          errors={errors}
-          register={register}
-          touchedFields={touchedFields}
-        />
-      )}
-      <button type="submit">Enviar</button>
+      </section>
+      <button className="w-full h-10 rounded-md text-white active:translate-y-1 bg-violet-500" type="submit">Enviar</button>
     </form>
   );
 }
