@@ -4,7 +4,7 @@ import { useInspectContext } from "../..";
 
 function FormUploadImage({ register }: any) {
   
-  const { validateImages } = useInspectContext();
+  // const { validateImages } = useInspectContext();
 
   const [image, setImage] = useState();
   const [loading, setLoading] = useState();
@@ -30,7 +30,7 @@ function FormUploadImage({ register }: any) {
       setLoading(res.data.secure_url);
       if (image) {
         
-        validateImages(image)
+        // validateImages(image)
       }
     } catch (err) {
       console.log(err)
