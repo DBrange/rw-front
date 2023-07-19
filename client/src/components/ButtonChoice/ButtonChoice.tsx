@@ -19,7 +19,7 @@ function ButtonChoice({
     <div className="w-full flex rounded-md ">
       <button
         className={`${
-          isActiveOne ? "bg-violet-500" : "hover:bg-violet-300"
+          isActiveOne ? "bg-violet-500 text-white" : "hover:bg-violet-300"
         } p-2 rounded-s-md basis-1/2`}
         onClick={selectedSchemaOne}
       >
@@ -27,7 +27,7 @@ function ButtonChoice({
       </button>
       <button
         className={`${
-          isActiveTwo ? "bg-violet-500" : "hover:bg-violet-300"
+          isActiveTwo ? "bg-violet-500 text-white" : "hover:bg-violet-300"
         } p-2 rounded-e-md basis-1/2`}
         onClick={selectedSchemaTwo}
       >

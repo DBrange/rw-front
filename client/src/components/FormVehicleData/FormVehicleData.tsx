@@ -13,8 +13,8 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
   return (
     <>
       <FormInput
-        register={register("year", { valueAsNumber: true })}
-        error={errors.year?.message}
+        register={register("schemaVehicle.year", { valueAsNumber: true })}
+        error={errors.schemaVehicle?.year?.message}
         type="number"
         id="year"
         label="Año"
@@ -22,119 +22,119 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.year}
       />
       <FormInput
-        register={register("color")}
-        error={errors.color?.message}
+        register={register("schemaVehicle.color")}
+        error={errors.schemaVehicle?.color?.message}
         type="text"
         id="color"
         label="Color"
         placeholder="Color del vehiculo"
-        touched={touchedFields.color}
+        touched={touchedFields.schemaVehicle?.color}
       />
       <FormInput
-        register={register("tireBrand")}
-        error={errors.tireBrand?.message}
+        register={register("schemaVehicle.tireBrand")}
+        error={errors.schemaVehicle?.tireBrand?.message}
         type="text"
         id="tireBrand"
         label="Marca de las ruedas"
         placeholder="Ingrese la marca"
-        touched={touchedFields.tireBrand}
+        touched={touchedFields.schemaVehicle?.tireBrand}
       />
       <FormInput
-        register={register("tireZise")}
-        error={errors.tireZise?.message}
+        register={register("schemaVehicle.tireZise")}
+        error={errors.schemaVehicle?.tireZise?.message}
         type="text"
         id="tireZise"
         label="Tamaño de la rueda"
         placeholder="Ingrese el tamaño"
-        touched={touchedFields.tireZise}
+        touched={touchedFields.schemaVehicle?.tireZise}
       />
       <FormInput
-        register={register("tireWear")}
-        error={errors.tireWear?.message}
+        register={register("schemaVehicle.tireWear")}
+        error={errors.schemaVehicle?.tireWear?.message}
         type="text"
         id="tireWear"
         label="Desgaste de la rueda"
         placeholder="Ingrese el desgaste"
-        touched={touchedFields.tireWear}
+        touched={touchedFields.schemaVehicle?.tireWear}
       />
 
       <FormCheckbox
-        register={register("damage")}
+        register={register("schemaVehicle.damage")}
         setChecked={setIsCheckedDamage}
         id={"damage"}
-        label={"daño"}
+        label={"Daño"}
       />
 
       <FormInputOptional
-        register={register("damageLocation")}
-        error={errors.damageLocation?.message}
+        register={register("schemaVehicle.damageLocation")}
+        error={errors.schemaVehicle?.damageLocation?.message}
         checked={isCheckedDamage}
         type="text"
         id="damageLocation"
         label="Lugar dañado"
         placeholder="Ingrese el lugar"
-        touched={touchedFields.damageLocation}
+        touched={touchedFields.schemaVehicle?.damageLocation}
       />
 
-      <FormUploadImage register={register("images")} />
+      <FormUploadImage register={register("schemaVehicle.images")} />
 
       <FormInput
-        register={register("plate")}
-        error={errors.plate?.message}
+        register={register("schemaVehicle.plate")}
+        error={errors.schemaVehicle?.plate?.message}
         type="text"
         id="plate"
         label="Patente"
         placeholder="Ingrese la patente"
-        touched={touchedFields.plate}
+        touched={touchedFields.schemaVehicle?.plate}
       />
 
-      <div>
-        <label htmlFor="">GNC</label>
-        <input type="checkbox" {...register("gnc")} />
+      <div className="mb-7 mt-4 flex gap-4">
+        <label htmlFor="gnc">GNC</label>
+        <input id='gnc' type="checkbox" {...register("schemaVehicle.gnc")} />
       </div>
 
       <FormInput
-        register={register("brand")}
-        error={errors.brand?.message}
+        register={register("schemaVehicle.brand")}
+        error={errors.schemaVehicle?.brand?.message}
         type="text"
         id="brand"
         label="Marca"
         placeholder="Ingresar marca"
-        touched={touchedFields.brand}
+        touched={touchedFields.schemaVehicle?.brand}
       />
       <FormInput
-        register={register("model")}
-        error={errors.model?.message}
+        register={register("schemaVehicle.model")}
+        error={errors.schemaVehicle?.model?.message}
         type="text"
         id="model"
         label="Modelo"
         placeholder="Ingresar modelo"
-        touched={touchedFields.model}
+        touched={touchedFields.schemaVehicle?.model}
       />
       <FormInput
-        register={register("engine")}
-        error={errors.engine?.message}
+        register={register("schemaVehicle.engine")}
+        error={errors.schemaVehicle?.engine?.message}
         type="text"
         id="engine"
         label="Motor"
         placeholder="Ingresar motor"
-        touched={touchedFields.ingine}
+        touched={touchedFields.schemaVehicle?.ingine}
       />
       <FormSelect
-        register={register("fuel")}
-        error={errors.fuel?.message}
+        register={register("schemaVehicle.fuel")}
+        error={errors.schemaVehicle?.fuel?.message}
         id="fuel"
         label="Combustible"
         options={["diesel", "gasoline"]}
-        touched={touchedFields.fuel}
+        touched={touchedFields.schemaVehicle?.fuel}
       />
       <FormSelect
-        register={register("vehicleType")}
-        error={errors.vehicleType?.message}
+        register={register("schemaVehicle.vehicleType")}
+        error={errors.schemaVehicle?.vehicleType?.message}
         id="vehicleType"
         label="Tipo de vehiculo"
         options={["camion", "automovil", "motocicleta"]}
-        touched={touchedFields.vehicleType}
+        touched={touchedFields.schemaVehicle?.vehicleType}
       />
     </>
   );

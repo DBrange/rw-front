@@ -13,7 +13,7 @@ function FormEffectOpenClose({formName, isActive, form }: Props) {
         } transition-all duration-1000`}
       >
         {/* <h3>Datos del usuario</h3> */}
-        <div className="overflow-hidden">
+        <div className="overflow-hidden w-full">
           <h2 className="mb-10 text-violet-500 text-xl">{formName}</h2>
           <div>{form}</div>
         </div>

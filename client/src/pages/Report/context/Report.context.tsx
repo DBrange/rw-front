@@ -157,7 +157,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   }
 
   const textaValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value
+    const {value} = e.target
     validateTexta(value)
     console.log(value)
   };
@@ -214,7 +214,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   console.log(errors);
 
   const submitData = (data: nose) => {
-    console.log(data);
+    console.log('todo',data);
     reset({
       firstName: "",
       lastName: "",

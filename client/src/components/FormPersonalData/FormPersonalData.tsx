@@ -10,75 +10,77 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
   return (
     <>
       <FormInput
-        register={register("firstName")}
-        error={errors.firstName?.message}
+        register={register("schemaPersonal.firstName")}
+        error={errors.schemaPersonal?.firstName?.message}
         type="text"
         id="name"
         label="Nombre"
         placeholder="Ingrese su nombre"
-        touched={touchedFields.firstName}
+        touched={touchedFields.schemaPersonal?.firstName}
       />
       <FormInput
-        register={register("lastName")}
-        error={errors.lastName?.message}
+        register={register("schemaPersonal.lastName")}
+        error={errors.schemaPersonal?.lastName?.message}
         type="text"
         id="lastName"
         label="Apellido"
         placeholder="Ingrese su Apellido"
-        touched={touchedFields.lastName}
+        touched={touchedFields.schemaPersonal?.lastName}
       />
       <FormInput
-        register={register("phoneNumber", { valueAsNumber: true })}
-        error={errors.phoneNumber?.message}
+        register={register("schemaPersonal.phoneNumber", {
+          valueAsNumber: true,
+        })}
+        error={errors.schemaPersonal?.phoneNumber?.message}
         type="number"
         id="phoneNumber"
         label="Numero de telefono"
         placeholder="Ingrese su numero de telefono"
-        touched={touchedFields.phoneNumber}
+        touched={touchedFields.schemaPersonal?.phoneNumber}
       />
       <FormInput
-        register={register("email")}
-        error={errors.email?.message}
+        register={register("schemaPersonal.email")}
+        error={errors.schemaPersonal?.email?.message}
         type="text"
         id="email"
         label="Email"
         placeholder="Ingrese su email"
-        touched={touchedFields.email}
+        touched={touchedFields.schemaPersonal?.email}
       />
       <FormInput
-        register={register("altEmail")}
-        error={errors.altEmail?.message}
+        register={register("schemaPersonal.altEmail")}
+        error={errors.schemaPersonal?.altEmail?.message}
         type="text"
         id="altEmail"
         label="Email alternativo"
         placeholder="Ingrese su email"
-        touched={touchedFields.altEmail}
+        touched={touchedFields.schemaPersonal?.altEmail}
       />
       <FormSelect
-        register={register("gender")}
-        error={errors.gender?.message}
+        register={register("schemaPersonal.gender")}
+        error={errors.schemaPersonal?.gender?.message}
         id="role"
         label="Genero"
         options={["hombre", "mujer", "otro"]}
-        touched={touchedFields.gender}
+        touched={touchedFields.schemaPersonal?.gender}
       />
       <FormInput
-        register={register("dni", { valueAsNumber: true })}
-        error={errors.dni?.message}
+        register={register("schemaPersonal.dni", { valueAsNumber: true })}
+        error={errors.schemaPersonal?.dni?.message}
         type="number"
         id="dni"
         label="DNI"
         placeholder="Ingrese su DNI"
-        touched={touchedFields.dni}
+        touched={touchedFields.schemaPersonal?.dni}
       />
       <FormInput
-        register={register("address")}
-        error={errors.address?.message}
+        register={register("schemaPersonal.address")}
+        error={errors.schemaPersonal?.address?.message}
         type="text"
         id="address"
         label="Direccion"
         placeholder="Ingrese su direccion"
-        touched={touchedFields.address}
+        touched={touchedFields.schemaPersonal?.address}
       />
     </>
   );

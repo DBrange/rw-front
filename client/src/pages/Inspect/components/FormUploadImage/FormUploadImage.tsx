@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from 'axios'
+import { useInspectContext } from "../..";
 
-function FormUploadImage({register}: any) {
+function FormUploadImage({ register }: any) {
+  
+  const { validateImages } = useInspectContext();
 
   const [image, setImage] = useState();
   const [loading, setLoading] = useState();
@@ -25,7 +28,10 @@ function FormUploadImage({register}: any) {
       setImage(res.data.secure_url);
       console.log(res.data.secure_url);
       setLoading(res.data.secure_url);
-      
+      if (image) {
+        
+        validateImages(image)
+      }
     } catch (err) {
       console.log(err)
     }
@@ -34,7 +40,7 @@ function FormUploadImage({register}: any) {
   return (
     <div>
     <label htmlFor="images">Subir imagen</label>
-      <input type="file" name='file' id="images" onChange={upload} {...register} />
+      <input type="file" id="images" onChange={upload} />
       <img className="h-10" src={image}/>
     </div>
   )

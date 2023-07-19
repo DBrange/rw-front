@@ -10,7 +10,6 @@ import {
   PageButton,
 } from "../../../../components";
 
-
 function FormInspect() {
   const {
     userActiveForm,
@@ -23,18 +22,10 @@ function FormInspect() {
     register,
     touchedFields,
     userBtnActive,
+    page,
+    changePage,
   } = useInspectContext();
 
-  const [page, setPage] = useState<number>(0);
-
-  const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const { value } = e.currentTarget
-    if (value === 'next') {
-      setPage(page + 1)
-    } else {
-      setPage(page - 1)
-    }
-  }
 
   return (
     <form
@@ -42,7 +33,7 @@ function FormInspect() {
       onSubmit={handleSubmit(submitData)}
     >
       <FormEffectOpenClose
-        formName={"Persona particular"}
+        formName={"Tipo de inspeccion"}
         isActive={page === 0}
         form={
           <>
@@ -65,7 +56,11 @@ function FormInspect() {
                 selectedSchemaTwo={() => selectFormSchema("electronic")}
               />
               <div className="w-full">
-                <PageButton changePage={changePage} page={page} />
+                <PageButton
+                  changePage={changePage}
+                  page={page}
+                  errors={false}
+                />
               </div>
             </div>
           </>
@@ -85,7 +80,11 @@ function FormInspect() {
                   touchedFields={touchedFields}
                 />
                 <div className="w-full">
-                  <PageButton changePage={changePage} page={page} />
+                  <PageButton
+                    changePage={changePage}
+                    page={page}
+                    errors={errors.schemaPersonal}
+                  />
                 </div>
               </>
             }
@@ -101,46 +100,65 @@ function FormInspect() {
                   touchedFields={touchedFields}
                 />
                 <div className="w-full">
-                  <PageButton changePage={changePage} page={page} />
+                  <PageButton
+                    changePage={changePage}
+                    page={page}
+                    errors={errors.schemaLegalPersonal}
+                  />
                 </div>
               </>
             }
           />
         </div>
-        <FormEffectOpenClose
-          formName={"Vehiculo"}
-          isActive={activeForm === "vehicle" && page === 2}
-          form={
-            <>
-              <FormVehicleData
-                errors={errors}
-                register={register}
-                touchedFields={touchedFields}
-              />
-              <div className="w-full">
-                <PageButton changePage={changePage} page={page} />
-              </div>
-            </>
-          }
-        />
-        <FormEffectOpenClose
-          formName={"Electrodomestico"}
-          isActive={activeForm === "electronic" && page === 2}
-          form={
-            <>
-              <FormElectronicData
-                errors={errors}
-                register={register}
-                touchedFields={touchedFields}
-              />
-              <div className="w-full">
-                <PageButton changePage={changePage} page={page} />
-              </div>
-            </>
-          }
-        />
+        <div>
+          <FormEffectOpenClose
+            formName={"Vehiculo"}
+            isActive={activeForm === "vehicle" && page === 2}
+            form={
+              <>
+                <FormVehicleData
+                  errors={errors}
+                  register={register}
+                  touchedFields={touchedFields}
+                />
+                <div className="w-full">
+                  <PageButton
+                    changePage={changePage}
+                    page={page}
+                    errors={errors.schemaVehicle}
+                  />
+                </div>
+              </>
+            }
+          />
+          <FormEffectOpenClose
+            formName={"Electrodomestico"}
+            isActive={activeForm === "electronic" && page === 2}
+            form={
+              <>
+                <FormElectronicData
+                  errors={errors}
+                  register={register}
+                  touchedFields={touchedFields}
+                />
+                <div className="w-full">
+                  <PageButton
+                    changePage={changePage}
+                    page={page}
+                    errors={errors.schemaElectronic}
+                  />
+                </div>
+              </>
+            }
+          />
+        </div>
       </section>
-      <button className="w-full h-10 rounded-md text-white active:translate-y-1 bg-violet-500" type="submit">Enviar</button>
+      <button
+        className="w-full h-10 rounded-md text-white active:translate-y-1 bg-violet-500"
+        type="submit"
+      >
+        Enviar
+      </button>
     </form>
   );
 }

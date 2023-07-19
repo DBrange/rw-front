@@ -1,5 +1,6 @@
 import { useReportContext } from "../../context";
 import {
+  FormEffectOpenClose,
   FormElectronicData,
   FormLegalPersonalData,
   FormPersonalData,
@@ -38,6 +39,21 @@ function FormReport() {
           Electrodomestico
         </button>
       </div>
+      {/* <FormEffectOpenClose
+        formName={"Persona particular"}
+        isActive={userActiveForm === "person" }
+        form={
+          <>
+            <FormPersonalData
+              errors={errors}
+              register={register}
+              touchedFields={touchedFields}
+            />
+
+          </>
+        }
+      /> */}
+
       {userActiveForm === "person" ? (
         <FormPersonalData
           errors={errors}
@@ -62,15 +78,15 @@ function FormReport() {
           <FormVehicleReportData />
         </>
       ) : (
-          <>
-        <FormElectronicData
-          errors={errors}
-          register={register}
-          touchedFields={touchedFields}
+        <>
+          <FormElectronicData
+            errors={errors}
+            register={register}
+            touchedFields={touchedFields}
           />
-          
+
           <FormElectronicReportData />
-          </>
+        </>
       )}
       <button type="submit">Enviar</button>
     </form>

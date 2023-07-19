@@ -24,58 +24,58 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
   return (
     <>
       <FormSelectElecType
-        register={register("electronicType")}
-        error={errors.electrodomesticType?.message}
+        register={register("schemaElectronic.electronicType")}
+        error={errors.schemaElectronic?.electrodomesticType?.message}
         touched={touchedFields.electronicType}
         electronicType={electronicType}
       />
       <FormInputOptional
-        register={register("phoneNumberCel")}
-        error={errors.phoneNumberCel?.message}
+        register={register("schemaElectronic.phoneNumberCel")}
+        error={errors.schemaElectronic?.phoneNumberCel?.message}
         checked={isPhone}
         type="text"
         id="phoneNumberCel"
         label="Numero del movil"
         placeholder="Numero del movil"
-        touched={touchedFields.phoneNumberCel}
+        touched={touchedFields.schemaElectronic?.phoneNumberCel}
       />
       <FormInputOptional
-        register={register("phoneService")}
-        error={errors.phoneService?.message}
+        register={register("schemaElectronic.phoneService")}
+        error={errors.schemaElectronic?.phoneService?.message}
         checked={isPhone}
         type="text"
         id="phoneService"
         label="Servicio del movil"
         placeholder="Servicio del movil"
-        touched={touchedFields.phoneService}
+        touched={touchedFields.schemaElectronic?.phoneService}
       />
       <FormInputOptional
-        register={register("imei")}
-        error={errors.imei?.message}
+        register={register("schemaElectronic.imei")}
+        error={errors.schemaElectronic?.imei?.message}
         checked={isPhone}
         type="number"
         id="imei"
         label="IMEI"
         placeholder="Ingrese el Año"
-        touched={touchedFields.imei}
+        touched={touchedFields.schemaElectronic?.imei}
       />
       <FormInput
-        register={register("brand")}
-        error={errors.brand?.message}
+        register={register("schemaElectronic.brand")}
+        error={errors.schemaElectronic?.brand?.message}
         type="text"
         id="brand"
         label="Marca"
         placeholder="Ingrese el Año"
-        touched={touchedFields.brand}
+        touched={touchedFields.schemaElectronic?.brand}
       />
       <FormInput
-        register={register("model")}
-        error={errors.model?.message}
+        register={register("schemaElectronic.model")}
+        error={errors.schemaElectronic?.model?.message}
         type="text"
         id="model"
         label="Modelo"
         placeholder="Ingrese el Año"
-        touched={touchedFields.model}
+        touched={touchedFields.schemaElectronic?.model}
       />
     </>
   );

@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div>
+    <div className="flex justify-center items-center">
       <Link to={"/complaint"}>
-        <button>Denunciar</button>
+        <button className="p-5">Denunciar</button>
       </Link>
       <Link to={"/inspection"}>
-        <button>Inspeccionar</button>
+        <button className="p-5">Inspeccionar</button>
       </Link>
     </div>
   );

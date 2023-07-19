@@ -32,6 +32,9 @@ export interface IInspectContext {
   algo: () => void;
   touchedFields: any;
   userBtnActive: UserBtnActive;
+  page: number;
+  changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  validateImages: (value: string) => void;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -55,36 +58,39 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
   const currentYear = new Date().getFullYear();
 
-  const schemaPersonal = {
-    firstName: z.string().min(1).max(20),
-    lastName: z.string().min(1).max(20),
-    phoneNumber: z.number(),
-    email: z.string().email().max(30),
-    altEmail: z.string().email().max(30),
-    gender: z.enum(["hombre", "mujer", "otro"]),
-    dni: z.number(),
-    address: z.string().min(1).max(50),
-  };
+  const schemaPersonal = z.object({
+    schemaPersonal: z.object({
+      firstName: z.string().min(1).max(20),
+      lastName: z.string().min(1).max(20),
+      phoneNumber: z.number(),
+      email: z.string().email().max(30),
+      altEmail: z.string().email().max(30),
+      gender: z.enum(["hombre", "mujer", "otro"]),
+      dni: z.number(),
+      address: z.string().min(1).max(50),
+    }),
+  });
 
-  const schemaLegalPersonal = {
-    companyName: z.string().min(1).max(20),
-    cuit: z.number(),
-    phoneNumber: z.number(),
-    email: z.string().email().max(30),
-    altEmail: z.string().email().max(30),
-    address: z.string().min(1).max(50),
-  };
+  const schemaLegalPersonal = z.object({
+    schemaLegalPersonal: z.object({
+      companyName: z.string().min(1).max(20),
+      cuit: z.number(),
+      phoneNumber: z.number(),
+      email: z.string().email().max(30),
+      altEmail: z.string().email().max(30),
+      address: z.string().min(1).max(50),
+    }),
+  });
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
-    console.log(name)
     if (name === userActiveForm) {
       setuserBtnActive({
         ...userBtnActive,
         person: true,
         legal: false,
       });
-    } else{
+    } else {
       setuserBtnActive({
         ...userBtnActive,
         person: false,
@@ -96,87 +102,119 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   // const schemaUser =
   //   userActiveForm === "personal" ? schemaPersonal : schemaLegalPersonal;
 
-  const schemaVehicle = {
-    year: z.number().lte(currentYear),
-    color: z.string().min(1).max(20),
-    tireBrand: z.string(),
-    tireZise: z.string(),
-    tireWear: z.string(),
-    damage: z.boolean(),
-    damageLocation: z.string().max(50),
-    // images: z.string(),
-    plate: z.string(),
-    gnc: z.boolean(),
-    brand: z.string(),
-    engine: z.string(),
-    model: z.string(),
-    fuel: z.enum(["diesel", "gasoline"]),
-    vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
-  };
-
-const numberOrEmpty = z
-  .string()
-  .refine((value) => value === "" || /^\d*$/.test(value), {
-    message: "Solo se permiten números o el campo puede estar vacío",
+  const schemaVehicle = z.object({
+    schemaVehicle: z.object({
+      year: z.number().lte(currentYear),
+      color: z.string().min(1).max(20),
+      tireBrand: z.string().min(1).max(20),
+      tireZise: z.string().min(1).max(20),
+      tireWear: z.string().min(1).max(20),
+      damage: z.boolean(),
+      damageLocation: z.string(),
+      // images: z.string(),
+      plate: z.string().min(6).max(7),
+      gnc: z.boolean(),
+      brand: z.string().min(1).max(20),
+      engine: z.string().min(1).max(20),
+      model: z.string().min(1).max(20),
+      fuel: z.enum(["diesel", "gasoline"]),
+      vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
+    }),
   });
 
-  const schemaElectronic = {
-    electronicType: z.enum(["celular", "tablet", "notebook"]),
-    phoneNumberCel: numberOrEmpty,
-    phoneService: z.string().max(20),
-    brand: z.string(),
-    model: z.string(),
-    imei: z.string(),
-  };
+  const validateImages = (value: string) => {
+              console.log("chi", value);
+
+      schemaVehicle.shape.schemaVehicle.safeParse({images:value});
+    };
+
+  const numberOrEmpty = z
+    .string()
+    .refine((value) => value === "" || /^\d*$/.test(value), {
+      message: "Solo se permiten números o el campo puede estar vacío",
+    });
+
+  const schemaElectronic = z.object({
+    schemaElectronic: z.object({
+      electronicType: z.enum(["celular", "tablet", "notebook"]),
+      phoneNumberCel: numberOrEmpty,
+      phoneService: z.string().max(20),
+      brand: z.string().min(1).max(20),
+      model: z.string().min(1).max(20),
+      imei: z.string(),
+    }),
+  });
 
   const algo = () => {
-    let schemaUser;
-    let schemaElement;
+    let schemaUser: ZodType;
+    let schemaElement: ZodType;
     if (userActiveForm === "person") {
       schemaUser = schemaPersonal;
       if (activeForm === "vehicle") {
         schemaElement = schemaVehicle;
-        algomas<VehicleData>(schemaUser, schemaElement);
+        algomas(schemaUser, schemaElement);
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        algomas<ElectronicData>(schemaUser, schemaElement);
+        algomas(schemaUser, schemaElement);
       }
     } else if (userActiveForm === "legal") {
       schemaUser = schemaLegalPersonal;
       if (activeForm === "vehicle") {
         schemaElement = schemaVehicle;
-        algomas<LegalVehicleData>(schemaUser, schemaElement);
+        algomas(schemaUser, schemaElement);
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        algomas<LegalElectronicData>(schemaUser, schemaElement);
+        algomas(schemaUser, schemaElement);
       }
+    }
+  };
+
+  const [page, setPage] = useState<number>(0);
+
+  const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { value } = e.currentTarget;
+    if (value === "next") {
+      // setPage(page + 1);
+      if (page === 0) {
+        setPage(page + 1);
+      } else if (page === 1) {
+        setPage(page + 1);
+      }
+    } else if (value === "back") {
+      setPage(page - 1);
     }
   };
 
   const [algomasquemas, setAlgomasquemas] = useState<any>();
 
-  const algomas = <T,>(schemaUser: any, schemaElement: any) => {
-    const schema: any = z.object({ ...schemaUser, ...schemaElement });
-    // setAlgomasquemas(schema);
+  const algomas = <T extends ZodTypeAny>(schemaUser: any, schemaElement: T) => {
+    let schema: nose = schemaUser;
+    if (page === 1) {
+      schema = schemaUser;
+    } else if (page === 2) {
+      schema = schemaUser.merge(schemaElement);
+    }
+    console.log(schema);
+    setAlgomasquemas(schema);
   };
 
   // const [schema, setSchema] = useState<ZodType<nose>>(algomasquemas);
 
   const selectFormSchema = (name: string) => {
     setActiveForm(name);
-      if (name === activeForm) {
-        setuserBtnActive({
-          ...userBtnActive,
-          vehicle: true,
-          electronic: false,
-        });
-      } else {
-        setuserBtnActive({
-          ...userBtnActive,
-          vehicle: false,
-          electronic: true,
-        });
-      }
+    if (name === activeForm) {
+      setuserBtnActive({
+        ...userBtnActive,
+        vehicle: true,
+        electronic: false,
+      });
+    } else {
+      setuserBtnActive({
+        ...userBtnActive,
+        vehicle: false,
+        electronic: true,
+      });
+    }
   };
 
   const {
@@ -194,7 +232,7 @@ const numberOrEmpty = z
   console.log(errors);
 
   const submitData = (data: nose) => {
-    console.log(data);
+    console.log("todo", data);
     reset({
       firstName: "",
       lastName: "",
@@ -240,6 +278,9 @@ const numberOrEmpty = z
     algo,
     touchedFields,
     userBtnActive,
+    page,
+    changePage,
+    validateImages,
   };
 
   return (

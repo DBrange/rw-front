@@ -10,58 +10,58 @@ function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
   return (
     <>
       <FormInput
-        register={register("companyName")}
-        error={errors.companyName?.message}
+        register={register("schemaLegalPersonal.companyName")}
+        error={errors.schemaLegalPersonal?.companyName?.message}
         type="text"
         id="companyName"
         label="Nombre de la compania"
         placeholder="Ingrese su nombre"
-        touched={touchedFields.companyName}
+        touched={touchedFields.schemaLegalPersonal?.companyName}
       />
       <FormInput
-        register={register("cuit", { valueAsNumber: true })}
-        error={errors.cuit?.message}
+        register={register("schemaLegalPersonal.cuit", { valueAsNumber: true })}
+        error={errors.schemaLegalPersonal?.cuit?.message}
         type="number"
         id="cuit"
         label="CUIT"
         placeholder="Ingrese su CUIT"
-        touched={touchedFields.cuit}
+        touched={touchedFields.schemaLegalPersonal?.cuit}
       />
       <FormInput
-        register={register("phoneNumber", { valueAsNumber: true })}
-        error={errors.phoneNumber?.message}
+        register={register("schemaLegalPersonal.phoneNumber", { valueAsNumber: true })}
+        error={errors.schemaLegalPersonal?.phoneNumber?.message}
         type="number"
         id="phoneNumber"
         label="Numero de telefono"
         placeholder="Ingrese numero de telefonico"
-        touched={touchedFields.phoneNumber}
+        touched={touchedFields.schemaLegalPersonal?.phoneNumber}
       />
       <FormInput
-        register={register("email")}
-        error={errors.email?.message}
+        register={register("schemaLegalPersonal.email")}
+        error={errors.schemaLegalPersonal?.email?.message}
         type="text"
         id="email"
         label="Email"
         placeholder="Ingrese email"
-        touched={touchedFields.email}
+        touched={touchedFields.schemaLegalPersonal?.email}
       />
       <FormInput
-        register={register("altEmail")}
-        error={errors.altEmail?.message}
+        register={register("schemaLegalPersonal.altEmail")}
+        error={errors.schemaLegalPersonal?.altEmail?.message}
         type="text"
         id="altEmail"
         label="Email alternativo"
         placeholder="Ingrese email alternativo"
-        touched={touchedFields.altEmail}
+        touched={touchedFields.schemaLegalPersonal?.altEmail}
       />
       <FormInput
-        register={register("address")}
-        error={errors.address?.message}
+        register={register("schemaLegalPersonal.address")}
+        error={errors.schemaLegalPersonal?.address?.message}
         type="text"
         id="address"
         label="Direccion"
         placeholder="Ingrese su direccion"
-        touched={touchedFields.address}
+        touched={touchedFields.schemaLegalPersonal?.address}
       />
     </>
   );
