@@ -28,10 +28,10 @@ function FormUploadImage({ register }: any) {
       setImage(res.data.secure_url);
       console.log(res.data.secure_url);
       setLoading(res.data.secure_url);
-      if (image) {
+      // if (image) {
         
-        // validateImages(image)
-      }
+      //   validateImages(image)
+      // }
     } catch (err) {
       console.log(err)
     }

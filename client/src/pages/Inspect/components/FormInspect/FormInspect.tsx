@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useInspectContext } from "../..";
 import {
   ButtonChoice,
@@ -24,9 +24,12 @@ function FormInspect() {
     userBtnActive,
     page,
     changePage,
+    algo
   } = useInspectContext();
 
-
+  useEffect(() => {
+    algo()
+},[])
   return (
     <form
       className="w-[100%] mx-auto gap-5 flex flex-col items-center"
