@@ -2,10 +2,17 @@ import { useState, createContext, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z, ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserBtnActive } from "../../../interfaces";
 import {
-  UserBtnActive,
-} from "../../../interfaces";
-import { SchemaElectronic, SchemaLegalPersonalType, SchemaPersonalType, SchemaVehicle, schemaElectronic, schemaLegalPersonal, schemaPersonal, schemaVehicle } from "..";
+  SchemaElectronic,
+  SchemaLegalPersonalType,
+  SchemaPersonalType,
+  SchemaVehicle,
+  schemaElectronic,
+  schemaLegalPersonal,
+  schemaPersonal,
+  schemaVehicle,
+} from "..";
 
 type AllTypes =
   | SchemaPersonalType
@@ -34,7 +41,6 @@ export const InspectContext = createContext<IInspectContext | undefined>(
   undefined
 );
 
-
 type ChildrenType = {
   children: React.ReactElement[] | React.ReactElement;
 };
@@ -50,10 +56,11 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     electronic: false,
   });
 
+  const [algomasquemas, setAlgomasquemas] = useState<any>();
+
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
-    algo()
-    if (name === 'person') {
+    if (name === "person") {
       setuserBtnActive({
         ...userBtnActive,
         person: true,
@@ -68,33 +75,29 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-    const selectFormSchema = (name: string) => {
-      setActiveForm(name);
-      algo();
-      if (name === "vehicle") {
-        setuserBtnActive({
-          ...userBtnActive,
-          vehicle: true,
-          electronic: false,
-        });
-      } else {
-        setuserBtnActive({
-          ...userBtnActive,
-          vehicle: false,
-          electronic: true,
-        });
-      }
-    };
+  const selectFormSchema = (name: string) => {
+    setActiveForm(name);
 
-  // const schemaUser =
-  //   userActiveForm === "personal" ? schemaPersonal : schemaLegalPersonal;
-
+    if (name === "vehicle") {
+      setuserBtnActive({
+        ...userBtnActive,
+        vehicle: true,
+        electronic: false,
+      });
+    } else {
+      setuserBtnActive({
+        ...userBtnActive,
+        vehicle: false,
+        electronic: true,
+      });
+    }
+  };
 
   const validateImages = (value: string) => {
-              console.log("chi", value);
+    console.log("chi", value);
 
-      schemaVehicle.shape.schemaVehicle.safeParse({images:value});
-    };
+    schemaVehicle.shape.schemaVehicle.safeParse({ images: value });
+  };
 
   const algo = () => {
     let schemaUser: ZodType;
@@ -120,7 +123,6 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-
   const [page, setPage] = useState<number>(0);
 
   const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -136,9 +138,10 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const [algomasquemas, setAlgomasquemas] = useState<any>();
-
-  const algomas = <T extends ZodTypeAny>(schemaUser: any, schemaElement: any) => {
+  const algomas = <T extends ZodTypeAny>(
+    schemaUser: any,
+    schemaElement: any
+  ) => {
     let schema: any = schemaUser;
     if (page === 1) {
       schema = schemaUser;
@@ -147,10 +150,6 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
     setAlgomasquemas(schema);
   };
-
-  // const [schema, setSchema] = useState<ZodType<nose>>(algomasquemas);
-
-
 
   const {
     handleSubmit,
@@ -161,6 +160,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     resolver: zodResolver(algomasquemas),
   });
 
+  useEffect(() => {
+    algo();
+  }, [errors, algomasquemas]);
   console.log(errors);
 
   const submitData = (data: any) => {

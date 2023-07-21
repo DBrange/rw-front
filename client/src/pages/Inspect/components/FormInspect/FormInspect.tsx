@@ -24,12 +24,8 @@ function FormInspect() {
     userBtnActive,
     page,
     changePage,
-    algo
   } = useInspectContext();
 
-  useEffect(() => {
-    algo()
-},[])
   return (
     <form
       className="w-[100%] mx-auto gap-5 flex flex-col items-center"
