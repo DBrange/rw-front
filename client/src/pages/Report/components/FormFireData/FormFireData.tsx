@@ -34,7 +34,11 @@ function FormFireData() {
         touched={touchedFields.location}
       />
 
-      <FormTextArea textaValue={textaValue} />
+      <FormTextArea
+        textaValue={textaValue}
+        error={errors.details}
+        touched={touchedFields.details}
+      />
     </>
   );
 }

@@ -52,7 +52,9 @@ function FormCrashData() {
         placeholder="Ingresar ubicacion"
         touched={touchedFields.location}
       />
-      <FormTextArea textaValue={textaValue} />
+      
+      <FormTextArea textaValue={textaValue} error={errors.details} touched={touchedFields.details} />
+
       <FormCheckbox
         register={register("injuried")}
         setChecked={setIsCheckedInjuried}
@@ -89,7 +91,7 @@ function FormCrashData() {
         register={register("thirdInjuried")}
         setChecked={setIsCheckedThirdInjuried}
         id={"thirdInjuried"}
-        label={"Tercero(s) con lesiones"}
+        label={"Tercero(s) lesionados"}
       />
       <FormInputOptional
         register={register("amount")}

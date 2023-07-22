@@ -14,7 +14,10 @@ import {
   schemaElectronic,
   schemaLegalPersonal,
   schemaVehicleCrashReport,
+  FormInjuredInfoData,
+  PageButtonReport,
 } from "../..";
+import { FormEffectOpenClose } from "../../../components";
 
 type AllTypes =
   | SchemaPersonalType
@@ -39,6 +42,8 @@ export interface IReportContext {
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   page: number;
   userBtnActive: UserBtnActive;
+  setPeople: (value: React.SetStateAction<boolean>) => void;
+  thirdInjuredForm: () => any;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -62,12 +67,12 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   });
 
   const [typeComplaintForm, setTypeComplaitForm] = useState<TypeComplaintForm>({
-    crash: false,
+    crash: true,
     theft: false,
     fire: false,
   });
 
-  console.log(typeComplaintForm)
+  console.log(typeComplaintForm);
 
   const typeComplaint = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -115,6 +120,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       });
     }
   };
+  const [people, setPeople] = useState<boolean>(false);
 
   const validateTexta = (value: string) => {
     schemaVehicleCrashReport.safeParse({ details: value });
@@ -150,15 +156,57 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
+  const thirdInjuredForm = () => {
+    let people: any = [];
+
+    if (1 + 1 === 3) {
+      // setPeople(true);
+      for (let i = 0; i < 2; i++) {
+        people.push(<FormInjuredInfoData key={i + 1} person={i + 1} />);
+      }
+
+      return (
+        <FormEffectOpenClose
+          formName={"Terceros lesionados"}
+          isActive={typeComplaintForm.crash && page === 5}
+          form={
+            <>
+              {people}
+              <div className="w-full">
+                <PageButtonReport
+                  changePage={changePage}
+                  page={page}
+                  errors={errors.schemaVehicle}
+                />
+              </div>
+            </>
+          }
+        />
+      );
+    } else {
+      // setPeople(false);
+
+      return;
+    }
+  };
+
   const [page, setPage] = useState<number>(0);
   console.log(page);
 
   const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { value } = e.currentTarget;
     if (value === "next") {
-      setPage(page + 1);
+      if (page === 4 && !people) {
+        setPage(page + 2);
+      } else {
+        setPage(page + 1);
+      }
     } else if (value === "back") {
-      setPage(page - 1);
+      if (page === 6 && !people) {
+        setPage(page - 2);
+      } else {
+        setPage(page - 1);
+      }
     }
   };
 
@@ -211,6 +259,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     changePage,
     page,
     userBtnActive,
+    setPeople,
+    thirdInjuredForm,
   };
 
   return (
