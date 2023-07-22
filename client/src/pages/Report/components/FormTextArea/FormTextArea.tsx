@@ -5,9 +5,9 @@ interface Props {
 function FormTextArea({ textaValue }: Props) {
   return (
     <div className="">
-      <label htmlFor="details"></label>
+      <label htmlFor="details">Deatalles del suceso</label>
       <textarea
-        className="resize-none h-32"
+        className="resize-none h-32 p-4 outline-none"
         onChange={textaValue}
         id="details"
         cols={30}

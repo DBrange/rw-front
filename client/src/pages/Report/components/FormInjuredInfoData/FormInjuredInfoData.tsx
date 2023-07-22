@@ -4,8 +4,8 @@ import { useReportContext } from "../../context";
 function FormInjuredInfoData({person}: {person: number}) {
   const { register, errors, touchedFields } = useReportContext();
   return (
-    <>
-      <h3>{`Persona ${person}`}</h3>
+    <div className="border-b-2 border-violet-500">
+      <h4 className="text-violet-500 text-lg my-5">{`Persona ${person}`}</h4>
 
       <FormInput
         register={register("thridParty.firstName")}
@@ -69,7 +69,7 @@ function FormInjuredInfoData({person}: {person: number}) {
         placeholder="Ingrese su direccion"
         touched={touchedFields.injuries}
       />
-    </>
+    </div>
   );
 }
 export default FormInjuredInfoData

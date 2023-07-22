@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { FormInjuredInfoData, FormTextArea, FormThirdPartyVehicleData } from "..";
-import { FormInput, FormCheckbox, FormInputOptional } from "../../../../components";
+import { FormInjuredInfoData, FormTextArea, FormThirdPartyVehicleData, PageButtonReport } from "..";
+import { FormInput, FormCheckbox, FormInputOptional, FormEffectOpenClose } from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormCrashData() {
-      const { register, errors, touchedFields, textaValue } =
-        useReportContext();
+      const {
+        register,
+        errors,
+        touchedFields,
+        textaValue,
+        typeComplaintForm,
+        changePage,
+        page,
+      } = useReportContext();
 
       const [isCheckedInjuried, setIsCheckedInjuried] =
         useState<boolean>(false);
@@ -14,16 +21,8 @@ function FormCrashData() {
       const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
     useState<boolean>(false);
   
-  const thirdInjuredForm = () => {
-    let a = []
-    for (let i = 0; i < 3; i++) {
-      a.push(<FormInjuredInfoData person={i + 1} />)
-    }
-    console.log(a)
-    return a
-  }
 
-  thirdInjuredForm()
+
   return (
     <>
       <FormInput
@@ -82,7 +81,7 @@ function FormCrashData() {
         checked={isCheckedAmbulance}
         type="text"
         id="ambulanceTo"
-        label="Tipo el de lesion"
+        label="Destino de la ambulancia"
         placeholder="Ingrese tipo el de lesion"
         touched={touchedFields.ambulanceTo}
       />
@@ -102,9 +101,8 @@ function FormCrashData() {
         placeholder="Ingresar cantidad"
         touched={touchedFields.amount}
       />
-      {thirdInjuredForm()}
 
-      <FormThirdPartyVehicleData />
+      {/* <FormThirdPartyVehicleData /> */}
     </>
   );
 }

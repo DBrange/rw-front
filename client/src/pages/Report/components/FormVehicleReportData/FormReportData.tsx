@@ -1,26 +1,39 @@
-import { FormCrashData, FormFireData, FormThieftData } from "..";
 import { useReportContext } from "../../context";
 
 function FormVehicleReportData() {
 
-const {isOpen, typeComplaint} = useReportContext()
+const { typeComplaintForm, typeComplaint } =
+  useReportContext();
 
   return (
-    <div>
-      <button onClick={typeComplaint} value="crash">
+    <div className="flex flex-col gap-3">
+      <button
+        className={`${
+          typeComplaintForm.crash && "bg-violet-500 text-white"
+        } w-full hover:bg-violet-300 p-4 rounded-md`}
+        onClick={typeComplaint}
+        value="crash"
+      >
         Choque
       </button>
-      <button onClick={typeComplaint} value="theft">
+      <button
+        className={`${
+          typeComplaintForm.theft && "bg-violet-500 text-white"
+        } w-full hover:bg-violet-300 p-4 rounded-md`}
+        onClick={typeComplaint}
+        value="theft"
+      >
         Robo
       </button>
-      <button onClick={typeComplaint} value="fire">
+      <button
+        className={`${
+          typeComplaintForm.fire && "bg-violet-500 text-white"
+        } w-full hover:bg-violet-300 p-4 rounded-md`}
+        onClick={typeComplaint}
+        value="fire"
+      >
         Incendio
       </button>
-
-      {isOpen.crash && <FormCrashData />}
-      {isOpen.theft && <FormThieftData />}
-      {isOpen.fire && <FormFireData />}
-
     </div>
   );
 }

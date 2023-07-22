@@ -1,4 +1,4 @@
-export interface IsOpen {
+export interface TypeComplaintForm {
   crash: boolean;
   theft: boolean;
   fire: boolean;

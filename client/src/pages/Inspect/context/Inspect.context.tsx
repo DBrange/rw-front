@@ -29,7 +29,7 @@ export interface IInspectContext {
   selectFormSchema: (name: string) => void;
   handleSubmit: any;
   register: any;
-  algo: () => void;
+  selectingSchema: () => void;
   touchedFields: any;
   userBtnActive: UserBtnActive;
   page: number;
@@ -56,7 +56,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     electronic: false,
   });
 
-  const [algomasquemas, setAlgomasquemas] = useState<any>();
+  const [schema, setSchema] = useState<any>();
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
@@ -99,26 +99,26 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     schemaVehicle.shape.schemaVehicle.safeParse({ images: value });
   };
 
-  const algo = () => {
+  const selectingSchema = () => {
     let schemaUser: ZodType;
     let schemaElement: ZodType;
     if (userActiveForm === "person") {
       schemaUser = schemaPersonal;
       if (activeForm === "vehicle") {
         schemaElement = schemaVehicle;
-        algomas(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement);
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        algomas(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement);
       }
     } else if (userActiveForm === "legal") {
       schemaUser = schemaLegalPersonal;
       if (activeForm === "vehicle") {
         schemaElement = schemaVehicle;
-        algomas(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement);
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        algomas(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement);
       }
     }
   };
@@ -138,7 +138,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const algomas = <T extends ZodTypeAny>(
+  const estructuringSchema = <T extends ZodTypeAny>(
     schemaUser: any,
     schemaElement: any
   ) => {
@@ -148,7 +148,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     } else if (page === 2) {
       schema = schemaUser.merge(schemaElement);
     }
-    setAlgomasquemas(schema);
+    setSchema(schema);
   };
 
   const {
@@ -157,12 +157,12 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     formState: { errors, touchedFields },
     reset,
   } = useForm<AllTypes>({
-    resolver: zodResolver(algomasquemas),
+    resolver: zodResolver(schema),
   });
 
   useEffect(() => {
-    algo();
-  }, [errors, algomasquemas]);
+    selectingSchema();
+  }, [errors, schema]);
   console.log(errors);
 
   const submitData = (data: any) => {
@@ -179,7 +179,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     selectFormSchema,
     handleSubmit,
     register,
-    algo,
+    selectingSchema,
     touchedFields,
     userBtnActive,
     page,

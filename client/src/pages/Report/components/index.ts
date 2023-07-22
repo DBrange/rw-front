@@ -7,3 +7,5 @@ export * from './FormTextArea';
 export * from './FormThirdPartyVehicleData';
 export * from './FormVehicleReportData';
 export * from './FormVehicleThieftData';
+export * from './PageButtonReport';
+export * from './ReportContainer';
