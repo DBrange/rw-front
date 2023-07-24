@@ -3,16 +3,9 @@ import { useForm } from "react-hook-form";
 import { z, ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive } from "../../../interfaces";
-import {
-  SchemaElectronic,
-  SchemaLegalPersonalType,
-  SchemaPersonalType,
-  SchemaVehicle,
-  schemaElectronic,
-  schemaLegalPersonal,
-  schemaPersonal,
-  schemaVehicle,
-} from "..";
+import { SchemaPersonalType, SchemaLegalPersonalType, SchemaVehicle, SchemaElectronic } from "../../../models";
+import { schemaPersonal, schemaVehicle, schemaElectronic, schemaLegalPersonal } from "../../../utilities";
+
 
 type AllTypes =
   | SchemaPersonalType

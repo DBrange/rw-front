@@ -5,23 +5,14 @@ import { UserBtnActive } from "../../../interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
 import { TypeComplaintForm } from "../interfaces";
 import {
-  SchemaPersonalType,
-  SchemaLegalPersonalType,
-  SchemaVehicle,
-  SchemaElectronic,
-  schemaPersonal,
-  schemaVehicle,
-  schemaElectronic,
-  schemaLegalPersonal,
-  schemaVehicleCrashReport,
+
   FormInjuredInfoData,
   PageButtonReport,
-  schemaVehicleTheftReport,
-  schemaVehicleFireReport,
-  schemaElectronicTheftReport,
-  schemaThirdPartyVehicleReport,
+
 } from "../..";
 import { FormEffectOpenClose } from "../../../components";
+import { SchemaPersonalType, SchemaLegalPersonalType, SchemaVehicle, SchemaElectronic } from "../../../models";
+import { schemaVehicleCrashReport, schemaPersonal, schemaVehicle, schemaVehicleTheftReport, schemaVehicleFireReport, schemaElectronic, schemaElectronicTheftReport, schemaLegalPersonal, schemaThirdPartyVehicleReport } from "../../../utilities";
 
 type AllTypes =
   | SchemaPersonalType

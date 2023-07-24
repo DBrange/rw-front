@@ -7,6 +7,6 @@ export { default as FormInputOptional } from "./FormInputOptional/FormInputOptio
 export * from "./FormLegalPersonalData";
 export * from "./FormPersonalData";
 export * from "./FormSelect";
-export * from "../pages/Inspect/components/FormUploadImageReport";
+export * from "../pages/Inspect/components/FormUploadImage";
 export * from "../pages/Inspect/components/FormVehicleData";
 export * from "./PageButton";

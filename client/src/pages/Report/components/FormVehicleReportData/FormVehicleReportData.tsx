@@ -5,7 +5,7 @@ import {
   FormInputOptional,
   FormSelect,
 } from "../../../../components";
-import { FormUploadImage, useReportContext } from "../../..";
+import { FormUploadImageReport, useReportContext } from "../../..";
 
 interface Props {
   register: any;
@@ -120,7 +120,7 @@ function FormVehicleDataReport() {
         touched={touchedFields.schemaVehicle?.damageLocation}
       />
 
-      <FormUploadImage register={register("schemaVehicle.images")} />
+      <FormUploadImageReport register={register("schemaVehicle.images")} />
       {/* <label htmlFor="acaaaaa">acaaaa</label>
       <input
         type="file"

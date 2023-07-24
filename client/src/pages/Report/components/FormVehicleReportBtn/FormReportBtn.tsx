@@ -1,6 +1,6 @@
 import { useReportContext } from "../../context";
 
-function FormVehicleReportData() {
+function FormVehicleReportBtn() {
 
 const { typeComplaintForm, typeComplaint } =
   useReportContext();
@@ -37,4 +37,4 @@ const { typeComplaintForm, typeComplaint } =
     </div>
   );
 }
-export default FormVehicleReportData
+export default FormVehicleReportBtn

@@ -1,10 +1,8 @@
-export { default as Inspect } from "./Inspect";
-export * from "./components/FormInspect";
-export { default as FormSelectElecType } from "./components/FormSelectElecType/FormSelectElecType";
-export * from "./components/FormUploadImageReport";
-export * from "./components/InspectContainer";
-export * from "./components";
-export * from "./context";
-export * from "./models/interfaces";
-export * from "../../models/types";
-export * from "../../utilities";
+export { default as Inspect } from './Inspect';
+export * from './components/FormInspect';
+export { default as FormSelectElecType } from './components/FormSelectElecType/FormSelectElecType';
+export * from './components/FormUploadImage';
+export * from './components/FormVehicleData';
+export * from './components/InspectContainer';
+export * from './components';
+export * from './context';

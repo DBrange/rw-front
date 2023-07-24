@@ -1,4 +1,4 @@
-import { FormUploadImage } from "../../..";
+import { FormUploadImageReport } from "..";
 import { FormInput } from "../../../../components";
 import { useReportContext } from "../../context";
 
@@ -123,7 +123,7 @@ function FormThirdPartyVehicleData() {
         touched={touchedFields.schemaThirdPartyVehicleReport?.phoneNumber}
       />
 
-      <FormUploadImage
+      <FormUploadImageReport
         register={register("schemaThirdPartyVehicleReport.licencePhoto")}
       />
       <FormInput

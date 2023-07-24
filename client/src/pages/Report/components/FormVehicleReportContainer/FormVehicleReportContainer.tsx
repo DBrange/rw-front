@@ -1,4 +1,4 @@
-import { PageButtonReport, FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData, FormInjuredInfoData, FormVehicleDataReport } from "..";
+import { PageButtonReport, FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData, FormInjuredInfoData } from "..";
 import { useReportContext } from "../..";
 import { FormEffectOpenClose, FormVehicleData } from "../../../../components";
 
@@ -22,7 +22,7 @@ function FormVehicleReportContainer() {
           isActive={activeForm === "vehicle" && page === 2}
           form={
             <>
-              <FormVehicleDataReport
+              <FormVehicleReportData
 
               />
               <div className="w-full">

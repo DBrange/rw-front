@@ -1,13 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
-import { useReportContext } from "../../..";
+import { useInspectContext } from "../../..";
 
 interface Props {
  register: any
 }
 
 function FormUploadImage({register}: Props) {
-  const { setValue } = useReportContext();
+  const { setValue } = useInspectContext();
   const [loading, setLoading] = useState();
   const preset_key = "denuncias-web";
   const cloud_name = "dhr6ywb8r";

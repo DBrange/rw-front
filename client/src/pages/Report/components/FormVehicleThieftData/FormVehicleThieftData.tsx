@@ -1,4 +1,4 @@
-import { FormUploadImage } from "../../..";
+import { FormUploadImageReport } from "../../..";
 import { FormInput } from "../../../../components";
 import { useReportContext } from "../../context";
 
@@ -34,7 +34,7 @@ function FormThieftData() {
         touched={touchedFields.schemaElectronicTheftReport?.location}
       />
 
-      <FormUploadImage register={register("schemaVehicle.images")} />
+      <FormUploadImageReport register={register("schemaVehicle.images")} />
     </>
   );
 }

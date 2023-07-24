@@ -5,7 +5,8 @@ import {
   FormInputOptional,
   FormSelect,
 } from "../../../../components";
-import { FormUploadImage, useInspectContext } from "../../..";
+import { useInspectContext } from "../../..";
+import FormUploadImage from "../FormUploadImage/FormUploadImage";
 
 interface Props {
   register: any;
@@ -15,19 +16,11 @@ interface Props {
   image: any;
 }
 
-function FormVehicleData({
-
-}: Props) {
-  
-  const {
-    errors,
-    register,
-    touchedFields,
-    setValue
-  } = useInspectContext();
+function FormVehicleData({}: Props) {
+  const { errors, register, touchedFields, setValue } = useInspectContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [slider, setSlider] = useState<number>(50);
-  
+
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.ceil(parseInt(e.target.value) / 10) * 10;
     setValue("schemaVehicle.tireWear", value);
