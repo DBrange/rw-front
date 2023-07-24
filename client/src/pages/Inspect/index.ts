@@ -1,7 +1,7 @@
 export { default as Inspect } from "./Inspect";
 export * from "./components/FormInspect";
 export { default as FormSelectElecType } from "./components/FormSelectElecType/FormSelectElecType";
-export * from "./components/FormUploadImage";
+export * from "./components/FormUploadImageReport";
 export * from "./components/InspectContainer";
 export * from "./components";
 export * from "./context";

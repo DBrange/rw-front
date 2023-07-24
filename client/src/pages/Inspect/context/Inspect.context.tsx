@@ -34,7 +34,9 @@ export interface IInspectContext {
   userBtnActive: UserBtnActive;
   page: number;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  validateImages: (value: string) => void;
+  validateImages: any;
+  image: any
+  setValue: any
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -57,6 +59,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   });
 
   const [schema, setSchema] = useState<any>();
+
+  const [image, setImage] = useState<string | undefined>('');
+  console.log('........', image)
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
@@ -93,11 +98,21 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const validateImages = (value: string) => {
+  const validateImages = (value: number) => {
     console.log("chi", value);
 
-    schemaVehicle.shape.schemaVehicle.safeParse({ images: value });
+// setImage(value)
+
+    // schemaVehicle.shape.schemaVehicle.safeParse({
+    //   images:
+    //     "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1690152799/denuncias-web/ocevhqoybzjrgztvpmxm.png",
+    // });
+
+
+    // setValue("schemaVehicle.images", value);
   };
+
+  
 
   const selectingSchema = () => {
     let schemaUser: ZodType;
@@ -156,13 +171,14 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     register,
     formState: { errors, touchedFields },
     reset,
+    setValue
   } = useForm<AllTypes>({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     selectingSchema();
-  }, [errors, schema]);
+  }, [errors]);
   console.log(errors);
 
   const submitData = (data: any) => {
@@ -185,6 +201,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     page,
     changePage,
     validateImages,
+    image,
+    setValue
   };
 
   return (
@@ -195,7 +213,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 export const useInspectContext = () => {
   const context = useContext(InspectContext);
   if (!context)
-    throw new Error("useLoginContext can only be used inside LoginProvider");
+    throw new Error("useInspectContext can only be used inside InspectProvider");
 
   return context;
 };

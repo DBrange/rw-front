@@ -1,15 +1,46 @@
 import { useState } from "react";
-import { FormCheckbox, FormInput, FormInputOptional, FormSelect } from "..";
-import { FormUploadImage } from "../../pages";
+import {
+  FormCheckbox,
+  FormInput,
+  FormInputOptional,
+  FormSelect,
+} from "../../../../components";
+import { FormUploadImage, useInspectContext } from "../../..";
 
 interface Props {
   register: any;
   errors: any;
   touchedFields: any;
+  validateImages: any;
+  image: any;
 }
 
-function FormVehicleData({ register, errors, touchedFields }: Props) {
+function FormVehicleData({
+
+}: Props) {
+  
+  const {
+    errors,
+    register,
+    touchedFields,
+    setValue
+  } = useInspectContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
+  const [slider, setSlider] = useState<number>(50);
+  
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Math.ceil(parseInt(e.target.value) / 10) * 10;
+    setValue("schemaVehicle.tireWear", value);
+    setSlider(value);
+  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const imageUrl = URL.createObjectURL(file);
+  //     console.log('siiiiiii', imageUrl)
+  //     validateImages(imageUrl); // Asigna la URL de la imagen al campo "images" en el formulario
+  //   }
+  // };
   return (
     <>
       <FormInput
@@ -48,7 +79,7 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         placeholder="Ingrese el tamaño"
         touched={touchedFields.schemaVehicle?.tireZise}
       />
-      <FormInput
+      {/* <FormInput
         register={register("schemaVehicle.tireWear")}
         error={errors.schemaVehicle?.tireWear?.message}
         type="text"
@@ -56,7 +87,22 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         label="Desgaste de la rueda"
         placeholder="Ingrese el desgaste"
         touched={touchedFields.schemaVehicle?.tireWear}
-      />
+      /> */}
+      <div className="flex flex-col">
+        <label htmlFor="tireWear">Desgaste de la rueda</label>
+        <div className="flex gap-2">
+          <input
+            className="flex-1"
+            type="range"
+            id="tireWear"
+            {...register("schemaVehicle.tireWear", { valueAsNumber: true })}
+            onChange={handleSliderChange}
+            min="0"
+            max="100"
+          />
+          <p className=" flex-none">{`${slider}%`}</p>
+        </div>
+      </div>
 
       <FormCheckbox
         register={register("schemaVehicle.damage")}
@@ -77,6 +123,12 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
       />
 
       <FormUploadImage register={register("schemaVehicle.images")} />
+      {/* <label htmlFor="acaaaaa">acaaaa</label>
+      <input
+        type="file"
+        {...register("schemaVehicle.images")}
+        onChange={handleFileChange}
+      /> */}
 
       <FormInput
         register={register("schemaVehicle.plate")}
@@ -90,7 +142,7 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
 
       <div className="mb-7 mt-4 flex gap-4">
         <label htmlFor="gnc">GNC</label>
-        <input id='gnc' type="checkbox" {...register("schemaVehicle.gnc")} />
+        <input id="gnc" type="checkbox" {...register("schemaVehicle.gnc")} />
       </div>
 
       <FormInput

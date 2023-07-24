@@ -24,6 +24,8 @@ function FormInspect() {
     userBtnActive,
     page,
     changePage,
+    validateImages,
+    image
   } = useInspectContext();
 
   return (
@@ -119,6 +121,8 @@ function FormInspect() {
                   errors={errors}
                   register={register}
                   touchedFields={touchedFields}
+                  validateImages={validateImages}
+                  image={image}
                 />
                 <div className="w-full">
                   <PageButton

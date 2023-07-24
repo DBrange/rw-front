@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { PageButtonReport, FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData, FormInjuredInfoData } from "..";
+import { PageButtonReport, FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData, FormInjuredInfoData, FormVehicleDataReport } from "..";
 import { useReportContext } from "../..";
 import { FormEffectOpenClose, FormVehicleData } from "../../../../components";
 
@@ -23,10 +22,8 @@ function FormVehicleReportContainer() {
           isActive={activeForm === "vehicle" && page === 2}
           form={
             <>
-              <FormVehicleData
-                errors={errors}
-                register={register}
-                touchedFields={touchedFields}
+              <FormVehicleDataReport
+
               />
               <div className="w-full">
                 <PageButtonReport
@@ -65,7 +62,7 @@ function FormVehicleReportContainer() {
                 <PageButtonReport
                   changePage={changePage}
                   page={page}
-                  errors={errors.schemaVehicle}
+                  errors={errors.schemaVehicleCrashReport}
                 />
               </div>
             </>
@@ -84,7 +81,7 @@ function FormVehicleReportContainer() {
                 <PageButtonReport
                   changePage={changePage}
                   page={page}
-                  errors={errors.schemaVehicle}
+                  errors={errors.schemaThirdPartyVehicleReport}
                 />
               </div>
             </>
@@ -103,7 +100,7 @@ function FormVehicleReportContainer() {
                 <PageButtonReport
                   changePage={changePage}
                   page={page}
-                  errors={errors.schemaVehicle}
+                  errors={errors.schemaVehicleTheftReport}
                 />
               </div>
             </>
@@ -120,7 +117,7 @@ function FormVehicleReportContainer() {
                 <PageButtonReport
                   changePage={changePage}
                   page={page}
-                  errors={errors.schemaVehicle}
+                  errors={errors.schemaVehicleFireReport}
                 />
               </div>
             </>

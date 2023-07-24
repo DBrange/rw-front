@@ -7,31 +7,31 @@ function FormFireData() {
   return (
     <>
       <FormInput
-        register={register("time")}
-        error={errors.time?.message}
+        register={register("schemaVehicleTheftReport.time")}
+        error={errors.schemaVehicleTheftReport?.time?.message}
         type="text"
         id="time"
         label="Horario del suceso"
         placeholder="Ingresar horario"
-        touched={touchedFields.time}
+        touched={touchedFields.schemaVehicleTheftReport?.time}
       />
       <FormInput
-        register={register("date")}
-        error={errors.time?.message}
+        register={register("schemaVehicleTheftReport.date")}
+        error={errors.schemaVehicleTheftReport?.date?.message}
         type="date"
-        id="time"
-        label="Horario del suceso"
-        placeholder="Ingresar horario"
-        touched={touchedFields.time}
+        id="date"
+        label="Fecha del suceso"
+        placeholder="Ingresar fecha"
+        touched={touchedFields.schemaVehicleTheftReport?.date}
       />
       <FormInput
-        register={register("location")}
-        error={errors.location?.message}
+        register={register("schemaVehicleTheftReport.location")}
+        error={errors.schemaVehicleTheftReport?.location?.message}
         type="text"
         id="location"
         label="Ubicacion del suceso"
         placeholder="Ingresar ubicacion"
-        touched={touchedFields.location}
+        touched={touchedFields.schemaVehicleTheftReport?.location}
       />
 
       <FormTextArea

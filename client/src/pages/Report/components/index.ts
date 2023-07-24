@@ -6,6 +6,8 @@ export * from './FormInjuredInfoData';
 export * from './FormReport';
 export * from './FormTextArea';
 export * from './FormThirdPartyVehicleData';
+export * from './FormUploadImage';
+export * from './FormVehicleDataReport';
 export * from './FormVehicleReportContainer';
 export * from './FormVehicleReportData';
 export * from './FormVehicleThieftData';

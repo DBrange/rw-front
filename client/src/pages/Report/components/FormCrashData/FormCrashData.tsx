@@ -9,9 +9,6 @@ function FormCrashData() {
         errors,
         touchedFields,
         textaValue,
-        typeComplaintForm,
-        changePage,
-        page,
       } = useReportContext();
 
       const [isCheckedInjuried, setIsCheckedInjuried] =
@@ -26,82 +23,86 @@ function FormCrashData() {
   return (
     <>
       <FormInput
-        register={register("time")}
-        error={errors.time?.message}
+        register={register("schemaVehicleCrashReport.time")}
+        error={errors.schemaVehicleCrashReport?.time?.message}
         type="text"
         id="time"
         label="Horario del suceso"
         placeholder="Ingresar horario"
-        touched={touchedFields.time}
+        touched={touchedFields.schemaVehicleCrashReport?.time}
       />
       <FormInput
-        register={register("date")}
-        error={errors.time?.message}
+        register={register("schemaVehicleCrashReport.date")}
+        error={errors.schemaVehicleCrashReport?.date?.message}
         type="date"
         id="time"
         label="Horario del suceso"
         placeholder="Ingresar horario"
-        touched={touchedFields.time}
+        touched={touchedFields.schemaVehicleCrashReport?.date}
       />
       <FormInput
-        register={register("location")}
-        error={errors.location?.message}
+        register={register("schemaVehicleCrashReport.location")}
+        error={errors.schemaVehicleCrashReport?.location?.message}
         type="text"
         id="location"
         label="Ubicacion del suceso"
         placeholder="Ingresar ubicacion"
-        touched={touchedFields.location}
+        touched={touchedFields.schemaVehicleCrashReport?.location}
       />
-      
-      <FormTextArea textaValue={textaValue} error={errors.details} touched={touchedFields.details} />
+
+      <FormTextArea
+        textaValue={textaValue}
+        error={errors.details}
+        touched={touchedFields.details}
+      />
 
       <FormCheckbox
-        register={register("injuried")}
+        register={register("schemaVehicleCrashReport.injured")}
         setChecked={setIsCheckedInjuried}
         id={"injuried"}
         label={"Lesiones"}
       />
       <FormInputOptional
-        register={register("injuries")}
-        error={errors.injuries?.message}
+        register={register("schemaVehicleCrashReport.injuries")}
+        error={errors.schemaVehicleCrashReport?.injuries?.message}
         checked={isCheckedInjuried}
         type="text"
         id="injuries"
         label="Tipo el de lesion"
         placeholder="Ingrese tipo el de lesion"
-        touched={touchedFields.injuries}
+        touched={touchedFields.schemaVehicleCrashReport?.injuries}
       />
       <FormCheckbox
-        register={register("ambulance")}
+        register={register("schemaVehicleCrashReport.ambulance")}
         setChecked={setIsCheckedAmbulance}
         id={"ambulance"}
         label={"Ambulancia"}
       />
       <FormInputOptional
-        register={register("ambulanceTo")}
-        error={errors.ambulanceTo?.message}
+        register={register("schemaVehicleCrashReport.ambulanceTo")}
+        error={errors.schemaVehicleCrashReport?.ambulanceTo?.message}
         checked={isCheckedAmbulance}
         type="text"
         id="ambulanceTo"
         label="Destino de la ambulancia"
         placeholder="Ingrese tipo el de lesion"
-        touched={touchedFields.ambulanceTo}
+        touched={touchedFields.schemaVehicleCrashReport?.ambulanceTo}
       />
       <FormCheckbox
-        register={register("thirdInjuried")}
+        register={register("schemaVehicleCrashReport.thirdInjured")}
         setChecked={setIsCheckedThirdInjuried}
         id={"thirdInjuried"}
         label={"Tercero(s) lesionados"}
       />
       <FormInputOptional
-        register={register("amount")}
-        error={errors.amount?.message}
+        register={register("schemaVehicleCrashReport.amount")}
+        error={errors.schemaVehicleCrashReport?.amount?.message}
         checked={isCheckedThirdInjuried}
         type="number"
         id="amount"
         label="Cantidad"
         placeholder="Ingresar cantidad"
-        touched={touchedFields.amount}
+        touched={touchedFields.schemaVehicleCrashReport?.amount}
       />
 
       {/* <FormThirdPartyVehicleData /> */}

@@ -49,7 +49,9 @@ function FormElectronicReportContainer() {
       />
       <FormEffectOpenClose
         formName={"Robo"}
-        isActive={activeForm === "electronic" && typeComplaintForm.theft && page === 4}
+        isActive={
+          activeForm === "electronic" && typeComplaintForm.theft && page === 4
+        }
         form={
           <>
             <FormThieftData />
@@ -57,7 +59,7 @@ function FormElectronicReportContainer() {
               <PageButtonReport
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaElectronic}
+                errors={errors.schemaElectronicTheftReport}
               />
             </div>
           </>

@@ -16,6 +16,10 @@ import {
   schemaVehicleCrashReport,
   FormInjuredInfoData,
   PageButtonReport,
+  schemaVehicleTheftReport,
+  schemaVehicleFireReport,
+  schemaElectronicTheftReport,
+  schemaThirdPartyVehicleReport,
 } from "../..";
 import { FormEffectOpenClose } from "../../../components";
 
@@ -44,6 +48,8 @@ export interface IReportContext {
   userBtnActive: UserBtnActive;
   setPeople: (value: React.SetStateAction<boolean>) => void;
   thirdInjuredForm: () => any;
+  validateImages: (value: string) => void;
+  setValue: any;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -135,23 +141,53 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const selectingSchema = () => {
     let schemaUser: ZodType;
     let schemaElement: ZodType;
+    let schemaComplaintType: ZodType;
     if (userActiveForm === "person") {
       schemaUser = schemaPersonal;
       if (activeForm === "vehicle") {
         schemaElement = schemaVehicle;
-        estructuringSchema(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.crash) {
+          schemaComplaintType = schemaVehicleCrashReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaVehicleTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.fire) {
+          schemaComplaintType = schemaVehicleFireReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        estructuringSchema(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaElectronicTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       }
+
     } else if (userActiveForm === "legal") {
       schemaUser = schemaLegalPersonal;
       if (activeForm === "vehicle") {
         schemaElement = schemaVehicle;
-        estructuringSchema(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.crash) {
+          schemaComplaintType = schemaVehicleCrashReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaVehicleTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.fire) {
+          schemaComplaintType = schemaVehicleFireReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        estructuringSchema(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaElectronicTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       }
     }
   };
@@ -212,22 +248,40 @@ export const ReportProvider = ({ children }: ChildrenType) => {
 
   const estructuringSchema = <T extends ZodTypeAny>(
     schemaUser: any,
-    schemaElement: any
+    schemaElement: any,
+    schemaComplaintType: any
   ) => {
     let schema: any = schemaUser;
+    // schemaComplaintType = schemaVehicleTheftReport;
     if (page === 1) {
       schema = schemaUser;
     } else if (page === 2) {
       schema = schemaUser.merge(schemaElement);
+    } else if (page === 3) {
+      schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+    } else if (page === 4) {
+      schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+    } else if (page === 6) {
+      schema = schemaUser
+        .merge(schemaElement)
+        .merge(schemaComplaintType)
+        .merge(schemaThirdPartyVehicleReport);
     }
     setSchema(schema);
   };
+
+    const validateImages = (value: string) => {
+      console.log("chi", value);
+
+      schemaVehicle.shape.schemaVehicle.safeParse({ images: value });
+    };
 
   const {
     handleSubmit,
     register,
     formState: { errors, touchedFields },
     reset,
+    setValue
   } = useForm<any>({
     resolver: zodResolver(schema),
   });
@@ -261,6 +315,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     userBtnActive,
     setPeople,
     thirdInjuredForm,
+    validateImages,
+    setValue
   };
 
   return (

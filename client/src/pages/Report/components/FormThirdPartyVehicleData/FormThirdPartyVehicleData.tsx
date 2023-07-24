@@ -7,123 +7,133 @@ function FormThirdPartyVehicleData() {
   return (
     <>
       <FormInput
-        register={register("year", { valueAsNumber: true })}
-        error={errors.year?.message}
+        register={register("schemaThirdPartyVehicleReport.year", {
+          valueAsNumber: true,
+        })}
+        error={errors.schemaThirdPartyVehicleReport?.year?.message}
         type="number"
         id="year"
         label="Año"
         placeholder="Año del vehiculo"
-        touched={touchedFields.year}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.year}
       />
       <FormInput
-        register={register("brand")}
-        error={errors.brand?.message}
+        register={register("schemaThirdPartyVehicleReport.brand")}
+        error={errors.schemaThirdPartyVehicleReport?.brand?.message}
         type="text"
         id="brand"
         label="Marca"
         placeholder="Ingresar marca"
-        touched={touchedFields.brand}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.brand}
       />
       <FormInput
-        register={register("model")}
-        error={errors.model?.message}
+        register={register("schemaThirdPartyVehicleReport.model")}
+        error={errors.schemaThirdPartyVehicleReport?.model?.message}
         type="text"
         id="model"
         label="Modelo"
         placeholder="Ingresar modelo"
-        touched={touchedFields.model}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.model}
       />
       <FormInput
-        register={register("plate")}
-        error={errors.plate?.message}
+        register={register("schemaThirdPartyVehicleReport.plate")}
+        error={errors.schemaThirdPartyVehicleReport?.plate?.message}
         type="text"
         id="plate"
         label="Patente"
         placeholder="Ingrese la patente"
-        touched={touchedFields.plate}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.plate}
       />
       <FormInput
-        register={register("insauranceCompany")}
-        error={errors.insauranceCompany?.message}
+        register={register("schemaThirdPartyVehicleReport.insauranceCompany")}
+        error={errors.schemaThirdPartyVehicleReport?.insauranceCompany?.message}
         type="text"
         id="insauranceCompany"
         label="Compania de seguros"
         placeholder="Ingrese la compania"
-        touched={touchedFields.insauranceCompany}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.insauranceCompany}
       />
       <FormInput
-        register={register("insaurancePolicy")}
-        error={errors.insaurancePolicy?.message}
+        register={register("schemaThirdPartyVehicleReport.insaurancePolicy")}
+        error={errors.schemaThirdPartyVehicleReport?.insaurancePolicy?.message}
         type="text"
         id="insaurancePolicy"
         label="Poliza de seguros"
         placeholder="Ingrese la poliza"
-        touched={touchedFields.insaurancePolicy}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.insaurancePolicy}
       />
       <FormInput
-        register={register("ownerName")}
-        error={errors.ownerName?.message}
+        register={register("schemaThirdPartyVehicleReport.ownerName")}
+        error={errors.schemaThirdPartyVehicleReport?.ownerName?.message}
         type="text"
         id="ownerName"
         label="Nombre del propietario"
         placeholder="Ingresar nombre"
-        touched={touchedFields.ownerName}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.ownerName}
       />
       <FormInput
-        register={register("ownerDni")}
-        error={errors.ownerDni?.message}
+        register={register("schemaThirdPartyVehicleReport.ownerDni", {
+          valueAsNumber: true,
+        })}
+        error={errors.schemaThirdPartyVehicleReport?.ownerDni?.message}
         type="number"
         id="ownerDni"
         label="DNI del propietario"
         placeholder="Ingresar DNI"
-        touched={touchedFields.ownerDni}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.ownerDni}
       />
       <FormInput
-        register={register("name")}
-        error={errors.name?.message}
+        register={register("schemaThirdPartyVehicleReport.name")}
+        error={errors.schemaThirdPartyVehicleReport?.name?.message}
         type="text"
         id="name"
         label="Nombre del conductor"
         placeholder="Ingresar nombre"
-        touched={touchedFields.name}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.name}
       />
       <FormInput
-        register={register("dni")}
-        error={errors.dni?.message}
+        register={register("schemaThirdPartyVehicleReport.dni", {
+          valueAsNumber: true,
+        })}
+        error={errors.schemaThirdPartyVehicleReport?.dni?.message}
         type="number"
         id="dni"
         label="DNI del conductor"
         placeholder="Ingresar DNI"
-        touched={touchedFields.dni}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.dni}
       />
       <FormInput
-        register={register("address")}
-        error={errors.address?.message}
+        register={register("schemaThirdPartyVehicleReport.address")}
+        error={errors.schemaThirdPartyVehicleReport?.address?.message}
         type="text"
         id="address"
         label="Residencia del conductor"
         placeholder="Ingresar residencia"
-        touched={touchedFields.address}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.address}
       />
       <FormInput
-        register={register("phoneNumber")}
-        error={errors.phoneNumber?.message}
+        register={register("schemaThirdPartyVehicleReport.phoneNumber", {
+          valueAsNumber: true,
+        })}
+        error={errors.schemaThirdPartyVehicleReport?.phoneNumber?.message}
         type="number"
         id="phoneNumber"
         label="Telefono del conductor"
         placeholder="Ingresar numero telefonico"
-        touched={touchedFields.phoneNumber}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.phoneNumber}
       />
 
-      <FormUploadImage register={register("licencePhoto")} />
+      <FormUploadImage
+        register={register("schemaThirdPartyVehicleReport.licencePhoto")}
+      />
       <FormInput
         register={register("email")}
-        error={errors.email?.message}
-        type="number"
+        error={errors.schemaThirdPartyVehicleReport?.email?.message}
+        type="text"
         id="email"
         label="Email del conductor"
         placeholder="Ingresar email"
-        touched={touchedFields.email}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.email}
       />
     </>
   );

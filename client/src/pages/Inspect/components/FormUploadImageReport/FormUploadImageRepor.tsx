@@ -1,16 +1,17 @@
 import { useState } from "react";
-import axios from 'axios'
-import { useInspectContext } from "../..";
+import axios from "axios";
+import { useInspectContext } from "../../..";
 
-function FormUploadImage({ register }: any) {
-  
-  // const { validateImages } = useInspectContext();
+interface Props {
+ register: any
+}
 
-  const [image, setImage] = useState();
+function FormUploadImageReport({register}: Props) {
+  const { setValue } = useInspectContext();
   const [loading, setLoading] = useState();
   const preset_key = "denuncias-web";
-  const cloud_name = 'dhr6ywb8r';
-  
+  const cloud_name = "dhr6ywb8r";
+
   const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const files = e.target.files;
@@ -24,25 +25,22 @@ function FormUploadImage({ register }: any) {
         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
         data
       );
-      
-      setImage(res.data.secure_url);
+      if (res) {
+        setValue("schemaVehicle.images", res.data.secure_url);
+      }
       console.log(res.data.secure_url);
       setLoading(res.data.secure_url);
-      // if (image) {
-        
-      //   validateImages(image)
-      // }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div>
-    <label htmlFor="images">Subir imagen</label>
-      <input type="file" id="images" onChange={upload} />
-      <img className="h-10" src={image}/>
+      <label htmlFor="image">Subir imagen</label>
+      <input type="file" id="image" {...register} onChange={upload} />
+      {/* <img className="h-10" src={image} /> */}
     </div>
-  )
+  );
 }
-export default FormUploadImage
+export default FormUploadImageReport;
