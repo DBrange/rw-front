@@ -104,13 +104,11 @@ function FormVehicleDataReport() {
         touched={touchedFields.schemaVehicle?.damageLocation}
       />
 
-      <FormUploadImageReport schemaName={"schemaVehicle.images"} />
-      {/* <label htmlFor="acaaaaa">acaaaa</label>
-      <input
-        type="file"
-        {...register("schemaVehicle.images")}
-        onChange={handleFileChange}
-      /> */}
+      <FormUploadImageReport
+        schemaName={"schemaVehicle.images"}
+        error={errors.schemaVehicle?.images?.message}
+        touched={touchedFields.schemaVehicle?.images}
+      />
 
       <FormInput
         register={register("schemaVehicle.plate")}

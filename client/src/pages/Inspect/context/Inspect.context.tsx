@@ -92,22 +92,6 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  // const validateImages = (value: number) => {
-  //   console.log("chi", value);
-
-// setImage(value)
-
-    // schemaVehicle.shape.schemaVehicle.safeParse({
-    //   images:
-    //     "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1690152799/denuncias-web/ocevhqoybzjrgztvpmxm.png",
-    // });
-
-
-    // setValue("schemaVehicle.images", value);
-  // };
-
-  
-
   const selectingSchema = () => {
     let schemaUser: ZodType;
     let schemaElement: ZodType;

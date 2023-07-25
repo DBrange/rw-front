@@ -1,8 +1,9 @@
-import { FormElectronicReportData, FormThieftData, PageButtonReport } from "..";
+import { FormElectronicReportData, FormThieftData } from "..";
 import { useReportContext } from "../..";
 import {
   FormEffectOpenClose,
   FormElectronicData,
+  PageButton,
 } from "../../../../components";
 
 function FormElectronicReportContainer() {
@@ -20,13 +21,12 @@ function FormElectronicReportContainer() {
               register={register}
               touchedFields={touchedFields}
             />
-            <div className="w-full">
-              <PageButtonReport
-                changePage={changePage}
-                page={page}
-                errors={errors.schemaElectronic}
-              />
-            </div>
+            <PageButton
+              changePage={changePage}
+              page={page}
+              errors={errors.schemaElectronic}
+              max={4}
+            />
           </>
         }
       />
@@ -38,10 +38,11 @@ function FormElectronicReportContainer() {
             <FormElectronicReportData />
 
             <div className="w-full">
-              <PageButtonReport
+              <PageButton
                 changePage={changePage}
                 page={page}
                 errors={errors.schemaElectronic}
+                max={4}
               />
             </div>
           </>
@@ -56,10 +57,11 @@ function FormElectronicReportContainer() {
           <>
             <FormThieftData />
             <div className="w-full">
-              <PageButtonReport
+              <PageButton
                 changePage={changePage}
                 page={page}
                 errors={errors.schemaVehicleTheftReport}
+                max={4}
               />
             </div>
           </>

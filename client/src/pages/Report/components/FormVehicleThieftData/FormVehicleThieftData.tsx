@@ -34,7 +34,11 @@ function FormThieftData() {
         touched={touchedFields.schemaVehicleTheftReport?.location}
       />
 
-      <FormUploadImageReport schemaName={"schemaVehicleTheftReport.images"} />
+      <FormUploadImageReport
+        schemaName={"schemaVehicleTheftReport.images"}
+        error={errors.schemaVehicleTheftReport?.images?.message}
+        touched={touchedFields.schemaVehicleTheftReport?.images}
+      />
     </>
   );
 }

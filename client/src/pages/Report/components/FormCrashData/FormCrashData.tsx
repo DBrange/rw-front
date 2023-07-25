@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { FormInjuredInfoData, FormInputOptionalAmount, FormTextArea, FormThirdPartyVehicleData, PageButtonReport } from "..";
-import { FormInput, FormCheckbox, FormInputOptional, FormEffectOpenClose } from "../../../../components";
+import { FormInputOptionalAmount, FormTextArea } from "..";
+import { FormInput, FormCheckbox, FormInputOptional } from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormCrashData() {

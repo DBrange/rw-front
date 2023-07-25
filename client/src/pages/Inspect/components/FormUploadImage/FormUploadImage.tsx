@@ -4,11 +4,14 @@ import { useInspectContext } from "../../..";
 
 interface Props {
   schemaName: string;
+  error: any;
+  touched: any
 }
 
-function FormUploadImage({schemaName}: Props) {
+function FormUploadImage({schemaName, error, touched}: Props) {
   const { setValue } = useInspectContext();
   const [loading, setLoading] = useState();
+  const [image, setImage] = useState();
   const preset_key = "denuncias-web";
   const cloud_name = "dhr6ywb8r";
 
@@ -27,6 +30,7 @@ function FormUploadImage({schemaName}: Props) {
       );
       if (res) {
         setValue("schemaVehicle.images", res.data.secure_url);
+        setImage(res.data.secure_url);
       }
       console.log(res.data.secure_url);
       setLoading(res.data.secure_url);
@@ -36,10 +40,17 @@ function FormUploadImage({schemaName}: Props) {
   };
 
   return (
-    <div>
-      <label htmlFor="image">Subir imagen</label>
-      <input type="file" id="image" onChange={upload} />
-      {/* <img className="h-10" src={image} /> */}
+    <div className="flex gap-10 my-3">
+      <label
+        className={`${
+          touched && error && "border-red-400 text-red-400"
+        }  cursor-pointer w-auto border-2 border-violet-300 h-8 hover:bg-violet-300 p-2 leading-3 rounded outline-none focus:border-blue-400`}
+        htmlFor="image"
+      >
+        Subir imagen
+      </label>
+      <img className="h-10 max-h-10 object-cover max-w-[60px]" src={image} />
+      <input className="hidden" type="file" id="image" onChange={upload} />
     </div>
   );
 }

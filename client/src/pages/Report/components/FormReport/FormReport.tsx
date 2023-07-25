@@ -4,11 +4,11 @@ import {
   FormEffectOpenClose,
   FormLegalPersonalData,
   FormPersonalData,
+  PageButton,
 } from "../../../../components";
 import {
   FormElectronicReportContainer,
   FormVehicleReportContainer,
-  PageButtonReport,
 } from "..";
 
 function FormReport() {
@@ -29,7 +29,7 @@ function FormReport() {
 
   return (
     <form
-      className="w-[100%] mx-auto gap-5 flex flex-col items-center"
+      className="w-[100%] gap-5 flex flex-col items-center"
       onSubmit={handleSubmit(submitData)}
     >
       <FormEffectOpenClose
@@ -56,10 +56,11 @@ function FormReport() {
                 selectedSchemaTwo={() => selectFormSchema("electronic")}
               />
               <div className="w-full">
-                <PageButtonReport
+                <PageButton
                   changePage={changePage}
                   page={page}
                   errors={false}
+                  max={6}
                 />
               </div>
             </div>
@@ -80,10 +81,11 @@ function FormReport() {
                   touchedFields={touchedFields}
                 />
                 <div className="w-full">
-                  <PageButtonReport
+                  <PageButton
                     changePage={changePage}
                     page={page}
                     errors={errors.schemaPersonal}
+                    max={6}
                   />
                 </div>
               </>
@@ -100,10 +102,11 @@ function FormReport() {
                   touchedFields={touchedFields}
                 />
                 <div className="w-full">
-                  <PageButtonReport
+                  <PageButton
                     changePage={changePage}
                     page={page}
                     errors={errors.schemaLegalPersonal}
+                    max={6}
                   />
                 </div>
               </>

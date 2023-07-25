@@ -5,7 +5,7 @@ import { UserBtnActive } from "../../../interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
 import { TypeComplaintForm } from "../interfaces";
 import { FormInjuredInfoData, PageButtonReport } from "../..";
-import { FormEffectOpenClose } from "../../../components";
+import { FormEffectOpenClose, PageButton } from "../../../components";
 import {
   SchemaPersonalType,
   SchemaLegalPersonalType,
@@ -47,7 +47,6 @@ export interface IReportContext {
   page: number;
   userBtnActive: UserBtnActive;
   thirdInjuredForm: () => any;
-  validateImages: (value: string) => void;
   setValue: any;
   setAmountValue: (value: React.SetStateAction<number>) => void;
   amountValue: number;
@@ -210,10 +209,11 @@ export const ReportProvider = ({ children }: ChildrenType) => {
             <>
               {people}
               <div className="w-full">
-                <PageButtonReport
+                <PageButton
                   changePage={changePage}
                   page={page}
                   errors={errors.schemaVehicle}
+                  max={typeComplaintForm.crash ? 6 : 5}
                 />
               </div>
             </>
@@ -312,11 +312,11 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setSchema(schema);
   };
 
-  const validateImages = (value: string) => {
-    console.log("chi", value);
+  // const validateImages = (value: string) => {
+  //   console.log("chi", value);
 
-    schemaVehicle.shape.schemaVehicle.safeParse({ images: value });
-  };
+  //   schemaVehicle.shape.schemaVehicle.safeParse({ images: value });
+  // };
 
   const {
     handleSubmit,
@@ -356,7 +356,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     page,
     userBtnActive,
     thirdInjuredForm,
-    validateImages,
     setValue,
     setAmountValue,
     amountValue,

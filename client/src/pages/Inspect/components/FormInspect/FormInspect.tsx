@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useInspectContext } from "../..";
 import {
   ButtonChoice,
@@ -24,12 +23,11 @@ function FormInspect() {
     userBtnActive,
     page,
     changePage,
-    image,
   } = useInspectContext();
 
   return (
     <form
-      className="w-[100%] mx-auto gap-5 flex flex-col items-center"
+      className="w-[100%] gap-5 flex flex-col items-center"
       onSubmit={handleSubmit(submitData)}
     >
       <FormEffectOpenClose
@@ -55,19 +53,18 @@ function FormInspect() {
                 selectedSchemaOne={() => selectFormSchema("vehicle")}
                 selectedSchemaTwo={() => selectFormSchema("electronic")}
               />
-              <div className="w-full">
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={false}
-                />
-              </div>
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={false}
+                max={2}
+              />
             </div>
           </>
         }
       />
 
-      <section className="">
+      <section className="w-full">
         <div className="">
           <FormEffectOpenClose
             formName={"Persona particular"}
@@ -79,13 +76,12 @@ function FormInspect() {
                   register={register}
                   touchedFields={touchedFields}
                 />
-                <div className="w-full">
-                  <PageButton
-                    changePage={changePage}
-                    page={page}
-                    errors={errors.schemaPersonal}
-                  />
-                </div>
+                <PageButton
+                  changePage={changePage}
+                  page={page}
+                  errors={errors.schemaPersonal}
+                  max={2}
+                />
               </>
             }
           />
@@ -99,13 +95,12 @@ function FormInspect() {
                   register={register}
                   touchedFields={touchedFields}
                 />
-                <div className="w-full">
-                  <PageButton
-                    changePage={changePage}
-                    page={page}
-                    errors={errors.schemaLegalPersonal}
-                  />
-                </div>
+                <PageButton
+                  changePage={changePage}
+                  page={page}
+                  errors={errors.schemaLegalPersonal}
+                  max={2}
+                />
               </>
             }
           />
@@ -117,14 +112,13 @@ function FormInspect() {
             form={
               <>
                 <FormVehicleData />
-                
-                <div className="w-full">
-                  <PageButton
-                    changePage={changePage}
-                    page={page}
-                    errors={errors.schemaVehicle}
-                  />
-                </div>
+
+                <PageButton
+                  changePage={changePage}
+                  page={page}
+                  errors={errors.schemaVehicle}
+                  max={2}
+                />
               </>
             }
           />
@@ -138,13 +132,12 @@ function FormInspect() {
                   register={register}
                   touchedFields={touchedFields}
                 />
-                <div className="w-full">
-                  <PageButton
-                    changePage={changePage}
-                    page={page}
-                    errors={errors.schemaElectronic}
-                  />
-                </div>
+                <PageButton
+                  changePage={changePage}
+                  page={page}
+                  errors={errors.schemaElectronic}
+                  max={2}
+                />
               </>
             }
           />

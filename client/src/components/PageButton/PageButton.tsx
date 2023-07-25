@@ -6,11 +6,12 @@ interface Props {
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   page: number;
   errors: any;
+  max: number;
 }
 
-function PageButton({ changePage, page, errors }: Props) {
+function PageButton({ changePage, page, errors, max }: Props) {
   return (
-    <div className="flex justify-between p-1">
+    <div className="w-full flex justify-between p-1">
       <button
         onClick={changePage}
         type="button"
@@ -28,7 +29,7 @@ function PageButton({ changePage, page, errors }: Props) {
         type="button"
         value="next"
         className={`${errors && "border-red-400 pointer-events-none"} ${
-          page === 2 && "pointer-events-none opacity-0"
+          page === max && "pointer-events-none opacity-0"
         } relative w-24 h-8 border-2 border-green-400 rounded-xl active:bg-green-100 active:translate-x-1`}
       >
         <i

@@ -101,7 +101,11 @@ function FormVehicleData() {
         touched={touchedFields.schemaVehicle?.damageLocation}
       />
 
-      <FormUploadImage schemaName={"schemaVehicle.images"} />
+      <FormUploadImage
+        schemaName={"schemaVehicle.images"}
+        error={errors.schemaVehicle?.images?.message}
+        touched={touchedFields.schemaVehicle?.images}
+      />
       {/* <label htmlFor="acaaaaa">acaaaa</label>
       <input
         type="file"
