@@ -124,7 +124,7 @@ function FormThirdPartyVehicleData() {
       />
 
       <FormUploadImageReport
-        register={register("schemaThirdPartyVehicleReport.licencePhoto")}
+        schemaName={"schemaThirdPartyVehicleReport.licencePhoto"}
       />
       <FormInput
         register={register("schemaThirdPartyVehicleReport.email")}

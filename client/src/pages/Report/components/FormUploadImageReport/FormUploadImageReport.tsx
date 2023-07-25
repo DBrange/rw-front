@@ -3,10 +3,10 @@ import axios from "axios";
 import { useReportContext } from "../../..";
 
 interface Props {
- register: any
+  schemaName: string;
 }
 
-function FormUploadImageReport({register}: Props) {
+function FormUploadImageReport({ schemaName }: Props) {
   const { setValue } = useReportContext();
   const [loading, setLoading] = useState();
   const preset_key = "denuncias-web";
@@ -26,7 +26,7 @@ function FormUploadImageReport({register}: Props) {
         data
       );
       if (res) {
-        setValue("schemaVehicle.images", res.data.secure_url);
+        setValue(schemaName, res.data.secure_url);
       }
       console.log(res.data.secure_url);
       setLoading(res.data.secure_url);
@@ -38,7 +38,7 @@ function FormUploadImageReport({register}: Props) {
   return (
     <div>
       <label htmlFor="image">Subir imagen</label>
-      <input type="file" id="image" {...register} onChange={upload} />
+      <input type="file" id="image" onChange={upload} />
       {/* <img className="h-10" src={image} /> */}
     </div>
   );

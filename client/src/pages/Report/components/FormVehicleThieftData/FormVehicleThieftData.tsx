@@ -34,9 +34,7 @@ function FormThieftData() {
         touched={touchedFields.schemaVehicleTheftReport?.location}
       />
 
-      <FormUploadImageReport
-        register={register("schemaVehicleTheftReport.images")}
-      />
+      <FormUploadImageReport schemaName={"schemaVehicleTheftReport.images"} />
     </>
   );
 }

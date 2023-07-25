@@ -65,7 +65,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.schemaPersonal?.gender}
       />
       <FormInput
-        register={register("schemaPersonal.dni", { valueAsNumber: true })}
+        register={register("schemaPersonal.dni")}
         error={errors.schemaPersonal?.dni?.message}
         type="number"
         id="dni"

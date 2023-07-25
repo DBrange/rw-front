@@ -115,7 +115,7 @@ function FormVehicleData({}: Props) {
         touched={touchedFields.schemaVehicle?.damageLocation}
       />
 
-      <FormUploadImage register={register("schemaVehicle.images")} />
+      <FormUploadImage schemaName={"schemaVehicle.images"} />
       {/* <label htmlFor="acaaaaa">acaaaa</label>
       <input
         type="file"

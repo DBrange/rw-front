@@ -1,14 +1,32 @@
 import { z } from "zod";
 
+const altEmailValidate = z
+      .string()
+      .refine(
+        (value) =>
+          value === "" ||
+          /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value),
+        {
+          message: "Debe tener un formato email o el campo puede estar vacío",
+        }
+      )
+
 export const schemaPersonal = z.object({
   schemaPersonal: z.object({
     firstName: z.string().min(1).max(20),
     lastName: z.string().min(1).max(20),
     phoneNumber: z.number(),
     email: z.string().email().max(30),
-    altEmail: z.string().email().max(30),
+    altEmail: altEmailValidate,
     gender: z.enum(["hombre", "mujer", "otro"]),
-    dni: z.number(),
+    dni: z
+      .string()
+      .refine((value) => value.length === 8, {
+        message: "El campo debe tener exactamente 11 dígitos.",
+      })
+      .refine((value) => /^\d+$/.test(value), {
+        message: "El campo debe contener solo números.",
+      }),
     address: z.string().min(1).max(50),
   }),
 });
@@ -16,10 +34,17 @@ export const schemaPersonal = z.object({
 export const schemaLegalPersonal = z.object({
   schemaLegalPersonal: z.object({
     companyName: z.string().min(1).max(20),
-    cuit: z.number(),
+    cuit: z
+      .string()
+      .refine((value) => /^\d+$/.test(value), {
+        message: "El campo debe contener solo números.",
+      })
+      .refine((value) => value.length === 11, {
+        message: "El campo debe tener exactamente 11 dígitos.",
+      }),
     phoneNumber: z.number(),
     email: z.string().email().max(30),
-    altEmail: z.string().email().max(30),
+    altEmail: altEmailValidate,
     address: z.string().min(1).max(50),
   }),
 });
@@ -35,7 +60,7 @@ export const schemaVehicle = z.object({
     tireWear: z.number().min(1).max(100),
     damage: z.boolean(),
     damageLocation: z.string(),
-    // images: z.string(),
+    images: z.string().url(),
     plate: z.string().min(6).max(7),
     gnc: z.boolean(),
     brand: z.string().min(1).max(20),
@@ -65,24 +90,24 @@ export const schemaElectronic = z.object({
 
 // Report
 
-export const schemaThirdInjuredData = z.object({
-  schemaThirdInjuredData: z.object({
-    name: z.string().min(1).max(20),
-    lastName: z.string().min(1).max(20),
-    phoneNumber: z.number(),
-    email: z.string().min(1).max(30),
-    gender: z.enum(["hombre", "mujer", "otro"]),
-    dni: z.number(),
-    injuries: z.string(),
-  }),
-});
+// export const schemaThirdInjuredData = z.object({
+//   schemaThirdInjuredData: z.object({
+//     name: z.string().min(1).max(20),
+//     lastName: z.string().min(1).max(20),
+//     phoneNumber: z.number(),
+//     email: z.string().min(1).max(30),
+//     gender: z.enum(["hombre", "mujer", "otro"]),
+//     dni: z.number(),
+//     injuries: z.string(),
+//   }),
+// });
 
-export const schemaThirdInjured = z.object({
-  schemaThirdInjured: z.object({
-    amount: z.number(),
-    injuredInfo: z.array(schemaThirdInjuredData),
-  })
-})
+// export const schemaThirdInjured = z.object({
+//   schemaThirdInjured: z.object({
+//     amount: z.number(),
+//     injuredInfo: z.array(schemaThirdInjuredData),
+//   })
+// })
 
 export const schemaVehicleCrashReport = z.object({
   schemaVehicleCrashReport: z.object({
@@ -95,10 +120,6 @@ export const schemaVehicleCrashReport = z.object({
     ambulance: z.boolean(),
     ambulanceTo: z.string(),
     thirdInjured: z.boolean(),
-    // thirdInjuredData: z.object({
-    //   amount: z.number(),
-    //   injuredInfo: z.array(schemaThirdInjured),
-    // }),
   }),
 });
 
@@ -112,7 +133,7 @@ export const schemaVehicleTheftReport = z.object({
     ambulance: z.boolean(),
     ambulanceTo: z.string(),
     thirdInjured: z.boolean(),
-    // reportPhoto: z.string()
+    reportPhoto: z.string()
   }),
 });
 
@@ -130,7 +151,7 @@ export const schemaElectronicTheftReport = z.object({
     time: z.string().min(1).max(20),
     date: z.coerce.date(),
     location: z.string().min(1),
-    // reportPhoto: z.string(),
+    reportPhoto: z.string(),
   }),
 });
 
@@ -148,7 +169,7 @@ export const schemaThirdPartyVehicleReport = z.object({
     dni: z.number(),
     address: z.string().min(1).max(20),
     phoneNumber: z.number(),
-    // licencePhoto: z.string(),
+    licencePhoto: z.string(),
     email: z.string().email(),
   }),
 });

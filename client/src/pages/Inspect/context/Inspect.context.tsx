@@ -28,8 +28,10 @@ export interface IInspectContext {
   page: number;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   validateImages: any;
-  image: any
-  setValue: any
+  image: any;
+  setValue: any;
+  trigger: any;
+  getValues: any
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -164,7 +166,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     register,
     formState: { errors, touchedFields },
     reset,
-    setValue
+    trigger,
+    setValue,
+    getValues
   } = useForm<AllTypes>({
     resolver: zodResolver(schema),
   });
@@ -195,7 +199,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     changePage,
     validateImages,
     image,
-    setValue
+    setValue,
+    trigger,
+    getValues,
   };
 
   return (

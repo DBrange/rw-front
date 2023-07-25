@@ -3,10 +3,10 @@ import axios from "axios";
 import { useInspectContext } from "../../..";
 
 interface Props {
- register: any
+  schemaName: string;
 }
 
-function FormUploadImage({register}: Props) {
+function FormUploadImage({schemaName}: Props) {
   const { setValue } = useInspectContext();
   const [loading, setLoading] = useState();
   const preset_key = "denuncias-web";
@@ -38,7 +38,7 @@ function FormUploadImage({register}: Props) {
   return (
     <div>
       <label htmlFor="image">Subir imagen</label>
-      <input type="file" id="image" {...register} onChange={upload} />
+      <input type="file" id="image" onChange={upload} />
       {/* <img className="h-10" src={image} /> */}
     </div>
   );
