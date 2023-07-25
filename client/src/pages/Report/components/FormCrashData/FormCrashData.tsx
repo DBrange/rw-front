@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormInjuredInfoData, FormTextArea, FormThirdPartyVehicleData, PageButtonReport } from "..";
+import { FormInjuredInfoData, FormInputOptionalAmount, FormTextArea, FormThirdPartyVehicleData, PageButtonReport } from "..";
 import { FormInput, FormCheckbox, FormInputOptional, FormEffectOpenClose } from "../../../../components";
 import { useReportContext } from "../../context";
 
@@ -36,8 +36,8 @@ function FormCrashData() {
         error={errors.schemaVehicleCrashReport?.date?.message}
         type="date"
         id="time"
-        label="Horario del suceso"
-        placeholder="Ingresar horario"
+        label="Fecha del suceso"
+        placeholder="Ingresar fecha"
         touched={touchedFields.schemaVehicleCrashReport?.date}
       />
       <FormInput
@@ -51,9 +51,10 @@ function FormCrashData() {
       />
 
       <FormTextArea
+        register={register("schemaVehicleCrashReport.details")}
         textaValue={textaValue}
-        error={errors.details}
-        touched={touchedFields.details}
+        error={errors.schemaVehicleCrashReport?.details?.message}
+        touched={touchedFields.schemaVehicleCrashReport?.details}
       />
 
       <FormCheckbox
@@ -94,15 +95,15 @@ function FormCrashData() {
         id={"thirdInjuried"}
         label={"Tercero(s) lesionados"}
       />
-      <FormInputOptional
-        register={register("schemaVehicleCrashReport.amount")}
-        error={errors.schemaVehicleCrashReport?.amount?.message}
+      <FormInputOptionalAmount
+        error={errors.schemaVehicleFireReport?.amount?.message}
         checked={isCheckedThirdInjuried}
         type="number"
         id="amount"
         label="Cantidad"
         placeholder="Ingresar cantidad"
-        touched={touchedFields.schemaVehicleCrashReport?.amount}
+        touched={touchedFields.schemaVehicleFireReport?.amount}
+        schemaName={"schemaThirdInjured.amount"}
       />
 
       {/* <FormThirdPartyVehicleData /> */}

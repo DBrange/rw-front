@@ -3,6 +3,7 @@ export * from './FormElectronicReportContainer';
 export * from './FormElectronicReportData';
 export * from './FormFireData';
 export * from './FormInjuredInfoData';
+export * from './FormInputOptionalAmount';
 export * from './FormReport';
 export * from './FormTextArea';
 export * from './FormThirdPartyVehicleData';

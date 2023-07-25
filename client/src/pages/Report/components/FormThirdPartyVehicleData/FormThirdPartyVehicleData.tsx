@@ -127,7 +127,7 @@ function FormThirdPartyVehicleData() {
         register={register("schemaThirdPartyVehicleReport.licencePhoto")}
       />
       <FormInput
-        register={register("email")}
+        register={register("schemaThirdPartyVehicleReport.email")}
         error={errors.schemaThirdPartyVehicleReport?.email?.message}
         type="text"
         id="email"

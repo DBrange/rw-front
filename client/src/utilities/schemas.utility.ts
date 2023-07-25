@@ -65,31 +65,39 @@ export const schemaElectronic = z.object({
 
 // Report
 
-export const schemaInjuredInfo = z.object({
-  schemaInjuredInfo: z.object({
+export const schemaThirdInjuredData = z.object({
+  schemaThirdInjuredData: z.object({
     name: z.string().min(1).max(20),
     lastName: z.string().min(1).max(20),
     phoneNumber: z.number(),
-    email: z.string(),
+    email: z.string().min(1).max(30),
     gender: z.enum(["hombre", "mujer", "otro"]),
     dni: z.number(),
     injuries: z.string(),
   }),
 });
 
+export const schemaThirdInjured = z.object({
+  schemaThirdInjured: z.object({
+    amount: z.number(),
+    injuredInfo: z.array(schemaThirdInjuredData),
+  })
+})
+
 export const schemaVehicleCrashReport = z.object({
   schemaVehicleCrashReport: z.object({
     time: z.string().min(1).max(20),
-    date: z.string(),
-    location: z.string(),
+    date: z.coerce.date(),
+    location: z.string().min(1).max(20),
+    details: z.string().min(1),
     injured: z.boolean(),
     injuries: z.string(),
     ambulance: z.boolean(),
     ambulanceTo: z.string(),
     thirdInjured: z.boolean(),
-    // thirdParty: z.object({
+    // thirdInjuredData: z.object({
     //   amount: z.number(),
-    //   injuredInfo: z.array(schemaInjuredInfo),
+    //   injuredInfo: z.array(schemaThirdInjured),
     // }),
   }),
 });
@@ -97,8 +105,13 @@ export const schemaVehicleCrashReport = z.object({
 export const schemaVehicleTheftReport = z.object({
   schemaVehicleTheftReport: z.object({
     time: z.string().min(1).max(20),
-    date: z.date(),
-    location: z.string(),
+    date: z.coerce.date(),
+    location: z.string().min(1),
+    injured: z.boolean(),
+    injuries: z.string(),
+    ambulance: z.boolean(),
+    ambulanceTo: z.string(),
+    thirdInjured: z.boolean(),
     // reportPhoto: z.string()
   }),
 });
@@ -106,18 +119,18 @@ export const schemaVehicleTheftReport = z.object({
 export const schemaVehicleFireReport = z.object({
   schemaVehicleFireReport: z.object({
     time: z.string().min(1).max(20),
-    date: z.date(),
-    location: z.string(),
-    details: z.string(),
+    date: z.coerce.date(),
+    location: z.string().min(1),
+    details: z.string().min(1),
   }),
 });
 
 export const schemaElectronicTheftReport = z.object({
   schemaElectronicTheftReport: z.object({
     time: z.string().min(1).max(20),
-    date: z.date(),
-    location: z.string(),
-    reportPhoto: z.string(),
+    date: z.coerce.date(),
+    location: z.string().min(1),
+    // reportPhoto: z.string(),
   }),
 });
 
@@ -130,12 +143,12 @@ export const schemaThirdPartyVehicleReport = z.object({
     insauranceCompany: z.string().min(1).max(20),
     insaurancePolicy: z.string().min(1).max(20),
     ownerName: z.string().min(1).max(20),
-    ownerDni: z.string().min(1).max(20),
+    ownerDni: z.number(),
     name: z.string().min(1).max(20),
     dni: z.number(),
     address: z.string().min(1).max(20),
-    phoneNumber: z.string().min(1).max(20),
+    phoneNumber: z.number(),
     // licencePhoto: z.string(),
-    email: z.string().email()
-  })
-})
+    email: z.string().email(),
+  }),
+});

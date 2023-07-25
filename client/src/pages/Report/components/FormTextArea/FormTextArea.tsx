@@ -1,12 +1,15 @@
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useReportContext } from "../..";
 
 interface Props {
+  register: any;
   textaValue: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   error: string | undefined;
   touched: boolean;
 }
 
-function FormTextArea({ textaValue, error, touched }: Props) {
+function FormTextArea({register, textaValue, error, touched }: Props) {
+  const {setValue} = useReportContext()
   return (
     <div className="">
       <label
@@ -20,10 +23,11 @@ function FormTextArea({ textaValue, error, touched }: Props) {
           className={`${
             touched && error && "border-red-400"
           } resize-none border-2 w-full h-32 pl-2 rounded outline-none focus:border-blue-400`}
-          onChange={textaValue}
+          // onChange={textaValue}
           id="details"
           cols={30}
           rows={30}
+          {...register}
         ></textarea>
         {touched && error && (
           <i className="text-red-400 absolute right-2 top-2">

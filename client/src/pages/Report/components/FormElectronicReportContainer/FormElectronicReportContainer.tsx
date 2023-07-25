@@ -59,7 +59,7 @@ function FormElectronicReportContainer() {
               <PageButtonReport
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaElectronicTheftReport}
+                errors={errors.schemaVehicleTheftReport}
               />
             </div>
           </>

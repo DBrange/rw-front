@@ -7,34 +7,36 @@ function FormThieftData() {
   return (
     <>
       <FormInput
-        register={register("schemaElectronicTheftReport.time")}
-        error={errors.schemaElectronicTheftReport?.time?.message}
+        register={register("schemaVehicleTheftReport.time")}
+        error={errors.schemaVehicleTheftReport?.time?.message}
         type="text"
         id="time"
         label="Horario del suceso"
         placeholder="Ingresar horario"
-        touched={touchedFields.schemaElectronicTheftReport?.time}
+        touched={touchedFields.schemaVehicleTheftReport?.time}
       />
       <FormInput
-        register={register("schemaElectronicTheftReport.date")}
-        error={errors.schemaElectronicTheftReport?.date?.message}
+        register={register("schemaVehicleTheftReport.date")}
+        error={errors.schemaVehicleTheftReport?.date?.message}
         type="date"
         id="date"
         label="Fecha del suceso"
         placeholder="Ingresar fecha"
-        touched={touchedFields.schemaElectronicTheftReport?.date}
+        touched={touchedFields.schemaVehicleTheftReport?.date}
       />
       <FormInput
-        register={register("schemaElectronicTheftReport.location")}
-        error={errors.schemaElectronicTheftReport?.location?.message}
+        register={register("schemaVehicleTheftReport.location")}
+        error={errors.schemaVehicleTheftReport?.location?.message}
         type="text"
         id="location"
         label="Ubicacion del suceso"
         placeholder="Ingresar ubicacion"
-        touched={touchedFields.schemaElectronicTheftReport?.location}
+        touched={touchedFields.schemaVehicleTheftReport?.location}
       />
 
-      <FormUploadImageReport register={register("schemaVehicle.images")} />
+      <FormUploadImageReport
+        register={register("schemaVehicleTheftReport.images")}
+      />
     </>
   );
 }
