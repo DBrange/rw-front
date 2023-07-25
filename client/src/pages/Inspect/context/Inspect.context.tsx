@@ -27,7 +27,6 @@ export interface IInspectContext {
   userBtnActive: UserBtnActive;
   page: number;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  validateImages: any;
   image: any;
   setValue: any;
   trigger: any;
@@ -93,8 +92,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const validateImages = (value: number) => {
-    console.log("chi", value);
+  // const validateImages = (value: number) => {
+  //   console.log("chi", value);
 
 // setImage(value)
 
@@ -105,7 +104,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
 
     // setValue("schemaVehicle.images", value);
-  };
+  // };
 
   
 
@@ -197,7 +196,6 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     userBtnActive,
     page,
     changePage,
-    validateImages,
     image,
     setValue,
     trigger,

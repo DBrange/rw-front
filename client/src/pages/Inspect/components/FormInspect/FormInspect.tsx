@@ -24,7 +24,6 @@ function FormInspect() {
     userBtnActive,
     page,
     changePage,
-    validateImages,
     image,
   } = useInspectContext();
 
@@ -117,13 +116,8 @@ function FormInspect() {
             isActive={activeForm === "vehicle" && page === 2}
             form={
               <>
-                <FormVehicleData
-                  errors={errors}
-                  register={register}
-                  touchedFields={touchedFields}
-                  validateImages={validateImages}
-                  image={image}
-                />
+                <FormVehicleData />
+                
                 <div className="w-full">
                   <PageButton
                     changePage={changePage}

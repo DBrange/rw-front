@@ -245,19 +245,19 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const [people, setPeople] = useState<any>([]);
+  // const [people, setPeople] = useState<any>([]);
 
-  const addingPeople = () => {
-    if (amountValue) {
-      const thirdInjured = [];
-      for (let i = 0; i < amountValue; i++) {
-        thirdInjured.push(schemaThirdInjuredData);
-      }
-      setPeople(thirdInjured);
-    }
+  // const addingPeople = () => {
+  //   if (amountValue) {
+  //     const thirdInjured = [];
+  //     for (let i = 0; i < amountValue; i++) {
+  //       thirdInjured.push(schemaThirdInjuredData);
+  //     }
+  //     setPeople(thirdInjured);
+  //   }
 
-    return;
-  };
+  //   return;
+  // };
   const schemaThirdInjuredData = z.object({
     // schemaThirdInjuredData: z.object({
       name: z.string().min(1).max(20),
@@ -290,7 +290,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     } else if (page === 4) {
       schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
     } else if (page === 5 && amountValue) {
-      addingPeople();
+      // addingPeople();
       schema = schemaUser
         .merge(schemaElement)
         .merge(schemaComplaintType)

@@ -7,14 +7,6 @@ import {
 } from "../../../../components";
 import { FormUploadImageReport, useReportContext } from "../../..";
 
-interface Props {
-  register: any;
-  errors: any;
-  touchedFields: any;
-  validateImages: any;
-  image: any;
-}
-
 function FormVehicleDataReport() {
   
   const {
@@ -31,14 +23,6 @@ function FormVehicleDataReport() {
     setValue("schemaVehicle.tireWear", value);
     setSlider(value);
   };
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     const imageUrl = URL.createObjectURL(file);
-  //     console.log('siiiiiii', imageUrl)
-  //     validateImages(imageUrl); // Asigna la URL de la imagen al campo "images" en el formulario
-  //   }
-  // };
   return (
     <>
       <FormInput

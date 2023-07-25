@@ -8,15 +8,8 @@ import {
 import { useInspectContext } from "../../..";
 import FormUploadImage from "../FormUploadImage/FormUploadImage";
 
-interface Props {
-  register: any;
-  errors: any;
-  touchedFields: any;
-  validateImages: any;
-  image: any;
-}
 
-function FormVehicleData({}: Props) {
+function FormVehicleData() {
   const { errors, register, touchedFields, setValue } = useInspectContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [slider, setSlider] = useState<number>(50);
@@ -26,14 +19,7 @@ function FormVehicleData({}: Props) {
     setValue("schemaVehicle.tireWear", value);
     setSlider(value);
   };
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     const imageUrl = URL.createObjectURL(file);
-  //     console.log('siiiiiii', imageUrl)
-  //     validateImages(imageUrl); // Asigna la URL de la imagen al campo "images" en el formulario
-  //   }
-  // };
+
   return (
     <>
       <FormInput
