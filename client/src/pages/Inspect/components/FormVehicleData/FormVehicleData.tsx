@@ -43,7 +43,7 @@ function FormVehicleData({}: Props) {
         id="year"
         label="Año"
         placeholder="Ano del vehiculo"
-        touched={touchedFields.year}
+        touched={touchedFields.schemaVehicle?.year}
       />
       <FormInput
         register={register("schemaVehicle.color")}

@@ -50,10 +50,11 @@ export const schemaLegalPersonal = z.object({
 });
 
 const currentYear = new Date().getFullYear();
+console.log(currentYear)
 
 export const schemaVehicle = z.object({
   schemaVehicle: z.object({
-    year: z.number().lte(currentYear),
+    year: z.number().refine((value) => value <= currentYear, {message: 'El año exede al actual'}),
     color: z.string().min(1).max(20),
     tireBrand: z.string().min(1).max(20),
     tireZise: z.string().min(1).max(20),

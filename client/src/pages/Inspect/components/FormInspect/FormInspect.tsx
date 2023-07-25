@@ -26,8 +26,6 @@ function FormInspect() {
     changePage,
     validateImages,
     image,
-    trigger,
-    getValues,
   } = useInspectContext();
 
   return (

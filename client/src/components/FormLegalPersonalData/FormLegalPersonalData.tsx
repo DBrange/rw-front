@@ -19,7 +19,7 @@ function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.schemaLegalPersonal?.companyName}
       />
       <FormInput
-        register={register("schemaLegalPersonal.cuit", { valueAsNumber: true })}
+        register={register("schemaLegalPersonal.cuit")}
         error={errors.schemaLegalPersonal?.cuit?.message}
         type="number"
         id="cuit"
