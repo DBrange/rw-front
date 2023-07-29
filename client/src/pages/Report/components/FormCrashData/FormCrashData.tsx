@@ -1,39 +1,31 @@
 import { useState } from "react";
-import { FormInputOptionalAmount, FormTextArea } from "..";
-import { FormInput, FormCheckbox, FormInputOptional } from "../../../../components";
+import { FormInputOptionalAmount, FormTextArea, FormTimeInput } from "..";
+import {
+  FormInput,
+  FormCheckbox,
+  FormInputOptional,
+} from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormCrashData() {
-      const {
-        register,
-        errors,
-        touchedFields,
-      } = useReportContext();
+  const { register, errors, touchedFields } = useReportContext();
 
-      const [isCheckedInjuried, setIsCheckedInjuried] =
-        useState<boolean>(false);
-      const [isCheckedAmbulance, setIsCheckedAmbulance] =
-        useState<boolean>(false);
-      const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
+  const [isCheckedInjuried, setIsCheckedInjuried] = useState<boolean>(false);
+  const [isCheckedAmbulance, setIsCheckedAmbulance] = useState<boolean>(false);
+  const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
     useState<boolean>(false);
-  
+
   return (
     <>
-      <FormInput
-        register={register("schemaVehicleCrashReport.time")}
-        error={errors.schemaVehicleCrashReport?.time?.message}
-        type="text"
-        id="time"
-        label="Horario del suceso"
-        placeholder="Ingresar horario"
-        touched={touchedFields.schemaVehicleCrashReport?.time}
+      <FormTimeInput
+        schemaName={"schemaVehicleCrashReport.time"}
       />
       <FormInput
         register={register("schemaVehicleCrashReport.date")}
         error={errors.schemaVehicleCrashReport?.date?.message}
         type="date"
         id="time"
-        label="Fecha del suceso"
+        label="Fecha del suceso*"
         placeholder="Ingresar fecha"
         touched={touchedFields.schemaVehicleCrashReport?.date}
       />
@@ -42,7 +34,7 @@ function FormCrashData() {
         error={errors.schemaVehicleCrashReport?.location?.message}
         type="text"
         id="location"
-        label="Ubicacion del suceso"
+        label="Ubicacion del suceso*"
         placeholder="Ingresar ubicacion"
         touched={touchedFields.schemaVehicleCrashReport?.location}
       />
@@ -104,4 +96,4 @@ function FormCrashData() {
     </>
   );
 }
-export default FormCrashData
+export default FormCrashData;

@@ -1,6 +1,7 @@
 import { FormVehicleData, useInspectContext } from "../..";
 import {
   ButtonChoice,
+  ErrorBtn,
   FormEffectOpenClose,
   FormElectronicData,
   FormLegalPersonalData,
@@ -24,6 +25,7 @@ function FormInspect() {
     userBtnActive,
     page,
     changePage,
+    isError
   } = useInspectContext();
 
   return (
@@ -146,6 +148,7 @@ function FormInspect() {
           </div>
         </section>
       </form>
+      <ErrorBtn isError={ isError} />
     </>
   );
 }

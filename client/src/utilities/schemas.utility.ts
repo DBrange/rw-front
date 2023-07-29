@@ -50,7 +50,6 @@ export const schemaLegalPersonal = z.object({
 });
 
 const currentYear = new Date().getFullYear();
-// console.log(currentYear)
 
 export const schemaVehicle = z.object({
   schemaVehicle: z.object({
@@ -131,7 +130,7 @@ export const schemaVehicleTheftReport = z.object({
     time: z.string().min(1).max(20),
     date: z.coerce.date(),
     location: z.string().min(1),
-    // reportPhoto: z.array(z.string().url()),
+    reportPhoto: z.array(z.string().url()),
   }),
 });
 
@@ -154,7 +153,7 @@ export const schemaElectronicTheftReport = z.object({
     time: z.string().min(1).max(20),
     date: z.coerce.date(),
     location: z.string().min(1),
-    // reportPhoto: z.array(z.string().url()),
+    reportPhoto: z.array(z.string().url()),
   }),
 });
 

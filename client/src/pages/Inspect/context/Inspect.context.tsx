@@ -40,6 +40,9 @@ export interface IInspectContext {
   setValue: any;
   trigger: any;
   modalActive: boolean;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
+  isError: boolean;
+  control: any
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -64,10 +67,10 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     electronic: false,
   });
 
-  useEffect(() => {
-      trigger();
+  // useEffect(() => {
+  //     trigger();
     
-  }, [page]);
+  // }, [page]);
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
@@ -157,19 +160,26 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     formState: { errors, touchedFields },
     trigger,
     setValue,
+    control
   } = useForm<any>({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     selectingSchema();
+        if (modalActive) {
+            setIsError(true);
+    } else {
+            setIsError(true);
+    }
   }, [errors]);
 
   console.log(errors);
 
   const submitData = (data: any) => {
     console.log("todo", data);
-    validationFormDataInspect(userActiveForm, activeForm, setModalActive, data);
+    validationFormDataInspect({ userActiveForm, activeForm, setModalActive, setIsError, data });
+
   };
 
   const values = {
@@ -189,6 +199,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     setValue,
     trigger,
     modalActive,
+    setIsError,
+    isError,
+    control
   };
 
   return (

@@ -3,20 +3,15 @@ import {
   FormCheckbox,
   FormInput,
   FormInputOptional,
+  FormInputRange,
   FormSelect,
 } from "../../../../components";
 import { FormUploadImageReport, useReportContext } from "../../..";
 
 function FormVehicleDataReport() {
-  const { errors, register, touchedFields, setValue } = useReportContext();
+  const { errors, register, touchedFields, setValue, control } = useReportContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
-  const [slider, setSlider] = useState<number>(50);
 
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.ceil(parseInt(e.target.value) / 10) * 10;
-    setValue("schemaVehicle.tireWear", value);
-    setSlider(value);
-  };
   return (
     <>
       <FormInput
@@ -24,7 +19,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.year?.message}
         type="number"
         id="year"
-        label="Año"
+        label="Año*"
         placeholder="Ano del vehiculo"
         touched={touchedFields.year}
       />
@@ -33,7 +28,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.color?.message}
         type="text"
         id="color"
-        label="Color"
+        label="Color*"
         placeholder="Color del vehiculo"
         touched={touchedFields.schemaVehicle?.color}
       />
@@ -42,7 +37,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.tireBrand?.message}
         type="text"
         id="tireBrand"
-        label="Marca de las ruedas"
+        label="Marca de las ruedas*"
         placeholder="Ingrese la marca"
         touched={touchedFields.schemaVehicle?.tireBrand}
       />
@@ -51,34 +46,17 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.tireSize?.message}
         type="text"
         id="tireSize"
-        label="Tamaño de la rueda"
+        label="Tamaño de la rueda*"
         placeholder="Ingrese el tamaño"
         touched={touchedFields.schemaVehicle?.tireSize}
       />
-      {/* <FormInput
-        register={register("schemaVehicle.tireWear")}
-        error={errors.schemaVehicle?.tireWear?.message}
-        type="text"
-        id="tireWear"
-        label="Desgaste de la rueda"
-        placeholder="Ingrese el desgaste"
-        touched={touchedFields.schemaVehicle?.tireWear}
-      /> */}
-      <div className="flex flex-col">
-        <label htmlFor="tireWear">Desgaste de la rueda</label>
-        <div className="flex gap-2">
-          <input
-            className="flex-1"
-            type="range"
-            id="tireWear"
-            {...register("schemaVehicle.tireWear", { valueAsNumber: true })}
-            onChange={handleSliderChange}
-            min="0"
-            max="100"
-          />
-          <p className=" flex-none">{`${slider}%`}</p>
-        </div>
-      </div>
+
+      <FormInputRange
+        register={register("schemaVehicle.tireWear", { valueAsNumber: true })}
+        setValue={setValue}
+        schemaName={"schemaVehicle.tireWear"}
+        control={control}
+      />
 
       <FormCheckbox
         register={register("schemaVehicle.damage")}
@@ -108,7 +86,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.plate?.message}
         type="text"
         id="plate"
-        label="Patente"
+        label="Patente*"
         placeholder="Ingrese la patente"
         touched={touchedFields.schemaVehicle?.plate}
       />
@@ -123,7 +101,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.brand?.message}
         type="text"
         id="brand"
-        label="Marca"
+        label="Marca*"
         placeholder="Ingresar marca"
         touched={touchedFields.schemaVehicle?.brand}
       />
@@ -132,7 +110,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.model?.message}
         type="text"
         id="model"
-        label="Modelo"
+        label="Modelo*"
         placeholder="Ingresar modelo"
         touched={touchedFields.schemaVehicle?.model}
       />
@@ -141,7 +119,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicle?.engine?.message}
         type="text"
         id="engine"
-        label="Motor"
+        label="Motor*"
         placeholder="Ingresar motor"
         touched={touchedFields.schemaVehicle?.ingine}
       />
@@ -149,7 +127,7 @@ function FormVehicleDataReport() {
         register={register("schemaVehicle.fuel")}
         error={errors.schemaVehicle?.fuel?.message}
         id="fuel"
-        label="Combustible"
+        label="Combustible*"
         options={["diesel", "gasoline"]}
         touched={touchedFields.schemaVehicle?.fuel}
       />
@@ -157,7 +135,7 @@ function FormVehicleDataReport() {
         register={register("schemaVehicle.vehicleType")}
         error={errors.schemaVehicle?.vehicleType?.message}
         id="vehicleType"
-        label="Tipo de vehiculo"
+        label="Tipo de vehiculo*"
         options={["camion", "automovil", "motocicleta"]}
         touched={touchedFields.schemaVehicle?.vehicleType}
       />

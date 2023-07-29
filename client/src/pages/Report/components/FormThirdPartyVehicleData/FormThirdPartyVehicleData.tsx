@@ -14,7 +14,7 @@ function FormThirdPartyVehicleData() {
         type="number"
         id="year"
         label="Año"
-        placeholder="Año del vehiculo"
+        placeholder="Año del vehiculo*"
         touched={touchedFields.schemaThirdPartyVehicleReport?.year}
       />
       <FormInput
@@ -23,7 +23,7 @@ function FormThirdPartyVehicleData() {
         type="text"
         id="brand"
         label="Marca"
-        placeholder="Ingresar marca"
+        placeholder="Ingresar marca*"
         touched={touchedFields.schemaThirdPartyVehicleReport?.brand}
       />
       <FormInput
@@ -32,7 +32,7 @@ function FormThirdPartyVehicleData() {
         type="text"
         id="model"
         label="Modelo"
-        placeholder="Ingresar modelo"
+        placeholder="Ingresar modelo*"
         touched={touchedFields.schemaThirdPartyVehicleReport?.model}
       />
       <FormInput
@@ -41,7 +41,7 @@ function FormThirdPartyVehicleData() {
         type="text"
         id="plate"
         label="Patente"
-        placeholder="Ingrese la patente"
+        placeholder="Ingrese la patente*"
         touched={touchedFields.schemaThirdPartyVehicleReport?.plate}
       />
       <FormInput
@@ -50,7 +50,7 @@ function FormThirdPartyVehicleData() {
         type="text"
         id="insauranceCompany"
         label="Compania de seguros"
-        placeholder="Ingrese la compania"
+        placeholder="Ingrese la compania*"
         touched={touchedFields.schemaThirdPartyVehicleReport?.insauranceCompany}
       />
       <FormInput
@@ -59,7 +59,7 @@ function FormThirdPartyVehicleData() {
         type="text"
         id="insaurancePolicy"
         label="Poliza de seguros"
-        placeholder="Ingrese la poliza"
+        placeholder="Ingrese la poliza*"
         touched={touchedFields.schemaThirdPartyVehicleReport?.insaurancePolicy}
       />
       <FormInput
@@ -67,7 +67,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.ownerName?.message}
         type="text"
         id="ownerName"
-        label="Nombre del propietario"
+        label="Nombre del propietario*"
         placeholder="Ingresar nombre"
         touched={touchedFields.schemaThirdPartyVehicleReport?.ownerName}
       />
@@ -78,7 +78,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.ownerDni?.message}
         type="number"
         id="ownerDni"
-        label="DNI del propietario"
+        label="DNI del propietario*"
         placeholder="Ingresar DNI"
         touched={touchedFields.schemaThirdPartyVehicleReport?.ownerDni}
       />
@@ -87,7 +87,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.name?.message}
         type="text"
         id="name"
-        label="Nombre del conductor"
+        label="Nombre del conductor*"
         placeholder="Ingresar nombre"
         touched={touchedFields.schemaThirdPartyVehicleReport?.name}
       />
@@ -98,7 +98,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.dni?.message}
         type="number"
         id="dni"
-        label="DNI del conductor"
+        label="DNI del conductor*"
         placeholder="Ingresar DNI"
         touched={touchedFields.schemaThirdPartyVehicleReport?.dni}
       />
@@ -107,7 +107,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.address?.message}
         type="text"
         id="address"
-        label="Residencia del conductor"
+        label="Residencia del conductor*"
         placeholder="Ingresar residencia"
         touched={touchedFields.schemaThirdPartyVehicleReport?.address}
       />
@@ -118,7 +118,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.phoneNumber?.message}
         type="number"
         id="phoneNumber"
-        label="Telefono del conductor"
+        label="Telefono del conductor*"
         placeholder="Ingresar numero telefonico"
         touched={touchedFields.schemaThirdPartyVehicleReport?.phoneNumber}
       />
@@ -131,7 +131,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.email?.message}
         type="text"
         id="email"
-        label="Email del conductor"
+        label="Email del conductor*"
         placeholder="Ingresar email"
         touched={touchedFields.schemaThirdPartyVehicleReport?.email}
       />

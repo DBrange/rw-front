@@ -36,30 +36,32 @@ function FormUploadImage({ schemaName, error }: Props) {
         setImages(imageRULs);
         setValue(schemaName, imageRULs);
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   };
   return (
     <div>
       <div className="flex overflow-hidden gap-6 my-3">
         <label
           className={`${
-           !images?.length && error ? "border-red-400 text-red-400" : "border-violet-300"
+            !images?.length && error
+              ? "border-red-400 text-red-400"
+              : "border-violet-300"
           }  cursor-pointer w-auto border-2  h-8 hover:bg-violet-300 p-2 leading-3 rounded outline-none focus:border-blue-400`}
           htmlFor="image"
         >
-          Subir imagen/es*
+          Subir imagen/es
         </label>
         {!images?.length ? (
           <div></div>
         ) : (
           <>
             <div className="flex gap-1 items-end">
-              {images.slice(0, 2)?.map((image: string) => {
+              {images.slice(0, 2)?.map((image: string, i: number) => {
                 return (
                   <img
+                    key={i}
                     className="max-h-8 object-cover max-w-[60px]"
-                    src={!images?.length ? image : ""}
+                    src={images?.length ? image : ""}
                   />
                 );
               })}

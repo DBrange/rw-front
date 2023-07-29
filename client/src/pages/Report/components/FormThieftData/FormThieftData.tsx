@@ -1,4 +1,4 @@
-import { FormUploadImageReport } from "../../..";
+import { FormTimeInput, FormUploadImageReport } from "../../..";
 import { FormInput } from "../../../../components";
 import { useReportContext } from "../../context";
 
@@ -7,21 +7,22 @@ function FormThieftData({ objectType }: { objectType: string }) {
 
   return (
     <>
-      <FormInput
+      {/* <FormInput
         register={register(`${objectType}.time`)}
         error={errors[`${objectType}`]?.time?.message}
         type="text"
         id="time"
-        label="Horario del suceso"
+        label="Horario del suceso*"
         placeholder="Ingresar horario"
         touched={touchedFields[`${objectType}`]?.time}
-      />
+      /> */}
+      <FormTimeInput schemaName={`${objectType}.time`} />
       <FormInput
         register={register(`${objectType}.date`)}
         error={errors[`${objectType}`]?.date?.message}
         type="date"
         id="date"
-        label="Fecha del suceso"
+        label="Fecha del suceso*"
         placeholder="Ingresar fecha"
         touched={touchedFields[`${objectType}`]?.date}
       />
@@ -30,7 +31,7 @@ function FormThieftData({ objectType }: { objectType: string }) {
         error={errors[`${objectType}`]?.location?.message}
         type="text"
         id="location"
-        label="Ubicacion del suceso"
+        label="Ubicacion del suceso*"
         placeholder="Ingresar ubicacion"
         touched={touchedFields[`${objectType}`]?.location}
       />

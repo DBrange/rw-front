@@ -1,9 +1,18 @@
-export const validationFormDataInspect = (
-  userActiveForm: string,
-  activeForm: string,
-  setModalActive: React.Dispatch<React.SetStateAction<boolean>>,
-  data: any
-) => {
+type ValidationFormDataInspect = {
+  userActiveForm: string;
+  activeForm: string;
+  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
+  data: any;
+};
+
+export const validationFormDataInspect = ({
+  userActiveForm,
+  activeForm,
+  setModalActive,
+  setIsError,
+  data,
+}: ValidationFormDataInspect) => {
   if (userActiveForm === "person" && activeForm === "vehicle") {
     if (data?.schemaPersonal && data?.schemaVehicle) {
       setModalActive(true);
@@ -28,5 +37,5 @@ export const validationFormDataInspect = (
     } else {
       setModalActive(false);
     }
-  }
+  } 
 };

@@ -3,21 +3,17 @@ import {
   FormCheckbox,
   FormInput,
   FormInputOptional,
+  FormInputRange,
   FormSelect,
 } from "../../../../components";
 import { useInspectContext } from "../../..";
 import FormUploadImage from "../FormUploadImage/FormUploadImage";
 
 function FormVehicleData() {
-  const { errors, register, touchedFields, setValue } = useInspectContext();
+  const { errors, register, touchedFields, setValue, control } = useInspectContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
-  const [slider, setSlider] = useState<number>(50);
 
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.ceil(parseInt(e.target.value) / 10) * 10;
-    setValue("schemaVehicle.tireWear", value);
-    setSlider(value);
-  };
+
 
   return (
     <>
@@ -57,30 +53,13 @@ function FormVehicleData() {
         placeholder="Ingrese el tamaño"
         touched={touchedFields.schemaVehicle?.tireSize}
       />
-      {/* <FormInput
-        register={register("schemaVehicle.tireWear")}
-        error={errors.schemaVehicle?.tireWear?.message}
-        type="text"
-        id="tireWear"
-        label="Desgaste de la rueda"
-        placeholder="Ingrese el desgaste"
-        touched={touchedFields.schemaVehicle?.tireWear}
-      /> */}
-      <div className="flex flex-col">
-        <label htmlFor="tireWear">Desgaste de la rueda*</label>
-        <div className="flex gap-2">
-          <input
-            className="flex-1"
-            type="range"
-            id="tireWear"
-            {...register("schemaVehicle.tireWear", { valueAsNumber: true })}
-            onChange={handleSliderChange}
-            min="0"
-            max="100"
-          />
-          <p className=" flex-none">{`${slider}%`}</p>
-        </div>
-      </div>
+
+      <FormInputRange
+        register={register("schemaVehicle.tireWear", { valueAsNumber: true })}
+        setValue={setValue}
+        schemaName={"schemaVehicle.tireWear"}
+        control={control}
+      />
 
       <FormCheckbox
         register={register("schemaVehicle.damage")}

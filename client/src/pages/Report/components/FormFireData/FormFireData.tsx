@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormInputOptionalAmount, FormTextArea } from "..";
+import { FormInputOptionalAmount, FormTextArea, FormTimeInput } from "..";
 import { FormCheckbox, FormInput, FormInputOptional } from "../../../../components";
 import { useReportContext } from "../../context";
 
@@ -14,21 +14,23 @@ function FormFireData() {
           useState<boolean>(false);
   return (
     <>
-      <FormInput
+      {/* <FormInput
         register={register("schemaVehicleFireReport.time")}
         error={errors.schemaVehicleFireReport?.time?.message}
         type="text"
         id="time"
-        label="Horario del suceso"
+        label="Horario del suceso*"
         placeholder="Ingresar horario"
         touched={touchedFields.schemaVehicleFireReport?.time}
-      />
+      /> */}
+      <FormTimeInput schemaName={"schemaVehicleFireReport.time"} />
+
       <FormInput
         register={register("schemaVehicleFireReport.date")}
         error={errors.schemaVehicleFireReport?.date?.message}
         type="date"
         id="date"
-        label="Fecha del suceso"
+        label="Fecha del suceso*"
         placeholder="Ingresar fecha"
         touched={touchedFields.schemaVehicleFireReport?.date}
       />
@@ -37,7 +39,7 @@ function FormFireData() {
         error={errors.schemaVehicleFireReport?.location?.message}
         type="text"
         id="location"
-        label="Ubicacion del suceso"
+        label="Ubicacion del suceso*"
         placeholder="Ingresar ubicacion"
         touched={touchedFields.schemaVehicleFireReport?.location}
       />
@@ -51,7 +53,7 @@ function FormFireData() {
         register={register("schemaVehicleFireReport.injured")}
         setChecked={setIsCheckedInjuried}
         id={"injuried"}
-        label={"Lesiones"}
+        label={"Lesiones*"}
       />
       <FormInputOptional
         register={register("schemaVehicleFireReport.injuries")}
@@ -59,7 +61,7 @@ function FormFireData() {
         checked={isCheckedInjuried}
         type="text"
         id="injuries"
-        label="Tipo el de lesion"
+        label="Tipo el de lesion*"
         placeholder="Ingrese tipo el de lesion"
         touched={touchedFields.schemaVehicleFireReport?.injuries}
       />
@@ -75,7 +77,7 @@ function FormFireData() {
         checked={isCheckedAmbulance}
         type="text"
         id="ambulanceTo"
-        label="Destino de la ambulancia"
+        label="Destino de la ambulancia*"
         placeholder="Ingrese tipo el de lesion"
         touched={touchedFields.schemaVehicleFireReport?.ambulanceTo}
       />
@@ -83,14 +85,14 @@ function FormFireData() {
         register={register("schemaVehicleFireReport.thirdInjured")}
         setChecked={setIsCheckedThirdInjuried}
         id={"thirdInjuried"}
-        label={"Tercero(s) lesionados"}
+        label={"Tercero(s) lesionados*"}
       />
       <FormInputOptionalAmount
         error={errors.schemaVehicleFireReport?.amount?.message}
         checked={isCheckedThirdInjuried}
         type="number"
         id="amount"
-        label="Cantidad"
+        label="Cantidad*"
         placeholder="Ingresar cantidad"
         touched={touchedFields.schemaVehicleFireReport?.amount}
         schemaName={"schemaThirdInjured.amount"}

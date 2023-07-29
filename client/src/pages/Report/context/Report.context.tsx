@@ -50,7 +50,9 @@ export interface IReportContext {
   setValue: any;
   setAmountValue: (value: React.SetStateAction<number>) => void;
   amountValue: number;
-  modalActive: boolean
+  modalActive: boolean;
+  isError: boolean;
+  control: any;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -68,6 +70,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const [amountValue, setAmountValue] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
   const [userBtnActive, setuserBtnActive] = useState<UserBtnActive>({
     person: true,
     legal: false,
@@ -314,12 +317,18 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     formState: { errors, touchedFields },
     setValue,
     trigger,
+    control
   } = useForm<any>({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     selectingSchema();
+            if (modalActive) {
+              setIsError(true);
+            } else {
+              setIsError(true);
+            }
   }, [errors]);
   console.log(errors);
 
@@ -357,6 +366,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setAmountValue,
     amountValue,
     modalActive,
+    isError,
+    control
   };
 
   return (
