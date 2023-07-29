@@ -39,7 +39,10 @@ function FormThieftData({ objectType }: { objectType: string }) {
       <FormUploadImageReport
         schemaName={`${objectType}.images`}
         error={errors.objectType?.images?.message}
+        id="imagesFire"
+        name="imagesFire"
       />
+      
     </>
   );
 }

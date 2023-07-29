@@ -1,11 +1,13 @@
 import { FormReport, ReportContainer } from ".";
-import { ReportProvider } from "./context";
+import { ImageProvider, ReportProvider } from "./context";
 
 function Report() {
   return (
     <ReportProvider>
       <ReportContainer>
-        <FormReport />
+        <ImageProvider>
+          <FormReport />
+        </ImageProvider>
       </ReportContainer>
     </ReportProvider>
   );

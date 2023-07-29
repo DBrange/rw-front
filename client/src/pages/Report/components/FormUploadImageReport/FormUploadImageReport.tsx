@@ -1,13 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
-import { useReportContext } from "../../..";
+import { useReportContext } from "../..";
 
 interface Props {
   schemaName: string;
   error: any;
+  id: string
+  name: string,
 }
 
-function FormUploadImageReport({ schemaName, error }: Props) {
+function FormUploadImageReport({ schemaName, error, name, id }: Props) {
   const { setValue } = useReportContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [images, setImages] = useState<string[] | undefined>();
@@ -20,7 +22,7 @@ function FormUploadImageReport({ schemaName, error }: Props) {
       if (files) {
         const allImages = Array.from(files);
 
-        const imageURLs: string[] = [];
+        const imageRULs: string[] = [];
         for (const image of allImages) {
           const formData = new FormData();
           formData.append("file", image);
@@ -31,15 +33,12 @@ function FormUploadImageReport({ schemaName, error }: Props) {
             formData
           );
           const { data } = response;
-          imageURLs.push(data.secure_url);
+          imageRULs.push(data.secure_url);
         }
-        setImages(imageURLs);
-        setValue(schemaName, imageURLs);
+        setImages(imageRULs);
+        setValue(schemaName, imageRULs);
       }
-      console.log(images);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   return (
     <div>
@@ -49,8 +48,8 @@ function FormUploadImageReport({ schemaName, error }: Props) {
             !images?.length && error
               ? "border-red-400 text-red-400"
               : "border-violet-300"
-          }  cursor-pointer w-auto border-2 h-8 hover:bg-violet-300 p-2 leading-3 rounded outline-none focus:border-blue-400`}
-          htmlFor="image"
+          }  cursor-pointer w-auto border-2  h-8 hover:bg-violet-300 p-2 leading-3 rounded outline-none focus:border-blue-400`}
+          htmlFor={id}
         >
           Subir imagen/es
         </label>
@@ -63,7 +62,7 @@ function FormUploadImageReport({ schemaName, error }: Props) {
                 return (
                   <img
                     key={i}
-                    className="max-h-8 object-cover max-w-[50px]"
+                    className="max-h-8 object-cover max-w-[60px]"
                     src={images?.length ? image : ""}
                   />
                 );
@@ -76,7 +75,8 @@ function FormUploadImageReport({ schemaName, error }: Props) {
           className="hidden"
           type="file"
           multiple
-          id="image"
+          id={id}
+          name={name}
           onChange={transformFiles}
         />
       </div>

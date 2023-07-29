@@ -171,7 +171,7 @@ export const schemaThirdPartyVehicleReport = z.object({
     dni: z.number(),
     address: z.string().min(1).max(20),
     phoneNumber: z.number(),
-    // licencePhoto: z.array(z.string().url()),
+    licencePhoto: z.array(z.string().url()),
     email: z.string().email(),
   }),
 });

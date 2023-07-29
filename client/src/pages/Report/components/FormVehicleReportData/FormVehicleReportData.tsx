@@ -6,7 +6,7 @@ import {
   FormInputRange,
   FormSelect,
 } from "../../../../components";
-import { FormUploadImageReport, useReportContext } from "../../..";
+import { FormUploadImageReport, useImageContext, useReportContext } from "../../..";
 
 function FormVehicleDataReport() {
   const { errors, register, touchedFields, setValue, control } = useReportContext();
@@ -79,7 +79,11 @@ function FormVehicleDataReport() {
       <FormUploadImageReport
         schemaName={"schemaVehicle.images"}
         error={errors.schemaVehicle?.images?.message}
+        id="images"
+        name="images"
       />
+      
+
 
       <FormInput
         register={register("schemaVehicle.plate")}
