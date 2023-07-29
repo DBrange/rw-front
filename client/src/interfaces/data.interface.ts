@@ -22,7 +22,7 @@ export interface VehicleData extends PersonalData {
   year: number;
   color: string;
   tireBrand: string;
-  tireZise: string;
+  tireSize: string;
   tireWear: string;
   damage: boolean;
   damageLocation?: string;
@@ -39,7 +39,7 @@ export interface LegalVehicleData extends LegalPersonalData {
   year: number;
   color: string;
   tireBrand: string;
-  tireZise: string;
+  tireSize: string;
   tireWear: string;
   damage: boolean;
   damageLocation?: string;
@@ -88,7 +88,7 @@ export interface AllDataInspect
   year: number;
   color: string;
   tireBrand: string;
-  tireZise: string;
+  tireSize: string;
   tireWear: string;
   damage: boolean;
   damageLocation?: string;

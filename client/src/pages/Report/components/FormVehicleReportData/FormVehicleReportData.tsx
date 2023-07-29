@@ -8,16 +8,10 @@ import {
 import { FormUploadImageReport, useReportContext } from "../../..";
 
 function FormVehicleDataReport() {
-  
-  const {
-    errors,
-    register,
-    touchedFields,
-    setValue
-  } = useReportContext();
+  const { errors, register, touchedFields, setValue } = useReportContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [slider, setSlider] = useState<number>(50);
-  
+
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.ceil(parseInt(e.target.value) / 10) * 10;
     setValue("schemaVehicle.tireWear", value);
@@ -53,13 +47,13 @@ function FormVehicleDataReport() {
         touched={touchedFields.schemaVehicle?.tireBrand}
       />
       <FormInput
-        register={register("schemaVehicle.tireZise")}
-        error={errors.schemaVehicle?.tireZise?.message}
+        register={register("schemaVehicle.tireSize")}
+        error={errors.schemaVehicle?.tireSize?.message}
         type="text"
-        id="tireZise"
+        id="tireSize"
         label="Tamaño de la rueda"
         placeholder="Ingrese el tamaño"
-        touched={touchedFields.schemaVehicle?.tireZise}
+        touched={touchedFields.schemaVehicle?.tireSize}
       />
       {/* <FormInput
         register={register("schemaVehicle.tireWear")}
@@ -107,7 +101,6 @@ function FormVehicleDataReport() {
       <FormUploadImageReport
         schemaName={"schemaVehicle.images"}
         error={errors.schemaVehicle?.images?.message}
-        touched={touchedFields.schemaVehicle?.images}
       />
 
       <FormInput

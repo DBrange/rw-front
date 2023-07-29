@@ -48,7 +48,7 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
         <p
           className={`${
             touched && error ? "text-red-400" : "text-transparent"
-          } text-xs`}
+          } text-xs select-none`}
         >
           {error || "a"}
         </p>

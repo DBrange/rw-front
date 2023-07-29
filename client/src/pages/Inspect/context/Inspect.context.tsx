@@ -1,11 +1,21 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { z, ZodType, ZodTypeAny } from "zod";
+import { ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive } from "../../../interfaces";
-import { SchemaPersonalType, SchemaLegalPersonalType, SchemaVehicle, SchemaElectronic } from "../../../models";
-import { schemaPersonal, schemaVehicle, schemaElectronic, schemaLegalPersonal } from "../../../utilities";
-
+import {
+  SchemaPersonalType,
+  SchemaLegalPersonalType,
+  SchemaVehicle,
+  SchemaElectronic,
+} from "../../../models";
+import {
+  schemaPersonal,
+  schemaVehicle,
+  schemaElectronic,
+  schemaLegalPersonal,
+} from "../../../utilities";
+import { validationFormDataInspect } from "../utilities";
 
 type AllTypes =
   | SchemaPersonalType
@@ -27,10 +37,9 @@ export interface IInspectContext {
   userBtnActive: UserBtnActive;
   page: number;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  image: any;
   setValue: any;
   trigger: any;
-  getValues: any
+  modalActive: boolean;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -43,8 +52,11 @@ type ChildrenType = {
 
 export const InspectProvider = ({ children }: ChildrenType) => {
   const [activeForm, setActiveForm] = useState<string>("vehicle");
-
+  const [page, setPage] = useState<number>(0);
+  const [schema, setSchema] = useState<any>(schemaPersonal);
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
+  const [modalActive, setModalActive] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [userBtnActive, setuserBtnActive] = useState<UserBtnActive>({
     person: true,
     legal: false,
@@ -52,20 +64,21 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     electronic: false,
   });
 
-  const [schema, setSchema] = useState<any>();
-
-  const [image, setImage] = useState<string | undefined>('');
-  console.log('........', image)
+  useEffect(() => {
+      trigger();
+    
+  }, [page]);
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
+
     if (name === "person") {
       setuserBtnActive({
         ...userBtnActive,
         person: true,
         legal: false,
       });
-    } else {
+    } else if (name === "legal") {
       setuserBtnActive({
         ...userBtnActive,
         person: false,
@@ -116,16 +129,10 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const [page, setPage] = useState<number>(0);
-
   const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { value } = e.currentTarget;
     if (value === "next") {
-      if (page === 0) {
-        setPage(page + 1);
-      } else if (page === 1) {
-        setPage(page + 1);
-      }
+      setPage(page + 1);
     } else if (value === "back") {
       setPage(page - 1);
     }
@@ -137,9 +144,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   ) => {
     let schema: any = schemaUser;
     if (page === 1) {
-      schema = schemaUser;
+      schema = schema;
     } else if (page === 2) {
-      schema = schemaUser.merge(schemaElement);
+      schema = schema.merge(schemaElement);
     }
     setSchema(schema);
   };
@@ -148,22 +155,21 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     handleSubmit,
     register,
     formState: { errors, touchedFields },
-    reset,
     trigger,
     setValue,
-    getValues
-  } = useForm<AllTypes>({
+  } = useForm<any>({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     selectingSchema();
   }, [errors]);
+
   console.log(errors);
 
   const submitData = (data: any) => {
     console.log("todo", data);
-    reset({});
+    validationFormDataInspect(userActiveForm, activeForm, setModalActive, data);
   };
 
   const values = {
@@ -180,10 +186,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     userBtnActive,
     page,
     changePage,
-    image,
     setValue,
     trigger,
-    getValues,
+    modalActive,
   };
 
   return (
@@ -194,7 +199,9 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 export const useInspectContext = () => {
   const context = useContext(InspectContext);
   if (!context)
-    throw new Error("useInspectContext can only be used inside InspectProvider");
+    throw new Error(
+      "useInspectContext can only be used inside InspectProvider"
+    );
 
   return context;
 };

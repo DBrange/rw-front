@@ -4,7 +4,7 @@ import { FormCheckbox, FormInput, FormInputOptional } from "../../../../componen
 import { useReportContext } from "../../context";
 
 function FormFireData() {
-  const { register, errors, touchedFields, textaValue } = useReportContext();
+  const { register, errors, touchedFields } = useReportContext();
 
         const [isCheckedInjuried, setIsCheckedInjuried] =
           useState<boolean>(false);
@@ -44,8 +44,7 @@ function FormFireData() {
 
       <FormTextArea
         register={register("schemaVehicleFireReport.details")}
-        textaValue={textaValue}
-        error={errors.schemaVehicleFireReport?.details}
+        error={errors.schemaVehicleFireReport?.details.message}
         touched={touchedFields.schemaVehicleFireReport?.details}
       />
       <FormCheckbox

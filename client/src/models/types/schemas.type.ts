@@ -5,7 +5,7 @@ import {
   schemaVehicle,
   schemaElectronic,
   schemaVehicleCrashReport,
-} from "../../pages";
+} from "../../utilities";
 
 export type SchemaPersonalType = z.infer<typeof schemaPersonal>;
 export type SchemaLegalPersonalType = z.infer<typeof schemaLegalPersonal>;

@@ -90,69 +90,6 @@ function FormInjuredInfoData({person}: {person: number}) {
         touched={touchedFields.injuries}
       />
     </div>
-    //   <FormInput
-    //     register={register("schemaThirdInjuredData.firstName")}
-    //     error={errors.firstName?.message}
-    //     type="text"
-    //     id="name"
-    //     label="Nombre"
-    //     placeholder="Ingrese su nombre"
-    //     touched={touchedFields.firstName}
-    //   />
-    //   <FormInput
-    //     register={register("schemaThirdInjuredData.lastName")}
-    //     error={errors.lastName?.message}
-    //     type="text"
-    //     id="lastName"
-    //     label="Apellido"
-    //     placeholder="Ingrese su Apellido"
-    //     touched={touchedFields.lastName}
-    //   />
-    //   <FormInput
-    //     register={register("schemaThirdInjuredData.phoneNumber", { valueAsNumber: true })}
-    //     error={errors.phoneNumber?.message}
-    //     type="number"
-    //     id="phoneNumber"
-    //     label="Numero de telefono"
-    //     placeholder="Ingrese su numero de telefono"
-    //     touched={touchedFields.phoneNumber}
-    //   />
-    //   <FormInput
-    //     register={register("schemaThirdInjuredData.email")}
-    //     error={errors.email?.message}
-    //     type="text"
-    //     id="email"
-    //     label="Email"
-    //     placeholder="Ingrese su email"
-    //     touched={touchedFields.email}
-    //   />
-    //   <FormSelect
-    //     register={register("schemaThirdInjuredData.gender")}
-    //     error={errors.gender?.message}
-    //     id="role"
-    //     label="Genero"
-    //     options={["hombre", "mujer", "otro"]}
-    //     touched={touchedFields.gender}
-    //   />
-    //   <FormInput
-    //     register={register("schemaThirdInjuredData.dni", { valueAsNumber: true })}
-    //     error={errors.dni?.message}
-    //     type="number"
-    //     id="dni"
-    //     label="DNI"
-    //     placeholder="Ingrese su DNI"
-    //     touched={touchedFields.dni}
-    //   />
-    //   <FormInput
-    //     register={register("schemaThirdInjuredData.injuries")}
-    //     error={errors.injuries?.message}
-    //     type="text"
-    //     id="injuries"
-    //     label="Direccion"
-    //     placeholder="Ingrese su direccion"
-    //     touched={touchedFields.injuries}
-    //   />
-    // </div>
   );
 }
 export default FormInjuredInfoData

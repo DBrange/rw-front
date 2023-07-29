@@ -8,7 +8,6 @@ import {
 import { useInspectContext } from "../../..";
 import FormUploadImage from "../FormUploadImage/FormUploadImage";
 
-
 function FormVehicleData() {
   const { errors, register, touchedFields, setValue } = useInspectContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
@@ -27,7 +26,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.year?.message}
         type="number"
         id="year"
-        label="Año"
+        label="Año*"
         placeholder="Ano del vehiculo"
         touched={touchedFields.schemaVehicle?.year}
       />
@@ -36,7 +35,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.color?.message}
         type="text"
         id="color"
-        label="Color"
+        label="Color*"
         placeholder="Color del vehiculo"
         touched={touchedFields.schemaVehicle?.color}
       />
@@ -45,18 +44,18 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.tireBrand?.message}
         type="text"
         id="tireBrand"
-        label="Marca de las ruedas"
+        label="Marca de las ruedas*"
         placeholder="Ingrese la marca"
         touched={touchedFields.schemaVehicle?.tireBrand}
       />
       <FormInput
-        register={register("schemaVehicle.tireZise")}
-        error={errors.schemaVehicle?.tireZise?.message}
+        register={register("schemaVehicle.tireSize")}
+        error={errors.schemaVehicle?.tireSize?.message}
         type="text"
-        id="tireZise"
-        label="Tamaño de la rueda"
+        id="tireSize"
+        label="Tamaño de la rueda*"
         placeholder="Ingrese el tamaño"
-        touched={touchedFields.schemaVehicle?.tireZise}
+        touched={touchedFields.schemaVehicle?.tireSize}
       />
       {/* <FormInput
         register={register("schemaVehicle.tireWear")}
@@ -68,7 +67,7 @@ function FormVehicleData() {
         touched={touchedFields.schemaVehicle?.tireWear}
       /> */}
       <div className="flex flex-col">
-        <label htmlFor="tireWear">Desgaste de la rueda</label>
+        <label htmlFor="tireWear">Desgaste de la rueda*</label>
         <div className="flex gap-2">
           <input
             className="flex-1"
@@ -96,7 +95,7 @@ function FormVehicleData() {
         checked={isCheckedDamage}
         type="text"
         id="damageLocation"
-        label="Lugar dañado"
+        label="Lugar dañado*"
         placeholder="Ingrese el lugar"
         touched={touchedFields.schemaVehicle?.damageLocation}
       />
@@ -104,21 +103,14 @@ function FormVehicleData() {
       <FormUploadImage
         schemaName={"schemaVehicle.images"}
         error={errors.schemaVehicle?.images?.message}
-        touched={touchedFields.schemaVehicle?.images}
       />
-      {/* <label htmlFor="acaaaaa">acaaaa</label>
-      <input
-        type="file"
-        {...register("schemaVehicle.images")}
-        onChange={handleFileChange}
-      /> */}
 
       <FormInput
         register={register("schemaVehicle.plate")}
         error={errors.schemaVehicle?.plate?.message}
         type="text"
         id="plate"
-        label="Patente"
+        label="Patente*"
         placeholder="Ingrese la patente"
         touched={touchedFields.schemaVehicle?.plate}
       />
@@ -133,7 +125,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.brand?.message}
         type="text"
         id="brand"
-        label="Marca"
+        label="Marca*"
         placeholder="Ingresar marca"
         touched={touchedFields.schemaVehicle?.brand}
       />
@@ -142,7 +134,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.model?.message}
         type="text"
         id="model"
-        label="Modelo"
+        label="Modelo*"
         placeholder="Ingresar modelo"
         touched={touchedFields.schemaVehicle?.model}
       />
@@ -151,7 +143,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.engine?.message}
         type="text"
         id="engine"
-        label="Motor"
+        label="Motor*"
         placeholder="Ingresar motor"
         touched={touchedFields.schemaVehicle?.ingine}
       />
@@ -159,7 +151,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.fuel")}
         error={errors.schemaVehicle?.fuel?.message}
         id="fuel"
-        label="Combustible"
+        label="Combustible*"
         options={["diesel", "gasoline"]}
         touched={touchedFields.schemaVehicle?.fuel}
       />
@@ -167,7 +159,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.vehicleType")}
         error={errors.schemaVehicle?.vehicleType?.message}
         id="vehicleType"
-        label="Tipo de vehiculo"
+        label="Tipo de vehiculo*"
         options={["camion", "automovil", "motocicleta"]}
         touched={touchedFields.schemaVehicle?.vehicleType}
       />

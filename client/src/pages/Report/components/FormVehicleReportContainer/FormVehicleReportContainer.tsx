@@ -1,4 +1,4 @@
-import { PageButtonReport, FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData, FormInjuredInfoData } from "..";
+import { FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData, FormInjuredInfoData } from "..";
 import { useReportContext } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../../components";
 import FormVehicleReportBtn from "../FormVehicleReportBtn/FormReportBtn";
@@ -23,14 +23,12 @@ function FormVehicleReportContainer() {
           form={
             <>
               <FormVehicleReportData />
-              <div className="w-full">
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={errors.schemaVehicle}
-                  max={6}
-                />
-              </div>
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaVehicle}
+                max={6}
+              />
             </>
           }
         />
@@ -41,14 +39,12 @@ function FormVehicleReportContainer() {
             <>
               <FormVehicleReportBtn />
 
-              <div className="w-full">
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={errors.schemaVehicle}
-                  max={6}
-                />
-              </div>
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaVehicle}
+                max={6}
+              />
             </>
           }
         />
@@ -58,14 +54,12 @@ function FormVehicleReportContainer() {
           form={
             <>
               <FormCrashData />
-              <div className="w-full">
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={errors.schemaVehicleCrashReport}
-                  max={6}
-                />
-              </div>
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaVehicleCrashReport}
+                max={6}
+              />
             </>
           }
         />
@@ -74,20 +68,16 @@ function FormVehicleReportContainer() {
 
         <FormEffectOpenClose
           formName={"Vehiculo del tercero"}
-          isActive={
-            typeComplaintForm.crash && page === 6
-          }
+          isActive={typeComplaintForm.crash && page === 6}
           form={
             <>
               <FormThirdPartyVehicleData />
-              <div className="w-full">
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={errors.schemaThirdPartyVehicleReport}
-                  max={6}
-                />
-              </div>
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaThirdPartyVehicleReport}
+                max={6}
+              />
             </>
           }
         />
@@ -99,15 +89,13 @@ function FormVehicleReportContainer() {
           }
           form={
             <>
-              <FormThieftData />
-              <div className="w-full">
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={errors.schemaVehicleTheftReport}
-                  max={4}
-                />
-              </div>
+              <FormThieftData objectType={'schemaVehicleTheftReport'} />
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaVehicleTheftReport}
+                max={4}
+              />
             </>
           }
         />
@@ -118,14 +106,12 @@ function FormVehicleReportContainer() {
           form={
             <>
               <FormFireData />
-              <div className="w-full">
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={errors.schemaVehicleFireReport}
-                  max={amountValue ? 5 : 4}
-                />
-              </div>
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaVehicleFireReport}
+                max={amountValue ? 5 : 4}
+              />
             </>
           }
         />

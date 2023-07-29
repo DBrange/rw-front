@@ -14,7 +14,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaPersonal?.firstName?.message}
         type="text"
         id="name"
-        label="Nombre"
+        label="Nombre*"
         placeholder="Ingrese su nombre"
         touched={touchedFields.schemaPersonal?.firstName}
       />
@@ -23,7 +23,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaPersonal?.lastName?.message}
         type="text"
         id="lastName"
-        label="Apellido"
+        label="Apellido*"
         placeholder="Ingrese su Apellido"
         touched={touchedFields.schemaPersonal?.lastName}
       />
@@ -34,7 +34,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaPersonal?.phoneNumber?.message}
         type="number"
         id="phoneNumber"
-        label="Numero de telefono"
+        label="Numero telefonico*"
         placeholder="Ingrese su numero de telefono"
         touched={touchedFields.schemaPersonal?.phoneNumber}
       />
@@ -43,7 +43,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaPersonal?.email?.message}
         type="text"
         id="email"
-        label="Email"
+        label="Email*"
         placeholder="Ingrese su email"
         touched={touchedFields.schemaPersonal?.email}
       />
@@ -60,7 +60,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register("schemaPersonal.gender")}
         error={errors.schemaPersonal?.gender?.message}
         id="role"
-        label="Genero"
+        label="Genero*"
         options={["hombre", "mujer", "otro"]}
         touched={touchedFields.schemaPersonal?.gender}
       />
@@ -69,7 +69,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaPersonal?.dni?.message}
         type="number"
         id="dni"
-        label="DNI"
+        label="DNI*"
         placeholder="Ingrese su DNI"
         touched={touchedFields.schemaPersonal?.dni}
       />
@@ -78,7 +78,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaPersonal?.address?.message}
         type="text"
         id="address"
-        label="Direccion"
+        label="Direccion*"
         placeholder="Ingrese su direccion"
         touched={touchedFields.schemaPersonal?.address}
       />

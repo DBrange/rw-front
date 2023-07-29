@@ -33,7 +33,7 @@ function FormReport() {
       onSubmit={handleSubmit(submitData)}
     >
       <FormEffectOpenClose
-        formName={"Tipo de inspeccion"}
+        formName={"Tipo de denuncia"}
         isActive={page === 0}
         form={
           <>
@@ -55,20 +55,18 @@ function FormReport() {
                 selectedSchemaOne={() => selectFormSchema("vehicle")}
                 selectedSchemaTwo={() => selectFormSchema("electronic")}
               />
-              <div className="w-full">
                 <PageButton
                   changePage={changePage}
                   page={page}
                   errors={false}
                   max={6}
                 />
-              </div>
             </div>
           </>
         }
       />
 
-      <section className="">
+      <section className="w-full">
         <div className="">
           <FormEffectOpenClose
             formName={"Persona particular"}
@@ -80,14 +78,12 @@ function FormReport() {
                   register={register}
                   touchedFields={touchedFields}
                 />
-                <div className="w-full">
                   <PageButton
                     changePage={changePage}
                     page={page}
                     errors={errors.schemaPersonal}
                     max={6}
                   />
-                </div>
               </>
             }
           />
@@ -101,14 +97,12 @@ function FormReport() {
                   register={register}
                   touchedFields={touchedFields}
                 />
-                <div className="w-full">
                   <PageButton
                     changePage={changePage}
                     page={page}
                     errors={errors.schemaLegalPersonal}
                     max={6}
                   />
-                </div>
               </>
             }
           />
@@ -118,7 +112,7 @@ function FormReport() {
           <FormElectronicReportContainer />
         </div>
       </section>
-      <button type="submit">Enviar</button>
+      {/* <button type="submit">Enviar</button> */}
     </form>
   );
 }

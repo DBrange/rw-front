@@ -22,6 +22,7 @@ import {
   schemaLegalPersonal,
   schemaThirdPartyVehicleReport,
 } from "../../../utilities";
+import { validationFormDataReport } from "../utilities";
 
 type AllTypes =
   | SchemaPersonalType
@@ -40,7 +41,6 @@ export interface IReportContext {
   register: any;
   selectingSchema: () => void;
   touchedFields: any;
-  textaValue: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   typeComplaintForm: TypeComplaintForm;
   typeComplaint: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -50,6 +50,7 @@ export interface IReportContext {
   setValue: any;
   setAmountValue: (value: React.SetStateAction<number>) => void;
   amountValue: number;
+  modalActive: boolean
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -63,9 +64,10 @@ type ChildrenType = {
 export const ReportProvider = ({ children }: ChildrenType) => {
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
-  const [schema, setSchema] = useState<any>();
+  const [schema, setSchema] = useState<any>(schemaPersonal);
   const [amountValue, setAmountValue] = useState<number>(0);
-
+  const [page, setPage] = useState<number>(0);
+  const [modalActive, setModalActive] = useState<boolean>(false);
   const [userBtnActive, setuserBtnActive] = useState<UserBtnActive>({
     person: true,
     legal: false,
@@ -79,7 +81,9 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     fire: false,
   });
 
-  console.log(typeComplaintForm);
+  // useEffect(() => {
+  //     trigger();
+  // }, [page]);
 
   const typeComplaint = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -126,16 +130,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         electronic: true,
       });
     }
-  };
-
-  const validateTexta = (value: string) => {
-    schemaVehicleCrashReport.safeParse({ details: value });
-  };
-
-  const textaValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    validateTexta(value);
-    console.log(value);
   };
 
   const selectingSchema = () => {
@@ -208,14 +202,12 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           form={
             <>
               {people}
-              <div className="w-full">
                 <PageButton
                   changePage={changePage}
                   page={page}
                   errors={errors.schemaVehicle}
                   max={typeComplaintForm.crash ? 6 : 5}
                 />
-              </div>
             </>
           }
         />
@@ -224,9 +216,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return;
     }
   };
-
-  const [page, setPage] = useState<number>(0);
-  console.log(page);
 
   const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { value } = e.currentTarget;
@@ -260,19 +249,21 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   // };
   const schemaThirdInjuredData = z.object({
     // schemaThirdInjuredData: z.object({
-      name: z.string().min(1).max(20),
-      lastName: z.string().min(1).max(20),
-      phoneNumber: z.number(),
-      email: z.string().min(1).max(30),
-      gender: z.enum(["hombre", "mujer", "otro"]),
-      dni: z.number(),
-      injuries: z.string(),
+    firstName: z.string().min(1).max(20),
+    lastName: z.string().min(1).max(20),
+    phoneNumber: z.number(),
+    email: z.string().min(1).max(30),
+    gender: z.enum(["hombre", "mujer", "otro"]),
+    dni: z.number(),
+    injuries: z.string(),
     // }),
   });
 
   const schemaThirdInjured = z.object({
-    amount: z.number(),
-    injuredInfo: z.array(schemaThirdInjuredData),
+    schemaThirdInjured: z.object({
+      amount: z.number(),
+      injuredInfo: z.array(schemaThirdInjuredData),
+    })
   });
 
   const estructuringSchema = <T extends ZodTypeAny>(
@@ -290,7 +281,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     } else if (page === 4) {
       schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
     } else if (page === 5 && amountValue) {
-      // addingPeople();
       schema = schemaUser
         .merge(schemaElement)
         .merge(schemaComplaintType)
@@ -322,10 +312,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     handleSubmit,
     register,
     formState: { errors, touchedFields },
-    reset,
     setValue,
+    trigger,
   } = useForm<any>({
-    // resolver: zodResolver(schema),
+    resolver: zodResolver(schema),
   });
 
   useEffect(() => {
@@ -335,7 +325,15 @@ export const ReportProvider = ({ children }: ChildrenType) => {
 
   const submitData = (data: AllTypes) => {
     console.log("todo", data);
-    reset({});
+
+    validationFormDataReport({
+      userActiveForm,
+      activeForm,
+      setModalActive,
+      typeComplaintForm,
+      data,
+      amountValue,
+    });
   };
 
   const values = {
@@ -349,7 +347,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     register,
     selectingSchema,
     touchedFields,
-    textaValue,
     typeComplaintForm,
     typeComplaint,
     changePage,
@@ -359,6 +356,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setValue,
     setAmountValue,
     amountValue,
+    modalActive,
   };
 
   return (

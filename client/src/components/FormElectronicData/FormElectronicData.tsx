@@ -35,7 +35,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         checked={isPhone}
         type="text"
         id="phoneNumberCel"
-        label="Numero del movil"
+        label="Numero del movil*"
         placeholder="Numero del movil"
         touched={touchedFields.schemaElectronic?.phoneNumberCel}
       />
@@ -45,7 +45,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         checked={isPhone}
         type="text"
         id="phoneService"
-        label="Servicio del movil"
+        label="Servicio del movil*"
         placeholder="Servicio del movil"
         touched={touchedFields.schemaElectronic?.phoneService}
       />
@@ -55,7 +55,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         checked={isPhone}
         type="number"
         id="imei"
-        label="IMEI"
+        label="IMEI*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.imei}
       />
@@ -64,7 +64,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         error={errors.schemaElectronic?.brand?.message}
         type="text"
         id="brand"
-        label="Marca"
+        label="Marca*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.brand}
       />
@@ -73,7 +73,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         error={errors.schemaElectronic?.model?.message}
         type="text"
         id="model"
-        label="Modelo"
+        label="Modelo*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.model}
       />

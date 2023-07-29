@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 const altEmailValidate = z
-      .string()
-      .refine(
-        (value) =>
-          value === "" ||
-          /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value),
-        {
-          message: "Debe tener un formato email o el campo puede estar vacío",
-        }
-      )
+  .string()
+  .refine(
+    (value) =>
+      value === "" ||
+      /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value),
+    {
+      message: "Debe tener un formato email o el campo puede estar vacío",
+    }
+  );
 
 export const schemaPersonal = z.object({
   schemaPersonal: z.object({
@@ -22,7 +22,7 @@ export const schemaPersonal = z.object({
     dni: z
       .string()
       .refine((value) => value.length === 8, {
-        message: "El campo debe tener exactamente 11 dígitos.",
+        message: "El campo debe tener exactamente 8 dígitos.",
       })
       .refine((value) => /^\d+$/.test(value), {
         message: "El campo debe contener solo números.",
@@ -50,18 +50,20 @@ export const schemaLegalPersonal = z.object({
 });
 
 const currentYear = new Date().getFullYear();
-console.log(currentYear)
+// console.log(currentYear)
 
 export const schemaVehicle = z.object({
   schemaVehicle: z.object({
-    year: z.number().refine((value) => value <= currentYear, {message: 'El año exede al actual'}),
+    year: z.number().refine((value) => value <= currentYear, {
+      message: "El año exede al actual",
+    }),
     color: z.string().min(1).max(20),
     tireBrand: z.string().min(1).max(20),
-    tireZise: z.string().min(1).max(20),
+    tireSize: z.string().min(1).max(20),
     tireWear: z.number().min(1).max(100),
     damage: z.boolean(),
     damageLocation: z.string(),
-    images: z.string().url(),
+    images: z.array(z.string().url()),
     plate: z.string().min(6).max(7),
     gnc: z.boolean(),
     brand: z.string().min(1).max(20),
@@ -114,7 +116,7 @@ export const schemaVehicleCrashReport = z.object({
   schemaVehicleCrashReport: z.object({
     time: z.string().min(1).max(20),
     date: z.coerce.date(),
-    location: z.string().min(1).max(20),
+    location: z.string().min(1),
     details: z.string().min(1),
     injured: z.boolean(),
     injuries: z.string(),
@@ -129,12 +131,7 @@ export const schemaVehicleTheftReport = z.object({
     time: z.string().min(1).max(20),
     date: z.coerce.date(),
     location: z.string().min(1),
-    injured: z.boolean(),
-    injuries: z.string(),
-    ambulance: z.boolean(),
-    ambulanceTo: z.string(),
-    thirdInjured: z.boolean(),
-    reportPhoto: z.string()
+    // reportPhoto: z.array(z.string().url()),
   }),
 });
 
@@ -144,6 +141,11 @@ export const schemaVehicleFireReport = z.object({
     date: z.coerce.date(),
     location: z.string().min(1),
     details: z.string().min(1),
+    injured: z.boolean(),
+    injuries: z.string(),
+    ambulance: z.boolean(),
+    ambulanceTo: z.string(),
+    thirdInjured: z.boolean(),
   }),
 });
 
@@ -152,7 +154,7 @@ export const schemaElectronicTheftReport = z.object({
     time: z.string().min(1).max(20),
     date: z.coerce.date(),
     location: z.string().min(1),
-    reportPhoto: z.string(),
+    // reportPhoto: z.array(z.string().url()),
   }),
 });
 
@@ -170,7 +172,7 @@ export const schemaThirdPartyVehicleReport = z.object({
     dni: z.number(),
     address: z.string().min(1).max(20),
     phoneNumber: z.number(),
-    licencePhoto: z.string(),
+    // licencePhoto: z.array(z.string().url()),
     email: z.string().email(),
   }),
 });

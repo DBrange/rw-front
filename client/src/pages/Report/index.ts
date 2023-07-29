@@ -7,7 +7,7 @@ export * from "./components/FormReport";
 export * from "./components/FormTextArea";
 export * from "./components/FormThirdPartyVehicleData";
 export * from "./components/FormVehicleReportBtn";
-export * from "./components/FormVehicleThieftData";
+export * from "./components/FormThieftData";
 export * from "./components/PageButtonReport";
 export * from "./components/ReportContainer";
 export * from "./components";

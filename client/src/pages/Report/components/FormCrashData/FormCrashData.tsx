@@ -8,7 +8,6 @@ function FormCrashData() {
         register,
         errors,
         touchedFields,
-        textaValue,
       } = useReportContext();
 
       const [isCheckedInjuried, setIsCheckedInjuried] =
@@ -18,8 +17,6 @@ function FormCrashData() {
       const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
     useState<boolean>(false);
   
-
-
   return (
     <>
       <FormInput
@@ -52,7 +49,6 @@ function FormCrashData() {
 
       <FormTextArea
         register={register("schemaVehicleCrashReport.details")}
-        textaValue={textaValue}
         error={errors.schemaVehicleCrashReport?.details?.message}
         touched={touchedFields.schemaVehicleCrashReport?.details}
       />
@@ -105,8 +101,6 @@ function FormCrashData() {
         touched={touchedFields.schemaVehicleFireReport?.amount}
         schemaName={"schemaThirdInjured.amount"}
       />
-
-      {/* <FormThirdPartyVehicleData /> */}
     </>
   );
 }

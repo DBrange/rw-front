@@ -37,14 +37,12 @@ function FormElectronicReportContainer() {
           <>
             <FormElectronicReportData />
 
-            <div className="w-full">
-              <PageButton
-                changePage={changePage}
-                page={page}
-                errors={errors.schemaElectronic}
-                max={4}
-              />
-            </div>
+            <PageButton
+              changePage={changePage}
+              page={page}
+              errors={errors.schemaElectronic}
+              max={4}
+            />
           </>
         }
       />
@@ -55,15 +53,13 @@ function FormElectronicReportContainer() {
         }
         form={
           <>
-            <FormThieftData />
-            <div className="w-full">
-              <PageButton
-                changePage={changePage}
-                page={page}
-                errors={errors.schemaVehicleTheftReport}
-                max={4}
-              />
-            </div>
+            <FormThieftData objectType={'schemaElectronicTheftReport'} />
+            <PageButton
+              changePage={changePage}
+              page={page}
+              errors={errors.schemaElectronicTheftReport}
+              max={4}
+            />
           </>
         }
       />
