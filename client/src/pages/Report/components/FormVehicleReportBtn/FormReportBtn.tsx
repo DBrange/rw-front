@@ -1,9 +1,7 @@
 import { useReportContext } from "../../context";
 
 function FormVehicleReportBtn() {
-
-const { typeComplaintForm, typeComplaint } =
-  useReportContext();
+  const { typeComplaintForm, typeComplaint } = useReportContext();
 
   return (
     <div className="flex flex-col gap-3">
@@ -37,4 +35,4 @@ const { typeComplaintForm, typeComplaint } =
     </div>
   );
 }
-export default FormVehicleReportBtn
+export default FormVehicleReportBtn;

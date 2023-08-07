@@ -8,6 +8,7 @@ export * from './FormReport';
 export * from './FormTextArea';
 export * from './FormThieftData';
 export * from './FormThirdPartyVehicleData';
+export * from './FormThirdPartyVehiclesData';
 export * from './FormTimeInput';
 export * from './FormUploadImageReport';
 export * from './FormVehicleReportBtn';

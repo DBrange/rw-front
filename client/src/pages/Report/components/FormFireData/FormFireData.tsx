@@ -4,7 +4,8 @@ import { FormCheckbox, FormInput, FormInputOptional } from "../../../../componen
 import { useReportContext } from "../../context";
 
 function FormFireData() {
-  const { register, errors, touchedFields } = useReportContext();
+  const { register, errors, touchedFields, setAmountValue } =
+    useReportContext();
 
         const [isCheckedInjuried, setIsCheckedInjuried] =
           useState<boolean>(false);
@@ -96,6 +97,7 @@ function FormFireData() {
         placeholder="Ingresar cantidad"
         touched={touchedFields.schemaVehicleFireReport?.amount}
         schemaName={"schemaThirdInjured.amount"}
+        setAmountValue={setAmountValue}
       />
     </>
   );

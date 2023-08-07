@@ -1,8 +1,10 @@
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormInput, FormSelect } from "..";
+import { AllInspectSchemas, SchemaPersonalType } from "../../models";
 
 interface Props {
-  register: any;
-  errors: any;
+  register: UseFormRegister<AllInspectSchemas>;
+  errors: FieldErrors<SchemaPersonalType>;
   touchedFields: any;
 }
 

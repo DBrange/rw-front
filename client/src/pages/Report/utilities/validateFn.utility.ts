@@ -53,7 +53,7 @@ const validationWithInjuries = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
       data.schemaThirdInjured &&
       data.schemaThirdPartyVehicleReport
@@ -71,7 +71,7 @@ const validationWithInjuries = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleFireReport &&
       data.schemaThirdInjured
     ) {
@@ -88,7 +88,7 @@ const validationWithInjuries = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
       data.schemaThirdInjured &&
       data.schemaThirdPartyVehicleReport
@@ -106,7 +106,7 @@ const validationWithInjuries = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleFireReport &&
       data.schemaThirdInjured
     ) {
@@ -211,7 +211,7 @@ const validationPersonal = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
       data.schemaThirdPartyVehicleReport
     ) {
@@ -228,7 +228,7 @@ const validationPersonal = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleTheftReport
     ) {
       setModalActive(true);
@@ -244,7 +244,7 @@ const validationPersonal = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleFireReport
     ) {
       setModalActive(true);
@@ -286,7 +286,7 @@ const validationLegalPersonal = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
       data.schemaThirdPartyVehicleReport
     ) {
@@ -303,7 +303,7 @@ const validationLegalPersonal = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleTheftReport
     ) {
       setModalActive(true);
@@ -319,7 +319,7 @@ const validationLegalPersonal = ({
   ) {
     if (
       data.schemaPersonal &&
-      data.schemaVehicle &&
+      data.schemaVehicleReport &&
       data.schemaVehicleFireReport
     ) {
       setModalActive(true);

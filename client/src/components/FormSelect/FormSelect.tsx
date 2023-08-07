@@ -1,5 +1,7 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+
 interface Props {
-  register: any;
+  register: UseFormRegisterReturn<any>;
   error: string | undefined;
   id: string;
   label: string;

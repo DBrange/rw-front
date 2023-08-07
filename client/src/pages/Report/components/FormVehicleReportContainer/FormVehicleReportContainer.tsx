@@ -11,7 +11,9 @@ function FormVehicleReportContainer() {
     page,
     typeComplaintForm,
     thirdInjuredForm,
-    amountValue
+    amountValue,
+    amountVehicles,
+    thirdPartyVehiclesForm,
   } = useReportContext();
 
 
@@ -26,7 +28,7 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaVehicle}
+                errors={errors.schemaVehicleReport}
                 max={6}
               />
             </>
@@ -42,7 +44,7 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaVehicle}
+                errors={errors.schemaVehicleReport}
                 max={6}
               />
             </>
@@ -65,10 +67,13 @@ function FormVehicleReportContainer() {
         />
 
         {thirdInjuredForm()}
+        {thirdPartyVehiclesForm()}
 
         <FormEffectOpenClose
           formName={"Vehiculo del tercero"}
-          isActive={typeComplaintForm.crash && page === 6}
+          isActive={
+            typeComplaintForm.crash && page === 6 && amountVehicles <= 1
+          }
           form={
             <>
               <FormThirdPartyVehicleData />
@@ -89,7 +94,7 @@ function FormVehicleReportContainer() {
           }
           form={
             <>
-              <FormThieftData objectType={'schemaVehicleTheftReport'} />
+              <FormThieftData objectType={"schemaVehicleTheftReport"} />
               <PageButton
                 changePage={changePage}
                 page={page}

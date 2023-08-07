@@ -30,7 +30,6 @@ export interface VehicleData extends PersonalData {
   plate: string;
   gnc: boolean;
   brand: string;
-  engine: string;
   model: string;
   fuel: "diesel" | "gasoline";
   vehicleType: "camion" | "automovil" | "motocicleta";
@@ -47,7 +46,6 @@ export interface LegalVehicleData extends LegalPersonalData {
   plate: string;
   gnc: boolean;
   brand: any;
-  engine: any;
   model: any;
   fuel: "diesel" | "gasoline";
   vehicleType: "camion" | "automovil" | "motocicleta";
@@ -70,38 +68,5 @@ export interface LegalElectronicData extends LegalPersonalData {
   imei?: number;
 }
 
-export interface AllDataInspect
-  extends LegalElectronicData,
-    ElectronicData,
-    PersonalData,
-    LegalPersonalData {
-  firstName: string;
-  lastName: string;
-  phoneNumber: number;
-  email: string;
-  altEmail?: string;
-  gender: "hombre" | "mujer" | "otro";
-  dni: number;
-  address: string;
-  companyName: string;
-  cuit: number;
-  year: number;
-  color: string;
-  tireBrand: string;
-  tireSize: string;
-  tireWear: string;
-  damage: boolean;
-  damageLocation?: string;
-  images: string;
-  plate: string;
-  gnc: boolean;
-  brand: string;
-  engine: string;
-  model: string;
-  fuel: "diesel" | "gasoline";
-  vehicleType: "camion" | "automovil" | "motocicleta";
-  electronicType: "celular" | "tablet" | "notebook";
-  phoneNumberCel?: number;
-  phoneService?: string;
-  imei?: number;
-}
+
+

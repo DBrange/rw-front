@@ -21,11 +21,9 @@ function FormTimeInput({ schemaName }: Props) {
 
   const transformToSchedule = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    console.log(value);
 
     const split = value.trim().split("");
     const twoLettersValue = split.slice(0, 2).join("");
-    console.log(twoLettersValue);
 
     setInputValue({
       ...inputValue,

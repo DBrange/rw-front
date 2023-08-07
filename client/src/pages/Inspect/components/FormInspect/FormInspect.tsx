@@ -25,12 +25,10 @@ function FormInspect() {
     userBtnActive,
     page,
     changePage,
-    isError
+    isError,
   } = useInspectContext();
-
   return (
     <>
-        
       <form
         className="w-[100%] gap-5 flex flex-col items-center"
         onSubmit={handleSubmit(submitData)}
@@ -148,7 +146,7 @@ function FormInspect() {
           </div>
         </section>
       </form>
-      <ErrorBtn isError={ isError} />
+      <ErrorBtn isError={isError} />
     </>
   );
 }

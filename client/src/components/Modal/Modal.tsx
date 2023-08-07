@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-function Modal({modalActive}: {modalActive: boolean}) {
-  const navigate = useNavigate()
+function Modal({ modalActive }: { modalActive: boolean }) {
+  const navigate = useNavigate();
   return (
     <div
       className={`${
@@ -29,4 +29,4 @@ function Modal({modalActive}: {modalActive: boolean}) {
     </div>
   );
 }
-export default Modal
+export default Modal;

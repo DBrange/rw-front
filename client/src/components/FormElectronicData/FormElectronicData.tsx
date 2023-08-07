@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { FormInput, FormInputOptional } from "..";
 import { FormSelectElecType } from "../../pages";
+import { AllInspectSchemas, SchemaElectronicType } from "../../models";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface Props {
-  register: any;
-  errors: any;
-  touchedFields: any;
+  register: UseFormRegister<AllInspectSchemas>;
+  errors: FieldErrors<SchemaElectronicType>;
+  touchedFields: FieldValues["touched"];
 }
 
 function FormElectronicData({ register, errors, touchedFields }: Props) {
@@ -25,7 +27,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
     <>
       <FormSelectElecType
         register={register("schemaElectronic.electronicType")}
-        error={errors.schemaElectronic?.electrodomesticType?.message}
+        error={errors.schemaElectronic?.electronicType?.message}
         touched={touchedFields.electronicType}
         electronicType={electronicType}
       />

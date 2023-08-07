@@ -1,17 +1,21 @@
 import { useState } from "react";
-import { useWatch } from "react-hook-form";
+import { Control, UseFormRegisterReturn, UseFormSetValue, useWatch } from "react-hook-form";
+import { AllInspectSchemas } from "../../models";
+// import { SubmitHandler, useForm } from "react-hook-form";
+
+// type controlType = ReturnType<typeof useForm>['control'];
 
 interface Props {
-  register: any;
-  setValue: any;
+  register: UseFormRegisterReturn<any>;
+  setValue: UseFormSetValue<any>;
   schemaName: string;
-  control: any
+  control: Control<any>;
 }
 
 function FormInputRange({ register, setValue, schemaName, control }: Props) {
   const slider = useWatch({
     control,
-    name: schemaName 
+    name: schemaName,
   });
   
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {

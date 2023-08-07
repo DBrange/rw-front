@@ -1,13 +1,27 @@
+import useSWRMutation from "swr/mutation";
+import {
+  addInspectionPersonalVehicle,
+  baseUrlPersonalVehicle,
+} from "..";
 import { useState, createContext, useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  FieldValues,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormTrigger,
+  useForm,
+} from "react-hook-form";
 import { ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive } from "../../../interfaces";
 import {
-  SchemaPersonalType,
-  SchemaLegalPersonalType,
-  SchemaVehicle,
-  SchemaElectronic,
+  AllInspectSchemas,
+  SchemaElements,
+  SchemaUsers,
 } from "../../../models";
 import {
   schemaPersonal,
@@ -17,32 +31,26 @@ import {
 } from "../../../utilities";
 import { validationFormDataInspect } from "../utilities";
 
-type AllTypes =
-  | SchemaPersonalType
-  | SchemaLegalPersonalType
-  | SchemaVehicle
-  | SchemaElectronic;
-
 export interface IInspectContext {
   userActiveForm: string;
   activeForm: string;
-  errors: any;
-  submitData: (data: AllTypes) => void;
+  errors: any; //FieldErrors<AllInspectSchemas>;
   selectFormUserSchema: (name: string) => void;
+  submitData: (data: AllInspectSchemas) => void;
   selectFormSchema: (name: string) => void;
-  handleSubmit: any;
-  register: any;
+  handleSubmit: UseFormHandleSubmit<AllInspectSchemas, undefined>;
+  register: UseFormRegister<AllInspectSchemas>;
   selectingSchema: () => void;
-  touchedFields: any;
+  touchedFields: FieldValues["touched"]; //Partial<Record<keyof AllInspectSchemas, true>>; //Partial<Readonly<AllInspectSchemas>>;
   userBtnActive: UserBtnActive;
   page: number;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  setValue: any;
-  trigger: any;
+  setValue: UseFormSetValue<AllInspectSchemas>;
+  trigger: UseFormTrigger<AllInspectSchemas>;
   modalActive: boolean;
   setIsError: React.Dispatch<React.SetStateAction<boolean>>;
   isError: boolean;
-  control: any
+  control: Control<AllInspectSchemas>;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -56,7 +64,8 @@ type ChildrenType = {
 export const InspectProvider = ({ children }: ChildrenType) => {
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [page, setPage] = useState<number>(0);
-  const [schema, setSchema] = useState<any>(schemaPersonal);
+  const [schema, setSchema] =
+    useState<ZodType<AllInspectSchemas>>(schemaPersonal);
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -69,7 +78,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
   // useEffect(() => {
   //     trigger();
-    
+
   // }, [page]);
 
   const selectFormUserSchema = (name: string) => {
@@ -109,8 +118,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   };
 
   const selectingSchema = () => {
-    let schemaUser: ZodType;
-    let schemaElement: ZodType;
+    let schemaUser: ZodType<SchemaUsers>;
+    let schemaElement: ZodType<SchemaElements>;
     if (userActiveForm === "person") {
       schemaUser = schemaPersonal;
       if (activeForm === "vehicle") {
@@ -141,15 +150,16 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const estructuringSchema = <T extends ZodTypeAny>(
-    schemaUser: any,
-    schemaElement: any
+  const estructuringSchema = (
+    schemaUser: ZodType<SchemaUsers>,
+    schemaElement: ZodType<SchemaElements>
   ) => {
     let schema: any = schemaUser;
     if (page === 1) {
       schema = schema;
     } else if (page === 2) {
       schema = schema.merge(schemaElement);
+      setIsError(true);
     }
     setSchema(schema);
   };
@@ -160,29 +170,38 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     formState: { errors, touchedFields },
     trigger,
     setValue,
-    control
-  } = useForm<any>({
+    control,
+  } = useForm<AllInspectSchemas>({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     selectingSchema();
-        if (modalActive) {
-            setIsError(true);
-    } else {
-            setIsError(true);
-    }
+    // if (modalActive) {
+    //   setIsError(true);
+    // } else {
+    //   setIsError(true);
   }, [errors]);
 
   console.log(errors);
 
-  const submitData = (data: any) => {
+  const {
+    error: errorInspectionPersonalVehicle,
+    trigger: triggerInspectionPersonalVehicle,
+  } = useSWRMutation(baseUrlPersonalVehicle, addInspectionPersonalVehicle);
+console.log(errorInspectionPersonalVehicle, '.-.-.-.-.')
+  const submitData: SubmitHandler<AllInspectSchemas> = (data) => {
     console.log("todo", data);
-    validationFormDataInspect({ userActiveForm, activeForm, setModalActive, setIsError, data });
-
+    validationFormDataInspect({
+      userActiveForm,
+      activeForm,
+      setModalActive,
+      data,
+      triggerInspectionPersonalVehicle,
+    });
   };
 
-  const values = {
+  const values: IInspectContext = {
     userActiveForm,
     activeForm,
     errors,
@@ -201,7 +220,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     modalActive,
     setIsError,
     isError,
-    control
+    control,
   };
 
   return (

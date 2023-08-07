@@ -1,95 +1,100 @@
 import { FormInput, FormSelect } from "../../../../components";
 import { useReportContext } from "../../context";
 
-function FormInjuredInfoData({person}: {person: number}) {
+function FormInjuredInfoData({ people }: { people: number }) {
   const { register, errors, touchedFields } = useReportContext();
+
+  const errorSchema = errors?.schemaThirdInjured?.injuredInfo[people - 1];
+  const touchedSchema =
+    touchedFields?.schemaThirdInjured?.injuredInfo[people - 1];
+  
   return (
     <div className="border-b-2 border-violet-500">
-      <h4 className="text-violet-500 text-lg my-5">{`Persona ${person}`}</h4>
+      <h4 className="text-violet-500 text-lg my-5">{`Persona ${people}`}</h4>
 
       <FormInput
         register={register(
-          `schemaThirdInjured.injuredInfo.${[person - 1]}.firstName`
+          `schemaThirdInjured.injuredInfo.${[people - 1]}.firstName`
         )}
-        error={errors.firstName?.message}
+        error={errorSchema?.firstName?.message}
         type="text"
         id="name"
         label="Nombre"
         placeholder="Ingrese su nombre"
-        touched={touchedFields.firstName}
+        touched={touchedSchema?.firstName}
       />
       <FormInput
         register={register(
-          `schemaThirdInjured.injuredInfo.${[person - 1]}.lastName`
+          `schemaThirdInjured.injuredInfo.${[people - 1]}.lastName`
         )}
-        error={errors.lastName?.message}
+        error={errorSchema?.lastName?.message}
         type="text"
         id="lastName"
         label="Apellido"
         placeholder="Ingrese su Apellido"
-        touched={touchedFields.lastName}
+        touched={touchedSchema?.lastName}
       />
       <FormInput
         register={register(
-          `schemaThirdInjured.injuredInfo.${[person - 1]}.phoneNumber`,
+          `schemaThirdInjured.injuredInfo.${[people - 1]}.phoneNumber`,
           {
             valueAsNumber: true,
           }
         )}
-        error={errors.phoneNumber?.message}
+        error={errorSchema?.phoneNumber?.message}
         type="number"
         id="phoneNumber"
         label="Numero de telefono"
         placeholder="Ingrese su numero de telefono"
-        touched={touchedFields.phoneNumber}
+        touched={touchedSchema?.phoneNumber}
       />
       <FormInput
         register={register(
-          `schemaThirdInjured.injuredInfo.${[person - 1]}.email`
+          `schemaThirdInjured.injuredInfo.${[people - 1]}.email`
         )}
-        error={errors.email?.message}
+        error={errorSchema?.email?.message}
         type="text"
         id="email"
         label="Email"
         placeholder="Ingrese su email"
-        touched={touchedFields.email}
+        touched={touchedSchema?.email}
       />
       <FormSelect
         register={register(
-          `schemaThirdInjured.injuredInfo.${[person - 1]}.gender`
+          `schemaThirdInjured.injuredInfo.${[people - 1]}.gender`
         )}
-        error={errors.gender?.message}
+        error={errorSchema?.gender?.message}
         id="role"
         label="Genero"
         options={["hombre", "mujer", "otro"]}
-        touched={touchedFields.gender}
+        touched={touchedSchema?.gender}
       />
       <FormInput
         register={register(
-          `schemaThirdInjured.injuredInfo.${[person - 1]}.dni`,
+          `schemaThirdInjured.injuredInfo.${[people - 1]}.dni`,
           {
             valueAsNumber: true,
           }
         )}
-        error={errors.dni?.message}
+        error={errorSchema?.dni?.message}
         type="number"
         id="dni"
         label="DNI"
         placeholder="Ingrese su DNI"
-        touched={touchedFields.dni}
+        touched={touchedSchema?.dni}
       />
       <FormInput
         register={register(
-          `schemaThirdInjured.injuredInfo.${[person - 1]}.injuries`
+          `schemaThirdInjured.injuredInfo.${[people - 1]}.injuries`
         )}
-        error={errors.injuries?.message}
+        error={errorSchema?.injuries?.message}
         type="text"
         id="injuries"
         label="Direccion"
         placeholder="Ingrese su direccion"
-        touched={touchedFields.injuries}
+        touched={touchedSchema?.injuries}
       />
     </div>
   );
 }
-export default FormInjuredInfoData
+export default FormInjuredInfoData;

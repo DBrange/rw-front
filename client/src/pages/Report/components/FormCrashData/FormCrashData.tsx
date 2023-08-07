@@ -8,18 +8,19 @@ import {
 import { useReportContext } from "../../context";
 
 function FormCrashData() {
-  const { register, errors, touchedFields } = useReportContext();
+  const { register, errors, touchedFields, setAmountValue, setAmountVehicles } =
+    useReportContext();
 
+  const [isCheckedThirdVehicle, setIsCheckedThirdVehicle] =
+    useState<boolean>(false);
   const [isCheckedInjuried, setIsCheckedInjuried] = useState<boolean>(false);
   const [isCheckedAmbulance, setIsCheckedAmbulance] = useState<boolean>(false);
   const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
     useState<boolean>(false);
-
+  
   return (
     <>
-      <FormTimeInput
-        schemaName={"schemaVehicleCrashReport.time"}
-      />
+      <FormTimeInput schemaName={"schemaVehicleCrashReport.time"} />
       <FormInput
         register={register("schemaVehicleCrashReport.date")}
         error={errors.schemaVehicleCrashReport?.date?.message}
@@ -84,14 +85,32 @@ function FormCrashData() {
         label={"Tercero(s) lesionados"}
       />
       <FormInputOptionalAmount
-        error={errors.schemaVehicleFireReport?.amount?.message}
+        error={errors.schemaThirdInjured?.amount?.message}
         checked={isCheckedThirdInjuried}
         type="number"
         id="amount"
         label="Cantidad"
         placeholder="Ingresar cantidad"
-        touched={touchedFields.schemaVehicleFireReport?.amount}
+        touched={touchedFields.schemaThirdInjured?.amount}
         schemaName={"schemaThirdInjured.amount"}
+        setAmountValue={setAmountValue}
+      />
+      <FormCheckbox
+        register={register("schemaVehicleCrashReport.friendlyStatement")}
+        setChecked={setIsCheckedThirdVehicle}
+        id={"thirdInjuried"}
+        label={"Declaracion amistosa"}
+      />
+      <FormInputOptionalAmount
+        error={errors.schemaVehicleCrashReportData?.amount?.message}
+        checked={isCheckedThirdVehicle}
+        type="number"
+        id="amountThirdPartyVehicle"
+        label="Cantidad"
+        placeholder="Ingresar cantidad"
+        touched={touchedFields.schemaVehicleCrashReportData?.amount}
+        schemaName={"schemaVehicleCrashReportData.amount"}
+        setAmountValue={setAmountVehicles}
       />
     </>
   );

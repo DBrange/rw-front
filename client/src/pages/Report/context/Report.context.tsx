@@ -4,31 +4,33 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive } from "../../../interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
 import { TypeComplaintForm } from "../interfaces";
-import { FormInjuredInfoData, PageButtonReport } from "../..";
+import { FormInjuredInfoData, FormThirdPartyVehiclesData } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../components";
 import {
   SchemaPersonalType,
   SchemaLegalPersonalType,
-  SchemaVehicle,
-  SchemaElectronic,
+  schemaVehicleReportType,
+  SchemaElectronicType,
 } from "../../../models";
 import {
   schemaVehicleCrashReport,
   schemaPersonal,
-  schemaVehicle,
   schemaVehicleTheftReport,
   schemaVehicleFireReport,
   schemaElectronic,
   schemaLegalPersonal,
   schemaThirdPartyVehicleReport,
+  schemaVehicleReport,
+  schemaThirdInjured,
+  schemaVehicleCrashReportData,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 
 type AllTypes =
   | SchemaPersonalType
   | SchemaLegalPersonalType
-  | SchemaVehicle
-  | SchemaElectronic;
+  | schemaVehicleReportType
+  | SchemaElectronicType;
 
 export interface IReportContext {
   userActiveForm: string;
@@ -53,6 +55,10 @@ export interface IReportContext {
   modalActive: boolean;
   isError: boolean;
   control: any;
+  trigger: any;
+  setAmountVehicles: any;
+  amountVehicles: number;
+  thirdPartyVehiclesForm: () => any;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -68,25 +74,21 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
   const [schema, setSchema] = useState<any>(schemaPersonal);
   const [amountValue, setAmountValue] = useState<number>(0);
+  const [amountVehicles, setAmountVehicles] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [userBtnActive, setuserBtnActive] = useState<UserBtnActive>({
     person: true,
     legal: false,
     vehicle: true,
     electronic: false,
   });
-
   const [typeComplaintForm, setTypeComplaitForm] = useState<TypeComplaintForm>({
     crash: true,
     theft: false,
     fire: false,
   });
-
-  // useEffect(() => {
-  //     trigger();
-  // }, [page]);
 
   const typeComplaint = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -142,7 +144,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     if (userActiveForm === "person") {
       schemaUser = schemaPersonal;
       if (activeForm === "vehicle") {
-        schemaElement = schemaVehicle;
+        schemaElement = schemaVehicleReport;
         estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
         if (typeComplaintForm.crash) {
           schemaComplaintType = schemaVehicleCrashReport;
@@ -165,7 +167,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     } else if (userActiveForm === "legal") {
       schemaUser = schemaLegalPersonal;
       if (activeForm === "vehicle") {
-        schemaElement = schemaVehicle;
+        schemaElement = schemaVehicleReport;
         estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
         if (typeComplaintForm.crash) {
           schemaComplaintType = schemaVehicleCrashReport;
@@ -189,11 +191,11 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   };
 
   const thirdInjuredForm = () => {
-    let people: any = [];
+    let people: JSX.Element[] = [];
 
     if (amountValue > 0) {
       for (let i = 0; i < amountValue; i++) {
-        people.push(<FormInjuredInfoData key={i + 1} person={i + 1} />);
+        people.push(<FormInjuredInfoData key={i + 1} people={i + 1} />);
       }
 
       return (
@@ -205,18 +207,50 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           form={
             <>
               {people}
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  errors={errors.schemaVehicle}
-                  max={typeComplaintForm.crash ? 6 : 5}
-                />
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaThirdInjured}
+                max={typeComplaintForm.crash ? 6 : 5}
+              />
             </>
           }
         />
       );
     } else {
       return;
+    }
+  };
+
+  const thirdPartyVehiclesForm = () => {
+    let vehicles: JSX.Element[] = [];
+
+    if (amountVehicles > 1) {
+      for (let i = 0; i < amountVehicles; i++) {
+        vehicles.push(
+          <FormThirdPartyVehiclesData key={i + 1} vehicles={i + 1} />
+        );
+      }
+
+      return (
+        <FormEffectOpenClose
+          formName={"Vehiculos de terceros"}
+          isActive={typeComplaintForm.crash && page === 6 && amountVehicles > 0}
+          form={
+            <>
+              {vehicles}
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaVehicleCrashReport}
+                max={6}
+              />
+            </>
+          }
+        />
+      );
+    } else {
+      return null
     }
   };
 
@@ -236,38 +270,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       }
     }
   };
-
-  // const [people, setPeople] = useState<any>([]);
-
-  // const addingPeople = () => {
-  //   if (amountValue) {
-  //     const thirdInjured = [];
-  //     for (let i = 0; i < amountValue; i++) {
-  //       thirdInjured.push(schemaThirdInjuredData);
-  //     }
-  //     setPeople(thirdInjured);
-  //   }
-
-  //   return;
-  // };
-  const schemaThirdInjuredData = z.object({
-    // schemaThirdInjuredData: z.object({
-    firstName: z.string().min(1).max(20),
-    lastName: z.string().min(1).max(20),
-    phoneNumber: z.number(),
-    email: z.string().min(1).max(30),
-    gender: z.enum(["hombre", "mujer", "otro"]),
-    dni: z.number(),
-    injuries: z.string(),
-    // }),
-  });
-
-  const schemaThirdInjured = z.object({
-    schemaThirdInjured: z.object({
-      amount: z.number(),
-      injuredInfo: z.array(schemaThirdInjuredData),
-    })
-  });
 
   const estructuringSchema = <T extends ZodTypeAny>(
     schemaUser: any,
@@ -289,12 +291,24 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         .merge(schemaComplaintType)
         .merge(schemaThirdInjured);
     } else if (page === 6) {
-      if (amountValue) {
+      if (amountValue && amountVehicles < 2) {
         schema = schemaUser
           .merge(schemaElement)
           .merge(schemaComplaintType)
           .merge(schemaThirdInjured)
           .merge(schemaThirdPartyVehicleReport);
+      } else if (!amountValue && amountVehicles > 1) {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaVehicleCrashReportData);
+          
+        } else if (amountValue && amountVehicles > 1) {
+          schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaThirdInjured)
+          .merge(schemaVehicleCrashReportData);
       } else {
         schema = schemaUser
           .merge(schemaElement)
@@ -305,30 +319,24 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setSchema(schema);
   };
 
-  // const validateImages = (value: string) => {
-  //   console.log("chi", value);
-
-  //   schemaVehicle.shape.schemaVehicle.safeParse({ images: value });
-  // };
-
   const {
     handleSubmit,
     register,
     formState: { errors, touchedFields },
     setValue,
     trigger,
-    control
+    control,
   } = useForm<any>({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     selectingSchema();
-            if (modalActive) {
-              setIsError(true);
-            } else {
-              setIsError(true);
-            }
+    if (modalActive) {
+      setIsError(true);
+    } else {
+      setIsError(true);
+    }
   }, [errors]);
   console.log(errors);
 
@@ -367,7 +375,11 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     amountValue,
     modalActive,
     isError,
-    control
+    control,
+    trigger,
+    setAmountVehicles,
+    amountVehicles,
+    thirdPartyVehiclesForm,
   };
 
   return (

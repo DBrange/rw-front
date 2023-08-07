@@ -127,6 +127,7 @@ function FormThirdPartyVehicleData() {
         error={errors.schemaThirdPartyVehicleReport?.licencePhoto?.message}
         id="licencePhoto"
         name="licencePhoto"
+        imagesType={"Agregue imagenes del registro"}
       />
       <FormInput
         register={register("schemaThirdPartyVehicleReport.email")}

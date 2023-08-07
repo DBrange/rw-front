@@ -1,6 +1,9 @@
 import { BsArrowRight } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
+import { FieldErrors, FieldErrorsImpl } from "react-hook-form";
+import { AllInspectSchemas, AllInspectSchemasOptionals } from "../../models";
+import { useState, useEffect } from "react";
 interface Props {
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   page: number;
@@ -9,11 +12,21 @@ interface Props {
 }
 
 function PageButton({ changePage, page, errors, max }: Props) {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <div className="w-full flex justify-between p-1">
         <button
-          onClick={changePage}
+          onClick={(e) => {
+            changePage(e);
+            scrollToTop();
+          }}
           type="button"
           value="back"
           className={`${
@@ -33,7 +46,28 @@ function PageButton({ changePage, page, errors, max }: Props) {
           </button>
         ) : (
           <button
-            onClick={changePage}
+            onClick={(e) => {
+              changePage(e);
+              scrollToTop();
+            }}
+            type="button"
+            value="next"
+            className={`${
+              page === max && "pointer-events-none opacity-0"
+            } mb-4 relative w-24 h-8 border-2 border-green-400 rounded-xl active:bg-green-100 active:translate-x-1`}
+          >
+            <i
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-green-400`}
+            >
+              <BsArrowRight size={20} />
+            </i>
+          </button>
+        )}
+        {/* <button
+            onClick={(e) => {
+              changePage(e);
+              scrollToTop();
+            }}
             type="button"
             value="next"
             className={`${errors && "border-red-400 pointer-events-none"} ${
@@ -52,7 +86,7 @@ function PageButton({ changePage, page, errors, max }: Props) {
               )}
             </i>
           </button>
-        )}
+       */}
       </div>
     </>
   );

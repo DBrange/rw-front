@@ -1,17 +1,27 @@
+import { UseFormRegisterReturn } from "react-hook-form";
 import { FormInput } from "..";
 
 interface Props {
-  register: any;
-  error: any;
+  register: UseFormRegisterReturn<any>;
+  error: string | undefined;
   checked: boolean;
   type: string;
   id: string;
   label: string;
   placeholder: string;
-  touched: boolean
+  touched: boolean;
 }
 
-function FormInputOptional({ register, checked, error, type, id, label, placeholder, touched }: Props) {
+function FormInputOptional({
+  register,
+  checked,
+  error,
+  type,
+  id,
+  label,
+  placeholder,
+  touched,
+}: Props) {
   return (
     <div className="overflow-hidden w-[100%] flex">
       <div
@@ -33,4 +43,4 @@ function FormInputOptional({ register, checked, error, type, id, label, placehol
     </div>
   );
 }
-export default FormInputOptional
+export default FormInputOptional;

@@ -3,11 +3,13 @@ import axios from "axios";
 import { useInspectContext } from "../..";
 
 interface Props {
-  schemaName: string;
-  error: any;
+  schemaName: any;
+  error: string | undefined;
+  id: string
+  imagesType: string;
 }
 
-function FormUploadImage({ schemaName, error }: Props) {
+function FormUploadImage({ schemaName, error,id, imagesType }: Props) {
   const { setValue } = useInspectContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [images, setImages] = useState<string[] | undefined>();
@@ -40,6 +42,12 @@ function FormUploadImage({ schemaName, error }: Props) {
   };
   return (
     <div>
+      <label
+        className={`${!images?.length && error && "text-red-400"} mb-1`}
+        htmlFor={id}
+      >
+        {imagesType}
+      </label>
       <div className="flex overflow-hidden gap-6 my-3">
         <label
           className={`${

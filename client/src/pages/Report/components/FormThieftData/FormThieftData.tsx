@@ -41,8 +41,8 @@ function FormThieftData({ objectType }: { objectType: string }) {
         error={errors.objectType?.images?.message}
         id="imagesFire"
         name="imagesFire"
+        imagesType={'Agregue imagen de la denuncia'}
       />
-      
     </>
   );
 }

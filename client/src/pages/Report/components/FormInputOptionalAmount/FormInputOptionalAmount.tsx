@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
 import { useReportContext } from "../..";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 interface Props {
-  error: any;
+  error: string | undefined;
   checked: boolean;
   type: string;
   id: string;
@@ -10,6 +11,7 @@ interface Props {
   placeholder: string;
   touched: boolean;
   schemaName: string;
+  setAmountValue: any;
 }
 
 function FormInputOptionalAmount({
@@ -20,16 +22,32 @@ function FormInputOptionalAmount({
   label,
   placeholder,
   touched,
-  schemaName
+  schemaName,
+  setAmountValue,
 }: Props) {
+  const { setValue } = useReportContext();
 
-  const {setValue, setAmountValue} = useReportContext()
+  const [inputValue, setInputValue] = useState<number | string>(0);
+
+  useEffect(() => {
+    if (!checked) {
+      setInputValue(0);
+      setAmountValue(0);
+      setValue(schemaName, 0);
+    }
+  }, [checked, inputValue])
+  console.log(inputValue)
 
   const amount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value)
-    setAmountValue(value)
-    setValue(schemaName, value)
-  };
+    const value = (e.target.value).toString();
+    const valueSlice = value.split('').slice(0, 2).join('')
+    const valueNumber = !e.target.value ? '' : Number(valueSlice);
+
+    setInputValue(valueNumber);
+    setAmountValue(valueNumber);
+    setValue(schemaName, valueNumber);
+  }
+
   return (
     <div className="overflow-hidden w-[100%] flex">
       <div
@@ -57,6 +75,7 @@ function FormInputOptionalAmount({
               id={id}
               onChange={amount}
               placeholder={placeholder}
+              value={inputValue}
             />
             {touched && error && (
               <i className="text-red-400 absolute right-2 top-2">

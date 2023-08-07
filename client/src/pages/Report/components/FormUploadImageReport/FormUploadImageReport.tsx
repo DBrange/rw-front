@@ -4,12 +4,19 @@ import { useReportContext } from "../..";
 
 interface Props {
   schemaName: string;
-  error: any;
-  id: string
-  name: string,
+  error: string | undefined;
+  id: string;
+  name: string;
+  imagesType: string;
 }
 
-function FormUploadImageReport({ schemaName, error, name, id }: Props) {
+function FormUploadImageReport({
+  schemaName,
+  error,
+  name,
+  id,
+  imagesType,
+}: Props) {
   const { setValue } = useReportContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [images, setImages] = useState<string[] | undefined>();
@@ -40,8 +47,15 @@ function FormUploadImageReport({ schemaName, error, name, id }: Props) {
       }
     } catch (err) {}
   };
+
   return (
     <div>
+      <label
+        className={`${!images?.length && error && "text-red-400"} mb-1`}
+        htmlFor={id}
+      >
+        {imagesType}
+      </label>  
       <div className="flex overflow-hidden gap-6 my-3">
         <label
           className={`${

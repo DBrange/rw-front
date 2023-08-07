@@ -31,6 +31,7 @@ function FormReport() {
         className="w-[100%] gap-5 flex flex-col items-center"
         onSubmit={handleSubmit(submitData)}
       >
+        <div></div>
         <FormEffectOpenClose
           formName={"Tipo de denuncia"}
           isActive={page === 0}

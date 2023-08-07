@@ -65,8 +65,25 @@ export const schemaVehicle = z.object({
     images: z.array(z.string().url()),
     plate: z.string().min(6).max(7),
     gnc: z.boolean(),
+    obleaNumber: z.string().refine(
+      (value: string) => (
+        value === "" || /^\d+$/.test(value),
+        {
+          message:
+            "El campo debe contener solo números o el campo puede estar vacío.",
+        }
+      )
+    ),
+    gncEpiration: z
+      .string()
+      .refine(
+        (value: string) => value === "" || /^\d{2}\/\d{2}\/\d{4}$/.test(value),
+        {
+          message:
+            "El campo debe contener una fecha válida o el campo puede estar vacío.",
+        }
+      ),
     brand: z.string().min(1).max(20),
-    engine: z.string().min(1).max(20),
     model: z.string().min(1).max(20),
     fuel: z.enum(["diesel", "gasoline"]),
     vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
@@ -92,36 +109,41 @@ export const schemaElectronic = z.object({
 
 // Report
 
-// export const schemaThirdInjuredData = z.object({
-//   schemaThirdInjuredData: z.object({
-//     name: z.string().min(1).max(20),
-//     lastName: z.string().min(1).max(20),
-//     phoneNumber: z.number(),
-//     email: z.string().min(1).max(30),
-//     gender: z.enum(["hombre", "mujer", "otro"]),
-//     dni: z.number(),
-//     injuries: z.string(),
-//   }),
-// });
 
-// export const schemaThirdInjured = z.object({
-//   schemaThirdInjured: z.object({
-//     amount: z.number(),
-//     injuredInfo: z.array(schemaThirdInjuredData),
-//   })
-// })
 
-export const schemaVehicleCrashReport = z.object({
-  schemaVehicleCrashReport: z.object({
-    time: z.string().min(1).max(20),
-    date: z.coerce.date(),
-    location: z.string().min(1),
-    details: z.string().min(1),
-    injured: z.boolean(),
-    injuries: z.string(),
-    ambulance: z.boolean(),
-    ambulanceTo: z.string(),
-    thirdInjured: z.boolean(),
+export const schemaVehicleReport = z.object({
+  schemaVehicleReport: z.object({
+    year: z.number().refine((value) => value <= currentYear, {
+      message: "El año exede al actual",
+    }),
+    color: z.string().min(1).max(20),
+    damage: z.boolean(),
+    damageLocation: z.string(),
+    images: z.array(z.string().url()),
+    plate: z.string().min(6).max(7),
+    gnc: z.boolean(),
+    obleaNumber: z.string().refine(
+      (value: string) => (
+        value === "" || /^\d+$/.test(value),
+        {
+          message:
+            "El campo debe contener solo números o el campo puede estar vacío.",
+        }
+      )
+    ),
+    gncEpiration: z
+      .string()
+      .refine(
+        (value: string) => value === "" || /^\d{2}\/\d{2}\/\d{4}$/.test(value),
+        {
+          message:
+            "El campo debe contener una fecha válida o el campo puede estar vacío.",
+        }
+      ),
+    brand: z.string().min(1).max(20),
+    model: z.string().min(1).max(20),
+    fuel: z.enum(["diesel", "gasoline"]),
+    vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
   }),
 });
 
@@ -156,6 +178,22 @@ export const schemaElectronicTheftReport = z.object({
     reportPhoto: z.array(z.string().url()),
   }),
 });
+const schemaThirdInjuredData = z.object({
+  firstName: z.string().min(1).max(20),
+  lastName: z.string().min(1).max(20),
+  phoneNumber: z.number(),
+  email: z.string().min(1).max(30),
+  gender: z.enum(["hombre", "mujer", "otro"]),
+  dni: z.number(),
+  injuries: z.string(),
+});
+
+export const schemaThirdInjured = z.object({
+  schemaThirdInjured: z.object({
+    amount: z.number(),
+    injuredInfo: z.array(schemaThirdInjuredData),
+  }),
+});
 
 export const schemaThirdPartyVehicleReport = z.object({
   schemaThirdPartyVehicleReport: z.object({
@@ -175,3 +213,24 @@ export const schemaThirdPartyVehicleReport = z.object({
     email: z.string().email(),
   }),
 });
+
+export const schemaVehicleCrashReportData = z.object({
+  amount: z.number(),
+  thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReport),
+});
+
+export const schemaVehicleCrashReport = z.object({
+  schemaVehicleCrashReport: z.object({
+    time: z.string().min(1).max(20),
+    date: z.coerce.date(),
+    location: z.string().min(1),
+    details: z.string().min(1),
+    injured: z.boolean(),
+    injuries: z.string(),
+    ambulance: z.boolean(),
+    ambulanceTo: z.string(),
+    thirdInjured: z.boolean(),
+    friendlyStatement: z.boolean(),
+  }),
+});
+

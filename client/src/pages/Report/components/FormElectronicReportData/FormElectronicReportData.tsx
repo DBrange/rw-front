@@ -16,4 +16,4 @@ function FormElectronicReportData() {
     </>
   );
 }
-export default FormElectronicReportData
+export default FormElectronicReportData;
