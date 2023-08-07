@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "src/pages/Inspect/context/Inspect.context.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

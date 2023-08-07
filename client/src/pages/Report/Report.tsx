@@ -1,11 +1,13 @@
-import { FormReport } from "."
-import { ReportProvider } from "./context"
+import { FormReport, ReportContainer } from ".";
+import { ReportProvider } from "./context";
 
 function Report() {
   return (
     <ReportProvider>
-      <FormReport />
+      <ReportContainer>
+          <FormReport />
+      </ReportContainer>
     </ReportProvider>
-  )
+  );
 }
-export default Report
+export default Report;

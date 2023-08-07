@@ -1,16 +1,19 @@
-import { FormThieftData } from "..";
 import { useReportContext } from "../../context";
 
 function FormElectronicReportData() {
-  const { isOpen, typeComplaint } = useReportContext();
+  const { typeComplaint, typeComplaintForm } = useReportContext();
   return (
     <>
-      
-      <button onClick={typeComplaint} value="theft">
+      <button
+        className={`${
+          typeComplaintForm.theft && "bg-violet-500 text-white"
+        } w-full hover:bg-violet-300 p-4 rounded-md`}
+        onClick={typeComplaint}
+        value="theft"
+      >
         Robo
       </button>
-      {isOpen.theft && <FormThieftData />}
     </>
   );
 }
-export default FormElectronicReportData
+export default FormElectronicReportData;

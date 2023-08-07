@@ -1,8 +1,10 @@
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormInput } from "..";
+import { AllInspectSchemasOptionals, SchemaLegalPersonalType } from "../../models";
 
 interface Props {
-  register: any;
-  errors: any;
+  register: UseFormRegister<AllInspectSchemasOptionals>;
+  errors: FieldErrors<SchemaLegalPersonalType>;
   touchedFields: any;
 }
 
@@ -14,16 +16,16 @@ function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaLegalPersonal?.companyName?.message}
         type="text"
         id="companyName"
-        label="Nombre de la compania"
+        label="Nombre de la compania*"
         placeholder="Ingrese su nombre"
         touched={touchedFields.schemaLegalPersonal?.companyName}
       />
       <FormInput
-        register={register("schemaLegalPersonal.cuit", { valueAsNumber: true })}
+        register={register("schemaLegalPersonal.cuit")}
         error={errors.schemaLegalPersonal?.cuit?.message}
         type="number"
         id="cuit"
-        label="CUIT"
+        label="CUIT*"
         placeholder="Ingrese su CUIT"
         touched={touchedFields.schemaLegalPersonal?.cuit}
       />
@@ -32,7 +34,7 @@ function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaLegalPersonal?.phoneNumber?.message}
         type="number"
         id="phoneNumber"
-        label="Numero de telefono"
+        label="Numero de telefono*"
         placeholder="Ingrese numero de telefonico"
         touched={touchedFields.schemaLegalPersonal?.phoneNumber}
       />
@@ -42,7 +44,7 @@ function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
         type="text"
         id="email"
         label="Email"
-        placeholder="Ingrese email"
+        placeholder="Ingrese email*"
         touched={touchedFields.schemaLegalPersonal?.email}
       />
       <FormInput
@@ -59,7 +61,7 @@ function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaLegalPersonal?.address?.message}
         type="text"
         id="address"
-        label="Direccion"
+        label="Direccion*"
         placeholder="Ingrese su direccion"
         touched={touchedFields.schemaLegalPersonal?.address}
       />

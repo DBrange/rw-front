@@ -36,4 +36,4 @@ function ButtonChoice({
     </div>
   );
 }
-export default ButtonChoice
+export default ButtonChoice;

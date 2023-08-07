@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { FormInput, FormInputOptional } from "..";
 import { FormSelectElecType } from "../../pages";
+import { AllInspectSchemas, SchemaElectronicType } from "../../models";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface Props {
-  register: any;
-  errors: any;
-  touchedFields: any;
+  register: UseFormRegister<AllInspectSchemas>;
+  errors: FieldErrors<SchemaElectronicType>;
+  touchedFields: FieldValues["touched"];
 }
 
 function FormElectronicData({ register, errors, touchedFields }: Props) {
@@ -25,7 +27,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
     <>
       <FormSelectElecType
         register={register("schemaElectronic.electronicType")}
-        error={errors.schemaElectronic?.electrodomesticType?.message}
+        error={errors.schemaElectronic?.electronicType?.message}
         touched={touchedFields.electronicType}
         electronicType={electronicType}
       />
@@ -35,7 +37,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         checked={isPhone}
         type="text"
         id="phoneNumberCel"
-        label="Numero del movil"
+        label="Numero del movil*"
         placeholder="Numero del movil"
         touched={touchedFields.schemaElectronic?.phoneNumberCel}
       />
@@ -45,7 +47,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         checked={isPhone}
         type="text"
         id="phoneService"
-        label="Servicio del movil"
+        label="Servicio del movil*"
         placeholder="Servicio del movil"
         touched={touchedFields.schemaElectronic?.phoneService}
       />
@@ -55,7 +57,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         checked={isPhone}
         type="number"
         id="imei"
-        label="IMEI"
+        label="IMEI*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.imei}
       />
@@ -64,7 +66,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         error={errors.schemaElectronic?.brand?.message}
         type="text"
         id="brand"
-        label="Marca"
+        label="Marca*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.brand}
       />
@@ -73,7 +75,7 @@ function FormElectronicData({ register, errors, touchedFields }: Props) {
         error={errors.schemaElectronic?.model?.message}
         type="text"
         id="model"
-        label="Modelo"
+        label="Modelo*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.model}
       />

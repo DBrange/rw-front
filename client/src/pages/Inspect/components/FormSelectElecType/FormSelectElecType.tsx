@@ -9,7 +9,7 @@ function FormSelectElecType({ register, error, touched, electronicType }: Props)
   return (
     <div className="w-[100%] flex flex-col">
   <label className="mb-1" htmlFor={"electronicType"}>
-    {"Tipo de electrodomestico"}
+    {"Tipo de electrodomestico*"}
   </label>
   <select
     onClick={(e: React.ChangeEvent<HTMLInputElement>) => electronicType(e)}

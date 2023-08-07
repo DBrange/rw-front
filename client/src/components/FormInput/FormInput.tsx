@@ -1,3 +1,4 @@
+import { UseFormRegisterReturn } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AiFillCheckCircle } from "react-icons/ai";
 
@@ -5,14 +6,14 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
 interface Props {
-  register: any;
+  register: UseFormRegisterReturn<any>;
   error: string | undefined;
-  type: string ;
+  type: string;
   id: string;
   label: string;
   placeholder: string;
   touched: boolean;
-  checked?: boolean
+  checked?: boolean;
 }
 
 function FormInput({ register, error, type, id, label, placeholder, touched, checked }: Props) {
@@ -20,7 +21,7 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
     <div
       className={`${
         checked ? "w-full" : "w-[100%]"
-      }  flex flex-col overflow-hidden`}
+      } flex flex-col overflow-hidden`}
     >
       <label
         className={`${touched && error && "text-red-400"} mb-1`}
@@ -28,7 +29,7 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
       >
         {label}
       </label>
-      <div className=" relative">
+      <div className="relative">
         <input
           className={`${
             touched && error && "border-red-400"
@@ -48,7 +49,7 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
         <p
           className={`${
             touched && error ? "text-red-400" : "text-transparent"
-          } text-xs`}
+          } text-xs select-none`}
         >
           {error || "a"}
         </p>

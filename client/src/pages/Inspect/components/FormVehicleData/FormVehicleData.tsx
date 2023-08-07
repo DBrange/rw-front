@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { FormCheckbox, FormInput, FormInputOptional, FormSelect } from "..";
-import { FormUploadImage } from "../../pages";
+import {
+  FormCheckbox,
+  FormInput,
+  FormInputOptional,
+  FormInputRange,
+  FormSelect,
+} from "../../../../components";
+import { FormSelectElecType, useInspectContext } from "../../..";
+import FormUploadImage from "../FormUploadImage/FormUploadImage";
 
-interface Props {
-  register: any;
-  errors: any;
-  touchedFields: any;
-}
-
-function FormVehicleData({ register, errors, touchedFields }: Props) {
+function FormVehicleData() {
+  const { errors, register, touchedFields, setValue, control } = useInspectContext();
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
+  const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
+
+
+
   return (
     <>
       <FormInput
@@ -17,16 +23,16 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         error={errors.schemaVehicle?.year?.message}
         type="number"
         id="year"
-        label="Año"
+        label="Año*"
         placeholder="Ano del vehiculo"
-        touched={touchedFields.year}
+        touched={touchedFields.schemaVehicle?.year}
       />
       <FormInput
         register={register("schemaVehicle.color")}
         error={errors.schemaVehicle?.color?.message}
         type="text"
         id="color"
-        label="Color"
+        label="Color*"
         placeholder="Color del vehiculo"
         touched={touchedFields.schemaVehicle?.color}
       />
@@ -35,27 +41,25 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         error={errors.schemaVehicle?.tireBrand?.message}
         type="text"
         id="tireBrand"
-        label="Marca de las ruedas"
+        label="Marca de las ruedas*"
         placeholder="Ingrese la marca"
         touched={touchedFields.schemaVehicle?.tireBrand}
       />
       <FormInput
-        register={register("schemaVehicle.tireZise")}
-        error={errors.schemaVehicle?.tireZise?.message}
+        register={register("schemaVehicle.tireSize")}
+        error={errors.schemaVehicle?.tireSize?.message}
         type="text"
-        id="tireZise"
-        label="Tamaño de la rueda"
+        id="tireSize"
+        label="Tamaño de la rueda*"
         placeholder="Ingrese el tamaño"
-        touched={touchedFields.schemaVehicle?.tireZise}
+        touched={touchedFields.schemaVehicle?.tireSize}
       />
-      <FormInput
-        register={register("schemaVehicle.tireWear")}
-        error={errors.schemaVehicle?.tireWear?.message}
-        type="text"
-        id="tireWear"
-        label="Desgaste de la rueda"
-        placeholder="Ingrese el desgaste"
-        touched={touchedFields.schemaVehicle?.tireWear}
+
+      <FormInputRange
+        register={register("schemaVehicle.tireWear", { valueAsNumber: true })}
+        setValue={setValue}
+        schemaName={"schemaVehicle.tireWear"}
+        control={control}
       />
 
       <FormCheckbox
@@ -71,34 +75,62 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         checked={isCheckedDamage}
         type="text"
         id="damageLocation"
-        label="Lugar dañado"
+        label="Lugar dañado*"
         placeholder="Ingrese el lugar"
         touched={touchedFields.schemaVehicle?.damageLocation}
       />
 
-      <FormUploadImage register={register("schemaVehicle.images")} />
+      <FormUploadImage
+        schemaName={"schemaVehicle.images"}
+        error={errors.schemaVehicle?.images?.message}
+        id={'images'}
+        imagesType={'Agregue fotos del vehiculo'}
+      />
 
       <FormInput
         register={register("schemaVehicle.plate")}
         error={errors.schemaVehicle?.plate?.message}
         type="text"
         id="plate"
-        label="Patente"
+        label="Patente*"
         placeholder="Ingrese la patente"
         touched={touchedFields.schemaVehicle?.plate}
       />
 
-      <div className="mb-7 mt-4 flex gap-4">
-        <label htmlFor="gnc">GNC</label>
-        <input id='gnc' type="checkbox" {...register("schemaVehicle.gnc")} />
-      </div>
+      <FormCheckbox
+        register={register("schemaVehicle.gnc")}
+        setChecked={setIsCheckedGnc}
+        id={"gnc"}
+        label={"GNC"}
+      />
+
+      <FormInputOptional
+        register={register("schemaVehicle.obleaNumber")}
+        error={errors.schemaVehicle?.obleaNumber?.message}
+        checked={isCheckedGnc}
+        type="text"
+        id="obleaNumber"
+        label="Numero de oblea*"
+        placeholder="Ingrese el lugar"
+        touched={touchedFields.schemaVehicle?.obleaNumber}
+      />
+      <FormInputOptional
+        register={register("schemaVehicle.gncEpiration")}
+        error={errors.schemaVehicle?.gncEpiration?.message}
+        checked={isCheckedGnc}
+        type="text"
+        id="gncEpiration"
+        label="Vencimiento*"
+        placeholder="Ingrese el lugar"
+        touched={touchedFields.schemaVehicle?.gncEpiration}
+      />
 
       <FormInput
         register={register("schemaVehicle.brand")}
         error={errors.schemaVehicle?.brand?.message}
         type="text"
         id="brand"
-        label="Marca"
+        label="Marca*"
         placeholder="Ingresar marca"
         touched={touchedFields.schemaVehicle?.brand}
       />
@@ -107,24 +139,16 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         error={errors.schemaVehicle?.model?.message}
         type="text"
         id="model"
-        label="Modelo"
+        label="Modelo*"
         placeholder="Ingresar modelo"
         touched={touchedFields.schemaVehicle?.model}
       />
-      <FormInput
-        register={register("schemaVehicle.engine")}
-        error={errors.schemaVehicle?.engine?.message}
-        type="text"
-        id="engine"
-        label="Motor"
-        placeholder="Ingresar motor"
-        touched={touchedFields.schemaVehicle?.ingine}
-      />
+
       <FormSelect
         register={register("schemaVehicle.fuel")}
         error={errors.schemaVehicle?.fuel?.message}
         id="fuel"
-        label="Combustible"
+        label="Combustible*"
         options={["diesel", "gasoline"]}
         touched={touchedFields.schemaVehicle?.fuel}
       />
@@ -132,7 +156,7 @@ function FormVehicleData({ register, errors, touchedFields }: Props) {
         register={register("schemaVehicle.vehicleType")}
         error={errors.schemaVehicle?.vehicleType?.message}
         id="vehicleType"
-        label="Tipo de vehiculo"
+        label="Tipo de vehiculo*"
         options={["camion", "automovil", "motocicleta"]}
         touched={touchedFields.schemaVehicle?.vehicleType}
       />

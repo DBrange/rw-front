@@ -1,7 +1,7 @@
 interface Props {
   formName: string;
   isActive: boolean;
-  form: JSX.Element;
+  form: JSX.Element | JSX.Element[];
 }
 
 function FormEffectOpenClose({formName, isActive, form }: Props) {

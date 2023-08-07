@@ -1,39 +1,64 @@
 import { useForm } from "react-hook-form";
 import { z, ZodType, ZodTypeAny } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  AllDataInspect,
-  ElectronicData,
-  LegalElectronicData,
-  LegalPersonalData,
-  LegalVehicleData,
-  PersonalData,
-  VehicleData,
-} from "../../../interfaces";
-
+import { UserBtnActive } from "../../../interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
-import { IsOpen } from "../interfaces";
+import { TypeComplaintForm } from "../interfaces";
+import { FormInjuredInfoData, FormThirdPartyVehiclesData } from "../..";
+import { FormEffectOpenClose, PageButton } from "../../../components";
+import {
+  SchemaPersonalType,
+  SchemaLegalPersonalType,
+  schemaVehicleReportType,
+  SchemaElectronicType,
+} from "../../../models";
+import {
+  schemaVehicleCrashReport,
+  schemaPersonal,
+  schemaVehicleTheftReport,
+  schemaVehicleFireReport,
+  schemaElectronic,
+  schemaLegalPersonal,
+  schemaThirdPartyVehicleReport,
+  schemaVehicleReport,
+  schemaThirdInjured,
+  schemaVehicleCrashReportData,
+} from "../../../utilities";
+import { validationFormDataReport } from "../utilities";
 
-type nose =
-  | VehicleData
-  | ElectronicData
-  | LegalVehicleData
-  | LegalElectronicData;
+type AllTypes =
+  | SchemaPersonalType
+  | SchemaLegalPersonalType
+  | schemaVehicleReportType
+  | SchemaElectronicType;
 
 export interface IReportContext {
   userActiveForm: string;
   activeForm: string;
   errors: any;
-  submitData: (data: nose) => void;
+  submitData: (data: AllTypes) => void;
   selectFormUserSchema: (name: string) => void;
   selectFormSchema: (name: string) => void;
   handleSubmit: any;
   register: any;
-  algo: () => void;
+  selectingSchema: () => void;
   touchedFields: any;
-  textaValue: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  isOpen: IsOpen;
-  typeComplaint: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  typeComplaintForm: TypeComplaintForm;
+  typeComplaint: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  page: number;
+  userBtnActive: UserBtnActive;
+  thirdInjuredForm: () => any;
+  setValue: any;
+  setAmountValue: (value: React.SetStateAction<number>) => void;
+  amountValue: number;
+  modalActive: boolean;
+  isError: boolean;
+  control: any;
+  trigger: any;
+  setAmountVehicles: any;
+  amountVehicles: number;
+  thirdPartyVehiclesForm: () => any;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -46,205 +71,285 @@ type ChildrenType = {
 
 export const ReportProvider = ({ children }: ChildrenType) => {
   const [activeForm, setActiveForm] = useState<string>("vehicle");
-
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
+  const [schema, setSchema] = useState<any>(schemaPersonal);
+  const [amountValue, setAmountValue] = useState<number>(0);
+  const [amountVehicles, setAmountVehicles] = useState<number>(0);
+  const [page, setPage] = useState<number>(0);
+  const [modalActive, setModalActive] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [userBtnActive, setuserBtnActive] = useState<UserBtnActive>({
+    person: true,
+    legal: false,
+    vehicle: true,
+    electronic: false,
+  });
+  const [typeComplaintForm, setTypeComplaitForm] = useState<TypeComplaintForm>({
+    crash: true,
+    theft: false,
+    fire: false,
+  });
 
-    const [isOpen, setIsOpen] = useState<IsOpen>({
+  const typeComplaint = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const { value } = e.currentTarget;
+    setTypeComplaitForm({
       crash: false,
       theft: false,
       fire: false,
+      [value]: true,
     });
-
-    const typeComplaint = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      const { value } = e.currentTarget;
-      setIsOpen({
-        ...isOpen,
-        [value]: true,
-      });
-    };
-
-  const currentYear = new Date().getFullYear();
-
-  const schemaPersonal = {
-    firstName: z.string().min(1).max(20),
-    lastName: z.string().min(1).max(20),
-    phoneNumber: z.number(),
-    email: z.string().email().max(30),
-    altEmail: z.string().email().max(30),
-    gender: z.enum(["hombre", "mujer", "otro"]),
-    dni: z.number(),
-    address: z.string().min(1).max(50),
-  };
-
-  const schemaLegalPersonal = {
-    companyName: z.string().min(1).max(20),
-    cuit: z.number(),
-    phoneNumber: z.number(),
-    email: z.string().email().max(30),
-    altEmail: z.string().email().max(30),
-    address: z.string().min(1).max(50),
   };
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);
+    if (name === "person") {
+      setuserBtnActive({
+        ...userBtnActive,
+        person: true,
+        legal: false,
+      });
+    } else {
+      setuserBtnActive({
+        ...userBtnActive,
+        person: false,
+        legal: true,
+      });
+    }
   };
 
-  // const schemaUser =
-  //   userActiveForm === "personal" ? schemaPersonal : schemaLegalPersonal;
+  const selectFormSchema = (name: string) => {
+    setActiveForm(name);
 
-  const schemaVehicle = {
-    year: z.number().lte(currentYear),
-    color: z.string().min(1).max(20),
-    tireBrand: z.string(),
-    tireZise: z.string(),
-    tireWear: z.string(),
-    damage: z.boolean(),
-    damageLocation: z.string().max(50),
-    // images: z.string(),
-    plate: z.string(),
-    gnc: z.boolean(),
-    brand: z.string(),
-    engine: z.string(),
-    model: z.string(),
-    fuel: z.enum(["diesel", "gasoline"]),
-    vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
+    if (name === "vehicle") {
+      setuserBtnActive({
+        ...userBtnActive,
+        vehicle: true,
+        electronic: false,
+      });
+    } else {
+      setuserBtnActive({
+        ...userBtnActive,
+        vehicle: false,
+        electronic: true,
+      });
+    }
   };
 
-  const ZodNumberOrEmpty = z
-    .string()
-    .refine((value) => value === "" || /^\d*$/.test(value), {
-      message: "Solo se permiten números o el campo puede estar vacío",
-    });
-
-  const schemaInjuredInfo = z.object({
-    name: z.string(),
-    lastName: z.string(),
-    phoneNumber: z.number(),
-    email: z.string(),
-    gender: z.enum(["hombre", "mujer", "otro"]),
-    dni: z.number(),
-    injuries: z.string(),
-  });
-
-  const schemaElectronic = {
-    electronicType: z.enum(["celular", "tablet", "notebook"]),
-    phoneNumberCel: ZodNumberOrEmpty,
-    phoneService: z.string().max(20),
-    brand: z.string(),
-    model: z.string(),
-    imei: z.string(),
-  };
-
-  const schemaVehicleCrashReport = z.object({
-    time: z.string(),
-    date: z.date(),
-    location: z.string(),
-    injured: z.boolean(),
-    injures: z.string(),
-    ambulance: z.boolean(),
-    ambulanceTo: z.string(),
-    thridInjured: z.boolean(),
-    thridParty: z.object({
-      amount: z.number(),
-      injuredInfo: z.array(schemaInjuredInfo),
-    }),
-  });
-
-  const validateTexta = (value: string) => {
-    schemaVehicleCrashReport.safeParse({ details: value });
-  }
-
-  const textaValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const {value} = e.target
-    validateTexta(value)
-    console.log(value)
-  };
-
-  const algo = () => {
-    let schemaUser;
-    let schemaElement;
+  const selectingSchema = () => {
+    let schemaUser: ZodType;
+    let schemaElement: ZodType;
+    let schemaComplaintType: ZodType;
     if (userActiveForm === "person") {
       schemaUser = schemaPersonal;
       if (activeForm === "vehicle") {
-        schemaElement = schemaVehicle;
-        algomas<VehicleData>(schemaUser, schemaElement);
+        schemaElement = schemaVehicleReport;
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.crash) {
+          schemaComplaintType = schemaVehicleCrashReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaVehicleTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.fire) {
+          schemaComplaintType = schemaVehicleFireReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        algomas<ElectronicData>(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaVehicleTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       }
     } else if (userActiveForm === "legal") {
       schemaUser = schemaLegalPersonal;
       if (activeForm === "vehicle") {
-        schemaElement = schemaVehicle;
-        algomas<LegalVehicleData>(schemaUser, schemaElement);
+        schemaElement = schemaVehicleReport;
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.crash) {
+          schemaComplaintType = schemaVehicleCrashReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaVehicleTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        } else if (typeComplaintForm.fire) {
+          schemaComplaintType = schemaVehicleFireReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       } else if (activeForm === "electronic") {
         schemaElement = schemaElectronic;
-        algomas<LegalElectronicData>(schemaUser, schemaElement);
+        estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
+        if (typeComplaintForm.theft) {
+          schemaComplaintType = schemaVehicleTheftReport;
+          estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
+        }
       }
     }
   };
 
-  const [algomasquemas, setAlgomasquemas] = useState<any>();
+  const thirdInjuredForm = () => {
+    let people: JSX.Element[] = [];
 
-  const algomas = <T,>(schemaUser: any, schemaElement: any) => {
-    const schema: any = z.object({ ...schemaUser, ...schemaElement });
-    setAlgomasquemas(schema);
+    if (amountValue > 0) {
+      for (let i = 0; i < amountValue; i++) {
+        people.push(<FormInjuredInfoData key={i + 1} people={i + 1} />);
+      }
+
+      return (
+        <FormEffectOpenClose
+          formName={"Terceros lesionados"}
+          isActive={
+            (typeComplaintForm.crash || typeComplaintForm.fire) && page === 5
+          }
+          form={
+            <>
+              {people}
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaThirdInjured}
+                max={typeComplaintForm.crash ? 6 : 5}
+              />
+            </>
+          }
+        />
+      );
+    } else {
+      return;
+    }
   };
 
-  // const [schema, setSchema] = useState<ZodType<nose>>(algomasquemas);
+  const thirdPartyVehiclesForm = () => {
+    let vehicles: JSX.Element[] = [];
 
-  const selectFormSchema = (name: string) => {
-    setActiveForm(name);
+    if (amountVehicles > 1) {
+      for (let i = 0; i < amountVehicles; i++) {
+        vehicles.push(
+          <FormThirdPartyVehiclesData key={i + 1} vehicles={i + 1} />
+        );
+      }
+
+      return (
+        <FormEffectOpenClose
+          formName={"Vehiculos de terceros"}
+          isActive={typeComplaintForm.crash && page === 6 && amountVehicles > 0}
+          form={
+            <>
+              {vehicles}
+              <PageButton
+                changePage={changePage}
+                page={page}
+                errors={errors.schemaVehicleCrashReport}
+                max={6}
+              />
+            </>
+          }
+        />
+      );
+    } else {
+      return null
+    }
+  };
+
+  const changePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { value } = e.currentTarget;
+    if (value === "next") {
+      if (page === 4 && !amountValue) {
+        setPage(page + 2);
+      } else {
+        setPage(page + 1);
+      }
+    } else if (value === "back") {
+      if (page === 6 && !amountValue) {
+        setPage(page - 2);
+      } else {
+        setPage(page - 1);
+      }
+    }
+  };
+
+  const estructuringSchema = <T extends ZodTypeAny>(
+    schemaUser: any,
+    schemaElement: any,
+    schemaComplaintType: any
+  ) => {
+    let schema: any = schemaUser;
+    if (page === 1) {
+      schema = schemaUser;
+    } else if (page === 2) {
+      schema = schemaUser.merge(schemaElement);
+    } else if (page === 3) {
+      schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+    } else if (page === 4) {
+      schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+    } else if (page === 5 && amountValue) {
+      schema = schemaUser
+        .merge(schemaElement)
+        .merge(schemaComplaintType)
+        .merge(schemaThirdInjured);
+    } else if (page === 6) {
+      if (amountValue && amountVehicles < 2) {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaThirdInjured)
+          .merge(schemaThirdPartyVehicleReport);
+      } else if (!amountValue && amountVehicles > 1) {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaVehicleCrashReportData);
+          
+        } else if (amountValue && amountVehicles > 1) {
+          schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaThirdInjured)
+          .merge(schemaVehicleCrashReportData);
+      } else {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaThirdPartyVehicleReport);
+      }
+    }
+    setSchema(schema);
   };
 
   const {
     handleSubmit,
     register,
     formState: { errors, touchedFields },
-    reset,
+    setValue,
+    trigger,
+    control,
   } = useForm<any>({
-    resolver: zodResolver(algomasquemas),
+    resolver: zodResolver(schema),
   });
 
   useEffect(() => {
-    algo();
+    selectingSchema();
+    if (modalActive) {
+      setIsError(true);
+    } else {
+      setIsError(true);
+    }
   }, [errors]);
   console.log(errors);
 
-  const submitData = (data: nose) => {
-    console.log('todo',data);
-    reset({
-      firstName: "",
-      lastName: "",
-      phoneNumber: 0,
-      email: "",
-      altEmail: "",
-      gender: "hombre",
-      dni: 0,
-      address: "",
-      companyName: "",
-      cuit: 0,
-      year: 0,
-      color: "",
-      tireBrand: "",
-      tireZise: "",
-      tireWear: "",
-      damage: false,
-      damageLocation: "",
-      images: "",
-      plate: "",
-      gnc: false,
-      brand: "",
-      engine: "",
-      model: "",
-      fuel: "diesel",
-      vehicleType: "automovil",
-      electronicType: "celular",
-      phoneNumberCel: 0,
-      phoneService: "",
-      imei: 0,
+  const submitData = (data: AllTypes) => {
+    console.log("todo", data);
+
+    validationFormDataReport({
+      userActiveForm,
+      activeForm,
+      setModalActive,
+      typeComplaintForm,
+      data,
+      amountValue,
     });
   };
 
@@ -257,11 +362,24 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     selectFormSchema,
     handleSubmit,
     register,
-    algo,
+    selectingSchema,
     touchedFields,
-    textaValue,
-    isOpen,
+    typeComplaintForm,
     typeComplaint,
+    changePage,
+    page,
+    userBtnActive,
+    thirdInjuredForm,
+    setValue,
+    setAmountValue,
+    amountValue,
+    modalActive,
+    isError,
+    control,
+    trigger,
+    setAmountVehicles,
+    amountVehicles,
+    thirdPartyVehiclesForm,
   };
 
   return (
