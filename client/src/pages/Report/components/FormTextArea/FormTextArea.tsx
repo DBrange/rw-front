@@ -5,10 +5,10 @@ interface Props {
   register: any;
   error: string | undefined;
   touched: boolean;
+  id: string
 }
 
-function FormTextArea({register, error, touched }: Props) {
-  const {setValue} = useReportContext()
+function FormTextArea({register, error, touched, id }: Props) {
   return (
     <div className="">
       <label
@@ -22,7 +22,7 @@ function FormTextArea({register, error, touched }: Props) {
           className={`${
             touched && error && "border-red-400"
           } resize-none border-2 w-full h-32 pl-2 rounded outline-none focus:border-blue-400`}
-          id="details"
+          id={id}
           cols={30}
           rows={30}
           {...register}

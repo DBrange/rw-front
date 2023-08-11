@@ -29,7 +29,7 @@ function FormThieftData({ objectType }: { objectType: string }) {
         register={register(`${objectType}.date`)}
         error={errors[`${objectType}`]?.date?.message}
         type="date"
-        id="date"
+        id={`${objectType}.date`}
         label="Fecha del suceso*"
         placeholder="Ingresar fecha"
         touched={touchedFields[`${objectType}`]?.date}
@@ -38,7 +38,7 @@ function FormThieftData({ objectType }: { objectType: string }) {
         register={register(`${objectType}.location`)}
         error={errors[`${objectType}`]?.location?.message}
         type="text"
-        id="location"
+        id={`${objectType}.location`}
         label="Ubicacion del suceso*"
         placeholder="Ingresar ubicacion"
         touched={touchedFields[`${objectType}`]?.location}
@@ -54,7 +54,7 @@ function FormThieftData({ objectType }: { objectType: string }) {
         <FormCheckbox
           register={register("schemaThirdPartyVehicleReport.isTire")}
           setChecked={setIsTire}
-          id={"schemaThirdPartyVehicleReport.isTire"}
+          id="schemaThirdPartyVehicleReport.isTire"
           label={"¿Alguna rueda fue robada?"}
           instructions=""
         />
@@ -83,7 +83,7 @@ function FormThieftData({ objectType }: { objectType: string }) {
       <FormUploadImageReport
         schemaName={`${objectType}.images`}
         error={errors.objectType?.images?.message}
-        id="imagesFire"
+        id={`${objectType}.images`}
         name="imagesFire"
         imagesType={"Agregue imagen de la denuncia"}
       />

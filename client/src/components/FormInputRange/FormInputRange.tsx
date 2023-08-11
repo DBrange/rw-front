@@ -10,9 +10,10 @@ interface Props {
   setValue: UseFormSetValue<any>;
   schemaName: string;
   control: Control<any>;
+  id: string
 }
 
-function FormInputRange({ register, setValue, schemaName, control }: Props) {
+function FormInputRange({ register, setValue, schemaName, control, id }: Props) {
   const slider = useWatch({
     control,
     name: schemaName,
@@ -29,7 +30,7 @@ function FormInputRange({ register, setValue, schemaName, control }: Props) {
         <input
           className="flex-1"
           type="range"
-          id="tireWear"
+          id={id}
           {...register}
           value={!slider ? 0 : slider}
           onChange={handleSliderChange}

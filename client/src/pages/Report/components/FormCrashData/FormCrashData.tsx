@@ -33,7 +33,7 @@ isCheckedThirdInjuried
         register={register("schemaVehicleCrashReport.date")}
         error={errors.schemaVehicleCrashReport?.date?.message}
         type="date"
-        id="time"
+        id="schemaVehicleCrashReport.date"
         label="Fecha del suceso*"
         placeholder="Ingresar fecha"
         touched={touchedFields.schemaVehicleCrashReport?.date}
@@ -42,7 +42,7 @@ isCheckedThirdInjuried
         register={register("schemaVehicleCrashReport.location")}
         error={errors.schemaVehicleCrashReport?.location?.message}
         type="text"
-        id="location"
+        id="schemaVehicleCrashReport.location"
         label="Ubicacion del suceso*"
         placeholder="Ingresar ubicacion"
         touched={touchedFields.schemaVehicleCrashReport?.location}
@@ -52,12 +52,13 @@ isCheckedThirdInjuried
         register={register("schemaVehicleCrashReport.details")}
         error={errors.schemaVehicleCrashReport?.details?.message}
         touched={touchedFields.schemaVehicleCrashReport?.details}
+        id="schemaVehicleCrashReport.details"
       />
 
       <FormCheckbox
         register={register("schemaVehicleCrashReport.injured")}
         setChecked={setIsCheckedInjuried}
-        id={"injuried"}
+        id="schemaVehicleCrashReport.injured"
         label={"Lesiones"}
         instructions={"Estable si usted resulto herido"}
       />
@@ -66,7 +67,7 @@ isCheckedThirdInjuried
           register={register("schemaVehicleCrashReport.injuries")}
           error={errors.schemaVehicleCrashReport?.injuries?.message}
           type="text"
-          id="injuries"
+          id="schemaVehicleCrashReport.injuries"
           label="Tipo el de lesion"
           placeholder="Ingrese tipo el de lesion"
           touched={touchedFields.schemaVehicleCrashReport?.injuries}
@@ -75,7 +76,7 @@ isCheckedThirdInjuried
       <FormCheckbox
         register={register("schemaVehicleCrashReport.ambulance")}
         setChecked={setIsCheckedAmbulance}
-        id={"ambulance"}
+        id="schemaVehicleCrashReport.ambulance"
         label={"Ambulancia"}
         instructions={"Establece si estuvo la presencia de una ambulancia"}
       />
@@ -84,7 +85,7 @@ isCheckedThirdInjuried
           register={register("schemaVehicleCrashReport.ambulanceTo")}
           error={errors.schemaVehicleCrashReport?.ambulanceTo?.message}
           type="text"
-          id="ambulanceTo"
+          id="schemaVehicleCrashReport.ambulanceTo"
           label="Destino de la ambulancia"
           placeholder="Ingrese tipo el de lesion"
           touched={touchedFields.schemaVehicleCrashReport?.ambulanceTo}
@@ -93,7 +94,7 @@ isCheckedThirdInjuried
       <FormCheckbox
         register={register("schemaVehicleCrashReport.thirdInjured")}
         setChecked={setIsCheckedThirdInjuried}
-        id={"thirdInjuried"}
+        id="schemaVehicleCrashReport.thirdInjured"
         label={"Tercero(s) lesionados"}
         instructions={
           "Establece la cantidad de terceros heridos por el accidente"
@@ -103,7 +104,7 @@ isCheckedThirdInjuried
         error={errors.schemaThirdInjured?.amount?.message}
         checked={isCheckedThirdInjuried}
         type="number"
-        id="amount"
+        id="schemaThirdInjured.amount"
         label="Cantidad"
         placeholder="Ingresar cantidad"
         touched={touchedFields.schemaThirdInjured?.amount}
@@ -114,7 +115,7 @@ isCheckedThirdInjuried
       <FormCheckbox
         register={register("schemaVehicleCrashReport.friendlyStatement")}
         setChecked={setIsCheckedThirdVehicle}
-        id={"thirdInjuried"}
+        id="schemaVehicleCrashReport.friendlyStatement"
         label={"Declaracion amistosa"}
         instructions={
           "Establece un acuerdo de palabra con los demas implicados, donde los datos que usted ingrese en la denuncia, seran enviados por mail a cada una de las partes, en donde todos deben estar de acuerdo con lo ingresado"
@@ -124,7 +125,7 @@ isCheckedThirdInjuried
         error={errors.schemaVehicleCrashReportData?.amount?.message}
         checked={isCheckedThirdVehicle}
         type="number"
-        id="amountThirdPartyVehicle"
+        id="schemaVehicleCrashReportData.amount"
         label="Cantidad de terceros"
         placeholder="Ingresar cantidad"
         touched={touchedFields.schemaVehicleCrashReportData?.amount}

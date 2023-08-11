@@ -47,7 +47,7 @@ function FormElectronicData({
             register={register("schemaPhone.phoneNumberCel")}
             error={errors.schemaPhone?.phoneNumberCel?.message}
             type="text"
-            id="phoneNumberCel"
+            id="schemaPhone.phoneNumberCel"
             label="Numero del movil*"
             placeholder="Numero del movil"
             touched={touchedFields.schemaPhone?.phoneNumberCel}
@@ -56,7 +56,7 @@ function FormElectronicData({
             register={register("schemaPhone.phoneService")}
             error={errors.schemaPhone?.phoneService?.message}
             type="text"
-            id="phoneService"
+            id="schemaPhone.phoneService"
             label="Servicio del movil*"
             placeholder="Servicio del movil"
             touched={touchedFields.schemaPhone?.phoneService}
@@ -65,7 +65,7 @@ function FormElectronicData({
             register={register("schemaPhone.imei")}
             error={errors.schemaPhone?.imei?.message}
             type="number"
-            id="imei"
+            id="schemaPhone.imei"
             label="IMEI*"
             placeholder="Ingrese el Año"
             touched={touchedFields.schemaPhone?.imei}
@@ -76,7 +76,7 @@ function FormElectronicData({
         register={register("schemaElectronic.brand")}
         error={errors.schemaElectronic?.brand?.message}
         type="text"
-        id="brand"
+        id="schemaElectronic.brand"
         label="Marca*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.brand}
@@ -85,7 +85,7 @@ function FormElectronicData({
         register={register("schemaElectronic.model")}
         error={errors.schemaElectronic?.model?.message}
         type="text"
-        id="model"
+        id="schemaElectronic.model"
         label="Modelo*"
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.model}

@@ -21,22 +21,13 @@ isCheckedThirdInjuried
         
   return (
     <>
-      {/* <FormInput
-        register={register("schemaVehicleFireReport.time")}
-        error={errors.schemaVehicleFireReport?.time?.message}
-        type="text"
-        id="time"
-        label="Horario del suceso*"
-        placeholder="Ingresar horario"
-        touched={touchedFields.schemaVehicleFireReport?.time}
-      /> */}
       <FormTimeInput schemaName={"schemaVehicleFireReport.time"} />
 
       <FormInput
         register={register("schemaVehicleFireReport.date")}
         error={errors.schemaVehicleFireReport?.date?.message}
         type="date"
-        id="date"
+        id="schemaVehicleFireReport.date"
         label="Fecha del suceso*"
         placeholder="Ingresar fecha"
         touched={touchedFields.schemaVehicleFireReport?.date}
@@ -45,7 +36,7 @@ isCheckedThirdInjuried
         register={register("schemaVehicleFireReport.location")}
         error={errors.schemaVehicleFireReport?.location?.message}
         type="text"
-        id="location"
+        id="schemaVehicleFireReport.location"
         label="Ubicacion del suceso*"
         placeholder="Ingresar ubicacion"
         touched={touchedFields.schemaVehicleFireReport?.location}
@@ -55,11 +46,13 @@ isCheckedThirdInjuried
         register={register("schemaVehicleFireReport.details")}
         error={errors.schemaVehicleFireReport?.details.message}
         touched={touchedFields.schemaVehicleFireReport?.details}
+        id={"schemaVehicleFireReport.details"}
       />
+
       <FormCheckbox
         register={register("schemaVehicleFireReport.injured")}
         setChecked={setIsCheckedInjuried}
-        id={"injuried"}
+        id="schemaVehicleFireReport.injured"
         label={"Lesiones*"}
         instructions={"Estable si usted resulto herido"}
       />
@@ -68,7 +61,7 @@ isCheckedThirdInjuried
           register={register("schemaVehicleFireReport.injuries")}
           error={errors.schemaVehicleFireReport?.injuries?.message}
           type="text"
-          id="injuries"
+          id="schemaVehicleFireReport.injuries"
           label="Tipo el de lesion*"
           placeholder="Ingrese tipo el de lesion"
           touched={touchedFields.schemaVehicleFireReport?.injuries}
@@ -77,7 +70,7 @@ isCheckedThirdInjuried
       <FormCheckbox
         register={register("schemaVehicleFireReport.ambulance")}
         setChecked={setIsCheckedAmbulance}
-        id={"ambulance"}
+        id="schemaVehicleFireReport.ambulance"
         label={"Ambulancia"}
         instructions={"Establece si estuvo la presencia de una ambulancia"}
       />
@@ -86,7 +79,7 @@ isCheckedThirdInjuried
           register={register("schemaVehicleFireReport.ambulanceTo")}
           error={errors.schemaVehicleFireReport?.ambulanceTo?.message}
           type="text"
-          id="ambulanceTo"
+          id="schemaVehicleFireReport.ambulanceTo"
           label="Destino de la ambulancia*"
           placeholder="Ingrese tipo el de lesion"
           touched={touchedFields.schemaVehicleFireReport?.ambulanceTo}
@@ -95,7 +88,7 @@ isCheckedThirdInjuried
       <FormCheckbox
         register={register("schemaVehicleFireReport.thirdInjured")}
         setChecked={setIsCheckedThirdInjuried}
-        id={"thirdInjuried"}
+        id="schemaVehicleFireReport.thirdInjured"
         label={"Tercero(s) lesionados*"}
         instructions={
           "Establece la cantidad de terceros heridos por el accidente"
@@ -105,7 +98,7 @@ isCheckedThirdInjuried
         error={errors.schemaVehicleFireReport?.amount?.message}
         checked={isCheckedThirdInjuried}
         type="number"
-        id="amount"
+        id="schemaThirdInjured.amount"
         label="Cantidad*"
         placeholder="Ingresar cantidad"
         touched={touchedFields.schemaVehicleFireReport?.amount}

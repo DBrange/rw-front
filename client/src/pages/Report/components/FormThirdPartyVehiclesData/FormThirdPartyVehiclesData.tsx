@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { FormUploadImageReport } from "..";
-import { FormCheckbox, FormCheckboxObj, FormInput, FormInputOptional } from "../../../../components";
+import { FormCheckboxObj, FormInput, FormInputOptional } from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {

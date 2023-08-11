@@ -15,7 +15,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register("schemaPersonal.firstName")}
         error={errors.schemaPersonal?.firstName?.message}
         type="text"
-        id="name"
+        id="schemaPersonal.firstName"
         label="Nombre*"
         placeholder="Ingrese su nombre"
         touched={touchedFields.schemaPersonal?.firstName}
@@ -24,7 +24,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register("schemaPersonal.lastName")}
         error={errors.schemaPersonal?.lastName?.message}
         type="text"
-        id="lastName"
+        id="schemaPersonal.lastName"
         label="Apellido*"
         placeholder="Ingrese su Apellido"
         touched={touchedFields.schemaPersonal?.lastName}
@@ -35,7 +35,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         })}
         error={errors.schemaPersonal?.phoneNumber?.message}
         type="number"
-        id="phoneNumber"
+        id="schemaPersonal.phoneNumber"
         label="Numero telefonico*"
         placeholder="Ingrese su numero de telefono"
         touched={touchedFields.schemaPersonal?.phoneNumber}
@@ -44,7 +44,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register("schemaPersonal.email")}
         error={errors.schemaPersonal?.email?.message}
         type="text"
-        id="email"
+        id="schemaPersonal.email"
         label="Email*"
         placeholder="Ingrese su email"
         touched={touchedFields.schemaPersonal?.email}
@@ -53,7 +53,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register("schemaPersonal.altEmail")}
         error={errors.schemaPersonal?.altEmail?.message}
         type="text"
-        id="altEmail"
+        id="schemaPersonal.altEmail"
         label="Email alternativo"
         placeholder="Ingrese su email"
         touched={touchedFields.schemaPersonal?.altEmail}
@@ -61,7 +61,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
       <FormSelect
         register={register("schemaPersonal.gender")}
         error={errors.schemaPersonal?.gender?.message}
-        id="role"
+        id="schemaPersonal.gender"
         label="Genero*"
         options={["hombre", "mujer", "otro"]}
         touched={touchedFields.schemaPersonal?.gender}
@@ -70,7 +70,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register(`schemaPersonal.birthDate`)}
         error={errors.schemaPersonal?.birthDate?.message}
         type="date"
-        id="date"
+        id="schemaPersonal.birthDate"
         label="Fecha del nacimiento*"
         placeholder="Ingresar fecha"
         touched={touchedFields.birthDate?.gender}
@@ -79,7 +79,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register("schemaPersonal.dni")}
         error={errors.schemaPersonal?.dni?.message}
         type="number"
-        id="dni"
+        id="schemaPersonal.dni"
         label="DNI*"
         placeholder="Ingrese su DNI"
         touched={touchedFields.schemaPersonal?.dni}
@@ -88,7 +88,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         register={register("schemaPersonal.address")}
         error={errors.schemaPersonal?.address?.message}
         type="text"
-        id="address"
+        id="schemaPersonal.address"
         label="Direccion*"
         placeholder="Ingrese su direccion"
         touched={touchedFields.schemaPersonal?.address}

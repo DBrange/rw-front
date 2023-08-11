@@ -30,7 +30,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.year", { valueAsNumber: true })}
         error={errors.schemaVehicle?.year?.message}
         type="number"
-        id="year"
+        id="schemaVehicle.year"
         label="Año*"
         placeholder="Ano del vehiculo"
         touched={touchedFields.schemaVehicle?.year}
@@ -39,7 +39,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.color")}
         error={errors.schemaVehicle?.color?.message}
         type="text"
-        id="color"
+        id="schemaVehicle.color"
         label="Color*"
         placeholder="Color del vehiculo"
         touched={touchedFields.schemaVehicle?.color}
@@ -48,7 +48,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.tireBrand")}
         error={errors.schemaVehicle?.tireBrand?.message}
         type="text"
-        id="tireBrand"
+        id="schemaVehicle.tireBrand"
         label="Marca de las ruedas*"
         placeholder="Ingrese la marca"
         touched={touchedFields.schemaVehicle?.tireBrand}
@@ -57,7 +57,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.tireSize")}
         error={errors.schemaVehicle?.tireSize?.message}
         type="text"
-        id="tireSize"
+        id="schemaVehicle.tireSize"
         label="Tamaño de la rueda*"
         placeholder="Ingrese el tamaño"
         touched={touchedFields.schemaVehicle?.tireSize}
@@ -68,12 +68,13 @@ function FormVehicleData() {
         setValue={setValue}
         schemaName={"schemaVehicle.tireWear"}
         control={control}
+        id="schemaVehicle.tireWear"
       />
 
       <FormCheckbox
         register={register("schemaVehicle.damage")}
         setChecked={setIsCheckedDamage}
-        id={"damage"}
+        id="schemaVehicle.damage"
         label={"Daño"}
         instructions="Estable si el vehiculo sufrio algun daño"
       />
@@ -84,7 +85,7 @@ function FormVehicleData() {
             register={register("schemaVehicle.damageLocation")}
             error={errors.schemaVehicle?.damageLocation?.message}
             type="text"
-            id="damageLocation"
+            id="schemaVehicle.damageLocation"
             label="Lugar dañado*"
             placeholder="Ingrese el lugar"
             touched={touchedFields.schemaVehicle?.damageLocation}
@@ -95,7 +96,7 @@ function FormVehicleData() {
       <FormUploadImage
         schemaName={"schemaVehicle.images"}
         error={errors.schemaVehicle?.images?.message}
-        id={"images"}
+        id="schemaVehicle.images"
         imagesType={"Agregue fotos del vehiculo"}
       />
 
@@ -103,7 +104,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.plate")}
         error={errors.schemaVehicle?.plate?.message}
         type="text"
-        id="plate"
+        id="schemaVehicle.plate"
         label="Patente*"
         placeholder="Ingrese la patente"
         touched={touchedFields.schemaVehicle?.plate}
@@ -112,7 +113,7 @@ function FormVehicleData() {
       <FormCheckbox
         register={register("schemaVehicle.okm")}
         setChecked={setIsCheckedOkm}
-        id={"okm"}
+        id="schemaVehicle.okm"
         label={"¿Es 0 km?"}
         instructions="Estable si el vehiculo es 0 Km"
       />
@@ -120,7 +121,7 @@ function FormVehicleData() {
       <FormCheckbox
         register={register("schemaVehicle.gnc")}
         setChecked={setIsCheckedGnc}
-        id={"gnc"}
+        id="schemaVehicle.gnc"
         label={"GNC"}
         instructions="Estable si el vehiculo lleva GNC"
       />
@@ -131,7 +132,7 @@ function FormVehicleData() {
             register={register("schemaGnc.obleaNumber")}
             error={errors.schemaGnc?.obleaNumber?.message}
             type="text"
-            id="obleaNumber"
+            id="schemaGnc.obleaNumber"
             label="Numero de oblea*"
             placeholder="Ingrese el lugar"
             touched={touchedFields.schemaGnc?.obleaNumber}
@@ -140,7 +141,7 @@ function FormVehicleData() {
             register={register("schemaGnc.gncExpiration")}
             error={errors.schemaGnc?.gncExpiration?.message}
             type="date"
-            id="gncExpiration"
+            id="schemaGnc.gncExpiration"
             label="Vencimiento*"
             placeholder="Ingrese el lugar"
             touched={touchedFields.schemaGnc?.gncExpiration}
@@ -148,12 +149,11 @@ function FormVehicleData() {
         </>
       </FormInputOptional>
 
-
       <FormInput
         register={register("schemaVehicle.brand")}
         error={errors.schemaVehicle?.brand?.message}
         type="text"
-        id="brand"
+        id="schemaVehicle.brand"
         label="Marca*"
         placeholder="Ingresar marca"
         touched={touchedFields.schemaVehicle?.brand}
@@ -162,7 +162,7 @@ function FormVehicleData() {
         register={register("schemaVehicle.model")}
         error={errors.schemaVehicle?.model?.message}
         type="text"
-        id="model"
+        id="schemaVehicle.model"
         label="Modelo*"
         placeholder="Ingresar modelo"
         touched={touchedFields.schemaVehicle?.model}
@@ -171,7 +171,7 @@ function FormVehicleData() {
       <FormSelect
         register={register("schemaVehicle.fuel")}
         error={errors.schemaVehicle?.fuel?.message}
-        id="fuel"
+        id="schemaVehicle.fuel"
         label="Combustible*"
         options={["DIESEL", "GASOLINE"]}
         touched={touchedFields.schemaVehicle?.fuel}
@@ -179,7 +179,7 @@ function FormVehicleData() {
       <FormSelect
         register={register("schemaVehicle.type")}
         error={errors.schemaVehicle?.type?.message}
-        id="vehicleType"
+        id="schemaVehicle.type"
         label="Tipo de vehiculo*"
         options={["CAMION", "AUTOMOVIL", "MOTOCICLETA"]}
         touched={touchedFields.schemaVehicle?.type}

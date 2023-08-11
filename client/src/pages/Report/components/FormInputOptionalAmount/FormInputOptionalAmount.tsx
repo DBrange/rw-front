@@ -41,21 +41,7 @@ function FormInputOptionalAmount({
       setValue(schemaName, inputValue);
       setInputValue(amountValue)
     }
-
-
   }, [checked, inputValue, amountValue]);
-
-  // useEffect(() => {
-  //   setInputValue(amountValue);
-  // }, [amountValue, inputValue]);
-  // useEffect(() => {
-  //   if (!checked) {
-  //     setInputValue(0);
-  //     setAmountValue(0);
-  //     setValue(schemaName, 0);
-  //   }
-  // }, [checked, inputValue]);
-  // console.log(inputValue);
 
   const amount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toString();
