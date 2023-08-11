@@ -10,14 +10,15 @@ function FormFireData() {
     touchedFields,
     setAmountValue,
     amountValue,
+    setIsCheckedThirdInjuried,
+isCheckedThirdInjuried
   } = useReportContext();
 
         const [isCheckedInjuried, setIsCheckedInjuried] =
           useState<boolean>(false);
         const [isCheckedAmbulance, setIsCheckedAmbulance] =
           useState<boolean>(false);
-        const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
-          useState<boolean>(false);
+        
   return (
     <>
       {/* <FormInput
@@ -62,16 +63,17 @@ function FormFireData() {
         label={"Lesiones*"}
         instructions={"Estable si usted resulto herido"}
       />
-      <FormInputOptional
-        register={register("schemaVehicleFireReport.injuries")}
-        error={errors.schemaVehicleFireReport?.injuries?.message}
-        checked={isCheckedInjuried}
-        type="text"
-        id="injuries"
-        label="Tipo el de lesion*"
-        placeholder="Ingrese tipo el de lesion"
-        touched={touchedFields.schemaVehicleFireReport?.injuries}
-      />
+      <FormInputOptional checked={isCheckedInjuried}>
+        <FormInput
+          register={register("schemaVehicleFireReport.injuries")}
+          error={errors.schemaVehicleFireReport?.injuries?.message}
+          type="text"
+          id="injuries"
+          label="Tipo el de lesion*"
+          placeholder="Ingrese tipo el de lesion"
+          touched={touchedFields.schemaVehicleFireReport?.injuries}
+        />
+      </FormInputOptional>
       <FormCheckbox
         register={register("schemaVehicleFireReport.ambulance")}
         setChecked={setIsCheckedAmbulance}
@@ -79,16 +81,17 @@ function FormFireData() {
         label={"Ambulancia"}
         instructions={"Establece si estuvo la presencia de una ambulancia"}
       />
-      <FormInputOptional
-        register={register("schemaVehicleFireReport.ambulanceTo")}
-        error={errors.schemaVehicleFireReport?.ambulanceTo?.message}
-        checked={isCheckedAmbulance}
-        type="text"
-        id="ambulanceTo"
-        label="Destino de la ambulancia*"
-        placeholder="Ingrese tipo el de lesion"
-        touched={touchedFields.schemaVehicleFireReport?.ambulanceTo}
-      />
+      <FormInputOptional checked={isCheckedAmbulance}>
+        <FormInput
+          register={register("schemaVehicleFireReport.ambulanceTo")}
+          error={errors.schemaVehicleFireReport?.ambulanceTo?.message}
+          type="text"
+          id="ambulanceTo"
+          label="Destino de la ambulancia*"
+          placeholder="Ingrese tipo el de lesion"
+          touched={touchedFields.schemaVehicleFireReport?.ambulanceTo}
+        />
+      </FormInputOptional>
       <FormCheckbox
         register={register("schemaVehicleFireReport.thirdInjured")}
         setChecked={setIsCheckedThirdInjuried}

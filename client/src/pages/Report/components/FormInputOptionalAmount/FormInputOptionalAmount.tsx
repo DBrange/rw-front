@@ -36,15 +36,18 @@ function FormInputOptionalAmount({
       setInputValue(0);
       setAmountValue(0);
       setValue(schemaName, 0);
+    } else {
+      // setAmountValue(0);
+      setValue(schemaName, inputValue);
+      setInputValue(amountValue)
     }
 
-    setInputValue(amountValue);
+
   }, [checked, inputValue, amountValue]);
 
   // useEffect(() => {
   //   setInputValue(amountValue);
   // }, [amountValue, inputValue]);
-  console.log(inputValue);
   // useEffect(() => {
   //   if (!checked) {
   //     setInputValue(0);
@@ -62,6 +65,7 @@ function FormInputOptionalAmount({
     setInputValue(valueNumber);
     setAmountValue(valueNumber);
     setValue(schemaName, valueNumber);
+    console.log(valueNumber)
   };
 
   return (
@@ -93,6 +97,8 @@ function FormInputOptionalAmount({
                 onChange={amount}
                 placeholder={placeholder}
                 value={inputValue}
+                checked={checked}
+                
               />
               {touched && error && (
                 <i className="text-red-400 absolute right-2 top-2">

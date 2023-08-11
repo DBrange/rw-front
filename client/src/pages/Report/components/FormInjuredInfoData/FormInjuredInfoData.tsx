@@ -8,6 +8,7 @@ function FormInjuredInfoData({ people }: { people: number }) {
   const touchedSchema =
     touchedFields?.schemaThirdInjured?.injuredInfo[people - 1];
   const schema = `schemaThirdInjured.injuredInfo.${[people - 1]}`;
+  
   return (
     <div className="border-b-2 border-violet-500">
       <h4 className="text-violet-500 text-lg my-5">{`Persona ${people}`}</h4>

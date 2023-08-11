@@ -51,7 +51,7 @@ function FormTimeInput({ schemaName }: Props) {
       <label htmlFor="time" className={`${isString && touched && "text-red-400"} mb-1`}>
         Horario del suceso*
       </label>
-      <div className="flex">
+      <div className="flex items-center gap-1">
         <input
           id="time"
           type="text"

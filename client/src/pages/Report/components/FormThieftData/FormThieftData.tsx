@@ -10,8 +10,16 @@ import { useReportContext } from "../../context";
 
 function FormThieftData({ objectType }: { objectType: string }) {
 
-  const { register, errors, touchedFields, isTire, setIsTire, setValue, control } =
-    useReportContext();
+  const {
+    register,
+    errors,
+    touchedFields,
+    isTire,
+    setIsTire,
+    setValue,
+    control,
+    activeForm,
+  } = useReportContext();
   
 
   return (
@@ -36,35 +44,42 @@ function FormThieftData({ objectType }: { objectType: string }) {
         touched={touchedFields[`${objectType}`]?.location}
       />
 
-      <FormCheckbox
-        register={register("schemaThirdPartyVehicleReport.isTire")}
-        setChecked={setIsTire}
-        id={"schemaThirdPartyVehicleReport.isTire"}
-        label={"¿Alguna rueda fue robada?"}
-        instructions=""
-      />
-      <FormInputOptional checked={isTire}>
-        <>
-          <FormInput
-            register={register("schemaIsTire.tireAmount")}
-            error={errors.schemaIsTire?.tireAmount?.message}
-            type="text"
-            id="schemaIsTire.tireAmount"
-            label="Cantidad*"
-            placeholder="Ingresar cantidad"
-            touched={touchedFields.schemaIsTire?.tireAmount}
-          />
-          <FormInputRange
-            register={register("schemaIsTire.tireWear", {
-              valueAsNumber: true,
-            })}
-            setValue={setValue}
-            schemaName={"schemaIsTire.tireWear"}
-            control={control}
-          />
-        </>
-      </FormInputOptional>
-
+      <div
+        className={`${
+          activeForm === "vehicle"
+            ? "h-auto opacity-1 pointer-events-auto"
+            : "h-0 opacity-0 pointer-events-none"
+        } `}
+      >
+        <FormCheckbox
+          register={register("schemaThirdPartyVehicleReport.isTire")}
+          setChecked={setIsTire}
+          id={"schemaThirdPartyVehicleReport.isTire"}
+          label={"¿Alguna rueda fue robada?"}
+          instructions=""
+        />
+        <FormInputOptional checked={isTire}>
+          <>
+            <FormInput
+              register={register("schemaIsTire.tireAmount")}
+              error={errors.schemaIsTire?.tireAmount?.message}
+              type="text"
+              id="schemaIsTire.tireAmount"
+              label="Cantidad*"
+              placeholder="Ingresar cantidad"
+              touched={touchedFields.schemaIsTire?.tireAmount}
+            />
+            <FormInputRange
+              register={register("schemaIsTire.tireWear", {
+                valueAsNumber: true,
+              })}
+              setValue={setValue}
+              schemaName={"schemaIsTire.tireWear"}
+              control={control}
+            />
+          </>
+        </FormInputOptional>
+      </div>
       <FormUploadImageReport
         schemaName={`${objectType}.images`}
         error={errors.objectType?.images?.message}

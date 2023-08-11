@@ -26,6 +26,7 @@ import {
   schemaGnc,
   schemaPhone,
   schemaIsTire,
+  schemaElectronicTheftReport,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 
@@ -74,6 +75,8 @@ export interface IReportContext {
   isCheckedOwner: Record<string, boolean> | undefined;
   setIsTire: React.Dispatch<React.SetStateAction<boolean>>;
   isTire: boolean;
+  setIsCheckedThirdInjuried: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedThirdInjuried: boolean;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -85,10 +88,13 @@ type ChildrenType = {
 };
 
 export const ReportProvider = ({ children }: ChildrenType) => {
+  const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
+    useState<boolean>(false);
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
-  const [isCheckedOwner, setIsCheckedOwner] = useState<Record<string, boolean>>();
+  const [isCheckedOwner, setIsCheckedOwner] =
+    useState<Record<string, boolean>>();
   const [isTire, setIsTire] = useState<boolean>(false);
 
   const [activeForm, setActiveForm] = useState<string>("vehicle");
@@ -110,7 +116,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     theft: false,
     fire: false,
   });
-
+  console.log(amountValue);
   const typeComplaint = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -181,7 +187,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         schemaElement = schemaElectronic;
         estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
         if (typeComplaintForm.theft) {
-          schemaComplaintType = schemaVehicleTheftReport;
+          schemaComplaintType = schemaElectronicTheftReport;
           estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
         }
       }
@@ -218,7 +224,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       for (let i = 0; i < amountValue; i++) {
         people.push(<FormInjuredInfoData key={i + 1} people={i + 1} />);
       }
-
       return (
         <FormEffectOpenClose
           formName={"Terceros lesionados"}
@@ -238,7 +243,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         />
       );
     } else {
-      return;
+      return null;
     }
   };
 
@@ -310,17 +315,16 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       }
     } else if (page === 3) {
       schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
-      setAmountVehicles(0)
-      setAmountValue(0)
+      setAmountVehicles(0);
+      setAmountValue(0);
+      setIsCheckedThirdInjuried(false)
     } else if (page === 4) {
       if (isTire && typeComplaintForm.theft) {
         schema = schemaUser
           .merge(schemaElement)
           .merge(schemaComplaintType)
           .merge(schemaIsTire);
-        
       } else {
-        
         schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
       }
     } else if (page === 5 && amountValue) {
@@ -361,11 +365,14 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     register,
     formState: { errors, touchedFields },
     setValue,
+    getValues,
     trigger,
     control,
   } = useForm<any>({
     resolver: zodResolver(schema),
   });
+
+  console.log(getValues());
 
   useEffect(() => {
     selectingSchema();
@@ -424,7 +431,11 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setIsPhone,
     isPhone,
     setIsCheckedOwner,
-    isCheckedOwner,isTire, setIsTire
+    isCheckedOwner,
+    isTire,
+    setIsTire,
+    setIsCheckedThirdInjuried,
+    isCheckedThirdInjuried,
   };
 
   return (

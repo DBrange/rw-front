@@ -16,14 +16,15 @@ function FormCrashData() {
     setAmountVehicles,
     amountValue,
     amountVehicles,
+    setIsCheckedThirdInjuried,
+isCheckedThirdInjuried
   } = useReportContext();
 
   const [isCheckedThirdVehicle, setIsCheckedThirdVehicle] =
     useState<boolean>(false);
   const [isCheckedInjuried, setIsCheckedInjuried] = useState<boolean>(false);
   const [isCheckedAmbulance, setIsCheckedAmbulance] = useState<boolean>(false);
-  const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
-    useState<boolean>(false);
+
 
   return (
     <>
