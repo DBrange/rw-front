@@ -68,47 +68,49 @@ function FormInputOptionalAmount({
     <div className="overflow-hidden w-[100%] flex">
       <div
         className={`${
-          checked ? "h-full opacity-1" : "h-0 -translate-y-full opacity-0"
-        } w-full flex transition-all duration-200`}
+          checked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }  grid transition-all duration-1000 w-full`}
       >
-        <div
-          className={`${
-            checked ? "w-full" : "w-[100%]"
-          }  flex flex-col overflow-hidden`}
-        >
-          <label
-            className={`${touched && error && "text-red-400"} mb-1`}
-            htmlFor={id}
+        <section className="overflow-hidden">
+          <div
+            className={`${
+              checked ? "w-full" : "w-[100%]"
+            }  flex flex-col overflow-hidden`}
           >
-            {label}
-          </label>
-          <div className=" relative">
-            <input
-              className={`${
-                touched && error && "border-red-400"
-              } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
-              type={type}
-              id={id}
-              onChange={amount}
-              placeholder={placeholder}
-              value={inputValue}
-            />
-            {touched && error && (
-              <i className="text-red-400 absolute right-2 top-2">
-                <AiFillCloseCircle size={16} />
-              </i>
-            )}
-          </div>
-          <span>
-            <p
-              className={`${
-                touched && error ? "text-red-400" : "text-transparent"
-              } text-xs`}
+            <label
+              className={`${touched && error && "text-red-400"} mb-1`}
+              htmlFor={id}
             >
-              {error || "a"}
-            </p>
-          </span>
-        </div>
+              {label}
+            </label>
+            <div className=" relative">
+              <input
+                className={`${
+                  touched && error && "border-red-400"
+                } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
+                type={type}
+                id={id}
+                onChange={amount}
+                placeholder={placeholder}
+                value={inputValue}
+              />
+              {touched && error && (
+                <i className="text-red-400 absolute right-2 top-2">
+                  <AiFillCloseCircle size={16} />
+                </i>
+              )}
+            </div>
+            <span>
+              <p
+                className={`${
+                  touched && error ? "text-red-400" : "text-transparent"
+                } text-xs`}
+              >
+                {error || "a"}
+              </p>
+            </span>
+          </div>
+        </section>
       </div>
     </div>
   );

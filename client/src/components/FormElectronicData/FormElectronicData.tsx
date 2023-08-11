@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { FormInput, FormInputOptional } from "..";
 import { FormSelectElecType } from "../../pages";
-import { AllInspectSchemas, SchemaElectronicType, SchemaPhone } from "../../models";
+import {
+  AllInspectSchemas,
+  SchemaElectronicType,
+  SchemaPhone,
+} from "../../models";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface Props {
@@ -12,9 +16,13 @@ interface Props {
   isPhone: boolean;
 }
 
-function FormElectronicData({ register, errors, touchedFields, setIsPhone, isPhone }: Props) {
-  
-
+function FormElectronicData({
+  register,
+  errors,
+  touchedFields,
+  setIsPhone,
+  isPhone,
+}: Props) {
   const electronicType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
@@ -33,36 +41,37 @@ function FormElectronicData({ register, errors, touchedFields, setIsPhone, isPho
         touched={touchedFields.schemaElectronic?.type}
         electronicType={electronicType}
       />
-      <FormInputOptional
-        register={register("schemaPhone.phoneNumberCel")}
-        error={errors.schemaPhone?.phoneNumberCel?.message}
-        checked={isPhone}
-        type="text"
-        id="phoneNumberCel"
-        label="Numero del movil*"
-        placeholder="Numero del movil"
-        touched={touchedFields.schemaPhone?.phoneNumberCel}
-      />
-      <FormInputOptional
-        register={register("schemaPhone.phoneService")}
-        error={errors.schemaPhone?.phoneService?.message}
-        checked={isPhone}
-        type="text"
-        id="phoneService"
-        label="Servicio del movil*"
-        placeholder="Servicio del movil"
-        touched={touchedFields.schemaPhone?.phoneService}
-      />
-      <FormInputOptional
-        register={register("schemaPhone.imei")}
-        error={errors.schemaPhone?.imei?.message}
-        checked={isPhone}
-        type="number"
-        id="imei"
-        label="IMEI*"
-        placeholder="Ingrese el Año"
-        touched={touchedFields.schemaPhone?.imei}
-      />
+      <FormInputOptional checked={isPhone}>
+        <>
+          <FormInput
+            register={register("schemaPhone.phoneNumberCel")}
+            error={errors.schemaPhone?.phoneNumberCel?.message}
+            type="text"
+            id="phoneNumberCel"
+            label="Numero del movil*"
+            placeholder="Numero del movil"
+            touched={touchedFields.schemaPhone?.phoneNumberCel}
+          />
+          <FormInput
+            register={register("schemaPhone.phoneService")}
+            error={errors.schemaPhone?.phoneService?.message}
+            type="text"
+            id="phoneService"
+            label="Servicio del movil*"
+            placeholder="Servicio del movil"
+            touched={touchedFields.schemaPhone?.phoneService}
+          />
+          <FormInput
+            register={register("schemaPhone.imei")}
+            error={errors.schemaPhone?.imei?.message}
+            type="number"
+            id="imei"
+            label="IMEI*"
+            placeholder="Ingrese el Año"
+            touched={touchedFields.schemaPhone?.imei}
+          />
+        </>
+      </FormInputOptional>
       <FormInput
         register={register("schemaElectronic.brand")}
         error={errors.schemaElectronic?.brand?.message}

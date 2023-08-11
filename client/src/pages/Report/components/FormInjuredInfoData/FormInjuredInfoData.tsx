@@ -7,91 +7,84 @@ function FormInjuredInfoData({ people }: { people: number }) {
   const errorSchema = errors?.schemaThirdInjured?.injuredInfo[people - 1];
   const touchedSchema =
     touchedFields?.schemaThirdInjured?.injuredInfo[people - 1];
-  
+  const schema = `schemaThirdInjured.injuredInfo.${[people - 1]}`;
   return (
     <div className="border-b-2 border-violet-500">
       <h4 className="text-violet-500 text-lg my-5">{`Persona ${people}`}</h4>
 
       <FormInput
-        register={register(
-          `schemaThirdInjured.injuredInfo.${[people - 1]}.firstName`
-        )}
+        register={register(`${schema}.firstName`)}
         error={errorSchema?.firstName?.message}
         type="text"
-        id="name"
+        id={`${schema}.firstName`}
         label="Nombre"
         placeholder="Ingrese su nombre"
         touched={touchedSchema?.firstName}
       />
       <FormInput
-        register={register(
-          `schemaThirdInjured.injuredInfo.${[people - 1]}.lastName`
-        )}
+        register={register(`${schema}.lastName`)}
         error={errorSchema?.lastName?.message}
         type="text"
-        id="lastName"
+        id={`${schema}.lastName`}
         label="Apellido"
         placeholder="Ingrese su Apellido"
         touched={touchedSchema?.lastName}
       />
       <FormInput
-        register={register(
-          `schemaThirdInjured.injuredInfo.${[people - 1]}.phoneNumber`,
-          {
-            valueAsNumber: true,
-          }
-        )}
+        register={register(`${schema}.phoneNumber`, {
+          valueAsNumber: true,
+        })}
         error={errorSchema?.phoneNumber?.message}
         type="number"
-        id="phoneNumber"
+        id={`${schema}.phoneNumber`}
         label="Numero de telefono"
         placeholder="Ingrese su numero de telefono"
         touched={touchedSchema?.phoneNumber}
       />
       <FormInput
-        register={register(
-          `schemaThirdInjured.injuredInfo.${[people - 1]}.email`
-        )}
+        register={register(`${schema}.email`)}
         error={errorSchema?.email?.message}
         type="text"
-        id="email"
+        id={`${schema}.email`}
         label="Email"
         placeholder="Ingrese su email"
         touched={touchedSchema?.email}
       />
       <FormSelect
-        register={register(
-          `schemaThirdInjured.injuredInfo.${[people - 1]}.gender`
-        )}
+        register={register(`${schema}.gender`)}
         error={errorSchema?.gender?.message}
-        id="role"
+        id={`${schema}.gender`}
         label="Genero"
         options={["hombre", "mujer", "otro"]}
         touched={touchedSchema?.gender}
       />
       <FormInput
-        register={register(
-          `schemaThirdInjured.injuredInfo.${[people - 1]}.dni`,
-          {
-            valueAsNumber: true,
-          }
-        )}
+        register={register(`${schema}.dni`, {
+          valueAsNumber: true,
+        })}
         error={errorSchema?.dni?.message}
         type="number"
-        id="dni"
+        id={`${schema}.dni`}
         label="DNI"
         placeholder="Ingrese su DNI"
         touched={touchedSchema?.dni}
       />
       <FormInput
-        register={register(
-          `schemaThirdInjured.injuredInfo.${[people - 1]}.injuries`
-        )}
+        register={register(`${schema}.injuries`)}
         error={errorSchema?.injuries?.message}
         type="text"
-        id="injuries"
+        id={`${schema}.injuries`}
         label="Direccion"
         placeholder="Ingrese su direccion"
+        touched={touchedSchema?.injuries}
+      />
+      <FormInput
+        register={register(`${schema}.date`)}
+        error={errorSchema?.date?.message}
+        type="date"
+        id={`${schema}.date`}
+        label="Fecha del suceso"
+        placeholder="Ingrese la fecha"
         touched={touchedSchema?.injuries}
       />
     </div>

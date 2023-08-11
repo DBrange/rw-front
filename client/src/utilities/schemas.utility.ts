@@ -60,7 +60,7 @@ export const schemaVehicle = z.object({
     color: z.string().min(1).max(20),
     tireBrand: z.string().min(1).max(20),
     tireSize: z.string().min(1).max(20),
-    tireWear: z.number().min(1).max(100),
+    tireWear: z.number().min(0).max(100),
     damage: z.boolean(),
     damageLocation: z.string(),
     images: z.array(z.string().url()),
@@ -128,12 +128,20 @@ export const schemaVehicleReport = z.object({
   }),
 });
 
+export const schemaIsTire = z.object({
+  schemaIsTire: z.object({
+    tireAmount: z.number(),
+    tireWear: z.number().min(0).max(100),
+  }),
+});
+
 export const schemaVehicleTheftReport = z.object({
   schemaVehicleTheftReport: z.object({
     time: z.string().min(1).max(20),
     date: z.coerce.date(),
     location: z.string().min(1),
     reportPhoto: z.array(z.string().url()),
+    isTire: z.boolean(),
   }),
 });
 
@@ -176,13 +184,6 @@ export const schemaThirdInjured = z.object({
   }),
 });
 
-export const schemaNotOwner = z.object({
-  schemaNotOwner: z.object({
-    name: z.string().min(1).max(20),
-    dni: z.number(),
-  })
-});
-
 export const schemaThirdPartyVehicleReport = z.object({
   schemaThirdPartyVehicleReport: z.object({
     year: z.number(),
@@ -198,6 +199,8 @@ export const schemaThirdPartyVehicleReport = z.object({
     licencePhoto: z.array(z.string().url()),
     email: z.string().email(),
     isOwner: z.boolean(),
+    name: z.string().min(1).max(20),
+    dni: z.number(),
   }),
 });
 
@@ -206,15 +209,6 @@ export const schemaVehicleCrashReportData = z.object({
     amount: z.number(),
     thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReport),
   })
-});
-
-export const schemaVehicleCrashReportDataNotOwner = z.object({
-  schemaVehicleCrashReportDataNotOwner: z.object({
-    amount: z.number(),
-    thirdPartyVehicleInfo: z.array(
-      schemaThirdPartyVehicleReport.merge(schemaNotOwner)
-    ),
-  }),
 });
 
 export const schemaVehicleCrashReport = z.object({

@@ -1,197 +1,170 @@
+import { useState } from "react";
 import { FormUploadImageReport } from "..";
-import {
-  FormCheckbox,
-  FormCheckboxObj,
-  FormInput,
-  FormInputOptional,
-} from "../../../../components";
+import { FormCheckbox, FormCheckboxObj, FormInput, FormInputOptional } from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
-  const { register, errors, touchedFields, isCheckedOwnerObj, setIsCheckedOwnerObj } =
+  const { register, errors, touchedFields, isCheckedOwner, setIsCheckedOwner } =
     useReportContext();
 
-  const errorSchemaOwner = !isCheckedOwnerObj?.[`${vehicles - 1}IsCheckedOwner`]
-    ? errors?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[
-        vehicles - 1
-      ]?.schemaThirdPartyVehicleReport
-    : errors?.schemaVehicleCrashReportDataNotOwner?.thirdPartyVehicleInfo?.[
-        vehicles - 1
-      ]?.schemaThirdPartyVehicleReport;
-    console.log(errorSchemaOwner)
-  const touchedSchemaOwner = !isCheckedOwnerObj?.[`${vehicles - 1}IsCheckedOwner`]
-    ? touchedFields?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[
-        vehicles - 1
-      ]?.schemaThirdPartyVehicleReport
-    : touchedFields?.schemaVehicleCrashReportDataNotOwner
-        ?.thirdPartyVehicleInfo?.[vehicles - 1]?.schemaThirdPartyVehicleReport;
-
-  const schemaOwner = !isCheckedOwnerObj?.[`${vehicles - 1}IsCheckedOwner`]
-    ? `schemaVehicleCrashReportData.thirdPartyVehicleInfo.${[
-        vehicles - 1,
-      ]}.schemaThirdPartyVehicleReport`
-    : `schemaVehicleCrashReportDataNotOwner.thirdPartyVehicleInfo.${[
-        vehicles - 1,
-      ]}.schemaThirdPartyVehicleReport`;
-
-
-  const schemaNotOwner = `schemaVehicleCrashReportDataNotOwner.thirdPartyVehicleInfo.${[
-    vehicles - 1,
-  ]}.schemaNotOwner`;
-
-  const errorSchemaNotOwner =
-    errors?.schemaVehicleCrashReportDataNotOwner?.thirdPartyVehicleInfo?.[
-      vehicles - 1
-    ]?.schemaNotOwner;
+    const errorSchema =
+    errors?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[vehicles - 1]?.schemaThirdPartyVehicleReport;
   
-  const touchedSchemaNotOwner =
-    touchedFields?.schemaVehicleCrashReportDataNotOwner
-      ?.thirdPartyVehicleInfo?.[vehicles - 1]?.schemaNotOwner;
+    const touchedSchema =
+    touchedFields?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[vehicles - 1]?.schemaThirdPartyVehicleReport;
+  
+    const schema = `schemaVehicleCrashReportData.thirdPartyVehicleInfo.${[vehicles - 1]}.schemaThirdPartyVehicleReport`;
 
+  const isCheckedOwnerObj = isCheckedOwner?.[`${vehicles - 1}IsCheckedOwner`]
+
+  
   return (
     <div className="border-b-2 border-violet-500">
       <h4 className="text-violet-500 text-lg my-5">{`Vehiculo ${vehicles}`}</h4>
       <FormInput
-        register={register(`${schemaOwner}.year`, {
+        register={register(`${schema}.year`, {
           valueAsNumber: true,
         })}
-        error={errorSchemaOwner?.year?.message}
+        error={errorSchema?.year?.message}
         type="number"
-        id={`${schemaOwner}.year`}
+        id={`${schema}.year`}
         label="Año"
         placeholder="Año del vehiculo*"
-        touched={touchedSchemaOwner?.year}
+        touched={touchedSchema?.year}
       />
       <FormInput
-        register={register(`${schemaOwner}.brand`)}
-        error={errorSchemaOwner?.brand?.message}
+        register={register(`${schema}.brand`)}
+        error={errorSchema?.brand?.message}
         type="text"
-        id={`${schemaOwner}.brand`}
+        id={`${schema}.brand`}
         label="Marca"
         placeholder="Ingresar marca*"
-        touched={touchedSchemaOwner?.brand}
+        touched={touchedSchema?.brand}
       />
       <FormInput
-        register={register(`${schemaOwner}.model`)}
-        error={errorSchemaOwner?.model?.message}
+        register={register(`${schema}.model`)}
+        error={errorSchema?.model?.message}
         type="text"
-        id={`${schemaOwner}.model`}
+        id={`${schema}.model`}
         label="Modelo"
         placeholder="Ingresar modelo*"
-        touched={touchedSchemaOwner?.model}
+        touched={touchedSchema?.model}
       />
       <FormInput
-        register={register(`${schemaOwner}.plate`)}
-        error={errorSchemaOwner?.plate?.message}
+        register={register(`${schema}.plate`)}
+        error={errorSchema?.plate?.message}
         type="text"
-        id={`${schemaOwner}.plate`}
+        id={`${schema}.plate`}
         label="Patente"
         placeholder="Ingrese la patente*"
-        touched={touchedSchemaOwner?.plate}
+        touched={touchedSchema?.plate}
       />
       <FormInput
-        register={register(`${schemaOwner}.insauranceCompany`)}
-        error={errorSchemaOwner?.insauranceCompany?.message}
+        register={register(`${schema}.insauranceCompany`)}
+        error={errorSchema?.insauranceCompany?.message}
         type="text"
-        id={`${schemaOwner}.insauranceCompany`}
+        id={`${schema}.insauranceCompany`}
         label="Compania de seguros"
         placeholder="Ingrese la compania*"
-        touched={touchedSchemaOwner?.insauranceCompany}
+        touched={touchedSchema?.insauranceCompany}
       />
       <FormInput
-        register={register(`${schemaOwner}.insaurancePolicy`)}
-        error={errorSchemaOwner?.insaurancePolicy?.message}
+        register={register(`${schema}.insaurancePolicy`)}
+        error={errorSchema?.insaurancePolicy?.message}
         type="text"
-        id={`${schemaOwner}.insaurancePolicy`}
+        id={`${schema}.insaurancePolicy`}
         label="Poliza de seguros"
         placeholder="Ingrese la poliza*"
-        touched={touchedSchemaOwner?.insaurancePolicy}
+        touched={touchedSchema?.insaurancePolicy}
       />
       <FormInput
-        register={register(`${schemaOwner}.ownerName`)}
-        error={errorSchemaOwner?.ownerName?.message}
+        register={register(`${schema}.ownerName`)}
+        error={errorSchema?.ownerName?.message}
         type="text"
-        id={`${schemaOwner}.ownerName`}
+        id={`${schema}.ownerName`}
         label="Nombre del propietario*"
         placeholder="Ingresar nombre"
-        touched={touchedSchemaOwner?.ownerName}
+        touched={touchedSchema?.ownerName}
       />
       <FormInput
-        register={register(`${schemaOwner}.ownerDni`, {
+        register={register(`${schema}.ownerDni`, {
           valueAsNumber: true,
         })}
-        error={errorSchemaOwner?.ownerDni?.message}
+        error={errorSchema?.ownerDni?.message}
         type="number"
-        id={`${schemaOwner}.ownerDni`}
+        id={`${schema}.ownerDni`}
         label="DNI del propietario*"
         placeholder="Ingresar DNI"
-        touched={touchedSchemaOwner?.ownerDni}
+        touched={touchedSchema?.ownerDni}
       />
       <FormInput
-        register={register(`${schemaOwner}.address`)}
-        error={errorSchemaOwner?.address?.message}
+        register={register(`${schema}.address`)}
+        error={errorSchema?.address?.message}
         type="text"
-        id={`${schemaOwner}.address`}
+        id={`${schema}.address`}
         label="Residencia del conductor*"
         placeholder="Ingresar residencia"
-        touched={touchedSchemaOwner?.address}
+        touched={touchedSchema?.address}
       />
       <FormInput
-        register={register(`${schemaOwner}.phoneNumber`, {
+        register={register(`${schema}.phoneNumber`, {
           valueAsNumber: true,
         })}
-        error={errorSchemaOwner?.phoneNumber?.message}
+        error={errorSchema?.phoneNumber?.message}
         type="number"
-        id={`${schemaOwner}.phoneNumber`}
+        id={`${schema}.phoneNumber`}
         label="Telefono del conductor*"
         placeholder="Ingresar numero telefonico"
-        touched={touchedSchemaOwner?.phoneNumber}
+        touched={touchedSchema?.phoneNumber}
       />
       <FormUploadImageReport
-        schemaName={`${schemaOwner}.licencePhoto`}
-        error={errorSchemaOwner?.licencePhoto?.message}
-        id={`${schemaOwner}.licencePhoto`}
+        schemaName={`${schema}.licencePhoto`}
+        error={errorSchema?.licencePhoto?.message}
+        id={`${schema}.licencePhoto`}
         name="licencePhoto"
         imagesType={"Agregue imagenes del registro"}
       />
       <FormInput
-        register={register(`${schemaOwner}.email`)}
-        error={errorSchemaOwner?.email?.message}
+        register={register(`${schema}.email`)}
+        error={errorSchema?.email?.message}
         type="text"
-        id={`${schemaOwner}.email`}
+        id={`${schema}.email`}
         label="Email del conductor*"
         placeholder="Ingresar email"
-        touched={touchedSchemaOwner?.email}
+        touched={touchedSchema?.email}
       />
       <FormCheckboxObj
-        register={register(`${schemaOwner}.isOwner`)}
-        setChecked={setIsCheckedOwnerObj}
-        checkeds={isCheckedOwnerObj}
+        register={register(`${schema}.isOwner`)}
+        setChecked={setIsCheckedOwner}
+        checkeds={isCheckedOwner}
         thirdVehicle={vehicles - 1}
-        id={`${schemaOwner}.isOwner`}
-        label={"¿El conductor es el propoietario?"}
+        id={`${schema}.isOwner`}
+        label={"¿El conductor es el propietario?"}
         instructions=""
       />
-      <FormInputOptional
-        register={register(`${schemaNotOwner}.name`)}
-        error={errorSchemaNotOwner?.name?.message}
-        checked={isCheckedOwnerObj?.[`${vehicles - 1}IsCheckedOwner`]}
-        type="text"
-        id={`${schemaNotOwner}.name`}
-        label="Nombre del conductor*"
-        placeholder="Ingresar nombre"
-        touched={touchedSchemaNotOwner?.name}
-      />
-      <FormInputOptional
-        register={register(`${schemaNotOwner}.dni`)}
-        error={errorSchemaNotOwner?.dni?.message}
-        checked={isCheckedOwnerObj?.[`${vehicles - 1}IsCheckedOwner`]}
-        type="number"
-        id={`${schemaNotOwner}.dni`}
-        label="DNI del conductor*"
-        placeholder="Ingresar DNI"
-        touched={touchedSchemaNotOwner?.dni}
-      />
+      <FormInputOptional checked={isCheckedOwnerObj}>
+        <>
+          <FormInput
+            register={register(`${schema}.name`)}
+            error={errors.schemaThirdPartyVehicleReport?.name?.message}
+            type="text"
+            id={`${schema}.name`}
+            label="Nombre del conductor*"
+            placeholder="Ingresar nombre"
+            touched={touchedFields.schemaThirdPartyVehicleReport?.name}
+          />
+          <FormInput
+            register={register(`${schema}.dni`)}
+            error={errors.schemaThirdPartyVehicleReport?.dni?.message}
+            type="number"
+            id={`${schema}.dni`}
+            label="DNI del conductor*"
+            placeholder="Ingresar DNI"
+            touched={touchedFields.schemaThirdPartyVehicleReport?.dni}
+          />
+        </>
+      </FormInputOptional>
+
     </div>
   );
 }

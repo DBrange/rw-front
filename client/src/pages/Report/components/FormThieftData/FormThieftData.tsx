@@ -1,21 +1,21 @@
+import { useState } from "react";
 import { FormTimeInput, FormUploadImageReport } from "../../..";
-import { FormInput } from "../../../../components";
+import {
+  FormCheckbox,
+  FormInput,
+  FormInputOptional,
+  FormInputRange,
+} from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormThieftData({ objectType }: { objectType: string }) {
-  const { register, errors, touchedFields } = useReportContext();
+
+  const { register, errors, touchedFields, isTire, setIsTire, setValue, control } =
+    useReportContext();
+  
 
   return (
     <>
-      {/* <FormInput
-        register={register(`${objectType}.time`)}
-        error={errors[`${objectType}`]?.time?.message}
-        type="text"
-        id="time"
-        label="Horario del suceso*"
-        placeholder="Ingresar horario"
-        touched={touchedFields[`${objectType}`]?.time}
-      /> */}
       <FormTimeInput schemaName={`${objectType}.time`} />
       <FormInput
         register={register(`${objectType}.date`)}
@@ -36,14 +36,43 @@ function FormThieftData({ objectType }: { objectType: string }) {
         touched={touchedFields[`${objectType}`]?.location}
       />
 
+      <FormCheckbox
+        register={register("schemaThirdPartyVehicleReport.isTire")}
+        setChecked={setIsTire}
+        id={"schemaThirdPartyVehicleReport.isTire"}
+        label={"¿Alguna rueda fue robada?"}
+        instructions=""
+      />
+      <FormInputOptional checked={isTire}>
+        <>
+          <FormInput
+            register={register("schemaIsTire.tireAmount")}
+            error={errors.schemaIsTire?.tireAmount?.message}
+            type="text"
+            id="schemaIsTire.tireAmount"
+            label="Cantidad*"
+            placeholder="Ingresar cantidad"
+            touched={touchedFields.schemaIsTire?.tireAmount}
+          />
+          <FormInputRange
+            register={register("schemaIsTire.tireWear", {
+              valueAsNumber: true,
+            })}
+            setValue={setValue}
+            schemaName={"schemaIsTire.tireWear"}
+            control={control}
+          />
+        </>
+      </FormInputOptional>
+
       <FormUploadImageReport
         schemaName={`${objectType}.images`}
         error={errors.objectType?.images?.message}
         id="imagesFire"
         name="imagesFire"
-        imagesType={'Agregue imagen de la denuncia'}
+        imagesType={"Agregue imagen de la denuncia"}
       />
     </>
   );
 }
-export default FormThieftData
+export default FormThieftData;

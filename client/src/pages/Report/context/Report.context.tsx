@@ -11,8 +11,6 @@ import {
   SchemaLegalPersonalType,
   schemaVehicleReportType,
   SchemaElectronicType,
-  SchemaVehicleCrashReportData,
-  SchemaVehicleCrashReportDataNotOwner,
 } from "../../../models";
 import {
   schemaVehicleCrashReport,
@@ -27,8 +25,7 @@ import {
   schemaVehicleCrashReportData,
   schemaGnc,
   schemaPhone,
-  schemaNotOwner,
-  schemaVehicleCrashReportDataNotOwner,
+  schemaIsTire,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 
@@ -71,12 +68,12 @@ export interface IReportContext {
   isCheckedGnc: boolean;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
   isPhone: boolean;
-  setIsCheckedOwner: React.Dispatch<React.SetStateAction<boolean>>;
-  isCheckedOwner: boolean;
-  setIsCheckedOwnerObj: React.Dispatch<
+  setIsCheckedOwner: React.Dispatch<
     React.SetStateAction<Record<string, boolean> | undefined>
   >;
-  isCheckedOwnerObj: Record<string, boolean> | undefined;
+  isCheckedOwner: Record<string, boolean> | undefined;
+  setIsTire: React.Dispatch<React.SetStateAction<boolean>>;
+  isTire: boolean;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -91,10 +88,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
-  const [isCheckedOwner, setIsCheckedOwner] = useState<boolean>(false);
-  const [isCheckedOwnerObj, setIsCheckedOwnerObj] =
-    useState<Record<string, boolean>>();
-  console.log(isCheckedOwnerObj);
+  const [isCheckedOwner, setIsCheckedOwner] = useState<Record<string, boolean>>();
+  const [isTire, setIsTire] = useState<boolean>(false);
 
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
@@ -247,32 +242,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-const tupleForArr = () => {
-  type ValidationsType = ZodType<
-    SchemaVehicleCrashReportData | SchemaVehicleCrashReportDataNotOwner
-  >[];
-
-  let validations: ValidationsType = [];
-
-  for (const bol in isCheckedOwnerObj) {
-    console.log(isCheckedOwnerObj[bol], "bol");
-    const positionInArr = Number(bol.split("")[0]);
-
-    if (isCheckedOwnerObj[bol]) {
-      validations[positionInArr] = schemaVehicleCrashReportDataNotOwner;
-    } else {
-      validations[positionInArr] = schemaVehicleCrashReportData;
-    }
-  }
-
-  const tuple = z.union(
-    validations as unknown as readonly [ZodTypeAny, ZodTypeAny, ...ZodTypeAny[]]
-  );
-
-   return tuple
-};
-
-
   const thirdPartyVehiclesForm = () => {
     let vehicles: JSX.Element[] = [];
 
@@ -341,113 +310,48 @@ const tupleForArr = () => {
       }
     } else if (page === 3) {
       schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
-      setAmountVehicles(0);
-      setAmountValue(0);
+      setAmountVehicles(0)
+      setAmountValue(0)
     } else if (page === 4) {
-      schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+      if (isTire && typeComplaintForm.theft) {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaIsTire);
+        
+      } else {
+        
+        schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+      }
     } else if (page === 5 && amountValue) {
       schema = schemaUser
         .merge(schemaElement)
         .merge(schemaComplaintType)
         .merge(schemaThirdInjured);
     } else if (page === 6) {
-      if (isCheckedOwner && amountVehicles < 2) {
-        if (amountValue) {
-          schema = schemaUser
-            .merge(schemaElement)
-            .merge(schemaComplaintType)
-            .merge(schemaThirdInjured)
-            .merge(schemaThirdPartyVehicleReport)
-            .merge(schemaNotOwner);
-        } else if (!amountValue && !amountVehicles) {
-          schema = schemaUser
-            .merge(schemaElement)
-            .merge(schemaComplaintType)
-            .merge(schemaThirdPartyVehicleReport)
-            .merge(schemaNotOwner);
-        }
-      } else if (!isCheckedOwner && amountVehicles < 2) {
-        if (amountValue) {
-          schema = schemaUser
-            .merge(schemaElement)
-            .merge(schemaComplaintType)
-            .merge(schemaThirdInjured)
-            .merge(schemaThirdPartyVehicleReport);
-        } else if (!amountValue) {
-          schema = schemaUser
-            .merge(schemaElement)
-            .merge(schemaComplaintType)
-            .merge(schemaThirdPartyVehicleReport);
-        }
-      } else if (amountVehicles > 1) {
-        if (amountValue) {
-          schema = schemaUser
-            .merge(schemaElement)
-            .merge(schemaComplaintType)
-            .merge(schemaThirdInjured)
-            .merge(schemaVehicleCrashReportData); // como hago para darme cuenta si es reportdata o reportdatanotowner
-          // .merge(schemaNotOwner);
-        } else if (!amountValue && !amountVehicles) {
-          schema = schemaUser
-            .merge(schemaElement)
-            .merge(schemaComplaintType)
-            .merge(schemaVehicleCrashReportData);
-          // .merge(schemaNotOwner);
-        }
+      if (amountValue && amountVehicles < 2) {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaThirdInjured)
+          .merge(schemaThirdPartyVehicleReport);
+      } else if (!amountValue && amountVehicles > 1) {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaVehicleCrashReportData);
+      } else if (amountValue && amountVehicles > 1) {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaThirdInjured)
+          .merge(schemaVehicleCrashReportData);
+      } else {
+        schema = schemaUser
+          .merge(schemaElement)
+          .merge(schemaComplaintType)
+          .merge(schemaThirdPartyVehicleReport);
       }
-
-      // ----
-      // if (isCheckedOwner) {
-      //   if (amountValue && amountVehicles < 2) {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaThirdInjured)
-      //       .merge(schemaThirdPartyVehicleReport)
-      //       .merge(schemaNotOwner);
-      //   } else if (!amountValue && amountVehicles > 1) {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaVehicleCrashReportDataNotOwner);
-      //   } else if (amountValue && amountVehicles > 1) {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaThirdInjured)
-      //       .merge(schemaVehicleCrashReportDataNotOwner);
-      //   } else {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaThirdPartyVehicleReport)
-      //       .merge(schemaNotOwner);
-      //   }
-      // } else {
-      //   if (amountValue && amountVehicles < 2) {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaThirdInjured)
-      //       .merge(schemaThirdPartyVehicleReport);
-      //   } else if (!amountValue && amountVehicles > 1) {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaVehicleCrashReportData);
-      //   } else if (amountValue && amountVehicles > 1) {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaThirdInjured)
-      //       .merge(schemaVehicleCrashReportData);
-      //   } else {
-      //     schema = schemaUser
-      //       .merge(schemaElement)
-      //       .merge(schemaComplaintType)
-      //       .merge(schemaThirdPartyVehicleReport);
-      //   }
-      // }
     }
     setSchema(schema);
   };
@@ -520,9 +424,7 @@ const tupleForArr = () => {
     setIsPhone,
     isPhone,
     setIsCheckedOwner,
-    isCheckedOwner,
-    setIsCheckedOwnerObj,
-    isCheckedOwnerObj,
+    isCheckedOwner,isTire, setIsTire
   };
 
   return (

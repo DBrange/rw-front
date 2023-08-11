@@ -9,7 +9,6 @@ import {
   schemaGnc,
   schemaPhone,
   schemaVehicleCrashReportData,
-  schemaVehicleCrashReportDataNotOwner,
 } from "../../utilities";
 
 export type SchemaPersonalType = z.infer<typeof schemaPersonal>;
@@ -50,6 +49,4 @@ export type AllInspectSchemas =
   export type schemaVehicleReportType = z.infer<typeof schemaVehicleReport>;
 export type SchemaVehicleCrashReport = z.infer<typeof schemaVehicleCrashReport>;
 export type SchemaVehicleCrashReportData = z.infer<typeof schemaVehicleCrashReportData>;
-export type SchemaVehicleCrashReportDataNotOwner = z.infer<
-  typeof schemaVehicleCrashReportDataNotOwner
->;
+

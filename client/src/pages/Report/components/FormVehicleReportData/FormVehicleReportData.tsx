@@ -18,7 +18,6 @@ function FormVehicleDataReport() {
     isCheckedGnc,
   } = useReportContext();
 
-
   return (
     <>
       <FormInput
@@ -48,16 +47,17 @@ function FormVehicleDataReport() {
         instructions="Estable si el vehiculo sufrio algun daño"
       />
 
-      <FormInputOptional
-        register={register("schemaVehicleReport.damageLocation")}
-        error={errors.schemaVehicleReport?.damageLocation?.message}
-        checked={isCheckedDamage}
-        type="text"
-        id="damageLocation"
-        label="Lugar dañado"
-        placeholder="Ingrese el lugar"
-        touched={touchedFields.schemaVehicleReport?.damageLocation}
-      />
+      <FormInputOptional checked={isCheckedDamage}>
+        <FormInput
+          register={register("schemaVehicleReport.damageLocation")}
+          error={errors.schemaVehicleReport?.damageLocation?.message}
+          type="text"
+          id="damageLocation"
+          label="Lugar dañado"
+          placeholder="Ingrese el lugar"
+          touched={touchedFields.schemaVehicleReport?.damageLocation}
+        />
+      </FormInputOptional>
 
       <FormUploadImageReport
         schemaName={"schemaVehicleReport.images"}
@@ -85,27 +85,28 @@ function FormVehicleDataReport() {
         instructions="Estable si el vehiculo lleva GNC"
       />
 
-      <FormInputOptional
-        register={register("schemaGnc.obleaNumber")}
-        error={errors.schemaGnc?.obleaNumber?.message}
-        checked={isCheckedGnc}
-        type="text"
-        id="obleaNumber"
-        label="Numero de oblea*"
-        placeholder="Ingrese el lugar"
-        touched={touchedFields.schemaGnc?.obleaNumber}
-      />
-      <FormInputOptional
-        register={register("schemaGnc.gncExpiration")}
-        error={errors.schemaGnc?.gncExpiration?.message}
-        checked={isCheckedGnc}
-        type="date"
-        id="gncExpiration"
-        label="Vencimiento*"
-        placeholder="Ingrese el lugar"
-        touched={touchedFields.schemaGnc?.gncExpiration}
-      />
-
+      <FormInputOptional checked={isCheckedGnc}>
+        <>
+          <FormInput
+            register={register("schemaGnc.obleaNumber")}
+            error={errors.schemaGnc?.obleaNumber?.message}
+            type="text"
+            id="obleaNumber"
+            label="Numero de oblea*"
+            placeholder="Ingrese el lugar"
+            touched={touchedFields.schemaGnc?.obleaNumber}
+          />
+          <FormInput
+            register={register("schemaGnc.gncExpiration")}
+            error={errors.schemaGnc?.gncExpiration?.message}
+            type="date"
+            id="gncExpiration"
+            label="Vencimiento*"
+            placeholder="Ingrese el lugar"
+            touched={touchedFields.schemaGnc?.gncExpiration}
+          />
+        </>
+      </FormInputOptional>
       <FormInput
         register={register("schemaVehicleReport.brand")}
         error={errors.schemaVehicleReport?.brand?.message}
