@@ -12,6 +12,7 @@ interface Props {
   touched: boolean;
   schemaName: string;
   setAmountValue: any;
+  amountValue: number;
 }
 
 function FormInputOptionalAmount({
@@ -24,6 +25,7 @@ function FormInputOptionalAmount({
   touched,
   schemaName,
   setAmountValue,
+  amountValue,
 }: Props) {
   const { setValue } = useReportContext();
 
@@ -35,18 +37,32 @@ function FormInputOptionalAmount({
       setAmountValue(0);
       setValue(schemaName, 0);
     }
-  }, [checked, inputValue])
-  console.log(inputValue)
+
+    setInputValue(amountValue);
+  }, [checked, inputValue, amountValue]);
+
+  // useEffect(() => {
+  //   setInputValue(amountValue);
+  // }, [amountValue, inputValue]);
+  console.log(inputValue);
+  // useEffect(() => {
+  //   if (!checked) {
+  //     setInputValue(0);
+  //     setAmountValue(0);
+  //     setValue(schemaName, 0);
+  //   }
+  // }, [checked, inputValue]);
+  // console.log(inputValue);
 
   const amount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = (e.target.value).toString();
-    const valueSlice = value.split('').slice(0, 2).join('')
-    const valueNumber = !e.target.value ? '' : Number(valueSlice);
+    const value = e.target.value.toString();
+    const valueSlice = value.split("").slice(0, 2).join("");
+    const valueNumber = !e.target.value ? "" : Number(valueSlice);
 
     setInputValue(valueNumber);
     setAmountValue(valueNumber);
     setValue(schemaName, valueNumber);
-  }
+  };
 
   return (
     <div className="overflow-hidden w-[100%] flex">

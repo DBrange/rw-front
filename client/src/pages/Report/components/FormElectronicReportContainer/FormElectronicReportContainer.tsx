@@ -7,8 +7,17 @@ import {
 } from "../../../../components";
 
 function FormElectronicReportContainer() {
-  const { activeForm, errors, register, touchedFields, page, changePage, typeComplaintForm } =
-    useReportContext();
+  const {
+    activeForm,
+    errors,
+    register,
+    touchedFields,
+    page,
+    changePage,
+    typeComplaintForm,
+    setIsPhone,
+    isPhone,
+  } = useReportContext();
   return (
     <>
       <FormEffectOpenClose
@@ -20,13 +29,10 @@ function FormElectronicReportContainer() {
               errors={errors}
               register={register}
               touchedFields={touchedFields}
+              setIsPhone={setIsPhone}
+              isPhone={isPhone}
             />
-            <PageButton
-              changePage={changePage}
-              page={page}
-              errors={errors.schemaElectronic}
-              max={4}
-            />
+            <PageButton changePage={changePage} page={page} max={4} />
           </>
         }
       />
@@ -37,12 +43,7 @@ function FormElectronicReportContainer() {
           <>
             <FormElectronicReportData />
 
-            <PageButton
-              changePage={changePage}
-              page={page}
-              errors={errors.schemaElectronic}
-              max={4}
-            />
+            <PageButton changePage={changePage} page={page} max={4} />
           </>
         }
       />
@@ -53,13 +54,8 @@ function FormElectronicReportContainer() {
         }
         form={
           <>
-            <FormThieftData objectType={'schemaElectronicTheftReport'} />
-            <PageButton
-              changePage={changePage}
-              page={page}
-              errors={errors.schemaElectronicTheftReport}
-              max={4}
-            />
+            <FormThieftData objectType={"schemaElectronicTheftReport"} />
+            <PageButton changePage={changePage} page={page} max={4} />
           </>
         }
       />

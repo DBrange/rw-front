@@ -4,7 +4,7 @@ import { FormInput } from "..";
 interface Props {
   register: UseFormRegisterReturn<any>;
   error: string | undefined;
-  checked: boolean;
+  checked: boolean | undefined;
   type: string;
   id: string;
   label: string;

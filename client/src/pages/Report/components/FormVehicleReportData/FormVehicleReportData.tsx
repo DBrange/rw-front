@@ -3,15 +3,21 @@ import {
   FormCheckbox,
   FormInput,
   FormInputOptional,
-  FormInputRange,
   FormSelect,
 } from "../../../../components";
 import { FormUploadImageReport, useReportContext } from "../../..";
 
 function FormVehicleDataReport() {
-  const { errors, register, touchedFields, setValue, control } = useReportContext();
-  const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
-  const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
+  const {
+    errors,
+    register,
+    touchedFields,
+    setIsCheckedDamage,
+    isCheckedDamage,
+    setIsCheckedGnc,
+    isCheckedGnc,
+  } = useReportContext();
+
 
   return (
     <>
@@ -39,6 +45,7 @@ function FormVehicleDataReport() {
         setChecked={setIsCheckedDamage}
         id={"damage"}
         label={"Daño"}
+        instructions="Estable si el vehiculo sufrio algun daño"
       />
 
       <FormInputOptional
@@ -75,29 +82,28 @@ function FormVehicleDataReport() {
         setChecked={setIsCheckedGnc}
         id={"gnc"}
         label={"GNC"}
+        instructions="Estable si el vehiculo lleva GNC"
       />
 
       <FormInputOptional
-        register={register("schemaVehicleReport.obleaNumber", {
-          valueAsNumber: true,
-        })}
-        error={errors.schemaVehicleReport?.obleaNumber?.message}
+        register={register("schemaGnc.obleaNumber")}
+        error={errors.schemaGnc?.obleaNumber?.message}
         checked={isCheckedGnc}
         type="text"
         id="obleaNumber"
         label="Numero de oblea*"
         placeholder="Ingrese el lugar"
-        touched={touchedFields.schemaVehicleReport?.obleaNumber}
+        touched={touchedFields.schemaGnc?.obleaNumber}
       />
       <FormInputOptional
-        register={register("schemaVehicleReport.gncEpiration")}
-        error={errors.schemaVehicleReport?.gncEpiration?.message}
+        register={register("schemaGnc.gncExpiration")}
+        error={errors.schemaGnc?.gncExpiration?.message}
         checked={isCheckedGnc}
         type="date"
-        id="gncEpiration"
+        id="gncExpiration"
         label="Vencimiento*"
         placeholder="Ingrese el lugar"
-        touched={touchedFields.schemaVehicleReport?.gncEpiration}
+        touched={touchedFields.schemaGnc?.gncExpiration}
       />
 
       <FormInput
@@ -124,16 +130,16 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicleReport?.fuel?.message}
         id="fuel"
         label="Combustible*"
-        options={["diesel", "gasoline"]}
+        options={["DIESEL", "GASOLINE"]}
         touched={touchedFields.schemaVehicleReport?.fuel}
       />
       <FormSelect
-        register={register("schemaVehicleReport.vehicleType")}
-        error={errors.schemaVehicleReport?.vehicleType?.message}
+        register={register("schemaVehicleReport.type")}
+        error={errors.schemaVehicleReport?.type?.message}
         id="vehicleType"
         label="Tipo de vehiculo*"
-        options={["camion", "automovil", "motocicleta"]}
-        touched={touchedFields.schemaVehicleReport?.vehicleType}
+        options={["CAMION", "AUTOMOVIL", "MOTOCICLETA"]}
+        touched={touchedFields.schemaVehicleReport?.type}
       />
     </>
   );

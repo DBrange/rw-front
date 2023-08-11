@@ -1,7 +1,13 @@
 import useSWRMutation from "swr/mutation";
 import {
-  addInspectionPersonalVehicle,
-  baseUrlPersonalVehicle,
+  addInspectionElectronic,
+  addInspectionLegal,
+  addInspectionPersonal,
+  addInspectionVehicle,
+  electronicUrl,
+  legalUrl,
+  personalUrl,
+  vehicleUrl,
 } from "..";
 import { useState, createContext, useContext, useEffect } from "react";
 import {
@@ -28,6 +34,8 @@ import {
   schemaVehicle,
   schemaElectronic,
   schemaLegalPersonal,
+  schemaGnc,
+  schemaPhone,
 } from "../../../utilities";
 import { validationFormDataInspect } from "../utilities";
 
@@ -51,6 +59,14 @@ export interface IInspectContext {
   setIsError: React.Dispatch<React.SetStateAction<boolean>>;
   isError: boolean;
   control: Control<AllInspectSchemas>;
+  setIsCheckedDamage: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedDamage: boolean;
+  setIsCheckedGnc: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedGnc: boolean;
+  setIsCheckedOkm: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedOkm: boolean;
+  setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
+  isPhone: boolean;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -62,6 +78,11 @@ type ChildrenType = {
 };
 
 export const InspectProvider = ({ children }: ChildrenType) => {
+  const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
+  const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
+  const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
+  const [isPhone, setIsPhone] = useState<boolean>(false);
+
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [page, setPage] = useState<number>(0);
   const [schema, setSchema] =
@@ -158,8 +179,19 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     if (page === 1) {
       schema = schema;
     } else if (page === 2) {
-      schema = schema.merge(schemaElement);
-      setIsError(true);
+      if (activeForm === "vehicle") {
+        if (isCheckedGnc) {
+          schema = schema.merge(schemaElement).merge(schemaGnc);
+        } else {
+          schema = schema.merge(schemaElement);
+        }
+      } else if (activeForm === "electronic") {
+        if (isPhone) {
+          schema = schema.merge(schemaElement).merge(schemaPhone);
+        } else {
+          schema = schema.merge(schemaElement);
+        }
+      }
     }
     setSchema(schema);
   };
@@ -185,11 +217,33 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
   console.log(errors);
 
-  const {
-    error: errorInspectionPersonalVehicle,
-    trigger: triggerInspectionPersonalVehicle,
-  } = useSWRMutation(baseUrlPersonalVehicle, addInspectionPersonalVehicle);
-console.log(errorInspectionPersonalVehicle, '.-.-.-.-.')
+  const { trigger: triggerInspectionPersonal } = useSWRMutation(
+    personalUrl,
+    addInspectionPersonal
+  );
+
+  const { trigger: triggerInspectionLegal } = useSWRMutation(
+    legalUrl,
+    addInspectionLegal
+  );
+
+  const { trigger: triggerInspectionVehicle } = useSWRMutation(
+    vehicleUrl,
+    addInspectionVehicle
+  );
+
+  const { trigger: triggerInspectionElectronic } = useSWRMutation(
+    electronicUrl,
+    addInspectionElectronic
+  );
+
+  const triggers = {
+    triggerInspectionPersonal,
+    triggerInspectionLegal,
+    triggerInspectionVehicle,
+    triggerInspectionElectronic,
+  };
+
   const submitData: SubmitHandler<AllInspectSchemas> = (data) => {
     console.log("todo", data);
     validationFormDataInspect({
@@ -197,7 +251,7 @@ console.log(errorInspectionPersonalVehicle, '.-.-.-.-.')
       activeForm,
       setModalActive,
       data,
-      triggerInspectionPersonalVehicle,
+      triggers,
     });
   };
 
@@ -221,6 +275,14 @@ console.log(errorInspectionPersonalVehicle, '.-.-.-.-.')
     setIsError,
     isError,
     control,
+    setIsCheckedDamage,
+    isCheckedDamage,
+    setIsCheckedGnc,
+    isCheckedGnc,
+    setIsCheckedOkm,
+    isCheckedOkm,
+    setIsPhone,
+    isPhone,
   };
 
   return (

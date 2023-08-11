@@ -7,11 +7,10 @@ import { useState, useEffect } from "react";
 interface Props {
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   page: number;
-  errors: any;
   max: number;
 }
 
-function PageButton({ changePage, page, errors, max }: Props) {
+function PageButton({ changePage, page, max }: Props) {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

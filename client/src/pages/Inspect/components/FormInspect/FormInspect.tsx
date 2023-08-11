@@ -6,12 +6,10 @@ import {
   FormElectronicData,
   FormLegalPersonalData,
   FormPersonalData,
-  
   PageButton,
 } from "../../../../components";
 
 function FormInspect() {
-
   const {
     userActiveForm,
     handleSubmit,
@@ -26,6 +24,8 @@ function FormInspect() {
     page,
     changePage,
     isError,
+    setIsPhone,
+    isPhone,
   } = useInspectContext();
   return (
     <>
@@ -59,7 +59,6 @@ function FormInspect() {
                 <PageButton
                   changePage={changePage}
                   page={page}
-                  errors={false}
                   max={2}
                 />
               </div>
@@ -82,7 +81,6 @@ function FormInspect() {
                   <PageButton
                     changePage={changePage}
                     page={page}
-                    errors={errors.schemaPersonal}
                     max={2}
                   />
                 </>
@@ -101,7 +99,6 @@ function FormInspect() {
                   <PageButton
                     changePage={changePage}
                     page={page}
-                    errors={errors.schemaLegalPersonal}
                     max={2}
                   />
                 </>
@@ -118,7 +115,6 @@ function FormInspect() {
                   <PageButton
                     changePage={changePage}
                     page={page}
-                    errors={errors.schemaVehicle}
                     max={2}
                   />
                 </>
@@ -133,11 +129,12 @@ function FormInspect() {
                     errors={errors}
                     register={register}
                     touchedFields={touchedFields}
+                    setIsPhone={setIsPhone}
+                    isPhone={isPhone}
                   />
                   <PageButton
                     changePage={changePage}
                     page={page}
-                    errors={errors.schemaElectronic}
                     max={2}
                   />
                 </>

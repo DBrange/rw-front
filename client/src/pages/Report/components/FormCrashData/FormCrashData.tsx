@@ -8,8 +8,15 @@ import {
 import { useReportContext } from "../../context";
 
 function FormCrashData() {
-  const { register, errors, touchedFields, setAmountValue, setAmountVehicles } =
-    useReportContext();
+  const {
+    register,
+    errors,
+    touchedFields,
+    setAmountValue,
+    setAmountVehicles,
+    amountValue,
+    amountVehicles
+  } = useReportContext();
 
   const [isCheckedThirdVehicle, setIsCheckedThirdVehicle] =
     useState<boolean>(false);
@@ -17,7 +24,7 @@ function FormCrashData() {
   const [isCheckedAmbulance, setIsCheckedAmbulance] = useState<boolean>(false);
   const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
     useState<boolean>(false);
-  
+
   return (
     <>
       <FormTimeInput schemaName={"schemaVehicleCrashReport.time"} />
@@ -51,6 +58,7 @@ function FormCrashData() {
         setChecked={setIsCheckedInjuried}
         id={"injuried"}
         label={"Lesiones"}
+        instructions={"Estable si usted resulto herido"}
       />
       <FormInputOptional
         register={register("schemaVehicleCrashReport.injuries")}
@@ -67,6 +75,7 @@ function FormCrashData() {
         setChecked={setIsCheckedAmbulance}
         id={"ambulance"}
         label={"Ambulancia"}
+        instructions={"Establece si estuvo la presencia de una ambulancia"}
       />
       <FormInputOptional
         register={register("schemaVehicleCrashReport.ambulanceTo")}
@@ -83,6 +92,9 @@ function FormCrashData() {
         setChecked={setIsCheckedThirdInjuried}
         id={"thirdInjuried"}
         label={"Tercero(s) lesionados"}
+        instructions={
+          "Establece la cantidad de terceros heridos por el accidente"
+        }
       />
       <FormInputOptionalAmount
         error={errors.schemaThirdInjured?.amount?.message}
@@ -94,23 +106,28 @@ function FormCrashData() {
         touched={touchedFields.schemaThirdInjured?.amount}
         schemaName={"schemaThirdInjured.amount"}
         setAmountValue={setAmountValue}
+        amountValue={amountValue}
       />
       <FormCheckbox
         register={register("schemaVehicleCrashReport.friendlyStatement")}
         setChecked={setIsCheckedThirdVehicle}
         id={"thirdInjuried"}
         label={"Declaracion amistosa"}
+        instructions={
+          "Establece un acuerdo de palabra con los demas implicados, donde los datos que usted ingrese en la denuncia, seran enviados por mail a cada una de las partes, en donde todos deben estar de acuerdo con lo ingresado"
+        }
       />
       <FormInputOptionalAmount
         error={errors.schemaVehicleCrashReportData?.amount?.message}
         checked={isCheckedThirdVehicle}
         type="number"
         id="amountThirdPartyVehicle"
-        label="Cantidad"
+        label="Cantidad de terceros"
         placeholder="Ingresar cantidad"
         touched={touchedFields.schemaVehicleCrashReportData?.amount}
         schemaName={"schemaVehicleCrashReportData.amount"}
         setAmountValue={setAmountVehicles}
+        amountValue={amountVehicles}
       />
     </>
   );

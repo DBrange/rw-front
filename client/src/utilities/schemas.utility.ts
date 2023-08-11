@@ -19,6 +19,7 @@ export const schemaPersonal = z.object({
     email: z.string().email().max(30),
     altEmail: altEmailValidate,
     gender: z.enum(["hombre", "mujer", "otro"]),
+    birthDate: z.coerce.date(),
     dni: z
       .string()
       .refine((value) => value.length === 8, {
@@ -64,52 +65,49 @@ export const schemaVehicle = z.object({
     damageLocation: z.string(),
     images: z.array(z.string().url()),
     plate: z.string().min(6).max(7),
+    okm: z.boolean(),
     gnc: z.boolean(),
-    obleaNumber: z.string().refine(
-      (value: string) => (
-        value === "" || /^\d+$/.test(value),
-        {
-          message:
-            "El campo debe contener solo números o el campo puede estar vacío.",
-        }
-      )
-    ),
-    gncEpiration: z
-      .string()
-      .refine(
-        (value: string) => value === "" || /^\d{2}\/\d{2}\/\d{4}$/.test(value),
-        {
-          message:
-            "El campo debe contener una fecha válida o el campo puede estar vacío.",
-        }
-      ),
     brand: z.string().min(1).max(20),
     model: z.string().min(1).max(20),
-    fuel: z.enum(["diesel", "gasoline"]),
-    vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
+    fuel: z.enum(["DIESEL", "GASOLINE"]),
+    type: z.enum(["CAMION", "AUTOMOVIL", "MOTOCICLETA"]),
+  }),
+});
+
+export const schemaGnc = z.object({
+  schemaGnc: z.object({
+    obleaNumber: z.string().min(8),
+    gncExpiration: z.coerce.date(),
   }),
 });
 
 const numberOrEmpty = z
   .string()
-  .refine((value) => value === "" || /^\d*$/.test(value), {
-    message: "Solo se permiten números o el campo puede estar vacío",
-  });
+  .refine((value) => /^\d*$/.test(value), {
+    message: "Debe ingresar un numero valido",
+  })
+  .refine((value) => value.length, {
+    message: "Debe ingresar un numero valido",
+  })
 
-export const schemaElectronic = z.object({
-  schemaElectronic: z.object({
-    electronicType: z.enum(["celular", "tablet", "notebook"]),
+export const schemaPhone = z.object({
+  schemaPhone: z.object({
     phoneNumberCel: numberOrEmpty,
-    phoneService: z.string().max(20),
-    brand: z.string().min(1).max(20),
-    model: z.string().min(1).max(20),
+    phoneService: z.string().min(1).max(20),
     imei: z.string(),
   }),
 });
 
+export const schemaElectronic = z.object({
+  schemaElectronic: z.object({
+    type: z.enum(["celular", "tablet", "notebook"]),
+    brand: z.string().min(1).max(20),
+    model: z.string().min(1).max(20),
+    
+  }),
+});
+
 // Report
-
-
 
 export const schemaVehicleReport = z.object({
   schemaVehicleReport: z.object({
@@ -121,29 +119,12 @@ export const schemaVehicleReport = z.object({
     damageLocation: z.string(),
     images: z.array(z.string().url()),
     plate: z.string().min(6).max(7),
+    okm: z.boolean(),
     gnc: z.boolean(),
-    obleaNumber: z.string().refine(
-      (value: string) => (
-        value === "" || /^\d+$/.test(value),
-        {
-          message:
-            "El campo debe contener solo números o el campo puede estar vacío.",
-        }
-      )
-    ),
-    gncEpiration: z
-      .string()
-      .refine(
-        (value: string) => value === "" || /^\d{2}\/\d{2}\/\d{4}$/.test(value),
-        {
-          message:
-            "El campo debe contener una fecha válida o el campo puede estar vacío.",
-        }
-      ),
     brand: z.string().min(1).max(20),
     model: z.string().min(1).max(20),
-    fuel: z.enum(["diesel", "gasoline"]),
-    vehicleType: z.enum(["camion", "automovil", "motocicleta"]),
+    fuel: z.enum(["DIESEL", "GASOLINE"]),
+    type: z.enum(["CAMION", "AUTOMOVIL", "MOTOCICLETA"]),
   }),
 });
 
@@ -195,6 +176,13 @@ export const schemaThirdInjured = z.object({
   }),
 });
 
+export const schemaNotOwner = z.object({
+  schemaNotOwner: z.object({
+    name: z.string().min(1).max(20),
+    dni: z.number(),
+  })
+});
+
 export const schemaThirdPartyVehicleReport = z.object({
   schemaThirdPartyVehicleReport: z.object({
     year: z.number(),
@@ -205,18 +193,28 @@ export const schemaThirdPartyVehicleReport = z.object({
     insaurancePolicy: z.string().min(1).max(20),
     ownerName: z.string().min(1).max(20),
     ownerDni: z.number(),
-    name: z.string().min(1).max(20),
-    dni: z.number(),
     address: z.string().min(1).max(20),
     phoneNumber: z.number(),
     licencePhoto: z.array(z.string().url()),
     email: z.string().email(),
+    isOwner: z.boolean(),
   }),
 });
 
 export const schemaVehicleCrashReportData = z.object({
-  amount: z.number(),
-  thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReport),
+  schemaVehicleCrashReportData: z.object({
+    amount: z.number(),
+    thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReport),
+  })
+});
+
+export const schemaVehicleCrashReportDataNotOwner = z.object({
+  schemaVehicleCrashReportDataNotOwner: z.object({
+    amount: z.number(),
+    thirdPartyVehicleInfo: z.array(
+      schemaThirdPartyVehicleReport.merge(schemaNotOwner)
+    ),
+  }),
 });
 
 export const schemaVehicleCrashReport = z.object({
@@ -233,4 +231,3 @@ export const schemaVehicleCrashReport = z.object({
     friendlyStatement: z.boolean(),
   }),
 });
-

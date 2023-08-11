@@ -11,6 +11,8 @@ import {
   SchemaLegalPersonalType,
   schemaVehicleReportType,
   SchemaElectronicType,
+  SchemaVehicleCrashReportData,
+  SchemaVehicleCrashReportDataNotOwner,
 } from "../../../models";
 import {
   schemaVehicleCrashReport,
@@ -23,6 +25,10 @@ import {
   schemaVehicleReport,
   schemaThirdInjured,
   schemaVehicleCrashReportData,
+  schemaGnc,
+  schemaPhone,
+  schemaNotOwner,
+  schemaVehicleCrashReportDataNotOwner,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 
@@ -59,6 +65,18 @@ export interface IReportContext {
   setAmountVehicles: any;
   amountVehicles: number;
   thirdPartyVehiclesForm: () => any;
+  setIsCheckedDamage: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedDamage: boolean;
+  setIsCheckedGnc: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedGnc: boolean;
+  setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
+  isPhone: boolean;
+  setIsCheckedOwner: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedOwner: boolean;
+  setIsCheckedOwnerObj: React.Dispatch<
+    React.SetStateAction<Record<string, boolean> | undefined>
+  >;
+  isCheckedOwnerObj: Record<string, boolean> | undefined;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -70,6 +88,14 @@ type ChildrenType = {
 };
 
 export const ReportProvider = ({ children }: ChildrenType) => {
+  const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
+  const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
+  const [isPhone, setIsPhone] = useState<boolean>(false);
+  const [isCheckedOwner, setIsCheckedOwner] = useState<boolean>(false);
+  const [isCheckedOwnerObj, setIsCheckedOwnerObj] =
+    useState<Record<string, boolean>>();
+  console.log(isCheckedOwnerObj);
+
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
   const [schema, setSchema] = useState<any>(schemaPersonal);
@@ -210,7 +236,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaThirdInjured}
                 max={typeComplaintForm.crash ? 6 : 5}
               />
             </>
@@ -221,6 +246,32 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return;
     }
   };
+
+const tupleForArr = () => {
+  type ValidationsType = ZodType<
+    SchemaVehicleCrashReportData | SchemaVehicleCrashReportDataNotOwner
+  >[];
+
+  let validations: ValidationsType = [];
+
+  for (const bol in isCheckedOwnerObj) {
+    console.log(isCheckedOwnerObj[bol], "bol");
+    const positionInArr = Number(bol.split("")[0]);
+
+    if (isCheckedOwnerObj[bol]) {
+      validations[positionInArr] = schemaVehicleCrashReportDataNotOwner;
+    } else {
+      validations[positionInArr] = schemaVehicleCrashReportData;
+    }
+  }
+
+  const tuple = z.union(
+    validations as unknown as readonly [ZodTypeAny, ZodTypeAny, ...ZodTypeAny[]]
+  );
+
+   return tuple
+};
+
 
   const thirdPartyVehiclesForm = () => {
     let vehicles: JSX.Element[] = [];
@@ -239,18 +290,13 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           form={
             <>
               {vehicles}
-              <PageButton
-                changePage={changePage}
-                page={page}
-                errors={errors.schemaVehicleCrashReport}
-                max={6}
-              />
+              <PageButton changePage={changePage} page={page} max={6} />
             </>
           }
         />
       );
     } else {
-      return null
+      return null;
     }
   };
 
@@ -280,9 +326,23 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     if (page === 1) {
       schema = schemaUser;
     } else if (page === 2) {
-      schema = schemaUser.merge(schemaElement);
+      if (activeForm === "vehicle") {
+        if (isCheckedGnc) {
+          schema = schema.merge(schemaElement).merge(schemaGnc);
+        } else {
+          schema = schema.merge(schemaElement);
+        }
+      } else if (activeForm === "electronic") {
+        if (isPhone) {
+          schema = schema.merge(schemaElement).merge(schemaPhone);
+        } else {
+          schema = schema.merge(schemaElement);
+        }
+      }
     } else if (page === 3) {
       schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+      setAmountVehicles(0);
+      setAmountValue(0);
     } else if (page === 4) {
       schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
     } else if (page === 5 && amountValue) {
@@ -291,30 +351,103 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         .merge(schemaComplaintType)
         .merge(schemaThirdInjured);
     } else if (page === 6) {
-      if (amountValue && amountVehicles < 2) {
-        schema = schemaUser
-          .merge(schemaElement)
-          .merge(schemaComplaintType)
-          .merge(schemaThirdInjured)
-          .merge(schemaThirdPartyVehicleReport);
-      } else if (!amountValue && amountVehicles > 1) {
-        schema = schemaUser
-          .merge(schemaElement)
-          .merge(schemaComplaintType)
-          .merge(schemaVehicleCrashReportData);
-          
-        } else if (amountValue && amountVehicles > 1) {
+      if (isCheckedOwner && amountVehicles < 2) {
+        if (amountValue) {
           schema = schemaUser
-          .merge(schemaElement)
-          .merge(schemaComplaintType)
-          .merge(schemaThirdInjured)
-          .merge(schemaVehicleCrashReportData);
-      } else {
-        schema = schemaUser
-          .merge(schemaElement)
-          .merge(schemaComplaintType)
-          .merge(schemaThirdPartyVehicleReport);
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdInjured)
+            .merge(schemaThirdPartyVehicleReport)
+            .merge(schemaNotOwner);
+        } else if (!amountValue && !amountVehicles) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdPartyVehicleReport)
+            .merge(schemaNotOwner);
+        }
+      } else if (!isCheckedOwner && amountVehicles < 2) {
+        if (amountValue) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdInjured)
+            .merge(schemaThirdPartyVehicleReport);
+        } else if (!amountValue) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdPartyVehicleReport);
+        }
+      } else if (amountVehicles > 1) {
+        if (amountValue) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdInjured)
+            .merge(schemaVehicleCrashReportData); // como hago para darme cuenta si es reportdata o reportdatanotowner
+          // .merge(schemaNotOwner);
+        } else if (!amountValue && !amountVehicles) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaVehicleCrashReportData);
+          // .merge(schemaNotOwner);
+        }
       }
+
+      // ----
+      // if (isCheckedOwner) {
+      //   if (amountValue && amountVehicles < 2) {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaThirdInjured)
+      //       .merge(schemaThirdPartyVehicleReport)
+      //       .merge(schemaNotOwner);
+      //   } else if (!amountValue && amountVehicles > 1) {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaVehicleCrashReportDataNotOwner);
+      //   } else if (amountValue && amountVehicles > 1) {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaThirdInjured)
+      //       .merge(schemaVehicleCrashReportDataNotOwner);
+      //   } else {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaThirdPartyVehicleReport)
+      //       .merge(schemaNotOwner);
+      //   }
+      // } else {
+      //   if (amountValue && amountVehicles < 2) {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaThirdInjured)
+      //       .merge(schemaThirdPartyVehicleReport);
+      //   } else if (!amountValue && amountVehicles > 1) {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaVehicleCrashReportData);
+      //   } else if (amountValue && amountVehicles > 1) {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaThirdInjured)
+      //       .merge(schemaVehicleCrashReportData);
+      //   } else {
+      //     schema = schemaUser
+      //       .merge(schemaElement)
+      //       .merge(schemaComplaintType)
+      //       .merge(schemaThirdPartyVehicleReport);
+      //   }
+      // }
     }
     setSchema(schema);
   };
@@ -380,6 +513,16 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setAmountVehicles,
     amountVehicles,
     thirdPartyVehiclesForm,
+    setIsCheckedDamage,
+    isCheckedDamage,
+    setIsCheckedGnc,
+    isCheckedGnc,
+    setIsPhone,
+    isPhone,
+    setIsCheckedOwner,
+    isCheckedOwner,
+    setIsCheckedOwnerObj,
+    isCheckedOwnerObj,
   };
 
   return (

@@ -4,8 +4,13 @@ import { FormCheckbox, FormInput, FormInputOptional } from "../../../../componen
 import { useReportContext } from "../../context";
 
 function FormFireData() {
-  const { register, errors, touchedFields, setAmountValue } =
-    useReportContext();
+  const {
+    register,
+    errors,
+    touchedFields,
+    setAmountValue,
+    amountValue,
+  } = useReportContext();
 
         const [isCheckedInjuried, setIsCheckedInjuried] =
           useState<boolean>(false);
@@ -55,6 +60,7 @@ function FormFireData() {
         setChecked={setIsCheckedInjuried}
         id={"injuried"}
         label={"Lesiones*"}
+        instructions={"Estable si usted resulto herido"}
       />
       <FormInputOptional
         register={register("schemaVehicleFireReport.injuries")}
@@ -71,6 +77,7 @@ function FormFireData() {
         setChecked={setIsCheckedAmbulance}
         id={"ambulance"}
         label={"Ambulancia"}
+        instructions={"Establece si estuvo la presencia de una ambulancia"}
       />
       <FormInputOptional
         register={register("schemaVehicleFireReport.ambulanceTo")}
@@ -87,6 +94,9 @@ function FormFireData() {
         setChecked={setIsCheckedThirdInjuried}
         id={"thirdInjuried"}
         label={"Tercero(s) lesionados*"}
+        instructions={
+          "Establece la cantidad de terceros heridos por el accidente"
+        }
       />
       <FormInputOptionalAmount
         error={errors.schemaVehicleFireReport?.amount?.message}
@@ -98,6 +108,7 @@ function FormFireData() {
         touched={touchedFields.schemaVehicleFireReport?.amount}
         schemaName={"schemaThirdInjured.amount"}
         setAmountValue={setAmountValue}
+        amountValue={amountValue}
       />
     </>
   );

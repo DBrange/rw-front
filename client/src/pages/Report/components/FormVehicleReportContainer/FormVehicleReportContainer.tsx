@@ -28,7 +28,6 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaVehicleReport}
                 max={6}
               />
             </>
@@ -44,7 +43,6 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaVehicleReport}
                 max={6}
               />
             </>
@@ -59,7 +57,6 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaVehicleCrashReport}
                 max={6}
               />
             </>
@@ -80,7 +77,6 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaThirdPartyVehicleReport}
                 max={6}
               />
             </>
@@ -98,7 +94,6 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaVehicleTheftReport}
                 max={4}
               />
             </>
@@ -114,7 +109,6 @@ function FormVehicleReportContainer() {
               <PageButton
                 changePage={changePage}
                 page={page}
-                errors={errors.schemaVehicleFireReport}
                 max={amountValue ? 5 : 4}
               />
             </>

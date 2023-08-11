@@ -31,8 +31,8 @@ export interface VehicleData extends PersonalData {
   gnc: boolean;
   brand: string;
   model: string;
-  fuel: "diesel" | "gasoline";
-  vehicleType: "camion" | "automovil" | "motocicleta";
+  fuel: "DIESEL" | "GASOLINE";
+  type: "CAMION" | "AUTOMOVIL" | "MOTOCICLETA";
 }
 export interface LegalVehicleData extends LegalPersonalData {
   year: number;
@@ -47,12 +47,12 @@ export interface LegalVehicleData extends LegalPersonalData {
   gnc: boolean;
   brand: any;
   model: any;
-  fuel: "diesel" | "gasoline";
-  vehicleType: "camion" | "automovil" | "motocicleta";
+  fuel: "DIESEL" | "GASOLINE";
+  type: "CAMION" | "AUTOMOVIL" | "MOTOCICLETA";
 }
 
 export interface ElectronicData extends PersonalData {
-  electronicType: "celular" | "tablet" | "notebook";
+  type: "celular" | "tablet" | "notebook";
   phoneNumberCel?: number;
   phoneService?: string;
   brand: string;
@@ -60,13 +60,10 @@ export interface ElectronicData extends PersonalData {
   imei?: number;
 }
 export interface LegalElectronicData extends LegalPersonalData {
-  electronicType: "celular" | "tablet" | "notebook";
+  type: "celular" | "tablet" | "notebook";
   phoneNumberCel?: number;
   phoneService?: string;
   brand: string;
   model: string;
   imei?: number;
 }
-
-
-

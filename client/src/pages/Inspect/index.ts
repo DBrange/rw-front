@@ -6,5 +6,5 @@ export * from './components/FormVehicleData';
 export * from './components/InspectContainer';
 export * from './components';
 export * from './context';
-export * from './services/addInspect.service';
+export * from './services';
 export * from './utilities';

@@ -1,9 +1,16 @@
 import { FormUploadImageReport } from "..";
-import { FormInput } from "../../../../components";
+import { FormCheckbox, FormInput, FormInputOptional } from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormThirdPartyVehicleData() {
-  const { register, errors, touchedFields } = useReportContext();
+  const {
+    register,
+    errors,
+    touchedFields,
+    setIsCheckedOwner,
+    isCheckedOwner,
+  } = useReportContext();
+
   return (
     <>
       <FormInput
@@ -83,26 +90,6 @@ function FormThirdPartyVehicleData() {
         touched={touchedFields.schemaThirdPartyVehicleReport?.ownerDni}
       />
       <FormInput
-        register={register("schemaThirdPartyVehicleReport.name")}
-        error={errors.schemaThirdPartyVehicleReport?.name?.message}
-        type="text"
-        id="name"
-        label="Nombre del conductor*"
-        placeholder="Ingresar nombre"
-        touched={touchedFields.schemaThirdPartyVehicleReport?.name}
-      />
-      <FormInput
-        register={register("schemaThirdPartyVehicleReport.dni", {
-          valueAsNumber: true,
-        })}
-        error={errors.schemaThirdPartyVehicleReport?.dni?.message}
-        type="number"
-        id="dni"
-        label="DNI del conductor*"
-        placeholder="Ingresar DNI"
-        touched={touchedFields.schemaThirdPartyVehicleReport?.dni}
-      />
-      <FormInput
         register={register("schemaThirdPartyVehicleReport.address")}
         error={errors.schemaThirdPartyVehicleReport?.address?.message}
         type="text"
@@ -138,6 +125,55 @@ function FormThirdPartyVehicleData() {
         placeholder="Ingresar email"
         touched={touchedFields.schemaThirdPartyVehicleReport?.email}
       />
+
+      <FormCheckbox
+        register={register("schemaThirdPartyVehicleReport.isOwner")}
+        setChecked={setIsCheckedOwner}
+        id={"schemaThirdPartyVehicleReport.isOwner"}
+        label={"¿El conductor es el propoietario?"}
+        instructions=""
+      />
+      <FormInputOptional
+        register={register("schemaNotOwner.name")}
+        error={errors.schemaNotOwner?.name?.message}
+        checked={isCheckedOwner}
+        type="text"
+        id="schemaNotOwner.name"
+        label="Nombre del conductor*"
+        placeholder="Ingresar nombre"
+        touched={touchedFields.schemaNotOwner?.name}
+      />
+      <FormInputOptional
+        register={register("schemaNotOwner.dni")}
+        error={errors.schemaNotOwner?.dni?.message}
+        checked={isCheckedOwner}
+        type="date"
+        id="schemaNotOwner.dni"
+        label="DNI del conductor*"
+        placeholder="Ingresar DNI"
+        touched={touchedFields.schemaNotOwner?.dni}
+      />
+
+      {/* <FormInput
+        register={register("schemaThirdPartyVehicleReport.name")}
+        error={errors.schemaThirdPartyVehicleReport?.name?.message}
+        type="text"
+        id="name"
+        label="Nombre del conductor*"
+        placeholder="Ingresar nombre"
+        touched={touchedFields.schemaThirdPartyVehicleReport?.name}
+      />
+      <FormInput
+        register={register("schemaThirdPartyVehicleReport.dni", {
+          valueAsNumber: true,
+        })}
+        error={errors.schemaThirdPartyVehicleReport?.dni?.message}
+        type="number"
+        id="dni"
+        label="DNI del conductor*"
+        placeholder="Ingresar DNI"
+        touched={touchedFields.schemaThirdPartyVehicleReport?.dni}
+      /> */}
     </>
   );
 }

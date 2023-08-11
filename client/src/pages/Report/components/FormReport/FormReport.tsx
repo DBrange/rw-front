@@ -58,7 +58,6 @@ function FormReport() {
                 <PageButton
                   changePage={changePage}
                   page={page}
-                  errors={false}
                   max={6}
                 />
               </div>
@@ -81,7 +80,6 @@ function FormReport() {
                   <PageButton
                     changePage={changePage}
                     page={page}
-                    errors={errors.schemaPersonal}
                     max={6}
                   />
                 </>
@@ -100,7 +98,6 @@ function FormReport() {
                   <PageButton
                     changePage={changePage}
                     page={page}
-                    errors={errors.schemaLegalPersonal}
                     max={6}
                   />
                 </>
