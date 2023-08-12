@@ -1,6 +1,8 @@
 import { Link, Route, Routes } from "react-router-dom";
 import { Home, Inspect, Report } from "./pages";
 
+
+
 function App() {
   return (
     <>

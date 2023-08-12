@@ -1,4 +1,4 @@
-import { FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData, FormInjuredInfoData } from "..";
+import { FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData } from "..";
 import { useReportContext } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../../components";
 import FormVehicleReportBtn from "../FormVehicleReportBtn/FormReportBtn";
@@ -6,7 +6,6 @@ import FormVehicleReportBtn from "../FormVehicleReportBtn/FormReportBtn";
 function FormVehicleReportContainer() {
   const {
     activeForm,
-    errors,
     changePage,
     page,
     typeComplaintForm,

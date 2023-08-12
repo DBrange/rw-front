@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import { useReportContext } from "../..";
+import { FieldValues } from "react-hook-form";
 
 interface Props {
-  schemaName: string;
+  schemaName: any;
   error: string | undefined;
   id: string;
   name: string;

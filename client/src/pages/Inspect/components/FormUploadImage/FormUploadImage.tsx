@@ -5,7 +5,7 @@ import { useInspectContext } from "../..";
 interface Props {
   schemaName: any;
   error: string | undefined;
-  id: string
+  id: string;
   imagesType: string;
 }
 

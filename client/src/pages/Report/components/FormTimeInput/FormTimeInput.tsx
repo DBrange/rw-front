@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useReportContext } from "../..";
 
 interface Props {
-  schemaName: string;
+  schemaName: any;
 }
 
 interface InputValue {

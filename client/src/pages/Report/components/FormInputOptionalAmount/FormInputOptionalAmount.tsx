@@ -10,7 +10,7 @@ interface Props {
   label: string;
   placeholder: string;
   touched: boolean;
-  schemaName: string;
+  schemaName: any;
   setAmountValue: any;
   amountValue: number;
 }

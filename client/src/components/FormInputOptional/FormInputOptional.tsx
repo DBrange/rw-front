@@ -1,8 +1,6 @@
 interface Props {
   children: JSX.Element
-
   checked: boolean | undefined;
-
 }
 
 function FormInputOptional({ children, checked }: Props) {

@@ -9,44 +9,94 @@ import {
   schemaGnc,
   schemaPhone,
   schemaVehicleCrashReportData,
+  schemaElectronicTheftReport,
+  schemaIsTire,
+  schemaVehicleFireReport,
+  schemaVehicleTheftReport,
+  schemaThirdInjured,
+  schemaThirdPartyVehicleReport,
 } from "../../utilities";
 
-export type SchemaPersonalType = z.infer<typeof schemaPersonal>;
 export type SchemaLegalPersonalType = z.infer<typeof schemaLegalPersonal>;
-export type SchemaVehicleType = z.infer<typeof schemaVehicle>;
 export type SchemaElectronicType = z.infer<typeof schemaElectronic>;
-export type SchemaGnc = z.infer<typeof schemaGnc>;
-export type SchemaPhone = z.infer<typeof schemaPhone>;
+export type SchemaPersonalType = z.infer<typeof schemaPersonal>;
+export type SchemaVehicleType = z.infer<typeof schemaVehicle>;
+export type SchemaPhoneType = z.infer<typeof schemaPhone>;
+export type SchemaGncType = z.infer<typeof schemaGnc>;
 
 export type AllInspectSchemas =
   | (SchemaPersonalType &
       SchemaLegalPersonalType &
       SchemaVehicleType &
       SchemaElectronicType &
-      SchemaGnc &
-      SchemaPhone)
-  | AllInspectSchemesCombines
-  | AllInspectSchemasOptionals
-  | SchemaVehicleType;
-  
-  export type AllInspectSchemesCombines =
-  | (SchemaPersonalType & SchemaVehicleType)
-  | (SchemaPersonalType & SchemaElectronicType)
-  | (SchemaLegalPersonalType & SchemaVehicleType)
-  | (SchemaLegalPersonalType & SchemaElectronicType);
-  
-  export type SchemaElements = SchemaVehicleType | SchemaElectronicType;
-  export type SchemaUsers = SchemaPersonalType | SchemaLegalPersonalType
-  
-  export type AllInspectSchemasOptionals =
-    | SchemaPersonalType
-    | SchemaVehicleType
-    | SchemaLegalPersonalType
-    | SchemaElectronicType
-    | SchemaGnc
-    | SchemaPhone;
-  
-  export type schemaVehicleReportType = z.infer<typeof schemaVehicleReport>;
-export type SchemaVehicleCrashReport = z.infer<typeof schemaVehicleCrashReport>;
-export type SchemaVehicleCrashReportData = z.infer<typeof schemaVehicleCrashReportData>;
+      SchemaGncType &
+      SchemaPhoneType)
+  | AllInspectSchemasOptionals;
 
+export type SchemaElements = SchemaVehicleType | SchemaElectronicType;
+export type SchemaUsers = SchemaPersonalType | SchemaLegalPersonalType;
+
+export type AllInspectSchemasOptionals =
+  | SchemaPersonalType
+  | SchemaVehicleType
+  | SchemaLegalPersonalType
+  | SchemaElectronicType
+  | SchemaGncType
+  | SchemaPhoneType;
+
+export type SchemaVehicleCrashReportType = z.infer<typeof schemaVehicleCrashReport>;
+export type SchemaVehicleTheftReportType = z.infer<typeof schemaVehicleTheftReport>;
+export type SchemaVehicleFireReportType = z.infer<typeof schemaVehicleFireReport>;
+export type schemaVehicleReportTypeType = z.infer<typeof schemaVehicleReport>;
+export type SchemaThirdInjuredType = z.infer<typeof schemaThirdInjured>;
+export type SchemaElectronicTheftReportType = z.infer<
+  typeof schemaElectronicTheftReport
+>;
+export type SchemaVehicleCrashReportDataType = z.infer<
+  typeof schemaVehicleCrashReportData
+>;
+export type SchemaThirdPartyVehicleReportType = z.infer<
+  typeof schemaThirdPartyVehicleReport
+>;
+export type SchemaIsTireType = z.infer<typeof schemaIsTire>;
+
+export type AllReportSchemas =
+  | (SchemaPersonalType &
+      SchemaLegalPersonalType &
+      SchemaVehicleType &
+      SchemaElectronicType &
+      SchemaGncType &
+      SchemaPhoneType &
+      schemaVehicleReportTypeType &
+      SchemaVehicleCrashReportType &
+      SchemaVehicleTheftReportType &
+      SchemaElectronicTheftReportType &
+      SchemaVehicleFireReportType &
+      SchemaVehicleCrashReportDataType &
+      SchemaThirdInjuredType &
+      SchemaThirdPartyVehicleReportType &
+      SchemaIsTireType)
+  | AllReportOptionals;
+
+export type SchemaComplaint =
+  | SchemaVehicleCrashReportType
+  | SchemaVehicleTheftReportType
+  | SchemaVehicleFireReportType
+  | SchemaElectronicTheftReportType;
+
+export type AllReportOptionals =
+  | SchemaPersonalType
+  | SchemaLegalPersonalType
+  | SchemaVehicleType
+  | SchemaElectronicType
+  | SchemaGncType
+  | SchemaPhoneType
+  | schemaVehicleReportTypeType
+  | SchemaVehicleCrashReportType
+  | SchemaVehicleTheftReportType
+  | SchemaElectronicTheftReportType
+  | SchemaVehicleFireReportType
+  | SchemaVehicleCrashReportDataType
+  | SchemaThirdInjuredType
+  | SchemaThirdPartyVehicleReportType
+  | SchemaIsTireType;

@@ -1,16 +1,11 @@
-import { useState } from "react";
 import { Control, UseFormRegisterReturn, UseFormSetValue, useWatch } from "react-hook-form";
-import { AllInspectSchemas } from "../../models";
-// import { SubmitHandler, useForm } from "react-hook-form";
-
-// type controlType = ReturnType<typeof useForm>['control'];
 
 interface Props {
-  register: UseFormRegisterReturn<any>;
+  register: UseFormRegisterReturn<string>;
   setValue: UseFormSetValue<any>;
   schemaName: string;
   control: Control<any>;
-  id: string
+  id: string;
 }
 
 function FormInputRange({ register, setValue, schemaName, control, id }: Props) {

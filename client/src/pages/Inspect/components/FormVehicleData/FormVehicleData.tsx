@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   FormCheckbox,
   FormInput,
@@ -6,7 +5,7 @@ import {
   FormInputRange,
   FormSelect,
 } from "../../../../components";
-import { FormSelectElecType, useInspectContext } from "../../..";
+import { useInspectContext } from "../../..";
 import FormUploadImage from "../FormUploadImage/FormUploadImage";
 
 function FormVehicleData() {
@@ -21,7 +20,6 @@ function FormVehicleData() {
     setIsCheckedGnc,
     isCheckedGnc,
     setIsCheckedOkm,
-    isCheckedOkm,
   } = useInspectContext();
 
   return (
@@ -66,7 +64,7 @@ function FormVehicleData() {
       <FormInputRange
         register={register("schemaVehicle.tireWear", { valueAsNumber: true })}
         setValue={setValue}
-        schemaName={"schemaVehicle.tireWear"}
+        schemaName="schemaVehicle.tireWear"
         control={control}
         id="schemaVehicle.tireWear"
       />

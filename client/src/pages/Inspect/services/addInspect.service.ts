@@ -1,11 +1,5 @@
 import { SchemaElectronicType, SchemaLegalPersonalType, SchemaPersonalType, SchemaVehicleType } from "../../../models"
 
-// type AddInspection =
-//   | (SchemaPersonalType & SchemaVehicleType)
-//   | (SchemaPersonalType & SchemaElectronicType)
-//   | (SchemaLegalPersonalType & SchemaVehicleType)
-//   | (SchemaLegalPersonalType & SchemaElectronicType);
-
 export const baseUrl = "http://localhost:3001/v1";
 
 export const personalUrl = baseUrl + "/users/register";

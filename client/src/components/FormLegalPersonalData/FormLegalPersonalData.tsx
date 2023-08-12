@@ -1,11 +1,15 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { FormInput } from "..";
-import { AllInspectSchemasOptionals, SchemaLegalPersonalType } from "../../models";
+import {
+  AllReportOptionals,
+  AllInspectSchemasOptionals,
+  SchemaLegalPersonalType,
+} from "../../models";
 
 interface Props {
-  register: UseFormRegister<AllInspectSchemasOptionals>;
+  register: UseFormRegister<AllInspectSchemasOptionals | AllReportOptionals>;
   errors: FieldErrors<SchemaLegalPersonalType>;
-  touchedFields: any;
+  touchedFields: FieldValues["touched"];
 }
 
 function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
@@ -70,4 +74,4 @@ function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
     </>
   );
 }
-export default FormLegalPersonalData
+export default FormLegalPersonalData;

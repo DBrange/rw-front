@@ -14,5 +14,4 @@ export * from './FormUploadImageReport';
 export * from './FormVehicleReportBtn';
 export * from './FormVehicleReportContainer';
 export * from './FormVehicleReportData';
-export * from './PageButtonReport';
 export * from './ReportContainer';

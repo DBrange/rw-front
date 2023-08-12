@@ -13,6 +13,7 @@ import { useState, createContext, useContext, useEffect } from "react";
 import {
   Control,
   FieldErrors,
+  FieldErrorsImpl,
   FieldValues,
   SubmitHandler,
   UseFormHandleSubmit,
@@ -21,7 +22,7 @@ import {
   UseFormTrigger,
   useForm,
 } from "react-hook-form";
-import { ZodType, ZodTypeAny } from "zod";
+import { ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive } from "../../../interfaces";
 import {
@@ -49,7 +50,7 @@ export interface IInspectContext {
   handleSubmit: UseFormHandleSubmit<AllInspectSchemas, undefined>;
   register: UseFormRegister<AllInspectSchemas>;
   selectingSchema: () => void;
-  touchedFields: FieldValues["touched"]; //Partial<Record<keyof AllInspectSchemas, true>>; //Partial<Readonly<AllInspectSchemas>>;
+  touchedFields: FieldValues["touched"];
   userBtnActive: UserBtnActive;
   page: number;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -96,11 +97,6 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     vehicle: true,
     electronic: false,
   });
-
-  // useEffect(() => {
-  //     trigger();
-
-  // }, [page]);
 
   const selectFormUserSchema = (name: string) => {
     setUserActiveForm(name);

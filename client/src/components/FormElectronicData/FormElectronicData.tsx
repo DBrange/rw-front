@@ -1,15 +1,15 @@
-import { useState } from "react";
 import { FormInput, FormInputOptional } from "..";
 import { FormSelectElecType } from "../../pages";
 import {
   AllInspectSchemas,
+  AllReportSchemas,
   SchemaElectronicType,
   SchemaPhone,
 } from "../../models";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface Props {
-  register: UseFormRegister<AllInspectSchemas>;
+  register: UseFormRegister<AllInspectSchemas | AllReportSchemas>;
   errors: FieldErrors<SchemaElectronicType & SchemaPhone>;
   touchedFields: any;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;

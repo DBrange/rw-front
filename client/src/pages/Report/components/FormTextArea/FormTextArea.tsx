@@ -1,11 +1,11 @@
 import { AiFillCloseCircle } from "react-icons/ai";
-import { useReportContext } from "../..";
+import {  UseFormRegisterReturn } from "react-hook-form";
 
 interface Props {
-  register: any;
+  register: UseFormRegisterReturn<string>;
   error: string | undefined;
   touched: boolean;
-  id: string
+  id: string;
 }
 
 function FormTextArea({register, error, touched, id }: Props) {

@@ -1,9 +1,6 @@
 import { BsArrowRight } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
-import { FieldErrors, FieldErrorsImpl } from "react-hook-form";
-import { AllInspectSchemas, AllInspectSchemasOptionals } from "../../models";
-import { useState, useEffect } from "react";
+
 interface Props {
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   page: number;

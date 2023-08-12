@@ -6,7 +6,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
 interface Props {
-  register: UseFormRegisterReturn<any>;
+  register: UseFormRegisterReturn<string>;
   error: string | undefined;
   type: string;
   id: string;

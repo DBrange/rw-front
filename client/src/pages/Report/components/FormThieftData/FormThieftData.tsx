@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FormTimeInput, FormUploadImageReport } from "../../..";
 import {
   FormCheckbox,
@@ -52,9 +51,9 @@ function FormThieftData({ objectType }: { objectType: string }) {
         } `}
       >
         <FormCheckbox
-          register={register("schemaThirdPartyVehicleReport.isTire")}
+          register={register("schemaVehicleTheftReport.isTire")}
           setChecked={setIsTire}
-          id="schemaThirdPartyVehicleReport.isTire"
+          id="schemaVehicleTheftReport.isTire"
           label={"¿Alguna rueda fue robada?"}
           instructions=""
         />
@@ -76,6 +75,7 @@ function FormThieftData({ objectType }: { objectType: string }) {
               setValue={setValue}
               schemaName={"schemaIsTire.tireWear"}
               control={control}
+              id={"schemaIsTire.tireWear"}
             />
           </>
         </FormInputOptional>
@@ -85,7 +85,7 @@ function FormThieftData({ objectType }: { objectType: string }) {
         error={errors.objectType?.images?.message}
         id={`${objectType}.images`}
         name="imagesFire"
-        imagesType={"Agregue imagen de la denuncia"}
+        imagesType="Agregue imagen de la denuncia"
       />
     </>
   );

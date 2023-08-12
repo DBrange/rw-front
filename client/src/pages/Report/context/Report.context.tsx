@@ -1,5 +1,12 @@
-import { useForm } from "react-hook-form";
-import { z, ZodType, ZodTypeAny } from "zod";
+import {
+  Control,
+  FieldValues,
+  useForm,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
+import { ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive } from "../../../interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
@@ -7,10 +14,7 @@ import { TypeComplaintForm } from "../interfaces";
 import { FormInjuredInfoData, FormThirdPartyVehiclesData } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../components";
 import {
-  SchemaPersonalType,
-  SchemaLegalPersonalType,
-  schemaVehicleReportType,
-  SchemaElectronicType,
+  AllReportSchemas,
 } from "../../../models";
 import {
   schemaVehicleCrashReport,
@@ -30,39 +34,33 @@ import {
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 
-type AllTypes =
-  | SchemaPersonalType
-  | SchemaLegalPersonalType
-  | schemaVehicleReportType
-  | SchemaElectronicType;
 
 export interface IReportContext {
   userActiveForm: string;
   activeForm: string;
   errors: any;
-  submitData: (data: AllTypes) => void;
+  submitData: (data: AllReportSchemas) => void;
   selectFormUserSchema: (name: string) => void;
   selectFormSchema: (name: string) => void;
-  handleSubmit: any;
-  register: any;
+  handleSubmit: UseFormHandleSubmit<AllReportSchemas, undefined>;
+  register: UseFormRegister<any>;
   selectingSchema: () => void;
-  touchedFields: any;
+  touchedFields: FieldValues["touched"];
   typeComplaintForm: TypeComplaintForm;
   typeComplaint: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   page: number;
   userBtnActive: UserBtnActive;
-  thirdInjuredForm: () => any;
-  setValue: any;
+  thirdInjuredForm: () => JSX.Element | null;
+  setValue: UseFormSetValue<AllReportSchemas>;
   setAmountValue: (value: React.SetStateAction<number>) => void;
   amountValue: number;
   modalActive: boolean;
   isError: boolean;
-  control: any;
-  trigger: any;
-  setAmountVehicles: any;
+  control: Control<AllReportSchemas>;
+  setAmountVehicles: React.Dispatch<React.SetStateAction<number>>;
   amountVehicles: number;
-  thirdPartyVehiclesForm: () => any;
+  thirdPartyVehiclesForm: () => JSX.Element | null;
   setIsCheckedDamage: React.Dispatch<React.SetStateAction<boolean>>;
   isCheckedDamage: boolean;
   setIsCheckedGnc: React.Dispatch<React.SetStateAction<boolean>>;
@@ -99,7 +97,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
 
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
-  const [schema, setSchema] = useState<any>(schemaPersonal);
+  const [schema, setSchema] =
+    useState<ZodType<AllReportSchemas>>(schemaPersonal);
   const [amountValue, setAmountValue] = useState<number>(0);
   const [amountVehicles, setAmountVehicles] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
@@ -217,7 +216,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const thirdInjuredForm = () => {
+  const thirdInjuredForm = (): JSX.Element | null => {
     let people: JSX.Element[] = [];
 
     if (amountValue > 0) {
@@ -247,7 +246,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const thirdPartyVehiclesForm = () => {
+  const thirdPartyVehiclesForm = (): JSX.Element | null => {
     let vehicles: JSX.Element[] = [];
 
     if (amountVehicles > 1) {
@@ -291,10 +290,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const estructuringSchema = <T extends ZodTypeAny>(
-    schemaUser: any,
-    schemaElement: any,
-    schemaComplaintType: any
+  const estructuringSchema = (
+    schemaUser: any, //ZodType<SchemaUsers>
+    schemaElement: any, //ZodType<SchemaElements>
+    schemaComplaintType: any //ZodType<SchemaComplaint>
   ) => {
     let schema: any = schemaUser;
     if (page === 1) {
@@ -317,7 +316,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
       setAmountVehicles(0);
       setAmountValue(0);
-      setIsCheckedThirdInjuried(false)
+      setIsCheckedThirdInjuried(false);
     } else if (page === 4) {
       if (isTire && typeComplaintForm.theft) {
         schema = schemaUser
@@ -366,9 +365,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     formState: { errors, touchedFields },
     setValue,
     getValues,
-    trigger,
     control,
-  } = useForm<any>({
+  } = useForm<AllReportSchemas>({
     resolver: zodResolver(schema),
   });
 
@@ -384,7 +382,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   }, [errors]);
   console.log(errors);
 
-  const submitData = (data: AllTypes) => {
+  const submitData = (data: AllReportSchemas) => {
     console.log("todo", data);
 
     validationFormDataReport({
@@ -420,7 +418,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     modalActive,
     isError,
     control,
-    trigger,
     setAmountVehicles,
     amountVehicles,
     thirdPartyVehiclesForm,

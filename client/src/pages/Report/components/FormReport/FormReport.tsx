@@ -55,11 +55,7 @@ function FormReport() {
                   selectedSchemaOne={() => selectFormSchema("vehicle")}
                   selectedSchemaTwo={() => selectFormSchema("electronic")}
                 />
-                <PageButton
-                  changePage={changePage}
-                  page={page}
-                  max={6}
-                />
+                <PageButton changePage={changePage} page={page} max={6} />
               </div>
             </>
           }
@@ -77,11 +73,7 @@ function FormReport() {
                     register={register}
                     touchedFields={touchedFields}
                   />
-                  <PageButton
-                    changePage={changePage}
-                    page={page}
-                    max={6}
-                  />
+                  <PageButton changePage={changePage} page={page} max={6} />
                 </>
               }
             />
@@ -95,11 +87,7 @@ function FormReport() {
                     register={register}
                     touchedFields={touchedFields}
                   />
-                  <PageButton
-                    changePage={changePage}
-                    page={page}
-                    max={6}
-                  />
+                  <PageButton changePage={changePage} page={page} max={6} />
                 </>
               }
             />

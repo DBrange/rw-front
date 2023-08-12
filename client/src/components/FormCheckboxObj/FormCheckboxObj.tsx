@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface Props {
-  register: UseFormRegisterReturn<any>;
+  register: UseFormRegisterReturn<string>;
   setChecked: React.Dispatch<React.SetStateAction<Record<string, boolean> | undefined>>;
   checkeds: Record<string, boolean> | undefined
   thirdVehicle: number;
