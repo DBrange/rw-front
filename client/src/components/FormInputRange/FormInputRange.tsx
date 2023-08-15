@@ -18,6 +18,7 @@ function FormInputRange({ register, setValue, schemaName, control, id }: Props) 
     const value = Math.ceil(parseInt(e.target.value) / 10) * 10;
     setValue(schemaName, value);
   };
+  
   return (
     <div className="flex flex-col">
       <label htmlFor="tireWear">Desgaste de la rueda*</label>

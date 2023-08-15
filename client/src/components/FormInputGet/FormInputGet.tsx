@@ -1,4 +1,5 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { Control, UseFormRegisterReturn } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
 // import { AiFillCheckCircle } from "react-icons/ai";
 
@@ -14,9 +15,36 @@ interface Props {
   placeholder: string;
   touched: boolean;
   checked?: boolean;
+  valueApi: string | number | undefined;
 }
 
-function FormInput({ register, error, type, id, label, placeholder, touched, checked }: Props) {
+function FormInputGet({
+  register,
+  error,
+  type,
+  id,
+  label,
+  placeholder,
+  touched,
+  checked,
+  valueApi,
+}: Props) {
+
+  const [inputValue, setInputValue] = useState<number | string | undefined>('');
+
+  useEffect(() => {
+
+      
+      setInputValue(valueApi);
+
+  }, [valueApi]);
+  
+  const value = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+   setInputValue(valueApi ? valueApi : value);
+  };
+
   return (
     <div
       className={`${
@@ -38,6 +66,8 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
           id={id}
           {...register}
           placeholder={placeholder}
+          onChange={value}
+          value={inputValue}
         />
         {touched && error && (
           <i className="text-red-400 absolute right-2 top-2">
@@ -57,4 +87,4 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
     </div>
   );
 }
-export default FormInput;
+export default FormInputGet;

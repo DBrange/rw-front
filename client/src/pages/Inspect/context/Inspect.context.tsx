@@ -68,6 +68,8 @@ export interface IInspectContext {
   isCheckedOkm: boolean;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
   isPhone: boolean;
+  setVehicleApi: any;
+  vehicleApi: any
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -83,6 +85,13 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
   const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
+
+  const [vehicleApi, setVehicleApi] = useState<any>({
+    description: "",
+    carMake: "",
+    carModel: "",
+    year: "",
+  });
 
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [page, setPage] = useState<number>(0);
@@ -279,6 +288,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     isCheckedOkm,
     setIsPhone,
     isPhone,
+    setVehicleApi,
+    vehicleApi,
   };
 
   return (

@@ -7,6 +7,7 @@ import {
 } from "../../../../components";
 import { useInspectContext } from "../../..";
 import FormUploadImage from "../FormUploadImage/FormUploadImage";
+import FormPlateApi from "../FormPlateApi/FormPlateApi";
 
 function FormVehicleData() {
   const {
@@ -24,15 +25,8 @@ function FormVehicleData() {
 
   return (
     <>
-      <FormInput
-        register={register("schemaVehicle.year", { valueAsNumber: true })}
-        error={errors.schemaVehicle?.year?.message}
-        type="number"
-        id="schemaVehicle.year"
-        label="Año*"
-        placeholder="Ano del vehiculo"
-        touched={touchedFields.schemaVehicle?.year}
-      />
+      <FormPlateApi />
+
       <FormInput
         register={register("schemaVehicle.color")}
         error={errors.schemaVehicle?.color?.message}
@@ -60,7 +54,6 @@ function FormVehicleData() {
         placeholder="Ingrese el tamaño"
         touched={touchedFields.schemaVehicle?.tireSize}
       />
-
       <FormInputRange
         register={register("schemaVehicle.tireWear", { valueAsNumber: true })}
         setValue={setValue}
@@ -68,7 +61,6 @@ function FormVehicleData() {
         control={control}
         id="schemaVehicle.tireWear"
       />
-
       <FormCheckbox
         register={register("schemaVehicle.damage")}
         setChecked={setIsCheckedDamage}
@@ -76,7 +68,6 @@ function FormVehicleData() {
         label={"Daño"}
         instructions="Estable si el vehiculo sufrio algun daño"
       />
-
       <FormInputOptional checked={isCheckedDamage}>
         <>
           <FormInput
@@ -90,24 +81,12 @@ function FormVehicleData() {
           />
         </>
       </FormInputOptional>
-
       <FormUploadImage
         schemaName={"schemaVehicle.images"}
         error={errors.schemaVehicle?.images?.message}
         id="schemaVehicle.images"
         imagesType={"Agregue fotos del vehiculo"}
       />
-
-      <FormInput
-        register={register("schemaVehicle.plate")}
-        error={errors.schemaVehicle?.plate?.message}
-        type="text"
-        id="schemaVehicle.plate"
-        label="Patente*"
-        placeholder="Ingrese la patente"
-        touched={touchedFields.schemaVehicle?.plate}
-      />
-
       <FormCheckbox
         register={register("schemaVehicle.okm")}
         setChecked={setIsCheckedOkm}
@@ -115,7 +94,6 @@ function FormVehicleData() {
         label={"¿Es 0 km?"}
         instructions="Estable si el vehiculo es 0 Km"
       />
-
       <FormCheckbox
         register={register("schemaVehicle.gnc")}
         setChecked={setIsCheckedGnc}
@@ -123,7 +101,6 @@ function FormVehicleData() {
         label={"GNC"}
         instructions="Estable si el vehiculo lleva GNC"
       />
-
       <FormInputOptional checked={isCheckedGnc}>
         <>
           <FormInput
@@ -146,26 +123,6 @@ function FormVehicleData() {
           />
         </>
       </FormInputOptional>
-
-      <FormInput
-        register={register("schemaVehicle.brand")}
-        error={errors.schemaVehicle?.brand?.message}
-        type="text"
-        id="schemaVehicle.brand"
-        label="Marca*"
-        placeholder="Ingresar marca"
-        touched={touchedFields.schemaVehicle?.brand}
-      />
-      <FormInput
-        register={register("schemaVehicle.model")}
-        error={errors.schemaVehicle?.model?.message}
-        type="text"
-        id="schemaVehicle.model"
-        label="Modelo*"
-        placeholder="Ingresar modelo"
-        touched={touchedFields.schemaVehicle?.model}
-      />
-
       <FormSelect
         register={register("schemaVehicle.fuel")}
         error={errors.schemaVehicle?.fuel?.message}

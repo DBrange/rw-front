@@ -1,5 +1,7 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { fetchVehicleInfo } from "../../services";
+import { useInspectContext } from "../../pages";
 // import { AiFillCheckCircle } from "react-icons/ai";
 
 // import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -14,9 +16,39 @@ interface Props {
   placeholder: string;
   touched: boolean;
   checked?: boolean;
+  value?: string | number;
 }
 
-function FormInput({ register, error, type, id, label, placeholder, touched, checked }: Props) {
+function FormInputFetch({
+  register,
+  error,
+  type,
+  id,
+  label,
+  placeholder,
+  touched,
+  checked,
+}: Props) {
+  const { setVehicleApi } = useInspectContext();
+
+  const vehicleInfo = async (
+    e: React.FocusEvent<HTMLInputElement, Element>
+  ) => {
+    const { value } = e.target;
+    const vehicleInfo = await fetchVehicleInfo(value);
+
+    let vehicleObj = {
+      description: "",
+      carMake: "",
+      carModel: "",
+      year: "",
+    };
+
+    const info = vehicleInfo ? (vehicleObj = vehicleInfo) : vehicleObj;
+
+    setVehicleApi(info);
+  };
+
   return (
     <div
       className={`${
@@ -37,6 +69,7 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
           type={type}
           id={id}
           {...register}
+          onBlur={vehicleInfo}
           placeholder={placeholder}
         />
         {touched && error && (
@@ -57,4 +90,4 @@ function FormInput({ register, error, type, id, label, placeholder, touched, che
     </div>
   );
 }
-export default FormInput;
+export default FormInputFetch;

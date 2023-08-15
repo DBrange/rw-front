@@ -80,6 +80,7 @@ export const schemaVehicle = z.object({
     gnc: z.boolean(),
     brand: z.string().min(1).max(20),
     model: z.string().min(1).max(20),
+    make: z.string().min(1).max(20),
     fuel: z.enum(["DIESEL", "GASOLINE"]),
     type: z.enum(["CAMION", "AUTOMOVIL", "MOTOCICLETA"]),
   }),
