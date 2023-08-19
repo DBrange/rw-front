@@ -15,6 +15,7 @@ import {
   schemaVehicleTheftReport,
   schemaThirdInjured,
   schemaThirdPartyVehicleReport,
+  schemaThirdInjuredData,
 } from "../../utilities";
 
 export type SchemaLegalPersonalType = z.infer<typeof schemaLegalPersonal>;
@@ -33,6 +34,8 @@ export type AllInspectSchemas =
       SchemaPhoneType)
   | AllInspectSchemasOptionals;
 
+
+
 export type SchemaElements = SchemaVehicleType | SchemaElectronicType;
 export type SchemaUsers = SchemaPersonalType | SchemaLegalPersonalType;
 
@@ -44,10 +47,17 @@ export type AllInspectSchemasOptionals =
   | SchemaGncType
   | SchemaPhoneType;
 
-export type SchemaVehicleCrashReportType = z.infer<typeof schemaVehicleCrashReport>;
-export type SchemaVehicleTheftReportType = z.infer<typeof schemaVehicleTheftReport>;
-export type SchemaVehicleFireReportType = z.infer<typeof schemaVehicleFireReport>;
-export type schemaVehicleReportTypeType = z.infer<typeof schemaVehicleReport>;
+export type SchemaVehicleCrashReportType = z.infer<
+  typeof schemaVehicleCrashReport
+>;
+export type SchemaVehicleTheftReportType = z.infer<
+  typeof schemaVehicleTheftReport
+>;
+export type SchemaVehicleFireReportType = z.infer<
+  typeof schemaVehicleFireReport
+>;
+export type SchemaThirdInjuredDataType = z.infer<typeof schemaThirdInjuredData>;
+export type SchemaVehicleReportType = z.infer<typeof schemaVehicleReport>;
 export type SchemaThirdInjuredType = z.infer<typeof schemaThirdInjured>;
 export type SchemaElectronicTheftReportType = z.infer<
   typeof schemaElectronicTheftReport
@@ -67,7 +77,7 @@ export type AllReportSchemas =
       SchemaElectronicType &
       SchemaGncType &
       SchemaPhoneType &
-      schemaVehicleReportTypeType &
+      SchemaVehicleReportType &
       SchemaVehicleCrashReportType &
       SchemaVehicleTheftReportType &
       SchemaElectronicTheftReportType &
@@ -75,7 +85,8 @@ export type AllReportSchemas =
       SchemaVehicleCrashReportDataType &
       SchemaThirdInjuredType &
       SchemaThirdPartyVehicleReportType &
-      SchemaIsTireType)
+      SchemaIsTireType &
+      SchemaThirdInjuredDataType)
   | AllReportOptionals;
 
 export type SchemaComplaint =
@@ -91,7 +102,7 @@ export type AllReportOptionals =
   | SchemaElectronicType
   | SchemaGncType
   | SchemaPhoneType
-  | schemaVehicleReportTypeType
+  | SchemaVehicleReportType
   | SchemaVehicleCrashReportType
   | SchemaVehicleTheftReportType
   | SchemaElectronicTheftReportType
@@ -99,4 +110,5 @@ export type AllReportOptionals =
   | SchemaVehicleCrashReportDataType
   | SchemaThirdInjuredType
   | SchemaThirdPartyVehicleReportType
-  | SchemaIsTireType;
+  | SchemaIsTireType
+  | SchemaThirdInjuredDataType;

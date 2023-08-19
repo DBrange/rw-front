@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Control, UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
 // import { AiFillCheckCircle } from "react-icons/ai";
 

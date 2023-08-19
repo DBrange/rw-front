@@ -25,7 +25,7 @@ function FormInspect() {
     changePage,
     isError,
     setIsPhone,
-    isPhone,
+    isPhone
   } = useInspectContext();
   return (
     <>

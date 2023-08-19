@@ -9,7 +9,7 @@ function FormInputOptional({ children, checked }: Props) {
       <div
         className={`${
           checked ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }  grid transition-all duration-1000`}
+        }  grid transition-all duration-1000 w-full`}
       >
         <div className="overflow-hidden">{children}</div>
       </div>

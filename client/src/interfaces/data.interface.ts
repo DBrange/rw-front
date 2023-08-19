@@ -1,10 +1,10 @@
 export interface PersonalData {
-  firstName: string;
+  name: string;
   lastName: string;
-  phoneNumber: number;
+  phoneNumber: string;
   email: string;
   altEmail?: string;
-  gender: "hombre" | "mujer" | "otro";
+  gender: "HOMBRE" | "MUJER" | "OTRO";
   dni: number;
   address: string;
 }
@@ -12,7 +12,7 @@ export interface PersonalData {
 export interface LegalPersonalData {
   companyName: string;
   cuit: number;
-  phoneNumber: number;
+  phoneNumber: string;
   email: string;
   altEmail?: string;
   address: string;
@@ -31,8 +31,8 @@ export interface VehicleData extends PersonalData {
   gnc: boolean;
   brand: string;
   model: string;
-  fuel: "DIESEL" | "GASOLINE";
-  type: "CAMION" | "AUTOMOVIL" | "MOTOCICLETA";
+  fuel: "DIESEL" | "GASOLINA";
+  type: "CAMIONETA" | "AUTOMOVIL" | "MOTOCICLETA";
 }
 export interface LegalVehicleData extends LegalPersonalData {
   year: number;
@@ -47,23 +47,23 @@ export interface LegalVehicleData extends LegalPersonalData {
   gnc: boolean;
   brand: any;
   model: any;
-  fuel: "DIESEL" | "GASOLINE";
-  type: "CAMION" | "AUTOMOVIL" | "MOTOCICLETA";
+  fuel: "DIESEL" | "GASOLINA";
+  type: "CAMIONETA" | "AUTOMOVIL" | "MOTOCICLETA";
 }
 
 export interface ElectronicData extends PersonalData {
-  type: "celular" | "tablet" | "notebook";
-  phoneNumberCel?: number;
+  type: "CELULAR" | "TABLET" | "NOTEBOOK";
+  phoneNumber: string;
   phoneService?: string;
   brand: string;
   model: string;
-  imei?: number;
+  imei: number;
 }
 export interface LegalElectronicData extends LegalPersonalData {
-  type: "celular" | "tablet" | "notebook";
-  phoneNumberCel?: number;
+  type: "CELULAR" | "TABLET" | "NOTEBOOK";
+  phoneNumber: string;
   phoneService?: string;
   brand: string;
   model: string;
-  imei?: number;
+  imei: number;
 }

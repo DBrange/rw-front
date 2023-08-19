@@ -1,19 +1,17 @@
 import useSWRMutation from "swr/mutation";
 import {
-  addInspectionElectronic,
-  addInspectionLegal,
-  addInspectionPersonal,
-  addInspectionVehicle,
-  electronicUrl,
-  legalUrl,
-  personalUrl,
-  vehicleUrl,
+  LegalElectronicUrl,
+  LegalVehicleUrl,
+  PersonalElectronicUrl,
+  PersonalVehicleUrl,
+  addInspectionLegalElectronic,
+  addInspectionLegalVehicle,
+  addInspectionPersonalElectronic,
+  addInspectionPersonalVehicle,
 } from "..";
 import { useState, createContext, useContext, useEffect } from "react";
 import {
   Control,
-  FieldErrors,
-  FieldErrorsImpl,
   FieldValues,
   SubmitHandler,
   UseFormHandleSubmit,
@@ -24,7 +22,7 @@ import {
 } from "react-hook-form";
 import { ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserBtnActive } from "../../../interfaces";
+import { UserBtnActive, VehicleApi } from "../../../interfaces";
 import {
   AllInspectSchemas,
   SchemaElements,
@@ -48,7 +46,7 @@ export interface IInspectContext {
   submitData: (data: AllInspectSchemas) => void;
   selectFormSchema: (name: string) => void;
   handleSubmit: UseFormHandleSubmit<AllInspectSchemas, undefined>;
-  register: UseFormRegister<AllInspectSchemas>;
+  register: UseFormRegister<any>;
   selectingSchema: () => void;
   touchedFields: FieldValues["touched"];
   userBtnActive: UserBtnActive;
@@ -68,8 +66,8 @@ export interface IInspectContext {
   isCheckedOkm: boolean;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
   isPhone: boolean;
-  setVehicleApi: any;
-  vehicleApi: any
+  setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>;
+  vehicleApi: VehicleApi;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -86,7 +84,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
 
-  const [vehicleApi, setVehicleApi] = useState<any>({
+  const [vehicleApi, setVehicleApi] = useState<VehicleApi>({
     description: "",
     carMake: "",
     carModel: "",
@@ -177,8 +175,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   };
 
   const estructuringSchema = (
-    schemaUser: ZodType<SchemaUsers>,
-    schemaElement: ZodType<SchemaElements>
+    schemaUser: any, //ZodType<SchemaUsers>
+    schemaElement: any //ZodType<SchemaElements>
   ) => {
     let schema: any = schemaUser;
     if (page === 1) {
@@ -186,15 +184,16 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     } else if (page === 2) {
       if (activeForm === "vehicle") {
         if (isCheckedGnc) {
-          schema = schema.merge(schemaElement).merge(schemaGnc);
+          schema = schemaUser.merge(schemaElement).merge(schemaGnc);
         } else {
-          schema = schema.merge(schemaElement);
+          schema = schemaUser.merge(schemaElement);
         }
       } else if (activeForm === "electronic") {
         if (isPhone) {
-          schema = schema.merge(schemaElement).merge(schemaPhone);
+          console.log('hola')
+          schema = schemaUser.merge(schemaElement).merge(schemaPhone);
         } else {
-          schema = schema.merge(schemaElement);
+          schema = schemaUser.merge(schemaElement);
         }
       }
     }
@@ -222,33 +221,33 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
   console.log(errors);
 
-  const { trigger: triggerInspectionPersonal } = useSWRMutation(
-    personalUrl,
-    addInspectionPersonal
+  const { trigger: triggerInspectionPersonalVehicle } = useSWRMutation(
+    PersonalVehicleUrl,
+    addInspectionPersonalVehicle
   );
 
-  const { trigger: triggerInspectionLegal } = useSWRMutation(
-    legalUrl,
-    addInspectionLegal
+  const { trigger: triggerInspectionPersonalElectronic } = useSWRMutation(
+    PersonalElectronicUrl,
+    addInspectionPersonalElectronic
   );
 
-  const { trigger: triggerInspectionVehicle } = useSWRMutation(
-    vehicleUrl,
-    addInspectionVehicle
+  const { trigger: triggerInspectionLegalVehicle } = useSWRMutation(
+    LegalVehicleUrl,
+    addInspectionLegalVehicle
   );
 
-  const { trigger: triggerInspectionElectronic } = useSWRMutation(
-    electronicUrl,
-    addInspectionElectronic
+  const { trigger: triggerInspectionLegalElectronic } = useSWRMutation(
+    LegalElectronicUrl,
+    addInspectionLegalElectronic
   );
 
   const triggers = {
-    triggerInspectionPersonal,
-    triggerInspectionLegal,
-    triggerInspectionVehicle,
-    triggerInspectionElectronic,
+    triggerInspectionPersonalVehicle,
+    triggerInspectionPersonalElectronic,
+    triggerInspectionLegalVehicle,
+    triggerInspectionLegalElectronic,
   };
-
+  
   const submitData: SubmitHandler<AllInspectSchemas> = (data) => {
     console.log("todo", data);
     validationFormDataInspect({

@@ -7,7 +7,7 @@ import {
 } from "../../../../components";
 import { useInspectContext } from "../../..";
 import FormUploadImage from "../FormUploadImage/FormUploadImage";
-import FormPlateApi from "../FormPlateApi/FormPlateApi";
+import FormPlateApi from "../../../../components/FormPlateApi/FormPlateApi";
 
 function FormVehicleData() {
   const {
@@ -21,11 +21,20 @@ function FormVehicleData() {
     setIsCheckedGnc,
     isCheckedGnc,
     setIsCheckedOkm,
+    setVehicleApi,
+    vehicleApi,
   } = useInspectContext();
 
   return (
     <>
-      <FormPlateApi />
+      <FormPlateApi
+        schemaName="schemaVehicle"
+        errors={errors}
+        register={register}
+        touchedFields={touchedFields}
+        setVehicleApi={setVehicleApi}
+        vehicleApi={vehicleApi}
+      />
 
       <FormInput
         register={register("schemaVehicle.color")}
@@ -104,22 +113,31 @@ function FormVehicleData() {
       <FormInputOptional checked={isCheckedGnc}>
         <>
           <FormInput
-            register={register("schemaGnc.obleaNumber")}
-            error={errors.schemaGnc?.obleaNumber?.message}
+            register={register("schemaGnc.oblea")}
+            error={errors.schemaGnc?.oblea?.message}
             type="text"
-            id="schemaGnc.obleaNumber"
+            id="schemaGnc.oblea"
             label="Numero de oblea*"
             placeholder="Ingrese el lugar"
-            touched={touchedFields.schemaGnc?.obleaNumber}
+            touched={touchedFields.schemaGnc?.oblea}
           />
           <FormInput
-            register={register("schemaGnc.gncExpiration")}
-            error={errors.schemaGnc?.gncExpiration?.message}
+            register={register("schemaGnc.plate")}
+            error={errors.schemaGnc?.plate?.message}
+            type="text"
+            id="schemaGnc.plate"
+            label="Patente*"
+            placeholder="Ingrse patente"
+            touched={touchedFields.schemaGnc?.plate}
+          />
+          <FormInput
+            register={register("schemaGnc.expireDate")}
+            error={errors.schemaGnc?.expireDate?.message}
             type="date"
-            id="schemaGnc.gncExpiration"
+            id="schemaGnc.expireDate"
             label="Vencimiento*"
             placeholder="Ingrese el lugar"
-            touched={touchedFields.schemaGnc?.gncExpiration}
+            touched={touchedFields.schemaGnc?.expireDate}
           />
         </>
       </FormInputOptional>
@@ -128,7 +146,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.fuel?.message}
         id="schemaVehicle.fuel"
         label="Combustible*"
-        options={["DIESEL", "GASOLINE"]}
+        options={["DIESEL", "GASOLINA"]}
         touched={touchedFields.schemaVehicle?.fuel}
       />
       <FormSelect
@@ -136,7 +154,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.type?.message}
         id="schemaVehicle.type"
         label="Tipo de vehiculo*"
-        options={["CAMION", "AUTOMOVIL", "MOTOCICLETA"]}
+        options={["CAMIONETA", "AUTOMOVIL", "MOTOCICLETA"]}
         touched={touchedFields.schemaVehicle?.type}
       />
     </>

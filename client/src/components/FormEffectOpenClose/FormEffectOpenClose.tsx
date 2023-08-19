@@ -8,14 +8,14 @@ function FormEffectOpenClose({formName, isActive, form }: Props) {
   return (
     <div className="w-full">
       <div
-        className={`grid ${
+        className={`grid w-full ${
           isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        } transition-all duration-1000`}
+        } transition-all duration-1000 `}
       >
         {/* <h3>Datos del usuario</h3> */}
         <div className="overflow-hidden w-full">
           <h2 className="mb-10 text-violet-500 text-xl">{formName}</h2>
-          <div>{form}</div>
+          <div className="w-full">{form}</div>
         </div>
       </div>
     </div>

@@ -4,13 +4,13 @@ import {
   AllInspectSchemas,
   AllReportSchemas,
   SchemaElectronicType,
-  SchemaPhone,
+  SchemaPhoneType,
 } from "../../models";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface Props {
   register: UseFormRegister<AllInspectSchemas | AllReportSchemas>;
-  errors: FieldErrors<SchemaElectronicType & SchemaPhone>;
+  errors: FieldErrors<SchemaElectronicType & SchemaPhoneType>;
   touchedFields: any;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
   isPhone: boolean;
@@ -26,7 +26,7 @@ function FormElectronicData({
   const electronicType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    if (value === "celular") {
+    if (value === "CELULAR") {
       setIsPhone(true);
     } else {
       setIsPhone(false);
@@ -44,13 +44,13 @@ function FormElectronicData({
       <FormInputOptional checked={isPhone}>
         <>
           <FormInput
-            register={register("schemaPhone.phoneNumberCel")}
-            error={errors.schemaPhone?.phoneNumberCel?.message}
+            register={register("schemaPhone.phoneNumber")}
+            error={errors.schemaPhone?.phoneNumber?.message}
             type="text"
-            id="schemaPhone.phoneNumberCel"
+            id="schemaPhone.phoneNumber"
             label="Numero del movil*"
             placeholder="Numero del movil"
-            touched={touchedFields.schemaPhone?.phoneNumberCel}
+            touched={touchedFields.schemaPhone?.phoneNumber}
           />
           <FormInput
             register={register("schemaPhone.phoneService")}

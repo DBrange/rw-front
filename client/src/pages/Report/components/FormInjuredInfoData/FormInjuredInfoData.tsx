@@ -14,13 +14,13 @@ function FormInjuredInfoData({ people }: { people: number }) {
       <h4 className="text-violet-500 text-lg my-5">{`Persona ${people}`}</h4>
 
       <FormInput
-        register={register(`${schema}.firstName`)}
-        error={errorSchema?.firstName?.message}
+        register={register(`${schema}.name`)}
+        error={errorSchema?.name?.message}
         type="text"
-        id={`${schema}.firstName`}
+        id={`${schema}.name`}
         label="Nombre"
         placeholder="Ingrese su nombre"
-        touched={touchedSchema?.firstName}
+        touched={touchedSchema?.name}
       />
       <FormInput
         register={register(`${schema}.lastName`)}
@@ -32,9 +32,16 @@ function FormInjuredInfoData({ people }: { people: number }) {
         touched={touchedSchema?.lastName}
       />
       <FormInput
-        register={register(`${schema}.phoneNumber`, {
-          valueAsNumber: true,
-        })}
+        register={register(`${schema}.birthDate`)}
+        error={errorSchema?.birthDate?.message}
+        type="date"
+        id={`${schema}.birthDate`}
+        label="Fecha de nacimiento"
+        placeholder="Ingrese fecha de nacimiento"
+        touched={touchedSchema?.birthDate}
+      />
+      <FormInput
+        register={register(`${schema}.phoneNumber`)}
         error={errorSchema?.phoneNumber?.message}
         type="number"
         id={`${schema}.phoneNumber`}
@@ -60,11 +67,9 @@ function FormInjuredInfoData({ people }: { people: number }) {
         touched={touchedSchema?.gender}
       />
       <FormInput
-        register={register(`${schema}.dni`, {
-          valueAsNumber: true,
-        })}
+        register={register(`${schema}.dni`)}
         error={errorSchema?.dni?.message}
-        type="number"
+        type="text"
         id={`${schema}.dni`}
         label="DNI"
         placeholder="Ingrese su DNI"

@@ -36,7 +36,7 @@ export interface InjuredInfo{
   lastName: string;
   phoneNumber: number;
   email: string;
-  gender: 'hombre' | 'mujer' | 'otro'
+  gender: 'HOMBRE' | 'MUJER' | 'OTRO'
   dni: number;
   injuries: string;
 }

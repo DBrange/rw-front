@@ -5,6 +5,7 @@ import {
   FormSelect,
 } from "../../../../components";
 import { FormUploadImageReport, useReportContext } from "../../..";
+import { FormPlateApi } from "../../../../components/FormPlateApi";
 
 function FormVehicleDataReport() {
   const {
@@ -15,19 +16,21 @@ function FormVehicleDataReport() {
     isCheckedDamage,
     setIsCheckedGnc,
     isCheckedGnc,
+    vehicleApi,
+    setVehicleApi,
   } = useReportContext();
 
   return (
     <>
-      <FormInput
-        register={register("schemaVehicleReport.year", { valueAsNumber: true })}
-        error={errors.schemaVehicleReport?.year?.message}
-        type="number"
-        id="schemaVehicleReport.year"
-        label="Año*"
-        placeholder="Ano del vehiculo"
-        touched={touchedFields.year}
+      <FormPlateApi
+        schemaName="schemaVehicleReport"
+        errors={errors}
+        register={register}
+        touchedFields={touchedFields}
+        setVehicleApi={setVehicleApi}
+        vehicleApi={vehicleApi}
       />
+
       <FormInput
         register={register("schemaVehicleReport.color")}
         error={errors.schemaVehicleReport?.color?.message}
@@ -66,16 +69,6 @@ function FormVehicleDataReport() {
         imagesType={"Subir imagenes del vehiculo"}
       />
 
-      <FormInput
-        register={register("schemaVehicleReport.plate")}
-        error={errors.schemaVehicleReport?.plate?.message}
-        type="text"
-        id="schemaVehicleReport.plate"
-        label="Patente*"
-        placeholder="Ingrese la patente"
-        touched={touchedFields.schemaVehicleReport?.plate}
-      />
-
       <FormCheckbox
         register={register("schemaVehicleReport.gnc")}
         setChecked={setIsCheckedGnc}
@@ -87,50 +80,31 @@ function FormVehicleDataReport() {
       <FormInputOptional checked={isCheckedGnc}>
         <>
           <FormInput
-            register={register("schemaGnc.obleaNumber")}
-            error={errors.schemaGnc?.obleaNumber?.message}
+            register={register("schemaGnc.oblea")}
+            error={errors.schemaGnc?.oblea?.message}
             type="text"
-            id="schemaGnc.obleaNumber"
+            id="schemaGnc.oblea"
             label="Numero de oblea*"
             placeholder="Ingrese el lugar"
-            touched={touchedFields.schemaGnc?.obleaNumber}
+            touched={touchedFields.schemaGnc?.oblea}
           />
           <FormInput
-            register={register("schemaGnc.gncExpiration")}
-            error={errors.schemaGnc?.gncExpiration?.message}
+            register={register("schemaGnc.expireDate")}
+            error={errors.schemaGnc?.expireDate?.message}
             type="date"
-            id="schemaGnc.gncExpiration"
+            id="schemaGnc.expireDate"
             label="Vencimiento*"
             placeholder="Ingrese el lugar"
-            touched={touchedFields.schemaGnc?.gncExpiration}
+            touched={touchedFields.schemaGnc?.expireDate}
           />
         </>
       </FormInputOptional>
-      <FormInput
-        register={register("schemaVehicleReport.brand")}
-        error={errors.schemaVehicleReport?.brand?.message}
-        type="text"
-        id="schemaVehicleReport.brand"
-        label="Marca*"
-        placeholder="Ingresar marca"
-        touched={touchedFields.schemaVehicleReport?.brand}
-      />
-      <FormInput
-        register={register("schemaVehicleReport.model")}
-        error={errors.schemaVehicleReport?.model?.message}
-        type="text"
-        id="schemaVehicleReport.model"
-        label="Modelo*"
-        placeholder="Ingresar modelo"
-        touched={touchedFields.schemaVehicleReport?.model}
-      />
-
       <FormSelect
         register={register("schemaVehicleReport.fuel")}
         error={errors.schemaVehicleReport?.fuel?.message}
         id="schemaVehicleReport.fuel"
         label="Combustible*"
-        options={["DIESEL", "GASOLINE"]}
+        options={["DIESEL", "GASOLINA"]}
         touched={touchedFields.schemaVehicleReport?.fuel}
       />
       <FormSelect
@@ -138,7 +112,7 @@ function FormVehicleDataReport() {
         error={errors.schemaVehicleReport?.type?.message}
         id="schemaVehicleReport.type"
         label="Tipo de vehiculo*"
-        options={["CAMION", "AUTOMOVIL", "MOTOCICLETA"]}
+        options={["CAMIONETA", "AUTOMOVIL", "MOTOCICLETA"]}
         touched={touchedFields.schemaVehicleReport?.type}
       />
     </>

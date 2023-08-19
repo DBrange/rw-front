@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormInputOptionalAmount, FormTextArea, FormTimeInput } from "..";
+import { FormInputAmount, FormInputOptionalAmount, FormTextArea, FormTimeInput } from "..";
 import {
   FormInput,
   FormCheckbox,
@@ -112,6 +112,16 @@ isCheckedThirdInjuried
         setAmountValue={setAmountValue}
         amountValue={amountValue}
       />
+      <FormInputAmount
+        error={errors.schemaVehicleCrashReportData?.amount?.message}
+        type="number"
+        id="schemaVehicleCrashReportData.amount"
+        label="Cantidad de vehiculos implicados"
+        placeholder="Cantidad de terceros"
+        touched={touchedFields.schemaVehicleCrashReportData?.amount}
+        schemaName={"schemaVehicleCrashReportData.amount"}
+        setAmountValue={setAmountVehicles}
+      />
       <FormCheckbox
         register={register("schemaVehicleCrashReport.friendlyStatement")}
         setChecked={setIsCheckedThirdVehicle}
@@ -121,18 +131,18 @@ isCheckedThirdInjuried
           "Establece un acuerdo de palabra con los demas implicados, donde los datos que usted ingrese en la denuncia, seran enviados por mail a cada una de las partes, en donde todos deben estar de acuerdo con lo ingresado"
         }
       />
-      <FormInputOptionalAmount
+      {/* <FormInputOptionalAmount
         error={errors.schemaVehicleCrashReportData?.amount?.message}
         checked={isCheckedThirdVehicle}
         type="number"
         id="schemaVehicleCrashReportData.amount"
-        label="Cantidad de terceros"
-        placeholder="Ingresar cantidad"
+        label="Cantidad de vehiculos implicados"
+        placeholder="Cantidad de terceros"
         touched={touchedFields.schemaVehicleCrashReportData?.amount}
         schemaName={"schemaVehicleCrashReportData.amount"}
         setAmountValue={setAmountVehicles}
         amountValue={amountVehicles}
-      />
+      /> */}
     </>
   );
 }

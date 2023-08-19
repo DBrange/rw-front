@@ -2,6 +2,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { fetchVehicleInfo } from "../../services";
 import { useInspectContext } from "../../pages";
+import { VehicleApi } from "../../interfaces";
 // import { AiFillCheckCircle } from "react-icons/ai";
 
 // import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -17,6 +18,7 @@ interface Props {
   touched: boolean;
   checked?: boolean;
   value?: string | number;
+  setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>
 }
 
 function FormInputFetch({
@@ -28,8 +30,8 @@ function FormInputFetch({
   placeholder,
   touched,
   checked,
+  setVehicleApi,
 }: Props) {
-  const { setVehicleApi } = useInspectContext();
 
   const vehicleInfo = async (
     e: React.FocusEvent<HTMLInputElement, Element>

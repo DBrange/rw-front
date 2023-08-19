@@ -25,7 +25,7 @@ function FormSelectElecType({ register, error, touched, electronicType }: Props)
         <option value="default" hidden>
           Seleccionar
         </option>
-        {["celular", "tablet", "notebook"].map((el, i) => (
+        {["CELULAR", "TABLET", "NOTEBOOK"].map((el, i) => (
           <option value={el} key={i}>
             {el}
           </option>

@@ -1,3 +1,4 @@
+import useSWRMutation from "swr/mutation";
 import {
   Control,
   FieldValues,
@@ -8,14 +9,12 @@ import {
 } from "react-hook-form";
 import { ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserBtnActive } from "../../../interfaces";
+import { UserBtnActive, VehicleApi } from "../../../interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
 import { TypeComplaintForm } from "../interfaces";
-import { FormInjuredInfoData, FormThirdPartyVehiclesData } from "../..";
+import { FormInjuredInfoData, FormThirdPartyVehiclesData, LegalElectronicUrl, LegalVehicleUrl, PersonalElectronicUrl, PersonalVehicleUrl } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../components";
-import {
-  AllReportSchemas,
-} from "../../../models";
+import { AllReportSchemas } from "../../../models";
 import {
   schemaVehicleCrashReport,
   schemaPersonal,
@@ -33,7 +32,7 @@ import {
   schemaElectronicTheftReport,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
-
+import { addReportPersonalVehicle, addReportPersonalElectronic, addReportLegalVehicle, addReportLegalElectronic } from "../services";
 
 export interface IReportContext {
   userActiveForm: string;
@@ -75,6 +74,8 @@ export interface IReportContext {
   isTire: boolean;
   setIsCheckedThirdInjuried: React.Dispatch<React.SetStateAction<boolean>>;
   isCheckedThirdInjuried: boolean;
+  setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>;
+  vehicleApi: VehicleApi;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -94,6 +95,13 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const [isCheckedOwner, setIsCheckedOwner] =
     useState<Record<string, boolean>>();
   const [isTire, setIsTire] = useState<boolean>(false);
+
+  const [vehicleApi, setVehicleApi] = useState<VehicleApi>({
+    description: "",
+    carMake: "",
+    carModel: "",
+    year: "",
+  });
 
   const [activeForm, setActiveForm] = useState<string>("vehicle");
   const [userActiveForm, setUserActiveForm] = useState<string>("person");
@@ -359,6 +367,33 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setSchema(schema);
   };
 
+  const { trigger: triggerReportPersonalVehicle } = useSWRMutation(
+    PersonalVehicleUrl,
+    addReportPersonalVehicle
+  );
+
+  const { trigger: triggerReportPersonalElectronic } = useSWRMutation(
+    PersonalElectronicUrl,
+    addReportPersonalElectronic
+  );
+
+  const { trigger: triggerReportLegalVehicle } = useSWRMutation(
+    LegalVehicleUrl,
+    addReportLegalVehicle
+  );
+
+  const { trigger: triggerReportLegalElectronic } = useSWRMutation(
+    LegalElectronicUrl,
+    addReportLegalElectronic
+  );
+
+  const triggers = {
+    triggerReportPersonalVehicle,
+    triggerReportPersonalElectronic,
+    triggerReportLegalVehicle,
+    triggerReportLegalElectronic,
+  };
+
   const {
     handleSubmit,
     register,
@@ -370,7 +405,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     resolver: zodResolver(schema),
   });
 
-  console.log(getValues());
+  // console.log(getValues());
 
   useEffect(() => {
     selectingSchema();
@@ -392,6 +427,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       typeComplaintForm,
       data,
       amountValue,
+      triggers,
     });
   };
 
@@ -433,6 +469,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setIsTire,
     setIsCheckedThirdInjuried,
     isCheckedThirdInjuried,
+    setVehicleApi,
+    vehicleApi,
   };
 
   return (

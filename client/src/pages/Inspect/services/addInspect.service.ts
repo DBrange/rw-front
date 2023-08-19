@@ -1,12 +1,17 @@
-import { SchemaElectronicType, SchemaLegalPersonalType, SchemaPersonalType, SchemaVehicleType } from "../../../models"
+import {
+  LegalElectronicType,
+  PersonalElectronicType,
+  PersonalVehicleType,
+  LegalVehicleType,
+} from "../../../models";
 
-export const baseUrl = "http://localhost:3001/v1";
+export const BaseUrl = "http://localhost:3001/v1";
 
-export const personalUrl = baseUrl + "/users/register";
+export const PersonalVehicleUrl = BaseUrl + "/asset/user";
 
- export const addInspectionPersonal = async (
+ export const addInspectionPersonalVehicle = async (
    url: string,
-   { arg }: { arg: SchemaPersonalType }
+   { arg }: { arg: PersonalVehicleType }
  ): Promise<Response> => {
    return fetch(url, {
      method: "POST",
@@ -16,29 +21,13 @@ export const personalUrl = baseUrl + "/users/register";
        "Content-Type": "application/json",
      },
    });
- };
-
-export const legalUrl = baseUrl + "/legal-users/create";
-
-export const addInspectionLegal = async (
-  url: string,
-  { arg }: { arg: SchemaLegalPersonalType }
-): Promise<Response> => {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(arg),
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
 };
  
-export const vehicleUrl = baseUrl + "/vehicle/create";
+export const PersonalElectronicUrl = BaseUrl + "/asset/electronicAsset";
 
- export const addInspectionVehicle = async (
+export const addInspectionPersonalElectronic = async (
    url: string,
-   { arg }: { arg: SchemaVehicleType }
+   { arg }: { arg: PersonalElectronicType }
  ): Promise<Response> => {
    return fetch(url, {
      method: "POST",
@@ -50,11 +39,11 @@ export const vehicleUrl = baseUrl + "/vehicle/create";
    });
  };
 
-export const electronicUrl = baseUrl + "/electronics/create";
+export const LegalVehicleUrl = BaseUrl + "/asset/legalAsset";
 
- export const addInspectionElectronic = async (
+ export const addInspectionLegalVehicle = async (
    url: string,
-   { arg }: { arg: SchemaElectronicType }
+   { arg }: { arg: LegalVehicleType }
  ): Promise<Response> => {
    return fetch(url, {
      method: "POST",
@@ -65,4 +54,23 @@ export const electronicUrl = baseUrl + "/electronics/create";
      },
    });
  };
+
+export const LegalElectronicUrl = BaseUrl + "/asset/electronicAssetL";
+
+ export const addInspectionLegalElectronic = async (
+   url: string,
+   { arg }: { arg: LegalElectronicType }
+ ): Promise<Response> => {
+   return fetch(url, {
+     method: "POST",
+     body: JSON.stringify(arg),
+     credentials: "include",
+     headers: {
+       "Content-Type": "application/json",
+     },
+   });
+};
+ 
+
+
 

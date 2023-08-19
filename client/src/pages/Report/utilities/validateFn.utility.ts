@@ -7,6 +7,7 @@ type ValidationFormDataReport = {
   typeComplaintForm: TypeComplaintForm;
   data: any;
   amountValue?: number;
+  triggers: any
 };
 
 export const validationFormDataReport = ({
@@ -16,27 +17,27 @@ export const validationFormDataReport = ({
   typeComplaintForm,
   data,
   amountValue,
+  triggers,
 }: ValidationFormDataReport) => {
-
-
-    if (amountValue as number > 0) {
-      validationWithInjuries({
-        userActiveForm,
-        activeForm,
-        setModalActive,
-        typeComplaintForm,
-        data,
-      });
-    } else {
-      validationWithoutInjuries({
-        userActiveForm,
-        activeForm,
-        setModalActive,
-        typeComplaintForm,
-        data,
-      });
-    }
-
+  if ((amountValue as number) > 0) {
+    validationWithInjuries({
+      userActiveForm,
+      activeForm,
+      setModalActive,
+      typeComplaintForm,
+      data,
+      triggers,
+    });
+  } else {
+    validationWithoutInjuries({
+      userActiveForm,
+      activeForm,
+      setModalActive,
+      typeComplaintForm,
+      data,
+      triggers,
+    });
+  }
 };
   
 const validationWithInjuries = ({
@@ -125,22 +126,25 @@ const validationWithoutInjuries = ({
   setModalActive,
   typeComplaintForm,
   data,
+  triggers,
 }: ValidationFormDataReport) => {
-  if (activeForm === 'vehicle') {
+  if (activeForm === "vehicle") {
     validationVehicle({
       userActiveForm,
       activeForm,
       setModalActive,
       typeComplaintForm,
       data,
+      triggers,
     });
-  } else if (activeForm === 'electronic') {
+  } else if (activeForm === "electronic") {
     validationElectronic({
       userActiveForm,
       activeForm,
       setModalActive,
       typeComplaintForm,
       data,
+      triggers,
     });
   }
 };
@@ -151,22 +155,25 @@ const validationVehicle = ({
   setModalActive,
   typeComplaintForm,
   data,
+  triggers,
 }: ValidationFormDataReport) => {
-  if (userActiveForm === 'person') {
+  if (userActiveForm === "person") {
     validationPersonal({
       userActiveForm,
       activeForm,
       setModalActive,
       typeComplaintForm,
       data,
+      triggers,
     });
-  } else if(userActiveForm === 'legal') {
+  } else if (userActiveForm === "legal") {
     validationLegalPersonal({
       userActiveForm,
       activeForm,
       setModalActive,
       typeComplaintForm,
       data,
+      triggers,
     });
   }
 };
@@ -177,6 +184,7 @@ const validationElectronic = ({
   setModalActive,
   typeComplaintForm,
   data,
+  triggers,
 }: ValidationFormDataReport) => {
   if (userActiveForm === "person") {
     validationPersonal({
@@ -185,6 +193,7 @@ const validationElectronic = ({
       setModalActive,
       typeComplaintForm,
       data,
+      triggers,
     });
   } else if (userActiveForm === "legal") {
     validationLegalPersonal({
@@ -193,6 +202,7 @@ const validationElectronic = ({
       setModalActive,
       typeComplaintForm,
       data,
+      triggers,
     });
   }
 };

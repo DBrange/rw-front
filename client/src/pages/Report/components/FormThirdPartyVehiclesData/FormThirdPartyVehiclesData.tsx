@@ -86,11 +86,18 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
         touched={touchedSchema?.ownerName}
       />
       <FormInput
-        register={register(`${schema}.ownerDni`, {
-          valueAsNumber: true,
-        })}
+        register={register(`${schema}.ownerLastName`)}
+        error={errorSchema?.ownerLastName?.message}
+        type="text"
+        id={`${schema}.ownerLastName`}
+        label="Apellido del propietario*"
+        placeholder="Ingresar apellido"
+        touched={touchedSchema?.ownerLastName}
+      />
+      <FormInput
+        register={register(`${schema}.ownerDni`)}
         error={errorSchema?.ownerDni?.message}
-        type="number"
+        type="text"
         id={`${schema}.ownerDni`}
         label="DNI del propietario*"
         placeholder="Ingresar DNI"
@@ -106,9 +113,7 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
         touched={touchedSchema?.address}
       />
       <FormInput
-        register={register(`${schema}.phoneNumber`, {
-          valueAsNumber: true,
-        })}
+        register={register(`${schema}.phoneNumber`)}
         error={errorSchema?.phoneNumber?.message}
         type="number"
         id={`${schema}.phoneNumber`}

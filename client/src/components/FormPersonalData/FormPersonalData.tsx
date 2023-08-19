@@ -12,13 +12,13 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
   return (
     <>
       <FormInput
-        register={register("schemaPersonal.firstName")}
-        error={errors.schemaPersonal?.firstName?.message}
+        register={register("schemaPersonal.name")}
+        error={errors.schemaPersonal?.name?.message}
         type="text"
-        id="schemaPersonal.firstName"
+        id="schemaPersonal.name"
         label="Nombre*"
         placeholder="Ingrese su nombre"
-        touched={touchedFields.schemaPersonal?.firstName}
+        touched={touchedFields.schemaPersonal?.name}
       />
       <FormInput
         register={register("schemaPersonal.lastName")}
@@ -30,9 +30,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         touched={touchedFields.schemaPersonal?.lastName}
       />
       <FormInput
-        register={register("schemaPersonal.phoneNumber", {
-          valueAsNumber: true,
-        })}
+        register={register("schemaPersonal.phoneNumber")}
         error={errors.schemaPersonal?.phoneNumber?.message}
         type="number"
         id="schemaPersonal.phoneNumber"
@@ -63,7 +61,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         error={errors.schemaPersonal?.gender?.message}
         id="schemaPersonal.gender"
         label="Genero*"
-        options={["hombre", "mujer", "otro"]}
+        options={["HOMBRE", "MUJER", "OTRO"]}
         touched={touchedFields.schemaPersonal?.gender}
       />
       <FormInput

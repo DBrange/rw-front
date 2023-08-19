@@ -75,9 +75,7 @@ function FormThirdPartyVehicleData() {
         touched={touchedFields.schemaThirdPartyVehicleReport?.ownerName}
       />
       <FormInput
-        register={register("schemaThirdPartyVehicleReport.ownerDni", {
-          valueAsNumber: true,
-        })}
+        register={register("schemaThirdPartyVehicleReport.ownerDni")}
         error={errors.schemaThirdPartyVehicleReport?.ownerDni?.message}
         type="number"
         id="schemaThirdPartyVehicleReport.ownerDni"
@@ -95,9 +93,7 @@ function FormThirdPartyVehicleData() {
         touched={touchedFields.schemaThirdPartyVehicleReport?.address}
       />
       <FormInput
-        register={register("schemaThirdPartyVehicleReport.phoneNumber", {
-          valueAsNumber: true,
-        })}
+        register={register("schemaThirdPartyVehicleReport.phoneNumber")}
         error={errors.schemaThirdPartyVehicleReport?.phoneNumber?.message}
         type="number"
         id="schemaThirdPartyVehicleReport.phoneNumber"
