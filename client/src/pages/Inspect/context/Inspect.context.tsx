@@ -211,6 +211,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     resolver: zodResolver(schema),
   });
 
+  console.log(touchedFields)
+
   useEffect(() => {
     selectingSchema();
 

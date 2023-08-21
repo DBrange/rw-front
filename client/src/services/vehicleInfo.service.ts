@@ -2,7 +2,7 @@ import axios from "axios";
 import { VehicleInfo } from "../models";
 
 export const fetchVehicleInfo = async (plateNumber: string): Promise<VehicleInfo | undefined> => {
-  const username = "didirf5";
+  const username = '' //"didirf5";
   const url = `https://www.regcheck.org.uk/api/reg.asmx/CheckArgentina?RegistrationNumber=${plateNumber}&username=${username}`;
 
   try {
