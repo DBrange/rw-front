@@ -16,7 +16,7 @@ function FormElectronicReportContainer() {
     changePage,
     typeComplaintForm,
     setIsPhone,
-    isPhone,
+    isPhone,trigger
   } = useReportContext();
   return (
     <>
@@ -31,6 +31,7 @@ function FormElectronicReportContainer() {
               touchedFields={touchedFields}
               setIsPhone={setIsPhone}
               isPhone={isPhone}
+              trigger={trigger}
             />
             <PageButton changePage={changePage} page={page} max={4} />
           </>

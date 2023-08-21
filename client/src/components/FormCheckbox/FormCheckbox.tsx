@@ -6,6 +6,7 @@ interface Props {
   id: string;
   label: string;
   instructions: string;
+  trigger: any
 }
 
 function FormCheckbox({
@@ -14,10 +15,12 @@ function FormCheckbox({
   id,
   label,
   instructions,
+  trigger
 }: Props) {
   const check = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     const { checked } = e.currentTarget;
     setChecked(checked);
+    trigger()
   };
 
   return (

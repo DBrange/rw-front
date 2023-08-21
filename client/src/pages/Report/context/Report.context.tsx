@@ -9,10 +9,10 @@ import {
 } from "react-hook-form";
 import { ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserBtnActive, VehicleApi } from "../../../interfaces";
+import { UserBtnActive, VehicleApi } from "../../../models/interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
 import { TypeComplaintForm } from "../interfaces";
-import { FormInjuredInfoData, FormThirdPartyVehiclesData, LegalElectronicUrl, LegalVehicleUrl, PersonalElectronicUrl, PersonalVehicleUrl } from "../..";
+import { FormInjuredInfoData, FormThirdPartyVehiclesData } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../components";
 import { AllReportSchemas } from "../../../models";
 import {
@@ -22,7 +22,6 @@ import {
   schemaVehicleFireReport,
   schemaElectronic,
   schemaLegalPersonal,
-  schemaThirdPartyVehicleReport,
   schemaVehicleReport,
   schemaThirdInjured,
   schemaVehicleCrashReportData,
@@ -32,7 +31,24 @@ import {
   schemaElectronicTheftReport,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
-import { addReportPersonalVehicle, addReportPersonalElectronic, addReportLegalVehicle, addReportLegalElectronic } from "../services";
+import {
+  LegalElectronicTheftUrl,
+  LegalPersonalVehicleFireUrl,
+  LegalPersonalVehicleTheftUrl,
+  LegalVehicleCrashUrl,
+  PersonalElectronicTheftUrl,
+  PersonalVehicleCrashUrl,
+  PersonalVehicleFireUrl,
+  PersonalVehicleTheftUrl,
+  addReportLegalElectronicTheft,
+  addReportLegalPersonalVehicleFire,
+  addReportLegalPersonalVehicleTheft,
+  addReportLegalVehicleCrash,
+  addReportPersonalElectronicTheft,
+  addReportPersonalVehicleCrash,
+  addReportPersonalVehicleFire,
+  addReportPersonalVehicleTheft,
+} from "../services";
 
 export interface IReportContext {
   userActiveForm: string;
@@ -59,7 +75,7 @@ export interface IReportContext {
   control: Control<AllReportSchemas>;
   setAmountVehicles: React.Dispatch<React.SetStateAction<number>>;
   amountVehicles: number;
-  thirdPartyVehiclesForm: () => JSX.Element | null;
+  thirdPartyVehiclesForm: () => JSX.Element | undefined;
   setIsCheckedDamage: React.Dispatch<React.SetStateAction<boolean>>;
   isCheckedDamage: boolean;
   setIsCheckedGnc: React.Dispatch<React.SetStateAction<boolean>>;
@@ -76,6 +92,9 @@ export interface IReportContext {
   isCheckedThirdInjuried: boolean;
   setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>;
   vehicleApi: VehicleApi;
+  trigger: any;
+  setFormNotFound: React.Dispatch<React.SetStateAction<boolean>>;
+  formNotFound: boolean;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -95,11 +114,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const [isCheckedOwner, setIsCheckedOwner] =
     useState<Record<string, boolean>>();
   const [isTire, setIsTire] = useState<boolean>(false);
-
+  const [formNotFound, setFormNotFound] = useState(false);
   const [vehicleApi, setVehicleApi] = useState<VehicleApi>({
-    description: "",
-    carMake: "",
-    carModel: "",
+    brand: "",
+    model: "",
     year: "",
   });
 
@@ -119,11 +137,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     electronic: false,
   });
   const [typeComplaintForm, setTypeComplaitForm] = useState<TypeComplaintForm>({
-    crash: true,
-    theft: false,
+    crash: false,
+    theft: true,
     fire: false,
   });
-  console.log(amountValue);
   const typeComplaint = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -254,10 +271,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const thirdPartyVehiclesForm = (): JSX.Element | null => {
+  const thirdPartyVehiclesForm = () => {
     let vehicles: JSX.Element[] = [];
 
-    if (amountVehicles > 1) {
+    if (amountVehicles > 0) {
       for (let i = 0; i < amountVehicles; i++) {
         vehicles.push(
           <FormThirdPartyVehiclesData key={i + 1} vehicles={i + 1} />
@@ -276,8 +293,27 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           }
         />
       );
-    } else {
-      return null;
+    } else if (amountVehicles === 0) {
+      for (let i = 0; i < 1; i++) {
+        vehicles.push(
+          <FormThirdPartyVehiclesData key={i + 1} vehicles={i + 1} />
+        );
+      }
+
+      return (
+        <FormEffectOpenClose
+          formName={"Vehiculos de terceros"}
+          isActive={
+            typeComplaintForm.crash && page === 6 && amountVehicles === 0
+          }
+          form={
+            <>
+              {vehicles}
+              <PageButton changePage={changePage} page={page} max={6} />
+            </>
+          }
+        />
+      );
     }
   };
 
@@ -327,72 +363,182 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       setIsCheckedThirdInjuried(false);
     } else if (page === 4) {
       if (isTire && typeComplaintForm.theft) {
-        schema = schemaUser
-          .merge(schemaElement)
-          .merge(schemaComplaintType)
-          .merge(schemaIsTire);
+        if (isCheckedGnc) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaGnc)
+            .merge(schemaIsTire);
+        } else {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaIsTire);
+        }
       } else {
-        schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+        if (isPhone) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaPhone);
+        } else if (isCheckedGnc) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaGnc);
+        } else {
+          schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+        }
       }
     } else if (page === 5 && amountValue) {
-      schema = schemaUser
-        .merge(schemaElement)
-        .merge(schemaComplaintType)
-        .merge(schemaThirdInjured);
-    } else if (page === 6) {
-      if (amountValue && amountVehicles < 2) {
+      if (isCheckedGnc) {
         schema = schemaUser
           .merge(schemaElement)
           .merge(schemaComplaintType)
-          .merge(schemaThirdInjured)
-          .merge(schemaThirdPartyVehicleReport);
-      } else if (!amountValue && amountVehicles > 1) {
-        schema = schemaUser
-          .merge(schemaElement)
-          .merge(schemaComplaintType)
-          .merge(schemaVehicleCrashReportData);
-      } else if (amountValue && amountVehicles > 1) {
-        schema = schemaUser
-          .merge(schemaElement)
-          .merge(schemaComplaintType)
-          .merge(schemaThirdInjured)
-          .merge(schemaVehicleCrashReportData);
+          .merge(schemaGnc)
+          .merge(schemaThirdInjured);
       } else {
         schema = schemaUser
           .merge(schemaElement)
           .merge(schemaComplaintType)
-          .merge(schemaThirdPartyVehicleReport);
+          .merge(schemaThirdInjured);
+      }
+    } else if (page === 6) {
+      if (isCheckedGnc) {
+        if (!amountValue && amountVehicles > 0) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaGnc)
+            .merge(schemaVehicleCrashReportData);
+        } else if (amountValue && amountVehicles > 1) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaGnc)
+            .merge(schemaThirdInjured)
+            .merge(schemaVehicleCrashReportData);
+        } else if (!amountValue && !amountVehicles) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaGnc)
+            .merge(schemaVehicleCrashReportData);
+        } else if (amountValue && !amountVehicles) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaGnc)
+            .merge(schemaThirdInjured)
+            .merge(schemaVehicleCrashReportData);
+        }
+      } else {
+        if (!amountValue && amountVehicles > 0) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaVehicleCrashReportData);
+        } else if (amountValue && amountVehicles > 1) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdInjured)
+            .merge(schemaVehicleCrashReportData);
+        } else if (!amountValue && !amountVehicles) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaVehicleCrashReportData);
+        } else if (amountValue && !amountVehicles) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdInjured)
+            .merge(schemaVehicleCrashReportData);
+        }
       }
     }
     setSchema(schema);
   };
 
-  const { trigger: triggerReportPersonalVehicle } = useSWRMutation(
-    PersonalVehicleUrl,
-    addReportPersonalVehicle
+  const {
+    error: erroReportPersonalVehicleCrash,
+    trigger: triggerReportPersonalVehicleCrash,
+  } = useSWRMutation(PersonalVehicleCrashUrl, addReportPersonalVehicleCrash);
+
+  const {
+    error: errorReportPersonalVehicleTheft,
+    trigger: triggerReportPersonalVehicleTheft,
+  } = useSWRMutation(PersonalVehicleTheftUrl, addReportPersonalVehicleTheft);
+
+  const {
+    error: errorReportPersonalVehicleFire,
+    trigger: triggerReportPersonalVehicleFire,
+  } = useSWRMutation(PersonalVehicleFireUrl, addReportPersonalVehicleFire);
+
+  const {
+    error: errorReportLegalVehicleCrash,
+    trigger: triggerReportLegalVehicleCrash,
+  } = useSWRMutation(LegalVehicleCrashUrl, addReportLegalVehicleCrash);
+
+  const {
+    error: errorReportLegalVehicleTheft,
+    trigger: triggerReportLegalVehicleTheft,
+  } = useSWRMutation(
+    LegalPersonalVehicleTheftUrl,
+    addReportLegalPersonalVehicleTheft
   );
 
-  const { trigger: triggerReportPersonalElectronic } = useSWRMutation(
-    PersonalElectronicUrl,
-    addReportPersonalElectronic
+  const {
+    error: errorReportLegalVehicleFire,
+    trigger: triggerReportLegalVehicleFire,
+  } = useSWRMutation(
+    LegalPersonalVehicleFireUrl,
+    addReportLegalPersonalVehicleFire
   );
 
-  const { trigger: triggerReportLegalVehicle } = useSWRMutation(
-    LegalVehicleUrl,
-    addReportLegalVehicle
+  const {
+    error: errorReportPersonalElectronicTheft,
+    trigger: triggerReportPersonalElectronicTheft,
+  } = useSWRMutation(
+    PersonalElectronicTheftUrl,
+    addReportPersonalElectronicTheft
   );
 
-  const { trigger: triggerReportLegalElectronic } = useSWRMutation(
-    LegalElectronicUrl,
-    addReportLegalElectronic
-  );
+  const {
+    error: errorReportLegalElectronicTheft,
+    trigger: triggerReportLegalElectronicTheft,
+  } = useSWRMutation(LegalElectronicTheftUrl, addReportLegalElectronicTheft);
 
   const triggers = {
-    triggerReportPersonalVehicle,
-    triggerReportPersonalElectronic,
-    triggerReportLegalVehicle,
-    triggerReportLegalElectronic,
+    triggerReportPersonalVehicleCrash,
+    triggerReportPersonalVehicleTheft,
+    triggerReportPersonalVehicleFire,
+    triggerReportLegalVehicleCrash,
+    triggerReportLegalVehicleTheft,
+    triggerReportLegalVehicleFire,
+    triggerReportPersonalElectronicTheft,
+    triggerReportLegalElectronicTheft,
   };
+
+  const fetchErrors = [
+    erroReportPersonalVehicleCrash,
+    errorReportPersonalVehicleTheft,
+    errorReportPersonalVehicleFire,
+    errorReportLegalVehicleCrash,
+    errorReportLegalVehicleTheft,
+    errorReportLegalVehicleFire,
+    errorReportPersonalElectronicTheft,
+    errorReportLegalElectronicTheft,
+  ];
+  
+  useEffect(() => {
+    for (const err in fetchErrors) {
+      if (fetchErrors[err]) {
+        setFormNotFound(true);
+      }
+    }
+  }, [...fetchErrors]);
 
   const {
     handleSubmit,
@@ -400,12 +546,12 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     formState: { errors, touchedFields },
     setValue,
     getValues,
+    trigger,
     control,
   } = useForm<AllReportSchemas>({
     resolver: zodResolver(schema),
   });
 
-  // console.log(getValues());
 
   useEffect(() => {
     selectingSchema();
@@ -471,6 +617,9 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     isCheckedThirdInjuried,
     setVehicleApi,
     vehicleApi,
+    trigger,
+    setFormNotFound,
+    formNotFound,
   };
 
   return (

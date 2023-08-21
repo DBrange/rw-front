@@ -1,4 +1,4 @@
-import { FormVehicleReportData, FormCrashData, FormThirdPartyVehicleData, FormThieftData, FormFireData } from "..";
+import { FormVehicleReportData, FormCrashData, FormThieftData, FormFireData } from "..";
 import { useReportContext } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../../components";
 import FormVehicleReportBtn from "../FormVehicleReportBtn/FormReportBtn";
@@ -65,23 +65,7 @@ function FormVehicleReportContainer() {
         {thirdInjuredForm()}
         {thirdPartyVehiclesForm()}
 
-        <FormEffectOpenClose
-          formName={"Vehiculo del tercero"}
-          isActive={
-            typeComplaintForm.crash && page === 6 && amountVehicles <= 1
-          }
-          form={
-            <>
-              <FormThirdPartyVehicleData />
-              <PageButton
-                changePage={changePage}
-                page={page}
-                max={6}
-              />
-            </>
-          }
-        />
-
+       
         <FormEffectOpenClose
           formName={"Robo"}
           isActive={

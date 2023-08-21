@@ -1,72 +1,195 @@
-import {
-  LegalElectronicType,
-  PersonalElectronicType,
-  PersonalVehicleType,
-  LegalVehicleType,
-} from "../../../models";
+import { LegalElectronicTheftType, LegalPersonalVehicleFireType, LegalPersonalVehicleTheftType, LegalVehicleCrashType, PersonalElectronicTheftType, PersonalVehicleCrashType, PersonalVehicleFireType, PersonalVehicleTheftType } from "../types";
 
 export const BaseUrl = "http://localhost:3001/v1";
 
-export const PersonalVehicleUrl = BaseUrl + "/asset/user";
+export const PersonalVehicleCrashUrl = BaseUrl + "";
 
-export const addReportPersonalVehicle = async (
+export const addReportPersonalVehicleCrash = async (
   url: string,
-  { arg }: { arg: PersonalVehicleType }
-): Promise<Response> => {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(arg),
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  { arg }: { arg: PersonalVehicleCrashType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
 };
 
-export const PersonalElectronicUrl = BaseUrl + "/asset/electronicAsset";
+export const PersonalVehicleTheftUrl = BaseUrl + "";
 
-export const addReportPersonalElectronic = async (
+export const addReportPersonalVehicleTheft = async (
   url: string,
-  { arg }: { arg: PersonalElectronicType }
-): Promise<Response> => {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(arg),
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  { arg }: { arg: PersonalVehicleTheftType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
 };
 
-export const LegalVehicleUrl = BaseUrl + "/asset/legalAsset";
+export const PersonalVehicleFireUrl = BaseUrl + "";
 
-export const addReportLegalVehicle = async (
+export const addReportPersonalVehicleFire = async (
   url: string,
-  { arg }: { arg: LegalVehicleType }
-): Promise<Response> => {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(arg),
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  { arg }: { arg: PersonalVehicleFireType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
 };
 
-export const LegalElectronicUrl = BaseUrl + "/asset/electronicAssetL";
+export const LegalVehicleCrashUrl = BaseUrl + "";
 
-export const addReportLegalElectronic = async (
+export const addReportLegalVehicleCrash = async (
   url: string,
-  { arg }: { arg: LegalElectronicType }
-): Promise<Response> => {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(arg),
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  { arg }: { arg: LegalVehicleCrashType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const LegalPersonalVehicleTheftUrl = BaseUrl + "";
+
+export const addReportLegalPersonalVehicleTheft = async (
+  url: string,
+  { arg }: { arg: LegalPersonalVehicleTheftType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const LegalPersonalVehicleFireUrl = BaseUrl + "";
+
+export const addReportLegalPersonalVehicleFire = async (
+  url: string,
+  { arg }: { arg: LegalPersonalVehicleFireType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const PersonalElectronicTheftUrl = BaseUrl + "";
+
+export const addReportPersonalElectronicTheft = async (
+  url: string,
+  { arg }: { arg: PersonalElectronicTheftType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const LegalElectronicTheftUrl = BaseUrl + "";
+
+export const addReportLegalElectronicTheft = async (
+  url: string,
+  { arg }: { arg: LegalElectronicTheftType }
+): Promise<Response | void> => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (err) {
+    throw err;
+  }
 };

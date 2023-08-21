@@ -1,5 +1,5 @@
 import { FormInputFetch, FormInputGet } from "..";
-import { VehicleApi } from "../../interfaces";
+import { VehicleApi } from "../../models/interfaces";
 
 interface Props {
   schemaName: string;
@@ -8,6 +8,7 @@ interface Props {
   touchedFields: any;
   setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>;
   vehicleApi: VehicleApi;
+  setValue: any;
 }
 function FormPlateApi({
   schemaName,
@@ -16,6 +17,7 @@ function FormPlateApi({
   touchedFields,
   setVehicleApi,
   vehicleApi,
+  setValue,
 }: Props) {
   return (
     <div>
@@ -28,6 +30,8 @@ function FormPlateApi({
         placeholder="Ingrese la patente"
         touched={touchedFields[schemaName]?.plate}
         setVehicleApi={setVehicleApi}
+        setValue={setValue}
+        schemaName={schemaName}
       />
       <FormInputGet
         register={register(`${schemaName}.year`, { valueAsNumber: true })}
@@ -37,7 +41,7 @@ function FormPlateApi({
         label="Año*"
         placeholder="Ano del vehiculo"
         touched={touchedFields[schemaName]?.year}
-        valueApi={vehicleApi.year || ""}
+        valueApi={vehicleApi.year}
       />
       <FormInputGet
         register={register(`${schemaName}.brand`)}
@@ -47,7 +51,7 @@ function FormPlateApi({
         label="Marca*"
         placeholder="Ingresar marca"
         touched={touchedFields[schemaName]?.brand}
-        valueApi={vehicleApi.carMake || ""}
+        valueApi={vehicleApi.brand}
       />
       <FormInputGet
         register={register(`${schemaName}.model`)}
@@ -57,7 +61,7 @@ function FormPlateApi({
         label="Modelo*"
         placeholder="Ingresar modelo"
         touched={touchedFields[schemaName]?.model}
-        valueApi={vehicleApi.carModel || ""}
+        valueApi={vehicleApi.model}
       />
     </div>
   );

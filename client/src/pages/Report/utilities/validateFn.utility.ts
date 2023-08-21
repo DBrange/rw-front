@@ -7,7 +7,7 @@ type ValidationFormDataReport = {
   typeComplaintForm: TypeComplaintForm;
   data: any;
   amountValue?: number;
-  triggers: any
+  triggers: any;
 };
 
 export const validationFormDataReport = ({
@@ -39,13 +39,14 @@ export const validationFormDataReport = ({
     });
   }
 };
-  
+
 const validationWithInjuries = ({
   userActiveForm,
   activeForm,
   setModalActive,
   typeComplaintForm,
   data,
+  triggers,
 }: ValidationFormDataReport) => {
   if (
     userActiveForm === "person" &&
@@ -57,13 +58,12 @@ const validationWithInjuries = ({
       data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
       data.schemaThirdInjured &&
-      data.schemaThirdPartyVehicleReport
+      data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportPersonalVehicleCrash(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "person" &&
@@ -77,10 +77,9 @@ const validationWithInjuries = ({
       data.schemaThirdInjured
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportPersonalVehicleFire(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "legal" &&
@@ -88,17 +87,16 @@ const validationWithInjuries = ({
     typeComplaintForm.crash
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
       data.schemaThirdInjured &&
-      data.schemaThirdPartyVehicleReport
+      data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportLegalVehicleCrash(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "legal" &&
@@ -106,16 +104,15 @@ const validationWithInjuries = ({
     typeComplaintForm.fire
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaVehicleReport &&
       data.schemaVehicleFireReport &&
       data.schemaThirdInjured
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportLegalVehicleFire(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   }
 };
@@ -213,6 +210,7 @@ const validationPersonal = ({
   setModalActive,
   typeComplaintForm,
   data,
+  triggers,
 }: ValidationFormDataReport) => {
   if (
     userActiveForm === "person" &&
@@ -223,13 +221,12 @@ const validationPersonal = ({
       data.schemaPersonal &&
       data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
-      data.schemaThirdPartyVehicleReport
+      data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportPersonalVehicleCrash(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "person" &&
@@ -242,10 +239,9 @@ const validationPersonal = ({
       data.schemaVehicleTheftReport
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportPersonalVehicleTheft(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "person" &&
@@ -258,10 +254,9 @@ const validationPersonal = ({
       data.schemaVehicleFireReport
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportPersonalVehicleFire(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "person" &&
@@ -274,10 +269,9 @@ const validationPersonal = ({
       data.schemaElectronicTheftReport
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportPersonalElectronicTheft(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   }
 };
@@ -288,6 +282,7 @@ const validationLegalPersonal = ({
   setModalActive,
   typeComplaintForm,
   data,
+  triggers,
 }: ValidationFormDataReport) => {
   if (
     userActiveForm === "legal" &&
@@ -295,16 +290,15 @@ const validationLegalPersonal = ({
     typeComplaintForm.crash
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaVehicleReport &&
       data.schemaVehicleCrashReport &&
-      data.schemaThirdPartyVehicleReport
+      data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportLegalVehicleCrash(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "legal" &&
@@ -312,15 +306,14 @@ const validationLegalPersonal = ({
     typeComplaintForm.theft
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaVehicleReport &&
       data.schemaVehicleTheftReport
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportLegalVehicleTheft(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "legal" &&
@@ -333,10 +326,9 @@ const validationLegalPersonal = ({
       data.schemaVehicleFireReport
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportLegalVehicleFire(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   } else if (
     userActiveForm === "legal" &&
@@ -349,14 +341,9 @@ const validationLegalPersonal = ({
       data.schemaElectronicTheftReport
     ) {
       setModalActive(true);
-      console.log("siii");
+      triggers.triggerReportLegalElectronicTheft(data);
     } else {
       setModalActive(false);
-      console.log("nooo");
     }
   }
 };
-
-
-
-

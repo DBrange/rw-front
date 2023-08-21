@@ -1,5 +1,7 @@
 import { BsArrowRight } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
+import { ErrorBtn } from "..";
+import { useState } from "react";
 
 interface Props {
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -14,6 +16,8 @@ function PageButton({ changePage, page, max }: Props) {
       behavior: "smooth",
     });
   };
+
+  const [isError, setIsError] = useState<boolean>(false);
 
   return (
     <>
@@ -36,6 +40,7 @@ function PageButton({ changePage, page, max }: Props) {
         {page === max ? (
           <button
             className="relative w-24 h-8 mb-4 rounded-xl bg-violet-500 text-white active:translate-y-1"
+            onClick={() => setIsError(true)}
             type="submit"
           >
             Enviar
@@ -59,31 +64,8 @@ function PageButton({ changePage, page, max }: Props) {
             </i>
           </button>
         )}
-        {/* <button
-            onClick={(e) => {
-              changePage(e);
-              scrollToTop();
-            }}
-            type="button"
-            value="next"
-            className={`${errors && "border-red-400 pointer-events-none"} ${
-              page === max && "pointer-events-none opacity-0"
-            } mb-4 relative w-24 h-8 border-2 border-green-400 rounded-xl active:bg-green-100 active:translate-x-1`}
-          >
-            <i
-              className={`${
-                errors && "text-red-400"
-              } absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-green-400`}
-            >
-              {errors ? (
-                <AiOutlineClose size={20} />
-              ) : (
-                <BsArrowRight size={20} />
-              )}
-            </i>
-          </button>
-       */}
       </div>
+        <ErrorBtn isError={isError} />
     </>
   );
 }

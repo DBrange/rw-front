@@ -17,7 +17,7 @@ function FormVehicleDataReport() {
     setIsCheckedGnc,
     isCheckedGnc,
     vehicleApi,
-    setVehicleApi,
+    setVehicleApi,trigger
   } = useReportContext();
 
   return (
@@ -47,6 +47,7 @@ function FormVehicleDataReport() {
         id="schemaVehicleReport.damage"
         label={"Daño"}
         instructions="Estable si el vehiculo sufrio algun daño"
+        trigger={trigger}
       />
 
       <FormInputOptional checked={isCheckedDamage}>
@@ -75,6 +76,7 @@ function FormVehicleDataReport() {
         id="schemaVehicleReport.gnc"
         label={"GNC"}
         instructions="Estable si el vehiculo lleva GNC"
+        trigger={trigger}
       />
 
       <FormInputOptional checked={isCheckedGnc}>

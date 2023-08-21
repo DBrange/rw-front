@@ -71,7 +71,7 @@ function FormPersonalData({ register, errors, touchedFields }: Props) {
         id="schemaPersonal.birthDate"
         label="Fecha del nacimiento*"
         placeholder="Ingresar fecha"
-        touched={touchedFields.birthDate?.gender}
+        touched={touchedFields.schemaPersonal?.birthDate}
       />
       <FormInput
         register={register("schemaPersonal.dni")}

@@ -8,7 +8,6 @@ import {
 import { useReportContext } from "../../context";
 
 function FormThieftData({ objectType }: { objectType: string }) {
-
   const {
     register,
     errors,
@@ -18,8 +17,8 @@ function FormThieftData({ objectType }: { objectType: string }) {
     setValue,
     control,
     activeForm,
+    trigger,
   } = useReportContext();
-  
 
   return (
     <>
@@ -54,8 +53,9 @@ function FormThieftData({ objectType }: { objectType: string }) {
           register={register("schemaVehicleTheftReport.isTire")}
           setChecked={setIsTire}
           id="schemaVehicleTheftReport.isTire"
-          label={"¿Alguna rueda fue robada?"}
+          label={"¿Algun neumatico fue robado?"}
           instructions=""
+          trigger={trigger}
         />
         <FormInputOptional checked={isTire}>
           <>

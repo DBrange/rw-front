@@ -9,7 +9,7 @@ import {
   addInspectionPersonalElectronic,
   addInspectionPersonalVehicle,
 } from "..";
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext, useEffect, useRef } from "react";
 import {
   Control,
   FieldValues,
@@ -22,7 +22,7 @@ import {
 } from "react-hook-form";
 import { ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserBtnActive, VehicleApi } from "../../../interfaces";
+import { UserBtnActive, VehicleApi } from "../../../models/interfaces";
 import {
   AllInspectSchemas,
   SchemaElements,
@@ -68,6 +68,8 @@ export interface IInspectContext {
   isPhone: boolean;
   setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>;
   vehicleApi: VehicleApi;
+  setFormNotFound: React.Dispatch<React.SetStateAction<boolean>>;
+  formNotFound: boolean;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -83,11 +85,10 @@ export const InspectProvider = ({ children }: ChildrenType) => {
   const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
   const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
-
+  const [formNotFound, setFormNotFound] = useState<boolean>(false);
   const [vehicleApi, setVehicleApi] = useState<VehicleApi>({
-    description: "",
-    carMake: "",
-    carModel: "",
+    brand: "",
+    model: "",
     year: "",
   });
 
@@ -190,7 +191,6 @@ export const InspectProvider = ({ children }: ChildrenType) => {
         }
       } else if (activeForm === "electronic") {
         if (isPhone) {
-          console.log('hola')
           schema = schemaUser.merge(schemaElement).merge(schemaPhone);
         } else {
           schema = schemaUser.merge(schemaElement);
@@ -213,33 +213,30 @@ export const InspectProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     selectingSchema();
-    // if (modalActive) {
-    //   setIsError(true);
-    // } else {
-    //   setIsError(true);
+
   }, [errors]);
 
   console.log(errors);
 
-  const { trigger: triggerInspectionPersonalVehicle } = useSWRMutation(
-    PersonalVehicleUrl,
-    addInspectionPersonalVehicle
-  );
+  const {
+    error: errorInspectionPersonalVehicle,
+    trigger: triggerInspectionPersonalVehicle,
+  } = useSWRMutation(PersonalVehicleUrl, addInspectionPersonalVehicle);
 
-  const { trigger: triggerInspectionPersonalElectronic } = useSWRMutation(
-    PersonalElectronicUrl,
-    addInspectionPersonalElectronic
-  );
+  const {
+    error: errorInspectionPersonalElectronic,
+    trigger: triggerInspectionPersonalElectronic,
+  } = useSWRMutation(PersonalElectronicUrl, addInspectionPersonalElectronic);
 
-  const { trigger: triggerInspectionLegalVehicle } = useSWRMutation(
-    LegalVehicleUrl,
-    addInspectionLegalVehicle
-  );
+  const {
+    error: errorInspectionLegalVehicle,
+    trigger: triggerInspectionLegalVehicle,
+  } = useSWRMutation(LegalVehicleUrl, addInspectionLegalVehicle);
 
-  const { trigger: triggerInspectionLegalElectronic } = useSWRMutation(
-    LegalElectronicUrl,
-    addInspectionLegalElectronic
-  );
+  const {
+    error: errorInspectionLegalElectronic,
+    trigger: triggerInspectionLegalElectronic,
+  } = useSWRMutation(LegalElectronicUrl, addInspectionLegalElectronic);
 
   const triggers = {
     triggerInspectionPersonalVehicle,
@@ -247,7 +244,22 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     triggerInspectionLegalVehicle,
     triggerInspectionLegalElectronic,
   };
-  
+
+  const fetchErrors = [
+    errorInspectionPersonalVehicle,
+    errorInspectionPersonalElectronic,
+    errorInspectionLegalVehicle,
+    errorInspectionLegalElectronic,
+  ];
+
+  useEffect(() => {
+    for (const err in fetchErrors) {
+      if (fetchErrors[err]) {
+        setFormNotFound(true);
+      } 
+    }
+  }, [...fetchErrors]);
+
   const submitData: SubmitHandler<AllInspectSchemas> = (data) => {
     console.log("todo", data);
     validationFormDataInspect({
@@ -289,6 +301,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     isPhone,
     setVehicleApi,
     vehicleApi,
+    setFormNotFound,
+    formNotFound,
   };
 
   return (

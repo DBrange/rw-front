@@ -3,9 +3,16 @@ interface Props {
   error: string | undefined;
   touched: boolean;
   electronicType: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  trigger: any
 }
 
-function FormSelectElecType({ register, error, touched, electronicType }: Props) {
+function FormSelectElecType({ register, error, touched, electronicType, trigger }: Props) {
+  
+  const selectElectronic = (e: React.ChangeEvent<HTMLInputElement>) => {
+    electronicType(e);
+    trigger()
+  }
+
   return (
     <div className="w-[100%] flex flex-col">
       <label
@@ -20,7 +27,7 @@ function FormSelectElecType({ register, error, touched, electronicType }: Props)
         } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
         id={"electronicType"}
         {...register}
-        onClick={(e: React.ChangeEvent<HTMLInputElement>) => electronicType(e)}
+        onClick={selectElectronic}
       >
         <option value="default" hidden>
           Seleccionar

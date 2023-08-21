@@ -1,8 +1,7 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { fetchVehicleInfo } from "../../services";
-import { useInspectContext } from "../../pages";
-import { VehicleApi } from "../../interfaces";
+import { VehicleApi, VehicleInfo } from "../../models/interfaces";
 // import { AiFillCheckCircle } from "react-icons/ai";
 
 // import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -18,7 +17,9 @@ interface Props {
   touched: boolean;
   checked?: boolean;
   value?: string | number;
-  setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>
+  setVehicleApi: React.Dispatch<React.SetStateAction<VehicleApi>>;
+  setValue: any;
+  schemaName: string;
 }
 
 function FormInputFetch({
@@ -31,22 +32,26 @@ function FormInputFetch({
   touched,
   checked,
   setVehicleApi,
+  setValue,
+  schemaName,
 }: Props) {
-
   const vehicleInfo = async (
     e: React.FocusEvent<HTMLInputElement, Element>
   ) => {
     const { value } = e.target;
     const vehicleInfo = await fetchVehicleInfo(value);
 
-    let vehicleObj = {
-      description: "",
-      carMake: "",
-      carModel: "",
+    let vehicleObj: VehicleInfo = {
+      brand: "",
+      model: "",
       year: "",
     };
 
     const info = vehicleInfo ? (vehicleObj = vehicleInfo) : vehicleObj;
+
+    for (const key in info) {
+      setValue(`${schemaName}.${key}`, info[key as keyof VehicleInfo]);
+    }
 
     setVehicleApi(info);
   };

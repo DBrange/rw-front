@@ -14,6 +14,7 @@ interface Props {
   touchedFields: any;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
   isPhone: boolean;
+  trigger: any
 }
 
 function FormElectronicData({
@@ -22,6 +23,7 @@ function FormElectronicData({
   touchedFields,
   setIsPhone,
   isPhone,
+  trigger
 }: Props) {
   const electronicType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -40,6 +42,7 @@ function FormElectronicData({
         error={errors.schemaElectronic?.type?.message}
         touched={touchedFields.schemaElectronic?.type}
         electronicType={electronicType}
+        trigger={trigger}
       />
       <FormInputOptional checked={isPhone}>
         <>

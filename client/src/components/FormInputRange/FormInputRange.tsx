@@ -1,4 +1,9 @@
-import { Control, UseFormRegisterReturn, UseFormSetValue, useWatch } from "react-hook-form";
+import {
+  Control,
+  UseFormRegisterReturn,
+  UseFormSetValue,
+  useWatch,
+} from "react-hook-form";
 
 interface Props {
   register: UseFormRegisterReturn<string>;
@@ -8,20 +13,26 @@ interface Props {
   id: string;
 }
 
-function FormInputRange({ register, setValue, schemaName, control, id }: Props) {
+function FormInputRange({
+  register,
+  setValue,
+  schemaName,
+  control,
+  id,
+}: Props) {
   const slider = useWatch({
     control,
     name: schemaName,
   });
-  
+
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.ceil(parseInt(e.target.value) / 10) * 10;
     setValue(schemaName, value);
   };
-  
+
   return (
     <div className="flex flex-col">
-      <label htmlFor="tireWear">Desgaste de la rueda*</label>
+      <label htmlFor="tireWear">Desgaste del neumatico*</label>
       <div className="flex gap-2">
         <input
           className="flex-1"
@@ -38,4 +49,4 @@ function FormInputRange({ register, setValue, schemaName, control, id }: Props) 
     </div>
   );
 }
-export default FormInputRange
+export default FormInputRange;

@@ -22,7 +22,8 @@ function ButtonChoice({
           isActiveOne ? "bg-violet-500 text-white" : "hover:bg-violet-300"
         } p-2 rounded-s-md basis-1/2`}
         onClick={selectedSchemaOne}
-      >
+        type="button"
+        >
         {btnOne}
       </button>
       <button
@@ -30,7 +31,8 @@ function ButtonChoice({
           isActiveTwo ? "bg-violet-500 text-white" : "hover:bg-violet-300"
         } p-2 rounded-e-md basis-1/2`}
         onClick={selectedSchemaTwo}
-      >
+        type="button"
+        >
         {btnTwo}
       </button>
     </div>

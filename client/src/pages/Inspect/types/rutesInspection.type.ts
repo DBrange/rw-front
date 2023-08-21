@@ -1,4 +1,11 @@
-import { SchemaPersonalType, SchemaVehicleType, SchemaGncType, SchemaElectronicType, SchemaPhoneType, SchemaLegalPersonalType } from ".";
+import {
+  SchemaPersonalType,
+  SchemaVehicleType,
+  SchemaGncType,
+  SchemaElectronicType,
+  SchemaPhoneType,
+  SchemaLegalPersonalType,
+} from "../../../models/types";
 
 export type PersonalVehicleType =
   | (SchemaPersonalType & SchemaVehicleType)

@@ -51,7 +51,6 @@ function FormInputOptionalAmount({
     setInputValue(valueNumber);
     setAmountValue(valueNumber);
     setValue(schemaName, valueNumber);
-    console.log(valueNumber)
   };
 
   return (

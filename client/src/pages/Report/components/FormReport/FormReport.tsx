@@ -98,7 +98,6 @@ function FormReport() {
           </div>
         </section>
       </form>
-      <ErrorBtn isError={isError} />
     </>
   );
 }
