@@ -4,7 +4,7 @@ import { FormCheckbox, FormInput, FormInputOptional } from "../../../../componen
 import { useReportContext } from "../../context";
 
 function FormThirdPartyVehicleData() {
-  const { register, errors, touchedFields } = useReportContext();
+  const { register, errors, touchedFields, trigger } = useReportContext();
   const [isCheckedOwner, setIsCheckedOwner] = useState<boolean>(false);
 
   return (
@@ -124,6 +124,7 @@ function FormThirdPartyVehicleData() {
         id={"schemaThirdPartyVehicleReport.isOwner"}
         label={"¿El conductor es el propietario?"}
         instructions=""
+        trigger={trigger}
       />
       <FormInputOptional checked={isCheckedOwner}>
         <>
@@ -147,7 +148,6 @@ function FormThirdPartyVehicleData() {
           />
         </>
       </FormInputOptional>
-
     </>
   );
 }

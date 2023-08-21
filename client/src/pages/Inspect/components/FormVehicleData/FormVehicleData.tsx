@@ -23,6 +23,7 @@ function FormVehicleData() {
     setIsCheckedOkm,
     setVehicleApi,
     vehicleApi,
+    trigger,
   } = useInspectContext();
 
   return (
@@ -34,6 +35,7 @@ function FormVehicleData() {
         touchedFields={touchedFields}
         setVehicleApi={setVehicleApi}
         vehicleApi={vehicleApi}
+        setValue={setValue}
       />
 
       <FormInput
@@ -50,7 +52,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.tireBrand?.message}
         type="text"
         id="schemaVehicle.tireBrand"
-        label="Marca de las ruedas*"
+        label="Marca de los neumaticos*"
         placeholder="Ingrese la marca"
         touched={touchedFields.schemaVehicle?.tireBrand}
       />
@@ -59,7 +61,7 @@ function FormVehicleData() {
         error={errors.schemaVehicle?.tireSize?.message}
         type="text"
         id="schemaVehicle.tireSize"
-        label="Tamaño de la rueda*"
+        label="Tamaño del neumatico*"
         placeholder="Ingrese el tamaño"
         touched={touchedFields.schemaVehicle?.tireSize}
       />
@@ -76,6 +78,7 @@ function FormVehicleData() {
         id="schemaVehicle.damage"
         label={"Daño"}
         instructions="Estable si el vehiculo sufrio algun daño"
+        trigger={trigger}
       />
       <FormInputOptional checked={isCheckedDamage}>
         <>
@@ -102,6 +105,7 @@ function FormVehicleData() {
         id="schemaVehicle.okm"
         label={"¿Es 0 km?"}
         instructions="Estable si el vehiculo es 0 Km"
+        trigger={trigger}
       />
       <FormCheckbox
         register={register("schemaVehicle.gnc")}
@@ -109,6 +113,7 @@ function FormVehicleData() {
         id="schemaVehicle.gnc"
         label={"GNC"}
         instructions="Estable si el vehiculo lleva GNC"
+        trigger={trigger}
       />
       <FormInputOptional checked={isCheckedGnc}>
         <>

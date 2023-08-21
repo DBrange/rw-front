@@ -25,7 +25,7 @@ function FormInspect() {
     changePage,
     isError,
     setIsPhone,
-    isPhone
+    isPhone,trigger
   } = useInspectContext();
   return (
     <>
@@ -131,6 +131,7 @@ function FormInspect() {
                     touchedFields={touchedFields}
                     setIsPhone={setIsPhone}
                     isPhone={isPhone}
+                    trigger={trigger}
                   />
                   <PageButton
                     changePage={changePage}
@@ -143,7 +144,6 @@ function FormInspect() {
           </div>
         </section>
       </form>
-      <ErrorBtn isError={isError} />
     </>
   );
 }

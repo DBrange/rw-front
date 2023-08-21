@@ -15,7 +15,7 @@ function FormCrashData() {
     setAmountValue,
     setAmountVehicles,
     amountValue,
-    amountVehicles,
+    trigger,
     setIsCheckedThirdInjuried,
 isCheckedThirdInjuried
   } = useReportContext();
@@ -61,6 +61,7 @@ isCheckedThirdInjuried
         id="schemaVehicleCrashReport.injured"
         label={"Lesiones"}
         instructions={"Estable si usted resulto herido"}
+        trigger={trigger}
       />
       <FormInputOptional checked={isCheckedInjuried}>
         <FormInput
@@ -78,6 +79,7 @@ isCheckedThirdInjuried
         setChecked={setIsCheckedAmbulance}
         id="schemaVehicleCrashReport.ambulance"
         label={"Ambulancia"}
+        trigger={trigger}
         instructions={"Establece si estuvo la presencia de una ambulancia"}
       />
       <FormInputOptional checked={isCheckedAmbulance}>
@@ -99,6 +101,7 @@ isCheckedThirdInjuried
         instructions={
           "Establece la cantidad de terceros heridos por el accidente"
         }
+        trigger={trigger}
       />
       <FormInputOptionalAmount
         error={errors.schemaThirdInjured?.amount?.message}
@@ -130,6 +133,7 @@ isCheckedThirdInjuried
         instructions={
           "Establece un acuerdo de palabra con los demas implicados, donde los datos que usted ingrese en la denuncia, seran enviados por mail a cada una de las partes, en donde todos deben estar de acuerdo con lo ingresado"
         }
+        trigger={trigger}
       />
       {/* <FormInputOptionalAmount
         error={errors.schemaVehicleCrashReportData?.amount?.message}

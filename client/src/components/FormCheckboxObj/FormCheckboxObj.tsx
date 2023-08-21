@@ -7,6 +7,7 @@ interface Props {
   thirdVehicle: number;
   id: string;
   label: string;
+  trigger: any
   instructions: string;
 }
 
@@ -17,6 +18,7 @@ function FormCheckboxObj({
   thirdVehicle,
   id,
   label,
+  trigger,
   instructions,
 }: Props) {
   const check = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
@@ -25,6 +27,7 @@ function FormCheckboxObj({
       ...checkeds,
       [`${thirdVehicle}IsCheckedOwner`]: checked,
     });
+    trigger()
   };
 
   return (

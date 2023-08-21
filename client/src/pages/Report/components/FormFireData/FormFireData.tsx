@@ -11,7 +11,7 @@ function FormFireData() {
     setAmountValue,
     amountValue,
     setIsCheckedThirdInjuried,
-isCheckedThirdInjuried
+isCheckedThirdInjuried,trigger
   } = useReportContext();
 
         const [isCheckedInjuried, setIsCheckedInjuried] =
@@ -55,6 +55,7 @@ isCheckedThirdInjuried
         id="schemaVehicleFireReport.injured"
         label={"Lesiones*"}
         instructions={"Estable si usted resulto herido"}
+        trigger={trigger}
       />
       <FormInputOptional checked={isCheckedInjuried}>
         <FormInput
@@ -73,6 +74,7 @@ isCheckedThirdInjuried
         id="schemaVehicleFireReport.ambulance"
         label={"Ambulancia"}
         instructions={"Establece si estuvo la presencia de una ambulancia"}
+        trigger={trigger}
       />
       <FormInputOptional checked={isCheckedAmbulance}>
         <FormInput
@@ -93,6 +95,7 @@ isCheckedThirdInjuried
         instructions={
           "Establece la cantidad de terceros heridos por el accidente"
         }
+        trigger={trigger}
       />
       <FormInputOptionalAmount
         error={errors.schemaVehicleFireReport?.amount?.message}

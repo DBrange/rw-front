@@ -11,6 +11,8 @@ export * from './FormInputOptional';
 export * from './FormInputRange';
 export * from './FormLegalPersonalData';
 export * from './FormPersonalData';
+export * from './FormPlateApi';
 export * from './FormSelect';
 export * from './Modal';
+export * from './ModalError';
 export * from './PageButton';

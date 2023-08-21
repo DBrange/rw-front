@@ -13,7 +13,7 @@ interface Props {
   setAmountValue: any;
 }
 
-function FormInputOptionalAmount({
+function FormInputAmount({
   error,
   type,
   id,
@@ -33,9 +33,8 @@ function FormInputOptionalAmount({
     const valueNumber = !e.target.value ? "" : Number(valueSlice);
 
     setInputValue(valueNumber);
-    setAmountValue(valueNumber);
-    setValue(schemaName, valueNumber);
-    console.log(valueNumber);
+    setAmountValue(valueNumber === "" ? 0 : valueNumber);
+    setValue(schemaName, valueNumber === "" ? 0 : valueNumber);
   };
 
   return (
@@ -82,4 +81,4 @@ function FormInputOptionalAmount({
     </div>
   );
 }
-export default FormInputOptionalAmount;
+export default FormInputAmount;
