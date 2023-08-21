@@ -11,7 +11,6 @@ function FormVehicleReportContainer() {
     typeComplaintForm,
     thirdInjuredForm,
     amountValue,
-    amountVehicles,
     thirdPartyVehiclesForm,
   } = useReportContext();
 

@@ -11,7 +11,7 @@ function InspectContainer({
     <>
       <Modal modalActive={modalActive} />
       <ModalError modalActive={formNotFound} />
-      <div className="w-[90%] m-auto">{children}</div>;
+      <div className="w-[90%] max-w-[600px] m-auto">{children}</div>;
     </>
   );
 }

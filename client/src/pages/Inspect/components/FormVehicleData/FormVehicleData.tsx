@@ -24,6 +24,7 @@ function FormVehicleData() {
     setVehicleApi,
     vehicleApi,
     trigger,
+    
   } = useInspectContext();
 
   return (
@@ -34,8 +35,8 @@ function FormVehicleData() {
         register={register}
         touchedFields={touchedFields}
         setVehicleApi={setVehicleApi}
-        vehicleApi={vehicleApi}
         setValue={setValue}
+        control={control}
       />
 
       <FormInput

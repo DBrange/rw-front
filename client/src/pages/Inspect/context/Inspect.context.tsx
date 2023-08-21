@@ -9,7 +9,7 @@ import {
   addInspectionPersonalElectronic,
   addInspectionPersonalVehicle,
 } from "..";
-import { useState, createContext, useContext, useEffect, useRef } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import {
   Control,
   FieldValues,

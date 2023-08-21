@@ -16,8 +16,8 @@ function FormVehicleDataReport() {
     isCheckedDamage,
     setIsCheckedGnc,
     isCheckedGnc,
-    vehicleApi,
-    setVehicleApi,trigger
+    control,
+    setVehicleApi,trigger, setValue
   } = useReportContext();
 
   return (
@@ -28,7 +28,8 @@ function FormVehicleDataReport() {
         register={register}
         touchedFields={touchedFields}
         setVehicleApi={setVehicleApi}
-        vehicleApi={vehicleApi}
+        setValue={setValue}
+        control={control}
       />
 
       <FormInput

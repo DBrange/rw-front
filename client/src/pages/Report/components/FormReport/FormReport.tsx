@@ -1,7 +1,6 @@
 import { useReportContext } from "../../context";
 import {
   ButtonChoice,
-  ErrorBtn,
   FormEffectOpenClose,
   FormLegalPersonalData,
   FormPersonalData,
@@ -22,7 +21,6 @@ function FormReport() {
     userBtnActive,
     page,
     changePage,
-    isError,
   } = useReportContext();
 
   return (

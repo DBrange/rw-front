@@ -545,7 +545,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     register,
     formState: { errors, touchedFields },
     setValue,
-    getValues,
     trigger,
     control,
   } = useForm<AllReportSchemas>({
