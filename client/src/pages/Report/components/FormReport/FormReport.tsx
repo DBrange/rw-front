@@ -26,38 +26,39 @@ function FormReport() {
   return (
     <>
       <form
-        className="w-[100%] gap-5 flex flex-col items-center"
+        className="w-[100%] flex flex-col items-center"
         onSubmit={handleSubmit(submitData)}
       >
-        <div></div>
-        <FormEffectOpenClose
-          formName={"Tipo de denuncia"}
-          isActive={page === 0}
-          form={
-            <>
-              <div className="w-full flex flex-col justify-center items-center gap-4">
-                <ButtonChoice
-                  btnOne={"Persona particular"}
-                  btnTwo={"Persona juridica"}
-                  isActiveOne={userBtnActive.person}
-                  isActiveTwo={userBtnActive.legal}
-                  selectedSchemaOne={() => selectFormUserSchema("person")}
-                  selectedSchemaTwo={() => selectFormUserSchema("legal")}
-                />
+        <div className="mt-5">
+          <FormEffectOpenClose
+            formName={"Tipo de denuncia"}
+            isActive={page === 0}
+            form={
+              <>
+                <div className="w-full flex flex-col justify-center items-center gap-4">
+                  <ButtonChoice
+                    btnOne={"Persona particular"}
+                    btnTwo={"Persona juridica"}
+                    isActiveOne={userBtnActive.person}
+                    isActiveTwo={userBtnActive.legal}
+                    selectedSchemaOne={() => selectFormUserSchema("person")}
+                    selectedSchemaTwo={() => selectFormUserSchema("legal")}
+                  />
 
-                <ButtonChoice
-                  btnOne={"Vehiculo"}
-                  btnTwo={"Electrodomestico"}
-                  isActiveOne={userBtnActive.vehicle}
-                  isActiveTwo={userBtnActive.electronic}
-                  selectedSchemaOne={() => selectFormSchema("vehicle")}
-                  selectedSchemaTwo={() => selectFormSchema("electronic")}
-                />
-                <PageButton changePage={changePage} page={page} max={6} />
-              </div>
-            </>
-          }
-        />
+                  <ButtonChoice
+                    btnOne={"Vehiculo"}
+                    btnTwo={"Electrodomestico"}
+                    isActiveOne={userBtnActive.vehicle}
+                    isActiveTwo={userBtnActive.electronic}
+                    selectedSchemaOne={() => selectFormSchema("vehicle")}
+                    selectedSchemaTwo={() => selectFormSchema("electronic")}
+                  />
+                  <PageButton changePage={changePage} page={page} max={6} />
+                </div>
+              </>
+            }
+          />
+        </div>
 
         <section className="w-full">
           <div className="">

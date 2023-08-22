@@ -5,7 +5,7 @@ function Report() {
   return (
     <ReportProvider>
       <ReportContainer>
-          <FormReport />
+        <FormReport />
       </ReportContainer>
     </ReportProvider>
   );

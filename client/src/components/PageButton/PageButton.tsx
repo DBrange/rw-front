@@ -21,7 +21,7 @@ function PageButton({ changePage, page, max }: Props) {
 
   return (
     <>
-      <div className="w-full flex justify-between p-1">
+      <div className="w-full flex justify-between p-1 mt-5">
         <button
           onClick={(e) => {
             changePage(e);

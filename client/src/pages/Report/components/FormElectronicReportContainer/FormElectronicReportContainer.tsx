@@ -20,6 +20,7 @@ function FormElectronicReportContainer() {
   } = useReportContext();
   return (
     <>
+      
       <FormEffectOpenClose
         formName={"Electrodomestico"}
         isActive={activeForm === "electronic" && page === 2}

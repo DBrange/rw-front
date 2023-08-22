@@ -1,5 +1,5 @@
 import { useInspectContext } from "../..";
-import { Modal, ModalError } from "../../../../components";
+import { ButtonBack, Modal, ModalError } from "../../../../components";
 
 function InspectContainer({
   children,
@@ -11,6 +11,7 @@ function InspectContainer({
     <>
       <Modal modalActive={modalActive} />
       <ModalError modalActive={formNotFound} />
+      <ButtonBack />
       <div className="w-[90%] max-w-[600px] m-auto">{children}</div>;
     </>
   );
