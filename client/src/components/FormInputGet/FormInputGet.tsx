@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegisterReturn, useWatch } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
 // import { AiFillCheckCircle } from "react-icons/ai";
 
@@ -15,7 +15,8 @@ interface Props {
   placeholder: string;
   touched: boolean;
   checked?: boolean;
-  valueApi: string | number | undefined;
+  schemaName: string
+  control: any
 }
 
 function FormInputGet({
@@ -27,23 +28,14 @@ function FormInputGet({
   placeholder,
   touched,
   checked,
-  valueApi,
+  schemaName,
+  control
 }: Props) {
-
-  const [inputValue, setInputValue] = useState<number | string | undefined>('');
-
-  useEffect(() => {
-
-      
-      setInputValue(valueApi);
-
-  }, [valueApi]);
   
-  const value = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-   setInputValue(valueApi ? valueApi : value);
-  };
+    const value = useWatch({
+      control,
+      name: schemaName,
+    });
 
   return (
     <div
@@ -52,7 +44,7 @@ function FormInputGet({
       } flex flex-col overflow-hidden`}
     >
       <label
-        className={`${touched && error && "text-red-400"} mb-1`}
+        className={`${(touched && error) && "text-red-400"} mb-1`}
         htmlFor={id}
       >
         {label}
@@ -60,16 +52,15 @@ function FormInputGet({
       <div className="relative">
         <input
           className={`${
-            touched && error && "border-red-400"
+            (touched && error )&& "border-red-400"
           } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
           type={type}
           id={id}
-          {...register}
           placeholder={placeholder}
-          onChange={value}
-          value={inputValue}
+          value={value ? value : ''}
+          {...register}
         />
-        {touched && error && (
+        {(touched && error) && (
           <i className="text-red-400 absolute right-2 top-2">
             <AiFillCloseCircle size={16} />
           </i>

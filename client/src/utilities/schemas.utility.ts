@@ -119,7 +119,7 @@ export const schemaGnc = z.object({
           {
             message: "Debe ingresar una fecha valida",
           }
-        );
+        ); 
       })
       .refine((value) => value !== "", { message: "El campo esta vacio" }),
   }),

@@ -1,3 +1,4 @@
+export * from './ButtonBack';
 export * from './ButtonChoice';
 export * from './ErrorBtn';
 export * from './FormCheckbox';

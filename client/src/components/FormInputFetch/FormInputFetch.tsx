@@ -63,7 +63,7 @@ function FormInputFetch({
       } flex flex-col overflow-hidden`}
     >
       <label
-        className={`${touched && error && "text-red-400"} mb-1`}
+        className={`${ error && "text-red-400"} mb-1`}
         htmlFor={id}
       >
         {label}
@@ -71,7 +71,7 @@ function FormInputFetch({
       <div className="relative">
         <input
           className={`${
-            touched && error && "border-red-400"
+             error && "border-red-400"
           } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
           type={type}
           id={id}
@@ -79,7 +79,7 @@ function FormInputFetch({
           onBlur={vehicleInfo}
           placeholder={placeholder}
         />
-        {touched && error && (
+        { error && (
           <i className="text-red-400 absolute right-2 top-2">
             <AiFillCloseCircle size={16} />
           </i>
@@ -88,7 +88,7 @@ function FormInputFetch({
       <span>
         <p
           className={`${
-            touched && error ? "text-red-400" : "text-transparent"
+             error ? "text-red-400" : "text-transparent"
           } text-xs select-none`}
         >
           {error || "a"}

@@ -15,7 +15,9 @@ function Modal({ modalActive }: { modalActive: boolean }) {
           modalActive ? "scale-100" : "scale-50"
         } transition-all duration-200 delay-150 w-[90%] max-w-[700px] bg-white rounded-md p-5 text-center`}
       >
-        <p className="text-violet-500 text-xl">Su Informacion fue enviada</p>
+        <p className="text-violet-500 text-xl mb-5">
+          Su Informacion fue enviada
+        </p>
         <p className=" text-xs">
           Pronto le llegara un mail con toda la informacion
         </p>

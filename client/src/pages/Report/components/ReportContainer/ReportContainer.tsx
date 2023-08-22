@@ -1,5 +1,5 @@
 import { useReportContext } from "../..";
-import { Modal, ModalError } from "../../../../components";
+import { ButtonBack, Modal, ModalError } from "../../../../components";
 
 function ReportContainer({
   children,
@@ -11,7 +11,8 @@ function ReportContainer({
     <>
       <ModalError modalActive={formNotFound} />
       <Modal modalActive={modalActive} />
-      <div className="w-[90%] m-auto">{children}</div>
+      <ButtonBack />
+      <div className="w-[90%] max-w-[600px] m-auto">{children}</div>
     </>
   );
 }
