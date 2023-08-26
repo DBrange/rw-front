@@ -2,7 +2,7 @@ import { LegalElectronicTheftType, LegalPersonalVehicleFireType, LegalPersonalVe
 
 export const BaseUrl = "http://localhost:3001/v1";
 
-export const PersonalVehicleCrashUrl = BaseUrl + "";
+export const PersonalVehicleCrashUrl = BaseUrl + "/sinister/user-vehicle-crash";
 
 export const addReportPersonalVehicleCrash = async (
   url: string,
@@ -26,7 +26,7 @@ export const addReportPersonalVehicleCrash = async (
   }
 };
 
-export const PersonalVehicleTheftUrl = BaseUrl + "";
+export const PersonalVehicleTheftUrl = BaseUrl + "/sinister/user-vehicle-theft";
 
 export const addReportPersonalVehicleTheft = async (
   url: string,
@@ -146,7 +146,7 @@ export const addReportLegalPersonalVehicleFire = async (
   }
 };
 
-export const PersonalElectronicTheftUrl = BaseUrl + "";
+export const PersonalElectronicTheftUrl = BaseUrl + "/sinister/user-electronic-theft";
 
 export const addReportPersonalElectronicTheft = async (
   url: string,

@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { FormUploadImageReport } from "..";
-import { FormCheckbox, FormInput, FormInputOptional } from "../../../../components";
+import {
+  FormCheckbox,
+  FormInput,
+  FormInputOptional,
+} from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormThirdPartyVehicleData() {
@@ -102,10 +106,10 @@ function FormThirdPartyVehicleData() {
         touched={touchedFields.schemaThirdPartyVehicleReport?.phoneNumber}
       />
       <FormUploadImageReport
-        schemaName={"schemaThirdPartyVehicleReport.licencePhoto"}
-        error={errors.schemaThirdPartyVehicleReport?.licencePhoto?.message}
-        id="schemaThirdPartyVehicleReport.licencePhoto"
-        name="licencePhoto"
+        schemaName={"schemaThirdPartyVehicleReport.licensePhoto"}
+        error={errors.schemaThirdPartyVehicleReport?.licensePhoto?.message}
+        id="schemaThirdPartyVehicleReport.licensePhoto"
+        name="licensePhoto"
         imagesType={"Agregue imagenes del registro"}
       />
       <FormInput
@@ -119,9 +123,9 @@ function FormThirdPartyVehicleData() {
       />
 
       <FormCheckbox
-        register={register("schemaThirdPartyVehicleReport.isOwner")}
+        register={register("schemaThirdPartyVehicleReport.notOwner")}
         setChecked={setIsCheckedOwner}
-        id={"schemaThirdPartyVehicleReport.isOwner"}
+        id={"schemaThirdPartyVehicleReport.notOwner"}
         label={"¿El conductor es el propietario?"}
         instructions=""
         trigger={trigger}
@@ -138,6 +142,15 @@ function FormThirdPartyVehicleData() {
             touched={touchedFields.schemaThirdPartyVehicleReport?.name}
           />
           <FormInput
+            register={register("schemaThirdPartyVehicleReport.lastName")}
+            error={errors.schemaThirdPartyVehicleReport?.lastName?.message}
+            type="text"
+            id="schemaThirdPartyVehicleReport.lastName"
+            label="Apellido del conductor*"
+            placeholder="Ingresar apellido"
+            touched={touchedFields.schemaThirdPartyVehicleReport?.lastName}
+          />
+          <FormInput
             register={register("schemaThirdPartyVehicleReport.dni")}
             error={errors.schemaThirdPartyVehicleReport?.dni?.message}
             type="number"
@@ -151,4 +164,4 @@ function FormThirdPartyVehicleData() {
     </>
   );
 }
-export default FormThirdPartyVehicleData
+export default FormThirdPartyVehicleData;

@@ -10,7 +10,7 @@ import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface Props {
   register: UseFormRegister<AllInspectSchemas | AllReportSchemas>;
-  errors: FieldErrors<SchemaElectronicType & SchemaPhoneType>;
+  errors: any //FieldErrors<SchemaElectronicType & SchemaPhoneType>;
   touchedFields: any;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
   isPhone: boolean;

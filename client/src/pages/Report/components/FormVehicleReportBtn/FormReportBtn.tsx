@@ -11,6 +11,7 @@ function FormVehicleReportBtn() {
         } w-full hover:bg-violet-300 p-4 rounded-md`}
         onClick={typeComplaint}
         value="theft"
+        type="button"
       >
         Robo
       </button>
@@ -20,6 +21,7 @@ function FormVehicleReportBtn() {
         } w-full hover:bg-violet-300 p-4 rounded-md`}
         onClick={typeComplaint}
         value="crash"
+        type="button"
       >
         Choque
       </button>
@@ -29,6 +31,7 @@ function FormVehicleReportBtn() {
         } w-full hover:bg-violet-300 p-4 rounded-md`}
         onClick={typeComplaint}
         value="fire"
+        type="button"
       >
         Incendio
       </button>

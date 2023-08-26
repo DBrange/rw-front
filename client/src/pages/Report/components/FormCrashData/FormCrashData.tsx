@@ -14,6 +14,7 @@ function FormCrashData() {
     touchedFields,
     setAmountValue,
     setAmountVehicles,
+    amountVehicles,
     amountValue,
     trigger,
     setIsCheckedThirdInjuried,
@@ -116,14 +117,18 @@ isCheckedThirdInjuried
         amountValue={amountValue}
       />
       <FormInputAmount
-        error={errors.schemaVehicleCrashReportData?.amount?.message}
+        register={register("schemaVehicleCrashReportData.amountVehicles", {
+          valueAsNumber: true,
+        })}
+        error={errors.schemaVehicleCrashReportData?.amountVehicles?.message}
         type="number"
-        id="schemaVehicleCrashReportData.amount"
+        id="schemaVehicleCrashReportData.amountVehicles"
         label="Cantidad de vehiculos implicados"
         placeholder="Cantidad de terceros"
-        touched={touchedFields.schemaVehicleCrashReportData?.amount}
-        schemaName={"schemaVehicleCrashReportData.amount"}
+        touched={touchedFields.schemaVehicleCrashReportData?.amountVehicles}
+        schemaName={"schemaVehicleCrashReportData.amountVehicles"}
         setAmountValue={setAmountVehicles}
+        amountValue={amountVehicles}
       />
       <FormCheckbox
         register={register("schemaVehicleCrashReport.friendlyStatement")}
@@ -135,18 +140,6 @@ isCheckedThirdInjuried
         }
         trigger={trigger}
       />
-      {/* <FormInputOptionalAmount
-        error={errors.schemaVehicleCrashReportData?.amount?.message}
-        checked={isCheckedThirdVehicle}
-        type="number"
-        id="schemaVehicleCrashReportData.amount"
-        label="Cantidad de vehiculos implicados"
-        placeholder="Cantidad de terceros"
-        touched={touchedFields.schemaVehicleCrashReportData?.amount}
-        schemaName={"schemaVehicleCrashReportData.amount"}
-        setAmountValue={setAmountVehicles}
-        amountValue={amountVehicles}
-      /> */}
     </>
   );
 }

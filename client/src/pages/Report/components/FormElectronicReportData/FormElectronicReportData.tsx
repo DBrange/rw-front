@@ -10,6 +10,7 @@ function FormElectronicReportData() {
         } w-full hover:bg-violet-300 p-4 rounded-md`}
         onClick={typeComplaint}
         value="theft"
+        type="button"
       >
         Robo
       </button>

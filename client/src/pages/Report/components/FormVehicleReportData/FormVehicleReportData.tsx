@@ -16,8 +16,11 @@ function FormVehicleDataReport() {
     isCheckedDamage,
     setIsCheckedGnc,
     isCheckedGnc,
+    setIsCheckedOkm,
     control,
-    setVehicleApi,trigger, setValue
+    setVehicleApi,
+    trigger,
+    setValue,
   } = useReportContext();
 
   return (
@@ -70,7 +73,16 @@ function FormVehicleDataReport() {
         name="images"
         imagesType={"Subir imagenes del vehiculo"}
       />
-
+      <div className="hidden">
+        <FormCheckbox
+          register={register("schemaVehicleReport.okm")}
+          setChecked={setIsCheckedOkm}
+          id="schemaVehicle.okm"
+          label={"¿Es 0 km?"}
+          instructions="Estable si el vehiculo es 0 Km"
+          trigger={trigger}
+        />
+      </div>
       <FormCheckbox
         register={register("schemaVehicleReport.gnc")}
         setChecked={setIsCheckedGnc}

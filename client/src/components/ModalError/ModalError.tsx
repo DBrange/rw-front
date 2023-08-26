@@ -8,7 +8,7 @@ function ModalError({ modalActive }: { modalActive: boolean }) {
         modalActive
           ? "pointer-events-auto opacity-1"
           : "pointer-events-none opacity-0"
-      } transition-all duration-200 fixed flex justify-center items-center z-10 w-screen h-screen  bg-black bg-opacity-50`}
+      } transition-all duration-200 fixed flex justify-center items-center w-screen h-screen  bg-black bg-opacity-50 z-50`}
     >
       <div
         className={`${
@@ -21,6 +21,7 @@ function ModalError({ modalActive }: { modalActive: boolean }) {
         </p>
         <p className=" text-xs">Intente enviarlo nuevamente, gracias.</p>
         <button
+          type="button"
           onClick={() => navigate(-1)}
           className="w-[40%] max-w-[200px] h-8 mx-auto mt-5 rounded-xl bg-red-500 text-white active:translate-y-1"
         >
