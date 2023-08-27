@@ -18,16 +18,16 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
 
   const errorSchema =
     errors?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[vehicles - 1]
-      ?.schemaThirdPartyVehicleReport;
+      ;
 
   const touchedSchema =
     touchedFields?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[
       vehicles - 1
-    ]?.schemaThirdPartyVehicleReport;
+    ]
 
   const schema = `schemaVehicleCrashReportData.thirdPartyVehicleInfo.${[
     vehicles - 1,
-  ]}.schemaThirdPartyVehicleReport`;
+  ]}`;
 
   const isCheckedOwnerObj = isCheckedOwner?.[`${vehicles - 1}IsCheckedOwner`];
 
@@ -73,22 +73,22 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
         touched={touchedSchema?.plate}
       />
       <FormInput
-        register={register(`${schema}.insauranceCompany`)}
-        error={errorSchema?.insauranceCompany?.message}
+        register={register(`${schema}.insuranceCompany`)}
+        error={errorSchema?.insuranceCompany?.message}
         type="text"
-        id={`${schema}.insauranceCompany`}
+        id={`${schema}.insuranceCompany`}
         label="Compania de seguros"
         placeholder="Ingrese la compania*"
-        touched={touchedSchema?.insauranceCompany}
+        touched={touchedSchema?.insuranceCompany}
       />
       <FormInput
-        register={register(`${schema}.insaurancePolicy`)}
-        error={errorSchema?.insaurancePolicy?.message}
+        register={register(`${schema}.insurancePolicy`)}
+        error={errorSchema?.insurancePolicy?.message}
         type="text"
-        id={`${schema}.insaurancePolicy`}
+        id={`${schema}.insurancePolicy`}
         label="Poliza de seguros"
         placeholder="Ingrese la poliza*"
-        touched={touchedSchema?.insaurancePolicy}
+        touched={touchedSchema?.insurancePolicy}
       />
       <FormInput
         register={register(`${schema}.ownerName`)}

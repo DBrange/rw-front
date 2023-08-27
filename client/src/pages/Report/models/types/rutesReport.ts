@@ -12,7 +12,7 @@ import {
   SchemaElectronicType,
   SchemaElectronicTheftReportType,
   SchemaPhoneType,
-} from "../../../models";
+} from "../../../../models";
 
 export type PersonalVehicleCrashType =
   | (SchemaPersonalType &
@@ -37,7 +37,9 @@ export type PersonalVehicleCrashType =
       SchemaThirdInjuredType);
 
 export type PersonalVehicleTheftType =
-  | (SchemaPersonalType & SchemaVehicleReportType & SchemaVehicleTheftReportType)
+  | (SchemaPersonalType &
+      SchemaVehicleReportType &
+      SchemaVehicleTheftReportType)
   | (SchemaPersonalType &
       SchemaVehicleReportType &
       SchemaGncType &
@@ -91,7 +93,9 @@ export type LegalVehicleCrashType =
       SchemaThirdInjuredType);
 
 export type LegalPersonalVehicleTheftType =
-  | (SchemaLegalPersonalType & SchemaVehicleReportType & SchemaVehicleTheftReportType)
+  | (SchemaLegalPersonalType &
+      SchemaVehicleReportType &
+      SchemaVehicleTheftReportType)
   | (SchemaLegalPersonalType &
       SchemaVehicleReportType &
       SchemaGncType &
@@ -107,7 +111,9 @@ export type LegalPersonalVehicleTheftType =
       SchemaIsTireType);
 
 export type LegalPersonalVehicleFireType =
-  | (SchemaLegalPersonalType & SchemaVehicleReportType & SchemaVehicleFireReportType)
+  | (SchemaLegalPersonalType &
+      SchemaVehicleReportType &
+      SchemaVehicleFireReportType)
   | (SchemaLegalPersonalType &
       SchemaVehicleReportType &
       SchemaGncType &
@@ -153,5 +159,3 @@ export type LegalElectronicTheftType =
       SchemaElectronicType &
       SchemaPhoneType &
       SchemaElectronicTheftReportType);
-
-

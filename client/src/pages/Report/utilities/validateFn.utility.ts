@@ -19,7 +19,7 @@ export const validationFormDataReport = ({
   amountValue,
   triggers,
 }: ValidationFormDataReport) => {
-
+  console.log({thirdPartyVehicleDTO:data.schemaVehicleCrashReportData}, 'ppppppppppppppp');
   if ((amountValue as number) > 0) {
     validationWithInjuries({
       userActiveForm,
@@ -65,7 +65,7 @@ const validationWithInjuries = ({
       if (data.schemaGnc) {
         const dataObj = {
           userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           crashDTO: data.schemaVehicleCrashReport,
           injuredDTO: data.schemaThirdInjured,
@@ -74,11 +74,79 @@ const validationWithInjuries = ({
         triggers.triggerReportPersonalVehicleCrash(dataObj);
       } else {
         const dataObj = {
-          userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
-          crashDTO: data.schemaVehicleCrashReport,
-          injuredDTO: data.schemaThirdInjured,
-          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+          // userDTO: data.schemaPersonal,
+          // vehicleDTO: data.schemaVehicleReport,
+          // crashDTO: data.schemaVehicleCrashReport,
+          // injuredDTO: data.schemaThirdInjured,
+          // thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+          vehicleDTO: {
+            year: 2023,
+            color: "Blue",
+            brand: "Toyota",
+            model: "Corolla",
+            damage: false,
+            damageLocation: "",
+            images: [
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+            ],
+            plate: "ABC123",
+            gnc: false,
+            fuel: "DIESEL",
+            type: "CAMIONETA",
+            okm: false,
+          },
+          userDTO: {
+            name: "John",
+            lastName: "Doe",
+            birthDate: "1990-01-01",
+            email: "asesincreedaltairr@hotmail.com",
+            altEmail: "john@example.com",
+            address: "123 Main Street",
+            phoneNumber: 123456789,
+            gender: "MUJER",
+            dni: "12345678",
+          },
+          crashDTO: {
+            time: "12:12",
+            date: "1999-05-05",
+            location: "ni idea",
+            details: "nsoe",
+            injured: true,
+            injuries: "nose",
+            ambulance: false,
+            ambulanceTo: "",
+            thirdInjured: true,
+            friendlyStatement: false,
+          },
+          thirdPartyVehicleDTO: {
+            amountVehicles: 1,
+            thirdPartyVehicleInfo: [
+              {
+                brand: "nsoe",
+                model: "nose",
+                year: 1990,
+                plate: "aa111aa",
+                insuranceCompany: "nose",
+                insurancePolicy: "nose",
+                ownerName: "nose",
+                ownerLastName: "nose",
+                ownerDni: "nose",
+                name: "",
+                lastName: "",
+                dni: "",
+                address: "nose",
+                phoneNumber: "nose",
+                licensePhoto: [
+                  "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+                  "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+                ],
+                email: "brangedidier@gmail.com",
+              },
+            ],
+          },
         };
 
         triggers.triggerReportPersonalVehicleCrash(dataObj);
@@ -101,7 +169,7 @@ const validationWithInjuries = ({
       if (data.schemaGnc) {
         const dataObj = {
           userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           fireDTO: data.schemaVehicleFireReport,
           injuredDTO: data.schemaThirdInjured,
@@ -111,7 +179,7 @@ const validationWithInjuries = ({
       } else {
         const dataObj = {
           userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           fireDTO: data.schemaVehicleFireReport,
           injuredDTO: data.schemaThirdInjured,
         };
@@ -137,7 +205,7 @@ const validationWithInjuries = ({
       if (data.schemaGnc) {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           crashDTO: data.schemaVehicleCrashReport,
           injuredDTO: data.schemaThirdInjured,
@@ -148,7 +216,7 @@ const validationWithInjuries = ({
       } else {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           crashDTO: data.schemaVehicleCrashReport,
           injuredDTO: data.schemaThirdInjured,
           thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
@@ -174,7 +242,7 @@ const validationWithInjuries = ({
       if (data.schemaGnc) {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           fireDTO: data.schemaVehicleFireReport,
           injuredDTO: data.schemaThirdInjured,
@@ -184,7 +252,7 @@ const validationWithInjuries = ({
       } else {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           fireDTO: data.schemaVehicleFireReport,
           injuredDTO: data.schemaThirdInjured,
         };
@@ -307,18 +375,20 @@ const validationPersonal = ({
       if (data.schemaGnc) {
         const dataObj = {
           userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           crashDTO: data.schemaVehicleCrashReport,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData
         };
 
         triggers.triggerReportPersonalVehicleCrash(dataObj);
       } else {
         const dataObj = {
           userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           crashDTO: data.schemaVehicleCrashReport,
-        };
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+        }
 
         triggers.triggerReportPersonalVehicleCrash(dataObj);
       }
@@ -340,7 +410,7 @@ const validationPersonal = ({
         if (data?.schemaVehicleTheftReport?.isTire) {
           const dataObj = {
             userDTO: data.schemaPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             gncDTO: data.schemaGnc,
             theftDTO: data.schemaVehicleTheftReport,
             theftTireDTO: data.schemaIsTire,
@@ -349,7 +419,7 @@ const validationPersonal = ({
         } else {
           const dataObj = {
             userDTO: data.schemaPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             gncDTO: data.schemaGnc,
             theftDTO: data.schemaVehicleTheftReport,
           };
@@ -359,7 +429,7 @@ const validationPersonal = ({
         if (data?.schemaVehicleTheftReport?.isTire) {
           const dataObj = {
             userDTO: data.schemaPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             theftDTO: data.schemaVehicleTheftReport,
             theftTireDTO: data.schemaIsTire,
           };
@@ -367,8 +437,9 @@ const validationPersonal = ({
         } else {
           const dataObj = {
             userDTO: data.schemaPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             theftDTO: data.schemaVehicleTheftReport,
+
           };
           triggers.triggerReportPersonalVehicleTheft(dataObj);
         }
@@ -390,7 +461,7 @@ const validationPersonal = ({
       if (data.schemaGnc) {
         const dataObj = {
           userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           fireDTO: data.schemaVehicleFireReport,
         };
@@ -399,7 +470,7 @@ const validationPersonal = ({
       } else {
         const dataObj = {
           userDTO: data.schemaPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           fireDTO: data.schemaVehicleFireReport,
         };
 
@@ -465,17 +536,19 @@ const validationLegalPersonal = ({
       if (data.schemaGnc) {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           crashDTO: data.schemaVehicleCrashReport,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
         };
 
         triggers.triggerReportLegalVehicleCrash(dataObj);
       } else {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           crashDTO: data.schemaVehicleCrashReport,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
         };
 
         triggers.triggerReportLegalVehicleCrash(dataObj);
@@ -498,7 +571,7 @@ const validationLegalPersonal = ({
         if (data?.schemaVehicleTheftReport?.isTire) {
           const dataObj = {
             legalUserDTO: data.schemaLegalPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             gncDTO: data.schemaGnc,
             theftDTO: data.schemaVehicleTheftReport,
             theftTireDTO: data.schemaIsTire,
@@ -507,7 +580,7 @@ const validationLegalPersonal = ({
         } else {
           const dataObj = {
             legalUserDTO: data.schemaLegalPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             gncDTO: data.schemaGnc,
             theftDTO: data.schemaVehicleTheftReport,
           };
@@ -517,7 +590,7 @@ const validationLegalPersonal = ({
         if (data?.schemaVehicleTheftReport?.isTire) {
           const dataObj = {
             legalUserDTO: data.schemaLegalPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             theftDTO: data.schemaVehicleTheftReport,
             theftTireDTO: data.schemaIsTire,
           };
@@ -525,7 +598,7 @@ const validationLegalPersonal = ({
         } else {
           const dataObj = {
             legalUserDTO: data.schemaLegalPersonal,
-            vehicleDTO: data.schemaVehicle,
+            vehicleDTO: data.schemaVehicleReport,
             theftDTO: data.schemaVehicleTheftReport,
           };
           triggers.triggerReportLegalVehicleTheft(dataObj);
@@ -540,7 +613,7 @@ const validationLegalPersonal = ({
     typeComplaintForm.fire
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaVehicleReport &&
       data.schemaVehicleFireReport
     ) {
@@ -548,7 +621,7 @@ const validationLegalPersonal = ({
       if (data.schemaGnc) {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           gncDTO: data.schemaGnc,
           fireDTO: data.schemaVehicleFireReport,
         };
@@ -557,7 +630,7 @@ const validationLegalPersonal = ({
       } else {
         const dataObj = {
           legalUserDTO: data.schemaLegalPersonal,
-          vehicleDTO: data.schemaVehicle,
+          vehicleDTO: data.schemaVehicleReport,
           fireDTO: data.schemaVehicleFireReport,
         };
 
@@ -572,7 +645,7 @@ const validationLegalPersonal = ({
     typeComplaintForm.theft
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaElectronic &&
       data.schemaElectronicTheftReport
     ) {

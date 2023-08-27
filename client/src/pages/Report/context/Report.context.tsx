@@ -11,7 +11,7 @@ import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive, VehicleApi } from "../../../models/interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
-import { TypeComplaintForm } from "../interfaces";
+import { TypeComplaintForm } from "../models/interfaces";
 import { FormInjuredInfoData, FormThirdPartyVehiclesData } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../components";
 import { AllReportSchemas } from "../../../models";
@@ -33,10 +33,10 @@ import {
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 import {
-  LegalElectronicTheftUrl,
+  LegalPersonalElectronicTheftUrl,
   LegalPersonalVehicleFireUrl,
   LegalPersonalVehicleTheftUrl,
-  LegalVehicleCrashUrl,
+  LegalPersonalVehicleCrashUrl,
   PersonalElectronicTheftUrl,
   PersonalVehicleCrashUrl,
   PersonalVehicleFireUrl,
@@ -238,20 +238,20 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         schemaElement = schemaElectronic;
         estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
         if (typeComplaintForm.theft) {
-          schemaComplaintType = schemaVehicleTheftReport;
+          schemaComplaintType = schemaElectronicTheftReport;
           estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
         }
       }
     }
   };
 
-  const [tuple, setTuple] = useState<any>([]);
+  // const [tuple, setTuple] = useState<any>([]);
   
-  const tupleSchema = z.tuple([tuple]) 
+
 
   const thirdInjuredForm = (): JSX.Element | null => {
     let people: JSX.Element[] = [];
-    setTuple([...people])
+    // setTuple([...people])
 
     if (amountValue > 0) {
       for (let i = 0; i < amountValue; i++) {
@@ -279,13 +279,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return null;
     }
   };
-
-  const schemaVehicleCrashReportData = z.object({
-    amountVehicles: z.number(),
-    schemaVehicleCrashReportData: z.object({
-      thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReport),
-    }),
-  });
   
   const thirdPartyVehiclesForm = () => {
     let vehicles: JSX.Element[] = [];
@@ -495,7 +488,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const {
     error: errorReportLegalVehicleCrash,
     trigger: triggerReportLegalVehicleCrash,
-  } = useSWRMutation(LegalVehicleCrashUrl, addReportLegalVehicleCrash);
+  } = useSWRMutation(LegalPersonalVehicleCrashUrl, addReportLegalVehicleCrash);
 
   const {
     error: errorReportLegalVehicleTheft,
@@ -524,7 +517,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const {
     error: errorReportLegalElectronicTheft,
     trigger: triggerReportLegalElectronicTheft,
-  } = useSWRMutation(LegalElectronicTheftUrl, addReportLegalElectronicTheft);
+  } = useSWRMutation(LegalPersonalElectronicTheftUrl, addReportLegalElectronicTheft);
 
   const triggers = {
     triggerReportPersonalVehicleCrash,

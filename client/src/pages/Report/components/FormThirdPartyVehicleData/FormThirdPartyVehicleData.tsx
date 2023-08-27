@@ -52,22 +52,22 @@ function FormThirdPartyVehicleData() {
         touched={touchedFields.schemaThirdPartyVehicleReport?.plate}
       />
       <FormInput
-        register={register("schemaThirdPartyVehicleReport.insauranceCompany")}
-        error={errors.schemaThirdPartyVehicleReport?.insauranceCompany?.message}
+        register={register("schemaThirdPartyVehicleReport.insuranceCompany")}
+        error={errors.schemaThirdPartyVehicleReport?.insuranceCompany?.message}
         type="text"
-        id="schemaThirdPartyVehicleReport.insauranceCompany"
+        id="schemaThirdPartyVehicleReport.insuranceCompany"
         label="Compania de seguros"
         placeholder="Ingrese la compania*"
-        touched={touchedFields.schemaThirdPartyVehicleReport?.insauranceCompany}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.insuranceCompany}
       />
       <FormInput
-        register={register("schemaThirdPartyVehicleReport.insaurancePolicy")}
-        error={errors.schemaThirdPartyVehicleReport?.insaurancePolicy?.message}
+        register={register("schemaThirdPartyVehicleReport.insurancePolicy")}
+        error={errors.schemaThirdPartyVehicleReport?.insurancePolicy?.message}
         type="text"
-        id="schemaThirdPartyVehicleReport.insaurancePolicy"
+        id="schemaThirdPartyVehicleReport.insurancePolicy"
         label="Poliza de seguros"
         placeholder="Ingrese la poliza*"
-        touched={touchedFields.schemaThirdPartyVehicleReport?.insaurancePolicy}
+        touched={touchedFields.schemaThirdPartyVehicleReport?.insurancePolicy}
       />
       <FormInput
         register={register("schemaThirdPartyVehicleReport.ownerName")}

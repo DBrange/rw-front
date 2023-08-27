@@ -305,8 +305,8 @@ export const schemaThirdPartyVehicleReport = z.object({
     brand: z.string().min(1).max(20).trim(),
     model: z.string().min(1).max(20).trim(),
     plate: z.string().min(1).max(20).trim(),
-    insauranceCompany: z.string().min(1).max(20).trim(),
-    insaurancePolicy: z.string().min(1).max(20).trim(),
+    insuranceCompany: z.string().min(1).max(20).trim(),
+    insurancePolicy: z.string().min(1).max(20).trim(),
     ownerName: z.string().min(1).max(20).trim(),
     ownerLastName: z.string().min(1).max(20).trim(),
     ownerDni: z
@@ -338,10 +338,48 @@ export const schemaThirdPartyVehicleReport = z.object({
   }),
 });
 
+export const schemaThirdPartyVehicleReportArr = z.object({
+    year: z.number(),
+    brand: z.string().min(1).max(20).trim(),
+    model: z.string().min(1).max(20).trim(),
+    plate: z.string().min(1).max(20).trim(),
+    insuranceCompany: z.string().min(1).max(20).trim(),
+    insurancePolicy: z.string().min(1).max(20).trim(),
+    ownerName: z.string().min(1).max(20).trim(),
+    ownerLastName: z.string().min(1).max(20).trim(),
+    ownerDni: z
+      .string()
+      .refine((value) => value.length === 8, {
+        message: "El campo debe tener exactamente 8 dígitos.",
+      })
+      .refine((value) => /^\d+$/.test(value), {
+        message: "El campo debe contener solo números.",
+      }),
+    address: z.string().min(1).max(20).trim(),
+    phoneNumber: z
+      .string()
+      .min(1, { message: "Debe ingresar un número" })
+      .regex(/^\d+$/, { message: "Debe contener solo números" }),
+    licensePhoto: z.array(z.string().url()),
+    email: z.string().email(),
+    notOwner: z.boolean(),
+    name: z.string().min(0).max(20).trim(),
+    lastName: z.string().min(0).max(20).trim(),
+    dni: z
+      .string()
+      .refine((value) => value.length === 8 || value.length === 0, {
+        message: "El campo debe tener exactamente 8 dígitos.",
+      })
+      .refine((value) => /^\d+$/.test(value) || value.length === 0, {
+        message: "El campo debe contener solo números.",
+      }),
+  
+});
+
 export const schemaVehicleCrashReportData = z.object({
-  amountVehicles: z.number(),
   schemaVehicleCrashReportData: z.object({
-    thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReport),
+    amountVehicles: z.number(),
+    thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReportArr),
   }),
 });
 
