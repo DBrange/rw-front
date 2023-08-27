@@ -12,6 +12,7 @@ interface InputValue {
 
 function FormTimeInput({ schemaName }: Props) {
   const { setValue } = useReportContext();
+
   const [touched, setTouched] = useState(false);
   const [isString, setIsString] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<InputValue>({
@@ -41,14 +42,17 @@ function FormTimeInput({ schemaName }: Props) {
       ? setIsString(false)
       : setIsString(true);
     const time = `${inputValue.hour}:${inputValue.minute}`;
-    if (!isString) {
+    // if (!isString) {
       setValue(schemaName, time);
-    }
+    // }
   }, [inputValue]);
 
   return (
     <div className="">
-      <label htmlFor="time" className={`${isString && touched && "text-red-400"} mb-1`}>
+      <label
+        htmlFor="time"
+        className={`${isString && touched && "text-red-400"} mb-1`}
+      >
         Horario del suceso*
       </label>
       <div className="flex items-center gap-1">
@@ -61,6 +65,7 @@ function FormTimeInput({ schemaName }: Props) {
           name="hour"
           value={inputValue?.hour}
           onChange={transformToSchedule}
+          onBlur={transformToSchedule}
         />
         <span>:</span>
         <input
@@ -78,7 +83,7 @@ function FormTimeInput({ schemaName }: Props) {
           isString && touched ? "text-red-400" : "text-transparent"
         } text-xs select-none`}
       >
-        {"Debe completar con numeros"}
+        {"Debe ingresar un horario valido"}
       </p>
     </div>
   );

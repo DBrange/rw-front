@@ -1,22 +1,36 @@
 import { FormUploadImageReport } from "..";
-import { FormCheckboxObj, FormInput, FormInputOptional } from "../../../../components";
+import {
+  FormCheckboxObj,
+  FormInput,
+  FormInputOptional,
+} from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
-  const { register, errors, touchedFields, isCheckedOwner, setIsCheckedOwner, trigger } =
-    useReportContext();
+  const {
+    register,
+    errors,
+    touchedFields,
+    isCheckedOwner,
+    setIsCheckedOwner,
+    trigger,
+  } = useReportContext();
 
-    const errorSchema =
-    errors?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[vehicles - 1]?.schemaThirdPartyVehicleReport;
-  
-    const touchedSchema =
-    touchedFields?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[vehicles - 1]?.schemaThirdPartyVehicleReport;
-  
-    const schema = `schemaVehicleCrashReportData.thirdPartyVehicleInfo.${[vehicles - 1]}.schemaThirdPartyVehicleReport`;
+  const errorSchema =
+    errors?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[vehicles - 1]
+      ;
 
-  const isCheckedOwnerObj = isCheckedOwner?.[`${vehicles - 1}IsCheckedOwner`]
+  const touchedSchema =
+    touchedFields?.schemaVehicleCrashReportData?.thirdPartyVehicleInfo?.[
+      vehicles - 1
+    ]
 
-  
+  const schema = `schemaVehicleCrashReportData.thirdPartyVehicleInfo.${[
+    vehicles - 1,
+  ]}`;
+
+  const isCheckedOwnerObj = isCheckedOwner?.[`${vehicles - 1}IsCheckedOwner`];
+
   return (
     <div className="border-b-2 border-violet-500">
       <h4 className="text-violet-500 text-lg my-5">{`Vehiculo ${vehicles}`}</h4>
@@ -59,22 +73,22 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
         touched={touchedSchema?.plate}
       />
       <FormInput
-        register={register(`${schema}.insauranceCompany`)}
-        error={errorSchema?.insauranceCompany?.message}
+        register={register(`${schema}.insuranceCompany`)}
+        error={errorSchema?.insuranceCompany?.message}
         type="text"
-        id={`${schema}.insauranceCompany`}
+        id={`${schema}.insuranceCompany`}
         label="Compania de seguros"
         placeholder="Ingrese la compania*"
-        touched={touchedSchema?.insauranceCompany}
+        touched={touchedSchema?.insuranceCompany}
       />
       <FormInput
-        register={register(`${schema}.insaurancePolicy`)}
-        error={errorSchema?.insaurancePolicy?.message}
+        register={register(`${schema}.insurancePolicy`)}
+        error={errorSchema?.insurancePolicy?.message}
         type="text"
-        id={`${schema}.insaurancePolicy`}
+        id={`${schema}.insurancePolicy`}
         label="Poliza de seguros"
         placeholder="Ingrese la poliza*"
-        touched={touchedSchema?.insaurancePolicy}
+        touched={touchedSchema?.insurancePolicy}
       />
       <FormInput
         register={register(`${schema}.ownerName`)}
@@ -122,10 +136,10 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
         touched={touchedSchema?.phoneNumber}
       />
       <FormUploadImageReport
-        schemaName={`${schema}.licencePhoto`}
-        error={errorSchema?.licencePhoto?.message}
-        id={`${schema}.licencePhoto`}
-        name="licencePhoto"
+        schemaName={`${schema}.licensePhoto`}
+        error={errorSchema?.licensePhoto?.message}
+        id={`${schema}.licensePhoto`}
+        name="licensePhoto"
         imagesType={"Agregue imagenes del registro"}
       />
       <FormInput
@@ -138,12 +152,12 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
         touched={touchedSchema?.email}
       />
       <FormCheckboxObj
-        register={register(`${schema}.isOwner`)}
+        register={register(`${schema}.notOwner`)}
         setChecked={setIsCheckedOwner}
         checkeds={isCheckedOwner}
         thirdVehicle={vehicles - 1}
-        id={`${schema}.isOwner`}
-        label={"¿El conductor es el propietario?"}
+        id={`${schema}.notOwner`}
+        label={"¿El conductor no es el propietario?"}
         instructions=""
         trigger={trigger}
       />
@@ -157,6 +171,15 @@ function FormThirdPartyVehiclesData({ vehicles }: { vehicles: number }) {
             label="Nombre del conductor*"
             placeholder="Ingresar nombre"
             touched={touchedFields.schemaThirdPartyVehicleReport?.name}
+          />
+          <FormInput
+            register={register(`${schema}.lastName`)}
+            error={errors.schemaThirdPartyVehicleReport?.lastName?.message}
+            type="text"
+            id={`${schema}.lastName`}
+            label="Apellido del conductor*"
+            placeholder="Ingresar apellido"
+            touched={touchedFields.schemaThirdPartyVehicleReport?.lastName}
           />
           <FormInput
             register={register(`${schema}.dni`)}

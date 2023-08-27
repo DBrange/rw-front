@@ -63,7 +63,7 @@ function FormInjuredInfoData({ people }: { people: number }) {
         error={errorSchema?.gender?.message}
         id={`${schema}.gender`}
         label="Genero"
-        options={["hombre", "mujer", "otro"]}
+        options={["HOMBRE", "MUJER", "OTRO"]}
         touched={touchedSchema?.gender}
       />
       <FormInput
@@ -91,6 +91,15 @@ function FormInjuredInfoData({ people }: { people: number }) {
         id={`${schema}.date`}
         label="Fecha del suceso"
         placeholder="Ingrese la fecha"
+        touched={touchedSchema?.injuries}
+      />
+      <FormInput
+        register={register(`${schema}.injuries`)}
+        error={errorSchema?.injuries?.message}
+        type="text"
+        id={`${schema}.injuries`}
+        label="Lesiones"
+        placeholder="Tipo de lesiones"
         touched={touchedSchema?.injuries}
       />
     </div>

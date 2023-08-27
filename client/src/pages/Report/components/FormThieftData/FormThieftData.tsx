@@ -50,9 +50,9 @@ function FormThieftData({ objectType }: { objectType: string }) {
         } `}
       >
         <FormCheckbox
-          register={register("schemaVehicleTheftReport.isTire")}
+          register={register(`${objectType}.isTire`)}
           setChecked={setIsTire}
-          id="schemaVehicleTheftReport.isTire"
+          id={`${objectType}.isTire`}
           label={"¿Algun neumatico fue robado?"}
           instructions=""
           trigger={trigger}
@@ -81,11 +81,11 @@ function FormThieftData({ objectType }: { objectType: string }) {
         </FormInputOptional>
       </div>
       <FormUploadImageReport
-        schemaName={`${objectType}.images`}
-        error={errors.objectType?.images?.message}
-        id={`${objectType}.images`}
-        name="imagesFire"
-        imagesType="Agregue imagen de la denuncia"
+        schemaName={`${objectType}.reportPhoto`}
+        error={errors[`${objectType}`]?.reportPhoto?.message}
+        id={`${objectType}.reportPhoto`}
+        name={`${objectType}.reportPhoto`}
+        imagesType="Agregar foto de la denuncia"
       />
     </>
   );

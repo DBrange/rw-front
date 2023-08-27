@@ -11,4 +11,4 @@ export * from "./components/FormThieftData";
 export * from "./components/ReportContainer";
 export * from "./components";
 export * from "./context";
-export * from "./interfaces";
+export * from "./models/interfaces";

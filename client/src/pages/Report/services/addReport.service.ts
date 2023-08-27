@@ -1,8 +1,17 @@
-import { LegalElectronicTheftType, LegalPersonalVehicleFireType, LegalPersonalVehicleTheftType, LegalVehicleCrashType, PersonalElectronicTheftType, PersonalVehicleCrashType, PersonalVehicleFireType, PersonalVehicleTheftType } from "../types";
+import {
+  LegalElectronicTheftType,
+  LegalPersonalVehicleFireType,
+  LegalPersonalVehicleTheftType,
+  LegalVehicleCrashType,
+  PersonalElectronicTheftType,
+  PersonalVehicleCrashType,
+  PersonalVehicleFireType,
+  PersonalVehicleTheftType,
+} from "../models/types";
 
 export const BaseUrl = "http://localhost:3001/v1";
 
-export const PersonalVehicleCrashUrl = BaseUrl + "";
+export const PersonalVehicleCrashUrl = BaseUrl + "/sinister/user-vehicle-crash";
 
 export const addReportPersonalVehicleCrash = async (
   url: string,
@@ -26,7 +35,7 @@ export const addReportPersonalVehicleCrash = async (
   }
 };
 
-export const PersonalVehicleTheftUrl = BaseUrl + "";
+export const PersonalVehicleTheftUrl = BaseUrl + "/sinister/user-vehicle-theft";
 
 export const addReportPersonalVehicleTheft = async (
   url: string,
@@ -50,7 +59,7 @@ export const addReportPersonalVehicleTheft = async (
   }
 };
 
-export const PersonalVehicleFireUrl = BaseUrl + "";
+export const PersonalVehicleFireUrl = BaseUrl + "/sinister/user-vehicle-fire";
 
 export const addReportPersonalVehicleFire = async (
   url: string,
@@ -74,7 +83,7 @@ export const addReportPersonalVehicleFire = async (
   }
 };
 
-export const LegalVehicleCrashUrl = BaseUrl + "";
+export const LegalPersonalVehicleCrashUrl = BaseUrl + "/sinister/legalUser-vehicle-crash";
 
 export const addReportLegalVehicleCrash = async (
   url: string,
@@ -98,7 +107,8 @@ export const addReportLegalVehicleCrash = async (
   }
 };
 
-export const LegalPersonalVehicleTheftUrl = BaseUrl + "";
+export const LegalPersonalVehicleTheftUrl =
+  BaseUrl + "/sinister/legalUser-vehicle-theft";
 
 export const addReportLegalPersonalVehicleTheft = async (
   url: string,
@@ -122,7 +132,8 @@ export const addReportLegalPersonalVehicleTheft = async (
   }
 };
 
-export const LegalPersonalVehicleFireUrl = BaseUrl + "";
+export const LegalPersonalVehicleFireUrl =
+  BaseUrl + "/sinister/legalUser-vehicle-fire";
 
 export const addReportLegalPersonalVehicleFire = async (
   url: string,
@@ -146,7 +157,7 @@ export const addReportLegalPersonalVehicleFire = async (
   }
 };
 
-export const PersonalElectronicTheftUrl = BaseUrl + "";
+export const PersonalElectronicTheftUrl = BaseUrl + "/sinister/user-electronic-theft";
 
 export const addReportPersonalElectronicTheft = async (
   url: string,
@@ -170,7 +181,8 @@ export const addReportPersonalElectronicTheft = async (
   }
 };
 
-export const LegalElectronicTheftUrl = BaseUrl + "";
+export const LegalPersonalElectronicTheftUrl =
+  BaseUrl + "/sinister/legalUser-electronic-theft";
 
 export const addReportLegalElectronicTheft = async (
   url: string,

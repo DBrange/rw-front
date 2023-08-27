@@ -119,7 +119,7 @@ export const schemaGnc = z.object({
           {
             message: "Debe ingresar una fecha valida",
           }
-        ); 
+        );
       })
       .refine((value) => value !== "", { message: "El campo esta vacio" }),
   }),
@@ -183,7 +183,9 @@ export const schemaIsTire = z.object({
 
 export const schemaVehicleTheftReport = z.object({
   schemaVehicleTheftReport: z.object({
-    time: z.string().min(1).max(20).trim(),
+    time: z.string().refine((value) => value.length === 5, {
+      message: "Debe ingresar un horario valido",
+    }),
     date: z
       .string()
       .refine((value) => {
@@ -206,7 +208,9 @@ export const schemaVehicleTheftReport = z.object({
 
 export const schemaVehicleFireReport = z.object({
   schemaVehicleFireReport: z.object({
-    time: z.string().min(1).max(20).trim(),
+    time: z.string().refine((value) => value.length === 5, {
+      message: "Debe ingresar un horario valido",
+    }),
     date: z
       .string()
       .refine((value) => {
@@ -250,6 +254,7 @@ export const schemaElectronicTheftReport = z.object({
       .refine((value) => value !== "", { message: "El campo esta vacio" }),
     location: z.string().min(1).trim(),
     reportPhoto: z.array(z.string().url()),
+    isTire: z.boolean(),
   }),
 });
 
@@ -284,7 +289,7 @@ export const schemaThirdInjuredData = z.object({
     .refine((value) => /^\d+$/.test(value), {
       message: "El campo debe contener solo números.",
     }),
-  injuries: z.string(),
+  injuries: z.string().min(1),
 });
 
 export const schemaThirdInjured = z.object({
@@ -300,8 +305,8 @@ export const schemaThirdPartyVehicleReport = z.object({
     brand: z.string().min(1).max(20).trim(),
     model: z.string().min(1).max(20).trim(),
     plate: z.string().min(1).max(20).trim(),
-    insauranceCompany: z.string().min(1).max(20).trim(),
-    insaurancePolicy: z.string().min(1).max(20).trim(),
+    insuranceCompany: z.string().min(1).max(20).trim(),
+    insurancePolicy: z.string().min(1).max(20).trim(),
     ownerName: z.string().min(1).max(20).trim(),
     ownerLastName: z.string().min(1).max(20).trim(),
     ownerDni: z
@@ -317,11 +322,32 @@ export const schemaThirdPartyVehicleReport = z.object({
       .string()
       .min(1, { message: "Debe ingresar un número" })
       .regex(/^\d+$/, { message: "Debe contener solo números" }),
-    licencePhoto: z.array(z.string().url()),
+    licensePhoto: z.array(z.string().url()),
     email: z.string().email(),
-    isOwner: z.boolean(),
-    name: z.string().min(1).max(20).trim(),
+    notOwner: z.boolean(),
+    name: z.string().min(0).max(20).trim(),
+    lastName: z.string().min(0).max(20).trim(),
     dni: z
+      .string()
+      .refine((value) => value.length === 8 || value.length === 0, {
+        message: "El campo debe tener exactamente 8 dígitos.",
+      })
+      .refine((value) => /^\d+$/.test(value) || value.length === 0, {
+        message: "El campo debe contener solo números.",
+      }),
+  }),
+});
+
+export const schemaThirdPartyVehicleReportArr = z.object({
+    year: z.number(),
+    brand: z.string().min(1).max(20).trim(),
+    model: z.string().min(1).max(20).trim(),
+    plate: z.string().min(1).max(20).trim(),
+    insuranceCompany: z.string().min(1).max(20).trim(),
+    insurancePolicy: z.string().min(1).max(20).trim(),
+    ownerName: z.string().min(1).max(20).trim(),
+    ownerLastName: z.string().min(1).max(20).trim(),
+    ownerDni: z
       .string()
       .refine((value) => value.length === 8, {
         message: "El campo debe tener exactamente 8 dígitos.",
@@ -329,19 +355,39 @@ export const schemaThirdPartyVehicleReport = z.object({
       .refine((value) => /^\d+$/.test(value), {
         message: "El campo debe contener solo números.",
       }),
-  }),
+    address: z.string().min(1).max(20).trim(),
+    phoneNumber: z
+      .string()
+      .min(1, { message: "Debe ingresar un número" })
+      .regex(/^\d+$/, { message: "Debe contener solo números" }),
+    licensePhoto: z.array(z.string().url()),
+    email: z.string().email(),
+    notOwner: z.boolean(),
+    name: z.string().min(0).max(20).trim(),
+    lastName: z.string().min(0).max(20).trim(),
+    dni: z
+      .string()
+      .refine((value) => value.length === 8 || value.length === 0, {
+        message: "El campo debe tener exactamente 8 dígitos.",
+      })
+      .refine((value) => /^\d+$/.test(value) || value.length === 0, {
+        message: "El campo debe contener solo números.",
+      }),
+  
 });
 
 export const schemaVehicleCrashReportData = z.object({
   schemaVehicleCrashReportData: z.object({
-    amount: z.number(),
-    thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReport),
+    amountVehicles: z.number(),
+    thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReportArr),
   }),
 });
 
 export const schemaVehicleCrashReport = z.object({
   schemaVehicleCrashReport: z.object({
-    time: z.string().min(1).max(20).trim(),
+    time: z.string().refine((value) => value.length === 5, {
+      message: "Debe ingresar un horario valido",
+    }),
     date: z
       .string()
       .refine((value) => {

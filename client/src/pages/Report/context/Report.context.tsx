@@ -7,11 +7,11 @@ import {
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import { ZodType } from "zod";
+import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserBtnActive, VehicleApi } from "../../../models/interfaces";
 import { useState, createContext, useContext, useEffect } from "react";
-import { TypeComplaintForm } from "../interfaces";
+import { TypeComplaintForm } from "../models/interfaces";
 import { FormInjuredInfoData, FormThirdPartyVehiclesData } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../components";
 import { AllReportSchemas } from "../../../models";
@@ -29,13 +29,14 @@ import {
   schemaPhone,
   schemaIsTire,
   schemaElectronicTheftReport,
+  schemaThirdPartyVehicleReport,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 import {
-  LegalElectronicTheftUrl,
+  LegalPersonalElectronicTheftUrl,
   LegalPersonalVehicleFireUrl,
   LegalPersonalVehicleTheftUrl,
-  LegalVehicleCrashUrl,
+  LegalPersonalVehicleCrashUrl,
   PersonalElectronicTheftUrl,
   PersonalVehicleCrashUrl,
   PersonalVehicleFireUrl,
@@ -78,6 +79,8 @@ export interface IReportContext {
   thirdPartyVehiclesForm: () => JSX.Element | undefined;
   setIsCheckedDamage: React.Dispatch<React.SetStateAction<boolean>>;
   isCheckedDamage: boolean;
+  setIsCheckedOkm: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckedOkm: boolean;
   setIsCheckedGnc: React.Dispatch<React.SetStateAction<boolean>>;
   isCheckedGnc: boolean;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
@@ -109,6 +112,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
     useState<boolean>(false);
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
+  const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
   const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
   const [isCheckedOwner, setIsCheckedOwner] =
@@ -126,7 +130,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const [schema, setSchema] =
     useState<ZodType<AllReportSchemas>>(schemaPersonal);
   const [amountValue, setAmountValue] = useState<number>(0);
-  const [amountVehicles, setAmountVehicles] = useState<number>(0);
+  const [amountVehicles, setAmountVehicles] = useState<number>(1);
   const [page, setPage] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -234,15 +238,20 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         schemaElement = schemaElectronic;
         estructuringSchema(schemaUser, schemaElement, schemaVehicleCrashReport);
         if (typeComplaintForm.theft) {
-          schemaComplaintType = schemaVehicleTheftReport;
+          schemaComplaintType = schemaElectronicTheftReport;
           estructuringSchema(schemaUser, schemaElement, schemaComplaintType);
         }
       }
     }
   };
 
+  // const [tuple, setTuple] = useState<any>([]);
+  
+
+
   const thirdInjuredForm = (): JSX.Element | null => {
     let people: JSX.Element[] = [];
+    // setTuple([...people])
 
     if (amountValue > 0) {
       for (let i = 0; i < amountValue; i++) {
@@ -270,10 +279,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return null;
     }
   };
-
+  
   const thirdPartyVehiclesForm = () => {
     let vehicles: JSX.Element[] = [];
-
+    
     if (amountVehicles > 0) {
       for (let i = 0; i < amountVehicles; i++) {
         vehicles.push(
@@ -293,7 +302,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           }
         />
       );
-    } else if (amountVehicles === 0) {
+    } else if (amountVehicles === (0 )) {
       for (let i = 0; i < 1; i++) {
         vehicles.push(
           <FormThirdPartyVehiclesData key={i + 1} vehicles={i + 1} />
@@ -479,7 +488,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const {
     error: errorReportLegalVehicleCrash,
     trigger: triggerReportLegalVehicleCrash,
-  } = useSWRMutation(LegalVehicleCrashUrl, addReportLegalVehicleCrash);
+  } = useSWRMutation(LegalPersonalVehicleCrashUrl, addReportLegalVehicleCrash);
 
   const {
     error: errorReportLegalVehicleTheft,
@@ -508,7 +517,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const {
     error: errorReportLegalElectronicTheft,
     trigger: triggerReportLegalElectronicTheft,
-  } = useSWRMutation(LegalElectronicTheftUrl, addReportLegalElectronicTheft);
+  } = useSWRMutation(LegalPersonalElectronicTheftUrl, addReportLegalElectronicTheft);
 
   const triggers = {
     triggerReportPersonalVehicleCrash,
@@ -531,7 +540,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     errorReportPersonalElectronicTheft,
     errorReportLegalElectronicTheft,
   ];
-  
+
   useEffect(() => {
     for (const err in fetchErrors) {
       if (fetchErrors[err]) {
@@ -547,10 +556,11 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setValue,
     trigger,
     control,
+    getValues
   } = useForm<AllReportSchemas>({
     resolver: zodResolver(schema),
   });
-
+  // console.log(getValues(), 'acaaaaaaaaaaaaaaaaaaa')
 
   useEffect(() => {
     selectingSchema();
@@ -619,6 +629,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     trigger,
     setFormNotFound,
     formNotFound,
+    setIsCheckedOkm,
+    isCheckedOkm,
   };
 
   return (

@@ -19,6 +19,7 @@ export const validationFormDataReport = ({
   amountValue,
   triggers,
 }: ValidationFormDataReport) => {
+  console.log({thirdPartyVehicleDTO:data.schemaVehicleCrashReportData}, 'ppppppppppppppp');
   if ((amountValue as number) > 0) {
     validationWithInjuries({
       userActiveForm,
@@ -61,7 +62,95 @@ const validationWithInjuries = ({
       data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      triggers.triggerReportPersonalVehicleCrash(data);
+      if (data.schemaGnc) {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          crashDTO: data.schemaVehicleCrashReport,
+          injuredDTO: data.schemaThirdInjured,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+        };
+        triggers.triggerReportPersonalVehicleCrash(dataObj);
+      } else {
+        const dataObj = {
+          // userDTO: data.schemaPersonal,
+          // vehicleDTO: data.schemaVehicleReport,
+          // crashDTO: data.schemaVehicleCrashReport,
+          // injuredDTO: data.schemaThirdInjured,
+          // thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+          vehicleDTO: {
+            year: 2023,
+            color: "Blue",
+            brand: "Toyota",
+            model: "Corolla",
+            damage: false,
+            damageLocation: "",
+            images: [
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+              "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+            ],
+            plate: "ABC123",
+            gnc: false,
+            fuel: "DIESEL",
+            type: "CAMIONETA",
+            okm: false,
+          },
+          userDTO: {
+            name: "John",
+            lastName: "Doe",
+            birthDate: "1990-01-01",
+            email: "asesincreedaltairr@hotmail.com",
+            altEmail: "john@example.com",
+            address: "123 Main Street",
+            phoneNumber: 123456789,
+            gender: "MUJER",
+            dni: "12345678",
+          },
+          crashDTO: {
+            time: "12:12",
+            date: "1999-05-05",
+            location: "ni idea",
+            details: "nsoe",
+            injured: true,
+            injuries: "nose",
+            ambulance: false,
+            ambulanceTo: "",
+            thirdInjured: true,
+            friendlyStatement: false,
+          },
+          thirdPartyVehicleDTO: {
+            amountVehicles: 1,
+            thirdPartyVehicleInfo: [
+              {
+                brand: "nsoe",
+                model: "nose",
+                year: 1990,
+                plate: "aa111aa",
+                insuranceCompany: "nose",
+                insurancePolicy: "nose",
+                ownerName: "nose",
+                ownerLastName: "nose",
+                ownerDni: "nose",
+                name: "",
+                lastName: "",
+                dni: "",
+                address: "nose",
+                phoneNumber: "nose",
+                licensePhoto: [
+                  "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+                  "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
+                ],
+                email: "brangedidier@gmail.com",
+              },
+            ],
+          },
+        };
+
+        triggers.triggerReportPersonalVehicleCrash(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -77,7 +166,26 @@ const validationWithInjuries = ({
       data.schemaThirdInjured
     ) {
       setModalActive(true);
-      triggers.triggerReportPersonalVehicleFire(data);
+      if (data.schemaGnc) {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          fireDTO: data.schemaVehicleFireReport,
+          injuredDTO: data.schemaThirdInjured,
+        };
+
+        triggers.triggerReportPersonalVehicleFire(dataObj);
+      } else {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          fireDTO: data.schemaVehicleFireReport,
+          injuredDTO: data.schemaThirdInjured,
+        };
+
+        triggers.triggerReportPersonalVehicleFire(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -94,7 +202,28 @@ const validationWithInjuries = ({
       data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      triggers.triggerReportLegalVehicleCrash(data);
+      if (data.schemaGnc) {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          crashDTO: data.schemaVehicleCrashReport,
+          injuredDTO: data.schemaThirdInjured,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+        };
+
+        triggers.triggerReportLegalVehicleCrash(dataObj);
+      } else {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          crashDTO: data.schemaVehicleCrashReport,
+          injuredDTO: data.schemaThirdInjured,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+        };
+
+        triggers.triggerReportLegalVehicleCrash(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -110,7 +239,26 @@ const validationWithInjuries = ({
       data.schemaThirdInjured
     ) {
       setModalActive(true);
-      triggers.triggerReportLegalVehicleFire(data);
+      if (data.schemaGnc) {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          fireDTO: data.schemaVehicleFireReport,
+          injuredDTO: data.schemaThirdInjured,
+        };
+
+        triggers.triggerReportLegalVehicleFire(dataObj);
+      } else {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          fireDTO: data.schemaVehicleFireReport,
+          injuredDTO: data.schemaThirdInjured,
+        };
+
+        triggers.triggerReportLegalVehicleFire(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -224,7 +372,26 @@ const validationPersonal = ({
       data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      triggers.triggerReportPersonalVehicleCrash(data);
+      if (data.schemaGnc) {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          crashDTO: data.schemaVehicleCrashReport,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData
+        };
+
+        triggers.triggerReportPersonalVehicleCrash(dataObj);
+      } else {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          crashDTO: data.schemaVehicleCrashReport,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+        }
+
+        triggers.triggerReportPersonalVehicleCrash(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -239,7 +406,44 @@ const validationPersonal = ({
       data.schemaVehicleTheftReport
     ) {
       setModalActive(true);
-      triggers.triggerReportPersonalVehicleTheft(data);
+      if (data.schemaGnc) {
+        if (data?.schemaVehicleTheftReport?.isTire) {
+          const dataObj = {
+            userDTO: data.schemaPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            gncDTO: data.schemaGnc,
+            theftDTO: data.schemaVehicleTheftReport,
+            theftTireDTO: data.schemaIsTire,
+          };
+          triggers.triggerReportPersonalVehicleTheft(dataObj);
+        } else {
+          const dataObj = {
+            userDTO: data.schemaPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            gncDTO: data.schemaGnc,
+            theftDTO: data.schemaVehicleTheftReport,
+          };
+          triggers.triggerReportPersonalVehicleTheft(dataObj);
+        }
+      } else {
+        if (data?.schemaVehicleTheftReport?.isTire) {
+          const dataObj = {
+            userDTO: data.schemaPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            theftDTO: data.schemaVehicleTheftReport,
+            theftTireDTO: data.schemaIsTire,
+          };
+          triggers.triggerReportPersonalVehicleTheft(dataObj);
+        } else {
+          const dataObj = {
+            userDTO: data.schemaPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            theftDTO: data.schemaVehicleTheftReport,
+
+          };
+          triggers.triggerReportPersonalVehicleTheft(dataObj);
+        }
+      }
     } else {
       setModalActive(false);
     }
@@ -254,7 +458,24 @@ const validationPersonal = ({
       data.schemaVehicleFireReport
     ) {
       setModalActive(true);
-      triggers.triggerReportPersonalVehicleFire(data);
+      if (data.schemaGnc) {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          fireDTO: data.schemaVehicleFireReport,
+        };
+
+        triggers.triggerReportPersonalVehicleFire(dataObj);
+      } else {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          fireDTO: data.schemaVehicleFireReport,
+        };
+
+        triggers.triggerReportPersonalVehicleFire(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -269,7 +490,22 @@ const validationPersonal = ({
       data.schemaElectronicTheftReport
     ) {
       setModalActive(true);
-      triggers.triggerReportPersonalElectronicTheft(data);
+      if (data.schemaPhone) {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          electronicDTO: data.schemaElectronic,
+          theftDTO: data.schemaElectronicTheftReport,
+          smartPhoneDTO: data.schemaPhone,
+        };
+        triggers.triggerReportPersonalElectronicTheft(dataObj);
+      } else {
+        const dataObj = {
+          userDTO: data.schemaPersonal,
+          electronicDTO: data.schemaElectronic,
+          theftDTO: data.schemaElectronicTheftReport,
+        };
+        triggers.triggerReportPersonalElectronicTheft(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -296,7 +532,27 @@ const validationLegalPersonal = ({
       data.schemaVehicleCrashReportData
     ) {
       setModalActive(true);
-      triggers.triggerReportLegalVehicleCrash(data);
+
+      if (data.schemaGnc) {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          crashDTO: data.schemaVehicleCrashReport,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+        };
+
+        triggers.triggerReportLegalVehicleCrash(dataObj);
+      } else {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          crashDTO: data.schemaVehicleCrashReport,
+          thirdPartyVehicleDTO: data.schemaVehicleCrashReportData,
+        };
+
+        triggers.triggerReportLegalVehicleCrash(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -311,7 +567,43 @@ const validationLegalPersonal = ({
       data.schemaVehicleTheftReport
     ) {
       setModalActive(true);
-      triggers.triggerReportLegalVehicleTheft(data);
+      if (data.schemaGnc) {
+        if (data?.schemaVehicleTheftReport?.isTire) {
+          const dataObj = {
+            legalUserDTO: data.schemaLegalPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            gncDTO: data.schemaGnc,
+            theftDTO: data.schemaVehicleTheftReport,
+            theftTireDTO: data.schemaIsTire,
+          };
+          triggers.triggerReportLegalVehicleTheft(dataObj);
+        } else {
+          const dataObj = {
+            legalUserDTO: data.schemaLegalPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            gncDTO: data.schemaGnc,
+            theftDTO: data.schemaVehicleTheftReport,
+          };
+          triggers.triggerReportLegalVehicleTheft(dataObj);
+        }
+      } else {
+        if (data?.schemaVehicleTheftReport?.isTire) {
+          const dataObj = {
+            legalUserDTO: data.schemaLegalPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            theftDTO: data.schemaVehicleTheftReport,
+            theftTireDTO: data.schemaIsTire,
+          };
+          triggers.triggerReportLegalVehicleTheft(dataObj);
+        } else {
+          const dataObj = {
+            legalUserDTO: data.schemaLegalPersonal,
+            vehicleDTO: data.schemaVehicleReport,
+            theftDTO: data.schemaVehicleTheftReport,
+          };
+          triggers.triggerReportLegalVehicleTheft(dataObj);
+        }
+      }
     } else {
       setModalActive(false);
     }
@@ -321,12 +613,29 @@ const validationLegalPersonal = ({
     typeComplaintForm.fire
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaVehicleReport &&
       data.schemaVehicleFireReport
     ) {
       setModalActive(true);
-      triggers.triggerReportLegalVehicleFire(data);
+      if (data.schemaGnc) {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          gncDTO: data.schemaGnc,
+          fireDTO: data.schemaVehicleFireReport,
+        };
+
+        triggers.triggerReportLegalVehicleFire(dataObj);
+      } else {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          vehicleDTO: data.schemaVehicleReport,
+          fireDTO: data.schemaVehicleFireReport,
+        };
+
+        triggers.triggerReportLegalVehicleFire(dataObj);
+      }
     } else {
       setModalActive(false);
     }
@@ -336,12 +645,27 @@ const validationLegalPersonal = ({
     typeComplaintForm.theft
   ) {
     if (
-      data.schemaPersonal &&
+      data.schemaLegalPersonal &&
       data.schemaElectronic &&
       data.schemaElectronicTheftReport
     ) {
       setModalActive(true);
-      triggers.triggerReportLegalElectronicTheft(data);
+      if (data.schemaPhone) {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          electronicDTO: data.schemaElectronic,
+          theftDTO: data.schemaElectronicTheftReport,
+          smartPhoneDTO: data.schemaPhone,
+        };
+        triggers.triggerReportLegalElectronicTheft(dataObj);
+      } else {
+        const dataObj = {
+          legalUserDTO: data.schemaLegalPersonal,
+          electronicDTO: data.schemaElectronic,
+          theftDTO: data.schemaElectronicTheftReport,
+        };
+        triggers.triggerReportLegalElectronicTheft(dataObj);
+      }
     } else {
       setModalActive(false);
     }
