@@ -7,7 +7,7 @@ import {
 } from "../../../../components";
 import { useReportContext } from "../../context";
 
-function FormThieftData({ objectType }: { objectType: string }) {
+function FormThieftVehicleData() {
   const {
     register,
     errors,
@@ -22,24 +22,24 @@ function FormThieftData({ objectType }: { objectType: string }) {
 
   return (
     <>
-      <FormTimeInput schemaName={`${objectType}.time`} />
+      <FormTimeInput schemaName={`schemaVehicleTheftReport.time`} />
       <FormInput
-        register={register(`${objectType}.date`)}
-        error={errors[`${objectType}`]?.date?.message}
+        register={register(`schemaVehicleTheftReport.date`)}
+        error={errors[`schemaVehicleTheftReport`]?.date?.message}
         type="date"
-        id={`${objectType}.date`}
+        id={`schemaVehicleTheftReport.date`}
         label="Fecha del suceso*"
         placeholder="Ingresar fecha"
-        touched={touchedFields[`${objectType}`]?.date}
+        touched={touchedFields[`schemaVehicleTheftReport`]?.date}
       />
       <FormInput
-        register={register(`${objectType}.location`)}
-        error={errors[`${objectType}`]?.location?.message}
+        register={register(`schemaVehicleTheftReport.location`)}
+        error={errors[`schemaVehicleTheftReport`]?.location?.message}
         type="text"
-        id={`${objectType}.location`}
+        id={`schemaVehicleTheftReport.location`}
         label="Ubicacion del suceso*"
         placeholder="Ingresar ubicacion"
-        touched={touchedFields[`${objectType}`]?.location}
+        touched={touchedFields[`schemaVehicleTheftReport`]?.location}
       />
 
       <div
@@ -50,9 +50,9 @@ function FormThieftData({ objectType }: { objectType: string }) {
         } `}
       >
         <FormCheckbox
-          register={register(`${objectType}.isTire`)}
+          register={register(`schemaVehicleTheftReport.isTire`)}
           setChecked={setIsTire}
-          id={`${objectType}.isTire`}
+          id={`schemaVehicleTheftReport.isTire`}
           label={"¿Algun neumatico fue robado?"}
           instructions=""
           trigger={trigger}
@@ -81,13 +81,13 @@ function FormThieftData({ objectType }: { objectType: string }) {
         </FormInputOptional>
       </div>
       <FormUploadImageReport
-        schemaName={`${objectType}.reportPhoto`}
-        error={errors[`${objectType}`]?.reportPhoto?.message}
-        id={`${objectType}.reportPhoto`}
-        name={`${objectType}.reportPhoto`}
+        schemaName={`schemaVehicleTheftReport.reportPhoto`}
+        error={errors[`schemaVehicleTheftReport`]?.reportPhoto?.message}
+        id={`schemaVehicleTheftReport.reportPhoto`}
+        name={`schemaVehicleTheftReport.reportPhoto`}
         imagesType="Agregar foto de la denuncia"
       />
     </>
   );
 }
-export default FormThieftData;
+export default FormThieftVehicleData;

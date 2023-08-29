@@ -1,4 +1,9 @@
-import { FormVehicleReportData, FormCrashData, FormThieftData, FormFireData } from "..";
+import {
+  FormVehicleReportData,
+  FormCrashData,
+  FormThieftVehicleData,
+  FormFireData,
+} from "..";
 import { useReportContext } from "../..";
 import { FormEffectOpenClose, PageButton } from "../../../../components";
 import FormVehicleReportBtn from "../FormVehicleReportBtn/FormReportBtn";
@@ -72,7 +77,7 @@ function FormVehicleReportContainer() {
           }
           form={
             <>
-              <FormThieftData objectType={"schemaVehicleTheftReport"} />
+              <FormThieftVehicleData />
               <PageButton
                 changePage={changePage}
                 page={page}

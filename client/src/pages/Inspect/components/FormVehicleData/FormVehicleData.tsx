@@ -22,8 +22,7 @@ function FormVehicleData() {
     isCheckedGnc,
     setIsCheckedOkm,
     setVehicleApi,
-    vehicleApi,
-    trigger,
+   trigger,
     
   } = useInspectContext();
 

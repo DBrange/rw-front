@@ -24,12 +24,12 @@ import {
   schemaLegalPersonal,
   schemaVehicleReport,
   schemaThirdInjured,
-  schemaVehicleCrashReportData,
   schemaGnc,
   schemaPhone,
   schemaIsTire,
   schemaElectronicTheftReport,
-  schemaThirdPartyVehicleReport,
+  schemaThirdPartyVehicleReportArr,
+  schemaVehicleCrashReportData,
 } from "../../../utilities";
 import { validationFormDataReport } from "../utilities";
 import {
@@ -245,10 +245,6 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  // const [tuple, setTuple] = useState<any>([]);
-  
-
-
   const thirdInjuredForm = (): JSX.Element | null => {
     let people: JSX.Element[] = [];
     // setTuple([...people])
@@ -279,10 +275,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return null;
     }
   };
-  
+
   const thirdPartyVehiclesForm = () => {
     let vehicles: JSX.Element[] = [];
-    
+
     if (amountVehicles > 0) {
       for (let i = 0; i < amountVehicles; i++) {
         vehicles.push(
@@ -302,7 +298,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           }
         />
       );
-    } else if (amountVehicles === (0 )) {
+    } else if (amountVehicles === 0) {
       for (let i = 0; i < 1; i++) {
         vehicles.push(
           <FormThirdPartyVehiclesData key={i + 1} vehicles={i + 1} />
@@ -440,6 +436,13 @@ export const ReportProvider = ({ children }: ChildrenType) => {
             .merge(schemaGnc)
             .merge(schemaThirdInjured)
             .merge(schemaVehicleCrashReportData);
+        } else if (amountValue && amountVehicles === (1 || 0)) {
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdInjured)
+            .merge(schemaGnc)
+            .merge(schemaVehicleCrashReportData);
         }
       } else {
         if (!amountValue && amountVehicles > 0) {
@@ -464,12 +467,18 @@ export const ReportProvider = ({ children }: ChildrenType) => {
             .merge(schemaComplaintType)
             .merge(schemaThirdInjured)
             .merge(schemaVehicleCrashReportData);
+        } else if (amountValue && amountVehicles === (1 || 0)){
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            .merge(schemaThirdInjured)
+            .merge(schemaVehicleCrashReportData);
         }
       }
     }
     setSchema(schema);
   };
-
+console.log(amountVehicles,'llll')
   const {
     error: erroReportPersonalVehicleCrash,
     trigger: triggerReportPersonalVehicleCrash,
@@ -517,7 +526,10 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const {
     error: errorReportLegalElectronicTheft,
     trigger: triggerReportLegalElectronicTheft,
-  } = useSWRMutation(LegalPersonalElectronicTheftUrl, addReportLegalElectronicTheft);
+  } = useSWRMutation(
+    LegalPersonalElectronicTheftUrl,
+    addReportLegalElectronicTheft
+  );
 
   const triggers = {
     triggerReportPersonalVehicleCrash,
@@ -556,11 +568,9 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     setValue,
     trigger,
     control,
-    getValues
   } = useForm<AllReportSchemas>({
     resolver: zodResolver(schema),
   });
-  // console.log(getValues(), 'acaaaaaaaaaaaaaaaaaaa')
 
   useEffect(() => {
     selectingSchema();

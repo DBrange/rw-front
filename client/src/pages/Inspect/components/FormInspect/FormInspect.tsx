@@ -23,7 +23,8 @@ function FormInspect() {
     page,
     changePage,
     setIsPhone,
-    isPhone,trigger
+    isPhone,
+    trigger
   } = useInspectContext();
   return (
     <>

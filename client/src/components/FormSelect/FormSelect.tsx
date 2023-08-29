@@ -9,7 +9,15 @@ interface Props {
   touched: boolean;
 }
 
-function FormSelect({ register, error, id, label, options, touched }: Props) {
+function FormSelect({
+  register,
+  error,
+  id,
+  label,
+  options,
+  touched,
+}: Props) {
+
   return (
     <div className="w-[100%] flex flex-col">
       <label
@@ -40,7 +48,7 @@ function FormSelect({ register, error, id, label, options, touched }: Props) {
         <p
           className={`${
             touched && error ? "text-red-400" : "text-transparent"
-          } text-xs`}
+          } text-xs select-none`}
         >
           {error || "a"}
         </p>

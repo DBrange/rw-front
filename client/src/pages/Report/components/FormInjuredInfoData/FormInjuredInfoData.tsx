@@ -2,7 +2,7 @@ import { FormInput, FormSelect } from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormInjuredInfoData({ people }: { people: number }) {
-  const { register, errors, touchedFields } = useReportContext();
+  const { register, errors, touchedFields, trigger } = useReportContext();
 
   const errorSchema = errors?.schemaThirdInjured?.injuredInfo[people - 1];
   const touchedSchema =
@@ -76,13 +76,13 @@ function FormInjuredInfoData({ people }: { people: number }) {
         touched={touchedSchema?.dni}
       />
       <FormInput
-        register={register(`${schema}.injuries`)}
-        error={errorSchema?.injuries?.message}
+        register={register(`${schema}.location`)}
+        error={errorSchema?.location?.message}
         type="text"
-        id={`${schema}.injuries`}
+        id={`${schema}.location`}
         label="Direccion"
         placeholder="Ingrese su direccion"
-        touched={touchedSchema?.injuries}
+        touched={touchedSchema?.location}
       />
       <FormInput
         register={register(`${schema}.date`)}
@@ -91,7 +91,7 @@ function FormInjuredInfoData({ people }: { people: number }) {
         id={`${schema}.date`}
         label="Fecha del suceso"
         placeholder="Ingrese la fecha"
-        touched={touchedSchema?.injuries}
+        touched={touchedSchema?.date}
       />
       <FormInput
         register={register(`${schema}.injuries`)}
