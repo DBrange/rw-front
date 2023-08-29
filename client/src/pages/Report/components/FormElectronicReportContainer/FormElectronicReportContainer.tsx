@@ -1,10 +1,11 @@
-import { FormElectronicReportData, FormThieftData } from "..";
+import { FormElectronicReportData } from "..";
 import { useReportContext } from "../..";
 import {
   FormEffectOpenClose,
   FormElectronicData,
   PageButton,
 } from "../../../../components";
+import FormThieftElectronicData from "../FormTheftElectronicData/FormTheftElectronicData";
 
 function FormElectronicReportContainer() {
   const {
@@ -20,7 +21,6 @@ function FormElectronicReportContainer() {
   } = useReportContext();
   return (
     <>
-      
       <FormEffectOpenClose
         formName={"Electrodomestico"}
         isActive={activeForm === "electronic" && page === 2}
@@ -56,7 +56,7 @@ function FormElectronicReportContainer() {
         }
         form={
           <>
-            <FormThieftData objectType={"schemaElectronicTheftReport"} />
+            <FormThieftElectronicData />
             <PageButton changePage={changePage} page={page} max={4} />
           </>
         }

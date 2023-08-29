@@ -100,7 +100,7 @@ isCheckedThirdInjuried,trigger
       <FormInputOptionalAmount
         error={errors.schemaVehicleFireReport?.amount?.message}
         checked={isCheckedThirdInjuried}
-        type="number"
+        type="text"
         id="schemaThirdInjured.amount"
         label="Cantidad*"
         placeholder="Ingresar cantidad"

@@ -43,7 +43,7 @@ function FormSelectElecType({ register, error, touched, electronicType, trigger 
         <p
           className={`${
             touched && error ? "text-red-400" : "text-transparent"
-          } text-xs`}
+          } text-xs select-none`}
         >
           {error || "a"}
         </p>

@@ -107,7 +107,7 @@ isCheckedThirdInjuried
       <FormInputOptionalAmount
         error={errors.schemaThirdInjured?.amount?.message}
         checked={isCheckedThirdInjuried}
-        type="number"
+        type="text"
         id="schemaThirdInjured.amount"
         label="Cantidad"
         placeholder="Ingresar cantidad"
@@ -121,7 +121,7 @@ isCheckedThirdInjuried
           valueAsNumber: true,
         })}
         error={errors.schemaVehicleCrashReportData?.amountVehicles?.message}
-        type="number"
+        type="text"
         id="schemaVehicleCrashReportData.amountVehicles"
         label="Cantidad de vehiculos implicados"
         placeholder="Cantidad de terceros"

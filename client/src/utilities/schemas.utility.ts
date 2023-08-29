@@ -29,7 +29,9 @@ export const schemaPersonal = z.object({
     phoneNumber: z
       .string()
       .min(1, { message: "Debe ingresar un número" })
-      .regex(/^\d+$/, { message: "Debe contener solo números" }),
+      .refine((value) => /^\d+$/.test(value), {
+        message: "Debe contener solo números",
+      }),
     email: z.string().email().max(30),
     altEmail: altEmailValidate,
     gender: z.enum(["HOMBRE", "MUJER", "OTRO"]),
@@ -73,7 +75,9 @@ export const schemaLegalPersonal = z.object({
     phoneNumber: z
       .string()
       .min(1, { message: "Debe ingresar un número" })
-      .regex(/^\d+$/, { message: "Debe contener solo números" }),
+      .refine((value) => /^\d+$/.test(value), {
+        message: "Debe contener solo números",
+      }),
     email: z.string().email().max(30),
     altEmail: altEmailValidate,
     address: z.string().min(1).max(50).trim(),
@@ -139,7 +143,9 @@ export const schemaPhone = z.object({
     phoneNumber: z
       .string()
       .min(1, { message: "Debe ingresar un número" })
-      .regex(/^\d+$/, { message: "Debe contener solo números" }),
+      .refine((value) => /^\d+$/.test(value), {
+        message: "Debe contener solo números",
+      }),
     phoneService: z.string().min(1).max(20).trim(),
     imei: z.string().min(1),
   }),
@@ -176,7 +182,11 @@ export const schemaVehicleReport = z.object({
 
 export const schemaIsTire = z.object({
   schemaIsTire: z.object({
-    tireAmount: z.number(),
+    tireAmount: z
+    .string()
+    .refine((value) => /^\d+$/.test(value), {
+      message: "El campo debe contener solo números.",
+    }),
     tireWear: z.number().min(0).max(100),
   }),
 });
@@ -261,6 +271,7 @@ export const schemaElectronicTheftReport = z.object({
 export const schemaThirdInjuredData = z.object({
   name: z.string().min(1).max(20).trim(),
   lastName: z.string().min(1).max(20).trim(),
+  location: z.string().min(1).max(100).trim(),
   birthDate: z
     .string()
     .refine((value) => {
@@ -278,7 +289,9 @@ export const schemaThirdInjuredData = z.object({
   phoneNumber: z
     .string()
     .min(1, { message: "Debe ingresar un número" })
-    .regex(/^\d+$/, { message: "Debe contener solo números" }),
+    .refine((value) => /^\d+$/.test(value), {
+      message: "Debe contener solo números",
+    }),
   email: z.string().min(1).max(30),
   gender: z.enum(["HOMBRE", "MUJER", "OTRO"]),
   dni: z
@@ -321,7 +334,9 @@ export const schemaThirdPartyVehicleReport = z.object({
     phoneNumber: z
       .string()
       .min(1, { message: "Debe ingresar un número" })
-      .regex(/^\d+$/, { message: "Debe contener solo números" }),
+      .refine((value) => /^\d+$/.test(value), {
+        message: "Debe contener solo números",
+      }),
     licensePhoto: z.array(z.string().url()),
     email: z.string().email(),
     notOwner: z.boolean(),
@@ -339,41 +354,42 @@ export const schemaThirdPartyVehicleReport = z.object({
 });
 
 export const schemaThirdPartyVehicleReportArr = z.object({
-    year: z.number(),
-    brand: z.string().min(1).max(20).trim(),
-    model: z.string().min(1).max(20).trim(),
-    plate: z.string().min(1).max(20).trim(),
-    insuranceCompany: z.string().min(1).max(20).trim(),
-    insurancePolicy: z.string().min(1).max(20).trim(),
-    ownerName: z.string().min(1).max(20).trim(),
-    ownerLastName: z.string().min(1).max(20).trim(),
-    ownerDni: z
-      .string()
-      .refine((value) => value.length === 8, {
-        message: "El campo debe tener exactamente 8 dígitos.",
-      })
-      .refine((value) => /^\d+$/.test(value), {
-        message: "El campo debe contener solo números.",
-      }),
-    address: z.string().min(1).max(20).trim(),
-    phoneNumber: z
-      .string()
-      .min(1, { message: "Debe ingresar un número" })
-      .regex(/^\d+$/, { message: "Debe contener solo números" }),
-    licensePhoto: z.array(z.string().url()),
-    email: z.string().email(),
-    notOwner: z.boolean(),
-    name: z.string().min(0).max(20).trim(),
-    lastName: z.string().min(0).max(20).trim(),
-    dni: z
-      .string()
-      .refine((value) => value.length === 8 || value.length === 0, {
-        message: "El campo debe tener exactamente 8 dígitos.",
-      })
-      .refine((value) => /^\d+$/.test(value) || value.length === 0, {
-        message: "El campo debe contener solo números.",
-      }),
-  
+  year: z.number(),
+  brand: z.string().min(1).max(20).trim(),
+  model: z.string().min(1).max(20).trim(),
+  plate: z.string().min(1).max(20).trim(),
+  insuranceCompany: z.string().min(1).max(20).trim(),
+  insurancePolicy: z.string().min(1).max(20).trim(),
+  ownerName: z.string().min(1).max(20).trim(),
+  ownerLastName: z.string().min(1).max(20).trim(),
+  ownerDni: z
+    .string()
+    .refine((value) => value.length === 8, {
+      message: "El campo debe tener exactamente 8 dígitos.",
+    })
+    .refine((value) => /^\d+$/.test(value), {
+      message: "El campo debe contener solo números.",
+    }),
+  address: z.string().min(1).max(20).trim(),
+  phoneNumber: z
+    .string()
+    .min(1, { message: "Debe ingresar un número" })
+    .refine((value) => /^\d+$/.test(value), {
+      message: "Debe contener solo números",
+    }),
+  licensePhoto: z.array(z.string().url()),
+  email: z.string().email(),
+  notOwner: z.boolean(),
+  name: z.string().min(0).max(20).trim(),
+  lastName: z.string().min(0).max(20).trim(),
+  dni: z
+    .string()
+    .refine((value) => value.length === 8 || value.length === 0, {
+      message: "El campo debe tener exactamente 8 dígitos.",
+    })
+    .refine((value) => /^\d+$/.test(value) || value.length === 0, {
+      message: "El campo debe contener solo números.",
+    }),
 });
 
 export const schemaVehicleCrashReportData = z.object({

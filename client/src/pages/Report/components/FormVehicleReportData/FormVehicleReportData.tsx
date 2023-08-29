@@ -104,6 +104,15 @@ function FormVehicleDataReport() {
             touched={touchedFields.schemaGnc?.oblea}
           />
           <FormInput
+            register={register("schemaGnc.plate")}
+            error={errors.schemaGnc?.plate?.message}
+            type="text"
+            id="schemaGnc.plate"
+            label="Patente*"
+            placeholder="Ingrse patente"
+            touched={touchedFields.schemaGnc?.plate}
+          />
+          <FormInput
             register={register("schemaGnc.expireDate")}
             error={errors.schemaGnc?.expireDate?.message}
             type="date"
