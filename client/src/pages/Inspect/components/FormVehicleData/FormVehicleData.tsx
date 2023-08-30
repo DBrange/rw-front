@@ -163,9 +163,9 @@ function FormVehicleData() {
         touched={touchedFields.schemaVehicle?.type}
       />
       <FormCheckbox
-        register={register(`swornDeclaration`)}
+        register={register(`schemaVehicle.swornDeclaration`)}
         setChecked={setIsSwornDeclaration}
-        id={`swornDeclaration`}
+        id={`swornDeclarationinspectelectronic`}
         label="Aceptar declaracion jurada"
         instructions=""
         trigger={trigger}

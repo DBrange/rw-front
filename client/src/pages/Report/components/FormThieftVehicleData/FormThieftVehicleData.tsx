@@ -18,7 +18,7 @@ function FormThieftVehicleData() {
     control,
     activeForm,
     trigger,
-    // setIsSwornDeclaration,
+    setIsSwornDeclaration,
   } = useReportContext();
 
   return (
@@ -104,14 +104,14 @@ function FormThieftVehicleData() {
         name={`schemaVehicleTheftReport.tirePhoto`}
         imagesType="Agregar foto de un neumatico"
       />
-      {/* <FormCheckbox
-        register={register(`swornDeclaration`)}
+      <FormCheckbox
+        register={register(`schemaVehicleTheftReport.swornDeclaration`)}
         setChecked={setIsSwornDeclaration}
-        id={`swornDeclaration`}
-        label={"¿Algun neumatico fue robado?"}
+        id={`swornDeclarationttheft`}
+        label="Aceptar declaracion jurada"
         instructions=""
         trigger={trigger}
-      /> */}
+      />
     </>
   );
 }

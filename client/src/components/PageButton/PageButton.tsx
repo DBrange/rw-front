@@ -1,15 +1,16 @@
 import { BsArrowRight } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
-import { ErrorBtn } from "..";
+import { ErrorBtn, SwornDeclarationError } from "..";
 import { useState } from "react";
 
 interface Props {
   changePage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   page: number;
   max: number;
+  isSwornDeclaration?: boolean
 }
 
-function PageButton({ changePage, page, max }: Props) {
+function PageButton({ changePage, page, max, isSwornDeclaration }: Props) {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -65,7 +66,11 @@ function PageButton({ changePage, page, max }: Props) {
           </button>
         )}
       </div>
-        <ErrorBtn isError={isError} />
+      <SwornDeclarationError
+        onConfirmed={isSwornDeclaration as boolean}
+        isError={isError}
+      />
+      <ErrorBtn isError={isError} />
     </>
   );
 }

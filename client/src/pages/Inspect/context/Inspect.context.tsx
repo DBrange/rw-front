@@ -35,7 +35,6 @@ import {
   schemaLegalPersonal,
   schemaGnc,
   schemaPhone,
-  swornDeclaration,
 } from "../../../utilities";
 import { validationFormDataInspect } from "../utilities";
 
@@ -193,18 +192,18 @@ export const InspectProvider = ({ children }: ChildrenType) => {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaGnc)
-            .merge(swornDeclaration);
+            ;
         } else {
-          schema = schemaUser.merge(schemaElement).merge(swornDeclaration);
+          schema = schemaUser.merge(schemaElement);
         }
       } else if (activeForm === "electronic") {
         if (isPhone) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaPhone)
-            .merge(swornDeclaration);
+            ;
         } else {
-          schema = schemaUser.merge(schemaElement).merge(swornDeclaration);
+          schema = schemaUser.merge(schemaElement);
         }
       }
     }
@@ -218,11 +217,12 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     trigger,
     setValue,
     control,
+    getValues
   } = useForm<AllInspectSchemas>({
     resolver: zodResolver(schema),
   });
 
-  console.log(touchedFields)
+  console.log(getValues(),'aaaaaaaaaaaaa')
 
   useEffect(() => {
     selectingSchema();

@@ -20,11 +20,7 @@ const altEmailValidate = z
     {
       message: "Debe tener un formato email o el campo puede estar vacío",
     }
-);
-  
-export const swornDeclaration = z.object({
-  swornDeclaration: z.boolean().refine((value) => value === true, {message: 'Debe estar de acuerdo para poder continuar'})
-});
+  );
 
 export const schemaPersonal = z.object({
   schemaPersonal: z.object({
@@ -92,6 +88,11 @@ const currentYear = new Date().getFullYear();
 
 export const schemaVehicle = z.object({
   schemaVehicle: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     year: z.number().refine((value) => value <= currentYear, {
       message: "El año exede al actual",
     }),
@@ -160,6 +161,11 @@ export const schemaElectronic = z.object({
     type: z.enum(["CELULAR", "TABLET", "NOTEBOOK"]),
     brand: z.string().min(1).max(20),
     model: z.string().min(1).max(20),
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
   }),
 });
 
@@ -197,6 +203,9 @@ export const schemaIsTire = z.object({
 
 export const schemaVehicleTheftReport = z.object({
   schemaVehicleTheftReport: z.object({
+    swornDeclaration: z.boolean().refine((value) => value === true, {
+      message: "Debe estar de acuerdo para poder continuar",
+    }),
     time: z.string().refine((value) => value.length === 5, {
       message: "Debe ingresar un horario valido",
     }),
@@ -222,6 +231,11 @@ export const schemaVehicleTheftReport = z.object({
 
 export const schemaVehicleFireReport = z.object({
   schemaVehicleFireReport: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     time: z.string().refine((value) => value.length === 5, {
       message: "Debe ingresar un horario valido",
     }),
@@ -251,6 +265,11 @@ export const schemaVehicleFireReport = z.object({
 
 export const schemaElectronicTheftReport = z.object({
   schemaElectronicTheftReport: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     time: z.string().min(1).max(20).trim(),
     date: z
       .string()
@@ -398,6 +417,11 @@ export const schemaThirdPartyVehicleReportArr = z.object({
 
 export const schemaVehicleCrashReportData = z.object({
   schemaVehicleCrashReportData: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     amountVehicles: z.number(),
     thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReportArr),
   }),

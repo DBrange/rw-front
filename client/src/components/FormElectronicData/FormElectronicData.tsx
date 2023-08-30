@@ -28,7 +28,7 @@ function FormElectronicData({
   trigger,
   setIsSwornDeclaration,
 }: Props) {
-  const currentPath = useLocation().pathname
+  const currentPath = useLocation().pathname;
 
   const electronicType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -100,9 +100,9 @@ function FormElectronicData({
       />
       {currentPath === "/inspection" && (
         <FormCheckbox
-          register={register(`swornDeclaration`)}
+          register={register(`schemaElectronic.swornDeclaration`)}
           setChecked={setIsSwornDeclaration}
-          id={`swornDeclaration`}
+          id={`swornDeclarationinspectelectronic`}
           label="Aceptar declaracion jurada"
           instructions=""
           trigger={trigger}

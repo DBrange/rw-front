@@ -26,6 +26,7 @@ function FormInspect() {
     isPhone,
     trigger,
     setIsSwornDeclaration,
+    isSwornDeclaration,
   } = useInspectContext();
   return (
     <>
@@ -101,7 +102,12 @@ function FormInspect() {
               form={
                 <>
                   <FormVehicleData />
-                  <PageButton changePage={changePage} page={page} max={2} />
+                  <PageButton
+                    changePage={changePage}
+                    page={page}
+                    max={2}
+                    isSwornDeclaration={isSwornDeclaration}
+                  />
                 </>
               }
             />
@@ -119,7 +125,12 @@ function FormInspect() {
                     trigger={trigger}
                     setIsSwornDeclaration={setIsSwornDeclaration}
                   />
-                  <PageButton changePage={changePage} page={page} max={2} />
+                  <PageButton
+                    changePage={changePage}
+                    page={page}
+                    max={2}
+                    isSwornDeclaration={isSwornDeclaration}
+                  />
                 </>
               }
             />
