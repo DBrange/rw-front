@@ -146,7 +146,7 @@ function FormCrashData() {
         trigger={trigger}
       />
       <FormCheckbox
-        register={register(`schemaVehicleCrashReport.swornDeclaration`)}
+        register={register(`schemaVehicleCrashReportData.swornDeclaration`)}
         setChecked={setIsSwornDeclaration}
         id={`swornDeclarationcrash`}
         label="Aceptar declaracion jurada"
