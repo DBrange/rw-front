@@ -35,6 +35,7 @@ import {
   schemaLegalPersonal,
   schemaGnc,
   schemaPhone,
+  swornDeclaration,
 } from "../../../utilities";
 import { validationFormDataInspect } from "../utilities";
 
@@ -70,6 +71,8 @@ export interface IInspectContext {
   vehicleApi: VehicleApi;
   setFormNotFound: React.Dispatch<React.SetStateAction<boolean>>;
   formNotFound: boolean;
+  setIsSwornDeclaration: React.Dispatch<React.SetStateAction<boolean>>;
+  isSwornDeclaration: boolean;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -83,6 +86,8 @@ type ChildrenType = {
 export const InspectProvider = ({ children }: ChildrenType) => {
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
+  const [isSwornDeclaration, setIsSwornDeclaration] =
+    useState<boolean>(false);
   const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
@@ -185,15 +190,21 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     } else if (page === 2) {
       if (activeForm === "vehicle") {
         if (isCheckedGnc) {
-          schema = schemaUser.merge(schemaElement).merge(schemaGnc);
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaGnc)
+            .merge(swornDeclaration);
         } else {
-          schema = schemaUser.merge(schemaElement);
+          schema = schemaUser.merge(schemaElement).merge(swornDeclaration);
         }
       } else if (activeForm === "electronic") {
         if (isPhone) {
-          schema = schemaUser.merge(schemaElement).merge(schemaPhone);
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaPhone)
+            .merge(swornDeclaration);
         } else {
-          schema = schemaUser.merge(schemaElement);
+          schema = schemaUser.merge(schemaElement).merge(swornDeclaration);
         }
       }
     }
@@ -305,6 +316,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     vehicleApi,
     setFormNotFound,
     formNotFound,
+    setIsSwornDeclaration,
+    isSwornDeclaration,
   };
 
   return (

@@ -22,8 +22,8 @@ function FormVehicleData() {
     isCheckedGnc,
     setIsCheckedOkm,
     setVehicleApi,
-   trigger,
-    
+    trigger,
+    setIsSwornDeclaration,
   } = useInspectContext();
 
   return (
@@ -161,6 +161,14 @@ function FormVehicleData() {
         label="Tipo de vehiculo*"
         options={["CAMIONETA", "AUTOMOVIL", "MOTOCICLETA"]}
         touched={touchedFields.schemaVehicle?.type}
+      />
+      <FormCheckbox
+        register={register(`swornDeclaration`)}
+        setChecked={setIsSwornDeclaration}
+        id={`swornDeclaration`}
+        label="Aceptar declaracion jurada"
+        instructions=""
+        trigger={trigger}
       />
     </>
   );

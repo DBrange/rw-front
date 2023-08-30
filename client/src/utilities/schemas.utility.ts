@@ -20,7 +20,11 @@ const altEmailValidate = z
     {
       message: "Debe tener un formato email o el campo puede estar vacío",
     }
-  );
+);
+  
+export const swornDeclaration = z.object({
+  swornDeclaration: z.boolean().refine((value) => value === true, {message: 'Debe estar de acuerdo para poder continuar'})
+});
 
 export const schemaPersonal = z.object({
   schemaPersonal: z.object({
@@ -182,12 +186,12 @@ export const schemaVehicleReport = z.object({
 
 export const schemaIsTire = z.object({
   schemaIsTire: z.object({
-    tireAmount: z
-    .string()
-    .refine((value) => /^\d+$/.test(value), {
+    tireAmount: z.string().refine((value) => /^\d+$/.test(value), {
       message: "El campo debe contener solo números.",
     }),
     tireWear: z.number().min(0).max(100),
+    tirePhoto: z.array(z.string().url()),
+    replacementLocation: z.string().min(1).trim(),
   }),
 });
 

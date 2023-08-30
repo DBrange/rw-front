@@ -16,6 +16,7 @@ import {
   schemaThirdInjured,
   schemaThirdPartyVehicleReport,
   schemaThirdInjuredData,
+  swornDeclaration,
 } from "../../utilities";
 
 export type SchemaLegalPersonalType = z.infer<typeof schemaLegalPersonal>;
@@ -24,6 +25,7 @@ export type SchemaPersonalType = z.infer<typeof schemaPersonal>;
 export type SchemaVehicleType = z.infer<typeof schemaVehicle>;
 export type SchemaPhoneType = z.infer<typeof schemaPhone>;
 export type SchemaGncType = z.infer<typeof schemaGnc>;
+export type SwornDeclaration = z.infer<typeof swornDeclaration>;
 
 export type AllInspectSchemas =
   | (SchemaPersonalType &
@@ -31,7 +33,8 @@ export type AllInspectSchemas =
       SchemaVehicleType &
       SchemaElectronicType &
       SchemaGncType &
-      SchemaPhoneType)
+      SchemaPhoneType &
+      SwornDeclaration)
   | AllInspectSchemasOptionals;
 
 
@@ -45,7 +48,8 @@ export type AllInspectSchemasOptionals =
   | SchemaLegalPersonalType
   | SchemaElectronicType
   | SchemaGncType
-  | SchemaPhoneType;
+  | SchemaPhoneType
+  | SwornDeclaration;
 
 export type SchemaVehicleCrashReportType = z.infer<
   typeof schemaVehicleCrashReport
@@ -86,14 +90,16 @@ export type AllReportSchemas =
       SchemaThirdInjuredType &
       SchemaThirdPartyVehicleReportType &
       SchemaIsTireType &
-      SchemaThirdInjuredDataType)
+      SchemaThirdInjuredDataType &
+      SwornDeclaration)
   | AllReportOptionals;
 
 export type SchemaComplaint =
   | SchemaVehicleCrashReportType
   | SchemaVehicleTheftReportType
   | SchemaVehicleFireReportType
-  | SchemaElectronicTheftReportType;
+  | SchemaElectronicTheftReportType
+  | SwornDeclaration;
 
 export type AllReportOptionals =
   | SchemaPersonalType
@@ -111,4 +117,5 @@ export type AllReportOptionals =
   | SchemaThirdInjuredType
   | SchemaThirdPartyVehicleReportType
   | SchemaIsTireType
-  | SchemaThirdInjuredDataType;
+  | SchemaThirdInjuredDataType
+  | SwornDeclaration;

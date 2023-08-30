@@ -24,11 +24,11 @@ function FormInspect() {
     changePage,
     setIsPhone,
     isPhone,
-    trigger
+    trigger,
+    setIsSwornDeclaration,
   } = useInspectContext();
   return (
     <>
-      
       <form
         className="w-[100%] flex flex-col items-center"
         onSubmit={handleSubmit(submitData)}
@@ -117,6 +117,7 @@ function FormInspect() {
                     setIsPhone={setIsPhone}
                     isPhone={isPhone}
                     trigger={trigger}
+                    setIsSwornDeclaration={setIsSwornDeclaration}
                   />
                   <PageButton changePage={changePage} page={page} max={2} />
                 </>
