@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { FormInputAmount, FormInputOptionalAmount, FormTextArea, FormTimeInput } from "..";
+import {
+  FormInputAmount,
+  FormInputOptionalAmount,
+  FormTextArea,
+  FormTimeInput,
+} from "..";
 import {
   FormInput,
   FormCheckbox,
@@ -18,14 +23,14 @@ function FormCrashData() {
     amountValue,
     trigger,
     setIsCheckedThirdInjuried,
-isCheckedThirdInjuried
+    isCheckedThirdInjuried,
+    setIsSwornDeclaration,
   } = useReportContext();
 
   const [isCheckedThirdVehicle, setIsCheckedThirdVehicle] =
     useState<boolean>(false);
   const [isCheckedInjuried, setIsCheckedInjuried] = useState<boolean>(false);
   const [isCheckedAmbulance, setIsCheckedAmbulance] = useState<boolean>(false);
-
 
   return (
     <>
@@ -138,6 +143,14 @@ isCheckedThirdInjuried
         instructions={
           "Establece un acuerdo de palabra con los demas implicados, donde los datos que usted ingrese en la denuncia, seran enviados por mail a cada una de las partes, en donde todos deben estar de acuerdo con lo ingresado"
         }
+        trigger={trigger}
+      />
+      <FormCheckbox
+        register={register(`schemaVehicleCrashReportData.swornDeclaration`)}
+        setChecked={setIsSwornDeclaration}
+        id={`swornDeclarationcrash`}
+        label="Aceptar declaracion jurada"
+        instructions=""
         trigger={trigger}
       />
     </>

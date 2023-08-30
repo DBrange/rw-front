@@ -21,12 +21,14 @@ export const validationFormDataInspect = ({
           vehicleDTO: data.schemaVehicle,
           userDTO: data.schemaPersonal,
           gncDTO: data.schemaGnc,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionPersonalVehicle(dataObj);
       } else {
         const dataObj = {
           vehicleDTO: data.schemaVehicle,
           userDTO: data.schemaPersonal,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionPersonalVehicle(dataObj);
       }
@@ -41,12 +43,14 @@ export const validationFormDataInspect = ({
           electronicDTO: data.schemaElectronic,
           userDTO: data.schemaPersonal,
           smartphoneDTO: data.schemaPhone,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionPersonalElectronic(dataObj);
       } else {
         const dataObj = {
           electronicDTO: data.schemaElectronic,
           userDTO: data.schemaPersonal,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionPersonalElectronic(dataObj);
       }
@@ -61,12 +65,14 @@ export const validationFormDataInspect = ({
           vehicleDTO: data.schemaVehicle,
           legalUserDTO: data.schemaLegalPersonal,
           gncDTO: data.schemaGnc,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionLegalVehicle(dataObj);
       } else {
         const dataObj = {
           vehicleDTO: data.schemaVehicle,
           legalUserDTO: data.schemaLegalPersonal,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionLegalVehicle(dataObj);
       }
@@ -81,12 +87,14 @@ export const validationFormDataInspect = ({
           electronicDTO: data.schemaElectronic,
           legalUserDTO: data.schemaLegalPersonal,
           smartphoneDTO: data.schemaPhone,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionLegalElectronic(dataObj);
       } else {
         const dataObj = {
           electronicDTO: data.schemaElectronic,
           legalUserDTO: data.schemaLegalPersonal,
+          swornDeclaration: data.schemaVehicle.swornDeclaration,
         };
         triggers.triggerInspectionLegalElectronic(dataObj);
       }

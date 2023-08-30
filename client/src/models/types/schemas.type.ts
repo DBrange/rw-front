@@ -31,7 +31,7 @@ export type AllInspectSchemas =
       SchemaVehicleType &
       SchemaElectronicType &
       SchemaGncType &
-      SchemaPhoneType)
+      SchemaPhoneType )
   | AllInspectSchemasOptionals;
 
 
@@ -45,7 +45,7 @@ export type AllInspectSchemasOptionals =
   | SchemaLegalPersonalType
   | SchemaElectronicType
   | SchemaGncType
-  | SchemaPhoneType;
+  | SchemaPhoneType
 
 export type SchemaVehicleCrashReportType = z.infer<
   typeof schemaVehicleCrashReport
@@ -93,7 +93,7 @@ export type SchemaComplaint =
   | SchemaVehicleCrashReportType
   | SchemaVehicleTheftReportType
   | SchemaVehicleFireReportType
-  | SchemaElectronicTheftReportType;
+  | SchemaElectronicTheftReportType
 
 export type AllReportOptionals =
   | SchemaPersonalType
@@ -111,4 +111,4 @@ export type AllReportOptionals =
   | SchemaThirdInjuredType
   | SchemaThirdPartyVehicleReportType
   | SchemaIsTireType
-  | SchemaThirdInjuredDataType;
+  | SchemaThirdInjuredDataType

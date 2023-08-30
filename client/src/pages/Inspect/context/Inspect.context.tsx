@@ -70,6 +70,8 @@ export interface IInspectContext {
   vehicleApi: VehicleApi;
   setFormNotFound: React.Dispatch<React.SetStateAction<boolean>>;
   formNotFound: boolean;
+  setIsSwornDeclaration: React.Dispatch<React.SetStateAction<boolean>>;
+  isSwornDeclaration: boolean;
 }
 
 export const InspectContext = createContext<IInspectContext | undefined>(
@@ -83,6 +85,8 @@ type ChildrenType = {
 export const InspectProvider = ({ children }: ChildrenType) => {
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [isCheckedGnc, setIsCheckedGnc] = useState<boolean>(false);
+  const [isSwornDeclaration, setIsSwornDeclaration] =
+    useState<boolean>(false);
   const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
   const [isPhone, setIsPhone] = useState<boolean>(false);
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
@@ -185,13 +189,19 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     } else if (page === 2) {
       if (activeForm === "vehicle") {
         if (isCheckedGnc) {
-          schema = schemaUser.merge(schemaElement).merge(schemaGnc);
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaGnc)
+            ;
         } else {
           schema = schemaUser.merge(schemaElement);
         }
       } else if (activeForm === "electronic") {
         if (isPhone) {
-          schema = schemaUser.merge(schemaElement).merge(schemaPhone);
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaPhone)
+            ;
         } else {
           schema = schemaUser.merge(schemaElement);
         }
@@ -207,11 +217,12 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     trigger,
     setValue,
     control,
+    getValues
   } = useForm<AllInspectSchemas>({
     resolver: zodResolver(schema),
   });
 
-  console.log(touchedFields)
+  console.log(getValues(),'aaaaaaaaaaaaa')
 
   useEffect(() => {
     selectingSchema();
@@ -305,6 +316,8 @@ export const InspectProvider = ({ children }: ChildrenType) => {
     vehicleApi,
     setFormNotFound,
     formNotFound,
+    setIsSwornDeclaration,
+    isSwornDeclaration,
   };
 
   return (

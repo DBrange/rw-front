@@ -15,6 +15,7 @@ function FormThieftElectronicData() {
     setIsTire,
     activeForm,
     trigger,
+    setIsSwornDeclaration,
   } = useReportContext();
 
   return (
@@ -61,6 +62,14 @@ function FormThieftElectronicData() {
         id={`schemaElectronicTheftReport.reportPhoto`}
         name={`schemaElectronicTheftReport.reportPhoto`}
         imagesType="Agregar foto de la denuncia"
+      />
+      <FormCheckbox
+        register={register(`schemaElectronicTheftReport.swornDeclaration`)}
+        setChecked={setIsSwornDeclaration}
+        id={`swornDeclarationttheft`}
+        label="Aceptar declaracion jurada"
+        instructions=""
+        trigger={trigger}
       />
     </>
   );

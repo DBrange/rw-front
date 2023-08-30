@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { FormInputOptionalAmount, FormTextArea, FormTimeInput } from "..";
-import { FormCheckbox, FormInput, FormInputOptional } from "../../../../components";
+import {
+  FormCheckbox,
+  FormInput,
+  FormInputOptional,
+} from "../../../../components";
 import { useReportContext } from "../../context";
 
 function FormFireData() {
@@ -11,14 +15,14 @@ function FormFireData() {
     setAmountValue,
     amountValue,
     setIsCheckedThirdInjuried,
-isCheckedThirdInjuried,trigger
+    isCheckedThirdInjuried,
+    trigger,
+    setIsSwornDeclaration,
   } = useReportContext();
 
-        const [isCheckedInjuried, setIsCheckedInjuried] =
-          useState<boolean>(false);
-        const [isCheckedAmbulance, setIsCheckedAmbulance] =
-          useState<boolean>(false);
-        
+  const [isCheckedInjuried, setIsCheckedInjuried] = useState<boolean>(false);
+  const [isCheckedAmbulance, setIsCheckedAmbulance] = useState<boolean>(false);
+
   return (
     <>
       <FormTimeInput schemaName={"schemaVehicleFireReport.time"} />
@@ -109,7 +113,15 @@ isCheckedThirdInjuried,trigger
         setAmountValue={setAmountValue}
         amountValue={amountValue}
       />
+      <FormCheckbox
+        register={register(`schemaVehicleFireReport.swornDeclaration`)}
+        setChecked={setIsSwornDeclaration}
+        id={`swornDeclarationfire`}
+        label="Aceptar declaracion jurada"
+        instructions=""
+        trigger={trigger}
+      />
     </>
   );
 }
-export default FormFireData
+export default FormFireData;

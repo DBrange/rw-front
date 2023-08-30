@@ -1,4 +1,4 @@
-import { FormInput, FormInputOptional } from "..";
+import { FormCheckbox, FormInput, FormInputOptional } from "..";
 import { FormSelectElecType } from "../../pages";
 import {
   AllInspectSchemas,
@@ -7,14 +7,16 @@ import {
   SchemaPhoneType,
 } from "../../models";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   register: UseFormRegister<AllInspectSchemas | AllReportSchemas>;
-  errors: any //FieldErrors<SchemaElectronicType & SchemaPhoneType>;
+  errors: any; //FieldErrors<SchemaElectronicType & SchemaPhoneType>;
   touchedFields: any;
   setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
   isPhone: boolean;
-  trigger: any
+  trigger: any;
+  setIsSwornDeclaration: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function FormElectronicData({
@@ -23,8 +25,11 @@ function FormElectronicData({
   touchedFields,
   setIsPhone,
   isPhone,
-  trigger
+  trigger,
+  setIsSwornDeclaration,
 }: Props) {
+  const currentPath = useLocation().pathname;
+
   const electronicType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
@@ -93,6 +98,16 @@ function FormElectronicData({
         placeholder="Ingrese el Año"
         touched={touchedFields.schemaElectronic?.model}
       />
+      {currentPath === "/inspection" && (
+        <FormCheckbox
+          register={register(`schemaElectronic.swornDeclaration`)}
+          setChecked={setIsSwornDeclaration}
+          id={`swornDeclarationinspectelectronic`}
+          label="Aceptar declaracion jurada"
+          instructions=""
+          trigger={trigger}
+        />
+      )}
     </>
   );
 }

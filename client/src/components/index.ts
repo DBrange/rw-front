@@ -17,3 +17,4 @@ export * from './FormSelect';
 export * from './Modal';
 export * from './ModalError';
 export * from './PageButton';
+export * from './SwornDeclarationError';

@@ -18,6 +18,7 @@ function FormThieftVehicleData() {
     control,
     activeForm,
     trigger,
+    setIsSwornDeclaration,
   } = useReportContext();
 
   return (
@@ -77,15 +78,39 @@ function FormThieftVehicleData() {
               control={control}
               id={"schemaIsTire.tireWear"}
             />
+            <FormUploadImageReport
+              schemaName={`schemaIsTire.reportPhoto`}
+              error={errors[`schemaIsTire`]?.reportPhoto?.message}
+              id={`schemaIsTire.reportPhoto`}
+              name={`schemaIsTire.reportPhoto`}
+              imagesType="Agregar foto de la denuncia"
+            />
+            <FormInput
+              register={register(`schemaIsTire.replacementLocation`)}
+              error={errors[`schemaIsTire`]?.replacementLocation?.message}
+              type="text"
+              id={`schemaIsTire.replacementLocation`}
+              label="Ubicacion del suceso*"
+              placeholder="Ingresar ubicacion"
+              touched={touchedFields[`schemaIsTire`]?.replacementLocation}
+            />
           </>
         </FormInputOptional>
       </div>
       <FormUploadImageReport
-        schemaName={`schemaVehicleTheftReport.reportPhoto`}
-        error={errors[`schemaVehicleTheftReport`]?.reportPhoto?.message}
-        id={`schemaVehicleTheftReport.reportPhoto`}
-        name={`schemaVehicleTheftReport.reportPhoto`}
-        imagesType="Agregar foto de la denuncia"
+        schemaName={`schemaVehicleTheftReport.tirePhoto`}
+        error={errors[`schemaVehicleTheftReport`]?.tirePhoto?.message}
+        id={`schemaVehicleTheftReport.tirePhoto`}
+        name={`schemaVehicleTheftReport.tirePhoto`}
+        imagesType="Agregar foto de un neumatico"
+      />
+      <FormCheckbox
+        register={register(`schemaVehicleTheftReport.swornDeclaration`)}
+        setChecked={setIsSwornDeclaration}
+        id={`swornDeclarationttheft`}
+        label="Aceptar declaracion jurada"
+        instructions=""
+        trigger={trigger}
       />
     </>
   );

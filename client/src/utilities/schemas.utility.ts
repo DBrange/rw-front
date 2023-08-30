@@ -88,6 +88,11 @@ const currentYear = new Date().getFullYear();
 
 export const schemaVehicle = z.object({
   schemaVehicle: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     year: z.number().refine((value) => value <= currentYear, {
       message: "El año exede al actual",
     }),
@@ -156,6 +161,11 @@ export const schemaElectronic = z.object({
     type: z.enum(["CELULAR", "TABLET", "NOTEBOOK"]),
     brand: z.string().min(1).max(20),
     model: z.string().min(1).max(20),
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
   }),
 });
 
@@ -182,17 +192,20 @@ export const schemaVehicleReport = z.object({
 
 export const schemaIsTire = z.object({
   schemaIsTire: z.object({
-    tireAmount: z
-    .string()
-    .refine((value) => /^\d+$/.test(value), {
+    tireAmount: z.string().refine((value) => /^\d+$/.test(value), {
       message: "El campo debe contener solo números.",
     }),
     tireWear: z.number().min(0).max(100),
+    tirePhoto: z.array(z.string().url()),
+    replacementLocation: z.string().min(1).trim(),
   }),
 });
 
 export const schemaVehicleTheftReport = z.object({
   schemaVehicleTheftReport: z.object({
+    swornDeclaration: z.boolean().refine((value) => value === true, {
+      message: "Debe estar de acuerdo para poder continuar",
+    }),
     time: z.string().refine((value) => value.length === 5, {
       message: "Debe ingresar un horario valido",
     }),
@@ -218,6 +231,11 @@ export const schemaVehicleTheftReport = z.object({
 
 export const schemaVehicleFireReport = z.object({
   schemaVehicleFireReport: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     time: z.string().refine((value) => value.length === 5, {
       message: "Debe ingresar un horario valido",
     }),
@@ -247,6 +265,11 @@ export const schemaVehicleFireReport = z.object({
 
 export const schemaElectronicTheftReport = z.object({
   schemaElectronicTheftReport: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     time: z.string().min(1).max(20).trim(),
     date: z
       .string()
@@ -394,6 +417,11 @@ export const schemaThirdPartyVehicleReportArr = z.object({
 
 export const schemaVehicleCrashReportData = z.object({
   schemaVehicleCrashReportData: z.object({
+    swornDeclaration: z
+      .boolean()
+      .refine((value) => value === true, {
+        message: "Debe estar de acuerdo para poder continuar",
+      }),
     amountVehicles: z.number(),
     thirdPartyVehicleInfo: z.array(schemaThirdPartyVehicleReportArr),
   }),

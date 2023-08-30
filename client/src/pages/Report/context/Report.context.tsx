@@ -98,6 +98,8 @@ export interface IReportContext {
   trigger: any;
   setFormNotFound: React.Dispatch<React.SetStateAction<boolean>>;
   formNotFound: boolean;
+  setIsSwornDeclaration: React.Dispatch<React.SetStateAction<boolean>>;
+  isSwornDeclaration: boolean;
 }
 
 export const ReportContext = createContext<IReportContext | undefined>(
@@ -110,6 +112,8 @@ type ChildrenType = {
 
 export const ReportProvider = ({ children }: ChildrenType) => {
   const [isCheckedThirdInjuried, setIsCheckedThirdInjuried] =
+    useState<boolean>(false);
+  const [isSwornDeclaration, setIsSwornDeclaration] =
     useState<boolean>(false);
   const [isCheckedDamage, setIsCheckedDamage] = useState<boolean>(false);
   const [isCheckedOkm, setIsCheckedOkm] = useState<boolean>(false);
@@ -356,13 +360,19 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         }
       } else if (activeForm === "electronic") {
         if (isPhone) {
-          schema = schema.merge(schemaElement).merge(schemaPhone);
+          schema = schema
+            .merge(schemaElement)
+            .merge(schemaPhone)
+            ;
         } else {
           schema = schema.merge(schemaElement);
         }
       }
     } else if (page === 3) {
-      schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+      schema = schemaUser
+        .merge(schemaElement)
+        .merge(schemaComplaintType)
+        ;
       setAmountVehicles(0);
       setAmountValue(0);
       setIsCheckedThirdInjuried(false);
@@ -373,26 +383,33 @@ export const ReportProvider = ({ children }: ChildrenType) => {
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaGnc)
-            .merge(schemaIsTire);
+            .merge(schemaIsTire)
+            ;
         } else {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
-            .merge(schemaIsTire);
+            .merge(schemaIsTire)
+            ;
         }
       } else {
         if (isPhone) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
-            .merge(schemaPhone);
+            .merge(schemaPhone)
+            ;
         } else if (isCheckedGnc) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
-            .merge(schemaGnc);
+            .merge(schemaGnc)
+            ;
         } else {
-          schema = schemaUser.merge(schemaElement).merge(schemaComplaintType);
+          schema = schemaUser
+            .merge(schemaElement)
+            .merge(schemaComplaintType)
+            ;
         }
       }
     } else if (page === 5 && amountValue) {
@@ -401,12 +418,14 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           .merge(schemaElement)
           .merge(schemaComplaintType)
           .merge(schemaGnc)
-          .merge(schemaThirdInjured);
+          .merge(schemaThirdInjured)
+          ;
       } else {
         schema = schemaUser
           .merge(schemaElement)
           .merge(schemaComplaintType)
-          .merge(schemaThirdInjured);
+          .merge(schemaThirdInjured)
+          ;
       }
     } else if (page === 6) {
       if (isCheckedGnc) {
@@ -415,64 +434,74 @@ export const ReportProvider = ({ children }: ChildrenType) => {
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaGnc)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (amountValue && amountVehicles > 1) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaGnc)
             .merge(schemaThirdInjured)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (!amountValue && !amountVehicles) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaGnc)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (amountValue && !amountVehicles) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaGnc)
             .merge(schemaThirdInjured)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (amountValue && amountVehicles === (1 || 0)) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaThirdInjured)
             .merge(schemaGnc)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         }
       } else {
         if (!amountValue && amountVehicles > 0) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (amountValue && amountVehicles > 1) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaThirdInjured)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (!amountValue && !amountVehicles) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (amountValue && !amountVehicles) {
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaThirdInjured)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         } else if (amountValue && amountVehicles === (1 || 0)){
           schema = schemaUser
             .merge(schemaElement)
             .merge(schemaComplaintType)
             .merge(schemaThirdInjured)
-            .merge(schemaVehicleCrashReportData);
+            .merge(schemaVehicleCrashReportData)
+            ;
         }
       }
     }
@@ -568,10 +597,11 @@ console.log(amountVehicles,'llll')
     setValue,
     trigger,
     control,
+    getValues
   } = useForm<AllReportSchemas>({
     resolver: zodResolver(schema),
   });
-
+console.log(getValues(), 'aaaaaaaaaaaaaaaaaaa')
   useEffect(() => {
     selectingSchema();
     if (modalActive) {
@@ -641,6 +671,8 @@ console.log(amountVehicles,'llll')
     formNotFound,
     setIsCheckedOkm,
     isCheckedOkm,
+    setIsSwornDeclaration,
+    isSwornDeclaration,
   };
 
   return (

@@ -17,6 +17,7 @@ function FormVehicleReportContainer() {
     thirdInjuredForm,
     amountValue,
     thirdPartyVehiclesForm,
+    isSwornDeclaration,
   } = useReportContext();
 
 
@@ -28,11 +29,7 @@ function FormVehicleReportContainer() {
           form={
             <>
               <FormVehicleReportData />
-              <PageButton
-                changePage={changePage}
-                page={page}
-                max={6}
-              />
+              <PageButton changePage={changePage} page={page} max={6} />
             </>
           }
         />
@@ -43,11 +40,7 @@ function FormVehicleReportContainer() {
             <>
               <FormVehicleReportBtn />
 
-              <PageButton
-                changePage={changePage}
-                page={page}
-                max={6}
-              />
+              <PageButton changePage={changePage} page={page} max={6} />
             </>
           }
         />
@@ -61,6 +54,7 @@ function FormVehicleReportContainer() {
                 changePage={changePage}
                 page={page}
                 max={6}
+                isSwornDeclaration={isSwornDeclaration}
               />
             </>
           }
@@ -69,7 +63,6 @@ function FormVehicleReportContainer() {
         {thirdInjuredForm()}
         {thirdPartyVehiclesForm()}
 
-       
         <FormEffectOpenClose
           formName={"Robo"}
           isActive={
@@ -82,6 +75,7 @@ function FormVehicleReportContainer() {
                 changePage={changePage}
                 page={page}
                 max={4}
+                isSwornDeclaration={isSwornDeclaration}
               />
             </>
           }
@@ -97,6 +91,7 @@ function FormVehicleReportContainer() {
                 changePage={changePage}
                 page={page}
                 max={amountValue ? 5 : 4}
+                isSwornDeclaration={isSwornDeclaration}
               />
             </>
           }
