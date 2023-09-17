@@ -1,38 +1,47 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+import { checkboxService } from '@/pages';
+import {
+  AllInspectValues,
+  ChangeEventType,
+} from "../../pages";
+import { Label } from '@/styledComponents';
+import { CheckboxWrapper, CheckboxBox, InputCheckbox, Instructions } from '.';
+
 
 interface Props {
-  register: UseFormRegisterReturn<string>;
-  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
-  id: string;
+  changeInputForCheckbox: (e: ChangeEventType) => void;
   label: string;
+  name: string;
+  id: string;
   instructions: string;
-  trigger: any
 }
 
 function FormCheckbox({
-  register,
-  setChecked,
-  id,
+  changeInputForCheckbox,
   label,
+  name,
+  id,
   instructions,
-  trigger
 }: Props) {
-  const check = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+  const check = (e: ChangeEventType) => {
     const { checked } = e.currentTarget;
-    setChecked(checked);
-    trigger()
-  };
+    // const [type, key] = name.split(".");
 
+    changeInputForCheckbox(e)
+
+    checkboxService.setSubject(checked);
+  };
   return (
-    <div className="mb-7 mt-4 flex flex-col">
-      <div className="flex gap-4">
-        <label htmlFor={id}>{label}</label>
-        <input type="checkbox" id={id} onClick={check} {...register} />
-      </div>
+    <CheckboxWrapper>
+      <CheckboxBox>
+        <Label $error={false}>{label}</Label>
+        <InputCheckbox type="checkbox" name={name} id={id} onChange={check} />
+      </CheckboxBox>
       {instructions && (
-        <span className="block text-xs text-gray-400">{instructions}</span>
+        <Instructions className="block text-xs text-gray-400">
+          {instructions}
+        </Instructions>
       )}
-    </div>
+    </CheckboxWrapper>
   );
 }
 export default FormCheckbox;

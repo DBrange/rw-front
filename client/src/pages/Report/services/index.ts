@@ -1,1 +1,1 @@
-export * from './addReport.service';
+export * from './add-report.service';

@@ -1,103 +1,43 @@
-import { useReportContext } from "../../context";
-import {
-  ButtonChoice,
-  FormEffectOpenClose,
-  FormLegalPersonalData,
-  FormPersonalData,
-  PageButton,
-} from "../../../../components";
-import { FormElectronicReportContainer, FormVehicleReportContainer } from "..";
+import { PageBtn } from "@/components";
+import { Form } from "@/styledComponents";
+import { AllReportPages } from "..";
+import { useReportContext } from "../..";
 
 function FormReport() {
   const {
-    userActiveForm,
-    handleSubmit,
-    selectFormUserSchema,
-    selectFormSchema,
-    submitData,
-    errors,
-    register,
-    touchedFields,
-    userBtnActive,
+    submitValues,
     page,
     changePage,
+    partialErrors,
+    markedTouches,
+    amountInjured,
+    amountVehicles,
+    reportActive,
   } = useReportContext();
 
+ const correspondingPage =
+   amountInjured > 0 && amountVehicles > 0 && reportActive.crash
+     ? 8
+     : amountInjured > 0 && reportActive.fire
+     ? 7
+     : amountInjured < 1 && amountVehicles > 0 && reportActive.crash
+     ? 7
+     : amountInjured > 0 && amountVehicles < 1 && reportActive.crash
+     ? 7
+     : 6;
+
   return (
-    <>
-      <form
-        className="w-[100%] flex flex-col items-center"
-        onSubmit={handleSubmit(submitData)}
-      >
-        <div className="mt-5">
-          <FormEffectOpenClose
-            formName={"Tipo de denuncia"}
-            isActive={page === 0}
-            form={
-              <>
-                <div className="w-full flex flex-col justify-center items-center gap-4">
-                  <ButtonChoice
-                    btnOne={"Persona particular"}
-                    btnTwo={"Persona juridica"}
-                    isActiveOne={userBtnActive.person}
-                    isActiveTwo={userBtnActive.legal}
-                    selectedSchemaOne={() => selectFormUserSchema("person")}
-                    selectedSchemaTwo={() => selectFormUserSchema("legal")}
-                  />
+    <Form onSubmit={submitValues}>
+      <AllReportPages />
 
-                  <ButtonChoice
-                    btnOne={"Vehiculo"}
-                    btnTwo={"Electrodomestico"}
-                    isActiveOne={userBtnActive.vehicle}
-                    isActiveTwo={userBtnActive.electronic}
-                    selectedSchemaOne={() => selectFormSchema("vehicle")}
-                    selectedSchemaTwo={() => selectFormSchema("electronic")}
-                  />
-                  <PageButton changePage={changePage} page={page} max={6} />
-                </div>
-              </>
-            }
-          />
-        </div>
-
-        <section className="w-full">
-          <div className="">
-            <FormEffectOpenClose
-              formName={"Persona particular"}
-              isActive={userActiveForm === "person" && page === 1}
-              form={
-                <>
-                  <FormPersonalData
-                    errors={errors}
-                    register={register}
-                    touchedFields={touchedFields}
-                  />
-                  <PageButton changePage={changePage} page={page} max={6} />
-                </>
-              }
-            />
-            <FormEffectOpenClose
-              formName={"Persona juridica"}
-              isActive={userActiveForm === "legal" && page === 1}
-              form={
-                <>
-                  <FormLegalPersonalData
-                    errors={errors}
-                    register={register}
-                    touchedFields={touchedFields}
-                  />
-                  <PageButton changePage={changePage} page={page} max={6} />
-                </>
-              }
-            />
-          </div>
-          <div>
-            <FormVehicleReportContainer />
-            <FormElectronicReportContainer />
-          </div>
-        </section>
-      </form>
-    </>
+      <PageBtn
+        changePage={changePage}
+        page={page}
+        max={correspondingPage}
+        errorsInputValues={partialErrors()}
+        markedTouches={markedTouches}
+      />
+    </Form>
   );
 }
 export default FormReport;

@@ -1,114 +1,82 @@
-import { FormCheckbox, FormInput, FormInputOptional } from "..";
-import { FormSelectElecType } from "../../pages";
+import { useState } from "react";
 import {
-  AllInspectSchemas,
-  AllReportSchemas,
-  SchemaElectronicType,
-  SchemaPhoneType,
-} from "../../models";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+  FormInput,
+  FormOptional,
+  FormPhoneData,
+  FormSelectElectronic,
+} from "..";
+import { SectionFormContainer } from "@/styledComponents";
 
-interface Props {
-  register: UseFormRegister<AllInspectSchemas | AllReportSchemas>;
-  errors: any; //FieldErrors<SchemaElectronicType & SchemaPhoneType>;
-  touchedFields: any;
-  setIsPhone: React.Dispatch<React.SetStateAction<boolean>>;
-  isPhone: boolean;
-  trigger: any;
-  setIsSwornDeclaration: React.Dispatch<React.SetStateAction<boolean>>;
+interface Porps {
+  changeInputValues: any;
+  inputValues: any;
+  inputTouched: any;
+  errorsInputValues: any;
+  changeSelectValues: any;
 }
 
 function FormElectronicData({
-  register,
-  errors,
-  touchedFields,
-  setIsPhone,
-  isPhone,
-  trigger,
-  setIsSwornDeclaration,
-}: Props) {
-  const currentPath = useLocation().pathname;
-
-  const electronicType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
+  changeInputValues,
+  inputValues,
+  inputTouched,
+  errorsInputValues,
+  changeSelectValues,
+}: Porps) {
+  const [isPhone, setIsPhone] = useState<boolean>(false);
+  const electronicType = (value: string) => {
     if (value === "CELULAR") {
       setIsPhone(true);
     } else {
       setIsPhone(false);
     }
   };
-
   return (
-    <>
-      <FormSelectElecType
-        register={register("schemaElectronic.type")}
-        error={errors.schemaElectronic?.type?.message}
-        touched={touchedFields.schemaElectronic?.type}
+    <SectionFormContainer>
+      <FormSelectElectronic
+        label="Tipo de electodomestico"
         electronicType={electronicType}
-        trigger={trigger}
+        value={inputValues?.electronic?.type}
+        touched={inputTouched?.electronic?.type}
+        error={errorsInputValues?.electronic?.type}
+        handleChange={changeSelectValues}
+        name="electronic.type"
+        id="electronic.type"
+        options={["CELULAR", "TABLET", "NOTEBOOK"]}
       />
-      <FormInputOptional checked={isPhone}>
-        <>
-          <FormInput
-            register={register("schemaPhone.phoneNumber")}
-            error={errors.schemaPhone?.phoneNumber?.message}
-            type="text"
-            id="schemaPhone.phoneNumber"
-            label="Numero del movil*"
-            placeholder="Numero del movil"
-            touched={touchedFields.schemaPhone?.phoneNumber}
+      <FormOptional
+        children={
+          <FormPhoneData
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
           />
-          <FormInput
-            register={register("schemaPhone.phoneService")}
-            error={errors.schemaPhone?.phoneService?.message}
-            type="text"
-            id="schemaPhone.phoneService"
-            label="Servicio del movil*"
-            placeholder="Servicio del movil"
-            touched={touchedFields.schemaPhone?.phoneService}
-          />
-          <FormInput
-            register={register("schemaPhone.imei")}
-            error={errors.schemaPhone?.imei?.message}
-            type="number"
-            id="schemaPhone.imei"
-            label="IMEI*"
-            placeholder="Ingrese el Año"
-            touched={touchedFields.schemaPhone?.imei}
-          />
-        </>
-      </FormInputOptional>
+        }
+        checked={isPhone}
+      />
       <FormInput
-        register={register("schemaElectronic.brand")}
-        error={errors.schemaElectronic?.brand?.message}
-        type="text"
-        id="schemaElectronic.brand"
         label="Marca*"
-        placeholder="Ingrese el Año"
-        touched={touchedFields.schemaElectronic?.brand}
+        value={inputValues.electronic.brand}
+        touched={inputTouched?.electronic?.brand}
+        error={errorsInputValues?.electronic?.brand}
+        handleChange={changeInputValues}
+        name="electronic.brand"
+        id="electronic.brand"
+        type="text"
+        placeholder="Ingresar marca"
       />
       <FormInput
-        register={register("schemaElectronic.model")}
-        error={errors.schemaElectronic?.model?.message}
-        type="text"
-        id="schemaElectronic.model"
         label="Modelo*"
-        placeholder="Ingrese el Año"
-        touched={touchedFields.schemaElectronic?.model}
+        value={inputValues.electronic.model}
+        touched={inputTouched?.electronic?.model}
+        error={errorsInputValues?.electronic?.model}
+        handleChange={changeInputValues}
+        name="electronic.model"
+        id="electronic.model"
+        type="text"
+        placeholder="Ingresar modelo"
       />
-      {currentPath === "/inspection" && (
-        <FormCheckbox
-          register={register(`schemaElectronic.swornDeclaration`)}
-          setChecked={setIsSwornDeclaration}
-          id={`swornDeclarationinspectelectronic`}
-          label="Aceptar declaracion jurada"
-          instructions=""
-          trigger={trigger}
-        />
-      )}
-    </>
+    </SectionFormContainer>
   );
 }
 export default FormElectronicData;

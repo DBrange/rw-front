@@ -1,75 +1,88 @@
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { SectionFormContainer } from "@/styledComponents";
 import { FormInput } from "..";
-import {
-  AllReportOptionals,
-  AllInspectSchemasOptionals,
-  SchemaLegalPersonalType,
-} from "../../models";
 
 interface Props {
-  register: UseFormRegister<AllInspectSchemasOptionals | AllReportOptionals>;
-  errors: FieldErrors<SchemaLegalPersonalType>;
-  touchedFields: FieldValues["touched"];
+  changeInputValues: any;
+  inputValues: any;
+  inputTouched: any;
+  errorsInputValues: any;
 }
 
-function FormLegalPersonalData({ register, errors, touchedFields }: Props) {
+function FormLegalPersonalData({
+  changeInputValues,
+  inputValues,
+  inputTouched,
+  errorsInputValues,
+}: Props) {
   return (
-    <>
+    <SectionFormContainer>
       <FormInput
-        register={register("schemaLegalPersonal.companyName")}
-        error={errors.schemaLegalPersonal?.companyName?.message}
+        label="Nombre de la compañia*"
+        value={inputValues?.legalPersonal?.companyName}
+        touched={inputTouched?.legalPersonal?.companyName}
+        error={errorsInputValues?.legalPersonal?.companyName}
+        handleChange={changeInputValues}
+        name="legalPersonal.companyName"
+        id="legalPersonal.companyName"
         type="text"
-        id="schemaLegalPersonal.companyName"
-        label="Nombre de la compania*"
-        placeholder="Ingrese su nombre"
-        touched={touchedFields.schemaLegalPersonal?.companyName}
+        placeholder="Ingresar nombre de la compañia"
       />
       <FormInput
-        register={register("schemaLegalPersonal.cuit")}
-        error={errors.schemaLegalPersonal?.cuit?.message}
-        type="number"
-        id="schemaLegalPersonal.cuit"
         label="CUIT*"
-        placeholder="Ingrese su CUIT"
-        touched={touchedFields.schemaLegalPersonal?.cuit}
-      />
-      <FormInput
-        register={register("schemaLegalPersonal.phoneNumber")}
-        error={errors.schemaLegalPersonal?.phoneNumber?.message}
-        type="number"
-        id="schemaLegalPersonal.phoneNumber"
-        label="Numero de telefono*"
-        placeholder="Ingrese numero de telefonico"
-        touched={touchedFields.schemaLegalPersonal?.phoneNumber}
-      />
-      <FormInput
-        register={register("schemaLegalPersonal.email")}
-        error={errors.schemaLegalPersonal?.email?.message}
+        value={inputValues?.legalPersonal?.cuit}
+        touched={inputTouched?.legalPersonal?.cuit}
+        error={errorsInputValues?.legalPersonal?.cuit}
+        handleChange={changeInputValues}
+        name="legalPersonal.cuit"
+        id="legalPersonal.cuit"
         type="text"
-        id="schemaLegalPersonal.email"
-        label="Email"
-        placeholder="Ingrese email*"
-        touched={touchedFields.schemaLegalPersonal?.email}
+        placeholder="Ingresar CUIT"
       />
       <FormInput
-        register={register("schemaLegalPersonal.altEmail")}
-        error={errors.schemaLegalPersonal?.altEmail?.message}
+        label="Numero telefonico*"
+        value={inputValues?.legalPersonal?.phoneNumber}
+        touched={inputTouched?.legalPersonal?.phoneNumber}
+        error={errorsInputValues?.legalPersonal?.phoneNumber}
+        handleChange={changeInputValues}
+        name="legalPersonal.phoneNumber"
+        id="legalPersonal.phoneNumber"
         type="text"
-        id="schemaLegalPersonal.altEmail"
+        placeholder="Ingresar numero telefonico"
+      />
+      <FormInput
+        label="Email*"
+        value={inputValues?.legalPersonal?.email}
+        touched={inputTouched?.legalPersonal?.email}
+        error={errorsInputValues?.legalPersonal?.email}
+        handleChange={changeInputValues}
+        name="legalPersonal.email"
+        id="legalPersonal.email"
+        type="text"
+        placeholder="Ingresar email"
+      />
+      <FormInput
         label="Email alternativo"
-        placeholder="Ingrese email alternativo"
-        touched={touchedFields.schemaLegalPersonal?.altEmail}
+        value={inputValues?.legalPersonal?.altEmail}
+        touched={inputTouched?.legalPersonal?.altEmail}
+        error={errorsInputValues?.legalPersonal?.altEmail}
+        handleChange={changeInputValues}
+        name="legalPersonal.altEmail"
+        id="legalPersonal.altEmail"
+        type="text"
+        placeholder="Ingresar email alternativo"
       />
       <FormInput
-        register={register("schemaLegalPersonal.address")}
-        error={errors.schemaLegalPersonal?.address?.message}
+        label="Residencia*"
+        value={inputValues?.legalPersonal?.address}
+        touched={inputTouched?.legalPersonal?.address}
+        error={errorsInputValues?.legalPersonal?.address}
+        handleChange={changeInputValues}
+        name="legalPersonal.address"
+        id="legalPersonal.address"
         type="text"
-        id="schemaLegalPersonal.address"
-        label="Direccion*"
-        placeholder="Ingrese su direccion"
-        touched={touchedFields.schemaLegalPersonal?.address}
+        placeholder="Ingresar residencia"
       />
-    </>
+    </SectionFormContainer>
   );
 }
 export default FormLegalPersonalData;
