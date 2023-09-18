@@ -1,5 +1,5 @@
+export * from './AllInspectPages';
+export * from './FormAllDetailsInspect';
+export * from './FormDetail';
 export * from './FormInspect';
-export { default as FormSelectElecType } from './FormSelectElecType/FormSelectElecType';
-export * from './FormUploadImage';
-export * from './FormVehicleData';
 export * from './InspectContainer';

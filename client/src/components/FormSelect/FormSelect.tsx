@@ -1,59 +1,67 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+import { PiWarningCircleFill } from "react-icons/pi";
+import { Option, Select } from ".";
+import { SelectEventType } from "@/pages";
+import { ContainerField, Label, FieldIconBox, P } from "@/styledComponents";
 
 interface Props {
-  register: UseFormRegisterReturn<any>;
-  error: string | undefined;
-  id: string;
   label: string;
-  options: string[];
+  value: string;
   touched: boolean;
+  error?: string;
+  handleChange: (e: SelectEventType) => void;
+  name: string;
+  id: string;
+  options: string[];
 }
 
 function FormSelect({
-  register,
-  error,
-  id,
   label,
-  options,
+  value,
   touched,
+  error,
+  handleChange,
+  name,
+  id,
+  options,
 }: Props) {
-
   return (
-    <div className="w-[100%] flex flex-col">
-      <label
-        className={`${touched && error && "text-red-400"} mb-1`}
-        htmlFor={id}
-      >
+    <ContainerField>
+      <Label $error={!!error && touched} htmlFor={id}>
         {label}
-      </label>
-      <select
-        defaultValue="default"
-        className={`${
-          touched && error && "border-red-400"
-        } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
-        id={id}
-        {...register}
-      >
-        <option value="default" hidden>
-          Seleccionar
-        </option>
-        {options.map((el, i) => (
-          <option value={el} key={i}>
-            {el}
-          </option>
-        ))}
-      </select>
-
-      <span>
-        <p
-          className={`${
-            touched && error ? "text-red-400" : "text-transparent"
-          } text-xs select-none`}
+      </Label>
+      <FieldIconBox>
+        <Select
+          value={value}
+          $error={!!error && touched}
+          onChange={handleChange}
+          onBlur={handleChange}
+          name={name}
+          id={id}
         >
+          <Option value="default" hidden>
+            Seleccionar
+          </Option>
+          {options.map((el, i) => (
+            <Option value={el} key={i}>
+              {el}
+            </Option>
+          ))}
+        </Select>
+        {/* <Icon $error={!!error && touched} $touched={touched}>
+          {!!error && touched ? (
+            <AiFillCloseCircle size={16} />
+          ) : (
+            <BsCheckLg size={16} />
+          )}
+        </Icon> */}
+      </FieldIconBox>
+      <span>
+        <P $error={!!error && touched}>
+          <PiWarningCircleFill />
           {error || "a"}
-        </p>
+        </P>
       </span>
-    </div>
+    </ContainerField>
   );
 }
 export default FormSelect;

@@ -1,2 +1,1 @@
-export * from './dataReport.interface';
-export * from './events.interface';
+export * from './all-report.interface';

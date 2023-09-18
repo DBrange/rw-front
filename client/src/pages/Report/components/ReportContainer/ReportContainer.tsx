@@ -1,18 +1,34 @@
+import { useEffect, useState } from "react";
+
+import { LoaderImages, ModalError, ModalSent } from "@/components";
+import { Container } from "@/styledComponents";
+import { loaderImageService, modalSentService } from "@/pages";
 import { useReportContext } from "../..";
-import { ButtonBack, Modal, ModalError } from "../../../../components";
 
 function ReportContainer({
   children,
 }: {
   children: React.ReactElement | React.ReactElement[];
-  }) {
-  const { modalActive, formNotFound } = useReportContext();
+}) {
+  const { formNotFound } = useReportContext();
+  const [modalSentActive, setModalSentActive] = useState<boolean>(false);
+  const [loaderImages, setLoaderImages] = useState<boolean>(false);
+
+  useEffect(() => {
+    modalSentService.getSubject.subscribe((bol) => setModalSentActive(bol));
+    loaderImageService.getSubject.subscribe((bol) => setLoaderImages(bol));
+  }, []);
+  
+  // useEffect(() => {
+  //   modalSentService.getSubject.subscribe((bol) => setModalSentActive(bol));
+  // }, []);
+
   return (
     <>
+      <LoaderImages modalActive={loaderImages} />
+      <ModalSent modalActive={modalSentActive} />
       <ModalError modalActive={formNotFound} />
-      <Modal modalActive={modalActive} />
-      <ButtonBack />
-      <div className="w-[90%] max-w-[600px] m-auto">{children}</div>
+      <Container>{children}</Container>
     </>
   );
 }

@@ -1,60 +1,72 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+import { ChangeEventType } from "@/pages";
+import {
+  ContainerField,
+  Field,
+  FieldIconBox,
+  Icon,
+  Label,
+  P,
+} from "@/styledComponents";
 import { AiFillCloseCircle } from "react-icons/ai";
-// import { AiFillCheckCircle } from "react-icons/ai";
-
-// import { AiOutlineCloseCircle } from "react-icons/ai";
-// import { AiOutlineCheckCircle } from "react-icons/ai";
+import { BsCheckLg } from "react-icons/bs";
+import { PiWarningCircleFill } from "react-icons/pi";
 
 interface Props {
-  register: UseFormRegisterReturn<string>;
-  error: string | undefined;
-  type: string;
-  id: string;
   label: string;
-  placeholder: string;
+  value: string | number;
   touched: boolean;
-  checked?: boolean;
+  error?: string;
+  handleChange: (e: ChangeEventType) => void;
+  name: string;
+  id: string;
+  type: string;
+  placeholder: string;
 }
 
-function FormInput({ register, error, type, id, label, placeholder, touched, checked }: Props) {
+function FormInput({
+  label,
+  value,
+  touched,
+  error,
+  handleChange,
+  name,
+  id,
+  type,
+  placeholder,
+}: Props) {
   return (
-    <div
-      className={`${
-        checked ? "w-full" : "w-[100%]"
-      } flex flex-col overflow-hidden`}
-    >
-      <label
-        className={`${touched && error && "text-red-400"} mb-1`}
-        htmlFor={id}
-      >
+    <ContainerField as="section">
+      <Label $error={!!(error && touched)} htmlFor={id}>
         {label}
-      </label>
-      <div className="relative">
-        <input
-          className={`${
-            touched && error && "border-red-400"
-          } border-2 w-full h-8 pl-2 rounded outline-none focus:border-blue-400`}
-          type={type}
+      </Label>
+      <FieldIconBox>
+        <Field
+          value={value}
+          $error={!!(error && touched)}
+          onChange={handleChange}
+          onBlur={handleChange}
+          name={name}
           id={id}
-          {...register}
+          type={type}
           placeholder={placeholder}
         />
-        {touched && error && (
-          <i className="text-red-400 absolute right-2 top-2">
-            <AiFillCloseCircle size={16} />
-          </i>
-        )}
-      </div>
+        <Icon $error={!!error && touched} $touched={touched}>
+          {type !== "date" &&
+            (!!error && touched ? (
+              <AiFillCloseCircle size={16} />
+            ) : (
+              <BsCheckLg size={16} />
+            ))}
+        </Icon>
+      </FieldIconBox>
+
       <span>
-        <p
-          className={`${
-            touched && error ? "text-red-400" : "text-transparent"
-          } text-xs select-none`}
-        >
+        <P $error={!!error && touched}>
+          <PiWarningCircleFill />
           {error || "a"}
-        </p>
+        </P>
       </span>
-    </div>
+    </ContainerField>
   );
 }
 export default FormInput;

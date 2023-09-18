@@ -1,5 +1,5 @@
-import { FormReport, ReportContainer } from ".";
-import { ReportProvider } from "./context";
+import { ReportProvider } from "."
+import { FormReport, ReportContainer } from "./components"
 
 function Report() {
   return (
@@ -8,6 +8,6 @@ function Report() {
         <FormReport />
       </ReportContainer>
     </ReportProvider>
-  );
+  )
 }
-export default Report;
+export default Report
