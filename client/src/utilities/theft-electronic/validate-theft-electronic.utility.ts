@@ -16,6 +16,11 @@ export const validateTheftElectronic = ({
     time: /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
   };
 
+  const currentDate = new Date();
+  const userDate = new Date(date);
+  
+  if (userDate > currentDate || userDate.getFullYear() < 1900)
+    errors.date = "Debe contener un fecha valida";
   if (!location?.trim().length) errors.location = "No puede estar vacio";
   if (!regex.date.test(date)) errors.date = "Debe contener un fecha valida";
   if (!regex.time.test(time)) errors.time = "Debe contener un horario valido";

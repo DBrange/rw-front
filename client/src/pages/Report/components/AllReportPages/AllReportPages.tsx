@@ -34,7 +34,7 @@ function AllReportPages() {
     creatingThirdPartyVehicleContainer,
     amountInjured,
     amountVehicles,
-    changeInputValuesNumber
+    changeInputValuesNumber,
   } = useReportContext();
 
   const correspondingPage =
@@ -78,7 +78,7 @@ function AllReportPages() {
           <BtnChoice
             buttons={[
               {
-                value: "vehicle",
+                value: "vehicleReport",
                 label: "Vehiculo",
                 active: elementReportActive.vehicleReport,
               },
@@ -94,7 +94,7 @@ function AllReportPages() {
       />
       <FormOpenClose
         formName="Tipo de denuncia"
-        isActive={page === 4}
+        isActive={elementReportActive.vehicleReport && page === 4}
         form={
           <BtnChoice
             buttons={[
@@ -112,6 +112,22 @@ function AllReportPages() {
                 value: "crash",
                 label: "Choque",
                 active: reportActive.crash,
+              },
+            ]}
+            changeForm={changeForm}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Tipo de denuncia"
+        isActive={elementReportActive.electronic && page === 4}
+        form={
+          <BtnChoice
+            buttons={[
+              {
+                value: "theft",
+                label: "Robo",
+                active: reportActive.theft,
               },
             ]}
             changeForm={changeForm}

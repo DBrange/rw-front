@@ -98,7 +98,7 @@ function FormImages({
       </ButtonForUploading>
       <Instructions>Fotos:</Instructions>
       {instructionsImages.map((el, i) => (
-        <Instructions $error={!!(!images?.length && error)}>{`${
+        <Instructions key={i} $error={!!(!images?.length && error)}>{`${
           i + 1
         }. ${el}`}</Instructions>
       ))}

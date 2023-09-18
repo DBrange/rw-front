@@ -16,11 +16,16 @@ export const validateVehicleReport = ({
     year: /^\d+$/,
   };
 
+  // const userDate = new Date(year).getFullYear();
+  const currentDate = new Date().getFullYear();
+
   if (!plate?.trim().length) errors.plate = "No puede estar vacio";
   if (!year?.toString()?.trim().length) errors.year = "No puede estar vacio";
   if (year?.toString()?.trim().length !== 4)
     errors.year = "Debe ser un año valido";
   if (!regex.year.test(year?.toString())) errors.year = "Solo numeros";
+  if (Number(year) > currentDate || Number(year) < 1900)
+    errors.year = "Debe ser un año valido";
   if (!brand?.trim().length) errors.brand = "No puede estar vacio";
   if (!model?.trim().length) errors.model = "No puede estar vacio";
   if (!color?.trim().length) errors.color = "No puede estar vacio";

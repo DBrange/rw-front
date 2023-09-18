@@ -43,7 +43,7 @@ export const Field = styled.input<{ $error: boolean }>`
   width: 100%;
   height: 2rem;
   padding: 0 0.5rem;
-   color: ${theme.textColor};
+  color: ${theme.textColor};
   transition: all 0.2s linear;
   background-color: ${theme.pColor};
   border: ${(props) =>
@@ -52,14 +52,15 @@ export const Field = styled.input<{ $error: boolean }>`
   outline: none;
   &:focus {
     border-color: #60a5fa;
+    background-color: #fff1;
   }
   &:hover {
     border: ${(props) =>
       props.$error ? `2px solid ${theme.errColor}` : `2px solid #888`};
-  background-color: #fff1;
-  };
-   &::-webkit-autofill {
-    background-color: ${theme.pColor}
+    background-color: #fff1;
+  }
+  &::-webkit-autofill {
+    background-color: ${theme.pColor};
   }
 `;
 

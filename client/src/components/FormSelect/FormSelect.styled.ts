@@ -14,6 +14,7 @@ export const Select = styled.select<{ $error: boolean }>`
   outline: none;
   &:focus {
     border-color: #60a5fa;
+    background-color: #fff1;
   }
   &:hover {
     border: ${(props) =>

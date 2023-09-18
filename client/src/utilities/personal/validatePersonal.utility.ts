@@ -21,6 +21,10 @@ export const validatePersonal = ({
     dni: /^\d{8}$/,
   };
 
+  const currentDate = new Date();
+  const userDate = new Date(birthDate);
+  if (userDate > currentDate || userDate.getFullYear() < 1900)
+    errors.birthDate = "Debe contener un fecha valida";
   if (!name?.trim().length) errors.name = "No puede estar vacio";
   if (!lastName?.trim().length) errors.lastName = "No puede estar vacio";
   if (!phoneNumber?.trim().length) errors.phoneNumber = "No puede estar vacio";

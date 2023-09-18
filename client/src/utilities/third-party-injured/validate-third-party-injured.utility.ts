@@ -1,4 +1,7 @@
-import { ErrorsThirdPartyInjuredValues, ThirdPartyInjuredValues } from "../../models";
+import {
+  ErrorsThirdPartyInjuredValues,
+  ThirdPartyInjuredValues,
+} from "../../models";
 
 export const validateThirdPartyInjured = ({
   name,
@@ -23,6 +26,11 @@ export const validateThirdPartyInjured = ({
     dni: /^\d{8}$/,
   };
 
+  const currentDate = new Date();
+  const userDate = new Date(birthDate);
+
+  if (userDate > currentDate || userDate.getFullYear() < 1900)
+    errors.birthDate = "Debe contener un fecha valida";
   if (!regex.birthDate.test(birthDate))
     errors.birthDate = "Debe contener una fecha valida";
   if (!regex.dni.test(dni)) errors.dni = "Debe contener 8 digitos";
@@ -35,6 +43,6 @@ export const validateThirdPartyInjured = ({
   if (!injuries?.trim().length) errors.injuries = "No puede estar vacio";
   if (!email?.trim().length) errors.email = "No puede estar vacio";
   if (!regex.email.test(email)) errors.email = "Debe tener un formato de email";
-  
+
   return errors;
 };

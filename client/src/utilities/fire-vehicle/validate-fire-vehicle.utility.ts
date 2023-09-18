@@ -16,9 +16,14 @@ export const validateFireVehicle = ({
     amount: /^\d+$/,
   };
 
+  const currentDate = new Date();
+  const userDate = new Date(date);
+
   if (thirdInjured) {
     if (amount < 1) errors.amount = "Debe contener al menos 1 lesionado";
   }
+  if (userDate > currentDate || userDate.getFullYear() < 1900)
+    errors.date = "Debe contener un fecha valida";
   if (!regex.amount.test(amount.toString().trim()))
     errors.amount = "Solo puede contener numeros";
   if (!location?.trim().length) errors.location = "No puede estar vacio";

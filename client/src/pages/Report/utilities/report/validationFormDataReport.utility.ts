@@ -115,29 +115,29 @@ const validationWithInjuries = ({
           errorsInputValues?.gnc,
           triggerReportPersonalVehicleCrash(dataObj)
         );
-      } else {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-          userDTO: personal,
-          crashDTO: crashWithoutAmounts,
-          injuredDTO: injuredDTOObj,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjured<
-          ErrorsPersonalValues,
-          ErrorsVehicleReportValues,
-          ErrorsCrashVehicleValues,
-          ErrorsAllThirdPartyInjuredValues,
-          any
-        >(
-          errorsInputValues?.personal,
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.crash,
-          errorsInputValues?.thirdPartyInjured,
-          triggerReportPersonalVehicleCrash(dataObj)
-        );
       }
+    } else {
+      const dataObj = {
+        vehicleDTO: vehicleReport,
+        userDTO: personal,
+        crashDTO: crashWithoutAmounts,
+        injuredDTO: injuredDTOObj,
+        swornDeclaration: swornDeclaration.swornDeclaration,
+      };
+
+      userElementReportInjured<
+        ErrorsPersonalValues,
+        ErrorsVehicleReportValues,
+        ErrorsCrashVehicleValues,
+        ErrorsAllThirdPartyInjuredValues,
+        any
+      >(
+        errorsInputValues?.personal,
+        errorsInputValues?.vehicleReport,
+        errorsInputValues?.crash,
+        errorsInputValues?.thirdPartyInjured,
+        triggerReportPersonalVehicleCrash(dataObj)
+      );
     }
   } else if (
     errorsInputValues?.legalPersonal &&
@@ -171,29 +171,29 @@ const validationWithInjuries = ({
           errorsInputValues?.gnc,
           triggerReportLegalVehicleCrash(dataObj)
         );
-      } else {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-          legalUserDTO: legalPersonal,
-          crashDTO: crashWithoutAmounts,
-          injuredDTO: injuredDTOObj,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjured<
-          ErrorsLegalPersonalValues,
-          ErrorsVehicleReportValues,
-          ErrorsCrashVehicleValues,
-          ErrorsAllThirdPartyInjuredValues,
-          any
-        >(
-          errorsInputValues?.legalPersonal,
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.crash,
-          errorsInputValues?.thirdPartyInjured,
-          triggerReportLegalVehicleCrash(dataObj)
-        );
       }
+    } else {
+      const dataObj = {
+        vehicleDTO: vehicleReport,
+        legalUserDTO: legalPersonal,
+        crashDTO: crashWithoutAmounts,
+        injuredDTO: injuredDTOObj,
+        swornDeclaration: swornDeclaration.swornDeclaration,
+      };
+
+      userElementReportInjured<
+        ErrorsLegalPersonalValues,
+        ErrorsVehicleReportValues,
+        ErrorsCrashVehicleValues,
+        ErrorsAllThirdPartyInjuredValues,
+        any
+      >(
+        errorsInputValues?.legalPersonal,
+        errorsInputValues?.vehicleReport,
+        errorsInputValues?.crash,
+        errorsInputValues?.thirdPartyInjured,
+        triggerReportLegalVehicleCrash(dataObj)
+      );
     }
   } else if (
     errorsInputValues?.personal &&
@@ -343,32 +343,32 @@ const validationWithInjuries = ({
           errorsInputValues?.gnc,
           triggerReportPersonalVehicleCrash(dataObj)
         );
-      } else {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-          userDTO: personal,
-          crashDTO: crashWithoutAmounts,
-          injuredDTO: injuredDTOObj,
-          thirdPartyVehicleDTO: thirdPartyVehicle,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjuredExtra<
-          ErrorsPersonalValues,
-          ErrorsVehicleReportValues,
-          ErrorsCrashVehicleValues,
-          ErrorsAllThirdPartyInjuredValues,
-          ErrorsAllCrashVehiclesValues,
-          any
-        >(
-          errorsInputValues?.personal,
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.crash,
-          errorsInputValues?.thirdPartyInjured,
-          errorsInputValues?.thirdPartyVehicle,
-          triggerReportPersonalVehicleCrash(dataObj)
-        );
       }
+    } else {
+      const dataObj = {
+        vehicleDTO: vehicleReport,
+        userDTO: personal,
+        crashDTO: crashWithoutAmounts,
+        injuredDTO: injuredDTOObj,
+        thirdPartyVehicleDTO: thirdPartyVehicle,
+        swornDeclaration: swornDeclaration.swornDeclaration,
+      };
+
+      userElementReportInjuredExtra<
+        ErrorsPersonalValues,
+        ErrorsVehicleReportValues,
+        ErrorsCrashVehicleValues,
+        ErrorsAllThirdPartyInjuredValues,
+        ErrorsAllCrashVehiclesValues,
+        any
+      >(
+        errorsInputValues?.personal,
+        errorsInputValues?.vehicleReport,
+        errorsInputValues?.crash,
+        errorsInputValues?.thirdPartyInjured,
+        errorsInputValues?.thirdPartyVehicle,
+        triggerReportPersonalVehicleCrash(dataObj)
+      );
     }
   }
 };
@@ -465,30 +465,30 @@ const validationWithoutInjuries = ({
           errorsInputValues?.gnc,
           triggerReportPersonalVehicleCrash(dataObj)
         );
-      } else {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-          userDTO: personal,
-          gncDTO: gnc,
-          crashDTO: crashWithoutAmounts,
-          injuredDTO: injuredDTOObj,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjured<
-          ErrorsPersonalValues,
-          ErrorsVehicleReportValues,
-          ErrorsCrashVehicleValues,
-          ErrorsAllCrashVehiclesValues,
-          any
-        >(
-          errorsInputValues?.personal,
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.crash,
-          errorsInputValues?.thirdPartyVehicle,
-          triggerReportPersonalVehicleCrash(dataObj)
-        );
       }
+    } else {
+      const dataObj = {
+        vehicleDTO: vehicleReport,
+        userDTO: personal,
+        gncDTO: gnc,
+        crashDTO: crashWithoutAmounts,
+        injuredDTO: injuredDTOObj,
+        swornDeclaration: swornDeclaration.swornDeclaration,
+      };
+
+      userElementReportInjured<
+        ErrorsPersonalValues,
+        ErrorsVehicleReportValues,
+        ErrorsCrashVehicleValues,
+        ErrorsAllCrashVehiclesValues,
+        any
+      >(
+        errorsInputValues?.personal,
+        errorsInputValues?.vehicleReport,
+        errorsInputValues?.crash,
+        errorsInputValues?.thirdPartyVehicle,
+        triggerReportPersonalVehicleCrash(dataObj)
+      );
     }
   } else if (
     errorsInputValues?.legalPersonal &&
@@ -522,29 +522,29 @@ const validationWithoutInjuries = ({
           errorsInputValues?.gnc,
           triggerReportLegalVehicleCrash(dataObj)
         );
-      } else {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-          legalUserDTO: legalPersonal,
-          crashDTO: crashWithoutAmounts,
-          injuredDTO: injuredDTOObj,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjured<
-          ErrorsLegalPersonalValues,
-          ErrorsVehicleReportValues,
-          ErrorsCrashVehicleValues,
-          ErrorsAllCrashVehiclesValues,
-          any
-        >(
-          errorsInputValues?.legalPersonal,
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.crash,
-          errorsInputValues?.thirdPartyVehicle,
-          triggerReportLegalVehicleCrash(dataObj)
-        );
       }
+    } else {
+      const dataObj = {
+        vehicleDTO: vehicleReport,
+        legalUserDTO: legalPersonal,
+        crashDTO: crashWithoutAmounts,
+        injuredDTO: injuredDTOObj,
+        swornDeclaration: swornDeclaration.swornDeclaration,
+      };
+
+      userElementReportInjured<
+        ErrorsLegalPersonalValues,
+        ErrorsVehicleReportValues,
+        ErrorsCrashVehicleValues,
+        ErrorsAllCrashVehiclesValues,
+        any
+      >(
+        errorsInputValues?.legalPersonal,
+        errorsInputValues?.vehicleReport,
+        errorsInputValues?.crash,
+        errorsInputValues?.thirdPartyVehicle,
+        triggerReportLegalVehicleCrash(dataObj)
+      );
     }
   } else if (
     errorsInputValues?.personal &&

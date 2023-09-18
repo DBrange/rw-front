@@ -107,8 +107,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     });
 
   const [reportActive, setReportActive] = useState<ReportActive>({
-    theft: false,
-    fire: true,
+    theft: true,
+    fire: false,
     crash: false,
   });
 

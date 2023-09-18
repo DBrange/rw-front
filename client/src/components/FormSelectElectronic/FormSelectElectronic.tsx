@@ -1,7 +1,7 @@
 import { SelectEventType } from "@/pages";
 import { ContainerField, Label, FieldIconBox, P } from "@/styledComponents";
 import { PiWarningCircleFill } from "react-icons/pi";
-import { Select } from "..";
+import { Option, Select } from "..";
 
 
 interface Props {
@@ -45,13 +45,13 @@ function FormSelectElectronic({
           name={name}
           id={id}
         >
-          <option value="default" hidden>
+          <Option value="default" hidden>
             Seleccionar
-          </option>
+          </Option>
           {options.map((el, i) => (
-            <option value={el} key={i}>
+            <Option value={el} key={i}>
               {el}
-            </option>
+            </Option>
           ))}
         </Select>
         {/* <Icon $error={!!error && touched} $touched={touched}>

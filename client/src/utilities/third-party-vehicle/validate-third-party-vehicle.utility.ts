@@ -33,6 +33,10 @@ export const validateThirdPartyVehicle = ({
     dni: /^\d{8}$/,
   };
 
+  const currentDate = new Date().getFullYear();
+
+  if (Number(year) > currentDate || Number(year) < 1900)
+    errors.year = "Debe ser un año valido";
   if (year?.toString()?.trim().length !== 4)
     errors.year = "Debe ser un año valido";
   if (!regex.year.test(year?.toString())) errors.year = "Solo numeros";
