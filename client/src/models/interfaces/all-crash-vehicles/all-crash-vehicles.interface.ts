@@ -1,14 +1,17 @@
-import { ThirdPartyVehicleValues, ErrorsThirdPartyVehicleValues, TouchedThirdPartyVehicleValues } from "../third-party-vehicle";
-
+import {
+  ThirdPartyVehicleValues,
+  ErrorsThirdPartyVehicleValues,
+  TouchedThirdPartyVehicleValues,
+} from "../third-party-vehicle";
 
 export interface AllCrashVehiclesValues {
-  thirdPartyVehiclesInfo: ThirdPartyVehicleValues[];
+  thirdPartyVehicleInfo: ThirdPartyVehicleValues[];
 }
 
 export interface ErrorsAllCrashVehiclesValues {
-  thirdPartyVehiclesInfo: Partial<ErrorsThirdPartyVehicleValues>[];
+  thirdPartyVehicleInfo: Partial<ErrorsThirdPartyVehicleValues>[];
 }
 
 export interface TouchedAllCrashVehiclesValues {
-  thirdPartyVehiclesInfo: TouchedThirdPartyVehicleValues[];
+  thirdPartyVehicleInfo: TouchedThirdPartyVehicleValues[];
 }

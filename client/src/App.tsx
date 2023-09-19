@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import {
   Body,
+  Footer,
   Header,
   LinkNavigate,
   LogoText,
@@ -30,6 +31,7 @@ function App() {
           </Routes>
         </MainContent>
       </Body>
+        <Footer></Footer>
     </Suspense>
   );
 }

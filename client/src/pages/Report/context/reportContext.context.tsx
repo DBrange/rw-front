@@ -306,7 +306,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
 
     const withThirdPartyVehicleCrashErrors: boolean =
       (validate(errorsInputValues?.crash) && page === 5) ||
-      (errorsInputValues?.thirdPartyVehicle?.thirdPartyVehiclesInfo
+      (errorsInputValues?.thirdPartyVehicle?.thirdPartyVehicleInfo
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
         page === 6) ||
@@ -318,7 +318,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
         page === 6) ||
-      (errorsInputValues?.thirdPartyVehicle?.thirdPartyVehiclesInfo
+      (errorsInputValues?.thirdPartyVehicle?.thirdPartyVehicleInfo
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
         page === 7) ||
@@ -564,8 +564,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       setInputsTouched({
         ...touchedAllReportValues,
         thirdPartyVehicle: {
-          thirdPartyVehiclesInfo:
-            inputTouched.thirdPartyVehicle.thirdPartyVehiclesInfo.map(
+          thirdPartyVehicleInfo:
+            inputTouched.thirdPartyVehicle.thirdPartyVehicleInfo.map(
               () => touchedThirdPartyVehicleValuesTrue
             ),
         },
@@ -637,7 +637,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     const [a, b, c, d] = name.split(".");
 
     setInputValues((values) => {
-      let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehiclesInfo];
+      let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
       let vehicle = newVehicle[Number(c)];
       vehicle[d as keyof onlyOwner] = checked;
       newVehicle[Number(c)] = vehicle;
@@ -647,8 +647,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           inputValues: {
             ...inputValues,
             thirdPartyVehicle: {
-              thirdPartyVehiclesInfo: [
-                ...inputValues.thirdPartyVehicle.thirdPartyVehiclesInfo,
+              thirdPartyVehicleInfo: [
+                ...inputValues.thirdPartyVehicle.thirdPartyVehicleInfo,
               ],
             },
           },
@@ -660,7 +660,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return {
         ...values,
         thirdPartyVehicle: {
-          thirdPartyVehiclesInfo: newVehicle,
+          thirdPartyVehicleInfo: newVehicle,
         },
       };
     });
@@ -715,20 +715,20 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     const [a, b, c, d] = name.split(".");
 
     setInputValues((values) => {
-      let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehiclesInfo];
+      let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
       let vehicle = newVehicle[Number(c)];
       vehicle[d as keyof onlyLicensePhoto] = [...images];
       newVehicle[Number(c)] = vehicle;
       return {
         ...values,
         thirdPartyVehicle: {
-          thirdPartyVehiclesInfo: newVehicle,
+          thirdPartyVehicleInfo: newVehicle,
         },
       };
     });
 
     setInputsTouched((values) => {
-      let trueVehicle = [...values.thirdPartyVehicle.thirdPartyVehiclesInfo];
+      let trueVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
       let vehicle = trueVehicle[Number(c)];
 
       vehicle[d as keyof onlyLicensePhotoTouched] = true;
@@ -736,7 +736,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return {
         ...inputTouched,
         thirdPartyVehicle: {
-          thirdPartyVehiclesInfo: trueVehicle,
+          thirdPartyVehicleInfo: trueVehicle,
         },
       };
     });
@@ -746,8 +746,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         inputValues: {
           ...inputValues,
           thirdPartyVehicle: {
-            thirdPartyVehiclesInfo: [
-              ...inputValues.thirdPartyVehicle.thirdPartyVehiclesInfo,
+            thirdPartyVehicleInfo: [
+              ...inputValues.thirdPartyVehicle.thirdPartyVehicleInfo,
             ],
           },
         },
@@ -900,7 +900,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     const [a, b, c, d] = name.split(".");
 
     setInputValues((values) => {
-      let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehiclesInfo];
+      let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
       let vehicle = newVehicle[Number(c)];
       vehicle[d as keyof withoutLicensePhoto] = value as never;
       newVehicle[Number(c)] = vehicle;
@@ -910,8 +910,8 @@ export const ReportProvider = ({ children }: ChildrenType) => {
           inputValues: {
             ...inputValues,
             thirdPartyVehicle: {
-              thirdPartyVehiclesInfo: [
-                ...inputValues.thirdPartyVehicle.thirdPartyVehiclesInfo,
+              thirdPartyVehicleInfo: [
+                ...inputValues.thirdPartyVehicle.thirdPartyVehicleInfo,
               ],
             },
           },
@@ -923,13 +923,13 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return {
         ...values,
         thirdPartyVehicle: {
-          thirdPartyVehiclesInfo: newVehicle,
+          thirdPartyVehicleInfo: newVehicle,
         },
       };
     });
 
     setInputsTouched((values) => {
-      let trueVehicle = [...values.thirdPartyVehicle.thirdPartyVehiclesInfo];
+      let trueVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
       let vehicle = trueVehicle[Number(c)];
 
       vehicle[d as keyof TouchedThirdPartyVehicleValues] = true;
@@ -937,7 +937,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
       return {
         ...inputTouched,
         thirdPartyVehicle: {
-          thirdPartyVehiclesInfo: trueVehicle,
+          thirdPartyVehicleInfo: trueVehicle,
         },
       };
     });
@@ -997,26 +997,26 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   const createArraysToVehicles = (value: number) => {
     setAmountVehicles(value);
 
-    inputValues.thirdPartyVehicle.thirdPartyVehiclesInfo = [];
+    inputValues.thirdPartyVehicle.thirdPartyVehicleInfo = [];
 
     // let cleanVehicleInfo: ThirdPartyVehicleValues[] = [];
     // const trueVehicleInfo: TouchedThirdPartyVehicleValues[] = [];
     setInputValues({
       ...inputValues,
       thirdPartyVehicle: {
-        thirdPartyVehiclesInfo: [],
+        thirdPartyVehicleInfo: [],
       },
     });
 
     setInputsTouched({
       ...inputTouched,
       thirdPartyVehicle: {
-        thirdPartyVehiclesInfo: [],
+        thirdPartyVehicleInfo: [],
       },
     });
 
     for (let i = 0; i < value; i++) {
-      inputValues.thirdPartyVehicle.thirdPartyVehiclesInfo.push({
+      inputValues.thirdPartyVehicle.thirdPartyVehicleInfo.push({
         year: 0,
         brand: "",
         model: "",
@@ -1038,7 +1038,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     }
 
     for (let i = 0; i < value; i++) {
-      inputTouched.thirdPartyVehicle.thirdPartyVehiclesInfo.push({
+      inputTouched.thirdPartyVehicle.thirdPartyVehicleInfo.push({
         year: false,
         brand: false,
         model: false,

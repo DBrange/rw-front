@@ -161,7 +161,7 @@ function FormCrashVehicleDetail({
             <H4PropertyValue>
               Cantidad de vehiculos implicados:{" "}
             </H4PropertyValue>
-            {thirdPartyVehicle?.thirdPartyVehiclesInfo?.map((vehicle, i) => (
+            {thirdPartyVehicle?.thirdPartyVehicleInfo?.map((vehicle, i) => (
               <SectionFormDetailArrayContainer key={i}>
                 <div>
                   <H3PropertyTitle>Vehiculo n°{i + 1}</H3PropertyTitle>

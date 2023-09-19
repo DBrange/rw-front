@@ -55,9 +55,9 @@ export const validateThirdPartyVehicle = ({
   if (!email?.trim().length) errors.email = "No puede estar vacio";
   if (!regex.phoneNumber.test(phoneNumber))
     errors.phoneNumber = "Solo puede contener numeros";
-  if (licensePhoto.length < 8)
+  if (licensePhoto.length < 4)
     errors.licensePhoto =
-      "Debe agregar las images correspondientes, un total de 8";
+      "Debe agregar las images correspondientes, un total de 4";
   if (!owner) {
     if (!name?.trim().length) errors.name = "No puede estar vacio";
     if (!lastName?.trim().length) errors.lastName = "No puede estar vacio";

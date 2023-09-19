@@ -39,3 +39,8 @@ export const MainContent = styled.div`
   margin-top: 3rem;
   background-color: ${theme.pColor};
 `;
+
+export const Footer = styled.footer`
+  min-height: 10rem;
+  background-color: ${theme.sColor};
+`

@@ -29,15 +29,17 @@ export const DivModalSent = styled.div<{
   background-color: ${({ $error }) =>
     $error ? `${theme.errBgColor}` : `${theme.pColor}`};
   border-radius: 0.375rem;
-  padding: 1.25rem;
+  padding: 2.25rem;
   text-align: center;
   transition: all 0.2s linear 0.15s;
   transform: ${({ $modalActive }) =>
     $modalActive ? "scale(1)" : "scale(0.5)"};
+
+
 `;
 
 export const H3Modal = styled.h3<{ $error?: boolean }>`
-  margin-bottom: 1.25rem;
+  margin: 1.25rem 0;
   color: ${({ $error }) => ($error ? `${theme.errColor}` : `${theme.sColor}`)};
 `;
 
@@ -61,5 +63,17 @@ export const BtnModal = styled.button<{ $error?: boolean }>`
   border: none;
   &:active {
     transform: translateY(0.25rem);
+  }
+  ${({$error}) => $error ? `color: ${theme.errBgColor}` : ''}
+`;
+
+export const ImgModal = styled.img`
+  height: 80%;
+  width: 80%;
+  
+  @media (min-width: 1200px) {
+    height: 50%;
+    width: 50%;
+    margin: 2rem 0;
   }
 `;

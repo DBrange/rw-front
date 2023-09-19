@@ -1,9 +1,22 @@
-import { Link } from "react-router-dom";
-import { BsFillCarFrontFill } from "react-icons/bs";
-import { HiMiniDevicePhoneMobile } from "react-icons/hi2";
-import { LuMail } from "react-icons/lu";
-import { BsArrowUp } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import {
+  BtnHome,
+  DivBtnHome,
+  DivHome,
+  DivSection,
+  DivText,
+  H1Home,
+  H2Home,
+  H3Home,
+  H4Home,
+  ImgHome,
+  SectionHome,
+  SpanHome,
+} from ".";
+import HomeContainer from "./components/HomeContainer/HomeContainer";
+import { LinkNavigate } from "@/styledComponents";
+import person1 from "../../../assets/person1.svg";
+import person5 from "../../../assets/person5.svg";
+import person4 from "../../../assets/person4.svg";
 
 function Home() {
   // const [isVisible, setIsVisible] = useState(false);
@@ -36,75 +49,75 @@ function Home() {
           isVisible ? "block" : "hidden"
         }`}
         onClick={scrollToTop}
-      >
+        >
         <BsArrowUp />
       </button> */}
-      <div className="">
-        <section className="h-screen flex flex-col justify-center items-center bg-violet-300 gap-12 px-4">
-          <div className="text-center text-white text-lg">
-            <p>
-              Bienvenido a Reclamo Web, el mejor sitio para realizar tus
-              <span className="text-violet-500"> DENUNCIAS</span>
-            </p>
-            <div className="flex justify-center gap-5 mt-5 mb-2">
-              <BsFillCarFrontFill size={40} />
-              <HiMiniDevicePhoneMobile size={40} />
-            </div>
-            <p className=" text-sm">Rapido, Sencillo y Automatico</p>
-          </div>
+      {/* <ImgHome src={person1} alt="" /> */}
+      <HomeContainer>
+        <SectionHome>
+          <DivSection>
+            <DivHome>
+              <H1Home>
+                Bienvenido a <SpanHome>ReclamoWeb</SpanHome>.
+              </H1Home>
+              <H3Home>
+                El primer y unico sitio para <SpanHome>asegurar</SpanHome> y{" "}
+                <SpanHome>denunciar</SpanHome> online<SpanHome>.</SpanHome>
+              </H3Home>
+            </DivHome>
+            <DivText>
+              <H4Home>
+                Toda informacion ingresada, sera verificada y enviada tanto a
+                usted como al intermediario, el cual se comunicara contigo para
+                poder seguir adelante con su denuncia o inspeccion.
+              </H4Home>
+              <H4Home>
+                Toda la infomacion se mantendra en nuestra base de informacion,
+                para asi en proximas actualizaciones, usted como usuario pueda
+                tener todo su historial de denuncias e inspecciones a la vista,
+                y mejorar su experiencia de usuario, facilitando su acceso a las
+                mismas.
+              </H4Home>
+            </DivText>
+          </DivSection>
+          <ImgHome src={person1} alt="" />
+        </SectionHome>
 
-          <Link to={"/denuncia"}>
-            <button className="bg-violet-500 rounded-md px-10 py-2 active:translate-y-1 text-white">
-              Denunciar
-            </button>
-          </Link>
-        </section>
+        <SectionHome>
+          <ImgHome src={person4} alt="" />
+          <DivSection>
+            <DivHome $right>
+              <H3Home>
+                Podras realizar tus<SpanHome> DENUNCIAS</SpanHome> de robo, incendio o choque de la forma
+                mas sencilla y rapida<SpanHome>.</SpanHome>
+              </H3Home>
+              <LinkNavigate to="/denuncia">
+                <DivBtnHome>
+                  <BtnHome>Denunciar</BtnHome>
+                </DivBtnHome>
+              </LinkNavigate>
+            </DivHome>
+          </DivSection>
+        </SectionHome>
 
-        <section className="h-screen flex flex-col justify-center items-center bg-white gap-12 px-4">
-          <div className="text-center text-lg">
-            <p>
-              En Reclamo web tambien podras realizar inspecciones, para poder{" "}
-              <span className="text-violet-500">ASEGURAR</span> el vehiculo o
-              dipositivo que desees
-            </p>{" "}
-            <div className="flex justify-center gap-5 mt-5 mb-2">
-              <BsFillCarFrontFill size={40} />
-              <HiMiniDevicePhoneMobile size={40} />
-            </div>
-            <p className="text-sm">
-              Siempre de la forma mas sencilla y rapida que podrias conseguir
-            </p>
-          </div>
-          <Link to={"/inspeccion"}>
-            <button className="bg-violet-500 rounded-md px-10 py-2 active:translate-y-1 text-white">
-              Inspeccionar
-            </button>
-          </Link>
-        </section>
-
-        <footer className="h-16 flex flex-col justify-center items-center bg-violet-300 gap-12 px-4 text-white text-center ">
-          <div className="flex gap-5 items-center ">
-
-            <i>
-              <LuMail size={ 30} />
-            </i>
-          <p className="">
-            aaaaaaaaaaa@gmail.com
-          </p>
-          </div>
-          {/* <p className=" text-lg">
-            Para cualquiera de las opciones que ofrecemos, una vez que completes
-            todos los datos de tu vehiculo o dispositivo y finalizes el
-            formulario, se te enviara a ti y a nuestro broker un archivo PDF con
-            todos los datos ingresados, este broker se contactara contigo a la
-            brevedad.
-          </p>
-          <p>
-            Ante cualquier duda, puedes comunicarte con nosotros por medio de
-            ............
-          </p> */}
-        </footer>
-      </div>
+        <SectionHome>
+          <DivSection>
+            <DivHome>
+              <H3Home>
+                Tambien podras realizar inspecciones, para poder
+                <SpanHome> ASEGURAR</SpanHome> de la forma mas sencilla y rapida tus electrodomesticos  o vehiculos
+                <SpanHome>.</SpanHome>
+              </H3Home>
+              <LinkNavigate to="/inspeccion">
+                <DivBtnHome>
+                  <BtnHome>Inspeccionar</BtnHome>
+                </DivBtnHome>
+              </LinkNavigate>
+            </DivHome>
+          </DivSection>
+          <ImgHome src={person5} alt="" />
+        </SectionHome>
+      </HomeContainer>
     </>
   );
 }
