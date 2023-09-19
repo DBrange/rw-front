@@ -1,11 +1,13 @@
 
 import { LinkNavigate } from "@/styledComponents";
-import { BtnModal, DivModalSent, H3Modal, H4Modal, SectionModalBg } from "..";
+import { BtnModal, DivModalSent, H3Modal, H4Modal, ImgModal, SectionModalBg } from "..";
+import error from "../../../assets/error.svg";
 
 function ModalError({ modalActive }: { modalActive: boolean }) {
   return (
     <SectionModalBg $modalActive={modalActive} $error>
       <DivModalSent $error $modalActive={modalActive}>
+        <ImgModal src={error} alt="" />
         <H3Modal $error>Su Informacion no fue enviada</H3Modal>
         <H4Modal $error>
           Lo sentimos, hubo un error al enviar el formulario.

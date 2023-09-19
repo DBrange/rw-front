@@ -14,9 +14,10 @@ export const Form = styled.form`
   height: auto;
 `;
 
-export const Container = styled.section`
+export const Container = styled.section<{ $broad: boolean }>`
+  ${({ $broad }) => ($broad ? "" : "max-width: 600px;")};
   width: 90%;
-  max-width: 600px;
+
   margin: auto;
 `;
 
@@ -132,7 +133,6 @@ export const SectionFormDetailArrayContainer = styled.section`
   gap: 1.5rem;
   padding: 0.7rem 0;
 `;
-
 
 // export const AccordionContainer = styled.div<{
 //   checked: boolean;
