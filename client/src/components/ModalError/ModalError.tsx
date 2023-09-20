@@ -1,7 +1,7 @@
 
 import { LinkNavigate } from "@/styledComponents";
 import { BtnModal, DivModalSent, H3Modal, H4Modal, ImgModal, SectionModalBg } from "..";
-import error from "../../../assets/error.svg";
+import error from "../../assets/error.svg";
 
 function ModalError({ modalActive }: { modalActive: boolean }) {
   return (
