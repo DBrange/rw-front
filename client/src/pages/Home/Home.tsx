@@ -5,7 +5,6 @@ import {
   DivSection,
   DivText,
   H1Home,
-  H2Home,
   H3Home,
   H4Home,
   ImgHome,

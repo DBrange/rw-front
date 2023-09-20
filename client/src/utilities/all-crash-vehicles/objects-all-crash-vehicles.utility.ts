@@ -2,7 +2,6 @@ import {
   AllCrashVehiclesValues,
   TouchedAllCrashVehiclesValues,
 } from "@/models";
-import { emptyThirdPartyVehicleValues } from "../third-party-vehicle";
 
 export const emptyAllCrashVehiclesValues: AllCrashVehiclesValues = {
   thirdPartyVehicleInfo: [],

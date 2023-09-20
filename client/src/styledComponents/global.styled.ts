@@ -14,7 +14,7 @@ export const Form = styled.form`
   height: auto;
 `;
 
-export const Container = styled.section<{ $broad: boolean }>`
+export const Container = styled.section<{ $broad?: boolean }>`
   ${({ $broad }) => ($broad ? "" : "max-width: 600px;")};
   width: 90%;
 

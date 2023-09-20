@@ -629,12 +629,12 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   };
 
   const changeInputForCheckboxArrayVehicles = (
-    type: string,
+    _type: string,
     name: string,
     checked: boolean,
-    key: string
+    _key: string
   ) => {
-    const [a, b, c, d] = name.split(".");
+    const [_a, _b, c, d] = name.split(".");
 
     setInputValues((values) => {
       let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
@@ -707,12 +707,12 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   };
 
   const changeInputForImagesArrayVehicles = (
-    type: string,
+    _type: string,
     name: string,
     images: string[],
-    key: string
+    _key: string
   ) => {
-    const [a, b, c, d] = name.split(".");
+    const [_a, _b, c, d] = name.split(".");
 
     setInputValues((values) => {
       let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
@@ -830,12 +830,12 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   };
 
   const changeInputValuesArrayInjured = (
-    type: string,
+    _type: string,
     name: string,
     value: string,
-    key: string
+    _key: string
   ) => {
-    const [a, b, c, d] = name.split(".");
+    const [_a, _b, c, d] = name.split(".");
 
     setInputValues((values) => {
       let newInjured = [...values.thirdPartyInjured.injuredInfo];
@@ -892,12 +892,12 @@ export const ReportProvider = ({ children }: ChildrenType) => {
   };
 
   const changeInputValuesArrayVehicles = (
-    type: string,
+    _type: string,
     name: string,
     value: string | number,
-    key: string
+    _key: string
   ) => {
-    const [a, b, c, d] = name.split(".");
+    const [_a, _b, c, d] = name.split(".");
 
     setInputValues((values) => {
       let newVehicle = [...values.thirdPartyVehicle.thirdPartyVehicleInfo];
@@ -1159,9 +1159,9 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     type: string,
     name: string,
     value: string,
-    key: string
+    _key: string
   ) => {
-    const [a, b, c, d] = name.split(".");
+    const [_a, _b, c, d] = name.split(".");
 
     if (type === "thirdPartyInjured") {
       setInputValues((values) => {

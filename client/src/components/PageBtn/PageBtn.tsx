@@ -1,7 +1,7 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import { BtnSideBySide, IconSideBySide, PageBtnContainer, SecretBtn } from ".";
-import { ClickEventType, checkboxService, modalSentService } from "@/pages";
+import { ClickEventType, checkboxService } from "@/pages";
 import { useEffect, useRef, useState } from "react";
 
 interface Props {

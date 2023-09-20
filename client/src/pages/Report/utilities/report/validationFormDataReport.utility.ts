@@ -41,12 +41,8 @@ const validationWithInjuries = ({
     personal,
     legalPersonal,
     vehicleReport,
-    electronic,
     gnc,
-    phone,
-    theftVehicle,
-    theftElectronic,
-    isTire,
+
     fire,
     crash,
     thirdPartyInjured,
@@ -56,13 +52,9 @@ const validationWithInjuries = ({
   errorsInputValues,
   triggers: {
     triggerReportPersonalVehicleCrash,
-    triggerReportPersonalVehicleTheft,
     triggerReportPersonalVehicleFire,
     triggerReportLegalVehicleCrash,
-    triggerReportLegalVehicleTheft,
     triggerReportLegalVehicleFire,
-    triggerReportPersonalElectronicTheft,
-    triggerReportLegalElectronicTheft,
   },
 }: Params) => {
   const crashWithoutAmounts = {
@@ -468,7 +460,6 @@ const validationWithoutInjuries = ({
     isTire,
     fire,
     crash,
-    thirdPartyInjured,
     thirdPartyVehicle,
     swornDeclaration,
   },
@@ -509,10 +500,10 @@ const validationWithoutInjuries = ({
     time: fire.time,
   };
 
-  const injuredDTOObj = {
-    amount: crash.amount,
-    thirdPartyInjured: thirdPartyInjured.injuredInfo,
-  };
+  // const injuredDTOObj = {
+  //   amount: crash.amount,
+  //   thirdPartyInjured: thirdPartyInjured.injuredInfo,
+  // };
 
   //vehicle
   if (
