@@ -43,7 +43,7 @@ function PageBtn({
     scrollToTop();
   };
 
-  const send = () => {}
+  const send = () => {};
 
   const errorBtn = () => {
     markedTouches();
