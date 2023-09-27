@@ -6,8 +6,8 @@ export const PageBtnContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-
   padding: 1.25rem .25rem;
+  padding-bottom: 5rem;
 `;
 export const BtnSideBySide = styled.button<{
   $left?: boolean;

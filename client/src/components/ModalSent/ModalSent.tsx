@@ -1,13 +1,16 @@
 
 import { LinkNavigate } from "@/styledComponents";
-import { BtnModal, DivModalSent, H3Modal, H4Modal, SectionModalBg } from ".";
+import { BtnModal, DivModalSent, H3Modal, H4Modal, ImgModal, SectionModalBg } from ".";
+import person2 from "../../../assets/person2.svg";
 
 function ModalSent({ modalActive }: { modalActive: boolean }) {
   return (
     <SectionModalBg $modalActive={modalActive}>
       <DivModalSent $modalActive={modalActive}>
+        <ImgModal src={person2} alt="" />
         <H3Modal>Su Informacion fue enviada</H3Modal>
-        <H4Modal>Pronto le llegara un mail con toda la informacion</H4Modal>
+        <H4Modal>Pronto le llegara un mail con toda la informacion.</H4Modal>
+        <H4Modal>Nos estaremos comunicando con usted a la brevedad.</H4Modal>
         <LinkNavigate to="/">
           <BtnModal>Aceptar</BtnModal>
         </LinkNavigate>

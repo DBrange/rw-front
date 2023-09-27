@@ -103,7 +103,7 @@ function FormTheftVehicle({
               id="isTire.tirePhoto"
               name="isTire.tirePhoto"
               changeInputForImages={changeInputForImages}
-              instructionsImages={['Donde se vea marca y tamaño']}
+              instructionsImages={['Donde se visible marca y modelo']}
             />
             <FormInput
               label="Localidad de reposicion*"

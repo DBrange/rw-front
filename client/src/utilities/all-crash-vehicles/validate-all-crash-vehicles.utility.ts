@@ -1,22 +1,25 @@
-import { AllCrashVehiclesValues, ErrorsAllCrashVehiclesValues, ErrorsThirdPartyVehicleValues } from "@/models";
+import {
+  AllCrashVehiclesValues,
+  ErrorsAllCrashVehiclesValues,
+  ErrorsThirdPartyVehicleValues,
+} from "@/models";
 import { validateThirdPartyVehicle } from "..";
 
-
 export const validateAllCrashVehicles = ({
-  thirdPartyVehiclesInfo,
+  thirdPartyVehicleInfo,
 }: AllCrashVehiclesValues) => {
   const errors: Partial<ErrorsAllCrashVehiclesValues> | null = {};
 
   let thirdPartyVehiclesErrors:
-      | Partial<ErrorsThirdPartyVehicleValues>[]
-    | undefined
-  
-  if (thirdPartyVehiclesInfo.length > 0) {
-     thirdPartyVehiclesErrors = thirdPartyVehiclesInfo.map((vehicle) =>
-       validateThirdPartyVehicle(vehicle)
-     );
+    | Partial<ErrorsThirdPartyVehicleValues>[]
+    | undefined;
 
-    errors.thirdPartyVehiclesInfo = thirdPartyVehiclesErrors;
+  if (thirdPartyVehicleInfo.length > 0) {
+    thirdPartyVehiclesErrors = thirdPartyVehicleInfo.map((vehicle) =>
+      validateThirdPartyVehicle(vehicle)
+    );
+
+    errors.thirdPartyVehicleInfo = thirdPartyVehiclesErrors;
   }
 
   return errors;

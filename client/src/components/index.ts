@@ -34,6 +34,7 @@ export * from './FormVehicleData';
 export * from './FormVehicleDetail';
 export * from './FormVehicleReportData';
 export * from './FormVehicleReportDetail';
+export * from './GloblaLoader';
 export * from './Loader';
 export * from './LoaderImages';
 export * from './ModalError';

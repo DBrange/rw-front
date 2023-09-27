@@ -40,12 +40,13 @@ function FormThirdPartyVehicle({
 }: Props) {
   const [isOwner, setIsOwner] = useState<boolean>(false);
 
-  const objectValues = inputValues?.thirdPartyVehicle?.thirdPartyVehiclesInfo?.[index];
+  const objectValues =
+    inputValues?.thirdPartyVehicle?.thirdPartyVehicleInfo?.[index];
   const objectTouched =
-    inputTouched?.thirdPartyVehicle?.thirdPartyVehiclesInfo?.[index];
+    inputTouched?.thirdPartyVehicle?.thirdPartyVehicleInfo?.[index];
   const objectError =
-    errorsInputValues?.thirdPartyVehicle?.thirdPartyVehiclesInfo?.[index];
-  const stringValues = `thirdPartyVehicle.thirdPartyVehiclesInfo.${index}`;
+    errorsInputValues?.thirdPartyVehicle?.thirdPartyVehicleInfo?.[index];
+  const stringValues = `thirdPartyVehicle.thirdPartyVehicleInfo.${index}`;
 
   return (
     <SectionFormContainer>
@@ -173,12 +174,17 @@ function FormThirdPartyVehicle({
         placeholder="Ingresar numero telefonico"
       />
       <FormImages
-        label="Añadir fotos del registro*"
+        label="Añadir fotos del registro y cedula verde*"
         error={objectError?.licensePhoto}
         name={`${stringValues}.licensePhoto`}
         id={`${stringValues}.licensePhoto`}
         changeInputForImages={changeInputForImages}
-        instructionsImages={["Frente", "Dorso"]}
+        instructionsImages={[
+          "Registro frente",
+          "Registro dorso",
+          "Cedula frente",
+          "Cedula dorso",
+        ]}
       />
       <FormInput
         label="Email del conductor o propietario*"
