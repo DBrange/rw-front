@@ -1,4 +1,9 @@
 export { default as Report } from './Report';
+export * from './components/AllReportPages';
+export * from './components/FormAllDetailsReport';
+export * from './components/FormReport';
+export * from './components/ReportContainer';
+export * from './components';
 export * from './context';
 export * from './models';
 export * from './models/interfaces';

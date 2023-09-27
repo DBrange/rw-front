@@ -1,7 +1,7 @@
 
 import { LinkNavigate } from "@/styledComponents";
 import { BtnModal, DivModalSent, H3Modal, H4Modal, ImgModal, SectionModalBg } from ".";
-import person2 from "../../assets/person2.svg";
+import person2 from "../../../assets/person2.svg";
 
 function ModalSent({ modalActive }: { modalActive: boolean }) {
   return (

@@ -1,11 +1,6 @@
 import { GncValues, ErrorsGncValues } from "@/models";
 
-
-export const validateGnc = ({
-oblea,
-plate,
-expireDate
-}: GncValues) => {
+export const validateGnc = ({ oblea, plate, expireDate }: GncValues) => {
   const errors: Partial<ErrorsGncValues> | null = {};
 
   const regex = {
@@ -16,8 +11,12 @@ expireDate
     oblea: /^\d{8}$/,
   };
 
+  const currentDate = new Date().getFullYear();
+
+  if (Number(expireDate) > currentDate || Number(expireDate) < 1900)
+    errors.expireDate = "Debe ser un año valido";
   if (!plate?.trim().length) errors.plate = "No puede estar vacio";
-  if(!(regex.oblea).test(oblea)) errors.oblea = "Debe contener 8 digitos";
+  if (!regex.oblea.test(oblea)) errors.oblea = "Debe contener 8 digitos";
   if (!regex.expireDate.test(expireDate))
     errors.expireDate = "Debe contener un fecha valida";
 
