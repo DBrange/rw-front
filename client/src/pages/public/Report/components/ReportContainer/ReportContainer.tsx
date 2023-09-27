@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import { LoaderImages, ModalError, ModalSent } from "@/components";
 import { Container } from "@/styledComponents";
-import { loaderImageService, modalSentService } from "@/pages";
 import { useReportContext } from "../..";
+import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
 function ReportContainer({
   children,

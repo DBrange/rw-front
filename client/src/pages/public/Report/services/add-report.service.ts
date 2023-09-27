@@ -8,7 +8,7 @@ import {
   PersonalElectronicTheftType,
   LegalElectronicTheftType,
 } from "@/models";
-import { loaderImageService, modalSentService } from "@/pages";
+import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
 export const BaseUrlReport = "http://localhost:3001/v1";
 

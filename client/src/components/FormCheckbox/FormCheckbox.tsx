@@ -1,6 +1,5 @@
 import { checkboxService } from '@/pages';
 import {
-  AllInspectValues,
   ChangeEventType,
 } from "../../pages";
 import { Label } from '@/styledComponents';

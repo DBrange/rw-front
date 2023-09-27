@@ -5,7 +5,7 @@ interface Props {
   values: AllInspectValues;
 }
 
-function FormDetail({ values }: Props) {
+function FormDetail({  }: Props) {
   // const renderProperty = (name: string, value: any) => (
   //   <DivRenderProperty key={name}>
   //     <H4PropertyName>{name}:</H4PropertyName> {value}

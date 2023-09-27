@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { loaderImageService, modalSentService, useInspectContext } from "../..";
 import { LoaderImages, ModalError, ModalSent } from "@/components";
 import { Container } from "@/styledComponents";
+import { modalSentService, loaderImageService } from "@/services/sharing-information.service";
+import { useInspectContext } from "../..";
 
 function InspectContainer({
   children,

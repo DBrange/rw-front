@@ -1,5 +1,5 @@
 import { PersonalVehicleType, PersonalElectronicType, LegalVehicleType, LegalElectronicType } from "@/models";
-import { loaderImageService, modalSentService } from ".";
+import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
 
 export const BaseUrlInspect = "http://localhost:3001/v1";

@@ -9,7 +9,7 @@ export * from './gnc';
 export * from './is-tire';
 export * from './legalPersonal';
 export * from './personal';
-export * from './phone/phoneValues.interface';
+export * from './phone';
 export * from './statesInspect.interface';
 export * from './sworn-declaration';
 export * from './third-party-injured';
