@@ -21,6 +21,14 @@ export const Container = styled.section<{ $broad?: boolean }>`
   margin: auto;
 `;
 
+export const ContainerLogin = styled.section<{ $broad?: boolean }>`
+  max-width: 1000px;
+  width: 90%;
+  /* background-color: blue; */
+
+  margin: auto;
+`;
+
 export const SectionFormContainer = styled.section`
   display: flex;
   flex-direction: column;

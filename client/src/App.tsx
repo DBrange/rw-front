@@ -2,12 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { GlobalLoader, MainName } from "./components";
 import { AdminUser, BrokerUser, ClientUser } from "./pages";
-import {
-  Body,
-  Footer,
-  Header,
-  MainContent
-} from "./styledComponents";
+import { Body, Footer, Header, MainContent } from "./styledComponents";
 
 const Home = lazy(() => import("./pages/public/Home/Home"));
 const Inspect = lazy(() => import("./pages/public/Inspect/Inspect"));

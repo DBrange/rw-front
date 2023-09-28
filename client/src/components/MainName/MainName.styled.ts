@@ -21,13 +21,13 @@ export const DivMainName = styled.div`
   }
 `;
 
-export const BtnMainName = styled.button`
+export const BtnMainName = styled.button<{ $public?: boolean }>`
   position: absolute;
   z-index: 1000;
   top: 50%;
   left: 1rem;
   transform: translateY(-50%);
-  display: flex;
+  display: ${({ $public }) => $public ? 'none' : 'flex'};
   justify-content: center;
   align-items: center;
   background-color: transparent;
@@ -37,11 +37,11 @@ export const BtnMainName = styled.button`
   margin-right: 0.8rem;
   padding: 0.6rem;
   border-radius: 0.4rem;
-  
+
   &:hover {
     background-color: #fff1;
   }
-  
+
   @media (min-width: 800px) {
     position: static;
     margin-right: 0rem;

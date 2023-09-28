@@ -21,6 +21,7 @@ export const Header = styled.div`
 
 export const LinkNavigate = styled(Link)`
   text-decoration: none;
+  color: ${theme.textColor};
 `;
 
 export const LogoText = styled.h2`
@@ -34,7 +35,7 @@ export const LogoText = styled.h2`
 export const MainContent = styled.div`
   height: 100%;
   font-size: 0.9rem;
-  margin-top: 3rem;
+  margin-top: 7rem;
   background-color: ${theme.pColor};
 `;
 

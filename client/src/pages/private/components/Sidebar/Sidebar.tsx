@@ -1,5 +1,4 @@
 import { MainName } from "@/components";
-import { ClickEventType } from "@/pages";
 import { sidebarService } from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
 import {
@@ -10,9 +9,10 @@ import {
   UlSidebarList,
 } from "./Sidebar.styled";
 import { MdOutlineDashboard } from "react-icons/md";
+import { LinkNavigate } from "@/styledComponents";
 
 function Sidebar() {
-  const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(true);
+  const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
 
   useEffect(() => {
     sidebarService.getSubject.subscribe((bol) => setStateOfSidebar(bol));
@@ -25,19 +25,29 @@ function Sidebar() {
 
   const handleSidebarClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.stopPropagation();
-  };
+  ) => e.stopPropagation();
 
   return (
     <SectionBgSidebar $isOpen={stateOfSidebar} onClick={toggleSidebar}>
       <DivSidebarWrapper $isOpen={stateOfSidebar} onClick={handleSidebarClick}>
         <MainName />
         <UlSidebarList>
-          <LiSidebarItem><MdOutlineDashboard size={20}/>hablo</LiSidebarItem>
-          <LiSidebarItem><MdOutlineDashboard size={20}/>con</LiSidebarItem>
-          <LiSidebarItem><MdOutlineDashboard size={20}/>la mas</LiSidebarItem>
-          <LiSidebarItem><MdOutlineDashboard size={20}/>linda</LiSidebarItem>
+          <LiSidebarItem>
+            <MdOutlineDashboard size={20} />
+            <LinkNavigate to="#">hablo</LinkNavigate>
+          </LiSidebarItem>
+          <LiSidebarItem>
+            <MdOutlineDashboard size={20} />
+            <LinkNavigate to="#">con</LinkNavigate>
+          </LiSidebarItem>
+          <LiSidebarItem>
+            <MdOutlineDashboard size={20} />
+            <LinkNavigate to="#">la mas</LinkNavigate>
+          </LiSidebarItem>
+          <LiSidebarItem>
+            <MdOutlineDashboard size={20} />
+            <LinkNavigate to="#">linda</LinkNavigate>
+          </LiSidebarItem>
         </UlSidebarList>
         <FooterSidebar>
           <UlSidebarList>
