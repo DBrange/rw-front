@@ -39,7 +39,8 @@ export const MainContent = styled.div`
   background-color: ${theme.pColor};
 `;
 
-export const Footer = styled.footer`
+export const Footer = styled.footer<{ $public: boolean }>`
+  display: ${({ $public }) => $public ? 'block' : 'none'};
   min-height: 10rem;
   background-color: ${theme.sColor};
 `;

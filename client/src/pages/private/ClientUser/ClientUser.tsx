@@ -1,13 +1,14 @@
-import { InspectLogin, Sidebar } from "../components";
+import { ClientUserProvider, InspectLogin, Sidebar } from "../components";
 import { ClientUserContainer } from "./components";
 
 const ClientUser = () => {
-
   return (
-    <ClientUserContainer>
-      <Sidebar />
-      <InspectLogin />
-    </ClientUserContainer>
+    <ClientUserProvider>
+      <ClientUserContainer>
+        <Sidebar />
+        <InspectLogin sectionName="Inspecciones" />
+      </ClientUserContainer>
+    </ClientUserProvider>
   );
 };
 

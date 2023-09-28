@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { GlobalLoader, MainName } from "./components";
 import { AdminUser, BrokerUser, ClientUser } from "./pages";
 import { Body, Footer, Header, MainContent } from "./styledComponents";
@@ -9,6 +9,8 @@ const Inspect = lazy(() => import("./pages/public/Inspect/Inspect"));
 const Report = lazy(() => import("./pages/public/Report/Report"));
 
 function App() {
+    const path = useLocation().pathname;
+
   return (
     <Suspense fallback={<GlobalLoader />}>
       <Body>
@@ -26,7 +28,11 @@ function App() {
           </Routes>
         </MainContent>
       </Body>
-      <Footer />
+      <Footer
+        $public={
+          !!(path === "/" || path === "/denuncia" || path === "/inspeccion")
+        }
+      />
     </Suspense>
   );
 }
