@@ -1,9 +1,9 @@
-import { checkboxService } from '@/pages';
 import {
   ChangeEventType,
 } from "../../pages";
 import { Label } from '@/styledComponents';
 import { CheckboxWrapper, CheckboxBox, InputCheckbox, Instructions } from '.';
+import { checkboxService } from "@/services/sharing-information.service";
 
 
 interface Props {

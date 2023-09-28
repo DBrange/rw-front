@@ -1,3 +1,7 @@
+export * from './private/AdminUser';
+export * from './private/BrokerUser';
+export * from './private/ClientUser';
+export * from './private';
 export * from './public/Home/components/HomeContainer';
 export * from './public/Home/components';
 export * from './public/Home';

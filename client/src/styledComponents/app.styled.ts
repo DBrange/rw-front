@@ -6,7 +6,6 @@ export const Body = styled.section`
   min-height: 100vh;
   height: 100%;
   color: ${theme.textColor};
-  padding-top: 3rem;
   background: ${theme.pColor};
 `;
 
@@ -15,9 +14,7 @@ export const Header = styled.div`
   width: 100%;
   position: fixed;
   top: 0;
-  height: 3rem;
-  text-align: center;
-  border-bottom: 2px solid ${theme.sColor};
+  text-align: start;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   background-color: ${theme.pColor};
 `;
@@ -27,6 +24,7 @@ export const LinkNavigate = styled(Link)`
 `;
 
 export const LogoText = styled.h2`
+  display: inline-block;
   font-size: 1.125rem;
   line-height: 3rem;
   font-weight: 600;
@@ -43,4 +41,4 @@ export const MainContent = styled.div`
 export const Footer = styled.footer`
   min-height: 10rem;
   background-color: ${theme.sColor};
-`
+`;

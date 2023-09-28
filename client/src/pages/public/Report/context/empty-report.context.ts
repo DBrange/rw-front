@@ -15,9 +15,10 @@ import {
   AllReportValues,
   TouchedAllReportValues,
   ErrorsAllReportValues,
-  emptyAllReportValues,
   touchedAllReportValues,
 } from "..";
+
+import {emptyAllReportValues} from '../utilities/report/objects-all-report.utility'
 
 export interface IReportContext {
   submitValues: (e: SubmitEventType) => void;

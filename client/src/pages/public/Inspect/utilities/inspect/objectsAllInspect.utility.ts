@@ -9,16 +9,8 @@ import {
   touchedLegalPersonalValues,
   touchedLegalPersonalValuesTrue,
 } from "@/utilities/legalPersonal";
-import {
-  emptyVehicleValues,
-  touchedVehicleValues,
-  touchedVehicleValuesTrue,
-} from "../../../../utilities/vehicle";
-import {
-  emptyElectronicValues,
-  touchedElectronicValues,
-  touchedElectronicValuesTrue,
-} from "../../../../utilities/electronic";
+
+
 import {
   emptyGncValues,
   touchedGncValues,
@@ -29,6 +21,12 @@ import {
   touchedPhoneValues,
   touchedPhoneValuesTrue,
 } from "@/utilities/phone";
+import { emptyElectronicValues, touchedElectronicValues, touchedElectronicValuesTrue } from "@/utilities/electronic";
+import {
+  emptyVehicleValues,
+  touchedVehicleValues,
+  touchedVehicleValuesTrue,
+} from "@/utilities/vehicle";
 
 export const emptyAllInspectValues: AllInspectValues = {
   personal: emptyPersonalValues,

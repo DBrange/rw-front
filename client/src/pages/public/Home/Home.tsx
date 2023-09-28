@@ -13,9 +13,9 @@ import {
 } from ".";
 import HomeContainer from "./components/HomeContainer/HomeContainer";
 import { LinkNavigate } from "@/styledComponents";
-import person1 from "../../../assets/person1.svg";
-import person5 from "../../../assets/person5.svg";
-import person4 from "../../../assets/person4.svg";
+import person1 from "../../../../assets/person1.svg";
+import person5 from "../../../../assets/person5.svg";
+import person4 from "../../../../assets/person4.svg";
 
 function Home() {
   // const [isVisible, setIsVisible] = useState(false);

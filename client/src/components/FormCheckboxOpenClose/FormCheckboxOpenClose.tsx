@@ -1,14 +1,12 @@
 import { Label } from "@/styledComponents";
 import { CheckboxBox, CheckboxWrapper, InputCheckbox, Instructions } from "..";
-import {
-  ChangeEventType,
-} from "../../pages";
-import { checkboxService } from "../../pages";
+import { ChangeEventType } from "../../pages";
+import { checkboxService } from "@/services/sharing-information.service";
 
 interface Props {
   checked: boolean;
   setChecked: React.Dispatch<React.SetStateAction<boolean>>;
-  changeInputForCheckbox: (e: ChangeEventType) => void
+  changeInputForCheckbox: (e: ChangeEventType) => void;
   label: string;
   name: string;
   id: string;
@@ -28,7 +26,7 @@ function FormCheckboxOpenClose({
     const { checked } = e.currentTarget;
     // const [type, key] = name.split(".");
 
-    changeInputForCheckbox(e)
+    changeInputForCheckbox(e);
 
     checkboxService.setSubject(checked);
 
