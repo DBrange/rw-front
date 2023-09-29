@@ -5,7 +5,7 @@ export const AllVehiclesUrl = BaseUrlInspect + "/vehicle";
 
 export const allInspectedVehicles = async (
   url: string
-): Promise<AllClientVehicles[]> => {
+): Promise<AllClientVehicles[] | [] | undefined> => {
   try {
     return fetch(url).then((res) => res.json());
 

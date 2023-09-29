@@ -7,3 +7,12 @@ export const SectionCard = styled.section`
   gap: 1rem;
   padding: 1rem 0;
 `;
+export const FilterField = styled.input`
+width: 100%;
+padding: 0.6rem;
+color: ${theme.textColor};
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid ${theme.sColor};
+  outline: none;
+`
