@@ -34,11 +34,13 @@ function Sidebar() {
         <UlSidebarList>
           <LiSidebarItem>
             <MdOutlineDashboard size={20} />
-            <LinkNavigate to="#">hablo</LinkNavigate>
+            <LinkNavigate to="/dashboard_client/inspecciones">
+              Inspecciones
+            </LinkNavigate>
           </LiSidebarItem>
           <LiSidebarItem>
             <MdOutlineDashboard size={20} />
-            <LinkNavigate to="#">con</LinkNavigate>
+            <LinkNavigate to="">con</LinkNavigate>
           </LiSidebarItem>
           <LiSidebarItem>
             <MdOutlineDashboard size={20} />

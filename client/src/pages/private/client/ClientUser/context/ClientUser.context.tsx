@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { IClientUserContext } from ".";
-import { AllClientVehicles } from "../..";
 import { emptyClientUserContext } from "./empty-clientUser-context";
+import { AllClientVehicles } from "@/pages";
 
 export const ClientUserContext = createContext<IClientUserContext>(
   emptyClientUserContext
@@ -12,24 +12,12 @@ type ChildrenType = {
 };
 
 export const ClientUserProvider = ({ children }: ChildrenType) => {
-  const [formNotFound, setFormNotFound] = useState<boolean>(false);
 
-  const [searchField, setSearchField] = useState<string>("");
 
-  const filterData = <T extends AllClientVehicles>(
-    data: T[],
-    searchField: string
-  ): T[] => {
-    if (!searchField.length) {
-      return data || [];
-    } else if (searchField.length && data?.[0]?.hasOwnProperty("plate")) {
-      const regex = new RegExp(`^${searchField}`, "i"); 
-      return data.filter((el) => regex.test(el.plate));
-    }
-    return [];
-  };
 
-  const values = { filterData, setSearchField, searchField };
+  
+
+  const values = {  };
 
   return (
     <ClientUserContext.Provider value={values}>

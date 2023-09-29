@@ -1,4 +1,4 @@
-import { AllClientVehicles } from "../..";
+import { AllClientVehicles } from "@/pages";
 
 export const BaseUrlInspect = "http://localhost:3000";
 export const AllVehiclesUrl = BaseUrlInspect + "/vehicle";

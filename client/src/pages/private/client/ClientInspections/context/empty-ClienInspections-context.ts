@@ -1,16 +1,16 @@
-import { AllClientVehicles } from "../.."
+import { AllClientVehicles } from "@/pages";
 
-export interface IClientUserContext {
+export interface IClientInspectionsContext {
   filterData: <T extends AllClientVehicles>(
     data: T[],
     searchField: string
   ) => T[];
   setSearchField: React.Dispatch<React.SetStateAction<string>>;
-  searchField: string
+  searchField: string;
 }
 
-export const emptyClientUserContext: IClientUserContext = {
+export const emptyClientInspectionsContext: IClientInspectionsContext = {
   filterData: () => [],
   setSearchField: () => {},
-  searchField: ''
-}; 
+  searchField: "",
+};

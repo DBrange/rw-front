@@ -2,14 +2,20 @@ import { Suspense, lazy } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { GlobalLoader, MainName } from "./components";
 import { AdminUser, BrokerUser, ClientUser } from "./pages";
-import { Body, Footer, Header, MainContent } from "./styledComponents";
+import {
+  Body,
+  Footer,
+  Header,
+  MainContent,
+} from "./styledComponents";
+import { ClientInspections } from "./pages/private/client/ClientInspections";
 
 const Home = lazy(() => import("./pages/public/Home/Home"));
 const Inspect = lazy(() => import("./pages/public/Inspect/Inspect"));
 const Report = lazy(() => import("./pages/public/Report/Report"));
 
 function App() {
-    const path = useLocation().pathname;
+  const path = useLocation().pathname;
 
   return (
     <Suspense fallback={<GlobalLoader />}>
@@ -22,9 +28,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/inspeccion" element={<Inspect />} />
             <Route path="/denuncia" element={<Report />} />
-            <Route path="/dashboard_client" element={<ClientUser />} />
-            <Route path="/dashboard_broker" element={<BrokerUser />} />
-            <Route path="/dashboard_admin" element={<AdminUser />} />
+            <Route path="/dashboard/client" element={<ClientUser />} />
+            <Route
+              path="/dashboard/client/inspecciones"
+              element={<ClientInspections/>}
+            />
+            <Route path="/dashboard/broker" element={<BrokerUser />} />
+            <Route path="/dashboard/admin" element={<AdminUser />} />
           </Routes>
         </MainContent>
       </Body>

@@ -24,7 +24,6 @@ export const Container = styled.section<{ $broad?: boolean }>`
 export const ContainerLogin = styled.section<{ $broad?: boolean }>`
   max-width: 1000px;
   width: 90%;
-  /* background-color: blue; */
 
   margin: auto;
 `;

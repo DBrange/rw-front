@@ -1,4 +1,5 @@
-import { ClientUserProvider, InspectLogin, Sidebar } from "../components";
+import { ClientUserProvider } from ".";
+import { InspectLogin, Sidebar } from "../..";
 import { ClientUserContainer } from "./components";
 
 const ClientUser = () => {
@@ -6,7 +7,7 @@ const ClientUser = () => {
     <ClientUserProvider>
       <ClientUserContainer>
         <Sidebar />
-        <InspectLogin sectionName="Inspecciones" />
+        {/* <InspectLogin sectionName="Inspecciones" /> */}
       </ClientUserContainer>
     </ClientUserProvider>
   );

@@ -1,38 +1,36 @@
 import { FormTitle } from "@/components";
-import useSWR from "swr";
-import { useClientUserContext } from "..";
-import { AllClientVehicles } from "../..";
-import { AllVehiclesUrl, allInspectedVehicles } from "../../ClientUser/service";
-import { InspectionCard } from "../InspectionCard";
 import { FilterField, SectionCard } from "./InspectLogin.styled";
 
-function InspectLogin({ sectionName }: { sectionName: string }) {
-  const { filterData, setSearchField, searchField } = useClientUserContext();
-  const { error: errorAllInspectedVehicles, data: AllInspectedVehicles } =
-    useSWR(AllVehiclesUrl, allInspectedVehicles);
+interface Props {
+  sectionName: string;
+  error: any;
+  setSearchField: React.Dispatch<React.SetStateAction<string>>;
+  searchField: string;
+  placeholder: string
+  name: string;
+  cards: JSX.Element;
+}
 
-  
-const vehicles: [] | AllClientVehicles[] | undefined =
-  filterData<AllClientVehicles>(AllInspectedVehicles!, searchField);
+function InspectLogin({
+  sectionName,
+  error,
+  setSearchField,
+  searchField,
+  placeholder,
+  cards,name
+}: Props) {
   return (
     <>
       <FormTitle>{sectionName}</FormTitle>
       <FilterField
         type="text"
-        name="searchInspection"
+        id={name}
+        name={name}
         value={searchField}
         onChange={(e) => setSearchField(e.target.value)}
-        placeholder="Buscar patente"
+        placeholder={placeholder}
       />
-      <SectionCard>
-        {vehicles?.map((vehicle) => (
-          <InspectionCard
-            key={vehicle.id}
-            type={vehicle.type}
-            keyName={vehicle.plate}
-          />
-        ))}
-      </SectionCard>
+      <SectionCard>{cards}</SectionCard>
     </>
   );
 }
