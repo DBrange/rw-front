@@ -1,5 +1,37 @@
-export interface IRegisterContext{
+import { UserActive } from "@/models";
+import { ChangeEventType, ClickEventType, SelectEventType, } from "@/pages";
+import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "..";
+import { emptyRegisterValues, touchedRegisterValues } from '../utilities/objects-register.utility';
 
+export interface IRegisterContext {
+  page: number;
+  changePage: (e: ClickEventType) => void;
+  partialErrors: () => boolean;
+  markedTouches: () => void;
+  userActive: UserActive;
+  changeForm: (e: ClickEventType) => void;
+  inputValues: RegisterValues;
+  changeInputValues: (e: ChangeEventType) => void;
+  inputTouched: TouchedRegisterValues;
+  errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
+  changeSelectValues: (e: SelectEventType) => void;
+  changeInputForCheckbox: (e: ChangeEventType) => void;
 }
 
-export const emptyRegisterContext: IRegisterContext = {}
+export const emptyRegisterContext: IRegisterContext = {
+  page: 0,
+  changePage: () => {},
+  partialErrors: () => false,
+  markedTouches: () => {},
+  userActive: {
+    personal: true,
+    legalPersonal: false,
+  },
+  changeForm: () => {},
+  inputValues: emptyRegisterValues,
+  changeInputValues: () => {},
+  inputTouched: touchedRegisterValues,
+  errorsInputValues: undefined,
+  changeSelectValues: () => {},
+  changeInputForCheckbox: () => {},
+};
