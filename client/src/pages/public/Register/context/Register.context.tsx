@@ -1,4 +1,4 @@
-import { ChildrenType, TouchedForms, UserActive } from "@/models";
+import { ChildrenType, IUserType, TouchedForms, UserActive } from "@/models";
 import {
   touchedLegalPersonalValuesTrue,
   touchedPersonalValuesTrue,
@@ -38,7 +38,17 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     Partial<ErrorsRegisterValues> | undefined
   >(undefined);
 
+  const [userType, setUserType] = useState<IUserType>({
+    client: true,
+    broker: false,
+  });
+
   const [userActive, setUserActive] = useState<UserActive>({
+    personal: true,
+    legalPersonal: false,
+  });
+
+  const [brokerActive, setBrokerActive] = useState<UserActive>({
     personal: true,
     legalPersonal: false,
   });
@@ -65,14 +75,19 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
         personal: value === "personal",
         legalPersonal: value === "legalPersonal",
       });
+    } else if (value === 'client' || value === 'broker') {
+      setUserType({
+        client: value === 'client',
+        broker: value === 'broker'
+      })
     }
   };
 
   const partialErrors = () => {
     const userErrors =
-      (validate(errorsInputValues?.personal) && page === 1) ||
-      (validate(errorsInputValues?.legalPersonal) && page === 1) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 2);
+      (validate(errorsInputValues?.personal) && page === 2) ||
+      (validate(errorsInputValues?.legalPersonal) && page === 2) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 3);
 
     const errors: boolean = userErrors;
     return errors;
@@ -218,7 +233,7 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
         userActive,
       })
     );
-  }, []);
+  }, [page]);
 
   const submitValues = (e: SubmitEventType) => {
     e.preventDefault();
@@ -247,6 +262,7 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     errorsInputValues,
     changeSelectValues,
     changeInputForCheckbox,
+    userType,
   };
 
   return (

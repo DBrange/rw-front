@@ -3,6 +3,11 @@ export interface UserActive {
   legalPersonal: boolean;
 }
 
+export interface IUserType {
+  client: boolean;
+  broker: boolean;
+}
+
 export interface ElementActive {
   vehicle: boolean;
   electronic: boolean;

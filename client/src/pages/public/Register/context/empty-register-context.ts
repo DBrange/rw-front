@@ -1,4 +1,4 @@
-import { UserActive } from "@/models";
+import { IUserType, UserActive } from "@/models";
 import { ChangeEventType, ClickEventType, SelectEventType, SubmitEventType, } from "@/pages";
 import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "..";
 import { emptyRegisterValues, touchedRegisterValues } from '../utilities/objects-register.utility';
@@ -17,6 +17,7 @@ export interface IRegisterContext {
   errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
   changeSelectValues: (e: SelectEventType) => void;
   changeInputForCheckbox: (e: ChangeEventType) => void;
+  userType: IUserType
 }
 
 export const emptyRegisterContext: IRegisterContext = {
@@ -36,4 +37,5 @@ export const emptyRegisterContext: IRegisterContext = {
   errorsInputValues: undefined,
   changeSelectValues: () => {},
   changeInputForCheckbox: () => {},
+  userType: {client: true, broker: false}
 };

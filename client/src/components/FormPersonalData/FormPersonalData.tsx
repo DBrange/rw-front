@@ -1,12 +1,14 @@
 import { SectionFormContainer } from "@/styledComponents";
 import { FormInput, FormSelect } from "..";
+import { ChangeEventType, SelectEventType } from "@/pages";
+import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "@/pages/public/Register";
 
 interface Props {
-  changeInputValues: any;
-  inputValues: any;
-  inputTouched: any;
-  errorsInputValues: any;
-  changeSelectValues: any;
+  changeInputValues: (e: ChangeEventType) => void;
+  inputValues: RegisterValues;
+  inputTouched: TouchedRegisterValues;
+  errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
+  changeSelectValues: (e: SelectEventType) => void;
 }
 
 function FormPersonalData({

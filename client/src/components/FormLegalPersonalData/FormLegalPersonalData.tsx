@@ -1,11 +1,13 @@
 import { SectionFormContainer } from "@/styledComponents";
 import { FormInput } from "..";
+import { ChangeEventType } from "@/pages";
+import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "@/pages/public/Register";
 
 interface Props {
-  changeInputValues: any;
-  inputValues: any;
-  inputTouched: any;
-  errorsInputValues: any;
+  changeInputValues: (e: ChangeEventType) => void;
+  inputValues: RegisterValues;
+  inputTouched: TouchedRegisterValues;
+  errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
 }
 
 function FormLegalPersonalData({
@@ -72,7 +74,7 @@ function FormLegalPersonalData({
         placeholder="Ingresar email alternativo"
       />
       <FormInput
-        label="Residencia*"
+        label="Direccion*"
         value={inputValues?.legalPersonal?.address}
         touched={inputTouched?.legalPersonal?.address}
         error={errorsInputValues?.legalPersonal?.address}
@@ -80,7 +82,7 @@ function FormLegalPersonalData({
         name="legalPersonal.address"
         id="legalPersonal.address"
         type="text"
-        placeholder="Ingresar residencia"
+        placeholder="Ingresar direccion"
       />
     </SectionFormContainer>
   );

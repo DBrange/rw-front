@@ -2,6 +2,7 @@ export * from './all-crash-vehicles';
 export * from './all-third-party-injured';
 export * from './brand-electronic';
 export * from './brand-vehicle';
+export * from './broker-personal';
 export * from './crash-vehicle';
 export * from './electronic';
 export * from './fire-vehicle';

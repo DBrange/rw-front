@@ -1,4 +1,4 @@
-import { BtnChoice, FormLegalPersonalData, FormOpenClose, FormPersonalData, FormSwornDeclaration } from "@/components";
+import { BtnChoice, FormBrokerPersonalData, FormLegalPersonalData, FormOpenClose, FormPersonalData, FormSwornDeclaration } from "@/components";
 import { FormAllDetailsRegister, useRegisterContext } from "../..";
 
 function AllRegisterPages() {
@@ -12,12 +12,34 @@ function AllRegisterPages() {
       errorsInputValues,
       changeSelectValues,
       changeInputForCheckbox,
+      userType,
     } = useRegisterContext();
   return (
     <>
       <FormOpenClose
-        formName="Tipo de usuario"
+        formName="Usted es..."
         isActive={page === 0}
+        form={
+          <BtnChoice
+            buttons={[
+              {
+                value: "client",
+                label: "Cliente",
+                active: userType.client,
+              },
+              {
+                value: "broker",
+                label: "Broker",
+                active: userType.broker,
+              },
+            ]}
+            changeForm={changeForm}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Tipo de usuario"
+        isActive={page === 1}
         form={
           <BtnChoice
             buttons={[
@@ -38,7 +60,32 @@ function AllRegisterPages() {
       />
       <FormOpenClose
         formName="Persona particular"
-        isActive={userActive.personal && page === 1}
+        isActive={userActive.personal && page === 2 && userType.broker}
+        form={
+          <FormBrokerPersonalData
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
+            changeSelectValues={changeSelectValues}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Persona juridica"
+        isActive={userActive.legalPersonal && page === 2 && userType.client}
+        form={
+          <FormLegalPersonalData
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Persona particular"
+        isActive={userActive.personal && page === 2 && userType.client}
         form={
           <FormPersonalData
             changeInputValues={changeInputValues}
@@ -51,7 +98,7 @@ function AllRegisterPages() {
       />
       <FormOpenClose
         formName="Persona juridica"
-        isActive={userActive.legalPersonal && page === 1}
+        isActive={userActive.legalPersonal && page === 2 && userType.client}
         form={
           <FormLegalPersonalData
             changeInputValues={changeInputValues}
@@ -63,7 +110,7 @@ function AllRegisterPages() {
       />
       <FormOpenClose
         formName="Detalle"
-        isActive={page === 2}
+        isActive={page === 3}
         form={
           <>
             <FormAllDetailsRegister
