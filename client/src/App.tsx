@@ -1,37 +1,61 @@
-import { Route, Routes } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { GlobalLoader, MainName } from "./components";
+import { AdminUser, BrokerUser, ClientUser, Login } from "./pages";
 import {
   Body,
   Footer,
   Header,
-  LinkNavigate,
-  LogoText,
   MainContent,
 } from "./styledComponents";
-import { Suspense, lazy } from "react";
-import { GlobalLoader } from "./components";
+import { ClientInspections } from "./pages/private/client/ClientInspections";
+import LoginBtn from "./components/LoginBtn/LoginBtn";
+import { ClientReports } from "./pages/private";
+import { Register } from "./pages/public/Register";
 
-const Home = lazy(() => import('./pages/Home/Home'))
-const Inspect = lazy(() => import('./pages/Inspect/Inspect'))
-const Report = lazy(() => import('./pages/Report/Report'))
+const Home = lazy(() => import("./pages/public/Home/Home"));
+const Inspect = lazy(() => import("./pages/public/Inspect/Inspect"));
+const Report = lazy(() => import("./pages/public/Report/Report"));
 
 function App() {
+  const path = useLocation().pathname;
+
   return (
     <Suspense fallback={<GlobalLoader />}>
       <Body>
         <Header>
-          <LinkNavigate to="/">
-            <LogoText>ReclamoWeb</LogoText>
-          </LinkNavigate>
+          <MainName /><LoginBtn />
         </Header>
         <MainContent>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/inspeccion" element={<Inspect />} />
-            <Route path="/denuncia" element={<Report />} />
+            <Route path="/inspeccionar" element={<Inspect />} />
+            <Route path="/denunciar" element={<Report />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registrarse" element={<Register />} />
+            <Route path="/dashboard/cliente" element={<ClientUser />} />
+            <Route
+              path="/dashboard/cliente/inspecciones"
+              element={<ClientInspections/>}
+            />
+            {/* <Route
+              path="/dashboard/cliente/inspeccionar"
+              element={<ClientInspections/>}
+            /> */}
+            <Route
+              path="/dashboard/cliente/denuncias"
+              element={<ClientReports />}
+            />
+            <Route path="/dashboard/broker" element={<BrokerUser />} />
+            <Route path="/dashboard/admin" element={<AdminUser />} />
           </Routes>
         </MainContent>
       </Body>
-        <Footer></Footer>
+      <Footer
+        $public={
+          !!(path === "/" || path === "/denunciar" || path === "/inspeccionar")
+        }
+      />
     </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { ChangeEventType, loaderImageService } from "@/pages";
+import { ChangeEventType } from "@/pages";
 import { Label } from "@/styledComponents";
 import {
   FormImagesContainer,
@@ -11,6 +11,7 @@ import {
   Image,
 } from ".";
 import { Instructions } from "..";
+import { loaderImageService } from "@/services/sharing-information.service";
 
 interface Props {
   label: string;

@@ -120,23 +120,6 @@ export const InspectProvider = ({ children }: ChildrenType) => {
         page === 3) ||
       (validate(errorsInputValues?.swornDeclaration) && page === 4);
 
-    // let errors: boolean = false
-
-    // if (elementActive.vehicle) {
-    //   if (!inputValues.vehicle.gnc) {
-    //    errors = userErrors || withoutGncPhoneErrors;
-    //   } else if (inputValues.vehicle.gnc) {
-    //     errors = userErrors || withGncErrors;
-    //   }
-    // }
-
-    // if (elementActive.electronic) {
-    //   if (!(inputValues.electronic.type === "CELULAR")) {
-    //     errors = userErrors || withoutGncPhoneErrors;
-    //   } else if (inputValues.electronic.type === "CELULAR") {
-    //     errors = userErrors || withPhoneErrors;
-    //   }
-    // }
       const errors: boolean = inputValues.vehicle.gnc
         ? withGncErrors
         : inputValues.electronic.type === "CELULAR"
@@ -287,6 +270,7 @@ export const InspectProvider = ({ children }: ChildrenType) => {
       })
     );
   };
+  
   const changeInputValuesNumber = (e: ChangeEventType) => {
     const { value, name } = e.target;
     const [type, key] = name.split(".");

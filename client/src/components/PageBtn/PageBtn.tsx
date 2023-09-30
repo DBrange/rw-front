@@ -1,8 +1,9 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import { BtnSideBySide, IconSideBySide, PageBtnContainer, SecretBtn } from ".";
-import { ClickEventType, checkboxService } from "@/pages";
+import { ClickEventType } from "@/pages";
 import { useEffect, useRef, useState } from "react";
+import { checkboxService } from "@/services/sharing-information.service";
 
 interface Props {
   changePage: (e: ClickEventType) => void;
