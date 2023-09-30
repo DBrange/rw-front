@@ -1,9 +1,10 @@
 import { UserActive } from "@/models";
-import { ChangeEventType, ClickEventType, SelectEventType, } from "@/pages";
+import { ChangeEventType, ClickEventType, SelectEventType, SubmitEventType, } from "@/pages";
 import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "..";
 import { emptyRegisterValues, touchedRegisterValues } from '../utilities/objects-register.utility';
 
 export interface IRegisterContext {
+  submitValues: (e: SubmitEventType) => void;
   page: number;
   changePage: (e: ClickEventType) => void;
   partialErrors: () => boolean;
@@ -19,6 +20,7 @@ export interface IRegisterContext {
 }
 
 export const emptyRegisterContext: IRegisterContext = {
+  submitValues: () => {},
   page: 0,
   changePage: () => {},
   partialErrors: () => false,

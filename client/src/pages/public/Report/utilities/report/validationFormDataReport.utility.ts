@@ -29,10 +29,12 @@ export const validationFormDataReport = ({
   triggers,
   amountInjured,
 }: Params) => {
-  if ((amountInjured as number) > 0) {
-    validationWithInjuries({ inputValues, errorsInputValues, triggers });
-  } else {
-    validationWithoutInjuries({ inputValues, errorsInputValues, triggers });
+  if (inputValues.swornDeclaration.swornDeclaration) {
+    if ((amountInjured as number) > 0) {
+      validationWithInjuries({ inputValues, errorsInputValues, triggers });
+    } else {
+      validationWithoutInjuries({ inputValues, errorsInputValues, triggers });
+    }
   }
 };
 

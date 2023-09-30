@@ -1,11 +1,13 @@
 import {
   ErrorsLegalPersonalValues,
   ErrorsPersonalValues,
+  ErrorsSwornDeclaration,
   UserActive
 } from "@/models";
 import {
   validateLegalPersonal,
-  validatePersonal
+  validatePersonal,
+  validateSwornDeclaration
 } from "@/utilities";
 import { ErrorsRegisterValues, RegisterValues } from "..";
 
@@ -15,10 +17,7 @@ interface Params {
 }
 
 export const validateRegister = ({
-  inputValues: {
-    personal,
-    legalPersonal,
-  },
+  inputValues: { personal, legalPersonal, swornDeclaration },
   userActive: {
     personal: personalSelected,
     legalPersonal: legalPersonalSelected,
@@ -27,6 +26,8 @@ export const validateRegister = ({
   let personalErrors: Partial<ErrorsPersonalValues> | undefined;
   let legalPersonalErrors: Partial<ErrorsLegalPersonalValues> | undefined;
 
+  const swornDeclarationError: Partial<ErrorsSwornDeclaration> | undefined =
+    validateSwornDeclaration(swornDeclaration);
 
   if (personalSelected) {
     if (personal) {
@@ -40,12 +41,10 @@ export const validateRegister = ({
     }
   }
 
-  
-  
-
   const errors: Partial<ErrorsRegisterValues | null> = {
     personal: personalErrors,
     legalPersonal: legalPersonalErrors,
+    swornDeclaration: swornDeclarationError,
   };
 
   return errors;

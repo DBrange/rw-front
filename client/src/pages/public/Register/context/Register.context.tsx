@@ -4,7 +4,7 @@ import {
   touchedPersonalValuesTrue,
   validate,
 } from "@/utilities";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   ErrorsRegisterValues,
   RegisterValues,
@@ -16,7 +16,8 @@ import {
 import {
   ChangeEventType,
   ClickEventType,
-  SelectEventType
+  SelectEventType,
+  SubmitEventType,
 } from "../../Inspect";
 import {
   IRegisterContext,
@@ -26,9 +27,8 @@ import {
 const RegisterContext = createContext<IRegisterContext>(emptyRegisterContext);
 
 export const RegisterProvider = ({ children }: ChildrenType) => {
-  const [inputValues, setInputValues] = useState<RegisterValues>(
-    emptyRegisterValues
-  );
+  const [inputValues, setInputValues] =
+    useState<RegisterValues>(emptyRegisterValues);
 
   const [inputTouched, setInputsTouched] = useState<TouchedRegisterValues>(
     touchedRegisterValues
@@ -70,8 +70,9 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
 
   const partialErrors = () => {
     const userErrors =
-      (validate(errorsInputValues?.personal) && page === 2) ||
-      (validate(errorsInputValues?.legalPersonal) && page === 2);
+      (validate(errorsInputValues?.personal) && page === 1) ||
+      (validate(errorsInputValues?.legalPersonal) && page === 1) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
 
     const errors: boolean = userErrors;
     return errors;
@@ -80,8 +81,8 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
   const typeOfToucheds: () => TouchedForms = () => {
     let toucheds: TouchedForms;
     toucheds =
-      (userActive.personal && page === 2 && "personal") ||
-      (userActive.legalPersonal && page === 2 && "legalPersonal") ||
+      (userActive.personal && page === 1 && "personal") ||
+      (userActive.legalPersonal && page === 1 && "legalPersonal") ||
       "";
 
     return toucheds;
@@ -209,8 +210,31 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
       })
     );
   };
+  
+  useEffect(() => {
+    setErrorsInputValues(
+      validateRegister({
+        inputValues,
+        userActive,
+      })
+    );
+  }, []);
+
+  const submitValues = (e: SubmitEventType) => {
+    e.preventDefault();
+    setErrorsInputValues(
+      validateRegister({
+        inputValues,
+        userActive,
+      })
+    );
+
+    console.log("chau");
+    // validationFormDataInspect({ inputValues, errorsInputValues, triggers });
+  };
 
   const values = {
+    submitValues,
     changePage,
     page,
     partialErrors,

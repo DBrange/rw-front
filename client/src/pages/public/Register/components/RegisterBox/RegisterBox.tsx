@@ -2,19 +2,25 @@ import { Form } from "@/styledComponents"
 import { AllRegisterPages } from "..";
 import { PageBtn } from "@/components";
 import { useRegisterContext } from "../..";
+import { useEffect } from "react";
 
 
 function RegisterBox() {
-  const { changePage, page, partialErrors, markedTouches } =
+  const { changePage, page, partialErrors, markedTouches, submitValues } =
     useRegisterContext();
+  console.log(partialErrors())
+  useEffect(() => {
+
+  }, [page])
+  
   return (
-    <Form>
+    <Form onSubmit={submitValues}>
       <AllRegisterPages />
 
       <PageBtn
         changePage={changePage}
         page={page}
-        max={4}
+        max={2}
         errorsInputValues={partialErrors()}
         markedTouches={markedTouches}
       />

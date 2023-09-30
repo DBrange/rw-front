@@ -16,7 +16,7 @@ function AllRegisterPages() {
   return (
     <>
       <FormOpenClose
-        formName="Tipo de inspeccion"
+        formName="Tipo de usuario"
         isActive={page === 0}
         form={
           <BtnChoice
@@ -63,7 +63,7 @@ function AllRegisterPages() {
       />
       <FormOpenClose
         formName="Detalle"
-        isActive={page === 4}
+        isActive={page === 2}
         form={
           <>
             <FormAllDetailsRegister
