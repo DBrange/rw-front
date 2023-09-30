@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const DivMainName = styled.div`
-  position: relative;
-  white-space: nowrap;
+  /* position: relative;
   max-width: 100%;
+  justify-content: center; */
+  white-space: nowrap;
   width: 100%;
   padding: 2rem 1rem;
-  justify-content: center;
   gap: 0rem;
   align-items: center;
   display: flex; /* Agregamos esta propiedad */
   align-items: center;
 
+  position: static;
+  max-width: 260px;
+  justify-content: space-evenly;
   @media (min-width: 800px) {
-    position: static;
-    max-width: 260px;
-    justify-content: space-evenly;
   }
 `;
 

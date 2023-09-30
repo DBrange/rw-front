@@ -37,6 +37,7 @@ export * from './FormVehicleReportDetail';
 export * from './GloblaLoader';
 export * from './Loader';
 export * from './LoaderImages';
+export * from './LoginBtn';
 export * from './Logo';
 export * from './Logo2';
 export * from './MainName';

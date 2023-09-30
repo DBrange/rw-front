@@ -10,6 +10,9 @@ export const Body = styled.section`
 `;
 
 export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   z-index: 10;
   width: 100%;
   position: fixed;
@@ -40,7 +43,7 @@ export const MainContent = styled.div`
 `;
 
 export const Footer = styled.footer<{ $public: boolean }>`
-  display: ${({ $public }) => $public ? 'block' : 'none'};
+  display: ${({ $public }) => ($public ? "block" : "none")};
   min-height: 10rem;
   background-color: ${theme.sColor};
 `;

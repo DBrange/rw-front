@@ -5,6 +5,6 @@ function ClientInspectionsContainer({
 }: {
   children: React.ReactElement | React.ReactElement[];
 }) {
-  return <ContainerLogin $broad>{children}</ContainerLogin>;
+  return <ContainerLogin >{children}</ContainerLogin>;
 }
 export default ClientInspectionsContainer;

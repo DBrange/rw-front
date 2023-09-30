@@ -29,7 +29,7 @@ function MainName() {
     <DivMainName>
       <BtnMainName
         $public={
-          !!(path === "/" || path === "/denuncia" || path === "/inspeccion")
+          !!(path === "/" || path === "/denunciar" || path === "/inspeccionar")
         }
         onClick={toggleSidebar}
       >

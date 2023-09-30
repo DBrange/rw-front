@@ -1,14 +1,14 @@
 import {
   AllClientVehicles,
+  InspectLogin,
   InspectionCard,
   Sidebar,
-  InspectLogin,
 } from "@/pages";
 import useSWR from "swr";
 import {
-  useClientInspectionsContext,
   AllVehiclesUrl,
   allInspectedVehicles,
+  useClientInspectionsContext,
 } from "../..";
 
 function ClientInspectionsBox() {
@@ -18,14 +18,14 @@ function ClientInspectionsBox() {
   const { error: errorAllInspectedVehicles, data: AllInspectedVehicles } =
     useSWR(AllVehiclesUrl, allInspectedVehicles);
 
-  const vehicles: AllClientVehicles[] = filterData<AllClientVehicles>(
+  const searchedVehicles: AllClientVehicles[] = filterData<AllClientVehicles>(
     AllInspectedVehicles!,
     searchField
   );
 
   const cards: JSX.Element = (
     <>
-      {vehicles?.map((vehicle) => (
+      {searchedVehicles?.map((vehicle) => (
         <InspectionCard
           key={vehicle.id}
           type={vehicle.type}
