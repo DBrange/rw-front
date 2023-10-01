@@ -1,7 +1,7 @@
 import { ChangeEventType, SelectEventType } from "@/pages";
-import { FormInput, FormPersonalData } from "..";
-import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "@/pages/public/Register";
+import { ErrorsRegisterValues, RegisterValues, TouchedRegisterValues } from "@/pages/public/Register";
 import { SectionFormContainer } from "@/styledComponents";
+import { FormRegisterPersonalData } from "..";
 interface Props {
   changeInputValues: (e: ChangeEventType) => void;
   inputValues: RegisterValues;
@@ -18,7 +18,7 @@ function FormBrokerPersonalData({
 }: Props) {
   return (
     <SectionFormContainer>
-      <FormPersonalData
+      <FormRegisterPersonalData
         changeInputValues={changeInputValues}
         inputValues={inputValues}
         inputTouched={inputTouched}

@@ -75,18 +75,23 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
         personal: value === "personal",
         legalPersonal: value === "legalPersonal",
       });
-    } else if (value === 'client' || value === 'broker') {
+    } else if (value === "client" || value === "broker") {
       setUserType({
-        client: value === 'client',
-        broker: value === 'broker'
-      })
+        client: value === "client",
+        broker: value === "broker",
+      });
+    } else if (value === "personal" || value === "legalPersonal") {
+      setBrokerActive({
+        personal: value === "personal",
+        legalPersonal: value === "legalPersonal",
+      });
     }
   };
 
   const partialErrors = () => {
     const userErrors =
-      (validate(errorsInputValues?.personal) && page === 2) ||
-      (validate(errorsInputValues?.legalPersonal) && page === 2) ||
+      (validate(errorsInputValues?.registerPersonal) && page === 2) ||
+      (validate(errorsInputValues?.registerLegalPersonal) && page === 2) ||
       (validate(errorsInputValues?.swornDeclaration) && page === 3);
 
     const errors: boolean = userErrors;
@@ -263,6 +268,7 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     changeSelectValues,
     changeInputForCheckbox,
     userType,
+    brokerActive,
   };
 
   return (

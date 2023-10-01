@@ -1,13 +1,13 @@
-import { ErrorsPersonalValues, PersonalValues, TouchedPersonalValues } from "..";
+import {
+  ErrorsRegisterPersonalValues,
+  RegisterPersonalValues,
+  TouchedRegisterPersonalValues,
+} from "..";
 
-export interface BrokerPersonalValues extends PersonalValues {
+export interface BrokerPersonalValues extends RegisterPersonalValues {}
 
-}
+export interface ErrorsBrokerPersonalValues
+  extends ErrorsRegisterPersonalValues {}
 
-export interface ErrorsBrokerPersonalValues extends ErrorsPersonalValues {
-
-}
-
-export interface TouchedBrokerPersonalValues extends TouchedPersonalValues {
-
-}
+export interface TouchedBrokerPersonalValues
+  extends TouchedRegisterPersonalValues {}

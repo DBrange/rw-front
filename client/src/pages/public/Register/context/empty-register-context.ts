@@ -17,7 +17,8 @@ export interface IRegisterContext {
   errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
   changeSelectValues: (e: SelectEventType) => void;
   changeInputForCheckbox: (e: ChangeEventType) => void;
-  userType: IUserType
+  userType: IUserType;
+  brokerActive: UserActive;
 }
 
 export const emptyRegisterContext: IRegisterContext = {
@@ -37,5 +38,9 @@ export const emptyRegisterContext: IRegisterContext = {
   errorsInputValues: undefined,
   changeSelectValues: () => {},
   changeInputForCheckbox: () => {},
-  userType: {client: true, broker: false}
+  userType: { client: true, broker: false },
+  brokerActive:{
+    personal: true,
+    legalPersonal: false,
+  },
 };

@@ -20,6 +20,8 @@ export * from './FormPersonalData';
 export * from './FormPersonalDetail';
 export * from './FormPhoneData';
 export * from './FormRange';
+export * from './FormRegisterLegalPersonalData';
+export * from './FormRegisterPersonalData';
 export * from './FormScheduleInput';
 export * from './FormSelect';
 export * from './FormSelectElectronic';

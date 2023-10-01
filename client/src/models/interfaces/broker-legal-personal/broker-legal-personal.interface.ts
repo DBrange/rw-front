@@ -1,13 +1,14 @@
-import { ErrorsLegalPersonalValues, LegalPersonalValues, TouchedLegalPersonalValues } from "..";
+import {
+  ErrorsRegisterLegalPersonalValues,
+  RegisterLegalPersonalValues,
+  TouchedRegisterLegalPersonalValues,
+} from "..";
 
-export interface BrokerLegalPersonalValues extends LegalPersonalValues {
+export interface BrokerLegalPersonalValues
+  extends RegisterLegalPersonalValues {}
 
-}
+export interface ErrorsBrokerLegalPersonalValues
+  extends ErrorsRegisterLegalPersonalValues {}
 
-export interface ErrorsBrokerLegalPersonalValues extends ErrorsLegalPersonalValues {
-
-}
-
-export interface TouchedBrokerLegalPersonalValues extends TouchedLegalPersonalValues {
-
-}
+export interface TouchedBrokerLegalPersonalValues
+  extends TouchedRegisterLegalPersonalValues {}

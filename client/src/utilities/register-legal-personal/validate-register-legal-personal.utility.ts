@@ -1,18 +1,15 @@
-import {
-  BrokerLegalPersonalValues,
-  ErrorsBrokerLegalPersonalValues,
-} from "@/models";
+import { ErrorsRegisterLegalPersonalValues, RegisterLegalPersonalValues } from "@/models";
 
-export const validateBrokerLegalPersonal = ({
+export const validateRegisterLegalPersonal = ({
   companyName,
   cuit,
   phoneNumber,
   email,
   altEmail,
   address,
-  password,
-}: BrokerLegalPersonalValues) => {
-  const errors: Partial<ErrorsBrokerLegalPersonalValues> | null = {};
+  password
+}: RegisterLegalPersonalValues) => {
+  const errors: Partial<ErrorsRegisterLegalPersonalValues> | null = {};
 
   const regex = {
     phoneNumber: /^\d+$/,
@@ -31,9 +28,10 @@ export const validateBrokerLegalPersonal = ({
     errors.altEmail = "Debe tener un formato de email o puede estar vacio";
   if (!regex.cuit.test(cuit)) errors.cuit = "Debe contener 8 digitos";
   if (!address?.trim().length) errors.address = "No puede estar vacio";
+  if (!password?.trim().length) errors.password = "No puede estar vacio";
   if (!regex.password.test(password))
     errors.password =
       "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
-
+  
   return errors;
 };

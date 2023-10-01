@@ -1,6 +1,6 @@
-import { BrokerPersonalValues, ErrorsBrokerPersonalValues } from "@/models";
+import { ErrorsRegisterPersonalValues, RegisterPersonalValues } from "@/models";
 
-export const validateBrokerPersonal = ({
+export const validateRegisterPersonal = ({
   name,
   lastName,
   phoneNumber,
@@ -10,11 +10,9 @@ export const validateBrokerPersonal = ({
   birthDate,
   dni,
   address,
-  password
-}: BrokerPersonalValues) => {
-  type NewType = ErrorsBrokerPersonalValues;
-
-  const errors: Partial<NewType> | null = {};
+  password,
+}: RegisterPersonalValues) => {
+  const errors: Partial<ErrorsRegisterPersonalValues> | null = {};
 
   const regex = {
     phoneNumber: /^\d+$/,
@@ -43,9 +41,10 @@ export const validateBrokerPersonal = ({
     errors.birthDate = "Debe contener un fecha valida";
   if (!regex.dni.test(dni)) errors.dni = "Debe contener 8 digitos";
   if (!address?.trim().length) errors.address = "No puede estar vacio";
-    if (!regex.password.test(password))
-      errors.password =
-        "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
+  if (!password?.trim().length) errors.password = "No puede estar vacio";
+  if (!regex.password.test(password))
+    errors.password =
+      "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
 
   return errors;
 };

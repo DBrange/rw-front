@@ -1,13 +1,12 @@
+import { AllInspectValues, ChangeEventType, ErrorsAllInspectValues, SelectEventType, TouchedAllInspectValues } from "@/pages";
 import { SectionFormContainer } from "@/styledComponents";
 import { FormInput, FormSelect } from "..";
-import { ChangeEventType, SelectEventType } from "@/pages";
-import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "@/pages/public/Register";
 
 interface Props {
   changeInputValues: (e: ChangeEventType) => void;
-  inputValues: RegisterValues;
-  inputTouched: TouchedRegisterValues;
-  errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
+  inputValues: AllInspectValues;
+  inputTouched: TouchedAllInspectValues;
+  errorsInputValues: Partial<ErrorsAllInspectValues> | undefined;
   changeSelectValues: (e: SelectEventType) => void;
 }
 

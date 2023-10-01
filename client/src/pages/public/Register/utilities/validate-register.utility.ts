@@ -1,14 +1,14 @@
 import {
-  ErrorsLegalPersonalValues,
-  ErrorsPersonalValues,
+  ErrorsRegisterLegalPersonalValues,
+  ErrorsRegisterPersonalValues,
   ErrorsSwornDeclaration,
   UserActive
 } from "@/models";
 import {
-  validateLegalPersonal,
   validatePersonal,
   validateSwornDeclaration
 } from "@/utilities";
+import { validateRegisterLegalPersonal } from "@/utilities/register-legal-personal/validate-register-legal-personal.utility";
 import { ErrorsRegisterValues, RegisterValues } from "..";
 
 interface Params {
@@ -17,33 +17,37 @@ interface Params {
 }
 
 export const validateRegister = ({
-  inputValues: { personal, legalPersonal, swornDeclaration },
+  inputValues: { registerPersonal, registerLegalPersonal, swornDeclaration },
   userActive: {
     personal: personalSelected,
     legalPersonal: legalPersonalSelected,
   },
 }: Params) => {
-  let personalErrors: Partial<ErrorsPersonalValues> | undefined;
-  let legalPersonalErrors: Partial<ErrorsLegalPersonalValues> | undefined;
+  let registerPersonalErrors: Partial<ErrorsRegisterPersonalValues> | undefined;
+  let registerLegalPersonalErrors:
+    | Partial<ErrorsRegisterLegalPersonalValues>
+    | undefined;
 
   const swornDeclarationError: Partial<ErrorsSwornDeclaration> | undefined =
     validateSwornDeclaration(swornDeclaration);
 
   if (personalSelected) {
-    if (personal) {
-      personalErrors = validatePersonal(personal);
+    if (registerPersonal) {
+      registerPersonalErrors = validatePersonal(registerPersonal);
     }
   }
 
   if (legalPersonalSelected) {
-    if (legalPersonal) {
-      legalPersonalErrors = validateLegalPersonal(legalPersonal);
+    if (registerLegalPersonal) {
+      registerLegalPersonalErrors = validateRegisterLegalPersonal(
+        registerLegalPersonal
+      );
     }
   }
 
   const errors: Partial<ErrorsRegisterValues | null> = {
-    personal: personalErrors,
-    legalPersonal: legalPersonalErrors,
+    registerPersonal: registerPersonalErrors,
+    registerLegalPersonal: registerLegalPersonalErrors,
     swornDeclaration: swornDeclarationError,
   };
 

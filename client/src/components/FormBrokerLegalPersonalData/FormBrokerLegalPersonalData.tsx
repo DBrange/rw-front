@@ -1,5 +1,5 @@
 import { ChangeEventType } from "@/pages";
-import { FormLegalPersonalData } from "..";
+import { FormRegisterLegalPersonalData } from "..";
 import {
   RegisterValues,
   TouchedRegisterValues,
@@ -21,12 +21,12 @@ function FormBrokerLegalPersonalData({
 }: Props) {
   return (
     <SectionFormContainer>
-      <FormLegalPersonalData
+      <FormRegisterLegalPersonalData
         changeInputValues={changeInputValues}
         inputValues={inputValues}
         inputTouched={inputTouched}
         errorsInputValues={errorsInputValues}
-      ></FormLegalPersonalData>
+      ></FormRegisterLegalPersonalData>
     </SectionFormContainer>
   );
 }

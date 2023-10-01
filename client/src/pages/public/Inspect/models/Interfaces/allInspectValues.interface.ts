@@ -1,4 +1,4 @@
-import { PersonalValues, LegalPersonalValues, GncValues, PhoneValues, ErrorsPersonalValues, ErrorsGncValues, ErrorsPhoneValues, TouchedPersonalValues, TouchedLegalPersonalValues, TouchedGncValues, TouchedPhoneValues, ElectronicValues, ErrorsElectronicValues, TouchedElectronicValues, VehicleValues, ErrorsVehicleValues, TouchedVehicleValues, SwornDeclaration, ErrorsSwornDeclaration, TouchedSwornDeclaration } from "@/models";
+import { PersonalValues, LegalPersonalValues, GncValues, PhoneValues, ErrorsPersonalValues, ErrorsGncValues, ErrorsPhoneValues, TouchedPersonalValues, TouchedLegalPersonalValues, TouchedGncValues, TouchedPhoneValues, ElectronicValues, ErrorsElectronicValues, TouchedElectronicValues, VehicleValues, ErrorsVehicleValues, TouchedVehicleValues, SwornDeclaration, ErrorsSwornDeclaration, TouchedSwornDeclaration, ErrorsRegisterLegalPersonalValues } from "@/models";
 
 export interface AllInspectValues {
   personal: PersonalValues;
@@ -12,7 +12,7 @@ export interface AllInspectValues {
 
 export interface ErrorsAllInspectValues {
   personal: Partial<ErrorsPersonalValues>;
-  legalPersonal: Partial<LegalPersonalValues>;
+  legalPersonal: Partial<ErrorsRegisterLegalPersonalValues>;
   vehicle: Partial<ErrorsVehicleValues>;
   electronic: Partial<ErrorsElectronicValues>;
   gnc: Partial<ErrorsGncValues>;
