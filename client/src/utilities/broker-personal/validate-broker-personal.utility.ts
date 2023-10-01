@@ -10,7 +10,8 @@ export const validateBrokerPersonal = ({
   birthDate,
   dni,
   address,
-  password
+  password,
+  enrollment,
 }: BrokerPersonalValues) => {
   type NewType = ErrorsBrokerPersonalValues;
 
@@ -22,7 +23,7 @@ export const validateBrokerPersonal = ({
     birthDate:
       /^(?:\d{4})-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-30|(?:0[13578]|1[02])-31)$/,
     dni: /^\d{8}$/,
-    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(.{10,})$/,
+    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!.])(.{10,})$/,
   };
 
   const currentDate = new Date();
@@ -43,9 +44,9 @@ export const validateBrokerPersonal = ({
     errors.birthDate = "Debe contener un fecha valida";
   if (!regex.dni.test(dni)) errors.dni = "Debe contener 8 digitos";
   if (!address?.trim().length) errors.address = "No puede estar vacio";
-    if (!regex.password.test(password))
-      errors.password =
-        "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
-
+  if (!regex.password.test(password))
+    errors.password =
+      "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
+if (!enrollment?.trim().length) errors.enrollment = "No puede estar vacio";
   return errors;
 };

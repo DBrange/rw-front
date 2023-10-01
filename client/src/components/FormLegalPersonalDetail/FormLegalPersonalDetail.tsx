@@ -17,32 +17,32 @@ function FormLegalPersonalDetail({ inputLegalPersonalValues }: Props) {
 
       <DivRenderProperty>
         <H4PropertyValue>Nombre de la compañia: </H4PropertyValue>
-        {inputLegalPersonalValues.companyName}
+        {inputLegalPersonalValues?.companyName}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>CUIT: </H4PropertyValue>
-        {inputLegalPersonalValues.cuit}
+        {inputLegalPersonalValues?.cuit}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Numero telefonico: </H4PropertyValue>
-        {inputLegalPersonalValues.phoneNumber}
+        {inputLegalPersonalValues?.phoneNumber}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Residencia: </H4PropertyValue>
-        {inputLegalPersonalValues.address}
+        {inputLegalPersonalValues?.address}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Email: </H4PropertyValue>
-        {inputLegalPersonalValues.email}
+        {inputLegalPersonalValues?.email}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Email alternativo: </H4PropertyValue>
-        {inputLegalPersonalValues.altEmail}
+        {inputLegalPersonalValues?.altEmail}
       </DivRenderProperty>
     </DivRenderPropertys>
   );

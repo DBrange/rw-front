@@ -1,14 +1,20 @@
 import { BrokerLegalPersonalValues, TouchedBrokerLegalPersonalValues } from "@/models";
-import { emptyLegalPersonalValues, touchedLegalPersonalValues, touchedLegalPersonalValuesTrue } from "../legalPersonal";
+import { emptyRegisterLegalPersonalValues, touchedRegisterLegalPersonalValues, touchedRegisterLegalPersonalValuesTrue } from "../register-legal-personal/objects-register-legal-personal.utility";
 
 export const emptyBrokerLegalPersonalValues: BrokerLegalPersonalValues = {
-  ...emptyLegalPersonalValues,
+  ...emptyRegisterLegalPersonalValues,
+    enrollment: '',
+  businessName: ''
 };
 
 export const touchedBrokerLegalPersonalValues: TouchedBrokerLegalPersonalValues = {
-  ...touchedLegalPersonalValues,
+  ...touchedRegisterLegalPersonalValues,
+  enrollment: false,
+  businessName: false
 };
 
 export const touchedBrokerLegalPersonalValuesTrue: TouchedBrokerLegalPersonalValues = {
-  ...touchedLegalPersonalValuesTrue,
+  ...touchedRegisterLegalPersonalValuesTrue,
+  enrollment: true,
+  businessName: true
 };

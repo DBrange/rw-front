@@ -1,6 +1,8 @@
 export type TouchedForms =
   | "personal"
   | "legalPersonal"
+  | "brokerPersonal"
+  | "brokerLegalPersonal"
   | "vehicle"
   | "electronic"
   | "vehicleReport"

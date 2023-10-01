@@ -9,6 +9,7 @@ interface Props {
   inputTouched: TouchedRegisterValues;
   errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
   changeSelectValues: (e: SelectEventType) => void;
+  objectName: "registerPersonal" | "registerBrokerPersonal";
 }
 function FormRegisterPersonalData({
   changeInputValues,
@@ -16,119 +17,120 @@ function FormRegisterPersonalData({
   inputTouched,
   errorsInputValues,
   changeSelectValues,
+  objectName,
 }: Props) {
   return (
     <SectionFormContainer>
       <FormInput
         label="Nombre"
-        value={inputValues?.registerPersonal?.name}
-        touched={inputTouched?.registerPersonal?.name}
-        error={errorsInputValues?.registerPersonal?.name}
+        value={inputValues?.[objectName]?.name}
+        touched={inputTouched?.[objectName]?.name}
+        error={errorsInputValues?.[objectName]?.name}
         handleChange={changeInputValues}
-        name="registerPersonal.name"
-        id="registerPersonal.name"
+        name={`${objectName}.name`}
+        id={`${objectName}.name`}
         type="text"
         placeholder="Ingresar nombre"
       />
       <FormInput
         label="Apellido"
-        value={inputValues?.registerPersonal?.lastName}
-        touched={inputTouched?.registerPersonal?.lastName}
-        error={errorsInputValues?.registerPersonal?.lastName}
+        value={inputValues?.[objectName]?.lastName}
+        touched={inputTouched?.[objectName]?.lastName}
+        error={errorsInputValues?.[objectName]?.lastName}
         handleChange={changeInputValues}
-        name="registerPersonal.lastName"
-        id="registerPersonal.lastName"
+        name={`${objectName}.lastName`}
+        id={`${objectName}.lastName`}
         type="text"
         placeholder="Ingresar apellido"
       />
       <FormInput
         label="Numero telefonico"
-        value={inputValues?.registerPersonal?.phoneNumber}
-        touched={inputTouched?.registerPersonal?.phoneNumber}
-        error={errorsInputValues?.registerPersonal?.phoneNumber}
+        value={inputValues?.[objectName]?.phoneNumber}
+        touched={inputTouched?.[objectName]?.phoneNumber}
+        error={errorsInputValues?.[objectName]?.phoneNumber}
         handleChange={changeInputValues}
-        name="registerPersonal.phoneNumber"
-        id="registerPersonal.phoneNumber"
+        name={`${objectName}.phoneNumber`}
+        id={`${objectName}.phoneNumber`}
         type="text"
         placeholder="Ingresar numero telefonico"
       />
       <FormSelect
         label="Sexo"
-        value={inputValues?.registerPersonal?.gender}
-        touched={inputTouched?.registerPersonal?.gender}
-        error={errorsInputValues?.registerPersonal?.gender}
+        value={inputValues?.[objectName]?.gender}
+        touched={inputTouched?.[objectName]?.gender}
+        error={errorsInputValues?.[objectName]?.gender}
         handleChange={changeSelectValues}
-        name="registerPersonal.gender"
-        id="registerPersonal.gender"
+        name={`${objectName}.gender`}
+        id={`${objectName}.gender`}
         options={["HOMBRE", "MUJER", "OTRO"]}
       />
       <FormInput
         label="Fecha de nacimiento"
-        value={inputValues?.registerPersonal?.birthDate}
-        touched={inputTouched?.registerPersonal?.birthDate}
-        error={errorsInputValues?.registerPersonal?.birthDate}
+        value={inputValues?.[objectName]?.birthDate}
+        touched={inputTouched?.[objectName]?.birthDate}
+        error={errorsInputValues?.[objectName]?.birthDate}
         handleChange={changeInputValues}
-        name="registerPersonal.birthDate"
-        id="registerPersonal.birthDate"
+        name={`${objectName}.birthDate`}
+        id={`${objectName}.birthDate`}
         type="date"
         placeholder="Ingresar fecha de nacimiento"
       />
       <FormInput
         label="DNI"
-        value={inputValues?.registerPersonal?.dni}
-        touched={inputTouched?.registerPersonal?.dni}
-        error={errorsInputValues?.registerPersonal?.dni}
+        value={inputValues?.[objectName]?.dni}
+        touched={inputTouched?.[objectName]?.dni}
+        error={errorsInputValues?.[objectName]?.dni}
         handleChange={changeInputValues}
-        name="registerPersonal.dni"
-        id="registerPersonal.dni"
+        name={`${objectName}.dni`}
+        id={`${objectName}.dni`}
         type="text"
         placeholder="Ingresar DNI"
       />
       <FormInput
         label="Residencia"
-        value={inputValues?.registerPersonal?.address}
-        touched={inputTouched?.registerPersonal?.address}
-        error={errorsInputValues?.registerPersonal?.address}
+        value={inputValues?.[objectName]?.address}
+        touched={inputTouched?.[objectName]?.address}
+        error={errorsInputValues?.[objectName]?.address}
         handleChange={changeInputValues}
-        name="registerPersonal.address"
-        id="registerPersonal.address"
+        name={`${objectName}.address`}
+        id={`${objectName}.address`}
         type="text"
         placeholder="Ingresar residencia"
       />
       <FormInput
         label="Email"
-        value={inputValues?.registerPersonal?.email}
-        touched={inputTouched?.registerPersonal?.email}
-        error={errorsInputValues?.registerPersonal?.email}
+        value={inputValues?.[objectName]?.email}
+        touched={inputTouched?.[objectName]?.email}
+        error={errorsInputValues?.[objectName]?.email}
         handleChange={changeInputValues}
-        name="registerPersonal.email"
-        id="registerPersonal.email"
+        name={`${objectName}.email`}
+        id={`${objectName}.email`}
         type="text"
         placeholder="Ingresar email"
       />
       <FormInput
         label="Email alternativo"
-        value={inputValues?.registerPersonal?.altEmail}
-        touched={inputTouched?.registerPersonal?.altEmail}
-        error={errorsInputValues?.registerPersonal?.altEmail}
+        value={inputValues?.[objectName]?.altEmail}
+        touched={inputTouched?.[objectName]?.altEmail}
+        error={errorsInputValues?.[objectName]?.altEmail}
         handleChange={changeInputValues}
-        name="registerPersonal.altEmail"
-        id="registerPersonal.altEmail"
+        name={`${objectName}.altEmail`}
+        id={`${objectName}.altEmail`}
         type="text"
         placeholder="Ingresar email alternativo"
       />
       <FormInput
         label="Contraseña"
-        value={inputValues?.registerPersonal?.password}
-        touched={inputTouched?.registerPersonal?.password}
-        error={errorsInputValues?.registerPersonal?.password}
+        value={inputValues?.[objectName]?.password}
+        touched={inputTouched?.[objectName]?.password}
+        error={errorsInputValues?.[objectName]?.password}
         handleChange={changeInputValues}
-        name="registerPersonal.password"
-        id="registerPersonal.password"
+        name={`${objectName}.password`}
+        id={`${objectName}.password`}
         type="password"
         placeholder="Ingresar contraseña"
       />
     </SectionFormContainer>
   );
 }
-export default FormRegisterPersonalData
+export default FormRegisterPersonalData;

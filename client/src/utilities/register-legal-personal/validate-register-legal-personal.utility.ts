@@ -15,7 +15,7 @@ export const validateRegisterLegalPersonal = ({
     phoneNumber: /^\d+$/,
     email: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
     cuit: /^\d{11}$/,
-    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(.{10,})$/,
+    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!.])(.{10,})$/,
   };
 
   if (!companyName?.trim().length) errors.companyName = "No puede estar vacio";

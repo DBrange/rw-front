@@ -48,7 +48,7 @@ function AllRegisterPages() {
       />
       <FormOpenClose
         formName="Tipo de usuario"
-        isActive={page === 1}
+        isActive={page === 1 && userType.client}
         form={
           <BtnChoice
             buttons={[
@@ -61,6 +61,27 @@ function AllRegisterPages() {
                 value: "legalPersonal",
                 label: "Persona juridica",
                 active: userActive.legalPersonal,
+              },
+            ]}
+            changeForm={changeForm}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Tipo de usuario"
+        isActive={page === 1 && userType.broker}
+        form={
+          <BtnChoice
+            buttons={[
+              {
+                value: "personal",
+                label: "Persona particular",
+                active: brokerActive.personal,
+              },
+              {
+                value: "legalPersonal",
+                label: "Persona juridica",
+                active: brokerActive.legalPersonal,
               },
             ]}
             changeForm={changeForm}
@@ -103,6 +124,7 @@ function AllRegisterPages() {
               inputTouched={inputTouched}
               errorsInputValues={errorsInputValues}
               changeSelectValues={changeSelectValues}
+              objectName="registerPersonal"
             />
           </>
         }
@@ -116,6 +138,7 @@ function AllRegisterPages() {
             inputValues={inputValues}
             inputTouched={inputTouched}
             errorsInputValues={errorsInputValues}
+            objectName="registerLegalPersonal"
           />
         }
       />

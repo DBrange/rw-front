@@ -1,7 +1,7 @@
 import { ChangeEventType, SelectEventType } from "@/pages";
 import { ErrorsRegisterValues, RegisterValues, TouchedRegisterValues } from "@/pages/public/Register";
 import { SectionFormContainer } from "@/styledComponents";
-import { FormRegisterPersonalData } from "..";
+import { FormInput, FormRegisterPersonalData } from "..";
 interface Props {
   changeInputValues: (e: ChangeEventType) => void;
   inputValues: RegisterValues;
@@ -24,8 +24,19 @@ function FormBrokerPersonalData({
         inputTouched={inputTouched}
         errorsInputValues={errorsInputValues}
         changeSelectValues={changeSelectValues}
+        objectName="registerBrokerPersonal"
       />
-     
+      <FormInput
+        label="Matricula"
+        value={inputValues?.registerBrokerPersonal?.enrollment}
+        touched={inputTouched?.registerBrokerPersonal?.enrollment}
+        error={errorsInputValues?.registerBrokerPersonal?.enrollment}
+        handleChange={changeInputValues}
+        name={`registerBrokerPersonal.enrollment`}
+        id={`registerBrokerPersonal.enrollment`}
+        type="text"
+        placeholder="Ingresar matricula"
+      />
     </SectionFormContainer>
   );
 }

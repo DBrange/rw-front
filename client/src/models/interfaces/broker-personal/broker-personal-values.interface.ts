@@ -4,10 +4,16 @@ import {
   TouchedRegisterPersonalValues,
 } from "..";
 
-export interface BrokerPersonalValues extends RegisterPersonalValues {}
+export interface BrokerPersonalValues extends RegisterPersonalValues {
+  enrollment: string;
+}
 
 export interface ErrorsBrokerPersonalValues
-  extends ErrorsRegisterPersonalValues {}
+  extends ErrorsRegisterPersonalValues {
+  enrollment: string;
+}
 
 export interface TouchedBrokerPersonalValues
-  extends TouchedRegisterPersonalValues {}
+  extends TouchedRegisterPersonalValues {
+  enrollment: boolean;
+}

@@ -4,11 +4,19 @@ import {
   TouchedRegisterLegalPersonalValues,
 } from "..";
 
-export interface BrokerLegalPersonalValues
-  extends RegisterLegalPersonalValues {}
+export interface BrokerLegalPersonalValues extends RegisterLegalPersonalValues {
+  enrollment: string;
+  businessName: string;
+}
 
 export interface ErrorsBrokerLegalPersonalValues
-  extends ErrorsRegisterLegalPersonalValues {}
+  extends ErrorsRegisterLegalPersonalValues {
+  enrollment: string;
+  businessName: string;
+}
 
 export interface TouchedBrokerLegalPersonalValues
-  extends TouchedRegisterLegalPersonalValues {}
+  extends TouchedRegisterLegalPersonalValues {
+  enrollment: boolean;
+  businessName: boolean;
+}

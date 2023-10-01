@@ -7,6 +7,7 @@ interface Props {
   inputValues: RegisterValues;
   inputTouched: TouchedRegisterValues;
   errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
+  objectName: "registerLegalPersonal" | "registerBrokerLegalPersonal";
 }
 
 function FormRegisterLegalPersonalData({
@@ -14,83 +15,84 @@ function FormRegisterLegalPersonalData({
   inputValues,
   inputTouched,
   errorsInputValues,
+  objectName,
 }: Props) {
   return (
     <SectionFormContainer>
       <FormInput
         label="Nombre de la compañia*"
-        value={inputValues?.registerLegalPersonal?.companyName}
-        touched={inputTouched?.registerLegalPersonal?.companyName}
-        error={errorsInputValues?.registerLegalPersonal?.companyName}
+        value={inputValues?.[objectName]?.companyName}
+        touched={inputTouched?.[objectName]?.companyName}
+        error={errorsInputValues?.[objectName]?.companyName}
         handleChange={changeInputValues}
-        name="registerLegalPersonal.companyName"
-        id="registerLegalPersonal.companyName"
+        name={`${objectName}.companyName`}
+        id={`${objectName}.companyName`}
         type="text"
         placeholder="Ingresar nombre de la compañia"
       />
       <FormInput
         label="CUIT*"
-        value={inputValues?.registerLegalPersonal?.cuit}
-        touched={inputTouched?.registerLegalPersonal?.cuit}
-        error={errorsInputValues?.registerLegalPersonal?.cuit}
+        value={inputValues?.[objectName]?.cuit}
+        touched={inputTouched?.[objectName]?.cuit}
+        error={errorsInputValues?.[objectName]?.cuit}
         handleChange={changeInputValues}
-        name="registerLegalPersonal.cuit"
-        id="registerLegalPersonal.cuit"
+        name={`${objectName}.cuit`}
+        id={`${objectName}.cuit`}
         type="text"
         placeholder="Ingresar CUIT"
       />
       <FormInput
         label="Numero telefonico*"
-        value={inputValues?.registerLegalPersonal?.phoneNumber}
-        touched={inputTouched?.registerLegalPersonal?.phoneNumber}
-        error={errorsInputValues?.registerLegalPersonal?.phoneNumber}
+        value={inputValues?.[objectName]?.phoneNumber}
+        touched={inputTouched?.[objectName]?.phoneNumber}
+        error={errorsInputValues?.[objectName]?.phoneNumber}
         handleChange={changeInputValues}
-        name="registerLegalPersonal.phoneNumber"
-        id="registerLegalPersonal.phoneNumber"
+        name={`${objectName}.phoneNumber`}
+        id={`${objectName}.phoneNumber`}
         type="text"
         placeholder="Ingresar numero telefonico"
       />
       <FormInput
         label="Direccion*"
-        value={inputValues?.registerLegalPersonal?.address}
-        touched={inputTouched?.registerLegalPersonal?.address}
-        error={errorsInputValues?.registerLegalPersonal?.address}
+        value={inputValues?.[objectName]?.address}
+        touched={inputTouched?.[objectName]?.address}
+        error={errorsInputValues?.[objectName]?.address}
         handleChange={changeInputValues}
-        name="registerLegalPersonal.address"
-        id="registerLegalPersonal.address"
+        name={`${objectName}.address`}
+        id={`${objectName}.address`}
         type="text"
         placeholder="Ingresar direccion"
       />{" "}
       <FormInput
         label="Email*"
-        value={inputValues?.registerLegalPersonal?.email}
-        touched={inputTouched?.registerLegalPersonal?.email}
-        error={errorsInputValues?.registerLegalPersonal?.email}
+        value={inputValues?.[objectName]?.email}
+        touched={inputTouched?.[objectName]?.email}
+        error={errorsInputValues?.[objectName]?.email}
         handleChange={changeInputValues}
-        name="registerLegalPersonal.email"
-        id="registerLegalPersonal.email"
+        name={`${objectName}.email`}
+        id={`${objectName}.email`}
         type="text"
         placeholder="Ingresar email"
       />
       <FormInput
         label="Email alternativo"
-        value={inputValues?.registerLegalPersonal?.altEmail}
-        touched={inputTouched?.registerLegalPersonal?.altEmail}
-        error={errorsInputValues?.registerLegalPersonal?.altEmail}
+        value={inputValues?.[objectName]?.altEmail}
+        touched={inputTouched?.[objectName]?.altEmail}
+        error={errorsInputValues?.[objectName]?.altEmail}
         handleChange={changeInputValues}
-        name="registerLegalPersonal.altEmail"
-        id="registerLegalPersonal.altEmail"
+        name={`${objectName}.altEmail`}
+        id={`${objectName}.altEmail`}
         type="text"
         placeholder="Ingresar email alternativo"
       />
       <FormInput
         label="Contraseña"
-        value={inputValues?.registerLegalPersonal?.password}
-        touched={inputTouched?.registerLegalPersonal?.password}
-        error={errorsInputValues?.registerLegalPersonal?.password}
+        value={inputValues?.[objectName]?.password}
+        touched={inputTouched?.[objectName]?.password}
+        error={errorsInputValues?.[objectName]?.password}
         handleChange={changeInputValues}
-        name="registerLegalPersonal.password"
-        id="registerLegalPersonal.password"
+        name={`${objectName}.password`}
+        id={`${objectName}.password`}
         type="password"
         placeholder="Ingresar contraseña"
       />

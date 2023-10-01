@@ -1,5 +1,7 @@
 import { ChildrenType, IUserType, TouchedForms, UserActive } from "@/models";
 import {
+  touchedBrokerLegalPersonalValuesTrue,
+  touchedBrokerPersonalValuesTrue,
   touchedLegalPersonalValuesTrue,
   touchedPersonalValuesTrue,
   validate,
@@ -70,7 +72,10 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
   const changeForm = (e: ClickEventType) => {
     const { value } = e.currentTarget;
 
-    if (value === "personal" || value === "legalPersonal") {
+    if (
+      userType.client &&
+      (value === "personal" || value === "legalPersonal")
+    ) {
       setUserActive({
         personal: value === "personal",
         legalPersonal: value === "legalPersonal",
@@ -80,7 +85,10 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
         client: value === "client",
         broker: value === "broker",
       });
-    } else if (value === "personal" || value === "legalPersonal") {
+    } else if (
+      userType.broker &&
+      (value === "personal" || value === "legalPersonal")
+    ) {
       setBrokerActive({
         personal: value === "personal",
         legalPersonal: value === "legalPersonal",
@@ -89,12 +97,18 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
   };
 
   const partialErrors = () => {
-    const userErrors =
+    const clientErrors =
       (validate(errorsInputValues?.registerPersonal) && page === 2) ||
       (validate(errorsInputValues?.registerLegalPersonal) && page === 2) ||
       (validate(errorsInputValues?.swornDeclaration) && page === 3);
 
-    const errors: boolean = userErrors;
+    const brokerErrors =
+      (validate(errorsInputValues?.registerBrokerPersonal) && page === 2) ||
+      (validate(errorsInputValues?.registerBrokerLegalPersonal) &&
+        page === 2) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 3);
+
+    const errors: boolean = userType.client ? clientErrors : brokerErrors;
     return errors;
   };
 
@@ -103,6 +117,8 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     toucheds =
       (userActive.personal && page === 1 && "personal") ||
       (userActive.legalPersonal && page === 1 && "legalPersonal") ||
+      (brokerActive.personal && page === 1 && "brokerPersonal") ||
+      (brokerActive.legalPersonal && page === 1 && "brokerLegalPersonal") ||
       "";
 
     return toucheds;
@@ -115,6 +131,10 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
       values = touchedPersonalValuesTrue;
     } else if (typeOfToucheds === "legalPersonal") {
       values = touchedLegalPersonalValuesTrue;
+    } else if (typeOfToucheds === "brokerPersonal") {
+      values = touchedBrokerPersonalValuesTrue;
+    } else if (typeOfToucheds === "brokerLegalPersonal") {
+      values = touchedBrokerLegalPersonalValuesTrue;
     }
 
     return values;
@@ -159,6 +179,7 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
           },
         },
         userActive,
+        brokerActive
       })
     );
   };
@@ -193,6 +214,7 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
           },
         },
         userActive,
+        brokerActive,
       })
     );
   };
@@ -227,15 +249,17 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
           },
         },
         userActive,
+        brokerActive,
       })
     );
   };
-  
+
   useEffect(() => {
     setErrorsInputValues(
       validateRegister({
         inputValues,
         userActive,
+        brokerActive,
       })
     );
   }, [page]);
@@ -246,6 +270,7 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
       validateRegister({
         inputValues,
         userActive,
+        brokerActive,
       })
     );
 

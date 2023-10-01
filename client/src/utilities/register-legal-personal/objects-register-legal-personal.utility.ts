@@ -2,11 +2,8 @@ import {
   RegisterLegalPersonalValues,
   TouchedRegisterLegalPersonalValues
 } from "@/models";
-import {
-  emptyLegalPersonalValues,
-  touchedLegalPersonalValues,
-  touchedLegalPersonalValuesTrue,
-} from "@/utilities";
+import { emptyLegalPersonalValues, touchedLegalPersonalValues, touchedLegalPersonalValuesTrue } from "../legalPersonal/objectsLegalPersonal.utility";
+
 
 export const emptyRegisterLegalPersonalValues: RegisterLegalPersonalValues = {
   ...emptyLegalPersonalValues,

@@ -10,6 +10,7 @@ export * from './is-tire';
 export * from './legalPersonal';
 export * from './personal';
 export * from './phone';
+export * from './register-legal-personal';
 export * from './register-personal';
 export * from './subject-manager.utility';
 export * from './theft-electronic';

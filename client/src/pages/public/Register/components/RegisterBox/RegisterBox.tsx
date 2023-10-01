@@ -20,7 +20,7 @@ function RegisterBox() {
       <PageBtn
         changePage={changePage}
         page={page}
-        max={2}
+        max={3}
         errorsInputValues={partialErrors()}
         markedTouches={markedTouches}
       />

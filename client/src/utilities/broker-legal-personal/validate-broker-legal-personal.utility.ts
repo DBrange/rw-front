@@ -11,6 +11,8 @@ export const validateBrokerLegalPersonal = ({
   altEmail,
   address,
   password,
+  enrollment,
+  businessName,
 }: BrokerLegalPersonalValues) => {
   const errors: Partial<ErrorsBrokerLegalPersonalValues> | null = {};
 
@@ -18,7 +20,7 @@ export const validateBrokerLegalPersonal = ({
     phoneNumber: /^\d+$/,
     email: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
     cuit: /^\d{11}$/,
-    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(.{10,})$/,
+    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!.])(.{10,})$/,
   };
 
   if (!companyName?.trim().length) errors.companyName = "No puede estar vacio";
@@ -34,6 +36,9 @@ export const validateBrokerLegalPersonal = ({
   if (!regex.password.test(password))
     errors.password =
       "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
+  if (!enrollment?.trim().length) errors.enrollment = "No puede estar vacio";
+  if (!businessName?.trim().length)
+    errors.businessName = "No puede estar vacio";
 
   return errors;
 };

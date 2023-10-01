@@ -11,7 +11,7 @@ interface Props {
 }
 
 function FormPersonalDetail({ inputPersonalValues }: Props) {
-  const birthDate = inputPersonalValues.birthDate
+  const birthDate = inputPersonalValues?.birthDate
     .split("-")
     .reverse()
     .join("-");
@@ -22,32 +22,32 @@ function FormPersonalDetail({ inputPersonalValues }: Props) {
 
       <DivRenderProperty>
         <H4PropertyValue>Nombre: </H4PropertyValue>
-        {inputPersonalValues.name}
+        {inputPersonalValues?.name}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Apellido: </H4PropertyValue>
-        {inputPersonalValues.lastName}
+        {inputPersonalValues?.lastName}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Numero telefonico: </H4PropertyValue>
-        {inputPersonalValues.phoneNumber}
+        {inputPersonalValues?.phoneNumber}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Sexo: </H4PropertyValue>
-        {inputPersonalValues.gender}
+        {inputPersonalValues?.gender}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Email: </H4PropertyValue>
-        {inputPersonalValues.email}
+        {inputPersonalValues?.email}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Email alternativo: </H4PropertyValue>
-        {inputPersonalValues.altEmail}
+        {inputPersonalValues?.altEmail}
       </DivRenderProperty>
 
       <DivRenderProperty>
@@ -57,12 +57,12 @@ function FormPersonalDetail({ inputPersonalValues }: Props) {
 
       <DivRenderProperty>
         <H4PropertyValue>DNI: </H4PropertyValue>
-        {inputPersonalValues.dni}
+        {inputPersonalValues?.dni}
       </DivRenderProperty>
 
       <DivRenderProperty>
         <H4PropertyValue>Residencia: </H4PropertyValue>
-        {inputPersonalValues.address}
+        {inputPersonalValues?.address}
       </DivRenderProperty>
     </DivRenderPropertys>
   );
