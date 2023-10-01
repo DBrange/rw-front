@@ -8,6 +8,7 @@ interface Props {
   inputTouched: TouchedRegisterValues;
   errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
   objectName: "registerLegalPersonal" | "registerBrokerLegalPersonal";
+  HTMLElement?: JSX.Element
 }
 
 function FormRegisterLegalPersonalData({
@@ -16,6 +17,7 @@ function FormRegisterLegalPersonalData({
   inputTouched,
   errorsInputValues,
   objectName,
+  HTMLElement,
 }: Props) {
   return (
     <SectionFormContainer>
@@ -62,7 +64,8 @@ function FormRegisterLegalPersonalData({
         id={`${objectName}.address`}
         type="text"
         placeholder="Ingresar direccion"
-      />{" "}
+      />
+      {HTMLElement}
       <FormInput
         label="Email*"
         value={inputValues?.[objectName]?.email}

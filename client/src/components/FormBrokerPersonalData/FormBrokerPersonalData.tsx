@@ -1,6 +1,9 @@
 import { ChangeEventType, SelectEventType } from "@/pages";
-import { ErrorsRegisterValues, RegisterValues, TouchedRegisterValues } from "@/pages/public/Register";
-import { SectionFormContainer } from "@/styledComponents";
+import {
+  ErrorsRegisterValues,
+  RegisterValues,
+  TouchedRegisterValues,
+} from "@/pages/public/Register";
 import { FormInput, FormRegisterPersonalData } from "..";
 interface Props {
   changeInputValues: (e: ChangeEventType) => void;
@@ -17,7 +20,7 @@ function FormBrokerPersonalData({
   changeSelectValues,
 }: Props) {
   return (
-    <SectionFormContainer>
+    <>
       <FormRegisterPersonalData
         changeInputValues={changeInputValues}
         inputValues={inputValues}
@@ -25,19 +28,23 @@ function FormBrokerPersonalData({
         errorsInputValues={errorsInputValues}
         changeSelectValues={changeSelectValues}
         objectName="registerBrokerPersonal"
+        HTMLElement={
+          <>
+            <FormInput
+              label="Matricula"
+              value={inputValues?.registerBrokerPersonal?.enrollment}
+              touched={inputTouched?.registerBrokerPersonal?.enrollment}
+              error={errorsInputValues?.registerBrokerPersonal?.enrollment}
+              handleChange={changeInputValues}
+              name={`registerBrokerPersonal.enrollment`}
+              id={`registerBrokerPersonal.enrollment`}
+              type="text"
+              placeholder="Ingresar matricula"
+            />
+          </>
+        }
       />
-      <FormInput
-        label="Matricula"
-        value={inputValues?.registerBrokerPersonal?.enrollment}
-        touched={inputTouched?.registerBrokerPersonal?.enrollment}
-        error={errorsInputValues?.registerBrokerPersonal?.enrollment}
-        handleChange={changeInputValues}
-        name={`registerBrokerPersonal.enrollment`}
-        id={`registerBrokerPersonal.enrollment`}
-        type="text"
-        placeholder="Ingresar matricula"
-      />
-    </SectionFormContainer>
+    </>
   );
 }
 export default FormBrokerPersonalData;

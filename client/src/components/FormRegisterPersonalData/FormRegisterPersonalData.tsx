@@ -1,7 +1,11 @@
 import { SectionFormContainer } from "@/styledComponents";
 import { FormInput, FormSelect } from "..";
 import { ChangeEventType, SelectEventType } from "@/pages";
-import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "@/pages/public/Register";
+import {
+  RegisterValues,
+  TouchedRegisterValues,
+  ErrorsRegisterValues,
+} from "@/pages/public/Register";
 
 interface Props {
   changeInputValues: (e: ChangeEventType) => void;
@@ -10,6 +14,7 @@ interface Props {
   errorsInputValues: Partial<ErrorsRegisterValues> | undefined;
   changeSelectValues: (e: SelectEventType) => void;
   objectName: "registerPersonal" | "registerBrokerPersonal";
+  HTMLElement?: JSX.Element;
 }
 function FormRegisterPersonalData({
   changeInputValues,
@@ -18,6 +23,7 @@ function FormRegisterPersonalData({
   errorsInputValues,
   changeSelectValues,
   objectName,
+  HTMLElement,
 }: Props) {
   return (
     <SectionFormContainer>
@@ -97,6 +103,7 @@ function FormRegisterPersonalData({
         type="text"
         placeholder="Ingresar residencia"
       />
+      {HTMLElement}
       <FormInput
         label="Email"
         value={inputValues?.[objectName]?.email}
