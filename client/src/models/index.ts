@@ -2,6 +2,8 @@ export * from './interfaces/all-crash-vehicles';
 export * from './interfaces/all-third-party-injured';
 export * from './interfaces/brand-electronic';
 export * from './interfaces/brand-vehicle';
+export * from './interfaces/broker-legal-personal';
+export * from './interfaces/broker-personal';
 export * from './interfaces/crash-vehicle';
 export * from './interfaces/electronic';
 export * from './interfaces/fire-vehicle';

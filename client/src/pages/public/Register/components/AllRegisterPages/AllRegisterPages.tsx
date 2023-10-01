@@ -1,4 +1,4 @@
-import { BtnChoice, FormBrokerPersonalData, FormLegalPersonalData, FormOpenClose, FormPersonalData, FormSwornDeclaration } from "@/components";
+import { BtnChoice, FormBrokerLegalPersonalData, FormBrokerPersonalData, FormLegalPersonalData, FormOpenClose, FormPersonalData, FormSwornDeclaration } from "@/components";
 import { FormAllDetailsRegister, useRegisterContext } from "../..";
 
 function AllRegisterPages() {
@@ -73,9 +73,9 @@ function AllRegisterPages() {
       />
       <FormOpenClose
         formName="Persona juridica"
-        isActive={userActive.legalPersonal && page === 2 && userType.client}
+        isActive={userActive.legalPersonal && page === 2 && userType.broker}
         form={
-          <FormLegalPersonalData
+          <FormBrokerLegalPersonalData
             changeInputValues={changeInputValues}
             inputValues={inputValues}
             inputTouched={inputTouched}
