@@ -10,7 +10,7 @@ import {
 } from "./styledComponents";
 import { ClientInspections } from "./pages/private/client/ClientInspections";
 import LoginBtn from "./components/LoginBtn/LoginBtn";
-import { ClientReports } from "./pages/private";
+import { ClientCreateReport, ClientReports } from "./pages/private";
 import { Register } from "./pages/public/Register";
 
 const Home = lazy(() => import("./pages/public/Home/Home"));
@@ -38,6 +38,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/registrarse" element={<Register />} />
             <Route path="/dashboard/cliente" element={<ClientUser />} />
+            <Route path="/dashboard/cliente/crear-denuncia" element={<ClientCreateReport />} />
             <Route
               path="/dashboard/cliente/inspecciones"
               element={<ClientInspections />}

@@ -1,18 +1,24 @@
 import {
   AllReportValues,
   ChangeEventType,
+  ClientCreateReportValues,
   ErrorsAllReportValues,
+  ErrorsClientCreateReportValues,
   SelectEventType,
   TouchedAllReportValues,
+  TouchedClientCreateReportValues,
 } from "@/pages";
 import { FormInput, FormSelect, FormTitle } from "..";
 import { DivSeparator } from "./FormThirdPartyInjured.styled";
 import { SectionFormContainer } from "@/styledComponents";
 
 interface Props {
-  inputValues: AllReportValues;
-  inputTouched: TouchedAllReportValues;
-  errorsInputValues: Partial<ErrorsAllReportValues> | undefined;
+  inputValues: AllReportValues | ClientCreateReportValues;
+  inputTouched: TouchedAllReportValues | TouchedClientCreateReportValues;
+  errorsInputValues:
+    | Partial<ErrorsAllReportValues>
+    | Partial<ErrorsClientCreateReportValues>
+    | undefined;
   changeInputValues: (e: ChangeEventType) => void;
   changeSelectValues: (e: SelectEventType) => void;
   amountInjured: number;

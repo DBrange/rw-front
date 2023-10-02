@@ -12,23 +12,23 @@ function FormAllDetailsRegister({ user, inputValues }: Props) {
   const fieldsToRender = (user: UserActive) => {
     let elementsToRender: JSX.Element[] = [];
 
-    if (user.personal) {
-      elementsToRender = [
-        ...elementsToRender,
-        <FormPersonalDetail
-          key={1}
-          inputPersonalValues={inputValues.personal}
-        />,
-      ];
-    } else {
-      elementsToRender = [
-        ...elementsToRender,
-        <FormLegalPersonalDetail
-          key={2}
-          inputLegalPersonalValues={inputValues.legalPersonal}
-        />,
-      ];
-    }
+    // if (user.personal) {
+    //   elementsToRender = [
+    //     ...elementsToRender,
+    //     <FormPersonalDetail
+    //       key={1}
+    //       inputPersonalValues={inputValues.personal}
+    //     />,
+    //   ];
+    // } else {
+    //   elementsToRender = [
+    //     ...elementsToRender,
+    //     <FormLegalPersonalDetail
+    //       key={2}
+    //       inputLegalPersonalValues={inputValues.legalPersonal}
+    //     />,
+    //   ];
+    // }
 
     return elementsToRender;
   };

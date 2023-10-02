@@ -2,8 +2,11 @@ import {
   AllReportValues,
   ChangeEventTextAreaType,
   ChangeEventType,
+  ClientCreateReportValues,
   ErrorsAllReportValues,
+  ErrorsClientCreateReportValues,
   TouchedAllReportValues,
+  TouchedClientCreateReportValues,
 } from "@/pages";
 import { useState } from "react";
 import {
@@ -17,9 +20,12 @@ import {
 import { SectionFormContainer } from "@/styledComponents";
 
 interface Props {
-  inputValues: AllReportValues;
-  inputTouched: TouchedAllReportValues;
-  errorsInputValues: Partial<ErrorsAllReportValues> | undefined;
+  inputValues: AllReportValues | ClientCreateReportValues;
+  inputTouched: TouchedAllReportValues | TouchedClientCreateReportValues;
+  errorsInputValues:
+    | Partial<ErrorsAllReportValues>
+    | Partial<ErrorsClientCreateReportValues>
+    | undefined;
   changeInputValues: (e: ChangeEventType) => void;
   changeInputForCheckbox: (e: ChangeEventType) => void;
   changeInputForImages: (e: ChangeEventType, images: string[]) => void;

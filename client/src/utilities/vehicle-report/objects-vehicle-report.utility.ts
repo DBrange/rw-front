@@ -27,12 +27,12 @@ export const touchedVehicleReportValues: TouchedVehicleReportValues = {
 };
 
 export const touchedVehicleReportValuesTrue: TouchedVehicleReportValues = {
-  year: false,
-  color: false,
-  images: false,
-  plate: false,
-  brand: false,
-  model: false,
-  fuel: false,
-  type: false,
+  year: true,
+  color: true,
+  images: true,
+  plate: true,
+  brand: true,
+  model: true,
+  fuel: true,
+  type: true,
 };
