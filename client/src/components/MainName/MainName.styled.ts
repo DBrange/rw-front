@@ -2,11 +2,19 @@ import { theme } from "@/styledComponents";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const DivMainName = styled.div`
-  /* position: relative;
+export const DivMainName = styled.div<{ $public?: boolean }>`
+  ${({ $public }) =>
+    $public
+      ? `   
+    position: static;
+    max-width: 260px;
+    justify-content: space-evenly;`
+      : `  
+  position: relative;
   max-width: 100%;
-  justify-content: center; */
-  white-space: nowrap;
+  justify-content: center;
+  white-space: nowrap;`}
+
   width: 100%;
   padding: 2rem 1rem;
   gap: 0rem;
@@ -14,10 +22,10 @@ export const DivMainName = styled.div`
   display: flex; /* Agregamos esta propiedad */
   align-items: center;
 
-  position: static;
-  max-width: 260px;
-  justify-content: space-evenly;
   @media (min-width: 800px) {
+    position: static;
+    max-width: 260px;
+    justify-content: space-evenly;
   }
 `;
 
@@ -27,7 +35,7 @@ export const BtnMainName = styled.button<{ $public?: boolean }>`
   top: 50%;
   left: 1rem;
   transform: translateY(-50%);
-  display: ${({ $public }) => $public ? 'none' : 'flex'};
+  display: ${({ $public }) => ($public ? "none" : "flex")};
   justify-content: center;
   align-items: center;
   background-color: transparent;

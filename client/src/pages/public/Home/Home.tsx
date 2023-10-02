@@ -90,7 +90,7 @@ function Home() {
                 Podras realizar tus<SpanHome> DENUNCIAS</SpanHome> de robo, incendio o choque de la forma
                 mas sencilla y rapida<SpanHome>.</SpanHome>
               </H3Home>
-              <LinkNavigate to="/denuncia">
+              <LinkNavigate to="/denunciar">
                 <DivBtnHome>
                   <BtnHome>Denunciar</BtnHome>
                 </DivBtnHome>
@@ -107,7 +107,7 @@ function Home() {
                 <SpanHome> ASEGURAR</SpanHome> de la forma mas sencilla y rapida tus electrodomesticos  o vehiculos
                 <SpanHome>.</SpanHome>
               </H3Home>
-              <LinkNavigate to="/inspeccion">
+              <LinkNavigate to="/inspeccionar">
                 <DivBtnHome>
                   <BtnHome>Inspeccionar</BtnHome>
                 </DivBtnHome>

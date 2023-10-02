@@ -34,7 +34,7 @@ function Sidebar() {
         <UlSidebarList>
           <LiSidebarItem>
             <MdOutlineDashboard size={20} />
-            <LinkNavigate to="/dashboard_client/inspecciones">
+            <LinkNavigate to="/dashboard/cliente/inspecciones">
               Inspecciones
             </LinkNavigate>
           </LiSidebarItem>

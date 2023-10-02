@@ -1,5 +1,5 @@
 import { ClientUserProvider } from ".";
-import { InspectLogin, Sidebar } from "../..";
+import { Sidebar } from "../..";
 import { ClientUserContainer } from "./components";
 
 const ClientUser = () => {

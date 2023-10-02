@@ -2,9 +2,9 @@ import { ChildrenType, IUserType, TouchedForms, UserActive } from "@/models";
 import {
   touchedBrokerLegalPersonalValuesTrue,
   touchedBrokerPersonalValuesTrue,
-  touchedLegalPersonalValuesTrue,
-  touchedPersonalValuesTrue,
-  validate,
+  touchedRegisterLegalPersonalValuesTrue,
+  touchedRegisterPersonalValuesTrue,
+  validate
 } from "@/utilities";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
@@ -115,10 +115,12 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
   const typeOfToucheds: () => TouchedForms = () => {
     let toucheds: TouchedForms;
     toucheds =
-      (userActive.personal && page === 1 && "personal") ||
-      (userActive.legalPersonal && page === 1 && "legalPersonal") ||
-      (brokerActive.personal && page === 1 && "brokerPersonal") ||
-      (brokerActive.legalPersonal && page === 1 && "brokerLegalPersonal") ||
+      (userActive.personal && page === 2 && "registerPersonal") ||
+      (userActive.legalPersonal && page === 2 && "registerLegalPersonal") ||
+      (brokerActive.personal && page === 2 && "registerBrokerPersonal") ||
+      (brokerActive.legalPersonal &&
+        page === 2 &&
+        "registerBrokerLegalPersonal") ||
       "";
 
     return toucheds;
@@ -127,13 +129,13 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
   const trueValues = (typeOfToucheds: string) => {
     let values;
 
-    if (typeOfToucheds === "personal") {
-      values = touchedPersonalValuesTrue;
-    } else if (typeOfToucheds === "legalPersonal") {
-      values = touchedLegalPersonalValuesTrue;
-    } else if (typeOfToucheds === "brokerPersonal") {
+    if (typeOfToucheds === "registerPersonal") {
+      values = touchedRegisterPersonalValuesTrue;
+    } else if (typeOfToucheds === "registerLegalPersonal") {
+      values = touchedRegisterLegalPersonalValuesTrue;
+    } else if (typeOfToucheds === "registerBrokerPersonal") {
       values = touchedBrokerPersonalValuesTrue;
-    } else if (typeOfToucheds === "brokerLegalPersonal") {
+    } else if (typeOfToucheds === "registerBrokerLegalPersonal") {
       values = touchedBrokerLegalPersonalValuesTrue;
     }
 
@@ -179,7 +181,7 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
           },
         },
         userActive,
-        brokerActive
+        brokerActive,
       })
     );
   };

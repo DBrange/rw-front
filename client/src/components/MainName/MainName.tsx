@@ -1,4 +1,4 @@
-import { LinkNavigate, LogoText } from "@/styledComponents";
+import { LogoText } from "@/styledComponents";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Logo2 } from "..";
 import {
@@ -14,7 +14,6 @@ import { useLocation } from "react-router-dom";
 function MainName() {
   const path = useLocation().pathname;
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
-  const [displayBtn, setDisplayBtn] = useState<boolean>(false);
 
   useEffect(() => {
     sidebarService.getSubject.subscribe((bol) => setStateOfSidebar(bol));
@@ -26,10 +25,26 @@ function MainName() {
   };
 
   return (
-    <DivMainName>
+    <DivMainName
+      $public={
+        !!(
+          path === "/" ||
+          path === "/denunciar" ||
+          path === "/inspeccionar" ||
+          path === "/login" ||
+          path === "/registrarse"
+        )
+      }
+    >
       <BtnMainName
         $public={
-          !!(path === "/" || path === "/denunciar" || path === "/inspeccionar")
+          !!(
+            path === "/" ||
+            path === "/denunciar" ||
+            path === "/inspeccionar" ||
+            path === "/login" ||
+            path === "/registrarse"
+          )
         }
         onClick={toggleSidebar}
       >

@@ -4,3 +4,4 @@ export * from './components/LoginContainer';
 export * from './components';
 export * from './context';
 export * from './interfaces';
+export * from './utilities';

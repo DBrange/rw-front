@@ -24,7 +24,11 @@ function App() {
     <Suspense fallback={<GlobalLoader />}>
       <Body>
         <Header>
-          <MainName /><LoginBtn />
+          <MainName  />
+
+           
+          <LoginBtn />
+
         </Header>
         <MainContent>
           <Routes>
@@ -36,7 +40,7 @@ function App() {
             <Route path="/dashboard/cliente" element={<ClientUser />} />
             <Route
               path="/dashboard/cliente/inspecciones"
-              element={<ClientInspections/>}
+              element={<ClientInspections />}
             />
             {/* <Route
               path="/dashboard/cliente/inspeccionar"
@@ -53,7 +57,13 @@ function App() {
       </Body>
       <Footer
         $public={
-          !!(path === "/" || path === "/denunciar" || path === "/inspeccionar")
+          !!(
+            path === "/" ||
+            path === "/denunciar" ||
+            path === "/inspeccionar" ||
+            path === "/login" ||
+            path === "/registrarse"
+          )
         }
       />
     </Suspense>

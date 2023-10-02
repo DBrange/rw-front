@@ -23,7 +23,9 @@ function LoginBtn() {
       {!!(
         path === "/" ||
         path === "/denunciar" ||
-        path === "/inspeccionar"
+        path === "/inspeccionar" ||
+        path === "/login" ||
+        path === "/registrarse"
       ) && (
         <LinkNavigate to="/login">
           <BtnLogin>Login</BtnLogin>

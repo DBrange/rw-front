@@ -18,7 +18,7 @@ function LoginBox() {
           name="email"
           id="email"
           type="text"
-          placeholder="Email"
+          placeholder="Ingresar email"
         />
         <FormInput
           label="Contraseña"
@@ -28,13 +28,14 @@ function LoginBox() {
           handleChange={loginData}
           name="password"
           id="password"
-          type="text"
-          placeholder="Contraseña"
+          type="password"
+          placeholder="Ingresar contraseña"
         />
         <BtnLogin>Ingresar</BtnLogin>
         <DivNoRegister>
-          <H6NoRegister> 
-            ¿Aun no estas registrado? <SpanNoRegister to='/registrarse'>Registrate aqui</SpanNoRegister>
+          <H6NoRegister>
+            ¿Aun no estas registrado?{" "}
+            <SpanNoRegister to="/registrarse">Registrate aqui</SpanNoRegister>
           </H6NoRegister>
         </DivNoRegister>
       </SectionLoginBox>
