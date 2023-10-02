@@ -3,10 +3,14 @@ import {
   FormCrashVehicle,
   FormFireVehicle,
   FormOpenClose,
+  FormSwornDeclaration,
   FormTheftElectronic,
   FormTheftVehicle,
 } from "@/components";
-import { useClientInspectedCreateReportContext } from "../..";
+import {
+  FormAllDetailsClientInspectedCreateReport,
+  useClientInspectedCreateReportContext,
+} from "../..";
 
 function AllClientInspectedCreateReportPages() {
   const {
@@ -18,7 +22,6 @@ function AllClientInspectedCreateReportPages() {
     changeInputValues,
     inputTouched,
     errorsInputValues,
-    changeSelectValues,
     changeInputForCheckbox,
     changeInputForImages,
     changeInputForSchedule,
@@ -163,13 +166,12 @@ function AllClientInspectedCreateReportPages() {
 
       {creatingThirdPartyVehicleContainer()}
 
-      {/* <FormOpenClose
+      <FormOpenClose
         formName="Detalle"
         isActive={page === correspondingPage}
         form={
           <>
-            <FormAllDetailsReport
-              user={userActive}
+            <FormAllDetailsClientInspectedCreateReport
               element={elementReportActive}
               report={reportActive}
               inputValues={inputValues}
@@ -184,7 +186,7 @@ function AllClientInspectedCreateReportPages() {
             />
           </>
         }
-      /> */}
+      />
     </>
   );
 }

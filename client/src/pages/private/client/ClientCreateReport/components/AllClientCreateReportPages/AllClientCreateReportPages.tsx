@@ -9,7 +9,7 @@ import {
   FormTheftVehicle,
   FormVehicleReportData
 } from "@/components";
-import { useClientCreateReportContext } from "../..";
+import { FormAllDetailsClientCreateReport, useClientCreateReportContext } from "../..";
 
 
 function AllClientCreateReportPages() {
@@ -217,13 +217,12 @@ function AllClientCreateReportPages() {
 
       {creatingThirdPartyVehicleContainer()}
 
-      {/* <FormOpenClose
+      <FormOpenClose
         formName="Detalle"
         isActive={page === correspondingPage}
         form={
           <>
-            <FormAllDetailsReport
-              user={userActive}
+            <FormAllDetailsClientCreateReport
               element={elementReportActive}
               report={reportActive}
               inputValues={inputValues}
@@ -238,7 +237,7 @@ function AllClientCreateReportPages() {
             />
           </>
         }
-      /> */}
+      />
     </>
   );
 }
