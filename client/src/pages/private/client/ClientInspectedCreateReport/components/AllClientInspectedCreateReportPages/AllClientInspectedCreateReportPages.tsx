@@ -1,18 +1,14 @@
 import {
   BtnChoice,
   FormCrashVehicle,
-  FormElectronicData,
   FormFireVehicle,
   FormOpenClose,
-  FormSwornDeclaration,
   FormTheftElectronic,
   FormTheftVehicle,
-  FormVehicleReportData
 } from "@/components";
-import { useClientCreateReportContext } from "../..";
+import { useClientInspectedCreateReportContext } from "../..";
 
-
-function AllClientCreateReportPages() {
+function AllClientInspectedCreateReportPages() {
   const {
     elementReportActive,
     reportActive,
@@ -32,45 +28,24 @@ function AllClientCreateReportPages() {
     amountInjured,
     amountVehicles,
     changeInputValuesNumber,
-  } = useClientCreateReportContext();
+  } = useClientInspectedCreateReportContext();
 
   const correspondingPage =
     amountInjured > 0 && amountVehicles > 0 && reportActive.crash
-      ? 6
+      ? 4
       : amountInjured > 0 && reportActive.fire
-      ? 5
+      ? 3
       : amountInjured < 1 && amountVehicles > 0 && reportActive.crash
-      ? 5
+      ? 3
       : amountInjured > 0 && amountVehicles < 1 && reportActive.crash
-      ? 5
-      : 4;
+      ? 3
+      : 2;
 
   return (
     <>
       <FormOpenClose
         formName="Tipo de denuncia"
-        isActive={page === 0}
-        form={
-          <BtnChoice
-            buttons={[
-              {
-                value: "vehicleReport",
-                label: "Vehiculo",
-                active: elementReportActive.vehicleReport,
-              },
-              {
-                value: "electronic",
-                label: "Electrodomestico",
-                active: elementReportActive.electronic,
-              },
-            ]}
-            changeForm={changeForm}
-          />
-        }
-      />
-      <FormOpenClose
-        formName="Tipo de denuncia"
-        isActive={elementReportActive.vehicleReport && page === 2}
+        isActive={elementReportActive.vehicleReport && page === 0}
         form={
           <BtnChoice
             buttons={[
@@ -96,7 +71,7 @@ function AllClientCreateReportPages() {
       />
       <FormOpenClose
         formName="Tipo de denuncia"
-        isActive={elementReportActive.electronic && page === 2}
+        isActive={elementReportActive.electronic && page === 0}
         form={
           <BtnChoice
             buttons={[
@@ -111,38 +86,9 @@ function AllClientCreateReportPages() {
         }
       />
       <FormOpenClose
-        formName="Vehiculo"
-        isActive={elementReportActive.vehicleReport && page === 1}
-        form={
-          <FormVehicleReportData
-            changeInputValues={changeInputValues}
-            inputValues={inputValues}
-            inputTouched={inputTouched}
-            errorsInputValues={errorsInputValues}
-            changeSelectValues={changeSelectValues}
-            changeInputForCheckbox={changeInputForCheckbox}
-            changeInputForImages={changeInputForImages}
-            changeInputValuesNumber={changeInputValuesNumber}
-          />
-        }
-      />
-      <FormOpenClose
-        formName="Electrodomestico"
-        isActive={elementReportActive.electronic && page === 1}
-        form={
-          <FormElectronicData
-            changeInputValues={changeInputValues}
-            inputValues={inputValues}
-            inputTouched={inputTouched}
-            errorsInputValues={errorsInputValues}
-            changeSelectValues={changeSelectValues}
-          />
-        }
-      />
-      <FormOpenClose
         formName="Robo"
         isActive={
-          elementReportActive.vehicleReport && reportActive.theft && page === 3
+          elementReportActive.vehicleReport && reportActive.theft && page === 1
         }
         form={
           <FormTheftVehicle
@@ -160,7 +106,7 @@ function AllClientCreateReportPages() {
       <FormOpenClose
         formName="Robo"
         isActive={
-          elementReportActive.electronic && reportActive.theft && page === 3
+          elementReportActive.electronic && reportActive.theft && page === 1
         }
         form={
           <FormTheftElectronic
@@ -177,7 +123,7 @@ function AllClientCreateReportPages() {
       <FormOpenClose
         formName="Incendio"
         isActive={
-          elementReportActive.vehicleReport && reportActive.fire && page === 3
+          elementReportActive.vehicleReport && reportActive.fire && page === 1
         }
         form={
           <FormFireVehicle
@@ -196,7 +142,7 @@ function AllClientCreateReportPages() {
       <FormOpenClose
         formName="Crash"
         isActive={
-          elementReportActive.vehicleReport && reportActive.crash && page === 3
+          elementReportActive.vehicleReport && reportActive.crash && page === 1
         }
         form={
           <FormCrashVehicle
@@ -242,5 +188,4 @@ function AllClientCreateReportPages() {
     </>
   );
 }
-export default AllClientCreateReportPages;
-
+export default AllClientInspectedCreateReportPages;

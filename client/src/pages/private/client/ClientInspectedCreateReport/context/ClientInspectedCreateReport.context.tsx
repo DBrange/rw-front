@@ -17,8 +17,8 @@ import {
   ChangeEventTextAreaType,
   ChangeEventType,
   ClickEventType,
-  ClientCreateReportValues,
-  ErrorsClientCreateReportValues,
+  ClientInspectedCreateReportValues,
+  ErrorsClientInspectedCreateReportValues,
   LegalPersonalElectronicTheftUrl,
   LegalPersonalVehicleCrashUrl,
   LegalPersonalVehicleFireUrl,
@@ -29,7 +29,7 @@ import {
   PersonalVehicleTheftUrl,
   SelectEventType,
   SubmitEventType,
-  TouchedClientCreateReportValues,
+  TouchedClientInspectedCreateReportValues,
   addReportLegalElectronicTheft,
   addReportLegalPersonalVehicleFire,
   addReportLegalPersonalVehicleTheft,
@@ -39,6 +39,7 @@ import {
   addReportPersonalVehicleFire,
   addReportPersonalVehicleTheft,
   validateClientCreateReport,
+  validateClientInspectedCreateReport,
 } from "@/pages";
 import {
   touchedAllCrashVehiclesValuesTrue,
@@ -57,13 +58,13 @@ import {
 import { createContext, useContext, useEffect, useState } from "react";
 import useSWRMutation from "swr/mutation";
 import {
-  emptyClientCreateReportValues,
-  touchedClientCreateReportValues,
-} from "../../../utilities/client-create-report/objects-client-create-report.utility";
+  emptyClientInspectedCreateReportValues,
+  touchedClientInspectedCreateReportValues,
+} from "../../../utilities/client-inspected-create-report/objects-client-inspected-create-report";
 import {
-  IClientCreateReportContext,
-  emptyClientCreateReportContext,
-} from "./empty-ClientCreatesReport-context";
+  IClientInspectedCreateReportContext,
+  emptyClientInspectedCreateReportContext,
+} from "./empty-ClientInspectedCreatesReport-context";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
 type onlyLicensePhoto = Pick<ThirdPartyVehicleValues, "licensePhoto">;
@@ -78,20 +79,26 @@ type onlyGender = Pick<ThirdPartyInjuredValues, "gender">;
 
 //----------------
 
-const ClientCreateReportContext = createContext<IClientCreateReportContext>(
-  emptyClientCreateReportContext
-);
-
-export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
-  const [inputValues, setInputValues] = useState<ClientCreateReportValues>(
-    emptyClientCreateReportValues
+const ClientInspectedCreateReportContext =
+  createContext<IClientInspectedCreateReportContext>(
+    emptyClientInspectedCreateReportContext
   );
 
+export const ClientInspectedCreateReportProvider = ({
+  children,
+}: ChildrenType) => {
+  const [inputValues, setInputValues] =
+    useState<ClientInspectedCreateReportValues>(
+      emptyClientInspectedCreateReportValues
+    );
+
   const [inputTouched, setInputsTouched] =
-    useState<TouchedClientCreateReportValues>(touchedClientCreateReportValues);
+    useState<TouchedClientInspectedCreateReportValues>(
+      touchedClientInspectedCreateReportValues
+    );
 
   const [errorsInputValues, setErrorsInputValues] = useState<
-    Partial<ErrorsClientCreateReportValues> | undefined
+    Partial<ErrorsClientInspectedCreateReportValues> | undefined
   >(undefined);
 
   const [elementReportActive, setElementReportActive] =
@@ -162,7 +169,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
 
       const reportType = reportActive.fire ? "fire" : "crash";
 
-      return creatingThirdParty("Terceros heridos", 4, reportType, people);
+      return creatingThirdParty("Terceros heridos", 2, reportType, people);
     } else {
       return null;
     }
@@ -189,7 +196,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
         );
       }
 
-      const correspondingPage = amountInjured > 0 ? 5 : 4;
+      const correspondingPage = amountInjured > 0 ? 3 : 2;
 
       return creatingThirdParty(
         "Vehiculo de terceros",
@@ -233,214 +240,117 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
   };
 
   const partialErrors = (): boolean => {
-    const withoutGncPhoneErrors: boolean =
-      (validate(errorsInputValues?.vehicleReport) && page === 1) ||
-      (validate(errorsInputValues?.electronic) && page === 1);
-
-    const withGncErrors: boolean =
-      (validate(errorsInputValues?.gnc) ||
-        validate(errorsInputValues?.vehicleReport)) &&
-      page === 1;
-
-    const withPhoneErrors: boolean =
-      (validate(errorsInputValues?.phone) ||
-        validate(errorsInputValues?.electronic)) &&
-      page === 1;
-
     const withoutTireTheftErrors: boolean =
-      (validate(errorsInputValues?.theftVehicle) && page === 3) ||
+      (validate(errorsInputValues?.theftVehicle) && page === 1) ||
       // (validate(errorsInputValues?.theftElectronic) && page === 3) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 4);
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
 
     const electronicTheft: boolean =
-      (validate(errorsInputValues?.theftElectronic) && page === 3) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 4);
+      (validate(errorsInputValues?.theftElectronic) && page === 1) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
 
     const withTireTheftErrors: boolean =
       ((validate(errorsInputValues?.theftVehicle) ||
         validate(errorsInputValues?.isTire)) &&
-        page === 3) ||
+        page === 1) ||
       // ((validate(errorsInputValues?.theftElectronic) ||
       //   validate(errorsInputValues?.isTire)) &&
-      //   page === 3) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 4);
+      //   page === 1) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
 
     const withoutThirdPartyInjuredFireErrors: boolean =
-      (validate(errorsInputValues?.fire) && page === 3) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 4);
+      (validate(errorsInputValues?.fire) && page === 1) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
 
     const withThirdPartyInjuredFireErrors: boolean =
-      (validate(errorsInputValues?.fire) && page === 3) ||
+      (validate(errorsInputValues?.fire) && page === 1) ||
       (errorsInputValues?.thirdPartyInjured?.injuredInfo
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
-        page === 4) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 5);
+        page === 2) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 3);
 
     const withoutThirdPartyInjuredAndVehicleCrashErrors: boolean =
-      (validate(errorsInputValues?.crash) && page === 3) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 4);
+      (validate(errorsInputValues?.crash) && page === 1) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
 
     const withThirdPartyInjuredCrashErrors: boolean =
-      (validate(errorsInputValues?.crash) && page === 3) ||
+      (validate(errorsInputValues?.crash) && page === 1) ||
       (errorsInputValues?.thirdPartyInjured?.injuredInfo
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
-        page === 4) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 5);
+        page === 2) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 3);
 
     const withThirdPartyVehicleCrashErrors: boolean =
-      (validate(errorsInputValues?.crash) && page === 3) ||
+      (validate(errorsInputValues?.crash) && page === 1) ||
       (errorsInputValues?.thirdPartyVehicle?.thirdPartyVehicleInfo
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
-        page === 4) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 5);
+        page === 2) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 3);
 
     const withThirdPartyInjuredAndVehicleCrashErrors: boolean =
-      (validate(errorsInputValues?.crash) && page === 3) ||
+      (validate(errorsInputValues?.crash) && page === 1) ||
       (errorsInputValues?.thirdPartyInjured?.injuredInfo
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
-        page === 4) ||
+        page === 2) ||
       (errorsInputValues?.thirdPartyVehicle?.thirdPartyVehicleInfo
         ?.map((el) => validate(el))
         .some((el) => el === true) &&
-        page === 5) ||
-      (validate(errorsInputValues?.swornDeclaration) && page === 6);
+        page === 3) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 4);
 
     let errors: boolean = false;
 
     if (elementReportActive.vehicleReport) {
       //theft vehicle
-      if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.theft &&
-        !inputValues.theftVehicle.isTire
-      ) {
-        errors = withoutGncPhoneErrors || withoutTireTheftErrors;
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.theft &&
-        !inputValues.theftVehicle.isTire
-      ) {
-        errors = withGncErrors || withoutTireTheftErrors;
-      } else if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.theft &&
-        inputValues.theftVehicle.isTire
-      ) {
-        errors = withoutGncPhoneErrors || withTireTheftErrors;
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.theft &&
-        inputValues.theftVehicle.isTire
-      ) {
-        errors = withGncErrors || withTireTheftErrors;
+      if (reportActive.theft && !inputValues.theftVehicle.isTire) {
+        errors = withoutTireTheftErrors;
+      } else if (reportActive.theft && !inputValues.theftVehicle.isTire) {
+        errors = withoutTireTheftErrors;
+      } else if (!reportActive.theft && inputValues.theftVehicle.isTire) {
+        errors = withTireTheftErrors;
+      } else if (reportActive.theft && inputValues.theftVehicle.isTire) {
+        errors = withTireTheftErrors;
       }
 
       //fire vehicle
-      if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.fire &&
-        !amountInjured
-      ) {
-        errors = withoutGncPhoneErrors || withoutThirdPartyInjuredFireErrors;
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.fire &&
-        !amountInjured
-      ) {
-        errors = withGncErrors || withoutThirdPartyInjuredFireErrors;
-      } else if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.fire &&
-        amountInjured
-      ) {
-        errors = withoutGncPhoneErrors || withThirdPartyInjuredFireErrors;
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.fire &&
-        amountInjured
-      ) {
-        errors = withGncErrors || withThirdPartyInjuredFireErrors;
+      if (!reportActive.fire && !amountInjured) {
+        errors = withoutThirdPartyInjuredFireErrors;
+      } else if (reportActive.fire && !amountInjured) {
+        errors = withoutThirdPartyInjuredFireErrors;
+      } else if (!reportActive.fire && amountInjured) {
+        errors = withThirdPartyInjuredFireErrors;
+      } else if (reportActive.fire && amountInjured) {
+        errors = withThirdPartyInjuredFireErrors;
       }
 
       //crahs vehicle
-      if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        !amountInjured &&
-        !amountVehicles
-      ) {
-        errors =
-          withoutGncPhoneErrors ||
-          withoutThirdPartyInjuredAndVehicleCrashErrors;
-      } else if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        amountInjured &&
-        !amountVehicles
-      ) {
-        errors = withoutGncPhoneErrors || withThirdPartyInjuredCrashErrors;
-      } else if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        !amountInjured &&
-        amountVehicles
-      ) {
-        errors = withoutGncPhoneErrors || withThirdPartyVehicleCrashErrors;
-      } else if (
-        !inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        amountInjured &&
-        amountVehicles
-      ) {
-        errors =
-          withoutGncPhoneErrors || withThirdPartyInjuredAndVehicleCrashErrors;
+      if (!reportActive.crash && !amountInjured && !amountVehicles) {
+        errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
+      } else if (!reportActive.crash && amountInjured && !amountVehicles) {
+        errors = withThirdPartyInjuredCrashErrors;
+      } else if (!reportActive.crash && !amountInjured && amountVehicles) {
+        errors = withThirdPartyVehicleCrashErrors;
+      } else if (!reportActive.crash && amountInjured && amountVehicles) {
+        errors = withThirdPartyInjuredAndVehicleCrashErrors;
         //abajo
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        amountInjured &&
-        !amountVehicles
-      ) {
-        errors = withGncErrors || withThirdPartyInjuredCrashErrors;
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        !amountInjured &&
-        amountVehicles
-      ) {
-        errors = withGncErrors || withThirdPartyVehicleCrashErrors;
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        amountInjured &&
-        amountVehicles
-      ) {
-        errors = withGncErrors || withThirdPartyInjuredAndVehicleCrashErrors;
-      } else if (
-        inputValues.vehicleReport.gnc &&
-        reportActive.crash &&
-        !amountInjured &&
-        !amountVehicles
-      ) {
-        errors = withGncErrors || withoutThirdPartyInjuredAndVehicleCrashErrors;
+      } else if (reportActive.crash && amountInjured && !amountVehicles) {
+        errors = withThirdPartyInjuredCrashErrors;
+      } else if (reportActive.crash && !amountInjured && amountVehicles) {
+        errors = withThirdPartyVehicleCrashErrors;
+      } else if (reportActive.crash && amountInjured && amountVehicles) {
+        errors = withThirdPartyInjuredAndVehicleCrashErrors;
+      } else if (reportActive.crash && !amountInjured && !amountVehicles) {
+        errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
       }
     } else if (elementReportActive.electronic) {
-      if (
-        !(inputValues.electronic.type === "CELULAR") &&
-        reportActive.theft &&
-        !inputValues.theftElectronic.isTire
-      ) {
-        errors = withoutGncPhoneErrors || electronicTheft;
-      } else if (
-        inputValues.electronic.type === "CELULAR" &&
-        reportActive.theft &&
-        !inputValues.theftElectronic.isTire
-      ) {
-        errors = withPhoneErrors || electronicTheft;
+      if (reportActive.theft && !inputValues.theftElectronic.isTire) {
+        errors = electronicTheft;
+      } else if (reportActive.theft && !inputValues.theftElectronic.isTire) {
+        errors = electronicTheft;
       }
     }
 
@@ -452,25 +362,25 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     toucheds =
       (elementReportActive.vehicleReport && page === 1 && "vehicleReport") ||
       (elementReportActive.electronic && page === 1 && "electronic") ||
-      (reportActive.theft && page === 3 && "theftVehicle") ||
-      (reportActive.theft && page === 3 && "theftElectronic") ||
-      (reportActive.fire && page === 3 && "fire") ||
+      (reportActive.theft && page === 1 && "theftVehicle") ||
+      (reportActive.theft && page === 1 && "theftElectronic") ||
+      (reportActive.fire && page === 1 && "fire") ||
       (reportActive.fire &&
-        page === 4 &&
+        page === 2 &&
         amountInjured > 0 &&
         "thirdPartyInjured") ||
-      (reportActive.crash && page === 3 && "crash") ||
+      (reportActive.crash && page === 1 && "crash") ||
       (reportActive.crash &&
-        page === 4 &&
+        page === 2 &&
         amountInjured > 0 &&
         "thirdPartyInjured") ||
       (reportActive.crash &&
-        page === 4 &&
+        page === 2 &&
         amountInjured < 1 &&
         amountVehicles > 0 &&
         "thirdPartyVehicle") ||
       (reportActive.crash &&
-        page === 5 &&
+        page === 3 &&
         amountInjured > 0 &&
         amountVehicles > 0 &&
         "thirdPartyVehicle") ||
@@ -508,7 +418,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
   const markedTouches = () => {
     if (typeOfToucheds() === "thirdPartyInjured") {
       setInputsTouched({
-        ...touchedClientCreateReportValues,
+        ...touchedClientInspectedCreateReportValues,
         thirdPartyInjured: {
           injuredInfo: inputTouched.thirdPartyInjured.injuredInfo.map(
             () => touchedThirdPartyInjuredTrue
@@ -517,7 +427,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       });
     } else if (typeOfToucheds() === "thirdPartyVehicle") {
       setInputsTouched({
-        ...touchedClientCreateReportValues,
+        ...touchedClientInspectedCreateReportValues,
         thirdPartyVehicle: {
           thirdPartyVehicleInfo:
             inputTouched.thirdPartyVehicle.thirdPartyVehicleInfo.map(
@@ -527,7 +437,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       });
     } else {
       setInputsTouched({
-        ...touchedClientCreateReportValues,
+        ...touchedClientInspectedCreateReportValues,
         [typeOfToucheds()]: {
           ...trueValues(typeOfToucheds()),
         },
@@ -553,7 +463,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputValues({
         ...inputValues,
         [type]: {
-          ...inputValues[type as keyof ClientCreateReportValues],
+          ...inputValues[type as keyof ClientInspectedCreateReportValues],
           [key]: checked,
         },
       });
@@ -561,17 +471,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputsTouched({
         ...inputTouched,
         [type]: {
-          ...inputTouched[type as keyof ClientCreateReportValues],
+          ...inputTouched[type as keyof ClientInspectedCreateReportValues],
           [key]: checked,
         },
       });
 
       setErrorsInputValues(
-        validateClientCreateReport({
+        validateClientInspectedCreateReport({
           inputValues: {
             ...inputValues,
             [type]: {
-              ...inputValues[type as keyof ClientCreateReportValues],
+              ...inputValues[type as keyof ClientInspectedCreateReportValues],
               [key]: checked,
             },
           },
@@ -597,7 +507,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       newVehicle[Number(c)] = vehicle;
 
       setErrorsInputValues(
-        validateClientCreateReport({
+        validateClientInspectedCreateReport({
           inputValues: {
             ...inputValues,
             thirdPartyVehicle: {
@@ -629,7 +539,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputValues({
         ...inputValues,
         [type]: {
-          ...inputValues[type as keyof ClientCreateReportValues],
+          ...inputValues[type as keyof ClientInspectedCreateReportValues],
           [key]: [...images],
         },
       });
@@ -637,17 +547,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputsTouched({
         ...inputTouched,
         [type]: {
-          ...inputTouched[type as keyof ClientCreateReportValues],
+          ...inputTouched[type as keyof ClientInspectedCreateReportValues],
           [key]: [...images],
         },
       });
 
       setErrorsInputValues(
-        validateClientCreateReport({
+        validateClientInspectedCreateReport({
           inputValues: {
             ...inputValues,
             [type]: {
-              ...inputValues[type as keyof ClientCreateReportValues],
+              ...inputValues[type as keyof ClientInspectedCreateReportValues],
               [key]: [...images],
             },
           },
@@ -694,7 +604,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     });
 
     setErrorsInputValues(
-      validateClientCreateReport({
+      validateClientInspectedCreateReport({
         inputValues: {
           ...inputValues,
           thirdPartyVehicle: {
@@ -715,7 +625,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     setInputValues({
       ...inputValues,
       [type]: {
-        ...inputValues[type as keyof ClientCreateReportValues],
+        ...inputValues[type as keyof ClientInspectedCreateReportValues],
         [key]: schedule,
       },
     });
@@ -723,17 +633,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     setInputsTouched({
       ...inputTouched,
       [type]: {
-        ...inputTouched[type as keyof ClientCreateReportValues],
+        ...inputTouched[type as keyof ClientInspectedCreateReportValues],
         [key]: schedule,
       },
     });
 
     setErrorsInputValues(
-      validateClientCreateReport({
+      validateClientInspectedCreateReport({
         inputValues: {
           ...inputValues,
           [type]: {
-            ...inputValues[type as keyof ClientCreateReportValues],
+            ...inputValues[type as keyof ClientInspectedCreateReportValues],
             [key]: schedule,
           },
         },
@@ -750,7 +660,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     setInputValues({
       ...inputValues,
       [type]: {
-        ...inputValues[type as keyof ClientCreateReportValues],
+        ...inputValues[type as keyof ClientInspectedCreateReportValues],
         [key]: value,
       },
     });
@@ -758,17 +668,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     setInputsTouched({
       ...inputTouched,
       [type]: {
-        ...inputTouched[type as keyof ClientCreateReportValues],
+        ...inputTouched[type as keyof ClientInspectedCreateReportValues],
         [key]: true,
       },
     });
 
     setErrorsInputValues(
-      validateClientCreateReport({
+      validateClientInspectedCreateReport({
         inputValues: {
           ...inputValues,
           [type]: {
-            ...inputValues[type as keyof ClientCreateReportValues],
+            ...inputValues[type as keyof ClientInspectedCreateReportValues],
             [key]: value,
           },
         },
@@ -792,7 +702,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       injured[d as keyof withoutGender] = value;
       newInjured[Number(c)] = injured;
       setErrorsInputValues(
-        validateClientCreateReport({
+        validateClientInspectedCreateReport({
           inputValues: {
             ...values,
             thirdPartyInjured: {
@@ -841,7 +751,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       newVehicle[Number(c)] = vehicle;
 
       setErrorsInputValues(
-        validateClientCreateReport({
+        validateClientInspectedCreateReport({
           inputValues: {
             ...inputValues,
             thirdPartyVehicle: {
@@ -1013,7 +923,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputValues({
         ...inputValues,
         [type]: {
-          ...inputValues[type as keyof ClientCreateReportValues],
+          ...inputValues[type as keyof ClientInspectedCreateReportValues],
           [key]: value,
         },
       });
@@ -1021,17 +931,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputsTouched({
         ...inputTouched,
         [type]: {
-          ...inputTouched[type as keyof ClientCreateReportValues],
+          ...inputTouched[type as keyof ClientInspectedCreateReportValues],
           [key]: true,
         },
       });
 
       setErrorsInputValues(
-        validateClientCreateReport({
+        validateClientInspectedCreateReport({
           inputValues: {
             ...inputValues,
             [type]: {
-              ...inputValues[type as keyof ClientCreateReportValues],
+              ...inputValues[type as keyof ClientInspectedCreateReportValues],
               [key]: value,
             },
           },
@@ -1059,7 +969,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     setInputValues({
       ...inputValues,
       [type]: {
-        ...inputValues[type as keyof ClientCreateReportValues],
+        ...inputValues[type as keyof ClientInspectedCreateReportValues],
         [key]: numberValue,
       },
     });
@@ -1067,17 +977,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     setInputsTouched({
       ...inputTouched,
       [type]: {
-        ...inputTouched[type as keyof ClientCreateReportValues],
+        ...inputTouched[type as keyof ClientInspectedCreateReportValues],
         [key]: true,
       },
     });
 
     setErrorsInputValues(
-      validateClientCreateReport({
+      validateClientInspectedCreateReport({
         inputValues: {
           ...inputValues,
           [type]: {
-            ...inputValues[type as keyof ClientCreateReportValues],
+            ...inputValues[type as keyof ClientInspectedCreateReportValues],
             [key]: numberValue,
           },
         },
@@ -1126,7 +1036,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputValues({
         ...inputValues,
         [type]: {
-          ...inputValues[type as keyof ClientCreateReportValues],
+          ...inputValues[type as keyof ClientInspectedCreateReportValues],
           [key]: value,
         },
       });
@@ -1134,17 +1044,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       setInputsTouched({
         ...inputTouched,
         [type]: {
-          ...inputTouched[type as keyof ClientCreateReportValues],
+          ...inputTouched[type as keyof ClientInspectedCreateReportValues],
           [key]: true,
         },
       });
 
       setErrorsInputValues(
-        validateClientCreateReport({
+        validateClientInspectedCreateReport({
           inputValues: {
             ...inputValues,
             [type]: {
-              ...inputValues[type as keyof ClientCreateReportValues],
+              ...inputValues[type as keyof ClientInspectedCreateReportValues],
               [key]: value,
             },
           },
@@ -1239,7 +1149,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     setErrorsInputValues(
-      validateClientCreateReport({
+      validateClientInspectedCreateReport({
         inputValues,
         elementReportActive,
         reportActive,
@@ -1250,7 +1160,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
   const submitValues = (e: SubmitEventType) => {
     e.preventDefault();
     setErrorsInputValues(
-      validateClientCreateReport({
+      validateClientInspectedCreateReport({
         inputValues,
         elementReportActive,
         reportActive,
@@ -1297,18 +1207,18 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
   };
 
   return (
-    <ClientCreateReportContext.Provider value={values}>
+    <ClientInspectedCreateReportContext.Provider value={values}>
       {children}
-    </ClientCreateReportContext.Provider>
+    </ClientInspectedCreateReportContext.Provider>
   );
 };
 
-export const useClientCreateReportContext = () => {
-  const context = useContext(ClientCreateReportContext);
+export const useClientInspectedCreateReportContext = () => {
+  const context = useContext(ClientInspectedCreateReportContext);
 
   if (!context) {
     throw new Error(
-      "useClientCreateReportContext can only be used inside useClientCreateReportProvider"
+      "useClientInspectedCreateReportContext can only be used inside useClientInspectedCreateReportProvider"
     );
   }
 

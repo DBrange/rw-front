@@ -2,20 +2,30 @@ import {
   AllReportValues,
   ChangeEventType,
   ClientCreateReportValues,
+  ClientInspectedCreateReportValues,
   ErrorsAllReportValues,
   ErrorsClientCreateReportValues,
+  ErrorsClientInspectedCreateReportValues,
   TouchedAllReportValues,
   TouchedClientCreateReportValues,
+  TouchedClientInspectedCreateReportValues,
 } from "@/pages";
 import { FormImages, FormInput, FormScheduleInput } from "..";
 import { SectionFormContainer } from "@/styledComponents";
 
 interface Props {
-  inputValues: AllReportValues | ClientCreateReportValues;
-  inputTouched: TouchedAllReportValues | TouchedClientCreateReportValues;
+  inputValues:
+    | AllReportValues
+    | ClientCreateReportValues
+    | ClientInspectedCreateReportValues;
+  inputTouched:
+    | TouchedAllReportValues
+    | TouchedClientCreateReportValues
+    | TouchedClientInspectedCreateReportValues;
   errorsInputValues:
     | Partial<ErrorsAllReportValues>
     | Partial<ErrorsClientCreateReportValues>
+    | Partial<ErrorsClientInspectedCreateReportValues>
     | undefined;
   changeInputValues: (e: ChangeEventType) => void;
   changeInputForCheckbox: (e: ChangeEventType) => void;

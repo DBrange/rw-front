@@ -1,12 +1,9 @@
 import { PageBtn } from "@/components";
-import {
-  AllClientCreateReportPages,
-  Sidebar,
-  useClientCreateReportContext,
-} from "@/pages";
+import { Sidebar } from "@/pages";
 import { Form } from "@/styledComponents";
+import { AllClientInspectedCreateReportPages, useClientInspectedCreateReportContext } from "../..";
 
-function ClientCreateReportBox() {
+function ClientInspectedCreateReportBox() {
   const {
     changePage,
     page,
@@ -16,24 +13,24 @@ function ClientCreateReportBox() {
     reportActive,
     amountVehicles,
     amountInjured,
-  } = useClientCreateReportContext();
+  } = useClientInspectedCreateReportContext();
 
   const correspondingPage =
     amountInjured > 0 && amountVehicles > 0 && reportActive.crash
-      ? 6
+      ? 4
       : amountInjured > 0 && reportActive.fire
-      ? 5
+      ? 3
       : amountInjured < 1 && amountVehicles > 0 && reportActive.crash
-      ? 5
+      ? 3
       : amountInjured > 0 && amountVehicles < 1 && reportActive.crash
-      ? 5
-      : 4;
+      ? 3
+      : 2;
   return (
     <>
       <Sidebar />
 
       <Form onSubmit={submitValues}>
-        <AllClientCreateReportPages />
+        <AllClientInspectedCreateReportPages />
 
         <PageBtn
           changePage={changePage}
@@ -46,4 +43,4 @@ function ClientCreateReportBox() {
     </>
   );
 }
-export default ClientCreateReportBox;
+export default ClientInspectedCreateReportBox;

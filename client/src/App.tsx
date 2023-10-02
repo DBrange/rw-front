@@ -12,6 +12,7 @@ import { ClientInspections } from "./pages/private/client/ClientInspections";
 import LoginBtn from "./components/LoginBtn/LoginBtn";
 import { ClientCreateReport, ClientReports } from "./pages/private";
 import { Register } from "./pages/public/Register";
+import { ClientInspectedCreateReport } from "./pages/private/client/ClientInspectedCreateReport";
 
 const Home = lazy(() => import("./pages/public/Home/Home"));
 const Inspect = lazy(() => import("./pages/public/Inspect/Inspect"));
@@ -39,6 +40,7 @@ function App() {
             <Route path="/registrarse" element={<Register />} />
             <Route path="/dashboard/cliente" element={<ClientUser />} />
             <Route path="/dashboard/cliente/crear-denuncia" element={<ClientCreateReport />} />
+            <Route path="/dashboard/cliente/asegurado/crear-denuncia" element={<ClientInspectedCreateReport />} />
             <Route
               path="/dashboard/cliente/inspecciones"
               element={<ClientInspections />}
