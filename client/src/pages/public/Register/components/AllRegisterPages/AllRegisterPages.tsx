@@ -148,7 +148,9 @@ function AllRegisterPages() {
         form={
           <>
             <FormAllDetailsRegister
+              profile={userType}
               user={userActive}
+              brokerUser={brokerActive}
               inputValues={inputValues}
             />
 
