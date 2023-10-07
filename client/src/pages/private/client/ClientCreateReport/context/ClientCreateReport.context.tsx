@@ -1308,7 +1308,7 @@ export const useClientCreateReportContext = () => {
 
   if (!context) {
     throw new Error(
-      "useClientCreateReportContext can only be used inside useClientCreateReportProvider"
+      "useClientCreateReportContext can only be used inside ClientCreateReportProvider"
     );
   }
 

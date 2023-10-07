@@ -11,18 +11,24 @@ import {
 import {
   AllInspectValues,
   ChangeEventType,
+  ClientCreateInspectionValues,
   ErrorsAllInspectValues,
+  ErrorsClientCreateInspectionValues,
   SelectEventType,
   TouchedAllInspectValues,
+  TouchedClientCreateInspectionValues,
 } from "@/pages";
 import { SectionFormContainer } from "@/styledComponents";
 import { useState } from "react";
 
 interface Props {
   changeInputValues: (e: ChangeEventType) => void;
-  inputValues: AllInspectValues;
-  inputTouched: TouchedAllInspectValues;
-  errorsInputValues: Partial<ErrorsAllInspectValues> | undefined;
+  inputValues: AllInspectValues | ClientCreateInspectionValues;
+  inputTouched: TouchedAllInspectValues | TouchedClientCreateInspectionValues;
+  errorsInputValues:
+    | Partial<ErrorsAllInspectValues>
+    | Partial<ErrorsClientCreateInspectionValues>
+    | undefined;
   changeSelectValues: (e: SelectEventType) => void;
   changeInputForCheckbox: (e: ChangeEventType) => void;
   changeInputForImages: (e: ChangeEventType, images: string[]) => void;

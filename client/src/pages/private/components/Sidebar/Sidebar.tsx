@@ -9,10 +9,20 @@ import {
   UlSidebarList,
 } from "./Sidebar.styled";
 import { MdOutlineDashboard } from "react-icons/md";
+import { IoNewspaperOutline } from "react-icons/io5";
+import { CgLogOut } from "react-icons/cg";
+import { BsFillPersonFill } from "react-icons/bs";
+import { TbReportAnalytics } from "react-icons/tb";
+import { TfiWrite } from "react-icons/tfi";
+import { BsShieldCheck } from "react-icons/bs";
 import { LinkNavigate } from "@/styledComponents";
 
 function Sidebar() {
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
+
+  useEffect(() => {
+    sidebarService.setSubject(false);
+  }, []);
 
   useEffect(() => {
     sidebarService.getSubject.subscribe((bol) => setStateOfSidebar(bol));
@@ -32,29 +42,56 @@ function Sidebar() {
       <DivSidebarWrapper $isOpen={stateOfSidebar} onClick={handleSidebarClick}>
         <MainName />
         <UlSidebarList>
-          <LiSidebarItem>
-            <MdOutlineDashboard size={20} />
-            <LinkNavigate to="/dashboard/cliente/inspecciones">
+          <LinkNavigate to="/dashboard/cliente">
+            <LiSidebarItem>
+              <MdOutlineDashboard size={20} />
+              Inicio
+            </LiSidebarItem>
+          </LinkNavigate>
+
+          <LinkNavigate to="/dashboard/cliente/inspecciones">
+            <LiSidebarItem>
+              <TfiWrite size={20} />
               Inspecciones
-            </LinkNavigate>
-          </LiSidebarItem>
-          <LiSidebarItem>
-            <MdOutlineDashboard size={20} />
-            <LinkNavigate to="">con</LinkNavigate>
-          </LiSidebarItem>
-          <LiSidebarItem>
-            <MdOutlineDashboard size={20} />
-            <LinkNavigate to="#">la mas</LinkNavigate>
-          </LiSidebarItem>
-          <LiSidebarItem>
-            <MdOutlineDashboard size={20} />
-            <LinkNavigate to="#">linda</LinkNavigate>
-          </LiSidebarItem>
+            </LiSidebarItem>
+          </LinkNavigate>
+
+          <LinkNavigate to="/dashboard/cliente/denuncias">
+            <LiSidebarItem>
+              <IoNewspaperOutline size={20} />
+              Denuncias
+            </LiSidebarItem>
+          </LinkNavigate>
+
+          <LinkNavigate to="/dashboard/cliente/crear-inspeccion">
+            <LiSidebarItem>
+              <BsShieldCheck size={20} />
+              Inspeccionar
+            </LiSidebarItem>
+          </LinkNavigate>
+
+          <LinkNavigate to="/dashboard/cliente/crear-denuncia">
+            <LiSidebarItem>
+              <TbReportAnalytics size={20} />
+              Denunciar
+            </LiSidebarItem>
+          </LinkNavigate>
         </UlSidebarList>
         <FooterSidebar>
           <UlSidebarList>
-            <LiSidebarItem>algo</LiSidebarItem>
-            <LiSidebarItem>algo</LiSidebarItem>
+            <LinkNavigate to="/dashboard/cliente/perfil">
+              <LiSidebarItem>
+                <BsFillPersonFill size={20} />
+                Mi perfil
+              </LiSidebarItem>
+            </LinkNavigate>
+
+            <LinkNavigate to="/">
+              <LiSidebarItem>
+                <CgLogOut size={20} />
+                Salir
+              </LiSidebarItem>
+            </LinkNavigate>
           </UlSidebarList>
         </FooterSidebar>
       </DivSidebarWrapper>

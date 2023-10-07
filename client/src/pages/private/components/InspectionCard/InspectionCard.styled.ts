@@ -1,4 +1,5 @@
 import { theme } from "@/styledComponents";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const DivCard = styled.div`
@@ -24,4 +25,4 @@ export const IconCard = styled.i`
   display: flex;
   align-items: center;
 `;
-export const CardText = styled.h4``;
+export const CardText = styled(Link)``;

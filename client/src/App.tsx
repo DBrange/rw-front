@@ -2,15 +2,17 @@ import { Suspense, lazy } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { GlobalLoader, MainName } from "./components";
 import { AdminUser, BrokerUser, ClientUser, Login } from "./pages";
-import {
-  Body,
-  Footer,
-  Header,
-  MainContent,
-} from "./styledComponents";
+import { Body, Footer, Header, MainContent } from "./styledComponents";
 import { ClientInspections } from "./pages/private/client/ClientInspections";
 import LoginBtn from "./components/LoginBtn/LoginBtn";
-import { ClientCreateReport, ClientReports } from "./pages/private";
+import {
+  ClientCreateInspection,
+  ClientCreateReport,
+  ClientInspectionDetail,
+  ClientMyProfile,
+  ClientReports,
+  InspectionDetail,
+} from "./pages/private";
 import { Register } from "./pages/public/Register";
 import { ClientInspectedCreateReport } from "./pages/private/client/ClientInspectedCreateReport";
 
@@ -25,11 +27,8 @@ function App() {
     <Suspense fallback={<GlobalLoader />}>
       <Body>
         <Header>
-          <MainName  />
-
-           
+          <MainName />
           <LoginBtn />
-
         </Header>
         <MainContent>
           <Routes>
@@ -39,19 +38,33 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/registrarse" element={<Register />} />
             <Route path="/dashboard/cliente" element={<ClientUser />} />
-            <Route path="/dashboard/cliente/crear-denuncia" element={<ClientCreateReport />} />
-            <Route path="/dashboard/cliente/asegurado/crear-denuncia" element={<ClientInspectedCreateReport />} />
+            <Route
+              path="/dashboard/cliente/crear-inspeccion"
+              element={<ClientCreateInspection />}
+            />
+            <Route
+              path="/dashboard/cliente/crear-denuncia"
+              element={<ClientCreateReport />}
+            />
+            <Route
+              path="/dashboard/cliente/asegurado/crear-denuncia"
+              element={<ClientInspectedCreateReport />}
+            />
             <Route
               path="/dashboard/cliente/inspecciones"
               element={<ClientInspections />}
             />
-            {/* <Route
-              path="/dashboard/cliente/inspeccionar"
-              element={<ClientInspections/>}
-            /> */}
+            <Route
+              path="/dashboard/cliente/inspeccion/:inspectionId"
+              element={<ClientInspectionDetail />}
+            />
             <Route
               path="/dashboard/cliente/denuncias"
               element={<ClientReports />}
+            />
+            <Route
+              path="/dashboard/cliente/perfil"
+              element={<ClientMyProfile />}
             />
             <Route path="/dashboard/broker" element={<BrokerUser />} />
             <Route path="/dashboard/admin" element={<AdminUser />} />

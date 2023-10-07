@@ -22,7 +22,9 @@ function InspectionCard({type, keyName}: Props) {
         {type === "CAMIONETA" && <RiTruckLine size={30} />}
         {type === "MOTOCICLETA" && <RiMotorbikeFill size={30} />}
       </IconCard>
-      <CardText>{`${type} ${keyName}`}</CardText>
+      <CardText
+        to={"/dashboard/cliente/inspeccion/:inspectionId"}
+      >{`${type} ${keyName}`}</CardText>
     </DivCard>
   );
 }

@@ -1,10 +1,10 @@
-import { ContainerLogin } from "@/styledComponents";
+import { Container } from "@/styledComponents";
 
 function ClientInspectedCreateReportContainer({
   children,
 }: {
   children: React.ReactElement | React.ReactElement[];
 }) {
-  return <ContainerLogin>{children}</ContainerLogin>;
+  return <Container>{children}</Container>;
 }
 export default ClientInspectedCreateReportContainer;

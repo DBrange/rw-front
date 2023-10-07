@@ -1,5 +1,8 @@
 {
-  "vehicle": [
+  "inspections":[
+
+],
+  "reports": [
     {
       "id": "dasdasdsadadasd",
       "plate": "aa111aa",
@@ -27,15 +30,15 @@
       "noSpareTire": false,
       "gnc": false,
       "fuel": "DIESEL",
-      "type": "AUTOMOVIL",
+      "type": "MOTOCICLETA",
       "oblea": "12312312",
       "expireDate": "12/12/1998"
     },
     {
       "id": "dasdasdsadadasdjj",
-      "plate": "aa111aa",
+      "plate": "ab112gg",
       "year": 1998,
-      "brand": "Toyota",
+      "brand": "Peugeot",
       "model": "notengo idea",
       "color": "rojo",
       "tireBrand": "nose",
@@ -64,11 +67,11 @@
     },
     {
       "id": "dasdasdsadadasdddd",
-      "plate": "aa111aa",
+      "plate": "ll123aa",
       "year": 1998,
-      "brand": "Toyota",
+      "brand": "Fiat",
       "model": "notengo idea",
-      "color": "rojo",
+      "color": "verde",
       "tireBrand": "nose",
       "tireSize": "123/23/23",
       "tireWear": 30,
@@ -120,7 +123,7 @@
       "noSpareTire": false,
       "gnc": false,
       "fuel": "DIESEL",
-      "type": "AUTOMOVIL",
+      "type": "CAMIONETA",
       "oblea": "12312312",
       "expireDate": "12/12/1998"
     },

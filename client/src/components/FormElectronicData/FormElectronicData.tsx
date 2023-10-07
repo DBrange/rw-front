@@ -6,13 +6,17 @@ import {
   FormSelectElectronic,
 } from "..";
 import { SectionFormContainer } from "@/styledComponents";
+import { ChangeEventType, AllInspectValues, ClientCreateInspectionValues, TouchedAllInspectValues, TouchedClientCreateInspectionValues, ErrorsAllInspectValues, ErrorsClientCreateInspectionValues, SelectEventType } from "@/pages";
 
 interface Porps {
-  changeInputValues: any;
-  inputValues: any;
-  inputTouched: any;
-  errorsInputValues: any;
-  changeSelectValues: any;
+  changeInputValues: (e: ChangeEventType) => void;
+  inputValues: AllInspectValues | ClientCreateInspectionValues;
+  inputTouched: TouchedAllInspectValues | TouchedClientCreateInspectionValues;
+  errorsInputValues:
+    | Partial<ErrorsAllInspectValues>
+    | Partial<ErrorsClientCreateInspectionValues>
+    | undefined;
+  changeSelectValues: (e: SelectEventType) => void;
 }
 
 function FormElectronicData({
