@@ -2,10 +2,13 @@ import {
   FormElectronicData,
   FormOpenClose,
   FormSwornDeclaration,
-  FormVehicleData
+  FormVehicleData,
 } from "@/components";
 import BtnChoice from "@/components/BtnChoice/BtnChoice";
-import { FormAllDetailsClientCreateInspection, useClientCreateInspectionContext } from "../..";
+import {
+  FormAllDetailsClientCreateInspection,
+  useClientCreateInspectionContext,
+} from "../..";
 
 function AllClientCreateInspectionPages() {
   const {
@@ -88,7 +91,7 @@ function AllClientCreateInspectionPages() {
               label="Declaracion jurada"
               name="swornDeclaration.swornDeclaration"
               id="swornDeclaration.swornDeclaration"
-              instructions="ni idea bruh"
+              instructions="llenar con contenido"
             />
           </>
         }

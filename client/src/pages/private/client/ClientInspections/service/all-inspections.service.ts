@@ -1,7 +1,7 @@
-import { AllClientVehicles } from "@/pages";
+import { AllClientInspected, AllClientVehicles } from "@/pages";
 
 export const BaseUrlInspect = "http://localhost:3000";
-export const AllVehiclesUrl = BaseUrlInspect + "/vehicle";
+export const AllVehiclesUrl = BaseUrlInspect + "/vehicles";
 
 export const allInspectedVehicles = async (
   url: string

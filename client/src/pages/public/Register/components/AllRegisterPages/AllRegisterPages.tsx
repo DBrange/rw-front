@@ -5,7 +5,7 @@ import {
   FormOpenClose,
   FormRegisterLegalPersonalData,
   FormRegisterPersonalData,
-  FormSwornDeclaration
+  FormSwornDeclaration,
 } from "@/components";
 import { FormAllDetailsRegister, useRegisterContext } from "../..";
 
@@ -159,7 +159,7 @@ function AllRegisterPages() {
               label="Declaracion jurada"
               name="swornDeclaration.swornDeclaration"
               id="swornDeclaration.swornDeclaration"
-              instructions="ni idea bruh"
+              instructions="llenar con contenido"
             />
           </>
         }

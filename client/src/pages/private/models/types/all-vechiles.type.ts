@@ -1,5 +1,7 @@
+import { FUEL, VEHICLE_TYPE } from "@/models";
+
 export interface AllClientVehicles {
-  id:number
+  id: number;
   plate: string;
   year: number;
   brand: string;
@@ -15,8 +17,8 @@ export interface AllClientVehicles {
   explodedAirbag: boolean;
   noSpareTire: boolean;
   gnc: boolean;
-  fuel: string;
-  type: string;
+  fuel: FUEL;
+  type: VEHICLE_TYPE;
   oblea: string;
   expireDate: string;
 }

@@ -1,0 +1,22 @@
+export enum FUEL {
+  DIESEL = "DIESEL",
+  GASOLINE = "GASOLINA",
+}
+
+export enum VEHICLE_TYPE {
+  TRUCK = "CAMIONETA",
+  CAR = "AUTOMOVIL",
+  MOTORBIKE = "MOTOCICLETA",
+}
+
+export enum GENDER {
+  MAN = "HOMBRE",
+  WOMAN = "MUJER",
+  OTHER = "OTRO",
+}
+
+export enum ELECTRONIC_TYPE {
+  TABLET = "TABLET",
+  SMARTPHONE = "CELULAR",
+  NOTEBOOK = "NOTEBOOK",
+}

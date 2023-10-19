@@ -25,4 +25,7 @@ export const IconCard = styled.i`
   display: flex;
   align-items: center;
 `;
-export const CardText = styled(Link)``;
+export const CardText = styled(Link)`
+text-decoration: none;
+color: ${theme.textColor};
+`;

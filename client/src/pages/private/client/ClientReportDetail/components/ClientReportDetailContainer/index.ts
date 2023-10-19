@@ -1,1 +1,1 @@
-export { default as ClientReportDetailContainer } from './ClientReportDetailContainer';
+export { default as ClientReportDetailContainer } from "../ClientReportDetailContainer";

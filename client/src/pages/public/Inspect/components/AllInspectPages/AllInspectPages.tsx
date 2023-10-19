@@ -138,7 +138,7 @@ function AllInspectPages() {
               label="Declaracion jurada"
               name="swornDeclaration.swornDeclaration"
               id="swornDeclaration.swornDeclaration"
-              instructions="ni idea bruh"
+              instructions="llenar con contenido"
             />
           </>
         }

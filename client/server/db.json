@@ -1,8 +1,5 @@
 {
-  "inspections":[
-
-],
-  "reports": [
+  "vehicles": [
     {
       "id": "dasdasdsadadasd",
       "plate": "aa111aa",
@@ -14,7 +11,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -45,7 +42,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -76,7 +73,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -107,7 +104,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -138,7 +135,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -169,7 +166,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -200,7 +197,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -231,7 +228,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -262,7 +259,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -293,7 +290,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -324,7 +321,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -355,7 +352,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -386,7 +383,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -417,7 +414,7 @@
       "tireSize": "123/23/23",
       "tireWear": 30,
       "damage": true,
-      "damageLocation": "no tengo ni idea la verda, si te soy sincero",
+      "damageLocation": "",
       "images": [
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
         "https://res.cloudinary.com/dhr6ywb8r/image/upload/v1692675382/denuncias-web/jwhuabldya718kspavyl.jpg",
@@ -438,5 +435,12 @@
       "expireDate": "12/12/1998"
     }
     
+  ],
+  "electronics": [
+    {
+      "type": "TABLET",
+      "brand": "Iphone",
+      "model": "abc"
+    }
   ]
 }

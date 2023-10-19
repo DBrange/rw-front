@@ -1,5 +1,5 @@
-import { ReportDetail, Sidebar } from "../.."
-import ClientReportDetailContainer from "./components/ClientReportDetailContainer/ClientReportDetailContainer"
+import { ReportDetail, Sidebar } from "../..";
+import ClientReportDetailContainer from "./components/ClientReportDetailContainer";
 
 function ClientReportDetail() {
   return (
@@ -7,6 +7,6 @@ function ClientReportDetail() {
       <Sidebar />
       <ReportDetail />
     </ClientReportDetailContainer>
-  )
+  );
 }
-export default ClientReportDetail
+export default ClientReportDetail;
