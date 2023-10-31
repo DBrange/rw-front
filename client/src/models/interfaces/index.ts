@@ -18,5 +18,6 @@ export * from './statesInspect.interface';
 export * from './sworn-declaration';
 export * from './third-party-injured';
 export * from './third-party-vehicle';
+export * from './userInfo';
 export * from './vehicle-report';
 export * from './vehicle';

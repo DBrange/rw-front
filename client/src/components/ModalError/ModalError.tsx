@@ -1,6 +1,12 @@
-
 import { LinkNavigate } from "@/styledComponents";
-import { BtnModal, DivModalSent, H3Modal, H4Modal, ImgModal, SectionModalBg } from "..";
+import {
+  BtnModal,
+  DivModalSent,
+  H3Modal,
+  H4Modal,
+  ImgModal,
+  SectionModalBg,
+} from "..";
 import error from "../../../assets/error.svg";
 
 function ModalError({ modalActive }: { modalActive: boolean }) {
@@ -13,7 +19,7 @@ function ModalError({ modalActive }: { modalActive: boolean }) {
           Lo sentimos, hubo un error al enviar el formulario.
         </H4Modal>
         <H4Modal $error>Intente enviarlo nuevamente, gracias.</H4Modal>
-        <LinkNavigate to="/">
+        <LinkNavigate to="/home">
           <BtnModal $error>Aceptar</BtnModal>
         </LinkNavigate>
       </DivModalSent>

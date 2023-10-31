@@ -38,8 +38,6 @@ export * from './ClientReports/components/ClientReportsBox';
 export * from './ClientReports/components/ClientReportsContainer';
 export * from './ClientReports/components';
 export * from './ClientReports/context';
-export * from './ClientReports';
-export * from './ClientReports/services';
 export * from './ClientUser/components/ClientUserContainer';
 export * from './ClientUser/components';
 export * from './ClientUser/context';

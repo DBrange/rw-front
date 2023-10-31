@@ -28,22 +28,22 @@ function MainName() {
     <DivMainName
       $public={
         !!(
-          path === "/" ||
-          path === "/denunciar" ||
-          path === "/inspeccionar" ||
-          path === "/login" ||
-          path === "/registrarse"
+          path === "/public/home" ||
+          path === "/public/denunciar" ||
+          path === "/public/inspeccionar" ||
+          path === "/public/login" ||
+          path === "/public/registrarse"
         )
       }
     >
       <BtnMainName
         $public={
           !!(
-            path === "/" ||
-            path === "/denunciar" ||
-            path === "/inspeccionar" ||
-            path === "/login" ||
-            path === "/registrarse"
+            path === "/public/home" ||
+            path === "/public/denunciar" ||
+            path === "/public/inspeccionar" ||
+            path === "/public/login" ||
+            path === "/public/registrarse"
           )
         }
         onClick={toggleSidebar}
@@ -52,7 +52,7 @@ function MainName() {
           <RxHamburgerMenu size={25} />
         </IconMainName>
       </BtnMainName>
-      <LinkMainName to="/">
+      <LinkMainName to="/public/home">
         <Logo2 />
         <LogoText>ReclamoWeb</LogoText>
       </LinkMainName>

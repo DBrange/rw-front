@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { ILoginContext, emptyLoginContext } from "./empty-login-context";
 import { ChangeEventType, SubmitEventType } from "../../Inspect";
-import { InputValues, TouchedInputValues, validateLogin } from "..";
+import { InputValues, TouchedInputValues, loginClient, loginUrl, validateLogin } from "..";
+import useSWRMutation from "swr/mutation";
+
 
 const LoginContext = createContext<ILoginContext>(emptyLoginContext);
 
@@ -46,6 +48,9 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     });
   };
 
+    const { trigger, error } = useSWRMutation(loginUrl, loginClient);
+
+
   useEffect(() => {
     setErrorValues(
       validateLogin({
@@ -60,6 +65,8 @@ export const LoginProvider = ({ children }: ChildrenType) => {
       email: true,
       password: true,
     });
+
+        trigger(inputValues);
   };
 
   const values = {

@@ -86,7 +86,7 @@ function Sidebar() {
               </LiSidebarItem>
             </LinkNavigate>
 
-            <LinkNavigate to="/">
+            <LinkNavigate to="/home">
               <LiSidebarItem>
                 <CgLogOut size={20} />
                 Salir

@@ -9,9 +9,8 @@ const BtnLogin = styled.button`
   cursor: pointer;
   background-color: ${theme.sColor};
   margin-right: 2rem;
-  
+
   @media (min-width: 450px) {
-    
     margin-right: 4rem;
   }
 `;
@@ -21,13 +20,13 @@ function LoginBtn() {
   return (
     <>
       {!!(
-        path === "/" ||
-        path === "/denunciar" ||
-        path === "/inspeccionar" ||
-        path === "/login" ||
-        path === "/registrarse"
+        path === "/public/home" ||
+        path === "/public/denunciar" ||
+        path === "/public/inspeccionar" ||
+        path === "/public/login" ||
+        path === "/public/registrarse"
       ) && (
-        <LinkNavigate to="/login">
+        <LinkNavigate to="/public/login">
           <BtnLogin>Login</BtnLogin>
         </LinkNavigate>
       )}
