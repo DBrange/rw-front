@@ -22,7 +22,7 @@ export const loginClient = async (
 ): Promise<Response | void> => {
   try {
     loaderImageService.setSubject(true);
-    modalSentService.setSubject(false);
+    // modalSentService.setSubject(false);
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(arg),
@@ -33,16 +33,20 @@ export const loginClient = async (
     });
     
     if (!response.ok) {
+      loaderImageService.setSubject(false);
       throw new Error(`Request failed with status: ${response.status}`);
+    } else {
+      
     }
 
-    const res = await response.json();
+    loaderImageService.setSubject(false);
+    // modalSentService.setSubject(true);
+
+    return await response.json();
     // console.log(res)
     
-    localStorage.setItem("client", JSON.stringify(res));
+    // localStorage.setItem("client", JSON.stringify(res));
 
-    loaderImageService.setSubject(false);
-    modalSentService.setSubject(true);
   } catch (err) {
     throw err;
   }

@@ -1,8 +1,14 @@
 export { default as Register } from './Register';
 export * from './components/AllRegisterPages';
+export * from './components/FormAllDetailsRegister';
+export * from './components/FormBrokerLegalPersonalDetail';
+export * from './components/FormBrokerPersonalDetail';
+export * from './components/FormRegisterLegalPersonalDetail';
+export * from './components/FormRegisterPersonalDetail';
 export * from './components/RegisterBox';
 export * from './components/RegisterContainer';
 export * from './components';
 export * from './context';
 export * from './interfaces';
+export * from './services';
 export * from './utilities';

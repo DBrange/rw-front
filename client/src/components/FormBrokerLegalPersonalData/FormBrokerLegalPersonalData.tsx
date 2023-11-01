@@ -41,14 +41,14 @@ function FormBrokerLegalPersonalData({
             />
             <FormInput
               label="Razon social"
-              value={inputValues?.registerBrokerLegalPersonal?.businessName}
-              touched={inputTouched?.registerBrokerLegalPersonal?.businessName}
+              value={inputValues?.registerBrokerLegalPersonal?.bussinesName}
+              touched={inputTouched?.registerBrokerLegalPersonal?.bussinesName}
               error={
-                errorsInputValues?.registerBrokerLegalPersonal?.businessName
+                errorsInputValues?.registerBrokerLegalPersonal?.bussinesName
               }
               handleChange={changeInputValues}
-              name={`registerBrokerLegalPersonal.businessName`}
-              id={`registerBrokerLegalPersonal.businessName`}
+              name={`registerBrokerLegalPersonal.bussinesName`}
+              id={`registerBrokerLegalPersonal.bussinesName`}
               type="text"
               placeholder="Ingresar razon social"
             />

@@ -7,14 +7,16 @@ export interface ILoginContext {
   inputValues: InputValues;
   setInputValues: React.Dispatch<InputValues>;
   errorValues: Partial<InputValues> | undefined
-  touchedValues: TouchedInputValues
+  touchedValues: TouchedInputValues;
+  formNotFound: boolean
 }
 
 export const emptyLoginContext: ILoginContext = {
-  loginData: () => { },
-  submitData: () => { },
-  inputValues: {email: '', password: ''},
-  setInputValues: () => { },
+  loginData: () => {},
+  submitData: () => {},
+  inputValues: { email: "", password: "" },
+  setInputValues: () => {},
   errorValues: {},
-  touchedValues: {email: false, password: false}
+  touchedValues: { email: false, password: false },
+  formNotFound: false
 };

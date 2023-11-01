@@ -41,6 +41,17 @@ function FormBrokerPersonalData({
               type="text"
               placeholder="Ingresar matricula"
             />
+            <FormInput
+              label="Razon social"
+              value={inputValues?.registerBrokerPersonal?.bussinesName}
+              touched={inputTouched?.registerBrokerPersonal?.bussinesName}
+              error={errorsInputValues?.registerBrokerPersonal?.bussinesName}
+              handleChange={changeInputValues}
+              name={`registerBrokerPersonal.bussinesName`}
+              id={`registerBrokerPersonal.bussinesName`}
+              type="text"
+              placeholder="Ingresar razon social"
+            />
           </>
         }
       />

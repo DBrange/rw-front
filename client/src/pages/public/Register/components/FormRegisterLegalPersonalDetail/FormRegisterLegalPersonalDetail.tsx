@@ -60,7 +60,7 @@ function FormRegisterLegalPersonalDetail({
 
           <DivRenderProperty>
             <H4PropertyValue>Razon social: </H4PropertyValue>
-            {brokerValues?.businessName}
+            {brokerValues?.bussinesName}
           </DivRenderProperty>
         </>
       )}

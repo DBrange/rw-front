@@ -1,4 +1,6 @@
 import { ErrorsRegisterPersonalValues, RegisterPersonalValues } from "@/models";
+import { verifyUserUrl, verifyUserInputs } from "@/pages";
+import useSWR from "swr";
 
 export const validateRegisterPersonal = ({
   name,
@@ -23,6 +25,8 @@ export const validateRegisterPersonal = ({
     password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!.])(.{10,})$/,
   };
 
+
+
   const currentDate = new Date();
   const userDate = new Date(birthDate);
   if (userDate > currentDate || userDate.getFullYear() < 1900)
@@ -32,6 +36,7 @@ export const validateRegisterPersonal = ({
   if (!phoneNumber?.trim().length) errors.phoneNumber = "No puede estar vacio";
   if (!regex.phoneNumber.test(phoneNumber))
     errors.phoneNumber = "Solo puede contener numeros";
+  // if (VerifyCon) errors.email = "nonon";
   if (!email?.trim().length) errors.email = "No puede estar vacio";
   if (!regex.email.test(email)) errors.email = "Debe tener un formato de email";
   if (altEmail?.trim().length && !regex.email.test(altEmail))

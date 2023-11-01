@@ -1,9 +1,18 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { ILoginContext, emptyLoginContext } from "./empty-login-context";
 import { ChangeEventType, SubmitEventType } from "../../Inspect";
-import { InputValues, TouchedInputValues, loginClient, loginUrl, validateLogin } from "..";
+import {
+  InputValues,
+  TouchedInputValues,
+  loginClient,
+  loginUrl,
+  validateLogin,
+} from "..";
 import useSWRMutation from "swr/mutation";
-
+import { useDispatch } from "react-redux";
+import { addClient } from "@/redux/slices/clientSlice";
+import { useNavigate } from "react-router-dom";
+import { PrivateRoutes } from "@/models/types/routes";
 
 const LoginContext = createContext<ILoginContext>(emptyLoginContext);
 
@@ -12,7 +21,11 @@ type ChildrenType = {
 };
 
 export const LoginProvider = ({ children }: ChildrenType) => {
-  
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
   const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
     password: "",
@@ -26,6 +39,8 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     email: false,
     password: false,
   });
+
+  const [formNotFound, setFormNotFound] = useState(false);
 
   const loginData = (e: ChangeEventType) => {
     const { value, name } = e.target;
@@ -48,8 +63,21 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     });
   };
 
-    const { trigger, error } = useSWRMutation(loginUrl, loginClient);
+  const { data, trigger, error } = useSWRMutation(loginUrl, loginClient);
 
+  const fetchErrors = [error];
+
+  useEffect(() => {
+    for (const err in fetchErrors) {
+      if (fetchErrors[err]) {
+        setFormNotFound(true);
+      } else {
+        
+        setFormNotFound(false);
+        
+      }
+    }
+  }, [...fetchErrors]);
 
   useEffect(() => {
     setErrorValues(
@@ -59,6 +87,14 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     );
   }, []);
 
+  useEffect(() => {
+    if (data) { 
+
+      dispatch(addClient(data));
+      navigate(`/${PrivateRoutes.PRIVATE}`)
+    }
+  },[data])
+
   const submitData = (e: SubmitEventType) => {
     e.preventDefault();
     setTouchedValues({
@@ -66,7 +102,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
       password: true,
     });
 
-        trigger(inputValues);
+    trigger(inputValues);
   };
 
   const values = {
@@ -76,6 +112,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     setInputValues,
     errorValues,
     touchedValues,
+    formNotFound
   };
 
   return (

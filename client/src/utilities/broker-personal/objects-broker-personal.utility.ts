@@ -3,15 +3,18 @@ import { emptyRegisterPersonalValues, touchedRegisterPersonalValues, touchedRegi
 
 export const emptyBrokerPersonalValues: BrokerPersonalValues = {
   ...emptyRegisterPersonalValues,
-  enrollment: ''
+  enrollment: "",
+  bussinesName: '',
 };
 
 export const touchedBrokerPersonalValues: TouchedBrokerPersonalValues = {
   ...touchedRegisterPersonalValues,
-  enrollment: false
+  enrollment: false,
+  bussinesName: false,
 };
 
 export const touchedBrokerPersonalValuesTrue: TouchedBrokerPersonalValues = {
   ...touchedRegisterPersonalValuesTrue,
-  enrollment: true
+  enrollment: true,
+  bussinesName: true,
 };

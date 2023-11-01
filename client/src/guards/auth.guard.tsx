@@ -6,10 +6,10 @@ import { Navigate, Outlet } from "react-router-dom";
 export const AuthGuard = () => {
   const clientState = useSelector((store: AppStore) => store.user);
   // console.log(clientState)
-  return clientState.user.id ? (
+  return clientState?.user?.id ? (
     <Outlet />
   ) : (
-    <Navigate replace to={PublicRoutes.HOME} />
+    <Navigate replace to={`/${PublicRoutes.PUBLIC}`} />
   );
 };
 

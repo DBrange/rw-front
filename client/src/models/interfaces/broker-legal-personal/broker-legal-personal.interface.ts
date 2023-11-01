@@ -6,17 +6,17 @@ import {
 
 export interface BrokerLegalPersonalValues extends RegisterLegalPersonalValues {
   enrollment: string;
-  businessName: string;
+  bussinesName: string;
 }
 
 export interface ErrorsBrokerLegalPersonalValues
   extends ErrorsRegisterLegalPersonalValues {
   enrollment: string;
-  businessName: string;
+  bussinesName: string;
 }
 
 export interface TouchedBrokerLegalPersonalValues
   extends TouchedRegisterLegalPersonalValues {
   enrollment: boolean;
-  businessName: boolean;
+  bussinesName: boolean;
 }

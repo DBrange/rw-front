@@ -4,16 +4,21 @@ import {
   touchedBrokerPersonalValuesTrue,
   touchedRegisterLegalPersonalValuesTrue,
   touchedRegisterPersonalValuesTrue,
-  validate
+  validate,
 } from "@/utilities";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   ErrorsRegisterValues,
   RegisterValues,
   TouchedRegisterValues,
+  addUser,
   emptyRegisterValues,
+  registerUrl,
   touchedRegisterValues,
   validateRegister,
+  validationFormDataRegister,
+  verifyUserInputs,
+  verifyUserUrl,
 } from "..";
 import {
   ChangeEventType,
@@ -25,6 +30,7 @@ import {
   IRegisterContext,
   emptyRegisterContext,
 } from "./empty-register-context";
+import useSWRMutation from "swr/mutation";
 
 const RegisterContext = createContext<IRegisterContext>(emptyRegisterContext);
 
@@ -266,6 +272,35 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     );
   }, [page]);
 
+  useEffect(() => {
+    trigger2();
+    console.log(VerifyCon);
+  }, [inputValues]);
+
+  const {
+    data: VerifyCon,
+    error: errVerifyCon,
+    trigger: trigger2,
+  } = useSWRMutation(
+    verifyUserUrl(
+      inputValues.registerPersonal.email ||
+        inputValues.registerLegalPersonal.email ||
+        inputValues.registerBrokerPersonal.email ||
+        inputValues.registerBrokerLegalPersonal.email,
+      inputValues.registerPersonal.dni ||
+        inputValues.registerLegalPersonal.cuit ||
+        inputValues.registerBrokerPersonal.dni ||
+        inputValues.registerBrokerLegalPersonal.cuit,
+      inputValues.registerBrokerPersonal.enrollment ||
+        inputValues.registerBrokerLegalPersonal.enrollment
+    ),
+    verifyUserInputs
+  );
+
+  const { data, error, trigger } = useSWRMutation(registerUrl, addUser);
+
+  const triggers = { trigger };
+
   const submitValues = (e: SubmitEventType) => {
     e.preventDefault();
     setErrorsInputValues(
@@ -276,8 +311,14 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
       })
     );
 
-    console.log("chau");
-    // validationFormDataInspect({ inputValues, errorsInputValues, triggers });
+    validationFormDataRegister({
+      inputValues,
+      errorsInputValues,
+      triggers,
+      userActive,
+      brokerActive,
+      userType,
+    });
   };
 
   const values = {

@@ -28,7 +28,9 @@ export const clientSlice = createSlice({
     ? JSON.parse(localStorage.getItem("client") as string)
     : EmptyUserState,
   reducers: {
-    createClient: (state, action) => {
+    addClient: (state, action) => {
+      persistLocalStorage<ClientInfo>(clientKey, action.payload);
+      console.log('hhh')
       return action.payload;
     },
     updateClient: (state, action) => {
@@ -43,6 +45,6 @@ export const clientSlice = createSlice({
   },
 });
 
-export const { createClient, updateClient, resetClient } = clientSlice.actions;
+export const { addClient, updateClient, resetClient } = clientSlice.actions;
 
 export default clientSlice.reducer;

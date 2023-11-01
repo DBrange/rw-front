@@ -12,6 +12,7 @@ export const validateBrokerPersonal = ({
   address,
   password,
   enrollment,
+  bussinesName
 }: BrokerPersonalValues) => {
   type NewType = ErrorsBrokerPersonalValues;
 
@@ -47,6 +48,9 @@ export const validateBrokerPersonal = ({
   if (!regex.password.test(password))
     errors.password =
       "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
-if (!enrollment?.trim().length) errors.enrollment = "No puede estar vacio";
+  if (!enrollment?.trim().length) errors.enrollment = "No puede estar vacio";
+    if (!bussinesName?.trim().length)
+    errors.bussinesName = "No puede estar vacio";
+  
   return errors;
 };

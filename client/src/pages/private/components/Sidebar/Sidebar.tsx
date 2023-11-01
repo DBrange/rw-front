@@ -16,6 +16,7 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { TfiWrite } from "react-icons/tfi";
 import { BsShieldCheck } from "react-icons/bs";
 import { LinkNavigate } from "@/styledComponents";
+import LogOut from "../LogOut/LogOut";
 
 function Sidebar() {
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
@@ -85,13 +86,7 @@ function Sidebar() {
                 Mi perfil
               </LiSidebarItem>
             </LinkNavigate>
-
-            <LinkNavigate to="/home">
-              <LiSidebarItem>
-                <CgLogOut size={20} />
-                Salir
-              </LiSidebarItem>
-            </LinkNavigate>
+            <LogOut />
           </UlSidebarList>
         </FooterSidebar>
       </DivSidebarWrapper>

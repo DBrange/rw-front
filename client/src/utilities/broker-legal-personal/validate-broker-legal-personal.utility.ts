@@ -12,7 +12,7 @@ export const validateBrokerLegalPersonal = ({
   address,
   password,
   enrollment,
-  businessName,
+  bussinesName,
 }: BrokerLegalPersonalValues) => {
   const errors: Partial<ErrorsBrokerLegalPersonalValues> | null = {};
 
@@ -37,8 +37,8 @@ export const validateBrokerLegalPersonal = ({
     errors.password =
       "Debe contener al menos una mayuscula, un numero, un signo, y un minimo de 10 caracteres";
   if (!enrollment?.trim().length) errors.enrollment = "No puede estar vacio";
-  if (!businessName?.trim().length)
-    errors.businessName = "No puede estar vacio";
+  if (!bussinesName?.trim().length)
+    errors.bussinesName = "No puede estar vacio";
 
   return errors;
 };

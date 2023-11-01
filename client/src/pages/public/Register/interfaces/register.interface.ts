@@ -15,6 +15,7 @@ import {
   TouchedRegisterPersonalValues,
   TouchedSwornDeclaration,
 } from "@/models";
+import { USER_ROLES } from "@/models/types/users-roles.type";
 
 export interface RegisterValues {
   registerPersonal: RegisterPersonalValues;
@@ -38,4 +39,24 @@ export interface TouchedRegisterValues {
   registerBrokerPersonal: TouchedBrokerPersonalValues;
   registerBrokerLegalPersonal: TouchedBrokerLegalPersonalValues;
   swornDeclaration: TouchedSwornDeclaration;
+}
+
+export interface RegisterUser {
+  userDTO: PersonalValuesToSend | null;
+  legalUserDTO: LegalPersonalValuesToSend | null;
+  userBrokerDTO: BrokerValuesToSend | null;
+}
+
+export interface PersonalValuesToSend extends RegisterPersonalValues{
+  role: USER_ROLES
+}
+
+export interface LegalPersonalValuesToSend extends RegisterLegalPersonalValues{
+  role: USER_ROLES
+}
+
+export interface BrokerValuesToSend {
+	bussinesName: string,
+	enrollment: string,
+	card: string
 }

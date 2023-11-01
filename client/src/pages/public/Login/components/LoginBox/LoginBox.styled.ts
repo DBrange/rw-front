@@ -48,3 +48,12 @@ text-decoration: none;
 
 }
 `
+
+export const PNotFound = styled.span<{ $notFound: boolean }>`
+display: block;
+  opacity: ${({ $notFound }) => ($notFound ? "1" : "0")};
+  padding: 0.5rem;
+  /* background-color: ${theme.errBgColor}; */
+  color: ${theme.errColor};
+  text-align: start;
+`;
