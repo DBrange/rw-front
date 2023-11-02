@@ -4,6 +4,7 @@ export * from './broker-legal-personal';
 export * from './broker-personal';
 export * from './crash-vehicle';
 export * from './electronic';
+export { default as expiresToken } from './expires-token';
 export * from './fire-vehicle';
 export * from './gnc';
 export * from './is-tire';

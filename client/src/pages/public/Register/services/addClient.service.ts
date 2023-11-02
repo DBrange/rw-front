@@ -1,6 +1,7 @@
 import {
   loaderImageService,
   modalSentService,
+  modalSuccessfulRegistration,
 } from "@/services/sharing-information.service";
 import { RegisterUser } from "..";
 
@@ -14,7 +15,7 @@ export const addUser = async (
 ): Promise<Response | void> => {
   try {
     loaderImageService.setSubject(true);
-    modalSentService.setSubject(false);
+    modalSuccessfulRegistration.setSubject(false);
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(arg),
@@ -30,14 +31,11 @@ export const addUser = async (
     }
 
     loaderImageService.setSubject(false);
-    modalSentService.setSubject(true);
-    
+    modalSuccessfulRegistration.setSubject(true);
+
     return await response.json();
   } catch (err) {
-    console.log(err)
+    console.log(err);
     throw err;
   }
 };
-
-
-

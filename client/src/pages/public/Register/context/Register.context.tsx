@@ -61,6 +61,8 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     legalPersonal: false,
   });
 
+  const [formNotFound, setFormNotFound] = useState(false);
+
   const [page, setPage] = useState<number>(0);
 
   const changePage = (e: ClickEventType) => {
@@ -160,6 +162,14 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
   const changeInputValues = (e: ChangeEventType) => {
     const { value, name } = e.target;
     const [type, key] = name.split(".");
+
+    if (
+      key === "email" ||
+      key === "dni" ||
+      key === "cuit" ||
+      key === "enrollment"
+    )
+      verifyTrigger();
 
     setInputValues({
       ...inputValues,
@@ -272,15 +282,10 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     );
   }, [page]);
 
-  useEffect(() => {
-    trigger2();
-    console.log(VerifyCon);
-  }, [inputValues]);
-
   const {
-    data: VerifyCon,
-    error: errVerifyCon,
-    trigger: trigger2,
+    data: verifyInputs,
+    error: errVerifyInputs,
+    trigger: verifyTrigger,
   } = useSWRMutation(
     verifyUserUrl(
       inputValues.registerPersonal.email ||
@@ -297,9 +302,19 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     verifyUserInputs
   );
 
-  const { data, error, trigger } = useSWRMutation(registerUrl, addUser);
+  const { error, trigger } = useSWRMutation(registerUrl, addUser);
 
   const triggers = { trigger };
+
+  const fetchErrors = [error];
+
+  useEffect(() => {
+    for (const err in fetchErrors) {
+      if (fetchErrors[err]) {
+        setFormNotFound(true);
+      }
+    }
+  }, [...fetchErrors]);
 
   const submitValues = (e: SubmitEventType) => {
     e.preventDefault();
@@ -337,6 +352,9 @@ export const RegisterProvider = ({ children }: ChildrenType) => {
     changeInputForCheckbox,
     userType,
     brokerActive,
+    verifyTrigger,
+    verifyInputs,
+    formNotFound,
   };
 
   return (

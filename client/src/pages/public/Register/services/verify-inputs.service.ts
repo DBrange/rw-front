@@ -14,7 +14,7 @@ export const verifyUserUrl = (
 export const verifyUserInputs = async (
   url: string,
   // { arg }: { arg: any }
-): Promise<Response | void> => {
+): Promise<boolean> => {
   try {
     loaderImageService.setSubject(true);
     modalSentService.setSubject(false);

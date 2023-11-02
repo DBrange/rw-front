@@ -47,4 +47,5 @@ export * from './Logo2';
 export * from './MainName';
 export * from './ModalError';
 export * from './ModalSent';
+export * from './ModalSuccessfulResgistration';
 export * from './PageBtn';

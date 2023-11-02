@@ -9,7 +9,7 @@ interface Props {
   changePage: (e: ClickEventType) => void;
   page: number;
   max: number;
-  errorsInputValues: boolean;
+  errorsInputValues: boolean | undefined;
   markedTouches: () => void;
 }
 

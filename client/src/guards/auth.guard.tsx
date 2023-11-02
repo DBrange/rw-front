@@ -1,11 +1,12 @@
 import { PublicRoutes } from "@/models/types/routes";
 import { AppStore } from "@/redux";
+import ExpiresToken from "@/utilities/expires-token";
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 export const AuthGuard = () => {
   const clientState = useSelector((store: AppStore) => store.user);
-  // console.log(clientState)
+  ExpiresToken();
   return clientState?.user?.id ? (
     <Outlet />
   ) : (

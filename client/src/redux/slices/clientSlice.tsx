@@ -18,6 +18,7 @@ export const EmptyUserState: ClientInfo = {
     address: "",
     role: "",
   },
+  exp: 0
 };
 
 export const clientKey = 'client'

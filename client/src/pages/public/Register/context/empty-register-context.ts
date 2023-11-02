@@ -19,6 +19,9 @@ export interface IRegisterContext {
   changeInputForCheckbox: (e: ChangeEventType) => void;
   userType: IUserType;
   brokerActive: UserActive;
+  verifyTrigger: any;
+  verifyInputs?: boolean;
+  formNotFound: boolean
 }
 
 export const emptyRegisterContext: IRegisterContext = {
@@ -39,8 +42,11 @@ export const emptyRegisterContext: IRegisterContext = {
   changeSelectValues: () => {},
   changeInputForCheckbox: () => {},
   userType: { client: true, broker: false },
-  brokerActive:{
+  brokerActive: {
     personal: true,
     legalPersonal: false,
   },
+  verifyTrigger: () => {},
+  verifyInputs: false,
+  formNotFound: false
 };

@@ -1,6 +1,7 @@
 interface ClientInfo {
   accessToken: string;
   user: User;
+  exp: number
 }
 
 interface User {
