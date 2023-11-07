@@ -1,3 +1,4 @@
+export * from './add-inspection.interface';
 export * from './all-crash-vehicles';
 export * from './all-third-party-injured';
 export * from './brand-electronic';
@@ -18,6 +19,5 @@ export * from './statesInspect.interface';
 export * from './sworn-declaration';
 export * from './third-party-injured';
 export * from './third-party-vehicle';
-export * from './userInfo';
 export * from './vehicle-report';
 export * from './vehicle';

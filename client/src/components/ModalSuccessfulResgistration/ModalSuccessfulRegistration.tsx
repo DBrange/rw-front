@@ -14,7 +14,7 @@ function ModalSuccessfulRegistration({ modalActive }: { modalActive: boolean }) 
           Pronto se le enviara un mail para confirmar su nuevo usuario.
         </H4Modal>
         <H4Modal>Una vez confirmado, podra ingresar a su usuario.</H4Modal>
-        <LinkNavigate to={`${PublicRoutes.PUBLIC}/${PublicRoutes.HOME}`}>
+        <LinkNavigate to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.HOME}`}>
           <BtnModal>Aceptar</BtnModal>
         </LinkNavigate>
       </DivModalSent>

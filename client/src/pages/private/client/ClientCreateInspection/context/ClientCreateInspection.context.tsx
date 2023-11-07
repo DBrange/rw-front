@@ -15,7 +15,10 @@ import {
   addInspectionLegalVehicle,
   addInspectionPersonalElectronic,
   addInspectionPersonalVehicle,
+  createAssetInClientUser,
+  createAssetInClientUserUrl,
   validateClientCreateInspection,
+  validationFormDataInspection,
 } from "@/pages";
 import {
   touchedElectronicValuesTrue,
@@ -32,6 +35,8 @@ import {
   IClientCreateInspectionContext,
   emptyClientCreateInspectionContext,
 } from "./empty-clientCreateInspection-context";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 const ClientCreateInspectionContext =
   createContext<IClientCreateInspectionContext>(
@@ -314,39 +319,19 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     );
   };
 
-  const {
-    error: errorInspectionPersonalVehicle,
-    trigger: triggerInspectionPersonalVehicle,
-  } = useSWRMutation(PersonalVehicleUrl, addInspectionPersonalVehicle);
+  const user = useSelector((store: AppStore) => store.user);
 
-  const {
-    error: errorInspectionPersonalElectronic,
-    trigger: triggerInspectionPersonalElectronic,
-  } = useSWRMutation(PersonalElectronicUrl, addInspectionPersonalElectronic);
-
-  const {
-    error: errorInspectionLegalVehicle,
-    trigger: triggerInspectionLegalVehicle,
-  } = useSWRMutation(LegalVehicleUrl, addInspectionLegalVehicle);
-
-  const {
-    error: errorInspectionLegalElectronic,
-    trigger: triggerInspectionLegalElectronic,
-  } = useSWRMutation(LegalElectronicUrl, addInspectionLegalElectronic);
+  const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =
+    useSWRMutation(
+      createAssetInClientUserUrl(user.user.id),
+      createAssetInClientUser
+    );
 
   const triggers = {
-    triggerInspectionPersonalVehicle,
-    triggerInspectionPersonalElectronic,
-    triggerInspectionLegalVehicle,
-    triggerInspectionLegalElectronic,
+    triggerInspectionPersonal,
   };
 
-  const fetchErrors = [
-    errorInspectionPersonalVehicle,
-    errorInspectionPersonalElectronic,
-    errorInspectionLegalVehicle,
-    errorInspectionLegalElectronic,
-  ];
+  const fetchErrors = [errorInspectionPersonal];
 
   useEffect(() => {
     for (const err in fetchErrors) {
@@ -374,7 +359,11 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
       })
     );
 
-    //  validationFormDataInspect({ inputValues, errorsInputValues, triggers });
+    validationFormDataInspection({
+      inputValues,
+      errorsInputValues,
+      triggers,
+    });
   };
 
   const values = {

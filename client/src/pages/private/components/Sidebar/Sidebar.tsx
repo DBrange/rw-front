@@ -17,6 +17,7 @@ import { TfiWrite } from "react-icons/tfi";
 import { BsShieldCheck } from "react-icons/bs";
 import { LinkNavigate } from "@/styledComponents";
 import LogOut from "../LogOut/LogOut";
+import { PrivateRoutes } from "@/models/types/routes";
 
 function Sidebar() {
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
@@ -64,14 +65,18 @@ function Sidebar() {
             </LiSidebarItem>
           </LinkNavigate>
 
-          <LinkNavigate to="/dashboard/cliente/crear-inspeccion">
+          <LinkNavigate
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_INSPECTION}`}
+          >
             <LiSidebarItem>
               <BsShieldCheck size={20} />
               Inspeccionar
             </LiSidebarItem>
           </LinkNavigate>
 
-          <LinkNavigate to="/dashboard/cliente/crear-denuncia">
+          <LinkNavigate
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER}`}
+          >
             <LiSidebarItem>
               <TbReportAnalytics size={20} />
               Denunciar

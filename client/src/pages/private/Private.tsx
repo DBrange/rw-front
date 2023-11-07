@@ -19,30 +19,30 @@ function Private() {
     <RoutesWithNotFound>
       <Route
         path="/"
-        element={<Navigate replace to={PrivateRoutes.DASH} />}
+        element={<Navigate replace to={PrivateRoutes.DASHBOARD} />}
       />
-      <Route path="/dashboard/cliente" element={<ClientUser />} />
+      <Route path={PrivateRoutes.DASHBOARD} element={<ClientUser />} />
       <Route
-        path="/dashboard/cliente/crear-inspeccion"
+        path={PrivateRoutes.CREATE_INSPECTION}
         element={<ClientCreateInspection />}
       />
       <Route
-        path="/dashboard/cliente/crear-denuncia"
+        path={PrivateRoutes.CREATE_SINISTER}
         element={<ClientCreateReport />}
       />
       <Route
-        path="/dashboard/cliente/asegurado/crear-denuncia"
+        path={PrivateRoutes.CREATE_SINISTER_IN_INSURED}
         element={<ClientInspectedCreateReport />}
       />
-      <Route
-        path="/dashboard/cliente/inspecciones"
-        element={<ClientInspections />}
-      />
+      <Route path={PrivateRoutes.ALL_INSURED} element={<ClientInspections />} />
       <Route
         path="/dashboard/cliente/inspeccion/:inspectionId"
         element={<ClientInspectionDetail />}
       />
-      <Route path="/dashboard/cliente/denuncias" element={<ClientReports />} />
+      <Route
+        path={PrivateRoutes.ALL_SINISTER}
+        element={<ClientReports />}
+      />
       <Route path="/dashboard/cliente/perfil" element={<ClientMyProfile />} />
       <Route path="/dashboard/broker" element={<BrokerUser />} />
       <Route path="/dashboard/admin" element={<AdminUser />} />

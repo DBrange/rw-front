@@ -1,3 +1,4 @@
+import { PublicRoutes } from "@/models/types/routes";
 import { LinkNavigate, theme } from "@/styledComponents";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -26,7 +27,7 @@ function LoginBtn() {
         path === "/public/login" ||
         path === "/public/registrarse"
       ) && (
-        <LinkNavigate to="/public/login">
+        <LinkNavigate to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.LOGIN}`}>
           <BtnLogin>Login</BtnLogin>
         </LinkNavigate>
       )}

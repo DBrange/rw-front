@@ -2,5 +2,8 @@ export { default as ClientCreateInspection } from './ClientCreateInspection';
 export * from './components/AllClientCreateInspectionPages';
 export * from './components/ClientCreateInspectionBox';
 export * from './components/ClientCreateInspectionContainer';
+export * from './components/FormAllDetailsClientCreateInspection';
 export * from './components';
 export * from './context';
+export * from './services';
+export * from './utilities/validation-form-data-inspection.utility';

@@ -9,5 +9,10 @@ export enum PublicRoutes {
 
 export enum PrivateRoutes {
   PRIVATE = "private",
-  DASH = "dashboard/cliente",
+  DASHBOARD = "dashboard",
+  CREATE_INSPECTION = "crear-inspeccion",
+  CREATE_SINISTER = "crear-siniestro",
+  CREATE_SINISTER_IN_INSURED = "crear-siniestro",
+  ALL_INSURED = 'asegurados',
+  ALL_SINISTER = 'siniestros',
 }
