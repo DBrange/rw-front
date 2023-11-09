@@ -31,18 +31,15 @@ function Private() {
         element={<ClientCreateReport />}
       />
       <Route
-        path={PrivateRoutes.CREATE_SINISTER_IN_INSURED}
+        path={`${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/:insuredId`}
         element={<ClientInspectedCreateReport />}
       />
       <Route path={PrivateRoutes.ALL_INSURED} element={<ClientInspections />} />
       <Route
-        path="/dashboard/cliente/inspeccion/:inspectionId"
+        path={`${PrivateRoutes.INSURED_DETAIL}/:insuredId`}
         element={<ClientInspectionDetail />}
       />
-      <Route
-        path={PrivateRoutes.ALL_SINISTER}
-        element={<ClientReports />}
-      />
+      <Route path={PrivateRoutes.ALL_SINISTER} element={<ClientReports />} />
       <Route path="/dashboard/cliente/perfil" element={<ClientMyProfile />} />
       <Route path="/dashboard/broker" element={<BrokerUser />} />
       <Route path="/dashboard/admin" element={<AdminUser />} />

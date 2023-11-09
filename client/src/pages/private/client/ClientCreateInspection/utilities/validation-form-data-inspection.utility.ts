@@ -1,31 +1,29 @@
 import {
+  ErrorsElectronicValues,
+  ErrorsGncValues,
+  ErrorsPhoneValues,
+  ErrorsVehicleValues
+} from "@/models";
+import {
   ClientCreateInspectionValues,
   ErrorsClientCreateInspectionValues,
 } from "@/pages";
-import { InputValues } from "../../../../public/Login/interfaces/inputValues.interface";
 import { validate } from "@/utilities";
-import {
-  ErrorsPersonalValues,
-  ErrorsVehicleValues,
-  ErrorsGncValues,
-  ErrorsLegalPersonalValues,
-  ErrorsElectronicValues,
-  ErrorsPhoneValues,
-} from "@/models";
 
 interface Params {
   inputValues: ClientCreateInspectionValues;
   errorsInputValues: Partial<ErrorsClientCreateInspectionValues> | undefined;
   triggers: any;
+  user: ClientInfo
 }
 
 export const validationFormDataInspection = ({
   inputValues: { vehicle, electronic, gnc, phone, swornDeclaration },
   errorsInputValues,
-  triggers: { triggerInspectionPersonal },
+  triggers: { triggerInspectionPersonal },user
 }: Params) => {
   if (swornDeclaration.swornDeclaration) {
-    if (errorsInputValues?.vehicle) {
+    if (user.user.dni && errorsInputValues?.vehicle) {
       if (vehicle.gnc) {
         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
           const dataObj = {
@@ -56,7 +54,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (errorsInputValues?.vehicle) {
+    } else if (user.user.cuit && errorsInputValues?.vehicle) {
       if (vehicle.gnc) {
         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
           const dataObj = {
@@ -87,7 +85,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (errorsInputValues?.electronic) {
+    } else if (user.user.dni && errorsInputValues?.electronic) {
       if (electronic.type === "CELULAR") {
         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
           const dataObj = {
@@ -118,7 +116,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if ( errorsInputValues?.electronic) {
+    } else if (user.user.cuit && errorsInputValues?.electronic) {
       if (electronic.type === "CELULAR") {
         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
           const dataObj = {

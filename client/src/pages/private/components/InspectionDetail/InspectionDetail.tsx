@@ -4,6 +4,8 @@ import {
   DivInformationDetail,
 } from "../MiProfile/MiProfile.styled";
 import { DivHeaderInspectionDetail } from "./InspectionDetail.styled";
+import { Link, useParams } from "react-router-dom";
+import { PrivateRoutes } from '../../../../models/types/routes';
 
 function InspectionDetail(values: VehicleValues & GncValues) {
   
@@ -29,6 +31,8 @@ function InspectionDetail(values: VehicleValues & GncValues) {
     oblea,
   } = values
 
+  const { insuredId } = useParams();
+
   return (
     <section>
       <DivHeaderInspectionDetail>
@@ -38,6 +42,7 @@ function InspectionDetail(values: VehicleValues & GncValues) {
         <h2>{plate}</h2>
       </DivHeaderInspectionDetail>
       <DivInformationMyProfile>
+        <Link to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${insuredId}`}>Para denunciar</Link>
         <DivInformationDetail>
           <h4>Año</h4>
           <p>{year}</p>

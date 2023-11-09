@@ -19,27 +19,21 @@ import {
   ClickEventType,
   ClientCreateReportValues,
   ErrorsClientCreateReportValues,
-  LegalPersonalElectronicTheftUrl,
-  LegalPersonalVehicleCrashUrl,
-  LegalPersonalVehicleFireUrl,
-  LegalPersonalVehicleTheftUrl,
-  PersonalElectronicTheftUrl,
-  PersonalVehicleCrashUrl,
-  PersonalVehicleFireUrl,
-  PersonalVehicleTheftUrl,
   SelectEventType,
   SubmitEventType,
   TouchedClientCreateReportValues,
-  addReportLegalElectronicTheft,
-  addReportLegalPersonalVehicleFire,
-  addReportLegalPersonalVehicleTheft,
-  addReportLegalVehicleCrash,
-  addReportPersonalElectronicTheft,
-  addReportPersonalVehicleCrash,
-  addReportPersonalVehicleFire,
-  addReportPersonalVehicleTheft,
-  validateClientCreateReport,
+  addReportVehicleCrash,
+  addReportVehicleFire,
+  addReportVehicleTheft,
+  reportInClientLegalCrashUrl,
+  reportInClientLegalFireUrl,
+  reportInClientLegalTheftUrl,
+  reportInClientUserCrashUrl,
+  reportInClientUserFireUrl,
+  reportInClientUserTheftUrl,
+  validateClientCreateReport
 } from "@/pages";
+import { AppStore } from "@/redux";
 import {
   touchedAllCrashVehiclesValuesTrue,
   touchedAllThirdPartyInjuredValuesTrue,
@@ -55,6 +49,7 @@ import {
   validate,
 } from "@/utilities";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import useSWRMutation from "swr/mutation";
 import {
   emptyClientCreateReportValues,
@@ -64,6 +59,7 @@ import {
   IClientCreateReportContext,
   emptyClientCreateReportContext,
 } from "./empty-ClientCreatesReport-context";
+import { validationFormDataReport } from "../utilities/validation-form-data-report.utility";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
 type onlyLicensePhoto = Pick<ThirdPartyVehicleValues, "licensePhoto">;
@@ -1155,78 +1151,66 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const {
-    error: errorReportPersonalVehicleCrash,
-    trigger: triggerReportPersonalVehicleCrash,
-  } = useSWRMutation(PersonalVehicleCrashUrl, addReportPersonalVehicleCrash);
+  const user = useSelector((store: AppStore) => store.user);
 
-  const {
-    error: errorReportPersonalVehicleTheft,
-    trigger: triggerReportPersonalVehicleTheft,
-  } = useSWRMutation(PersonalVehicleTheftUrl, addReportPersonalVehicleTheft);
+  const { error: errorReportVehicleTheft, trigger: triggerReportVehicleTheft } =
+    useSWRMutation(
+      reportInClientUserTheftUrl(user.user.id),
+      addReportVehicleTheft
+    );
 
-  const {
-    error: errorReportPersonalVehicleFire,
-    trigger: triggerReportPersonalVehicleFire,
-  } = useSWRMutation(PersonalVehicleFireUrl, addReportPersonalVehicleFire);
+  const { error: errorReportVehicleFire, trigger: triggerReportVehicleFire } =
+    useSWRMutation(
+      reportInClientUserFireUrl(user.user.id),
+      addReportVehicleFire
+    );
 
-  const {
-    error: errorReportLegalVehicleCrash,
-    trigger: triggerReportLegalVehicleCrash,
-  } = useSWRMutation(LegalPersonalVehicleCrashUrl, addReportLegalVehicleCrash);
+  const { error: errorReportVehicleCrash, trigger: triggerReportVehicleCrash } =
+    useSWRMutation(
+      reportInClientUserCrashUrl(user.user.id),
+      addReportVehicleCrash
+    );
 
   const {
     error: errorReportLegalVehicleTheft,
     trigger: triggerReportLegalVehicleTheft,
   } = useSWRMutation(
-    LegalPersonalVehicleTheftUrl,
-    addReportLegalPersonalVehicleTheft
+    reportInClientLegalTheftUrl(user.user.id),
+    addReportVehicleTheft
   );
 
   const {
     error: errorReportLegalVehicleFire,
     trigger: triggerReportLegalVehicleFire,
   } = useSWRMutation(
-    LegalPersonalVehicleFireUrl,
-    addReportLegalPersonalVehicleFire
+    reportInClientLegalFireUrl(user.user.id),
+    addReportVehicleFire
   );
 
   const {
-    error: errorReportPersonalElectronicTheft,
-    trigger: triggerReportPersonalElectronicTheft,
+    error: errorReportLegalVehicleCrash,
+    trigger: triggerReportLegalVehicleCrash,
   } = useSWRMutation(
-    PersonalElectronicTheftUrl,
-    addReportPersonalElectronicTheft
-  );
-
-  const {
-    error: errorReportLegalElectronicTheft,
-    trigger: triggerReportLegalElectronicTheft,
-  } = useSWRMutation(
-    LegalPersonalElectronicTheftUrl,
-    addReportLegalElectronicTheft
+    reportInClientLegalCrashUrl(user.user.id),
+    addReportVehicleCrash
   );
 
   const triggers = {
-    triggerReportPersonalVehicleCrash,
-    triggerReportPersonalVehicleTheft,
-    triggerReportPersonalVehicleFire,
+    triggerReportVehicleCrash,
+    triggerReportVehicleTheft,
+    triggerReportVehicleFire,
     triggerReportLegalVehicleCrash,
     triggerReportLegalVehicleTheft,
     triggerReportLegalVehicleFire,
-    triggerReportPersonalElectronicTheft,
-    triggerReportLegalElectronicTheft,
   };
 
   const fetchErrors = [
-    errorReportPersonalVehicleCrash,
-    errorReportPersonalVehicleTheft,
-    errorReportPersonalVehicleFire,
+    errorReportVehicleCrash,
+    errorReportVehicleTheft,
+    errorReportVehicleFire,
     errorReportLegalVehicleCrash,
     errorReportLegalVehicleTheft,
     errorReportLegalVehicleFire,
-    errorReportPersonalElectronicTheft,
-    errorReportLegalElectronicTheft,
   ];
 
   useEffect(() => {
@@ -1257,12 +1241,13 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       })
     );
 
-    // validationFormDataReport({
-    //   inputValues,
-    //   errorsInputValues,
-    //   triggers,
-    //   amountInjured,
-    // });
+    validationFormDataReport({
+      inputValues,
+      errorsInputValues,
+      triggers,
+      amountInjured,
+      user,
+    });
   };
 
   const values = {

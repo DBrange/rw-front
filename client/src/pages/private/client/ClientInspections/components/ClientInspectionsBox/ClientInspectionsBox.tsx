@@ -1,40 +1,61 @@
 import {
-  AllClientVehicles,
+  AllClientAssets,
   InspectLogin,
   InspectionCard,
   Sidebar,
 } from "@/pages";
 import useSWR from "swr";
 import {
-  AllVehiclesUrl,
+  AllAssetsLegalUserUrl,
+  AllAssetsUserUrl,
   allInspectedVehicles,
   useClientInspectionsContext,
 } from "../..";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 function ClientInspectionsBox() {
   const { filterData, setSearchField, searchField } =
     useClientInspectionsContext();
 
-  const { error: errorAllInspectedVehicles, data: AllInspectedVehicles } =
-    useSWR(AllVehiclesUrl, allInspectedVehicles);
+    const user = useSelector((store: AppStore) => store.user);
 
-  const searchedVehicles: AllClientVehicles[] = filterData<AllClientVehicles>(
+  const { error: errorAllInspectedVehicles, data: AllInspectedVehicles } =
+    useSWR(AllAssetsLegalUserUrl(user.user.id), allInspectedVehicles);
+
+  const searchedVehicles: AllClientAssets[] = filterData<AllClientAssets>(
     AllInspectedVehicles!,
     searchField
   );
 
   const cards: JSX.Element = (
     <>
-      {searchedVehicles?.map((vehicle) => (
-        <InspectionCard
-          key={vehicle.id}
-          type={vehicle.type}
-          keyName={vehicle.plate}
-        />
-      ))}
+      {searchedVehicles?.map((el) => {
+        if (el.vehicle) {
+          return (
+            <InspectionCard
+              key={el.id}
+              type={el.vehicle.type}
+              keyName={el.vehicle.plate}
+              id={el.id}
+            />
+          );
+        } else if (el.electronics) {
+          return (
+            <InspectionCard
+              key={el.id}
+              type={el.electronics.type}
+              keyName={el.electronics.brand}
+              id={el.id}
+            />
+          );
+        } else {
+          return [];
+        }
+      })}
     </>
   );
-  
+
   return (
     <>
       <Sidebar />

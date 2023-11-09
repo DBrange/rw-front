@@ -19,27 +19,13 @@ import {
   ClickEventType,
   ClientInspectedCreateReportValues,
   ErrorsClientInspectedCreateReportValues,
-  LegalPersonalElectronicTheftUrl,
-  LegalPersonalVehicleCrashUrl,
-  LegalPersonalVehicleFireUrl,
-  LegalPersonalVehicleTheftUrl,
-  PersonalElectronicTheftUrl,
-  PersonalVehicleCrashUrl,
-  PersonalVehicleFireUrl,
-  PersonalVehicleTheftUrl,
   SelectEventType,
   SubmitEventType,
   TouchedClientInspectedCreateReportValues,
-  addReportLegalElectronicTheft,
-  addReportLegalPersonalVehicleFire,
-  addReportLegalPersonalVehicleTheft,
-  addReportLegalVehicleCrash,
-  addReportPersonalElectronicTheft,
-  addReportPersonalVehicleCrash,
-  addReportPersonalVehicleFire,
-  addReportPersonalVehicleTheft,
   validateClientInspectedCreateReport,
+  validationFormDataInspectedReport
 } from "@/pages";
+import { AppStore } from "@/redux";
 import {
   touchedAllCrashVehiclesValuesTrue,
   touchedAllThirdPartyInjuredValuesTrue,
@@ -55,15 +41,18 @@ import {
   validate,
 } from "@/utilities";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import useSWRMutation from "swr/mutation";
 import {
   emptyClientInspectedCreateReportValues,
   touchedClientInspectedCreateReportValues,
 } from "../../../utilities/client-inspected-create-report/objects-client-inspected-create-report";
+import { addReportCrash, addReportFire, addReportTheft, reportInInspectionCrashUrl, reportInInspectionFireUrl, reportInInspectionTheftUrl } from "../services/add-report-inspected.service";
 import {
   IClientInspectedCreateReportContext,
   emptyClientInspectedCreateReportContext,
 } from "./empty-ClientInspectedCreatesReport-context";
+import { useParams } from "react-router-dom";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
 type onlyLicensePhoto = Pick<ThirdPartyVehicleValues, "licensePhoto">;
@@ -1064,79 +1053,34 @@ export const ClientInspectedCreateReportProvider = ({
     }
   };
 
-  const {
-    error: errorReportPersonalVehicleCrash,
-    trigger: triggerReportPersonalVehicleCrash,
-  } = useSWRMutation(PersonalVehicleCrashUrl, addReportPersonalVehicleCrash);
+  const user = useSelector((store: AppStore) => store.user);
+  const { insuredId } = useParams();
 
-  const {
-    error: errorReportPersonalVehicleTheft,
-    trigger: triggerReportPersonalVehicleTheft,
-  } = useSWRMutation(PersonalVehicleTheftUrl, addReportPersonalVehicleTheft);
+  const { error: errorReportTheft, trigger: triggerReportTheft } =
+    useSWRMutation(
+      reportInInspectionTheftUrl(insuredId),
+      addReportTheft
+    );
 
-  const {
-    error: errorReportPersonalVehicleFire,
-    trigger: triggerReportPersonalVehicleFire,
-  } = useSWRMutation(PersonalVehicleFireUrl, addReportPersonalVehicleFire);
+  const { error: errorReportFire, trigger: triggerReportFire } =
+    useSWRMutation(
+      reportInInspectionFireUrl(insuredId),
+      addReportFire
+    );
 
-  const {
-    error: errorReportLegalVehicleCrash,
-    trigger: triggerReportLegalVehicleCrash,
-  } = useSWRMutation(LegalPersonalVehicleCrashUrl, addReportLegalVehicleCrash);
-
-  const {
-    error: errorReportLegalVehicleTheft,
-    trigger: triggerReportLegalVehicleTheft,
-  } = useSWRMutation(
-    LegalPersonalVehicleTheftUrl,
-    addReportLegalPersonalVehicleTheft
-  );
-
-  const {
-    error: errorReportLegalVehicleFire,
-    trigger: triggerReportLegalVehicleFire,
-  } = useSWRMutation(
-    LegalPersonalVehicleFireUrl,
-    addReportLegalPersonalVehicleFire
-  );
-
-  const {
-    error: errorReportPersonalElectronicTheft,
-    trigger: triggerReportPersonalElectronicTheft,
-  } = useSWRMutation(
-    PersonalElectronicTheftUrl,
-    addReportPersonalElectronicTheft
-  );
-
-  const {
-    error: errorReportLegalElectronicTheft,
-    trigger: triggerReportLegalElectronicTheft,
-  } = useSWRMutation(
-    LegalPersonalElectronicTheftUrl,
-    addReportLegalElectronicTheft
-  );
+  const { error: errorReportCrash, trigger: triggerReportCrash } =
+    useSWRMutation(
+      reportInInspectionCrashUrl(insuredId),
+      addReportCrash
+    );
 
   const triggers = {
-    triggerReportPersonalVehicleCrash,
-    triggerReportPersonalVehicleTheft,
-    triggerReportPersonalVehicleFire,
-    triggerReportLegalVehicleCrash,
-    triggerReportLegalVehicleTheft,
-    triggerReportLegalVehicleFire,
-    triggerReportPersonalElectronicTheft,
-    triggerReportLegalElectronicTheft,
+    triggerReportTheft,
+    triggerReportFire,
+    triggerReportCrash,
   };
 
-  const fetchErrors = [
-    errorReportPersonalVehicleCrash,
-    errorReportPersonalVehicleTheft,
-    errorReportPersonalVehicleFire,
-    errorReportLegalVehicleCrash,
-    errorReportLegalVehicleTheft,
-    errorReportLegalVehicleFire,
-    errorReportPersonalElectronicTheft,
-    errorReportLegalElectronicTheft,
-  ];
+  const fetchErrors = [errorReportTheft, errorReportFire, errorReportCrash];
 
   useEffect(() => {
     for (const err in fetchErrors) {
@@ -1166,12 +1110,13 @@ export const ClientInspectedCreateReportProvider = ({
       })
     );
 
-    // validationFormDataReport({
-    //   inputValues,
-    //   errorsInputValues,
-    //   triggers,
-    //   amountInjured,
-    // });
+    validationFormDataInspectedReport({
+      inputValues,
+      errorsInputValues,
+      triggers,
+      amountInjured,
+      user
+    });
   };
 
   const values = {

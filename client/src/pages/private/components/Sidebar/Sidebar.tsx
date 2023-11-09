@@ -44,21 +44,27 @@ function Sidebar() {
       <DivSidebarWrapper $isOpen={stateOfSidebar} onClick={handleSidebarClick}>
         <MainName />
         <UlSidebarList>
-          <LinkNavigate to="/dashboard/cliente">
+          <LinkNavigate
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.DASHBOARD}`}
+          >
             <LiSidebarItem>
               <MdOutlineDashboard size={20} />
               Inicio
             </LiSidebarItem>
           </LinkNavigate>
 
-          <LinkNavigate to="/dashboard/cliente/inspecciones">
+          <LinkNavigate
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_INSURED}`}
+          >
             <LiSidebarItem>
               <TfiWrite size={20} />
               Inspecciones
             </LiSidebarItem>
           </LinkNavigate>
 
-          <LinkNavigate to="/dashboard/cliente/denuncias">
+          <LinkNavigate
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_SINISTER}`}
+          >
             <LiSidebarItem>
               <IoNewspaperOutline size={20} />
               Denuncias
@@ -85,7 +91,9 @@ function Sidebar() {
         </UlSidebarList>
         <FooterSidebar>
           <UlSidebarList>
-            <LinkNavigate to="/dashboard/cliente/perfil">
+            <LinkNavigate
+              to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.MY_PROFILE}`}
+            >
               <LiSidebarItem>
                 <BsFillPersonFill size={20} />
                 Mi perfil

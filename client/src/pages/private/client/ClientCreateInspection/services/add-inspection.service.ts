@@ -3,7 +3,7 @@ import { loaderImageService, modalSentService } from "@/services/sharing-informa
 
 export const BaseUrl = "http://localhost:3001/v1";
 
-export const createAssetInClientUserUrl = (id: string) => `${BaseUrl}/asset/in-user/${id}`;
+export const createAssetInClientUserUrl = (id?: string) => `${BaseUrl}/asset/in-user/${id}`;
 
 export const createAssetInClientUser = async (
   url: string,

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-import { AllClientVehicles } from "@/pages";
+import { AllClientAssets } from "@/pages";
 import { IClientInspectionsContext, emptyClientInspectionsContext } from "./empty-ClienInspections-context";
 
 export const ClientInspectionsContext = createContext<IClientInspectionsContext>(
@@ -14,7 +14,7 @@ type ChildrenType = {
 export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
   const [searchField, setSearchField] = useState<string>('');
 
-  const filterData = <T extends AllClientVehicles>(
+  const filterData = <T extends AllClientAssets>(
     data: T[],
     searchField: string
   ): T[] => {
@@ -22,7 +22,7 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
       return data || [];
     } else if (searchField.length && data?.[0]?.hasOwnProperty("plate")) {
       const regex = new RegExp(`^${searchField}`, "i");
-      return data.filter((el) => regex.test(el.plate));
+      return data.filter((el) => regex.test(el?.vehicle?.plate as string));
     }
     return [];
   };

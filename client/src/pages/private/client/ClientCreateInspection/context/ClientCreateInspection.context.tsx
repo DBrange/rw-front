@@ -363,6 +363,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
       inputValues,
       errorsInputValues,
       triggers,
+      user
     });
   };
 

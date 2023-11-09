@@ -15,4 +15,6 @@ export enum PrivateRoutes {
   CREATE_SINISTER_IN_INSURED = "crear-siniestro",
   ALL_INSURED = 'asegurados',
   ALL_SINISTER = 'siniestros',
+  INSURED_DETAIL = 'asegurado',
+  MY_PROFILE = 'perfil'
 }
