@@ -14,7 +14,7 @@ interface Props {
 function BtnChoice({ buttons, changeForm }: Props) {
   return (
     <BtnChoiceContainer>
-      {buttons.map(({ value, label, active }) => (
+      {buttons.map(({ value, label, active }: Buttons) => (
         <BtnChoi
           $active={active}
           key={label}

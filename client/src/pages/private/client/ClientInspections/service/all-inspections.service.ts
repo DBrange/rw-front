@@ -1,10 +1,12 @@
-import {  AllClientAssets } from "@/pages";
+import { AllClientAssets } from "@/pages";
 
 export const BaseUrlInspect = "http://localhost:3001/v1";
-export const AllAssetsUserUrl = (id?: string) => BaseUrlInspect + `/asset/user-login/${id}`;
-export const AllAssetsLegalUserUrl = (id?: string) => BaseUrlInspect + `/asset/legal-user-login/${id}`;
+export const AllAssetsUserUrl = (id?: string) =>
+  BaseUrlInspect + `/asset/user-login/${id}`;
+export const AllAssetsLegalUserUrl = (id?: string) =>
+  BaseUrlInspect + `/asset/legal-user-login/${id}`;
 
-export const allInspectedVehicles = async (
+export const allInspected = async (
   url: string
 ): Promise<AllClientAssets[] | [] | undefined> => {
   try {

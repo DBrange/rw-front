@@ -17,21 +17,9 @@ import {
   ChangeEventTextAreaType,
   ChangeEventType,
   ClickEventType,
-  ClientCreateReportValues,
-  ErrorsClientCreateReportValues,
   SelectEventType,
   SubmitEventType,
-  TouchedClientCreateReportValues,
-  addReportVehicleCrash,
-  addReportVehicleFire,
-  addReportVehicleTheft,
-  reportInClientLegalCrashUrl,
-  reportInClientLegalFireUrl,
-  reportInClientLegalTheftUrl,
-  reportInClientUserCrashUrl,
-  reportInClientUserFireUrl,
-  reportInClientUserTheftUrl,
-  validateClientCreateReport
+
 } from "@/pages";
 import { AppStore } from "@/redux";
 import {
@@ -55,11 +43,13 @@ import {
   emptyClientCreateReportValues,
   touchedClientCreateReportValues,
 } from "../../../utilities/client-create-report/objects-client-create-report.utility";
+import { validationFormDataReport } from "../utilities/validation-form-data-report.utility";
 import {
   IClientCreateReportContext,
   emptyClientCreateReportContext,
 } from "./empty-ClientCreatesReport-context";
-import { validationFormDataReport } from "../utilities/validation-form-data-report.utility";
+import { ClientCreateReportValues, TouchedClientCreateReportValues, ErrorsClientCreateReportValues, validateClientCreateReport } from "@/pages/private";
+import { reportInClientUserTheftUrl, addReportVehicleTheft, reportInClientUserFireUrl, addReportVehicleFire, reportInClientUserCrashUrl, addReportVehicleCrash, reportInClientLegalTheftUrl, reportInClientLegalFireUrl, reportInClientLegalCrashUrl } from "..";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
 type onlyLicensePhoto = Pick<ThirdPartyVehicleValues, "licensePhoto">;

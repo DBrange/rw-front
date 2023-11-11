@@ -2,23 +2,10 @@ import { ChildrenType, ElementActive, TouchedForms } from "@/models";
 import {
   ChangeEventType,
   ClickEventType,
-  ClientCreateInspectionValues,
-  ErrorsClientCreateInspectionValues,
-  LegalElectronicUrl,
-  LegalVehicleUrl,
-  PersonalElectronicUrl,
-  PersonalVehicleUrl,
+
   SelectEventType,
   SubmitEventType,
-  TouchedClientCreateInspectionValues,
-  addInspectionLegalElectronic,
-  addInspectionLegalVehicle,
-  addInspectionPersonalElectronic,
-  addInspectionPersonalVehicle,
-  createAssetInClientUser,
-  createAssetInClientUserUrl,
-  validateClientCreateInspection,
-  validationFormDataInspection,
+
 } from "@/pages";
 import {
   touchedElectronicValuesTrue,
@@ -37,6 +24,8 @@ import {
 } from "./empty-clientCreateInspection-context";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
+import { ClientCreateInspectionValues, TouchedClientCreateInspectionValues, ErrorsClientCreateInspectionValues, validateClientCreateInspection } from "@/pages/private";
+import { createAssetInClientUserUrl, createAssetInClientUser, validationFormDataInspection } from "..";
 
 const ClientCreateInspectionContext =
   createContext<IClientCreateInspectionContext>(

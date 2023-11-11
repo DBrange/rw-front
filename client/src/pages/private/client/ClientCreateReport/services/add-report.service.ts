@@ -7,8 +7,9 @@ import {
   loaderImageService,
   modalSentService,
 } from "@/services/sharing-information.service";
+import { BaseUrl } from "../..";
 
-export const BaseUrl = "http://localhost:3001/v1";
+
 
 export const reportInClientUserTheftUrl = (id?: string) =>
   `${BaseUrl}/sinister/in-user-theft/${id}`;

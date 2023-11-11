@@ -1,7 +1,7 @@
 import { TheftType, FireType, CrashType } from "@/models/interfaces/add-report-in-inspection.interface";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
+import { BaseUrl } from "../..";
 
-export const BaseUrl = "http://localhost:3001/v1";
 
 export const reportInInspectionTheftUrl = (id?: string) =>
   `${BaseUrl}/sinister/in-user-inspection-theft/${id}`;

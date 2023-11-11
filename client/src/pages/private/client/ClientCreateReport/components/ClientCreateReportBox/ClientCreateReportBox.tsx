@@ -1,10 +1,8 @@
 import { PageBtn } from "@/components";
-import {
-  AllClientCreateReportPages,
-  Sidebar,
-  useClientCreateReportContext,
-} from "@/pages";
+import { Sidebar } from "@/pages";
 import { Form } from "@/styledComponents";
+import { AllClientCreateReportPages } from "..";
+import { useClientCreateReportContext } from "../..";
 
 function ClientCreateReportBox() {
   const {

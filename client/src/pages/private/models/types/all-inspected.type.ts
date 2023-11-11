@@ -1,4 +1,4 @@
-import { AllClientVehicles, AllClientElectronics } from ".";
+import {  AllClientElectronics, AllClientVehicles } from ".";
 
 export interface AllClientInspected {
   vehicles: AllClientVehicles[];

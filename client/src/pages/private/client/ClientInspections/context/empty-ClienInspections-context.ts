@@ -1,16 +1,17 @@
-import { AllClientVehicles } from "@/pages";
-
 export interface IClientInspectionsContext {
-  filterData: <T extends AllClientVehicles>(
-    data: T[],
-    searchField: string
-  ) => T[];
   setSearchField: React.Dispatch<React.SetStateAction<string>>;
   searchField: string;
+  setTypeToFilter: React.Dispatch<
+    React.SetStateAction<"vehicle" | "electronic">
+  >;
+  assets: any;
+  typeToFilter: "vehicle" | "electronic";
 }
 
 export const emptyClientInspectionsContext: IClientInspectionsContext = {
-  filterData: () => [],
   setSearchField: () => {},
   searchField: "",
+  setTypeToFilter: () => {},
+  assets: [],
+  typeToFilter: "vehicle",
 };

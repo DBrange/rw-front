@@ -1,4 +1,5 @@
 export { default as ClientInspections } from './ClientInspections';
+export * from './components/ClientInspectionsBox';
 export * from './components/ClientInspectionsContainer';
 export * from './components';
 export * from './context';

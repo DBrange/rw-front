@@ -4,33 +4,34 @@ import {
   InspectionCard,
   Sidebar,
 } from "@/pages";
-import useSWR from "swr";
 import {
-  AllAssetsLegalUserUrl,
-  AllAssetsUserUrl,
-  allInspectedVehicles,
-  useClientInspectionsContext,
+  useClientInspectionsContext
 } from "../..";
-import { AppStore } from "@/redux";
-import { useSelector } from "react-redux";
 
 function ClientInspectionsBox() {
-  const { filterData, setSearchField, searchField } =
-    useClientInspectionsContext();
-
-    const user = useSelector((store: AppStore) => store.user);
-
-  const { error: errorAllInspectedVehicles, data: AllInspectedVehicles } =
-    useSWR(AllAssetsLegalUserUrl(user.user.id), allInspectedVehicles);
-
-  const searchedVehicles: AllClientAssets[] = filterData<AllClientAssets>(
-    AllInspectedVehicles!,
-    searchField
-  );
+  const {
+    setSearchField,
+    searchField,
+    setTypeToFilter,
+    assets,
+    typeToFilter,
+  } = useClientInspectionsContext();
 
   const cards: JSX.Element = (
     <>
-      {searchedVehicles?.map((el) => {
+      <button
+        value="vehicle"
+        onClick={(e) => setTypeToFilter(e.currentTarget.value as "vehicle")}
+      >
+        vehiculo
+      </button>
+      <button
+        value="electronic"
+        onClick={(e) => setTypeToFilter(e.currentTarget.value as "electronic")}
+      >
+        electronico
+      </button>
+      {assets?.map((el: AllClientAssets) => {
         if (el.vehicle) {
           return (
             <InspectionCard
@@ -41,6 +42,7 @@ function ClientInspectionsBox() {
             />
           );
         } else if (el.electronics) {
+          console.log(el.id)
           return (
             <InspectionCard
               key={el.id}
@@ -61,11 +63,10 @@ function ClientInspectionsBox() {
       <Sidebar />
       <InspectLogin
         sectionName="Inspecciones"
-        error={errorAllInspectedVehicles}
         setSearchField={setSearchField}
         searchField={searchField}
-        placeholder="Buscar patente"
-        name="AllInspectedVehicles"
+        placeholder={typeToFilter === 'vehicle' ? "Buscar patente" : 'Buscar modelo' }
+        name="allInspected"
         cards={cards}
       />
     </>

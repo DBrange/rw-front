@@ -16,5 +16,6 @@ export enum PrivateRoutes {
   ALL_INSURED = 'asegurados',
   ALL_SINISTER = 'siniestros',
   INSURED_DETAIL = 'asegurado',
+  SINISTER_DETAIL = 'siniestro',
   MY_PROFILE = 'perfil'
 }

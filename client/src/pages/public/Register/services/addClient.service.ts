@@ -1,13 +1,12 @@
 import {
   loaderImageService,
-  modalSentService,
   modalSuccessfulRegistration,
 } from "@/services/sharing-information.service";
 import { RegisterUser } from "..";
+import { BaseUrl } from "@/pages";
 
-export const baseUrl = "http://localhost:3001/v1";
-export const usersUrl = `${baseUrl}/users`;
-export const registerUrl = `${usersUrl}/register-login`;
+export const clientsUrl = `${BaseUrl}/users`;
+export const registerUrl = `${clientsUrl}/register-login`;
 
 export const addUser = async (
   url: string,

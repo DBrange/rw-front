@@ -3,7 +3,6 @@ import { FilterField, SectionCard } from "./InspectLogin.styled";
 
 interface Props {
   sectionName: string;
-  error: any;
   setSearchField: React.Dispatch<React.SetStateAction<string>>;
   searchField: string;
   placeholder: string
@@ -13,7 +12,6 @@ interface Props {
 
 function InspectLogin({
   sectionName,
-  error,
   setSearchField,
   searchField,
   placeholder,

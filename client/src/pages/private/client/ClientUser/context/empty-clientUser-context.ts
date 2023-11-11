@@ -1,5 +1,3 @@
-import { AllClientVehicles } from "@/pages";
-
 export interface IClientUserContext {
 
 }

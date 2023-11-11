@@ -17,13 +17,10 @@ import {
   ChangeEventTextAreaType,
   ChangeEventType,
   ClickEventType,
-  ClientInspectedCreateReportValues,
-  ErrorsClientInspectedCreateReportValues,
+
   SelectEventType,
   SubmitEventType,
-  TouchedClientInspectedCreateReportValues,
-  validateClientInspectedCreateReport,
-  validationFormDataInspectedReport
+
 } from "@/pages";
 import { AppStore } from "@/redux";
 import {
@@ -53,6 +50,8 @@ import {
   emptyClientInspectedCreateReportContext,
 } from "./empty-ClientInspectedCreatesReport-context";
 import { useParams } from "react-router-dom";
+import { ClientInspectedCreateReportValues, TouchedClientInspectedCreateReportValues, ErrorsClientInspectedCreateReportValues, validateClientInspectedCreateReport } from "@/pages/private";
+import { validationFormDataInspectedReport } from "..";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
 type onlyLicensePhoto = Pick<ThirdPartyVehicleValues, "licensePhoto">;

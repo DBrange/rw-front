@@ -1,7 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { IClientUserContext } from ".";
 import { emptyClientUserContext } from "./empty-clientUser-context";
-import { AllClientVehicles } from "@/pages";
 
 export const ClientUserContext = createContext<IClientUserContext>(
   emptyClientUserContext
