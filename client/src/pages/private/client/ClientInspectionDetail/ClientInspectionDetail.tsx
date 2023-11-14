@@ -8,8 +8,6 @@ import {
   inspectedDetail,
   detailAssetUrl,
 } from "./services/add-asset-detail.service";
-import { useSelector } from "react-redux";
-import { AppStore } from "@/redux";
 import { useParams } from "react-router-dom";
 
 function ClientInspectionDetail() {

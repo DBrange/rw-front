@@ -20,4 +20,23 @@ interface User {
   address?: string;
   email?: string;
   role?: string;
+  userBroker?: UserBroker;
+  broker?: Broker
+}
+interface UserBroker {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  bussinesName: string;
+  enrollment: string;
+  card: string;
+}
+
+interface Broker {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  bussinesName: string;
+  enrollment: string;
+  card: string;
 }

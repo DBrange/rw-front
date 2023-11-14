@@ -1,3 +1,5 @@
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 import {
   DivImageMyProfile,
   DivInformationDetail,
@@ -9,6 +11,7 @@ import {
 } from "./MiProfile.styled";
 
 function MiProfile() {
+  const user = useSelector((store: AppStore) => store.user.user);
   return (
     <SectionMyProfile>
       <div>
@@ -19,38 +22,51 @@ function MiProfile() {
           />
         </DivImageMyProfile>
         <div>
-          <H2NameLastname>Didier Brange</H2NameLastname>
+          <H2NameLastname>{`${user.name} ${user.lastName}`}</H2NameLastname>
         </div>
       </div>
       <DivInformationMyProfile>
         <DivInformationDetail>
           <h4>Email</h4>
-          <p>didierbrange@gmail.com</p>
+          <p>{user.email}</p>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Email alternativo</h4>
-          <p>brangedidier@hotmail.com</p>
+          <p>{user.altEmail}</p>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Genero</h4>
-          <p>HOMBRE</p>
+          <p>{user.gender}</p>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Fecha de nacimiento</h4>
-          <p>31/03/1998</p>
+          <p>{user.birthDate}</p>
         </DivInformationDetail>
-        <DivInformationDetail>
-          <h4>DNI</h4>
-          <p>41027406</p>
-        </DivInformationDetail>
+        {user.dni ? (
+          <DivInformationDetail>
+            <h4>DNI</h4>
+            <p>{user.dni}</p>
+          </DivInformationDetail>
+        ) : (
+          <>
+            <DivInformationDetail>
+              <h4>Nombre de compañia</h4>
+              <p>{user.companyName}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>CUIT</h4>
+              <p>{user.cuit}</p>
+            </DivInformationDetail>
+          </>
+        )}
         <DivInformationDetail>
           <h4>Numero telefonico</h4>
-          <p>1149162968</p>
+          <p>{user.phoneNumber}</p>
           <MyProfileEditInformaction>Editar</MyProfileEditInformaction>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Residencia</h4>
-          <p>Aristobulo del Valle 865</p>
+          <p>{user.address}</p>
           <MyProfileEditInformaction>Editar</MyProfileEditInformaction>
         </DivInformationDetail>
       </DivInformationMyProfile>

@@ -19,6 +19,8 @@ export const EmptyUserState: ClientInfo = {
     role: undefined,
     companyName: undefined,
     cuit: undefined,
+    userBroker: undefined,
+    broker: undefined
   },
   exp: undefined,
 };

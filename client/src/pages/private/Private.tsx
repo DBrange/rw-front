@@ -10,6 +10,7 @@ import {
   ClientMyProfile,
   BrokerUser,
   AdminUser,
+  ClientReportDetail,
 } from ".";
 import { ClientReports } from "..";
 import { PrivateRoutes } from "@/models/types/routes";
@@ -38,9 +39,13 @@ function Private() {
         path={`${PrivateRoutes.INSURED_DETAIL}/:insuredId`}
         element={<ClientInspectionDetail />}
       />
+      <Route
+        path={`${PrivateRoutes.SINISTER_DETAIL}/:sinisterId`}
+        element={<ClientReportDetail />}
+      />
       <Route path={PrivateRoutes.ALL_INSURED} element={<ClientInspections />} />
       <Route path={PrivateRoutes.ALL_SINISTER} element={<ClientReports />} />
-      <Route path="/dashboard/cliente/perfil" element={<ClientMyProfile />} />
+      <Route path={PrivateRoutes.MY_PROFILE} element={<ClientMyProfile />} />
       <Route path="/dashboard/broker" element={<BrokerUser />} />
       <Route path="/dashboard/admin" element={<AdminUser />} />
     </RoutesWithNotFound>

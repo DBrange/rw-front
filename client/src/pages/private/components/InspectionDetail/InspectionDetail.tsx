@@ -37,6 +37,7 @@ function InspectionDetail({
           gnc,
           fuel,
           type,
+          gncId
         },
       } = values;
       console.log(id);
@@ -84,8 +85,8 @@ function InspectionDetail({
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Fotos del vehiculo</h4>
-              {images.map((el) => (
-                <div>
+              {images.map((el, i) => (
+                <div key={el+i}>
                   <img src={el} />
                 </div>
               ))}
@@ -110,24 +111,24 @@ function InspectionDetail({
               <h4>GNC</h4>
               <p>{gnc ? "Si" : "No"}</p>
             </DivInformationDetail>
-            {/* {gnc && (
+            {gnc && (
               <>
                 <DivInformationDetail>
                   <h4>OBLEA</h4>
-                  <p>{oblea}</p>
+                  <p>{gncId.oblea}</p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Fecha de vencimiento</h4>
-                  <p>{expireDate}</p>
+                  <p>{gncId.expireDate}</p>
                 </DivInformationDetail>
               </>
-            )} */}
+            )}
           </DivInformationMyProfile>
         </>
       );
     } else if (values?.electronics) {
       const {
-        electronics: { brand, model, type },
+        electronics: { brand, model, type,smartphones:{imei,phoneService,phoneNumber} },
       } = values;
 
       return (
@@ -143,6 +144,25 @@ function InspectionDetail({
           >
             Para denunciar
           </Link>
+          <DivInformationMyProfile>
+            {" "}
+            {type === 'CELULAR' && (
+              <>
+                <DivInformationDetail>
+                  <h4>IMEI</h4>
+                  <p>{imei}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Servicio</h4>
+                  <p>{phoneService}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Numero telefonico</h4>
+                  <p>{phoneNumber}</p>
+                </DivInformationDetail>
+              </>
+            )}
+          </DivInformationMyProfile>
         </>
       );
     }

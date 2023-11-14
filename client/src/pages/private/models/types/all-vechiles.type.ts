@@ -61,6 +61,15 @@ interface VehicleDetail {
   fuel: string;
   type: string;
   okm: boolean;
+  gncId: GncDetail
+}
+interface GncDetail {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  expireDate: string;
+  oblea: string;
+  plate: string;
 }
 
 interface UsersDetail {
@@ -101,8 +110,17 @@ interface ElectronicDetail {
   type: string;
   brand: string;
   model: string;
+  smartphones: SmartphonesDetail;
 }
 
+interface SmartphonesDetail {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  imei: string;
+  phoneNumber: string;
+  phoneService: string;
+}
 export interface AllClientVehicles {
   id: number;
   plate: string;
@@ -124,4 +142,132 @@ export interface AllClientVehicles {
   type: VEHICLE_TYPE;
   oblea: string;
   expireDate: string;
+}
+
+//-------
+
+export interface SinisterDetail {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  time: string;
+  date: string;
+  location: string;
+  asset: AssetDetail;
+  injuredd: Injuredd[];
+  thirdPartyVehicle: ThirdPartyVehicle[];
+  sinisterType: SinisterType;
+}
+
+interface SinisterType {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  theft?: Theft;
+  fire?: Fire;
+  crash?: Crash;
+}
+
+
+
+interface ThirdPartyVehicle {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  brand: string;
+  model: string;
+  year: number;
+  plate: string;
+  insuranceCompany: string;
+  insurancePolicy: string;
+  ownerName: string;
+  ownerLastName: string;
+  ownerDni: string;
+  thirdPartyDriver: ThirdPartyDriver
+}
+
+export interface Injuredd {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  amount: number;
+  injuredsInfo: InjuredsInfo[];
+}
+
+interface InjuredsInfo {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  name: string;
+  lastName: string;
+  birthDate: string;
+  phoneNumber: string;
+  email: string;
+  gender: string;
+  dni: string;
+  injuries: string;
+}
+
+export interface Crash {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  time: string;
+  date: string;
+  location: string;
+  details: string;
+  injured: boolean;
+  injuries: string;
+  ambulance: boolean;
+  ambulanceTo: string;
+  thirdInjured: boolean;
+  friendlyStatement: boolean;
+}
+
+export interface Fire {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  time: string;
+  date: string;
+  location: string;
+  details: string;
+  injured: boolean;
+  injuries: string;
+  ambulance: boolean;
+  ambulanceTo: string;
+  thirdInjured: boolean;
+}
+
+
+interface Theft {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  time: string;
+  date: string;
+  location: string;
+  reportPhoto: string[];
+  isTire: boolean;
+  theftTire?: TheftTire;
+}
+
+interface TheftTire {
+  tireAmount: number;
+  tireWear: number;
+  tirePhoto: string[];
+  replacementLocation: string;
+}
+
+interface ThirdPartyDriver {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  name: string;
+  lastName: string;
+  dni: string;
+  address: string;
+  phoneNumber: string;
+  licensePhoto: string[];
+  email: string;
 }

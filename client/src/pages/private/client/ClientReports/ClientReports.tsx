@@ -9,4 +9,5 @@ function ClientReports() {
     </ClientReportsProvider>
   )
 }
+
 export default ClientReports

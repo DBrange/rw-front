@@ -42,7 +42,6 @@ function ClientInspectionsBox() {
             />
           );
         } else if (el.electronics) {
-          console.log(el.id)
           return (
             <InspectionCard
               key={el.id}
