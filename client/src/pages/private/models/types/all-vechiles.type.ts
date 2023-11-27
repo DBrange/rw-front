@@ -1,4 +1,9 @@
 import { FUEL, VEHICLE_TYPE } from "@/models";
+import { User } from "@/models/interfaces/userInfo/userInfo.interface";
+
+export interface ClientDetailInBroker extends User {
+  asset: AllClientAssets[];
+}
 
 export interface AllClientAssets {
   id: string;
@@ -55,13 +60,13 @@ interface VehicleDetail {
   damageLocation: string;
   images: string[];
   plate: string;
-  explodedAirbag: string
-  noSpareTire: string
+  explodedAirbag: string;
+  noSpareTire: string;
   gnc: boolean;
   fuel: string;
   type: string;
   okm: boolean;
-  gncId: GncDetail
+  gncId: GncDetail;
 }
 interface GncDetail {
   id: string;
@@ -72,7 +77,7 @@ interface GncDetail {
   plate: string;
 }
 
-interface UsersDetail {
+export interface UsersDetail {
   id: string;
   creater_at: string;
   updated_at: string;
@@ -90,7 +95,7 @@ interface UsersDetail {
   authorization: string;
 }
 
-interface LegalUserDetail {
+export interface LegalUserDetail {
   id: string;
   creater_at: string;
   updated_at: string;
@@ -168,8 +173,6 @@ interface SinisterType {
   crash?: Crash;
 }
 
-
-
 interface ThirdPartyVehicle {
   id: string;
   creater_at: string;
@@ -183,7 +186,7 @@ interface ThirdPartyVehicle {
   ownerName: string;
   ownerLastName: string;
   ownerDni: string;
-  thirdPartyDriver: ThirdPartyDriver
+  thirdPartyDriver: ThirdPartyDriver;
 }
 
 export interface Injuredd {
@@ -238,7 +241,6 @@ export interface Fire {
   ambulanceTo: string;
   thirdInjured: boolean;
 }
-
 
 interface Theft {
   id: string;

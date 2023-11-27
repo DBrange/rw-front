@@ -26,6 +26,7 @@ import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import { ClientCreateInspectionValues, TouchedClientCreateInspectionValues, ErrorsClientCreateInspectionValues, validateClientCreateInspection } from "@/pages/private";
 import { createAssetInClientUserUrl, createAssetInClientUser, validationFormDataInspection } from "..";
+import { useParams } from "react-router-dom";
 
 const ClientCreateInspectionContext =
   createContext<IClientCreateInspectionContext>(
@@ -308,11 +309,12 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     );
   };
 
+  const {clientId} = useParams()
   const user = useSelector((store: AppStore) => store.user);
 
   const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =
     useSWRMutation(
-      createAssetInClientUserUrl(user.user.id),
+      createAssetInClientUserUrl(user.user.broker ? clientId : user.user.id),
       createAssetInClientUser
     );
 

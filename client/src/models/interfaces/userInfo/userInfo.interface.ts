@@ -1,10 +1,10 @@
-interface ClientInfo {
+export interface ClientInfo {
   accessToken?: string;
   user: User;
   exp?: number;
 }
 
-interface User {
+export interface User {
   id?: string;
   creater_at?: string;
   updated_at?: string;
@@ -40,3 +40,4 @@ interface Broker {
   enrollment: string;
   card: string;
 }
+

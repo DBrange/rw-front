@@ -1,4 +1,12 @@
-import { AllClientSinisters, AllLegalUserSinisterUrl, InspectLogin, ReportCard, Sidebar, allSinister } from "@/pages";
+import {
+  AllClientSinisters,
+  AllLegalUserSinisterUrl,
+  InspectLogin,
+  ReportCard,
+  Sidebar,
+  SidebarBroker,
+  allSinister,
+} from "@/pages";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
@@ -7,6 +15,8 @@ import { useClientReportsContext } from "../../..";
 function ClientReportsBox() {
   const { setSearchField, searchField, setTypeToFilter, assets, typeToFilter } =
     useClientReportsContext();
+
+  const broker = useSelector((store: AppStore) => store.user).user.broker;
 
   const cards: JSX.Element = (
     <>
@@ -50,7 +60,7 @@ function ClientReportsBox() {
 
   return (
     <>
-      <Sidebar />
+      {broker ? <SidebarBroker /> : <Sidebar />}
       <InspectLogin
         sectionName="Siniestros"
         setSearchField={setSearchField}
@@ -64,4 +74,4 @@ function ClientReportsBox() {
     </>
   );
 }
-export default ClientReportsBox
+export default ClientReportsBox;

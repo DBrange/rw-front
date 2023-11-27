@@ -11,12 +11,7 @@ type ChildrenType = {
 };
 
 export const ClientUserProvider = ({ children }: ChildrenType) => {
-
-
-
-  
-
-  const values = {  };
+  const values = {};
 
   return (
     <ClientUserContext.Provider value={values}>
@@ -28,7 +23,7 @@ export const ClientUserProvider = ({ children }: ChildrenType) => {
 export const useClientUserContext = () => {
   const context = useContext(ClientUserContext);
   if (!context) {
-    throw new Error("useClientUser can only be used inside ClientUserProvider");
+    throw new Error("useClientContext can only be used inside ClientUserProvider");
   }
 
   return context;

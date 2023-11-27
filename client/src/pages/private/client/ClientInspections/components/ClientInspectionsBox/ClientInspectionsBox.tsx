@@ -3,10 +3,13 @@ import {
   InspectLogin,
   InspectionCard,
   Sidebar,
+  SidebarBroker,
 } from "@/pages";
 import {
   useClientInspectionsContext
 } from "../..";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 function ClientInspectionsBox() {
   const {
@@ -16,6 +19,8 @@ function ClientInspectionsBox() {
     assets,
     typeToFilter,
   } = useClientInspectionsContext();
+  
+  const broker = useSelector((store: AppStore) => store.user).user.broker;
 
   const cards: JSX.Element = (
     <>
@@ -59,7 +64,7 @@ function ClientInspectionsBox() {
 
   return (
     <>
-      <Sidebar />
+{broker ? <SidebarBroker /> : <Sidebar />}
       <InspectLogin
         sectionName="Inspecciones"
         setSearchField={setSearchField}

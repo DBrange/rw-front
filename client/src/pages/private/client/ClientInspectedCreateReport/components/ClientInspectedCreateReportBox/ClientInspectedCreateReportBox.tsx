@@ -1,7 +1,9 @@
 import { PageBtn } from "@/components";
-import { Sidebar } from "@/pages";
+import { Sidebar, SidebarBroker } from "@/pages";
 import { Form } from "@/styledComponents";
 import { AllClientInspectedCreateReportPages, useClientInspectedCreateReportContext } from "../..";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 function ClientInspectedCreateReportBox() {
   const {
@@ -15,6 +17,8 @@ function ClientInspectedCreateReportBox() {
     amountInjured,
   } = useClientInspectedCreateReportContext();
 
+  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  
   const correspondingPage =
     amountInjured > 0 && amountVehicles > 0 && reportActive.crash
       ? 4
@@ -27,7 +31,7 @@ function ClientInspectedCreateReportBox() {
       : 2;
   return (
     <>
-      <Sidebar />
+{broker ? <SidebarBroker /> : <Sidebar />}
 
       <Form onSubmit={submitValues}>
         <AllClientInspectedCreateReportPages />

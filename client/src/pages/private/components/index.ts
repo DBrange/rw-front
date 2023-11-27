@@ -1,3 +1,9 @@
+export * from './ClientCard';
+export * from './ClientDetail/components/ClientDetailContainer';
+export * from './ClientDetail/components';
+export * from './ClientDetail';
+export * from './ClientDetail/services';
+export * from './ClientProfile';
 export * from './InspectLogin';
 export * from './InspectionCard';
 export * from './InspectionDetail';
@@ -6,3 +12,4 @@ export * from './MiProfile';
 export * from './ReportCard';
 export * from './ReportDetail';
 export * from './Sidebar';
+export * from './SidebarBroker';

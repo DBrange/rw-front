@@ -1,9 +1,8 @@
-import { AssetDetail, BaseUrlInspect } from "@/pages";
+import { AssetDetail, baseUrl } from "@/pages";
 
-export const BaseUrlInspectt = "http://localhost:3001/v1";
 
 export const detailAssetUrl = (id?: string) =>
-  `${BaseUrlInspectt}/asset/${id}`;
+  `${baseUrl}/asset/${id}`;
 
 
 export const inspectedDetail = async (

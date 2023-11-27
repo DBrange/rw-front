@@ -118,7 +118,7 @@ function ReportnDetail({
   };
 
   const dataInHTML = () => {
-    if (values?.asset.vehicle) {
+    if (values?.asset?.vehicle) {
       const {
         asset: {
           vehicle: {
@@ -395,7 +395,7 @@ function ReportnDetail({
           </DivInformationMyProfile>
         </>
       );
-    } else if (values?.asset.electronics) {
+    } else if (values?.asset?.electronics) {
       const {
         asset: {
           electronics: {
@@ -416,11 +416,11 @@ function ReportnDetail({
             {/* <h2></h2> */}
             {/* <h2>{plate}</h2> */}
           </DivHeaderInspectionDetail>
-          <Link
+          {/* <Link
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`}
           >
             Para denunciar
-          </Link>
+          </Link> */}
           <DivInformationMyProfile>
             {" "}
             {type === "CELULAR" && (

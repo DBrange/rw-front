@@ -1,3 +1,4 @@
+import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
 import { persistLocalStorage, clearLocalStorage } from "@/utilities";
 import { createSlice } from "@reduxjs/toolkit";
 

@@ -18,9 +18,12 @@ import { BsShieldCheck } from "react-icons/bs";
 import { LinkNavigate } from "@/styledComponents";
 import LogOut from "../LogOut/LogOut";
 import { PrivateRoutes } from "@/models/types/routes";
+import { useDispatch } from "react-redux";
+import { resetClient } from "@/redux/slices/clientSlice";
 
 function Sidebar() {
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     sidebarService.setSubject(false);
@@ -99,7 +102,9 @@ function Sidebar() {
                 Mi perfil
               </LiSidebarItem>
             </LinkNavigate>
-            <LogOut />
+            <span onClick={() => dispatch(resetClient())}>
+              <LogOut />
+            </span>
           </UlSidebarList>
         </FooterSidebar>
       </DivSidebarWrapper>

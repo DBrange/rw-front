@@ -17,7 +17,7 @@ function InspectionCard({ type, keyName,id }: Props) {
   
   return (
     <CardText
-      to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.INSURED_DETAIL}/${id}`}
+      to={`${id}`}
     >
       <DivCard>
         <IconCard>

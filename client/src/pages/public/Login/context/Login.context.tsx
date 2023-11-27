@@ -91,7 +91,12 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     if (data) { 
 
       dispatch(addClient(data));
-      navigate(`/${PrivateRoutes.PRIVATE}`)
+      const client = JSON.parse(localStorage.getItem("client") as string);
+      navigate(
+        client.broker
+          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`
+          : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.DASHBOARD}`
+      );
     }
   },[data])
 

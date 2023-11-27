@@ -22,7 +22,11 @@ function MiProfile() {
           />
         </DivImageMyProfile>
         <div>
-          <H2NameLastname>{`${user.name} ${user.lastName}`}</H2NameLastname>
+          {user?.companyName ? (
+            <H2NameLastname>{`${user?.companyName}`}</H2NameLastname>
+          ) : (
+            <H2NameLastname>{`${user?.name} ${user?.lastName}`}</H2NameLastname>
+          )}
         </div>
       </div>
       <DivInformationMyProfile>

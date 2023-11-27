@@ -4,6 +4,7 @@ import {
   ErrorsPhoneValues,
   ErrorsVehicleValues
 } from "@/models";
+import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
 import {
   ClientCreateInspectionValues,
   ErrorsClientCreateInspectionValues,

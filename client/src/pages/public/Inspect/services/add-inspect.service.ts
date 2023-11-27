@@ -1,10 +1,10 @@
 import { PersonalVehicleType, PersonalElectronicType, LegalVehicleType, LegalElectronicType } from "@/models";
-import { BaseUrlInspect } from "@/pages";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
+import { baseUrl } from "../..";
 
 
 
-export const PersonalVehicleUrl = BaseUrlInspect + "/asset/user";
+export const PersonalVehicleUrl = baseUrl + "/asset/user";
 
 export const addInspectionPersonalVehicle = async (
   url: string,
@@ -33,7 +33,7 @@ export const addInspectionPersonalVehicle = async (
   }
 };
 
-export const PersonalElectronicUrl = BaseUrlInspect + "/asset/electronicAsset";
+export const PersonalElectronicUrl = baseUrl + "/asset/electronicAsset";
 
 export const addInspectionPersonalElectronic = async (
   url: string,
@@ -62,7 +62,7 @@ export const addInspectionPersonalElectronic = async (
   }
 };
 
-export const LegalVehicleUrl = BaseUrlInspect + "/asset/legalAsset";
+export const LegalVehicleUrl = baseUrl + "/asset/legalAsset";
 
 export const addInspectionLegalVehicle = async (
   url: string,
@@ -91,7 +91,7 @@ export const addInspectionLegalVehicle = async (
   }
 };
 
-export const LegalElectronicUrl = BaseUrlInspect + "/asset/electronicAssetL";
+export const LegalElectronicUrl = baseUrl + "/asset/electronicAssetL";
 
 export const addInspectionLegalElectronic = async (
   url: string,

@@ -1,10 +1,10 @@
 import { TheftType, FireType, CrashType } from "@/models/interfaces/add-report-in-inspection.interface";
+import { baseUrl } from "@/pages";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
-import { BaseUrl } from "../..";
 
 
 export const reportInInspectionTheftUrl = (id?: string) =>
-  `${BaseUrl}/sinister/in-user-inspection-theft/${id}`;
+  `${baseUrl}/sinister/in-user-inspection-theft/${id}`;
 
 export const addReportTheft = async (
   url: string,
@@ -34,7 +34,7 @@ export const addReportTheft = async (
 };
 
 export const reportInInspectionFireUrl = (id?: string) =>
-  `${BaseUrl}/sinister/in-user-inspection-fire/${id}`;
+  `${baseUrl}/sinister/in-user-inspection-fire/${id}`;
 
 export const addReportFire = async (
   url: string,
@@ -64,7 +64,7 @@ export const addReportFire = async (
 };
 
 export const reportInInspectionCrashUrl = (id?: string) =>
-  `${BaseUrl}/sinister/in-user-inspection-crash/${id}`;
+  `${baseUrl}/sinister/in-user-inspection-crash/${id}`;
 
 export const addReportCrash = async (
   url: string,

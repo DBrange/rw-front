@@ -1,8 +1,10 @@
 import { PageBtn } from "@/components";
-import { Sidebar } from "@/pages";
+import { Sidebar, SidebarBroker } from "@/pages";
 import { AllClientCreateInspectionPages } from "..";
 import { useClientCreateInspectionContext } from "../..";
 import { Form } from "@/styledComponents";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 function ClientCreateInspectionBox() {
     const {
@@ -11,10 +13,13 @@ function ClientCreateInspectionBox() {
       partialErrors,
       markedTouches,
       submitValues,
-    } = useClientCreateInspectionContext();
+  } = useClientCreateInspectionContext();
+  const broker = useSelector((store: AppStore) => store.user).user.broker;
   return (
     <>
-      <Sidebar />
+    {
+      broker ? <SidebarBroker /> : <Sidebar />
+    }
 
       <Form onSubmit={submitValues}>
         <AllClientCreateInspectionPages />

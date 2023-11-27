@@ -7,6 +7,8 @@ import { DivHeaderInspectionDetail } from "./InspectionDetail.styled";
 import { Link, useParams } from "react-router-dom";
 import { PrivateRoutes } from "../../../../models/types/routes";
 import { AssetDetail } from "../..";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 function InspectionDetail({
   values,
@@ -15,7 +17,8 @@ function InspectionDetail({
   values: AssetDetail | undefined;
   id: string | undefined;
   }) {
-  
+    const broker = useSelector((store: AppStore) => store.user.user.broker);
+
   const dataInHTML = () => {
     if (values?.vehicle) {
       const {
@@ -40,7 +43,7 @@ function InspectionDetail({
           gncId
         },
       } = values;
-      console.log(id);
+
       return (
         <>
           <DivHeaderInspectionDetail>
@@ -49,11 +52,15 @@ function InspectionDetail({
             {/* <h2></h2> */}
             <h2>{plate}</h2>
           </DivHeaderInspectionDetail>
-            <Link
-              to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`}
-            >
-              Para denunciar
-            </Link>
+          <Link
+            to={
+              broker
+                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
+                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
+            }
+          >
+            Para denunciar
+          </Link>
           <DivInformationMyProfile>
             <DivInformationDetail>
               <h4>Año</h4>
@@ -86,7 +93,7 @@ function InspectionDetail({
             <DivInformationDetail>
               <h4>Fotos del vehiculo</h4>
               {images.map((el, i) => (
-                <div key={el+i}>
+                <div key={el + i}>
                   <img src={el} />
                 </div>
               ))}
@@ -140,13 +147,17 @@ function InspectionDetail({
             {/* <h2>{plate}</h2> */}
           </DivHeaderInspectionDetail>
           <Link
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`}
+            to={
+              broker
+                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
+                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
+            }
           >
             Para denunciar
           </Link>
           <DivInformationMyProfile>
             {" "}
-            {type === 'CELULAR' && (
+            {type === "CELULAR" && (
               <>
                 <DivInformationDetail>
                   <h4>IMEI</h4>

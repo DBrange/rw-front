@@ -1,10 +1,9 @@
-import { AllClientAssets } from "@/pages";
+import { AllClientAssets, baseUrl } from "@/pages";
 
-export const BaseUrlInspect = "http://localhost:3001/v1";
 export const AllAssetsUserUrl = (id?: string) =>
-  BaseUrlInspect + `/asset/user-login/${id}`;
+  baseUrl + `/asset/user-login/${id}`;
 export const AllAssetsLegalUserUrl = (id?: string) =>
-  BaseUrlInspect + `/asset/legal-user-login/${id}`;
+  baseUrl + `/asset/legal-user-login/${id}`;
 
 export const allInspected = async (
   url: string

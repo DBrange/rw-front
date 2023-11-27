@@ -6,6 +6,8 @@ import { RiTruckLine } from "react-icons/ri";
 import { RiMotorbikeFill } from "react-icons/ri";
 import { PrivateRoutes } from "@/models/types/routes";
 import { CardText, DivCard, IconCard } from "..";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 interface Props {
   type: string;
@@ -16,7 +18,7 @@ interface Props {
 function ReportCard({ type, keyName, id }: Props) {
   return (
     <CardText
-      to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.SINISTER_DETAIL}/${id}`}
+      to={`${id}`}
     >
       <DivCard>
         <IconCard>

@@ -3,9 +3,9 @@ import {
   modalSuccessfulRegistration,
 } from "@/services/sharing-information.service";
 import { RegisterUser } from "..";
-import { BaseUrl } from "@/pages";
+import { baseUrl } from "@/pages";
 
-export const clientsUrl = `${BaseUrl}/users`;
+export const clientsUrl = `${baseUrl}/users`;
 export const registerUrl = `${clientsUrl}/register-login`;
 
 export const addUser = async (

@@ -43,7 +43,7 @@ import {
   emptyClientCreateReportValues,
   touchedClientCreateReportValues,
 } from "../../../utilities/client-create-report/objects-client-create-report.utility";
-import { validationFormDataReport } from "../utilities/validation-form-data-report.utility";
+import { validationFormDataReportClient } from "../utilities/validation-form-data-report.utility";
 import {
   IClientCreateReportContext,
   emptyClientCreateReportContext,
@@ -1231,7 +1231,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       })
     );
 
-    validationFormDataReport({
+    validationFormDataReportClient({
       inputValues,
       errorsInputValues,
       triggers,

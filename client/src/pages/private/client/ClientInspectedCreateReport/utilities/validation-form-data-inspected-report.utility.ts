@@ -7,6 +7,7 @@ import {
   ErrorsTheftElectronicValues,
   ErrorsTheftVehiclesValues,
 } from "@/models";
+import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
 import {
   ClientInspectedCreateReportValues,
   ErrorsClientInspectedCreateReportValues,
@@ -20,7 +21,7 @@ interface Params {
     | undefined;
   triggers: any;
   amountInjured?: number;
-  user: ClientInfo;
+  user: ClientInfo
 }
 
 export const validationFormDataInspectedReport = ({

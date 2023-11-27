@@ -1,7 +1,7 @@
-import { AllClientSinisters, BaseUrl } from "@/pages";
+import { AllClientSinisters } from "@/pages";
+import {baseUrl} from '../../../../public/Login/services/getClient.service'
 
-
-export const SinisterUrl = `${BaseUrl}/sinister`
+export const SinisterUrl = `${baseUrl}/sinister`
 
 export const AllUserSinisterUrl = (id?: string) => `${SinisterUrl}/user-login/${id}`;
 

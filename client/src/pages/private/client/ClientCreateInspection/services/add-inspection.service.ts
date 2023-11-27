@@ -1,9 +1,9 @@
 import { CreateInspectionValues } from "@/models";
+import { baseUrl } from "@/pages";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
-export const BaseUrl = "http://localhost:3001/v1";
 
-export const createAssetInClientUserUrl = (id?: string) => `${BaseUrl}/asset/in-user/${id}`;
+export const createAssetInClientUserUrl = (id?: string) => `${baseUrl}/asset/in-user/${id}`;
 
 export const createAssetInClientUser = async (
   url: string,

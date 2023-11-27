@@ -1,9 +1,9 @@
+import { baseUrl } from "@/pages";
 import {
   loaderImageService,
   modalSentService,
 } from "@/services/sharing-information.service";
 
-export const baseUrl = "http://localhost:3001/v1";
 export const usersUrl = `${baseUrl}/users`;
 export const verifyUserUrl = (
   email?: string,

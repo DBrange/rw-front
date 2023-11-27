@@ -1,8 +1,7 @@
-import { SinisterDetail } from "@/pages";
+import { SinisterDetail, baseUrl } from "@/pages";
 
-export const BaseUrlInspectt = "http://localhost:3001/v1";
 
-export const detailSinisterUrl = (id?: string) => `${BaseUrlInspectt}/sinister/${id}`;
+export const detailSinisterUrl = (id?: string) => `${baseUrl}/sinister/${id}`;
 
 export const sinisterDetail = async (url: string): Promise<SinisterDetail> => {
   try {

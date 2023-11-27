@@ -11,6 +11,7 @@ import {
   ErrorsIsTireValues,
   ErrorsTheftElectronicValues,
 } from "@/models";
+import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
 import {
   ClientCreateReportValues,
   ErrorsClientCreateReportValues,
@@ -22,10 +23,10 @@ interface Params {
   errorsInputValues: Partial<ErrorsClientCreateReportValues> | undefined;
   triggers: any;
   amountInjured?: number;
-  user: ClientInfo;
+  user: ClientInfo
 }
 
-export const validationFormDataReport = ({
+export const validationFormDataReportClient = ({
   inputValues,
   errorsInputValues,
   triggers,

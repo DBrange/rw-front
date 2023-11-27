@@ -1,12 +1,16 @@
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 import { ClientUserProvider } from ".";
-import { Sidebar } from "../..";
+import { Sidebar, SidebarBroker } from "../..";
 import { ClientUserContainer } from "./components";
 
 const ClientUser = () => {
+  const broker = useSelector((store: AppStore) => store.user).user.broker;
+
   return (
     <ClientUserProvider>
       <ClientUserContainer>
-        <Sidebar />
+        {broker ? <SidebarBroker /> : <Sidebar />}
         {/* <InspectLogin sectionName="Inspecciones" /> */}
       </ClientUserContainer>
     </ClientUserProvider>
