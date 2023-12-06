@@ -24,7 +24,7 @@ export const validationFormDataInspection = ({
   triggers: { triggerInspectionPersonal },user
 }: Params) => {
   if (swornDeclaration.swornDeclaration) {
-    if (user.user.dni && errorsInputValues?.vehicle) {
+    if (user.user?.personalUser?.dni && errorsInputValues?.vehicle) {
       if (vehicle.gnc) {
         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
           const dataObj = {
@@ -55,7 +55,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (user.user.cuit && errorsInputValues?.vehicle) {
+    } else if (user.user?.legalUser?.cuit && errorsInputValues?.vehicle) {
       if (vehicle.gnc) {
         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
           const dataObj = {
@@ -86,7 +86,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (user.user.dni && errorsInputValues?.electronic) {
+    } else if (user.user?.personalUser?.dni && errorsInputValues?.electronic) {
       if (electronic.type === "CELULAR") {
         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
           const dataObj = {
@@ -117,7 +117,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (user.user.cuit && errorsInputValues?.electronic) {
+    } else if (user.user?.legalUser?.cuit && errorsInputValues?.electronic) {
       if (electronic.type === "CELULAR") {
         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
           const dataObj = {

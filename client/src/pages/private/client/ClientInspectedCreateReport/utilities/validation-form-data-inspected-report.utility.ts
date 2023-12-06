@@ -98,7 +98,7 @@ const validationWithInjuries = ({
   };
 
   if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
     errorsInputValues?.thirdPartyVehicle
@@ -122,7 +122,7 @@ const validationWithInjuries = ({
       triggerReportCrash(dataObj)
     );
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured
   ) {
@@ -143,7 +143,7 @@ const validationWithInjuries = ({
       triggerReportCrash(dataObj)
     );
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.fire &&
     errorsInputValues?.thirdPartyInjured
   ) {
@@ -163,7 +163,7 @@ const validationWithInjuries = ({
       triggerReportFire(dataObj)
     );
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.fire &&
     errorsInputValues?.thirdPartyInjured
   ) {
@@ -183,7 +183,7 @@ const validationWithInjuries = ({
       triggerReportFire(dataObj)
     );
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
     errorsInputValues?.thirdPartyVehicle
@@ -207,7 +207,7 @@ const validationWithInjuries = ({
       triggerReportCrash(dataObj)
     );
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured
   ) {
@@ -275,7 +275,7 @@ const validationWithoutInjuries = ({
 
   //vehicle
   if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyVehicle
   ) {
@@ -294,7 +294,7 @@ const validationWithoutInjuries = ({
       triggerReportCrash(dataObj)
     );
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyVehicle
   ) {
@@ -313,7 +313,7 @@ const validationWithoutInjuries = ({
       errorsInputValues?.thirdPartyVehicle,
       triggerReportCrash(dataObj)
     );
-  } else if (user.user.dni && errorsInputValues?.fire) {
+  } else if (user.user?.personalUser?.dni && errorsInputValues?.fire) {
     const dataObj = {
       fireDTO: fireWithoutAmounts,
       swornDeclaration: swornDeclaration.swornDeclaration,
@@ -323,7 +323,7 @@ const validationWithoutInjuries = ({
       errorsInputValues?.fire,
       triggerReportFire(dataObj)
     );
-  } else if (user.user.cuit && errorsInputValues?.fire) {
+  } else if (user.user?.legalUser?.cuit && errorsInputValues?.fire) {
     const dataObj = {
       fireDTO: fireWithoutAmounts,
       swornDeclaration: swornDeclaration.swornDeclaration,
@@ -333,7 +333,7 @@ const validationWithoutInjuries = ({
       errorsInputValues?.fire,
       triggerReportFire(dataObj)
     );
-  } else if (user.user.dni && errorsInputValues?.theftVehicle) {
+  } else if (user.user?.personalUser?.dni && errorsInputValues?.theftVehicle) {
     if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
       const dataObj = {
         theftDTO: theftVehicle,
@@ -363,7 +363,7 @@ const validationWithoutInjuries = ({
       );
     }
     //abajo
-  } else if (user.user.cuit && errorsInputValues?.theftVehicle) {
+  } else if (user.user?.legalUser?.cuit && errorsInputValues?.theftVehicle) {
     if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
       const dataObj = {
         theftDTO: theftVehicle,
@@ -391,7 +391,7 @@ const validationWithoutInjuries = ({
         triggerReportTheft(dataObj)
       );
     }
-  } else if (user.user.dni && errorsInputValues?.theftElectronic) {
+  } else if (user.user?.personalUser?.dni && errorsInputValues?.theftElectronic) {
     const dataObj = {
       theftDTO: theftElectronic,
       swornDeclaration: swornDeclaration.swornDeclaration,
@@ -401,7 +401,7 @@ const validationWithoutInjuries = ({
       errorsInputValues?.theftElectronic,
       triggerReportTheft(dataObj)
     );
-  } else if (user.user.cuit && errorsInputValues?.theftElectronic) {
+  } else if (user.user?.legalUser?.cuit && errorsInputValues?.theftElectronic) {
     const dataObj = {
       theftDTO: theftElectronic,
       swornDeclaration: swornDeclaration.swornDeclaration,

@@ -107,7 +107,7 @@ const validationWithInjuries = ({
   };
 
   if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
@@ -166,7 +166,7 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured
@@ -220,7 +220,7 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.fire &&
     errorsInputValues?.thirdPartyInjured
@@ -272,7 +272,7 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.fire &&
     errorsInputValues?.thirdPartyInjured
@@ -324,7 +324,7 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
@@ -383,7 +383,7 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured
@@ -494,7 +494,7 @@ const validationWithoutInjuries = ({
 
   //vehicle
   if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyVehicle
@@ -545,7 +545,7 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyVehicle
@@ -597,7 +597,7 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.fire
   ) {
@@ -642,7 +642,7 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.fire
   ) {
@@ -687,7 +687,7 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.theftVehicle
   ) {
@@ -786,7 +786,7 @@ const validationWithoutInjuries = ({
       }
     } //abajo
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.theftVehicle
   ) {
@@ -884,7 +884,7 @@ const validationWithoutInjuries = ({
       }
     }
   } else if (
-    user.user.dni &&
+    user.user?.personalUser?.dni &&
     errorsInputValues?.electronic &&
     errorsInputValues?.theftElectronic
   ) {
@@ -932,7 +932,7 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user.cuit &&
+    user.user?.legalUser?.cuit &&
     errorsInputValues?.electronic &&
     errorsInputValues?.theftElectronic
   ) {
