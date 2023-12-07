@@ -6,7 +6,7 @@ import {
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
-import { AllBrokerLegalUserSinisterUrl, AllBrokerUserSinisterUrl, IBrokerReportsContext, allBrokerSinister } from "..";
+import { AllBrokerUserSinisterUrl, IBrokerReportsContext, allBrokerSinister } from "..";
 import {emptyBrokerReportsContext} from './empty-brokerReports-context'
 
 export const BrokerReportsContext = createContext<IBrokerReportsContext>(
@@ -62,7 +62,7 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
 
   const brokerType = () => {
       const { data: allBrokerAssetsUser } = useSWR(
-        AllBrokerUserSinisterUrl(user.user?.userBroker?.id),
+        AllBrokerUserSinisterUrl(user.user?.id),
         allBrokerSinister
       );
 

@@ -1,11 +1,8 @@
-import {  AllClientSinisters, SinisterUrl, baseUrl } from "@/pages";
+import {  AllClientSinisters, SinisterUrl } from "@/pages";
 
 
 export const AllBrokerUserSinisterUrl = (id?: string) =>
-  `${SinisterUrl}/broker-sinisters-users/${id}`;
-
-export const AllBrokerLegalUserSinisterUrl = (id?: string) =>
-  `${SinisterUrl}/broker-sinisters-legal-users/${id}`;
+  `${SinisterUrl}/broker/${id}`;
 
 export const allBrokerSinister = async (
   url: string
