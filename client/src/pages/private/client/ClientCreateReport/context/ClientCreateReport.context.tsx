@@ -19,8 +19,13 @@ import {
   ClickEventType,
   SelectEventType,
   SubmitEventType,
-
 } from "@/pages";
+import {
+  ClientCreateReportValues,
+  ErrorsClientCreateReportValues,
+  TouchedClientCreateReportValues,
+  validateClientCreateReport,
+} from "@/pages/private";
 import { AppStore } from "@/redux";
 import {
   touchedAllCrashVehiclesValuesTrue,
@@ -38,7 +43,16 @@ import {
 } from "@/utilities";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import useSWRMutation from "swr/mutation";
+import {
+  addReportVehicleCrash,
+  addReportVehicleFire,
+  addReportVehicleTheft,
+  reportInClientUserCrashUrl,
+  reportInClientUserFireUrl,
+  reportInClientUserTheftUrl,
+} from "..";
 import {
   emptyClientCreateReportValues,
   touchedClientCreateReportValues,
@@ -48,8 +62,6 @@ import {
   IClientCreateReportContext,
   emptyClientCreateReportContext,
 } from "./empty-ClientCreatesReport-context";
-import { ClientCreateReportValues, TouchedClientCreateReportValues, ErrorsClientCreateReportValues, validateClientCreateReport } from "@/pages/private";
-import { reportInClientUserTheftUrl, addReportVehicleTheft, reportInClientUserFireUrl, addReportVehicleFire, reportInClientUserCrashUrl, addReportVehicleCrash, reportInClientLegalTheftUrl, reportInClientLegalFireUrl, reportInClientLegalCrashUrl } from "..";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
 type onlyLicensePhoto = Pick<ThirdPartyVehicleValues, "licensePhoto">;
@@ -1141,66 +1153,42 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
+  const { clientId } = useParams();
+
   const user = useSelector((store: AppStore) => store.user);
+  const selectBrokerUrl = user.user?.userBroker
+  ? user.user?.id
+  : user.user?.broker?.id;
+  const selectClientUrl = user.user?.userBroker ? clientId : user?.user?.id;
 
   const { error: errorReportVehicleTheft, trigger: triggerReportVehicleTheft } =
     useSWRMutation(
-      reportInClientUserTheftUrl(user.user.id),
+      reportInClientUserTheftUrl(selectBrokerUrl, selectClientUrl),
       addReportVehicleTheft
     );
 
   const { error: errorReportVehicleFire, trigger: triggerReportVehicleFire } =
     useSWRMutation(
-      reportInClientUserFireUrl(user.user.id),
+      reportInClientUserFireUrl(selectBrokerUrl, selectClientUrl),
       addReportVehicleFire
     );
 
   const { error: errorReportVehicleCrash, trigger: triggerReportVehicleCrash } =
     useSWRMutation(
-      reportInClientUserCrashUrl(user.user.id),
+      reportInClientUserCrashUrl(selectBrokerUrl, selectClientUrl),
       addReportVehicleCrash
     );
-
-  const {
-    error: errorReportLegalVehicleTheft,
-    trigger: triggerReportLegalVehicleTheft,
-  } = useSWRMutation(
-    reportInClientLegalTheftUrl(user.user.id),
-    addReportVehicleTheft
-  );
-
-  const {
-    error: errorReportLegalVehicleFire,
-    trigger: triggerReportLegalVehicleFire,
-  } = useSWRMutation(
-    reportInClientLegalFireUrl(user.user.id),
-    addReportVehicleFire
-  );
-
-  const {
-    error: errorReportLegalVehicleCrash,
-    trigger: triggerReportLegalVehicleCrash,
-  } = useSWRMutation(
-    reportInClientLegalCrashUrl(user.user.id),
-    addReportVehicleCrash
-  );
 
   const triggers = {
     triggerReportVehicleCrash,
     triggerReportVehicleTheft,
     triggerReportVehicleFire,
-    triggerReportLegalVehicleCrash,
-    triggerReportLegalVehicleTheft,
-    triggerReportLegalVehicleFire,
   };
 
   const fetchErrors = [
     errorReportVehicleCrash,
     errorReportVehicleTheft,
     errorReportVehicleFire,
-    errorReportLegalVehicleCrash,
-    errorReportLegalVehicleTheft,
-    errorReportLegalVehicleFire,
   ];
 
   useEffect(() => {

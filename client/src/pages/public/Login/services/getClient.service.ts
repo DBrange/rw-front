@@ -43,7 +43,6 @@ export const loginClient = async (
     // modalSentService.setSubject(true);
 
     return await response.json();
-    // console.log(res)
     
     // localStorage.setItem("client", JSON.stringify(res));
 

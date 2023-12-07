@@ -1,5 +1,5 @@
 import { ChildrenType } from "@/models";
-import { AllBrokerClients, AllBrokerClientsForCreateInspectionUrl, allBrokerClientsForCreateInspection } from "@/pages";
+import { AllBrokerClients } from "@/pages";
 import { AppStore } from "@/redux";
 import { createContext, useContext, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import {
   IBrokerCreateReportContext,
 } from "..";
 import { emptyBrokerCreateReportContext } from "./empty-brokerCreateReport-context";
+import { AllBrokerClientsForCreateSinisterUrl, allBrokerClientsForCreateSinister } from "../services/add-report-broker.service";
 
 const BrokerCreateReportContext =
   createContext<IBrokerCreateReportContext>(
@@ -31,9 +32,9 @@ export const BrokerCreateReportProvider = ({ children }: ChildrenType) => {
     const regex = new RegExp(`^${searchField}`, "i");
 
     const dataFilteredToElement: T[] = data?.filter((el) => {
-      if (typeToFilter === "user" && el.dni) {
-        return el.dni;
-      } else if (typeToFilter === "legalUser" && el.cuit) {
+      if (typeToFilter === "user" && el.personalUser?.dni) {
+        return el.personalUser?.dni;
+      } else if (typeToFilter === "legalUser" && el.legalUser?.cuit) {
         return el;
       }
     });
@@ -41,11 +42,11 @@ export const BrokerCreateReportProvider = ({ children }: ChildrenType) => {
     if (searchField.trim().length) {
       if (typeToFilter === "user") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.dni as string)
+          regex.test(el?.personalUser?.dni as string)
         );
       } else if (typeToFilter === "legalUser") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.cuit as string)
+          regex.test(el?.legalUser?.cuit as string)
         );
       }
     } else {
@@ -58,8 +59,8 @@ export const BrokerCreateReportProvider = ({ children }: ChildrenType) => {
 
   const brokerType = () => {
     const { data: allBrokerAssetsUser } = useSWR(
-      AllBrokerClientsForCreateInspectionUrl(user.user?.userBroker?.id),
-      allBrokerClientsForCreateInspection
+      AllBrokerClientsForCreateSinisterUrl(user.user?.userBroker?.id),
+      allBrokerClientsForCreateSinister
     );
 
     const searchedUserAsset: AllBrokerClients[] = filterData<AllBrokerClients>(

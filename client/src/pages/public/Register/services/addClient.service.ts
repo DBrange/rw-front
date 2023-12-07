@@ -25,7 +25,6 @@ export const addUser = async (
     });
 
     if (!response.ok) {
-      // console.log(response)
       throw new Error(`Request failed with status: ${response.status}`);
     }
 
@@ -34,7 +33,6 @@ export const addUser = async (
 
     return await response.json();
   } catch (err) {
-    console.log(err);
     throw err;
   }
 };

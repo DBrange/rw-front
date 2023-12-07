@@ -9,13 +9,10 @@ import {
   modalSentService,
 } from "@/services/sharing-information.service";
 
-
-
-export const reportInClientUserTheftUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-user-theft/${id}`;
-
-export const reportInClientLegalTheftUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-legal-user-theft/${id}`;
+export const reportInClientUserTheftUrl = (
+  brokerId?: string,
+  clientId?: string,
+) => `${baseUrl}/sinister/theft/${brokerId}/${clientId}`;
 
 export const addReportVehicleTheft = async (
   url: string,
@@ -44,11 +41,8 @@ export const addReportVehicleTheft = async (
   }
 };
 
-export const reportInClientUserFireUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-user-fire/${id}`;
-
-export const reportInClientLegalFireUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-legal-user-fire/${id}`;
+export const reportInClientUserFireUrl = (brokerId?: string, clientId?: string) =>
+  `${baseUrl}/sinister/fire/${brokerId}/${clientId}`;
 
 export const addReportVehicleFire = async (
   url: string,
@@ -77,11 +71,8 @@ export const addReportVehicleFire = async (
   }
 };
 
-export const reportInClientUserCrashUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-user-crash/${id}`;
-
-export const reportInClientLegalCrashUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-legal-user-crash/${id}`;
+export const reportInClientUserCrashUrl = (brokerId?: string, clientId?: string) =>
+  `${baseUrl}/sinister/crash/${brokerId}/${clientId}`;
 
 export const addReportVehicleCrash = async (
   url: string,

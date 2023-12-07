@@ -17,7 +17,8 @@ function ClientInspectedCreateReportBox() {
     amountInjured,
   } = useClientInspectedCreateReportContext();
 
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
   
   const correspondingPage =
     amountInjured > 0 && amountVehicles > 0 && reportActive.crash
@@ -31,7 +32,7 @@ function ClientInspectedCreateReportBox() {
       : 2;
   return (
     <>
-{broker ? <SidebarBroker /> : <Sidebar />}
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
 
       <Form onSubmit={submitValues}>
         <AllClientInspectedCreateReportPages />

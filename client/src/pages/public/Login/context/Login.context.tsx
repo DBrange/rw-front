@@ -92,7 +92,6 @@ export const LoginProvider = ({ children }: ChildrenType) => {
 
       dispatch(addClient(data));
       const client = JSON.parse(localStorage.getItem("client") as string);
-      console.log(client)
       navigate(
         // client.userBroker
         //   ?

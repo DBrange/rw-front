@@ -217,7 +217,6 @@ export const ClientInspectedCreateReportProvider = ({
         electronic: value === "electronic",
       });
     } else if (value === "theft" || value === "fire" || value === "crash") {
-      console.log("aquii");
       setReportActive({
         theft: value === "theft",
         fire: value === "fire",

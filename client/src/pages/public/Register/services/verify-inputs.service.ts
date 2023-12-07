@@ -28,7 +28,6 @@ export const verifyUserInputs = async (
     });
 
     if (!response.ok) {
-      // console.log(response)
       throw new Error(`Request failed with status: ${response.status}`);
     }
 
@@ -37,7 +36,6 @@ export const verifyUserInputs = async (
     
     return await response.json();
   } catch (err) {
-    console.log(err);
     throw err;
   }
 };
@@ -67,14 +65,12 @@ export const verifyLegalUserInputs = async (
     });
 
     if (!response.ok) {
-      // console.log(response)
       throw new Error(`Request failed with status: ${response.status}`);
     }
 
     loaderImageService.setSubject(false);
     modalSentService.setSubject(true);
   } catch (err) {
-    console.log(err);
     throw err;
   }
 };

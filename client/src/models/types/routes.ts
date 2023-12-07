@@ -13,7 +13,7 @@ export enum PrivateRoutes {
   DASHBOARD = "dashboard",
   CREATE_INSPECTION = "crear-inspeccion",
   CREATE_SINISTER = "crear-siniestro",
-  CREATE_SINISTER_IN_INSURED = "crear-siniestro",
+  CREATE_SINISTER_IN_INSURED = "crear-siniestro-en",
   ALL_INSURED = "asegurados",
   ALL_SINISTER = "siniestros",
   INSURED_DETAIL = "asegurados",

@@ -4,7 +4,7 @@ import { loaderImageService, modalSentService } from "@/services/sharing-informa
 
 
 export const reportInInspectionTheftUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-user-inspection-theft/${id}`;
+  `${baseUrl}/sinister/theft-inspection/${id}`;
 
 export const addReportTheft = async (
   url: string,
@@ -34,7 +34,7 @@ export const addReportTheft = async (
 };
 
 export const reportInInspectionFireUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-user-inspection-fire/${id}`;
+  `${baseUrl}/sinister/fire-inspection/${id}`;
 
 export const addReportFire = async (
   url: string,
@@ -64,7 +64,7 @@ export const addReportFire = async (
 };
 
 export const reportInInspectionCrashUrl = (id?: string) =>
-  `${baseUrl}/sinister/in-user-inspection-crash/${id}`;
+  `${baseUrl}/sinister/crash-inspection/${id}`;
 
 export const addReportCrash = async (
   url: string,
