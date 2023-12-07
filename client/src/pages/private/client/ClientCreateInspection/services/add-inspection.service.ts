@@ -3,7 +3,8 @@ import { baseUrl } from "@/pages";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
 
-export const createAssetInClientUserUrl = (id?: string) => `${baseUrl}/asset/in-user/${id}`;
+export const createAssetInClientUserUrl = (brokerId?: string, clientId?: string) =>
+  `${baseUrl}/asset/inspection/${brokerId}/${clientId}`;
 
 export const createAssetInClientUser = async (
   url: string,

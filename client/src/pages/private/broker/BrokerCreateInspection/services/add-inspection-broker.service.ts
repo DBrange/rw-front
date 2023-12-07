@@ -1,13 +1,16 @@
 import { AllBrokerClients, baseUrl } from "@/pages";
 
-export const AllBrokerClientsForCreateSinisterUrl = (id?: string) =>
-  baseUrl + `/users/broker-clients/${id}`;
+export const AllBrokerClientsForCreateInspectionUrl = (id?: string) =>
+  baseUrl + `/asset/broker-clients/${id}`;
 
-export const allBrokerClientsForCreateSinister = async (
+export const allBrokerClientsForCreateInspection = async (
   url: string
 ): Promise<AllBrokerClients[] | [] | undefined> => {
   try {
-    return fetch(url).then((res) => res.json());
+    return fetch(url).then((res) => {
+      console.log(res.json());
+      return res.json();
+    });
 
     // if (!response.ok) {
     //   throw new Error(`Request failed with status: ${response.status}`);

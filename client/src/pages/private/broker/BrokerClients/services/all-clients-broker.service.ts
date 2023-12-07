@@ -1,7 +1,7 @@
 import { AllBrokerClients, baseUrl } from "@/pages";
 
 export const AllBrokerClientsUrl = (id?: string) =>
-  baseUrl + `/users/broker-clients/${id}`;
+  baseUrl + `/asset/broker-clients/${id}`;
 
 export const allBrokerClients = async (
   url: string

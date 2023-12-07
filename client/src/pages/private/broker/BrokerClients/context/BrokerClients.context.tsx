@@ -35,9 +35,9 @@ export const BrokerClientsProvider = ({ children }: ChildrenType) => {
     const regex = new RegExp(`^${searchField}`, "i");
 
     const dataFilteredToElement: T[] = data?.filter((el) => {
-      if (typeToFilter === "user" && el.dni) {
-        return el.dni;
-      } else if (typeToFilter === "legalUser" && el.cuit) {
+      if (typeToFilter === "user" && el.personalUser?.dni) {
+        return el.personalUser?.dni;
+      } else if (typeToFilter === "legalUser" && el.legalUser?.cuit) {
         return el;
       }
     });
@@ -45,11 +45,11 @@ export const BrokerClientsProvider = ({ children }: ChildrenType) => {
     if (searchField.trim().length) {
       if (typeToFilter === "user") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.dni as string)
+          regex.test(el?.personalUser?.dni as string)
         );
       } else if (typeToFilter === "legalUser") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.cuit as string)
+          regex.test(el?.legalUser?.cuit as string)
         );
       }
     } else {
@@ -73,6 +73,7 @@ export const BrokerClientsProvider = ({ children }: ChildrenType) => {
 
     return searchedUserAsset;
   };
+  
   const clients = [...brokerType()]
     .filter((asset) => asset !== undefined)
     .flat();

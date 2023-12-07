@@ -1,5 +1,5 @@
 import { ChildrenType } from "@/models";
-import { AllBrokerClients, AllBrokerClientsForCreateSinisterUrl, allBrokerClientsForCreateSinister } from "@/pages";
+import { AllBrokerClients, AllBrokerClientsForCreateInspectionUrl, allBrokerClientsForCreateInspection } from "@/pages";
 import { AppStore } from "@/redux";
 import { createContext, useContext, useState } from "react";
 import { useSelector } from "react-redux";
@@ -58,8 +58,8 @@ export const BrokerCreateReportProvider = ({ children }: ChildrenType) => {
 
   const brokerType = () => {
     const { data: allBrokerAssetsUser } = useSWR(
-      AllBrokerClientsForCreateSinisterUrl(user.user?.userBroker?.id),
-      allBrokerClientsForCreateSinister
+      AllBrokerClientsForCreateInspectionUrl(user.user?.userBroker?.id),
+      allBrokerClientsForCreateInspection
     );
 
     const searchedUserAsset: AllBrokerClients[] = filterData<AllBrokerClients>(

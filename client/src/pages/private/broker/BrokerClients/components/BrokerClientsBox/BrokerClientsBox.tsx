@@ -30,23 +30,23 @@ function BrokerClientsBox() {
         juridica
       </button>
       {clients?.map((client, i) => {
-        if (client.dni) {
+        if (client.personalUser?.dni) {
           return (
             <ClientCard
               key={i}
-              name={client.name}
-              lastname={client.lastName}
-              keyName={client.dni}
-              id={client.id}
+              name={client.personalUser?.name}
+              lastname={client.personalUser?.lastName}
+              keyName={client.personalUser?.dni}
+              id={client.personalUser?.id}
             />
           );
-        } else if (client.cuit) {
+        } else if (client.legalUser?.cuit) {
           return (
             <ClientCard
               key={i}
-              companyName={client.companyName}
-              keyName={client.cuit}
-              id={client.id}
+              companyName={client.legalUser?.companyName}
+              keyName={client.legalUser?.cuit}
+              id={client.legalUser?.id}
             />
           );
         } else {

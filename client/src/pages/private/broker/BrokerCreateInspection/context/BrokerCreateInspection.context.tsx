@@ -1,16 +1,15 @@
 import { ChildrenType } from "@/models";
 import { createContext, useContext, useState } from "react";
 import {
-  AllBrokerClientsForCreateSinisterUrl,
-  IBrokerCreateInspectionContext, allBrokerClientsForCreateSinister,
+  AllBrokerClientsForCreateInspectionUrl,
+  IBrokerCreateInspectionContext, allBrokerClientsForCreateInspection,
   
 } from "..";
 import {emptyBrokerCreateInspectionContext} from './empty-brokerCreateInspection-context'
-import { AllBrokerClients } from "@/pages";
+import { AllBrokerClients, AllBrokerClientsUrl, allBrokerClients } from "@/pages";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
-import { AllBrokerClientsUrl, allBrokerClients } from "../..";
 
 const BrokerCreateInspectionContext =
   createContext<IBrokerCreateInspectionContext>(
@@ -36,9 +35,9 @@ const BrokerCreateInspectionContext =
       const regex = new RegExp(`^${searchField}`, "i");
 
       const dataFilteredToElement: T[] = data?.filter((el) => {
-        if (typeToFilter === "user" && el.dni) {
-          return el.dni;
-        } else if (typeToFilter === "legalUser" && el.cuit) {
+        if (typeToFilter === "user" && el.personalUser?.dni) {
+          return el.personalUser?.dni;
+        } else if (typeToFilter === "legalUser" && el.legalUser?.cuit) {
           return el;
         }
       });
@@ -46,11 +45,11 @@ const BrokerCreateInspectionContext =
       if (searchField.trim().length) {
         if (typeToFilter === "user") {
           return dataFilteredToElement?.filter((el) =>
-            regex.test(el?.dni as string)
+            regex.test(el?.personalUser?.dni as string)
           );
         } else if (typeToFilter === "legalUser") {
           return dataFilteredToElement?.filter((el) =>
-            regex.test(el?.cuit as string)
+            regex.test(el?.legalUser?.cuit as string)
           );
         }
       } else {
@@ -61,17 +60,21 @@ const BrokerCreateInspectionContext =
 
     const user = useSelector((store: AppStore) => store.user);
 
-    const brokerType = () => {
-      const { data: allBrokerAssetsUser } = useSWR(
-        AllBrokerClientsForCreateSinisterUrl(user.user?.userBroker?.id),
-        allBrokerClientsForCreateSinister
-      );
 
-      const searchedUserAsset: AllBrokerClients[] =
-        filterData<AllBrokerClients>(allBrokerAssetsUser!, searchField);
+  const brokerType = () => {
+    const { data: allBrokerAssetsUser } = useSWR(
+      AllBrokerClientsForCreateInspectionUrl(user.user?.userBroker?.id),
+      allBrokerClientsForCreateInspection
+    );
 
-      return searchedUserAsset;
+    const searchedUserAsset: AllBrokerClients[] = filterData<AllBrokerClients>(
+      allBrokerAssetsUser!,
+      searchField
+    );
+
+    return searchedUserAsset;
     };
+    
     const clients = [...brokerType()]
       .filter((asset) => asset !== undefined)
       .flat();

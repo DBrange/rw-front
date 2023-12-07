@@ -2,10 +2,8 @@ import { ChildrenType, ElementActive, TouchedForms } from "@/models";
 import {
   ChangeEventType,
   ClickEventType,
-
   SelectEventType,
   SubmitEventType,
-
 } from "@/pages";
 import {
   touchedElectronicValuesTrue,
@@ -24,8 +22,17 @@ import {
 } from "./empty-clientCreateInspection-context";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
-import { ClientCreateInspectionValues, TouchedClientCreateInspectionValues, ErrorsClientCreateInspectionValues, validateClientCreateInspection } from "@/pages/private";
-import { createAssetInClientUserUrl, createAssetInClientUser, validationFormDataInspection } from "..";
+import {
+  ClientCreateInspectionValues,
+  TouchedClientCreateInspectionValues,
+  ErrorsClientCreateInspectionValues,
+  validateClientCreateInspection,
+} from "@/pages/private";
+import {
+  createAssetInClientUserUrl,
+  createAssetInClientUser,
+  validationFormDataInspection,
+} from "..";
 import { useParams } from "react-router-dom";
 
 const ClientCreateInspectionContext =
@@ -309,14 +316,12 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     );
   };
 
-  const {clientId} = useParams()
+  const { clientId } = useParams();
   const user = useSelector((store: AppStore) => store.user);
 
   const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =
     useSWRMutation(
-      createAssetInClientUserUrl(
-        user.user?.userBroker?.id ? clientId : user.user?.id
-      ),
+      createAssetInClientUserUrl(user.user?.userBroker?.id, clientId),
       createAssetInClientUser
     );
 
@@ -356,7 +361,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
       inputValues,
       errorsInputValues,
       triggers,
-      user
+      user,
     });
   };
 
