@@ -1,29 +1,23 @@
-import { User } from "@/models/interfaces/userInfo/userInfo.interface";
 import {
   AllClientSinisters,
   ClientDetailInBroker,
   InspectionCard,
-  LegalUserDetail,
-  ReportCard,
-  SinisterDetail,
-  UsersDetail,
+  ReportCard
 } from "../..";
 import {
-  SectionMyProfile,
   DivImageMyProfile,
-  ImgMyProfile,
-  H2NameLastname,
-  DivInformationMyProfile,
   DivInformationDetail,
-  MyProfileEditInformaction,
+  DivInformationMyProfile,
+  H2NameLastname,
+  ImgMyProfile,
+  SectionMyProfile
 } from "../MiProfile/MiProfile.styled";
 
 interface Props {
   data: ClientDetailInBroker | undefined;
-  sinister: AllClientSinisters[] | [] | undefined;
 }
 
-function ClientProfile({ data, sinister }: Props) {
+function ClientProfile({ data }: Props) {
   return (
     <SectionMyProfile>
       <div>
@@ -34,10 +28,10 @@ function ClientProfile({ data, sinister }: Props) {
           />
         </DivImageMyProfile>
         <div>
-          {data?.companyName ? (
-            <H2NameLastname>{`${data?.companyName}`}</H2NameLastname>
+          {data?.legalUser?.companyName ? (
+            <H2NameLastname>{`${data?.legalUser?.companyName}`}</H2NameLastname>
           ) : (
-            <H2NameLastname>{`${data?.name} ${data?.lastName}`}</H2NameLastname>
+            <H2NameLastname>{`${data?.personalUser?.name} ${data?.personalUser?.lastName}`}</H2NameLastname>
           )}
         </div>
       </div>
@@ -52,26 +46,26 @@ function ClientProfile({ data, sinister }: Props) {
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Genero</h4>
-          <p>{data?.gender}</p>
+          <p>{data?.personalUser?.gender}</p>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Fecha de nacimiento</h4>
-          <p>{data?.birthDate}</p>
+          <p>{data?.personalUser?.birthDate}</p>
         </DivInformationDetail>
-        {data?.dni ? (
+        {data?.personalUser?.dni ? (
           <DivInformationDetail>
             <h4>DNI</h4>
-            <p>{data?.dni}</p>
+            <p>{data?.personalUser?.dni}</p>
           </DivInformationDetail>
         ) : (
           <>
             <DivInformationDetail>
               <h4>Nombre de compañia</h4>
-              <p>{data?.companyName}</p>
+              <p>{data?.legalUser?.companyName}</p>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>CUIT</h4>
-              <p>{data?.cuit}</p>
+              <p>{data?.legalUser?.cuit}</p>
             </DivInformationDetail>
           </>
         )}
@@ -85,53 +79,55 @@ function ClientProfile({ data, sinister }: Props) {
         </DivInformationDetail>
       </DivInformationMyProfile>
       <h2>Seguros</h2>
-      {data && data?.asset.map((el) => {
-        if (el?.vehicle) {
-          return (
-            <InspectionCard
-              key={el.id}
-              type={el.vehicle?.type}
-              keyName={el.vehicle?.plate}
-              id={el.id}
-            />
-          );
-        } else if (el?.electronics) {
-          return (
-            <InspectionCard
-              key={el.id}
-              type={el.electronics?.type}
-              keyName={el.electronics?.brand}
-              id={el.id}
-            />
-          );
-        } else {
-          return [];
-        }
-      })}
+      {data &&
+        data?.assets?.map((el) => {
+          if (el?.vehicle) {
+            return (
+              <InspectionCard
+                key={el.id}
+                type={el.vehicle?.type}
+                keyName={el.vehicle?.plate}
+                id={el.id}
+              />
+            );
+          } else if (el?.electronic) {
+            return (
+              <InspectionCard
+                key={el.id}
+                type={el.electronic?.type}
+                keyName={el.electronic?.brand}
+                id={el.id}
+              />
+            );
+          } else {
+            return [];
+          }
+        })}
       <h2>Siniestros</h2>
-      {sinister && sinister?.map((el) => {
-        if (el?.asset?.vehicle) {
-          return (
-            <ReportCard
-              key={el.id}
-              type={el.asset.vehicle.type}
-              keyName={el.asset.vehicle.plate}
-              id={el.id}
-            />
-          );
-        } else if (el?.asset?.electronics) {
-          return (
-            <ReportCard
-              key={el.id}
-              type={el.asset.electronics.type}
-              keyName={el.asset.electronics.brand}
-              id={el.id}
-            />
-          );
-        } else {
-          return [];
-        }
-      })}
+      {data?.sinisters &&
+        data?.sinisters?.map((el) => {
+          if (el?.vehicle) {
+            return (
+              <ReportCard
+                key={el.id}
+                type={el.vehicle.type}
+                keyName={el.vehicle.plate}
+                id={el.id}
+              />
+            );
+          } else if (el?.electronic) {
+            return (
+              <ReportCard
+                key={el.id}
+                type={el.electronic.type}
+                keyName={el.electronic.brand}
+                id={el.id}
+              />
+            );
+          } else {
+            return [];
+          }
+        })}
     </SectionMyProfile>
   );
 }

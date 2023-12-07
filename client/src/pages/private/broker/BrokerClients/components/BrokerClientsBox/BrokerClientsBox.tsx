@@ -11,7 +11,7 @@ function BrokerClientsBox() {
     clients,
     typeToFilter,
   } = useBrokerClientsContext();
-
+  
   const userBroker = useSelector((store: AppStore) => store.user).user
     ?.userBroker;
 
@@ -37,7 +37,7 @@ function BrokerClientsBox() {
               name={client.personalUser?.name}
               lastname={client.personalUser?.lastName}
               keyName={client.personalUser?.dni}
-              id={client.personalUser?.id}
+              id={client?.id}
             />
           );
         } else if (client.legalUser?.cuit) {
@@ -46,7 +46,7 @@ function BrokerClientsBox() {
               key={i}
               companyName={client.legalUser?.companyName}
               keyName={client.legalUser?.cuit}
-              id={client.legalUser?.id}
+              id={client?.id}
             />
           );
         } else {

@@ -1,8 +1,10 @@
 import { FUEL, VEHICLE_TYPE } from "@/models";
 import { User } from "@/models/interfaces/userInfo/userInfo.interface";
 
-export interface ClientDetailInBroker extends User {
-  asset: AllClientAssets[];
+export interface ClientDetailInBroker
+  extends Omit<User, "broker" | "userBroker" | "receivedNotifications"> {
+  assets: AllClientAssets[];
+  sinisters: AllClientSinisters[];
 }
 
 export interface AllClientAssets {
@@ -10,7 +12,7 @@ export interface AllClientAssets {
   creater_at: string;
   updated_at: string;
   vehicle: Vehicle | null;
-  electronics: Electronics | null;
+  electronic: Electronic | null;
 }
 export interface Vehicle {
   brand: string;
@@ -19,7 +21,7 @@ export interface Vehicle {
   type: string;
 }
 
-export interface Electronics {
+export interface Electronic {
   type: string;
   brand: string;
   model: string;
@@ -29,10 +31,14 @@ export interface AllClientSinisters {
   id: string;
   creater_at: string;
   updated_at: string;
-  time: string;
-  date: string;
-  location: string;
-  asset: AllClientAssets;
+  insured: false;
+  inspection: false;
+  vehicle: Vehicle | null;
+  electronic: Electronic | null;
+  // time: string;
+  // date: string;
+  // location: string;
+  // asset: AllClientAssets;
 }
 
 export interface AssetDetail {

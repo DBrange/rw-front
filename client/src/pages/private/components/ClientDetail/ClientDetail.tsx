@@ -2,25 +2,23 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { ClientDetailContainer } from ".";
 import { ClientProfile, SidebarBroker } from "..";
-import {
-  clientDetail,
-  clientDetailUrl,
-  clientSinisterDetail,
-  clientSinisterDetailUrl,
-} from "./services/user-detail.service";
+import { clientDetail, clientDetailUrl } from "./services/user-detail.service";
+import { AppStore } from "@/redux";
+import { useSelector } from "react-redux";
 
 function ClientDetail() {
   const { clientId } = useParams();
+  const user = useSelector((store: AppStore) => store.user);
 
-  const { data: clientData } = useSWR(clientDetailUrl(clientId), clientDetail);
-    const { data: sinisterClientData } = useSWR(
-      clientSinisterDetailUrl(clientId),
-      clientSinisterDetail
-    );
+  const { data: clientData } = useSWR(
+    clientDetailUrl(user.user?.id, clientId),
+    clientDetail
+  );
+console.log(clientData)
   return (
     <ClientDetailContainer>
       <SidebarBroker />
-      <ClientProfile data={clientData} sinister={sinisterClientData} />
+      <ClientProfile data={clientData} />
     </ClientDetailContainer>
   );
 }
