@@ -22,55 +22,55 @@ function MiProfile() {
           />
         </DivImageMyProfile>
         <div>
-          {user?.companyName ? (
-            <H2NameLastname>{`${user?.companyName}`}</H2NameLastname>
+          {user?.legalUser ? (
+            <H2NameLastname>{`${user?.legalUser?.companyName}`}</H2NameLastname>
           ) : (
-            <H2NameLastname>{`${user?.name} ${user?.lastName}`}</H2NameLastname>
+            <H2NameLastname>{`${user?.personalUser?.name} ${user?.personalUser?.lastName}`}</H2NameLastname>
           )}
         </div>
       </div>
       <DivInformationMyProfile>
         <DivInformationDetail>
           <h4>Email</h4>
-          <p>{user.email}</p>
+          <p>{user?.email}</p>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Email alternativo</h4>
-          <p>{user.altEmail}</p>
+          <p>{user?.altEmail}</p>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Genero</h4>
-          <p>{user.gender}</p>
+          <p>{user?.personalUser?.gender}</p>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Fecha de nacimiento</h4>
-          <p>{user.birthDate}</p>
+          <p>{user?.personalUser?.birthDate}</p>
         </DivInformationDetail>
-        {user.dni ? (
+        {user?.personalUser?.dni ? (
           <DivInformationDetail>
             <h4>DNI</h4>
-            <p>{user.dni}</p>
+            <p>{user?.personalUser?.dni}</p>
           </DivInformationDetail>
         ) : (
           <>
             <DivInformationDetail>
               <h4>Nombre de compañia</h4>
-              <p>{user.companyName}</p>
+              <p>{user?.legalUser?.companyName}</p>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>CUIT</h4>
-              <p>{user.cuit}</p>
+              <p>{user?.legalUser?.cuit}</p>
             </DivInformationDetail>
           </>
         )}
         <DivInformationDetail>
           <h4>Numero telefonico</h4>
-          <p>{user.phoneNumber}</p>
+          <p>{user?.phoneNumber}</p>
           <MyProfileEditInformaction>Editar</MyProfileEditInformaction>
         </DivInformationDetail>
         <DivInformationDetail>
           <h4>Residencia</h4>
-          <p>{user.address}</p>
+          <p>{user?.address}</p>
           <MyProfileEditInformaction>Editar</MyProfileEditInformaction>
         </DivInformationDetail>
       </DivInformationMyProfile>

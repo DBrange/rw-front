@@ -39,10 +39,37 @@ export interface AssetDetail {
   id: string;
   creater_at: string;
   updated_at: string;
-  users: UsersDetail | null;
-  legalUsers: LegalUserDetail | null;
+  // user: UserDetail | null;
   vehicle: VehicleDetail | null;
-  electronics: ElectronicDetail | null;
+  electronic: ElectronicDetail | null;
+  insured: boolean;
+  inspection: boolean;
+  client: ClientDetail;
+  sinisters: Sinister[];
+}
+
+interface ClientDetail {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  phoneNumber: string;
+  email: string;
+  altEmail: string;
+  address: string;
+  role: string;
+  accessLevel: number;
+  authorization: string;
+  personalUser?: PersonalUserDetail;
+  legalUser?: LegalUserDetail;
+}
+
+interface Sinister {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  time: string;
+  date: string;
+  location: string;
 }
 
 interface VehicleDetail {
@@ -77,22 +104,28 @@ interface GncDetail {
   plate: string;
 }
 
-export interface UsersDetail {
+export interface UserDetail {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  phoneNumber: string;
+  email: string;
+  altEmail: string;
+  address: string;
+  role: string;
+  accessLevel: number;
+  authorization: string;
+}
+
+export interface PersonalUserDetail {
   id: string;
   creater_at: string;
   updated_at: string;
   name: string;
   lastName: string;
   birthDate: string;
-  phoneNumber: string;
-  email: string;
-  altEmail: string;
   gender: string;
   dni: string;
-  address: string;
-  role: string;
-  accessLevel: number;
-  authorization: string;
 }
 
 export interface LegalUserDetail {
@@ -101,11 +134,6 @@ export interface LegalUserDetail {
   updated_at: string;
   companyName: string;
   cuit: string;
-  phoneNumber: string;
-  email: string;
-  altEmail: string;
-  address: string;
-  role: string;
 }
 
 interface ElectronicDetail {
@@ -171,6 +199,16 @@ interface SinisterType {
   theft?: Theft;
   fire?: Fire;
   crash?: Crash;
+  damage?: Damage;
+}
+
+interface Damage {
+  time: string;
+  date: string;
+  location: string;
+  details: string;
+  reportPhoto: string;
+  budget: string;
 }
 
 interface ThirdPartyVehicle {

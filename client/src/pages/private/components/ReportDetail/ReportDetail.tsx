@@ -395,10 +395,10 @@ function ReportnDetail({
           </DivInformationMyProfile>
         </>
       );
-    } else if (values?.asset?.electronics) {
+    } else if (values?.asset?.electronic) {
       const {
         asset: {
-          electronics: {
+          electronic: {
             brand,
             model,
             type,

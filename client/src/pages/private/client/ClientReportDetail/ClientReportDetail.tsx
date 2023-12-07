@@ -10,7 +10,8 @@ import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 
 function ClientReportDetail() {
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
 
   const { sinisterId } = useParams();
 
@@ -18,7 +19,7 @@ function ClientReportDetail() {
 
   return (
     <ClientReportDetailContainer>
-      {broker ? <SidebarBroker /> : <Sidebar />}
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
       <ReportDetail values={data} id={sinisterId} />
     </ClientReportDetailContainer>
   );
