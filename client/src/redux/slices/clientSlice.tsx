@@ -34,7 +34,6 @@ export const clientSlice = createSlice({
   reducers: {
     addClient: (state, action) => {
       persistLocalStorage<ClientInfo>(clientKey, action.payload);
-      console.log("hhh");
       return { ...state, ...action.payload };
     },
     updateClient: (state, action) => {

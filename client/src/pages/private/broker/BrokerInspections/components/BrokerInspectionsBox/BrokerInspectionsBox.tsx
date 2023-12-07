@@ -13,7 +13,8 @@ function BrokerInspectionsBox() {
   const { setSearchField, searchField, setTypeToFilter, assets, typeToFilter } =
     useBrokerInspectionsContext();
 
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
 
   const cards: JSX.Element = (
     <>
@@ -57,7 +58,7 @@ function BrokerInspectionsBox() {
 
   return (
     <>
-      {broker ? <SidebarBroker /> : <Sidebar />}
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
 
       <InspectLogin
         sectionName="Inspecciones"

@@ -314,7 +314,9 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
 
   const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =
     useSWRMutation(
-      createAssetInClientUserUrl(user.user.broker ? clientId : user.user.id),
+      createAssetInClientUserUrl(
+        user.user?.userBroker?.id ? clientId : user.user?.id
+      ),
       createAssetInClientUser
     );
 

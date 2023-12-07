@@ -12,7 +12,8 @@ function BrokerClientsBox() {
     typeToFilter,
   } = useBrokerClientsContext();
 
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
 
   const cards: JSX.Element = (
     <>
@@ -57,7 +58,7 @@ function BrokerClientsBox() {
 
   return (
     <>
-      {broker ? <SidebarBroker /> : <Sidebar />}
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
 
       <InspectLogin
         sectionName="Clientes"

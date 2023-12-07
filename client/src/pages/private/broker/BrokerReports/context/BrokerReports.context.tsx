@@ -61,9 +61,8 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
   const user = useSelector((store: AppStore) => store.user);
 
   const brokerType = () => {
-    if (user.user.dni) {
       const { data: allBrokerAssetsUser } = useSWR(
-        AllBrokerUserSinisterUrl(user.user.broker?.id),
+        AllBrokerUserSinisterUrl(user.user?.userBroker?.id),
         allBrokerSinister
       );
 
@@ -71,17 +70,7 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
         filterData<AllClientSinisters>(allBrokerAssetsUser!, searchField);
 
       return searchedUserAsset;
-    } else {
-      const { data: allBrokerAssetsLegalUser } = useSWR(
-        AllBrokerLegalUserSinisterUrl(user.user.broker?.id),
-        allBrokerSinister
-      );
-
-      const searchedLegalAssets: AllClientSinisters[] =
-        filterData<AllClientSinisters>(allBrokerAssetsLegalUser!, searchField);
-
-      return searchedLegalAssets;
-    }
+   
   };
 
   const assets = [...brokerType()]

@@ -14,12 +14,11 @@ function ClientCreateInspectionBox() {
       markedTouches,
       submitValues,
   } = useClientCreateInspectionContext();
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
   return (
     <>
-    {
-      broker ? <SidebarBroker /> : <Sidebar />
-    }
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
 
       <Form onSubmit={submitValues}>
         <AllClientCreateInspectionPages />

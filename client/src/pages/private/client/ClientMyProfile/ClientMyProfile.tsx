@@ -8,10 +8,11 @@ import {
 } from "../..";
 
 function ClientMyProfile() {
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
   return (
     <ClientMyProfileContainer>
-      {broker ? <SidebarBroker /> : <Sidebar />}
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
       <MiProfile />
     </ClientMyProfileContainer>
   );

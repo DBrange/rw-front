@@ -17,7 +17,6 @@ export const validationFormDataRegister = ({
     registerLegalPersonal,
     registerBrokerPersonal,
     registerBrokerLegalPersonal,
-    swornDeclaration,
   },
   errorsInputValues,
   triggers: { trigger },

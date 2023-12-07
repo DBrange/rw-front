@@ -58,7 +58,7 @@ export const BrokerCreateReportProvider = ({ children }: ChildrenType) => {
 
   const brokerType = () => {
     const { data: allBrokerAssetsUser } = useSWR(
-      AllBrokerClientsForCreateSinisterUrl(user.user.broker?.id),
+      AllBrokerClientsForCreateSinisterUrl(user.user?.userBroker?.id),
       allBrokerClientsForCreateSinister
     );
 

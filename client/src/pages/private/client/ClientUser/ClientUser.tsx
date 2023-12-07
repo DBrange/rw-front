@@ -5,12 +5,13 @@ import { Sidebar, SidebarBroker } from "../..";
 import { ClientUserContainer } from "./components";
 
 const ClientUser = () => {
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
 
   return (
     <ClientUserProvider>
       <ClientUserContainer>
-        {broker ? <SidebarBroker /> : <Sidebar />}
+        {userBroker ? <SidebarBroker /> : <Sidebar />}
         {/* <InspectLogin sectionName="Inspecciones" /> */}
       </ClientUserContainer>
     </ClientUserProvider>

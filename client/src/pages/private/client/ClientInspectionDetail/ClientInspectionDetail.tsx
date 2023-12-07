@@ -14,7 +14,8 @@ import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 
 function ClientInspectionDetail() {
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
 
   const { insuredId } = useParams();
 
@@ -22,7 +23,7 @@ function ClientInspectionDetail() {
 
   return (
     <ClientInspectionDetailContainer>
-      {broker ? <SidebarBroker /> : <Sidebar />}
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
       <InspectionDetail values={data} id={insuredId} />
     </ClientInspectionDetailContainer>
   );

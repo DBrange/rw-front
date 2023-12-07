@@ -17,7 +17,7 @@ function InspectionDetail({
   values: AssetDetail | undefined;
   id: string | undefined;
   }) {
-    const broker = useSelector((store: AppStore) => store.user.user.broker);
+    const userBroker = useSelector((store: AppStore) => store.user.user?.userBroker);
 
   const dataInHTML = () => {
     if (values?.vehicle) {
@@ -54,7 +54,7 @@ function InspectionDetail({
           </DivHeaderInspectionDetail>
           <Link
             to={
-              broker
+              userBroker
                 ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
                 : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
             }
@@ -148,7 +148,7 @@ function InspectionDetail({
           </DivHeaderInspectionDetail>
           <Link
             to={
-              broker
+              userBroker
                 ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
                 : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
             }

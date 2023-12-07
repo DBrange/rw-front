@@ -18,78 +18,77 @@ type ChildrenType = {
 };
 
 export const BrokerClientsProvider = ({ children }: ChildrenType) => {
+  const [searchField, setSearchField] = useState<string>("");
 
-    const [searchField, setSearchField] = useState<string>("");
-
-    const [typeToFilter, setTypeToFilter] = useState<"user" | "legalUser">(
-      "user"
-    );
+  const [typeToFilter, setTypeToFilter] = useState<"user" | "legalUser">(
+    "user"
+  );
 
   const filterData = <T extends AllBrokerClients>(
-      data: T[] | undefined,
-      searchField: string
-    ): T[] => {
-      console.log(data);
+    data: T[] | undefined,
+    searchField: string
+  ): T[] => {
+    console.log(data);
 
-      if (!data) return [];
+    if (!data) return [];
 
-      const regex = new RegExp(`^${searchField}`, "i");
+    const regex = new RegExp(`^${searchField}`, "i");
 
-      const dataFilteredToElement: T[] = data?.filter((el) => {
-        if (typeToFilter === "user" && el.dni) {
-          return el.dni;
-        } else if (typeToFilter === "legalUser" && el.cuit) {
-          return el;
-        }
-      });
-
-      if (searchField.trim().length) {
-        if (typeToFilter === "user") {
-          return dataFilteredToElement?.filter((el) =>
-            regex.test(el?.dni as string)
-          );
-        } else if (typeToFilter === "legalUser") {
-          return dataFilteredToElement?.filter((el) =>
-            regex.test(el?.cuit as string)
-          );
-        }
-      } else {
-        return dataFilteredToElement;
+    const dataFilteredToElement: T[] = data?.filter((el) => {
+      if (typeToFilter === "user" && el.dni) {
+        return el.dni;
+      } else if (typeToFilter === "legalUser" && el.cuit) {
+        return el;
       }
-      return [];
-    };
+    });
 
-    const user = useSelector((store: AppStore) => store.user);
+    if (searchField.trim().length) {
+      if (typeToFilter === "user") {
+        return dataFilteredToElement?.filter((el) =>
+          regex.test(el?.dni as string)
+        );
+      } else if (typeToFilter === "legalUser") {
+        return dataFilteredToElement?.filter((el) =>
+          regex.test(el?.cuit as string)
+        );
+      }
+    } else {
+      return dataFilteredToElement;
+    }
+    return [];
+  };
+
+  const user = useSelector((store: AppStore) => store.user);
 
   const brokerType = () => {
     const { data: allBrokerAssetsUser } = useSWR(
-      AllBrokerClientsUrl(user.user.broker?.id),
+      AllBrokerClientsUrl(user.user?.userBroker?.id),
       allBrokerClients
     );
 
-    const searchedUserAsset: AllBrokerClients[] =
-      filterData<AllBrokerClients>(allBrokerAssetsUser!, searchField);
+    const searchedUserAsset: AllBrokerClients[] = filterData<AllBrokerClients>(
+      allBrokerAssetsUser!,
+      searchField
+    );
 
     return searchedUserAsset;
+  };
+  const clients = [...brokerType()]
+    .filter((asset) => asset !== undefined)
+    .flat();
 
-    
-  }
-    const clients = [...brokerType()]
-      .filter((asset) => asset !== undefined)
-      .flat();
+  const values = {
+    setSearchField,
+    searchField,
+    setTypeToFilter,
+    clients,
+    typeToFilter,
+  };
 
-    const values = {
-      setSearchField,
-      searchField,
-      setTypeToFilter,
-      clients,
-      typeToFilter,
-    };
-  
   // const user = useSelector((store: AppStore) => store.user);
 
   // const { data } = useSWR(
-  //   AllBrokerClientsUrl(user.user.broker?.id),
+  //   AllBrokerClientsUrl(user.user?.userBroker?.id),
   //   allBrokerClients
   // );
   // const values = {data};

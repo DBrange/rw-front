@@ -3,7 +3,7 @@ import { AppStore } from "@/redux";
 import { createContext, useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
-import { IBrokerInspectionsContext, AllBrokerAssetsLegalUserUrl, allBrokerInspected, AllBrokerAssetsUserUrl } from "..";
+import { IBrokerInspectionsContext, allBrokerInspected, AllBrokerAssetsUserUrl } from "..";
 import {emptyBrokerInspectionsContext} from './empty-brokerInspections-context'
 
 
@@ -58,9 +58,8 @@ export const BrokerInspectionsProvider = ({ children }: ChildrenType) => {
   const user = useSelector((store: AppStore) => store.user);
 
   const brokerType = () => {
-    if (user.user.dni) {
       const { data: allBrokerAssetsUser } = useSWR(
-        AllBrokerAssetsUserUrl(user.user.broker?.id),
+        AllBrokerAssetsUserUrl(user.user?.id),
         allBrokerInspected
       );
 
@@ -70,17 +69,6 @@ export const BrokerInspectionsProvider = ({ children }: ChildrenType) => {
       );
 
       return searchedUserAsset;
-    } else {
-      const { data: allBrokerAssetsLegalUser } = useSWR(
-        AllBrokerAssetsLegalUserUrl(user.user.broker?.id),
-        allBrokerInspected
-      );
-
-      const searchedLegalAssets: AllClientAssets[] =
-        filterData<AllClientAssets>(allBrokerAssetsLegalUser!, searchField);
-
-      return searchedLegalAssets;
-    }
   };
 
   const assets = [...brokerType()]
