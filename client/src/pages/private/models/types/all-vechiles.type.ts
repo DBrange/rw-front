@@ -143,7 +143,7 @@ interface ElectronicDetail {
   type: string;
   brand: string;
   model: string;
-  smartphones: SmartphonesDetail;
+  smartphone: SmartphonesDetail;
 }
 
 interface SmartphonesDetail {

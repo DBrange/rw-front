@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import { Crash, Fire, Injuredd, SinisterDetail } from "../..";
-import { PrivateRoutes } from "../../../../models/types/routes";
 import { DivHeaderInspectionDetail } from "../InspectionDetail/InspectionDetail.styled";
 import {
   DivInformationDetail,
@@ -237,11 +235,11 @@ function ReportnDetail({
               <>
                 <DivInformationDetail>
                   <h4>OBLEA</h4>
-                  <p>{gncId.oblea}</p>
+                  <p>{gncId?.oblea}</p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Fecha de vencimiento</h4>
-                  <p>{gncId.expireDate}</p>
+                  <p>{gncId?.expireDate}</p>
                 </DivInformationDetail>
               </>
             )}
@@ -402,7 +400,7 @@ function ReportnDetail({
             brand,
             model,
             type,
-            smartphones: { imei, phoneService, phoneNumber },
+            smartphone: { imei, phoneService, phoneNumber },
           },
         },
         sinisterType: { theft },
