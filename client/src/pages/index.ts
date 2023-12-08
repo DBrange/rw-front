@@ -16,6 +16,7 @@ export * from './private/broker/BrokerCreateReport/components/BrokerCreateReport
 export * from './private/broker/BrokerCreateReport/components';
 export * from './private/broker/BrokerCreateReport/context';
 export * from './private/broker/BrokerCreateReport';
+export * from './private/broker/BrokerCreateReport/services';
 export * from './private/broker/BrokerInspections/components/BrokerInspectionsBox';
 export * from './private/broker/BrokerInspections/components/BrokerInspectionsContainer';
 export * from './private/broker/BrokerInspections/components';

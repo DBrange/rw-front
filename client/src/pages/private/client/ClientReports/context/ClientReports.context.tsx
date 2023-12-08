@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { IClientReportsContext, emptyClientReportsContext } from "./empty-clientReports-context";
-import { AllClientSinisters, AllLegalUserSinisterUrl, AllUserSinisterUrl, allSinister } from "@/pages";
+import { AllClientSinisters, AllUserSinisterUrl, allSinister } from "@/pages";
 import { useSelector } from "react-redux";
 import { AppStore } from "@/redux";
 import useSWR from "swr";
@@ -34,7 +34,7 @@ export const ClientReportsProvider = ({ children }: ChildrenType) => {
       if (typeToFilter === "vehicle") {
         return el.asset.vehicle;
       } else if (typeToFilter === "electronic") {
-        return el.asset.electronics;
+        return el.asset.electronic;
       }
     });
 
@@ -45,7 +45,7 @@ export const ClientReportsProvider = ({ children }: ChildrenType) => {
         );
       } else if (typeToFilter === "electronic") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.asset.electronics?.model as string)
+          regex.test(el?.asset.electronic?.model as string)
         );
       }
     } else {
@@ -57,9 +57,8 @@ export const ClientReportsProvider = ({ children }: ChildrenType) => {
   const user = useSelector((store: AppStore) => store.user);
 
   const clientType = () => {
-    if (user.user.dni) {
       const { data: allAssetsUser } = useSWR(
-        AllUserSinisterUrl(user.user.id),
+        AllUserSinisterUrl(user.user?.id),
         allSinister
       );
 
@@ -69,17 +68,7 @@ export const ClientReportsProvider = ({ children }: ChildrenType) => {
       );
 
       return searchedUserAsset;
-    } else {
-      const { data: allAssetsLegalUser } = useSWR(
-        AllLegalUserSinisterUrl(user.user.id),
-        allSinister
-      );
-
-      const searchedLegalAssets: AllClientSinisters[] =
-        filterData<AllClientSinisters>(allAssetsLegalUser!, searchField);
-
-      return searchedLegalAssets;
-    }
+   
   };
 
   const assets = [...clientType()]

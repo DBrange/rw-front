@@ -41,7 +41,7 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
       if (typeToFilter === "vehicle") {
         return el.vehicle;
       } else if (typeToFilter === "electronic") {
-        return el.electronics;
+        return el.electronic;
       }
     });
 
@@ -52,7 +52,7 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
         );
       } else if (typeToFilter === "electronic") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.electronics?.model as string)
+          regex.test(el?.electronic?.model as string)
         );
       }
     } else {
@@ -64,7 +64,7 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
   const user = useSelector((store: AppStore) => store.user);
 
   const clientType = () => {
-    if (user.user.dni) {
+    if (user.user?.personalUser?.dni) {
       const {  data: allAssetsUser } = useSWR(
         AllAssetsUserUrl(user.user.id),
         allInspected
@@ -78,7 +78,7 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
       return searchedUserAsset;
     } else {
       const {  data: allAssetsLegalUser } =
-        useSWR(AllAssetsLegalUserUrl(user.user.id), allInspected);
+        useSWR(AllAssetsLegalUserUrl(user.user?.id), allInspected);
 
       const searchedLegalAssets: AllClientAssets[] =
         filterData<AllClientAssets>(allAssetsLegalUser!, searchField);

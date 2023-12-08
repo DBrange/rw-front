@@ -1,6 +1,5 @@
 import {
   AllClientSinisters,
-  AllLegalUserSinisterUrl,
   InspectLogin,
   ReportCard,
   Sidebar,
@@ -41,12 +40,12 @@ function BrokerReportsBox() {
             id={el.id}
             />
             );
-          } else if (el.asset.electronics) {
+          } else if (el.asset.electronic) {
             return (
               <ReportCard
               key={el.id}
-              type={el.asset.electronics.type}
-              keyName={el.asset.electronics.brand}
+              type={el.asset.electronic.type}
+              keyName={el.asset.electronic.brand}
               id={el.id}
               />
               );

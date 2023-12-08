@@ -3,10 +3,7 @@ import {baseUrl} from '../../../../public/Login/services/getClient.service'
 
 export const SinisterUrl = `${baseUrl}/sinister`
 
-export const AllUserSinisterUrl = (id?: string) => `${SinisterUrl}/user-login/${id}`;
-
-export const AllLegalUserSinisterUrl = (id?: string) =>
-  `${SinisterUrl}/user-legal-login/${id}`;
+export const AllUserSinisterUrl = (id?: string) => `${SinisterUrl}/client/${id}`;
 
 export const allSinister = async (
   url: string

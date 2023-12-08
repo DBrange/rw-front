@@ -4,7 +4,7 @@ import { User } from "@/models/interfaces/userInfo/userInfo.interface";
 export interface ClientDetailInBroker
   extends Omit<User, "broker" | "userBroker" | "receivedNotifications"> {
   assets: AllClientAssets[];
-  sinisters: AllClientSinisters[];
+  sinisters: AllClientProfileSinisters[];
 }
 
 export interface AllClientAssets {
@@ -27,7 +27,7 @@ export interface Electronic {
   model: string;
 }
 
-export interface AllClientSinisters {
+export interface AllClientProfileSinisters {
   id: string;
   creater_at: string;
   updated_at: string;
@@ -39,6 +39,15 @@ export interface AllClientSinisters {
   // date: string;
   // location: string;
   // asset: AllClientAssets;
+}
+export interface AllClientSinisters {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  time: string;
+  date: string;
+  location: string;
+  asset: AllClientAssets;
 }
 
 export interface AssetDetail {

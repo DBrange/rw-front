@@ -175,7 +175,7 @@ function AllReportPages() {
           />
         }
       />
-      <FormOpenClose
+      {/* <FormOpenClose
         formName="Electrodomestico"
         isActive={elementReportActive.electronic && page === 3}
         form={
@@ -187,7 +187,7 @@ function AllReportPages() {
             changeSelectValues={changeSelectValues}
           />
         }
-      />
+      /> */}
       <FormOpenClose
         formName="Robo"
         isActive={

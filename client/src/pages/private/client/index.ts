@@ -41,6 +41,7 @@ export * from './ClientMyProfile';
 export * from './ClientReportDetail/components/ClientReportDetailContainer';
 export * from './ClientReportDetail/components';
 export * from './ClientReportDetail';
+export * from './ClientReportDetail/services/get-sinister-detail.service';
 export * from './ClientReports/components/ClientReportsBox';
 export * from './ClientReports/components/ClientReportsContainer';
 export * from './ClientReports/components';

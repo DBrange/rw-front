@@ -20,7 +20,8 @@ function ClientInspectionsBox() {
     typeToFilter,
   } = useClientInspectionsContext();
   
-  const broker = useSelector((store: AppStore) => store.user).user.broker;
+  const userBroker = useSelector((store: AppStore) => store.user).user
+    ?.userBroker;
 
   const cards: JSX.Element = (
     <>
@@ -46,12 +47,12 @@ function ClientInspectionsBox() {
               id={el.id}
             />
           );
-        } else if (el.electronics) {
+        } else if (el.electronic) {
           return (
             <InspectionCard
               key={el.id}
-              type={el.electronics.type}
-              keyName={el.electronics.brand}
+              type={el.electronic.type}
+              keyName={el.electronic.brand}
               id={el.id}
             />
           );
@@ -64,12 +65,14 @@ function ClientInspectionsBox() {
 
   return (
     <>
-{broker ? <SidebarBroker /> : <Sidebar />}
+      {userBroker ? <SidebarBroker /> : <Sidebar />}
       <InspectLogin
         sectionName="Inspecciones"
         setSearchField={setSearchField}
         searchField={searchField}
-        placeholder={typeToFilter === 'vehicle' ? "Buscar patente" : 'Buscar modelo' }
+        placeholder={
+          typeToFilter === "vehicle" ? "Buscar patente" : "Buscar modelo"
+        }
         name="allInspected"
         cards={cards}
       />

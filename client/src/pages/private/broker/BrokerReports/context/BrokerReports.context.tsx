@@ -38,7 +38,7 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
       if (typeToFilter === "vehicle") {
         return el.asset.vehicle;
       } else if (typeToFilter === "electronic") {
-        return el.asset.electronics;
+        return el.asset.electronic;
       }
     });
 
@@ -49,7 +49,7 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
         );
       } else if (typeToFilter === "electronic") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.asset.electronics?.model as string)
+          regex.test(el?.asset.electronic?.model as string)
         );
       }
     } else {
