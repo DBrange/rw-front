@@ -115,6 +115,84 @@ function ReportnDetail({
     );
   };
 
+  const dataClientHTML = () => {
+    if (values?.asset?.client) {
+      const {
+        asset: {
+          client: {
+            phoneNumber,
+            email,
+            altEmail,
+            address,
+            personalUser,
+            legalUser,
+          },
+        },
+      } = values;
+
+      return (
+        <>
+          <DivInformationMyProfile>
+            <h2>Persona</h2>
+            <DivInformationDetail>
+              <h4>Numero telefonico</h4>
+              <p>{phoneNumber}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Email</h4>
+              <p>{email}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Email alternativo</h4>
+              <p>{altEmail}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Domicilio</h4>
+              <p>{address}</p>
+            </DivInformationDetail>
+            {personalUser && (
+              <>
+                <DivInformationDetail>
+                  <h4>Nombre</h4>
+                  <p>{personalUser?.name}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Apellido</h4>
+                  <p>{personalUser?.lastName}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Fecha de nacimiento</h4>
+                  <p>{personalUser?.birthDate}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Genero</h4>
+                  <p>{personalUser?.gender}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>DNI</h4>
+                  <p>{personalUser?.dni}</p>
+                </DivInformationDetail>
+              </>
+            )}
+            {legalUser && (
+              <>
+                {" "}
+                <DivInformationDetail>
+                  <h4>Compañia</h4>
+                  <p>{legalUser?.companyName}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>CUIT</h4>
+                  <p>{legalUser?.cuit}</p>
+                </DivInformationDetail>
+              </>
+            )}
+          </DivInformationMyProfile>
+        </>
+      );
+    }
+  };
+
   const dataInHTML = () => {
     if (values?.asset?.vehicle) {
       const {
@@ -137,7 +215,7 @@ function ReportnDetail({
             gnc,
             fuel,
             type,
-            gncId
+            gncId,
           },
         },
         sinisterType: { theft, fire, crash },
@@ -162,6 +240,8 @@ function ReportnDetail({
             Para denunciar
           </Link> */}
           <DivInformationMyProfile>
+            
+            {dataClientHTML()}
             <h2>Siniestro</h2>
             <DivInformationDetail>
               <h4>Fecha de siniestro</h4>
@@ -206,7 +286,7 @@ function ReportnDetail({
             <DivInformationDetail>
               <h4>Fotos del vehiculo</h4>
               {images.map((el, i) => (
-                <div key={el+i}>
+                <div key={el + i}>
                   <img src={el} />
                 </div>
               ))}
@@ -261,7 +341,7 @@ function ReportnDetail({
                 <DivInformationDetail>
                   <h4>Foto de denuncia</h4>
                   {theft?.reportPhoto.map((el, i) => (
-                    <div key={el+i}>
+                    <div key={el + i}>
                       <img src={el} />
                     </div>
                   ))}
@@ -283,13 +363,12 @@ function ReportnDetail({
                     </DivInformationDetail>
                     <DivInformationDetail>
                       <h4>Fotos del neumatico</h4>
-                      
-                        {theft?.theftTire?.tirePhoto.map((el,i) => (
-                          <div key={el+i}>
-                            <img src={el} />
-                          </div>
-                        ))}
-                      
+
+                      {theft?.theftTire?.tirePhoto.map((el, i) => (
+                        <div key={el + i}>
+                          <img src={el} />
+                        </div>
+                      ))}
                     </DivInformationDetail>
                     <DivInformationDetail>
                       <h4>Ubicacion de reemplazo</h4>
@@ -376,13 +455,12 @@ function ReportnDetail({
                         </DivInformationDetail>
                         <DivInformationDetail>
                           <h4>Fotos de licencia</h4>
-                          
-                            {el.thirdPartyDriver.licensePhoto.map((el) => (
-                              <div key={el+i}>
-                                <img src={el} />
-                              </div>
-                            ))}
-                          
+
+                          {el.thirdPartyDriver.licensePhoto.map((el) => (
+                            <div key={el + i}>
+                              <img src={el} />
+                            </div>
+                          ))}
                         </DivInformationDetail>
                       </>
                     ))}
@@ -420,7 +498,8 @@ function ReportnDetail({
             Para denunciar
           </Link> */}
           <DivInformationMyProfile>
-            {" "}
+            
+            {dataClientHTML()}
             {type === "CELULAR" && (
               <>
                 <DivInformationDetail>
@@ -454,8 +533,8 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Foto de denuncia</h4>
-                  {theft?.reportPhoto.map((el,i) => (
-                    <div key={el+i}>
+                  {theft?.reportPhoto.map((el, i) => (
+                    <div key={el + i}>
                       <img src={el} />
                     </div>
                   ))}

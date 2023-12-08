@@ -56,14 +56,14 @@ function Sidebar() {
             </LiSidebarItem>
           </LinkNavigate>
 
-          <LinkNavigate
+          {/* <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_INSURED}`}
           >
             <LiSidebarItem>
               <TfiWrite size={20} />
               Inspecciones
             </LiSidebarItem>
-          </LinkNavigate>
+          </LinkNavigate> */}
 
           <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_SINISTER}`}

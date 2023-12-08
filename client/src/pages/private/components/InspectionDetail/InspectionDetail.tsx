@@ -1,14 +1,13 @@
-import { GncValues, VehicleValues } from "@/models";
-import {
-  DivInformationMyProfile,
-  DivInformationDetail,
-} from "../MiProfile/MiProfile.styled";
-import { DivHeaderInspectionDetail } from "./InspectionDetail.styled";
-import { Link, useParams } from "react-router-dom";
-import { PrivateRoutes } from "../../../../models/types/routes";
-import { AssetDetail } from "../..";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { AssetDetail } from "../..";
+import { PrivateRoutes } from "../../../../models/types/routes";
+import {
+  DivInformationDetail,
+  DivInformationMyProfile,
+} from "../MiProfile/MiProfile.styled";
+import { DivHeaderInspectionDetail } from "./InspectionDetail.styled";
 
 function InspectionDetail({
   values,
@@ -16,10 +15,12 @@ function InspectionDetail({
 }: {
   values: AssetDetail | undefined;
   id: string | undefined;
-  }) {
-    const userBroker = useSelector((store: AppStore) => store.user.user?.userBroker);
+}) {
+  const userBroker = useSelector(
+    (store: AppStore) => store.user.user?.userBroker
+  );
 
-  const dataInHTML = () => {
+  const dataVehicleHTML = () => {
     if (values?.vehicle) {
       const {
         vehicle: {
@@ -40,7 +41,7 @@ function InspectionDetail({
           gnc,
           fuel,
           type,
-          gncId
+          gncId,
         },
       } = values;
 
@@ -62,6 +63,7 @@ function InspectionDetail({
             Para denunciar
           </Link>
           <DivInformationMyProfile>
+            {dataClientHTML()}
             <DivInformationDetail>
               <h4>Año</h4>
               <p>{year}</p>
@@ -92,7 +94,7 @@ function InspectionDetail({
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Fotos del vehiculo</h4>
-              {images.map((el, i) => (
+              {images.map((el: string, i: number) => (
                 <div key={el + i}>
                   <img src={el} />
                 </div>
@@ -133,9 +135,18 @@ function InspectionDetail({
           </DivInformationMyProfile>
         </>
       );
-    } else if (values?.electronics) {
+    }
+  };
+
+  const dataElectronicHTML = () => {
+    if (values?.electronic) {
       const {
-        electronics: { brand, model, type,smartphones:{imei,phoneService,phoneNumber} },
+        electronic: {
+          brand,
+          model,
+          type,
+          smartphone: { imei, phoneService, phoneNumber },
+        },
       } = values;
 
       return (
@@ -156,7 +167,7 @@ function InspectionDetail({
             Para denunciar
           </Link>
           <DivInformationMyProfile>
-            {" "}
+            {dataClientHTML()}
             {type === "CELULAR" && (
               <>
                 <DivInformationDetail>
@@ -179,27 +190,89 @@ function InspectionDetail({
     }
   };
 
-  // const {
-  //   plate,
-  //   year,
-  //   brand,
-  //   model,
-  //   color,
-  //   tireBrand,
-  //   tireSize,
-  //   tireWear,
-  //   damage,
-  //   damageLocation,
-  //   images,
-  //   okm,
-  //   explodedAirbag,
-  //   noSpareTire,
-  //   gnc,
-  //   fuel,
-  //   type,
-  //   expireDate,
-  //   oblea,
-  // } = values;
+  const dataClientHTML = () => {
+    if (values?.client) {
+      const {
+        client: {
+          phoneNumber,
+          email,
+          altEmail,
+          address,
+          personalUser,
+          legalUser,
+        },
+      } = values;
+
+      return (
+        <>
+          <DivInformationMyProfile>
+            <h2>Persona</h2>
+            <DivInformationDetail>
+              <h4>Numero telefonico</h4>
+              <p>{phoneNumber}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Email</h4>
+              <p>{email}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Email alternativo</h4>
+              <p>{altEmail}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Domicilio</h4>
+              <p>{address}</p>
+            </DivInformationDetail>
+            {personalUser && (
+              <>
+                <DivInformationDetail>
+                  <h4>Nombre</h4>
+                  <p>{personalUser?.name}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Apellido</h4>
+                  <p>{personalUser?.lastName}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Fecha de nacimiento</h4>
+                  <p>{personalUser?.birthDate}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Genero</h4>
+                  <p>{personalUser?.gender}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>DNI</h4>
+                  <p>{personalUser?.dni}</p>
+                </DivInformationDetail>
+              </>
+            )}
+            {legalUser && (
+              <>
+                {" "}
+                <DivInformationDetail>
+                  <h4>Compañia</h4>
+                  <p>{legalUser?.companyName}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>CUIT</h4>
+                  <p>{legalUser?.cuit}</p>
+                </DivInformationDetail>
+              </>
+            )}
+          </DivInformationMyProfile>
+        </>
+      );
+    }
+  };
+
+  const dataInHTML = () => {
+    if (values?.vehicle) {
+      return dataVehicleHTML();
+    } else if (values?.electronic) {
+      return dataElectronicHTML();
+    }
+  };
 
   return <section>{dataInHTML()}</section>;
 }
