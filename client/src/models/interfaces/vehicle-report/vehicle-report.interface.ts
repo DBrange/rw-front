@@ -9,6 +9,8 @@ export interface VehicleReportValues {
   gnc: boolean;
   brand: string;
   model: string;
+  explodedAirbag: boolean;
+  noSpareTire: boolean;
   fuel: "default" | "DIESEL" | "GASOLINA";
   type: "default" | "CAMIONETA" | "AUTOMOVIL" | "MOTOCICLETA";
 }

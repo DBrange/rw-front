@@ -11,6 +11,8 @@ export const emptyVehicleReportValues: VehicleReportValues = {
   gnc: false,
   brand: "",
   model: "",
+  explodedAirbag: false,
+  noSpareTire: false,
   fuel: "default",
   type: "default",
 };

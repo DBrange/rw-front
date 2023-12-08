@@ -21,7 +21,22 @@ export interface User {
   legalUser?: LegalUser;
   broker?: Broker;
   userBroker?: UserBroker;
+  brokerUser?: BrokerUser
   receivedNotifications: Notification[];
+}
+interface BrokerUser {
+  id: string;
+  creater_at: string;
+  updated_at: string;
+  phoneNumber: string;
+  email: string;
+  altEmail: string;
+  address: string;
+  role: string;
+  accessLevel: number;
+  authorization: string;
+  legalUser?: LegalUser;
+  personalUser: PersonalUser;
 }
 
 export interface UserBroker {

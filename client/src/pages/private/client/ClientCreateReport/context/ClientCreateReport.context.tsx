@@ -1154,11 +1154,11 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
   };
 
   const { clientId } = useParams();
-
   const user = useSelector((store: AppStore) => store.user);
+
   const selectBrokerUrl = user.user?.userBroker
-  ? user.user?.id
-  : user.user?.broker?.id;
+    ? user.user?.id
+    : user.user?.brokerUser?.id;
   const selectClientUrl = user.user?.userBroker ? clientId : user?.user?.id;
 
   const { error: errorReportVehicleTheft, trigger: triggerReportVehicleTheft } =
@@ -1209,6 +1209,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     );
   }, [page]);
 
+  console.log(inputValues)
   const submitValues = (e: SubmitEventType) => {
     e.preventDefault();
     setErrorsInputValues(

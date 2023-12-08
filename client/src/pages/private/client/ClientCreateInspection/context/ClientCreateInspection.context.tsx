@@ -319,9 +319,14 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
   const { clientId } = useParams();
   const user = useSelector((store: AppStore) => store.user);
 
+  const selectBrokerUrl = user.user?.userBroker
+    ? user.user?.id
+    : user.user?.brokerUser?.id;
+  const selectClientUrl = user.user?.userBroker ? clientId : user?.user?.id;
+
   const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =
     useSWRMutation(
-      createAssetInClientUserUrl(user.user?.id, clientId),
+      createAssetInClientUserUrl(selectBrokerUrl, selectClientUrl),
       createAssetInClientUser
     );
 

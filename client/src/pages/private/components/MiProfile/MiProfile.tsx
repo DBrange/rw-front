@@ -30,6 +30,18 @@ function MiProfile() {
         </div>
       </div>
       <DivInformationMyProfile>
+        {user?.brokerUser && (
+          <>
+            <DivInformationDetail>
+              <h4>Broker</h4>
+              <p>
+                {user?.brokerUser?.personalUser
+                  ? `${user?.brokerUser?.personalUser.name} ${user?.brokerUser?.personalUser.lastName}`
+                  : `${user?.brokerUser?.legalUser?.companyName}`}
+              </p>
+            </DivInformationDetail>
+          </>
+        )}
         <DivInformationDetail>
           <h4>Email</h4>
           <p>{user?.email}</p>
