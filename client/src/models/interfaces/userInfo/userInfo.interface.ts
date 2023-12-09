@@ -3,7 +3,7 @@ import { NotificationResponse } from "@/models/types/notification-response.enum"
 export interface ClientInfo {
   accessToken?: string;
   user?: User;
-  exp?: number;
+  exp: number;
 }
 
 export interface User {

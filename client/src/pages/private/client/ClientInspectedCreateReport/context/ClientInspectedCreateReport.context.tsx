@@ -17,16 +17,16 @@ import {
   ChangeEventTextAreaType,
   ChangeEventType,
   ClickEventType,
-
   SelectEventType,
   SubmitEventType,
-
 } from "@/pages";
 import { AppStore } from "@/redux";
 import {
   touchedAllCrashVehiclesValuesTrue,
   touchedAllThirdPartyInjuredValuesTrue,
   touchedCrashVehicleValuesTrue,
+  touchedDamageElectronicValuesTrue,
+  touchedDamageVehiclesValuesTrue,
   touchedElectronicValuesTrue,
   touchedFireVehiclesValuesTrue,
   touchedTheftElectronicValuesTrue,
@@ -44,13 +44,27 @@ import {
   emptyClientInspectedCreateReportValues,
   touchedClientInspectedCreateReportValues,
 } from "../../../utilities/client-inspected-create-report/objects-client-inspected-create-report";
-import { addReportCrash, addReportFire, addReportTheft, reportInInspectionCrashUrl, reportInInspectionFireUrl, reportInInspectionTheftUrl } from "../services/add-report-inspected.service";
+import {
+  addReportCrash,
+  addReportDamage,
+  addReportFire,
+  addReportTheft,
+  reportInInspectionCrashUrl,
+  reportInInspectionDamageUrl,
+  reportInInspectionFireUrl,
+  reportInInspectionTheftUrl,
+} from "../services/add-report-inspected.service";
 import {
   IClientInspectedCreateReportContext,
   emptyClientInspectedCreateReportContext,
 } from "./empty-ClientInspectedCreatesReport-context";
 import { useParams } from "react-router-dom";
-import { ClientInspectedCreateReportValues, TouchedClientInspectedCreateReportValues, ErrorsClientInspectedCreateReportValues, validateClientInspectedCreateReport } from "@/pages/private";
+import {
+  ClientInspectedCreateReportValues,
+  TouchedClientInspectedCreateReportValues,
+  ErrorsClientInspectedCreateReportValues,
+  validateClientInspectedCreateReport,
+} from "@/pages/private";
 import { validationFormDataInspectedReport } from "..";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
@@ -98,6 +112,7 @@ export const ClientInspectedCreateReportProvider = ({
     theft: true,
     fire: false,
     crash: false,
+    damage: false,
   });
 
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
@@ -106,6 +121,16 @@ export const ClientInspectedCreateReportProvider = ({
 
   const [amountInjured, setAmountInjured] = useState<number>(0);
   const [amountVehicles, setAmountVehicles] = useState<number>(0);
+
+    const { insuredId, type } = useParams();
+
+  useEffect(() => {
+    if (type === 'electronic') {
+      setElementReportActive({ vehicleReport: false, electronic: true });
+    } else {
+      setElementReportActive({ vehicleReport: true, electronic: false });
+    }
+  },[])
 
   useEffect(() => {
     setAmountInjured(0);
@@ -216,11 +241,17 @@ export const ClientInspectedCreateReportProvider = ({
         vehicleReport: value === "vehicleReport",
         electronic: value === "electronic",
       });
-    } else if (value === "theft" || value === "fire" || value === "crash") {
+    } else if (
+      value === "theft" ||
+      value === "fire" ||
+      value === "crash" ||
+      value === "damage"
+    ) {
       setReportActive({
         theft: value === "theft",
         fire: value === "fire",
         crash: value === "crash",
+        damage: value === "damage",
       });
     }
   };
@@ -242,6 +273,15 @@ export const ClientInspectedCreateReportProvider = ({
       // ((validate(errorsInputValues?.theftElectronic) ||
       //   validate(errorsInputValues?.isTire)) &&
       //   page === 1) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
+
+    const vehicleDamageErrors: boolean =
+      (validate(errorsInputValues?.damageVehicle) && page === 1) ||
+      // (validate(errorsInputValues?.damageElectronic) && page === 3) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 2);
+
+    const electronicDamageErrors: boolean =
+      (validate(errorsInputValues?.damageElectronic) && page === 1) ||
       (validate(errorsInputValues?.swornDeclaration) && page === 2);
 
     const withoutThirdPartyInjuredFireErrors: boolean =
@@ -302,6 +342,13 @@ export const ClientInspectedCreateReportProvider = ({
         errors = withTireTheftErrors;
       }
 
+      //damage vehicle
+      if (reportActive.damage) {
+        errors = vehicleDamageErrors;
+      } else if (reportActive.damage) {
+        errors = vehicleDamageErrors;
+      }
+
       //fire vehicle
       if (!reportActive.fire && !amountInjured) {
         errors = withoutThirdPartyInjuredFireErrors;
@@ -333,10 +380,19 @@ export const ClientInspectedCreateReportProvider = ({
         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
       }
     } else if (elementReportActive.electronic) {
+      // theft electronic
       if (reportActive.theft && !inputValues.theftElectronic.isTire) {
         errors = electronicTheft;
       } else if (reportActive.theft && !inputValues.theftElectronic.isTire) {
         errors = electronicTheft;
+      }
+
+      //damage electronic
+
+      if (reportActive.damage) {
+        errors = electronicDamageErrors;
+      } else if (reportActive.damage) {
+        errors = electronicDamageErrors;
       }
     }
 
@@ -350,6 +406,8 @@ export const ClientInspectedCreateReportProvider = ({
       (elementReportActive.electronic && page === 1 && "electronic") ||
       (reportActive.theft && page === 1 && "theftVehicle") ||
       (reportActive.theft && page === 1 && "theftElectronic") ||
+      (reportActive.damage && page === 1 && "damageVehicle") ||
+      (reportActive.damage && page === 1 && "damageElectronic") ||
       (reportActive.fire && page === 1 && "fire") ||
       (reportActive.fire &&
         page === 2 &&
@@ -388,6 +446,10 @@ export const ClientInspectedCreateReportProvider = ({
       values = touchedTheftVehiclesValuesTrue;
     } else if (typeOfToucheds === "theftElectronic") {
       values = touchedTheftElectronicValuesTrue;
+    } else if (typeOfToucheds === "damageVehicle") {
+      values = touchedDamageVehiclesValuesTrue;
+    } else if (typeOfToucheds === "damageElectronic") {
+      values = touchedDamageElectronicValuesTrue;
     } else if (typeOfToucheds === "fire") {
       values = touchedFireVehiclesValuesTrue;
     } else if (typeOfToucheds === "crash") {
@@ -1052,33 +1114,35 @@ export const ClientInspectedCreateReportProvider = ({
   };
 
   const user = useSelector((store: AppStore) => store.user);
-  const { insuredId } = useParams();
+
 
   const { error: errorReportTheft, trigger: triggerReportTheft } =
-    useSWRMutation(
-      reportInInspectionTheftUrl(insuredId),
-      addReportTheft
-    );
+    useSWRMutation(reportInInspectionTheftUrl(insuredId), addReportTheft);
 
-  const { error: errorReportFire, trigger: triggerReportFire } =
-    useSWRMutation(
-      reportInInspectionFireUrl(insuredId),
-      addReportFire
-    );
+  const { error: errorReportDamage, trigger: triggerReportDamage } =
+    useSWRMutation(reportInInspectionDamageUrl(insuredId), addReportDamage);
+
+  const { error: errorReportFire, trigger: triggerReportFire } = useSWRMutation(
+    reportInInspectionFireUrl(insuredId),
+    addReportFire
+  );
 
   const { error: errorReportCrash, trigger: triggerReportCrash } =
-    useSWRMutation(
-      reportInInspectionCrashUrl(insuredId),
-      addReportCrash
-    );
+    useSWRMutation(reportInInspectionCrashUrl(insuredId), addReportCrash);
 
   const triggers = {
     triggerReportTheft,
+    triggerReportDamage,
     triggerReportFire,
     triggerReportCrash,
   };
 
-  const fetchErrors = [errorReportTheft, errorReportFire, errorReportCrash];
+  const fetchErrors = [
+    errorReportTheft,
+    errorReportDamage,
+    errorReportFire,
+    errorReportCrash,
+  ];
 
   useEffect(() => {
     for (const err in fetchErrors) {
@@ -1113,7 +1177,7 @@ export const ClientInspectedCreateReportProvider = ({
       errorsInputValues,
       triggers,
       amountInjured,
-      user
+      user,
     });
   };
 

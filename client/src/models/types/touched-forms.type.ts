@@ -10,6 +10,8 @@ export type TouchedForms =
   | "vehicleReport"
   | "theftVehicle"
   | "theftElectronic"
+  | "damageVehicle"
+  | "damageElectronic"
   | "fire"
   | "crash"
   | "thirdPartyInjured"

@@ -20,4 +20,5 @@ export interface ReportActive {
   theft: boolean;
   fire: boolean;
   crash: boolean;
+  damage: boolean
 }

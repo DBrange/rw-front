@@ -1,6 +1,8 @@
 import {
   BtnChoice,
   FormCrashVehicle,
+  FormDamageElectronic,
+  FormDamageVehicle,
   FormElectronicData,
   FormFireVehicle,
   FormOpenClose,
@@ -89,6 +91,11 @@ function AllClientCreateReportPages() {
                 label: "Choque",
                 active: reportActive.crash,
               },
+              {
+                value: "damage",
+                label: "Daño",
+                active: reportActive.damage,
+              },
             ]}
             changeForm={changeForm}
           />
@@ -105,11 +112,17 @@ function AllClientCreateReportPages() {
                 label: "Robo",
                 active: reportActive.theft,
               },
+              {
+                value: "damage",
+                label: "Daño",
+                active: reportActive.damage,
+              },
             ]}
             changeForm={changeForm}
           />
         }
       />
+
       <FormOpenClose
         formName="Vehiculo"
         isActive={elementReportActive.vehicleReport && page === 1}
@@ -128,7 +141,9 @@ function AllClientCreateReportPages() {
       />
       <FormOpenClose
         formName="Electrodomestico"
-        isActive={elementReportActive.electronic && page === 1}
+        isActive={
+          elementReportActive.electronic && reportActive.theft && page === 1
+        }
         form={
           <FormElectronicData
             changeInputValues={changeInputValues}
@@ -139,6 +154,19 @@ function AllClientCreateReportPages() {
           />
         }
       />
+      {/* <FormOpenClose
+        formName="Electrodomestico"
+        isActive={elementReportActive.electronic && reportActive.damage && page === 1}
+        form={
+          <FormElectronicData
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
+            changeSelectValues={changeSelectValues}
+          />
+        }
+      /> */}
       <FormOpenClose
         formName="Robo"
         isActive={
@@ -164,6 +192,39 @@ function AllClientCreateReportPages() {
         }
         form={
           <FormTheftElectronic
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
+            changeInputForCheckbox={changeInputForCheckbox}
+            changeInputForImages={changeInputForImages}
+            changeInputForSchedule={changeInputForSchedule}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Daño"
+        isActive={
+          elementReportActive.vehicleReport && reportActive.damage && page === 3
+        }
+        form={
+          <FormDamageVehicle
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
+            changeInputForImages={changeInputForImages}
+            changeInputForSchedule={changeInputForSchedule}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Daño"
+        isActive={
+          elementReportActive.electronic && reportActive.damage && page === 3
+        }
+        form={
+          <FormDamageElectronic
             changeInputValues={changeInputValues}
             inputValues={inputValues}
             inputTouched={inputTouched}

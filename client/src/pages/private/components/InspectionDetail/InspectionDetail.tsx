@@ -56,8 +56,8 @@ function InspectionDetail({
           <Link
             to={
               userBroker
-                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
-                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
+                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
+                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
             }
           >
             Para denunciar
@@ -145,7 +145,7 @@ function InspectionDetail({
           brand,
           model,
           type,
-          smartphone: { imei, phoneService, phoneNumber },
+          smartphone,
         },
       } = values;
 
@@ -160,8 +160,8 @@ function InspectionDetail({
           <Link
             to={
               userBroker
-                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
-                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`
+                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
+                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
             }
           >
             Para denunciar
@@ -172,15 +172,15 @@ function InspectionDetail({
               <>
                 <DivInformationDetail>
                   <h4>IMEI</h4>
-                  <p>{imei}</p>
+                  <p>{smartphone?.imei}</p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Servicio</h4>
-                  <p>{phoneService}</p>
+                  <p>{smartphone?.phoneService}</p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Numero telefonico</h4>
-                  <p>{phoneNumber}</p>
+                  <p>{smartphone?.phoneNumber}</p>
                 </DivInformationDetail>
               </>
             )}

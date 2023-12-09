@@ -1,5 +1,6 @@
 import {
   VehicleCrashType,
+  VehicleDamageType,
   VehicleFireType,
   VehicleTheftType,
 } from "@/models/interfaces/add-report.interface";
@@ -17,6 +18,38 @@ export const reportInClientUserTheftUrl = (
 export const addReportVehicleTheft = async (
   url: string,
   { arg }: { arg: VehicleTheftType }
+): Promise<Response | void> => {
+  try {
+    loaderImageService.setSubject(true);
+    modalSentService.setSubject(false);
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(arg),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    loaderImageService.setSubject(false);
+    modalSentService.setSubject(true);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const reportInClientUserDamageUrl = (
+  brokerId?: string,
+  clientId?: string,
+) => `${baseUrl}/sinister/damage/${brokerId}/${clientId}`;
+
+export const addReportVehicleDamage = async (
+  url: string,
+  { arg }: { arg: VehicleDamageType }
 ): Promise<Response | void> => {
   try {
     loaderImageService.setSubject(true);

@@ -2,6 +2,8 @@ import {
   emptyAllCrashVehiclesValues,
   emptyAllThirdPartyInjuredValues,
   emptyCrashVehicleValues,
+  emptyDamageElectronicValues,
+  emptyDamageVehiclesValues,
   emptyFireVehiclesValues,
   emptyIsTireValues,
   emptyTheftElectronicValues,
@@ -12,6 +14,10 @@ import {
   touchedAllThirdPartyInjuredValuesTrue,
   touchedCrashVehicleValues,
   touchedCrashVehicleValuesTrue,
+  touchedDamageElectronicValues,
+  touchedDamageElectronicValuesTrue,
+  touchedDamageVehiclesValues,
+  touchedDamageVehiclesValuesTrue,
   touchedFireVehiclesValues,
   touchedFireVehiclesValuesTrue,
   touchedIsTireValues,
@@ -26,21 +32,26 @@ import {
   TouchedClientInspectedCreateReportValues
 } from "../..";
 
-export const emptyClientInspectedCreateReportValues: ClientInspectedCreateReportValues = {
-  theftVehicle: emptyTheftVehiclesValues,
-  theftElectronic: emptyTheftElectronicValues,
-  isTire: emptyIsTireValues,
-  fire: emptyFireVehiclesValues,
-  crash: emptyCrashVehicleValues,
-  thirdPartyInjured: emptyAllThirdPartyInjuredValues,
-  thirdPartyVehicle: emptyAllCrashVehiclesValues,
-  swornDeclaration: { swornDeclaration: false },
-};
+export const emptyClientInspectedCreateReportValues: ClientInspectedCreateReportValues =
+  {
+    theftVehicle: emptyTheftVehiclesValues,
+    theftElectronic: emptyTheftElectronicValues,
+    damageVehicle: emptyDamageVehiclesValues,
+    damageElectronic: emptyDamageElectronicValues,
+    isTire: emptyIsTireValues,
+    fire: emptyFireVehiclesValues,
+    crash: emptyCrashVehicleValues,
+    thirdPartyInjured: emptyAllThirdPartyInjuredValues,
+    thirdPartyVehicle: emptyAllCrashVehiclesValues,
+    swornDeclaration: { swornDeclaration: false },
+  };
 
 export const touchedClientInspectedCreateReportValues: TouchedClientInspectedCreateReportValues =
   {
     theftVehicle: touchedTheftVehiclesValues,
     theftElectronic: touchedTheftElectronicValues,
+    damageVehicle: touchedDamageVehiclesValues,
+    damageElectronic: touchedDamageElectronicValues,
     isTire: touchedIsTireValues,
     fire: touchedFireVehiclesValues,
     crash: touchedCrashVehicleValues,
@@ -53,6 +64,8 @@ export const touchedClientInspectedCreateReportValuesTrue: TouchedClientInspecte
   {
     theftVehicle: touchedTheftVehiclesValuesTrue,
     theftElectronic: touchedTheftElectronicValuesTrue,
+    damageVehicle: touchedDamageVehiclesValuesTrue,
+    damageElectronic: touchedDamageElectronicValuesTrue,
     isTire: touchedIsTireValuesTrue,
     fire: touchedFireVehiclesValuesTrue,
     crash: touchedCrashVehicleValuesTrue,

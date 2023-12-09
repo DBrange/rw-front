@@ -2,7 +2,7 @@ import {
   ErrorsElectronicValues,
   ErrorsGncValues,
   ErrorsPhoneValues,
-  ErrorsVehicleValues
+  ErrorsVehicleValues,
 } from "@/models";
 import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
 import {
@@ -15,16 +15,17 @@ interface Params {
   inputValues: ClientCreateInspectionValues;
   errorsInputValues: Partial<ErrorsClientCreateInspectionValues> | undefined;
   triggers: any;
-  user: ClientInfo
+  user: ClientInfo;
 }
 
 export const validationFormDataInspection = ({
   inputValues: { vehicle, electronic, gnc, phone, swornDeclaration },
   errorsInputValues,
-  triggers: { triggerInspectionPersonal },user
+  triggers: { triggerInspectionPersonal },
+  user,
 }: Params) => {
   if (swornDeclaration.swornDeclaration) {
-    if (user.user?.personalUser?.dni && errorsInputValues?.vehicle) {
+    if (user.user?.id && errorsInputValues?.vehicle) {
       if (vehicle.gnc) {
         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
           const dataObj = {
@@ -86,7 +87,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (user.user?.personalUser?.dni && errorsInputValues?.electronic) {
+    } else if (user.user?.id && errorsInputValues?.electronic) {
       if (electronic.type === "CELULAR") {
         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
           const dataObj = {

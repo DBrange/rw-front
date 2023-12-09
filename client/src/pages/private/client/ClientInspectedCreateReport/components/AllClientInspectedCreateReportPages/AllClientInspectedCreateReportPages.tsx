@@ -1,6 +1,8 @@
 import {
   BtnChoice,
   FormCrashVehicle,
+  FormDamageElectronic,
+  FormDamageVehicle,
   FormFireVehicle,
   FormOpenClose,
   FormSwornDeclaration,
@@ -67,6 +69,11 @@ function AllClientInspectedCreateReportPages() {
                 label: "Choque",
                 active: reportActive.crash,
               },
+              {
+                value: "damage",
+                label: "Daño",
+                active: reportActive.damage,
+              },
             ]}
             changeForm={changeForm}
           />
@@ -82,6 +89,11 @@ function AllClientInspectedCreateReportPages() {
                 value: "theft",
                 label: "Robo",
                 active: reportActive.theft,
+              },
+              {
+                value: "damage",
+                label: "Daño",
+                active: reportActive.damage,
               },
             ]}
             changeForm={changeForm}
@@ -113,6 +125,39 @@ function AllClientInspectedCreateReportPages() {
         }
         form={
           <FormTheftElectronic
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
+            changeInputForCheckbox={changeInputForCheckbox}
+            changeInputForImages={changeInputForImages}
+            changeInputForSchedule={changeInputForSchedule}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Daño"
+        isActive={
+          elementReportActive.vehicleReport && reportActive.damage && page === 1
+        }
+        form={
+          <FormDamageVehicle
+            changeInputValues={changeInputValues}
+            inputValues={inputValues}
+            inputTouched={inputTouched}
+            errorsInputValues={errorsInputValues}
+            changeInputForImages={changeInputForImages}
+            changeInputForSchedule={changeInputForSchedule}
+          />
+        }
+      />
+      <FormOpenClose
+        formName="Daño"
+        isActive={
+          elementReportActive.electronic && reportActive.damage && page === 1
+        }
+        form={
+          <FormDamageElectronic
             changeInputValues={changeInputValues}
             inputValues={inputValues}
             inputTouched={inputTouched}

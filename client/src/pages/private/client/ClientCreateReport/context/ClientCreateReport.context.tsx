@@ -31,6 +31,8 @@ import {
   touchedAllCrashVehiclesValuesTrue,
   touchedAllThirdPartyInjuredValuesTrue,
   touchedCrashVehicleValuesTrue,
+  touchedDamageElectronicValuesTrue,
+  touchedDamageVehiclesValuesTrue,
   touchedElectronicValuesTrue,
   touchedFireVehiclesValuesTrue,
   touchedTheftElectronicValuesTrue,
@@ -47,9 +49,11 @@ import { useParams } from "react-router-dom";
 import useSWRMutation from "swr/mutation";
 import {
   addReportVehicleCrash,
+  addReportVehicleDamage,
   addReportVehicleFire,
   addReportVehicleTheft,
   reportInClientUserCrashUrl,
+  reportInClientUserDamageUrl,
   reportInClientUserFireUrl,
   reportInClientUserTheftUrl,
 } from "..";
@@ -102,6 +106,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     theft: true,
     fire: false,
     crash: false,
+    damage: false,
   });
 
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
@@ -220,12 +225,17 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
         vehicleReport: value === "vehicleReport",
         electronic: value === "electronic",
       });
-    } else if (value === "theft" || value === "fire" || value === "crash") {
-      console.log("aquii");
+    } else if (
+      value === "theft" ||
+      value === "fire" ||
+      value === "crash" ||
+      value === "damage"
+    ) {
       setReportActive({
         theft: value === "theft",
         fire: value === "fire",
         crash: value === "crash",
+        damage: value === "damage",
       });
     }
   };
@@ -261,6 +271,15 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       // ((validate(errorsInputValues?.theftElectronic) ||
       //   validate(errorsInputValues?.isTire)) &&
       //   page === 3) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 4);
+
+    const vehicleDamageErrors: boolean =
+      (validate(errorsInputValues?.damageVehicle) && page === 3) ||
+      // (validate(errorsInputValues?.damageElectronic) && page === 3) ||
+      (validate(errorsInputValues?.swornDeclaration) && page === 4);
+
+    const electronicDamageErrors: boolean =
+      (validate(errorsInputValues?.damageElectronic) && page === 3) ||
       (validate(errorsInputValues?.swornDeclaration) && page === 4);
 
     const withoutThirdPartyInjuredFireErrors: boolean =
@@ -335,6 +354,13 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
         inputValues.theftVehicle.isTire
       ) {
         errors = withGncErrors || withTireTheftErrors;
+      }
+
+      //damage vehicle
+      if (!inputValues.vehicleReport.gnc && reportActive.damage) {
+        errors = withoutGncPhoneErrors || vehicleDamageErrors;
+      } else if (inputValues.vehicleReport.gnc && reportActive.damage) {
+        errors = withGncErrors || vehicleDamageErrors;
       }
 
       //fire vehicle
@@ -427,6 +453,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
         errors = withGncErrors || withoutThirdPartyInjuredAndVehicleCrashErrors;
       }
     } else if (elementReportActive.electronic) {
+      // theft electronic
       if (
         !(inputValues.electronic.type === "CELULAR") &&
         reportActive.theft &&
@@ -440,6 +467,20 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       ) {
         errors = withPhoneErrors || electronicTheft;
       }
+
+      //damage electronic
+
+      if (
+        !(inputValues.electronic.type === "CELULAR") &&
+        reportActive.damage 
+      ) {
+        errors = withoutGncPhoneErrors || electronicDamageErrors;
+      } else if (
+        inputValues.electronic.type === "CELULAR" &&
+        reportActive.damage 
+      ) {
+        errors = withPhoneErrors || electronicDamageErrors;
+      }
     }
 
     return errors;
@@ -452,6 +493,8 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       (elementReportActive.electronic && page === 1 && "electronic") ||
       (reportActive.theft && page === 3 && "theftVehicle") ||
       (reportActive.theft && page === 3 && "theftElectronic") ||
+      (reportActive.damage && page === 3 && "damageVehicle") ||
+      (reportActive.damage && page === 3 && "damageElectronic") ||
       (reportActive.fire && page === 3 && "fire") ||
       (reportActive.fire &&
         page === 4 &&
@@ -490,6 +533,10 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       values = touchedTheftVehiclesValuesTrue;
     } else if (typeOfToucheds === "theftElectronic") {
       values = touchedTheftElectronicValuesTrue;
+    } else if (typeOfToucheds === "damageVehicle") {
+      values = touchedDamageVehiclesValuesTrue;
+    } else if (typeOfToucheds === "damageElectronic") {
+      values = touchedDamageElectronicValuesTrue;
     } else if (typeOfToucheds === "fire") {
       values = touchedFireVehiclesValuesTrue;
     } else if (typeOfToucheds === "crash") {
@@ -1167,6 +1214,12 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       addReportVehicleTheft
     );
 
+  const { error: errorReportVehicleDamage, trigger: triggerReportVehicleDamage } =
+    useSWRMutation(
+      reportInClientUserDamageUrl(selectBrokerUrl, selectClientUrl),
+      addReportVehicleDamage
+    );
+
   const { error: errorReportVehicleFire, trigger: triggerReportVehicleFire } =
     useSWRMutation(
       reportInClientUserFireUrl(selectBrokerUrl, selectClientUrl),
@@ -1182,12 +1235,14 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
   const triggers = {
     triggerReportVehicleCrash,
     triggerReportVehicleTheft,
+    triggerReportVehicleDamage,
     triggerReportVehicleFire,
   };
 
   const fetchErrors = [
     errorReportVehicleCrash,
     errorReportVehicleTheft,
+    errorReportVehicleDamage,
     errorReportVehicleFire,
   ];
 
@@ -1209,7 +1264,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     );
   }, [page]);
 
-  console.log(inputValues)
+  console.log(inputValues);
   const submitValues = (e: SubmitEventType) => {
     e.preventDefault();
     setErrorsInputValues(

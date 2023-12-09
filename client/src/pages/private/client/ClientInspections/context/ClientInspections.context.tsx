@@ -4,7 +4,7 @@ import {
   AllAssetsLegalUserUrl,
   AllAssetsUserUrl,
   AllClientAssets,
-  allInspected
+  allInspected,
 } from "@/pages";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
@@ -32,7 +32,6 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
     data: T[] | undefined,
     searchField: string
   ): T[] => {
-
     if (!data) return [];
 
     const regex = new RegExp(`^${searchField}`, "i");
@@ -64,8 +63,8 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
   const user = useSelector((store: AppStore) => store.user);
 
   const clientType = () => {
-    if (user.user?.personalUser?.dni) {
-      const {  data: allAssetsUser } = useSWR(
+    if (user.user?.id) {
+      const { data: allAssetsUser } = useSWR(
         AllAssetsUserUrl(user.user.id),
         allInspected
       );
@@ -77,17 +76,21 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
 
       return searchedUserAsset;
     } else {
-      const {  data: allAssetsLegalUser } =
-        useSWR(AllAssetsLegalUserUrl(user.user?.id), allInspected);
+      const { data: allAssetsLegalUser } = useSWR(
+        AllAssetsLegalUserUrl(user.user?.id),
+        allInspected
+      );
 
       const searchedLegalAssets: AllClientAssets[] =
         filterData<AllClientAssets>(allAssetsLegalUser!, searchField);
-      
+
       return searchedLegalAssets;
     }
   };
 
-  const assets = [...clientType()].filter((asset) => asset !== undefined).flat();
+  const assets = [...clientType()]
+    .filter((asset) => asset !== undefined)
+    .flat();
 
   const values = {
     setSearchField,

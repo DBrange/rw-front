@@ -3,6 +3,8 @@ import {
   ErrorsAllCrashVehiclesValues,
   ErrorsAllThirdPartyInjuredValues,
   ErrorsCrashVehicleValues,
+  ErrorsDamageElectronicValues,
+  ErrorsDamageVehiclesValues,
   ErrorsElectronicValues,
   ErrorsFireVehicleValues,
   ErrorsGncValues,
@@ -12,7 +14,7 @@ import {
   ErrorsTheftElectronicValues,
   ErrorsTheftVehiclesValues,
   ErrorsVehicleReportValues,
-  ReportActive
+  ReportActive,
 } from "@/models";
 import {
   validateAllCrashVehicles,
@@ -25,10 +27,15 @@ import {
   validateSwornDeclaration,
   validateTheftElectronic,
   validateTheftVechile,
-  validateVehicleReport
+  validateVehicleReport,
 } from "@/utilities";
 import { validateIsTire } from "@/utilities/is-tire/validate-is-tire.utility.interface";
-import { ClientCreateReportValues, ErrorsClientCreateReportValues } from "../..";
+import {
+  ClientCreateReportValues,
+  ErrorsClientCreateReportValues,
+} from "../..";
+import { validateDamageElectronic } from "@/utilities/damage-electronic/validate-damage-electronic.utility";
+import { validateDamageVehicle } from "@/utilities/damage-vehicle/validate-damage-vehicle.utility";
 
 interface Params {
   inputValues: ClientCreateReportValues;
@@ -44,6 +51,8 @@ export const validateClientCreateReport = ({
     phone,
     theftVehicle,
     theftElectronic,
+    damageVehicle,
+    damageElectronic,
     isTire,
     fire,
     crash,
@@ -59,6 +68,7 @@ export const validateClientCreateReport = ({
     theft: theftSelected,
     fire: fireSelected,
     crash: crashSelected,
+    damage: damageSelected,
   },
 }: Params) => {
   let vehicleErrors: Partial<ErrorsVehicleReportValues> | undefined;
@@ -67,6 +77,8 @@ export const validateClientCreateReport = ({
   let phoneErrors: Partial<ErrorsPhoneValues> | undefined;
   let theftVehicleErrors: Partial<ErrorsTheftVehiclesValues> | undefined;
   let theftElectronicErrors: Partial<ErrorsTheftElectronicValues> | undefined;
+  let damageVehicleErrors: Partial<ErrorsDamageVehiclesValues> | undefined;
+  let damageElectronicErrors: Partial<ErrorsDamageElectronicValues> | undefined;
   let isTireErrors: Partial<ErrorsIsTireValues> | undefined;
   let fireErrors: Partial<ErrorsFireVehicleValues> | undefined;
   let crashErrors: Partial<ErrorsCrashVehicleValues> | undefined;
@@ -114,6 +126,18 @@ export const validateClientCreateReport = ({
     }
   }
 
+  if (damageSelected && vehicleReport) {
+    if (damageVehicle) {
+      damageVehicleErrors = validateDamageVehicle(damageVehicle);
+    }
+  }
+
+  if (damageSelected && electronic) {
+    if (damageElectronic) {
+      damageElectronicErrors = validateDamageElectronic(damageElectronic);
+    }
+  }
+
   if (theftSelected) {
     if (theftVehicle.isTire) {
       isTireErrors = validateIsTire(isTire);
@@ -152,6 +176,8 @@ export const validateClientCreateReport = ({
     phone: phoneErrors,
     theftVehicle: theftVehicleErrors,
     theftElectronic: theftElectronicErrors,
+    damageVehicle: damageVehicleErrors,
+    damageElectronic: damageElectronicErrors,
     isTire: isTireErrors,
     fire: fireErrors,
     crash: crashErrors,

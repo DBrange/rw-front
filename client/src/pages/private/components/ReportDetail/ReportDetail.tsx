@@ -218,7 +218,7 @@ function ReportnDetail({
             gncId,
           },
         },
-        sinisterType: { theft, fire, crash },
+        sinisterType: { theft, fire, crash,damage: damageSinister },
         injuredd,
         thirdPartyVehicle,
         date,
@@ -240,7 +240,6 @@ function ReportnDetail({
             Para denunciar
           </Link> */}
           <DivInformationMyProfile>
-            
             {dataClientHTML()}
             <h2>Siniestro</h2>
             <DivInformationDetail>
@@ -378,6 +377,39 @@ function ReportnDetail({
                 )}
               </>
             )}
+            {damageSinister && (
+              <>
+                <h2>{"Daño"}</h2>
+                <DivInformationDetail>
+                  <h4>Ubicacion</h4>
+                  <p>{damageSinister?.location}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Fecha</h4>
+                  <p>{damageSinister?.date}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Horario</h4>
+                  <p>{damageSinister?.time}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Detalle del dano</h4>
+                  <p>{damageSinister?.details}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Foto de denuncia</h4>
+                  {damageSinister?.reportPhoto.map((el, i) => (
+                    <div key={el + i}>
+                      <img src={el} />
+                    </div>
+                  ))}
+                </DivInformationDetail>{" "}
+                <DivInformationDetail>
+                  <h4>Monto de reparacion</h4>
+                  <p>{damageSinister?.budget}</p>
+                </DivInformationDetail>
+              </>
+            )}
             {fire && FireCrashHTML(injuredd, undefined, fire)}
             {crash && (
               <>
@@ -474,14 +506,9 @@ function ReportnDetail({
     } else if (values?.asset?.electronic) {
       const {
         asset: {
-          electronic: {
-            brand,
-            model,
-            type,
-            smartphone: { imei, phoneService, phoneNumber },
-          },
+          electronic: { brand, model, type, smartphone },
         },
-        sinisterType: { theft },
+        sinisterType: { theft, damage: damageSinister },
       } = values;
 
       return (
@@ -498,21 +525,20 @@ function ReportnDetail({
             Para denunciar
           </Link> */}
           <DivInformationMyProfile>
-            
             {dataClientHTML()}
             {type === "CELULAR" && (
               <>
                 <DivInformationDetail>
                   <h4>IMEI</h4>
-                  <p>{imei}</p>
+                  <p>{smartphone?.imei}</p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Servicio</h4>
-                  <p>{phoneService}</p>
+                  <p>{smartphone?.phoneService}</p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Numero telefonico</h4>
-                  <p>{phoneNumber}</p>
+                  <p>{smartphone?.phoneNumber}</p>
                 </DivInformationDetail>
               </>
             )}
@@ -538,6 +564,39 @@ function ReportnDetail({
                       <img src={el} />
                     </div>
                   ))}
+                </DivInformationDetail>
+              </>
+            )}
+            {theft && (
+              <>
+                <h2>{"Daño"}</h2>
+                <DivInformationDetail>
+                  <h4>Ubicacion</h4>
+                  <p>{damageSinister?.location}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Fecha</h4>
+                  <p>{damageSinister?.date}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Horario</h4>
+                  <p>{damageSinister?.time}</p>
+                </DivInformationDetail>{" "}
+                <DivInformationDetail>
+                  <h4>Detalle del daño</h4>
+                  <p>{damageSinister?.details}</p>
+                </DivInformationDetail>
+                <DivInformationDetail>
+                  <h4>Foto de denuncia</h4>
+                  {damageSinister?.reportPhoto.map((el, i) => (
+                    <div key={el + i}>
+                      <img src={el} />
+                    </div>
+                  ))}
+                </DivInformationDetail>{" "}
+                <DivInformationDetail>
+                  <h4>Monto de reparacion</h4>
+                  <p>{damageSinister?.budget}</p>
                 </DivInformationDetail>
               </>
             )}

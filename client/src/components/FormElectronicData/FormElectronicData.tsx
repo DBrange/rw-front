@@ -10,8 +10,8 @@ import { ChangeEventType, AllInspectValues, ClientCreateInspectionValues, Touche
 
 interface Porps {
   changeInputValues: (e: ChangeEventType) => void;
-  inputValues: AllInspectValues | ClientCreateInspectionValues;
-  inputTouched: TouchedAllInspectValues | TouchedClientCreateInspectionValues;
+  inputValues: any //AllInspectValues | ClientCreateInspectionValues;
+  inputTouched: any //TouchedAllInspectValues | TouchedClientCreateInspectionValues;
   errorsInputValues:
     | Partial<ErrorsAllInspectValues>
     | Partial<ErrorsClientCreateInspectionValues>

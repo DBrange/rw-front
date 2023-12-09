@@ -40,6 +40,12 @@ import {
   TouchedTheftVehiclesValues,
   TouchedVehicleReportValues,
   ErrorsVehicleReportValues,
+  DamageVehiclesValues,
+  DamageElectronicValues,
+  ErrorsDamageElectronicValues,
+  ErrorsDamageVehiclesValues,
+  TouchedDamageElectronicValues,
+  TouchedDamageVehiclesValues,
 } from "@/models";
 
 export interface AllReportValues {
@@ -51,6 +57,8 @@ export interface AllReportValues {
   phone: PhoneValues;
   theftVehicle: TheftVehiclesValues;
   theftElectronic: TheftElectronicValues;
+  damageVehicle: DamageVehiclesValues;
+  damageElectronic: DamageElectronicValues;
   isTire: IsTireValues;
   fire: FireVehicleValues;
   crash: CrashVehicleValues;
@@ -68,6 +76,8 @@ export interface ErrorsAllReportValues {
   phone: Partial<ErrorsPhoneValues>;
   theftVehicle: Partial<ErrorsTheftVehiclesValues>;
   theftElectronic: Partial<ErrorsTheftElectronicValues>;
+  damageVehicle: Partial<ErrorsDamageVehiclesValues>;
+  damageElectronic: Partial<ErrorsDamageElectronicValues>;
   isTire: Partial<ErrorsIsTireValues>;
   fire: Partial<ErrorsFireVehicleValues>;
   crash: Partial<ErrorsCrashVehicleValues>;
@@ -85,6 +95,8 @@ export interface TouchedAllReportValues {
   phone: TouchedPhoneValues;
   theftVehicle: TouchedTheftVehiclesValues;
   theftElectronic: TouchedTheftElectronicValues;
+  damageVehicle: TouchedDamageVehiclesValues;
+  damageElectronic: TouchedDamageElectronicValues;
   isTire: TouchedIsTireValues;
   fire: TouchedFireVehicleValues;
   crash: TouchedCrashVehicleValues;

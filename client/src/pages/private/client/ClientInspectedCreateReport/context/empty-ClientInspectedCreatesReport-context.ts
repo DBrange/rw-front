@@ -86,6 +86,7 @@ export const emptyClientInspectedCreateReportContext: IClientInspectedCreateRepo
       theft: true,
       fire: false,
       crash: false,
+      damage: false
     },
     changeInputForSchedule: () => {},
     creatingThirdPartyInjuredContainer: () => null,

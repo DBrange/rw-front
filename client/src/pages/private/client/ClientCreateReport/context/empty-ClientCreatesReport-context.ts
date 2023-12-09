@@ -83,6 +83,7 @@ export const emptyClientCreateReportContext: IClientCreateReportContext = {
     theft: true,
     fire: false,
     crash: false,
+    damage: false
   },
   changeInputForSchedule: () => {},
   creatingThirdPartyInjuredContainer: () => null,

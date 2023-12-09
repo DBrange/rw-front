@@ -6,6 +6,8 @@ import {
   ErrorsIsTireValues,
   ErrorsTheftElectronicValues,
   ErrorsTheftVehiclesValues,
+  ErrorsDamageVehiclesValues,
+  ErrorsDamageElectronicValues,
 } from "@/models";
 import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
 import {
@@ -21,7 +23,7 @@ interface Params {
     | undefined;
   triggers: any;
   amountInjured?: number;
-  user: ClientInfo
+  user: ClientInfo;
 }
 
 export const validationFormDataInspectedReport = ({
@@ -98,7 +100,7 @@ const validationWithInjuries = ({
   };
 
   if (
-    user.user?.personalUser?.dni &&
+    user.user?.id &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
     errorsInputValues?.thirdPartyVehicle
@@ -143,7 +145,7 @@ const validationWithInjuries = ({
       triggerReportCrash(dataObj)
     );
   } else if (
-    user.user?.personalUser?.dni &&
+    user.user?.id &&
     errorsInputValues?.fire &&
     errorsInputValues?.thirdPartyInjured
   ) {
@@ -183,7 +185,7 @@ const validationWithInjuries = ({
       triggerReportFire(dataObj)
     );
   } else if (
-    user.user?.personalUser?.dni &&
+    user.user?.id &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
     errorsInputValues?.thirdPartyVehicle
@@ -207,7 +209,7 @@ const validationWithInjuries = ({
       triggerReportCrash(dataObj)
     );
   } else if (
-    user.user?.personalUser?.dni &&
+    user.user?.id &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured
   ) {
@@ -233,6 +235,8 @@ const validationWithoutInjuries = ({
   inputValues: {
     theftVehicle,
     theftElectronic,
+    damageVehicle,
+    damageElectronic,
     isTire,
     fire,
     crash,
@@ -240,7 +244,12 @@ const validationWithoutInjuries = ({
     swornDeclaration,
   },
   errorsInputValues,
-  triggers: { triggerReportCrash, triggerReportTheft, triggerReportFire },
+  triggers: {
+    triggerReportCrash,
+    triggerReportTheft,
+    triggerReportDamage,
+    triggerReportFire,
+  },
   user,
 }: Params) => {
   const crashWithoutAmounts = {
@@ -275,7 +284,7 @@ const validationWithoutInjuries = ({
 
   //vehicle
   if (
-    user.user?.personalUser?.dni &&
+    user.user?.id &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyVehicle
   ) {
@@ -313,7 +322,7 @@ const validationWithoutInjuries = ({
       errorsInputValues?.thirdPartyVehicle,
       triggerReportCrash(dataObj)
     );
-  } else if (user.user?.personalUser?.dni && errorsInputValues?.fire) {
+  } else if (user.user?.id && errorsInputValues?.fire) {
     const dataObj = {
       fireDTO: fireWithoutAmounts,
       swornDeclaration: swornDeclaration.swornDeclaration,
@@ -333,7 +342,7 @@ const validationWithoutInjuries = ({
       errorsInputValues?.fire,
       triggerReportFire(dataObj)
     );
-  } else if (user.user?.personalUser?.dni && errorsInputValues?.theftVehicle) {
+  } else if (user.user?.id && errorsInputValues?.theftVehicle) {
     if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
       const dataObj = {
         theftDTO: theftVehicle,
@@ -363,6 +372,33 @@ const validationWithoutInjuries = ({
       );
     }
     //abajo
+  } else if (user.user?.id && errorsInputValues?.damageVehicle) {
+    if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
+      const dataObj = {
+        damageDTO: damageVehicle,
+        swornDeclaration: swornDeclaration.swornDeclaration,
+      };
+
+      userElementReportExtra<
+        ErrorsDamageVehiclesValues,
+        ErrorsIsTireValues,
+        any
+      >(
+        errorsInputValues?.damageVehicle,
+        errorsInputValues?.isTire,
+        triggerReportDamage(dataObj)
+      );
+    } else {
+      const dataObj = {
+        damageDTO: damageVehicle,
+        swornDeclaration: swornDeclaration.swornDeclaration,
+      };
+
+      userElementReport<ErrorsDamageVehiclesValues, any>(
+        errorsInputValues?.damageVehicle,
+        triggerReportDamage(dataObj)
+      );
+    }
   } else if (user.user?.legalUser?.cuit && errorsInputValues?.theftVehicle) {
     if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
       const dataObj = {
@@ -391,7 +427,7 @@ const validationWithoutInjuries = ({
         triggerReportTheft(dataObj)
       );
     }
-  } else if (user.user?.personalUser?.dni && errorsInputValues?.theftElectronic) {
+  } else if (user.user?.id && errorsInputValues?.theftElectronic) {
     const dataObj = {
       theftDTO: theftElectronic,
       swornDeclaration: swornDeclaration.swornDeclaration,
@@ -410,6 +446,16 @@ const validationWithoutInjuries = ({
     userElementReport<ErrorsTheftElectronicValues, any>(
       errorsInputValues?.theftElectronic,
       triggerReportTheft(dataObj)
+    );
+  } else if (user.user?.id && errorsInputValues?.damageElectronic) {
+    const dataObj = {
+      damageDTO: damageElectronic,
+      swornDeclaration: swornDeclaration.swornDeclaration,
+    };
+
+    userElementReport<ErrorsDamageElectronicValues, any>(
+      errorsInputValues?.damageElectronic,
+      triggerReportDamage(dataObj)
     );
   }
 };

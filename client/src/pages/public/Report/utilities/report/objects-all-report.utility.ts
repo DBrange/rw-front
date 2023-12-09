@@ -1,4 +1,4 @@
-import { emptyPersonalValues, emptyLegalPersonalValues, emptyVehicleReportValues, emptyElectronicValues, emptyGncValues, emptyPhoneValues, emptyTheftVehiclesValues, emptyIsTireValues, emptyCrashVehicleValues, emptyAllCrashVehiclesValues, emptyFireVehiclesValues, emptyAllThirdPartyInjuredValues, emptyTheftElectronicValues, touchedAllCrashVehiclesValues, touchedAllThirdPartyInjuredValues, touchedElectronicValues, touchedFireVehiclesValues, touchedGncValues, touchedIsTireValues, touchedLegalPersonalValues, touchedPersonalValues, touchedPhoneValues, touchedTheftElectronicValues, touchedTheftVehiclesValues, touchedVehicleReportValues, touchedCrashVehicleValues, touchedAllCrashVehiclesValuesTrue, touchedElectronicValuesTrue, touchedFireVehiclesValuesTrue, touchedGncValuesTrue, touchedIsTireValuesTrue, touchedLegalPersonalValuesTrue, touchedPersonalValuesTrue, touchedPhoneValuesTrue, touchedTheftElectronicValuesTrue, touchedTheftVehiclesValuesTrue, touchedVehicleReportValuesTrue, touchedCrashVehicleValuesTrue, touchedAllThirdPartyInjuredValuesTrue } from "@/utilities";
+import { emptyPersonalValues, emptyLegalPersonalValues, emptyVehicleReportValues, emptyElectronicValues, emptyGncValues, emptyPhoneValues, emptyTheftVehiclesValues, emptyIsTireValues, emptyCrashVehicleValues, emptyAllCrashVehiclesValues, emptyFireVehiclesValues, emptyAllThirdPartyInjuredValues, emptyTheftElectronicValues, touchedAllCrashVehiclesValues, touchedAllThirdPartyInjuredValues, touchedElectronicValues, touchedFireVehiclesValues, touchedGncValues, touchedIsTireValues, touchedLegalPersonalValues, touchedPersonalValues, touchedPhoneValues, touchedTheftElectronicValues, touchedTheftVehiclesValues, touchedVehicleReportValues, touchedCrashVehicleValues, touchedAllCrashVehiclesValuesTrue, touchedElectronicValuesTrue, touchedFireVehiclesValuesTrue, touchedGncValuesTrue, touchedIsTireValuesTrue, touchedLegalPersonalValuesTrue, touchedPersonalValuesTrue, touchedPhoneValuesTrue, touchedTheftElectronicValuesTrue, touchedTheftVehiclesValuesTrue, touchedVehicleReportValuesTrue, touchedCrashVehicleValuesTrue, touchedAllThirdPartyInjuredValuesTrue, emptyDamageElectronicValues, emptyDamageVehiclesValues, touchedDamageElectronicValues, touchedDamageElectronicValuesTrue, touchedDamageVehiclesValues, touchedDamageVehiclesValuesTrue } from "@/utilities";
 import { AllReportValues, TouchedAllReportValues } from "../..";
 
 export const emptyAllReportValues: AllReportValues = {
@@ -10,6 +10,8 @@ export const emptyAllReportValues: AllReportValues = {
   phone: emptyPhoneValues,
   theftVehicle: emptyTheftVehiclesValues,
   theftElectronic: emptyTheftElectronicValues,
+  damageVehicle: emptyDamageVehiclesValues,
+  damageElectronic: emptyDamageElectronicValues,
   isTire: emptyIsTireValues,
   fire: emptyFireVehiclesValues,
   crash: emptyCrashVehicleValues,
@@ -27,6 +29,8 @@ export const touchedAllReportValues: TouchedAllReportValues = {
   phone: touchedPhoneValues,
   theftVehicle: touchedTheftVehiclesValues,
   theftElectronic: touchedTheftElectronicValues,
+  damageVehicle: touchedDamageVehiclesValues,
+  damageElectronic: touchedDamageElectronicValues,
   isTire: touchedIsTireValues,
   fire: touchedFireVehiclesValues,
   crash: touchedCrashVehicleValues,
@@ -44,6 +48,8 @@ export const touchedAllReportValuesTrue: TouchedAllReportValues = {
   phone: touchedPhoneValuesTrue,
   theftVehicle: touchedTheftVehiclesValuesTrue,
   theftElectronic: touchedTheftElectronicValuesTrue,
+  damageVehicle: touchedDamageVehiclesValuesTrue,
+  damageElectronic: touchedDamageElectronicValuesTrue,
   isTire: touchedIsTireValuesTrue,
   fire: touchedFireVehiclesValuesTrue,
   crash: touchedCrashVehicleValuesTrue,

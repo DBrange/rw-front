@@ -86,7 +86,7 @@ function Private() {
         element={<ClientCreateReport />}
       />
       <Route
-        path={`${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/:insuredId`}
+        path={`${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/:insuredId/:type`}
         element={<ClientInspectedCreateReport />}
       />
       <Route

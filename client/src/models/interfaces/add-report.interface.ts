@@ -18,6 +18,12 @@ export type VehicleTheftType =
   | (VehicleReportValues & ThirdPartyVehicleValues & IsTireValues)
   | (VehicleReportValues & GncValues & ThirdPartyVehicleValues & IsTireValues);
 
+export type VehicleDamageType =
+  | (VehicleReportValues & ThirdPartyVehicleValues)
+  | (VehicleReportValues & GncValues & ThirdPartyVehicleValues)
+  | (VehicleReportValues & ThirdPartyVehicleValues & IsTireValues)
+  | (VehicleReportValues & GncValues & ThirdPartyVehicleValues & IsTireValues);
+
 export type ElectronicTheftType =
   | (ElectronicValues & TheftElectronicValues)
   | (ElectronicValues & TheftElectronicValues)

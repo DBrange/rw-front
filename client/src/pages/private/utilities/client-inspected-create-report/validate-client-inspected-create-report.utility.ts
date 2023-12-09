@@ -3,12 +3,14 @@ import {
   ErrorsAllCrashVehiclesValues,
   ErrorsAllThirdPartyInjuredValues,
   ErrorsCrashVehicleValues,
+  ErrorsDamageElectronicValues,
+  ErrorsDamageVehiclesValues,
   ErrorsFireVehicleValues,
   ErrorsIsTireValues,
   ErrorsSwornDeclaration,
   ErrorsTheftElectronicValues,
   ErrorsTheftVehiclesValues,
-  ReportActive
+  ReportActive,
 } from "@/models";
 import {
   validateAllCrashVehicles,
@@ -17,13 +19,15 @@ import {
   validateFireVehicle,
   validateSwornDeclaration,
   validateTheftElectronic,
-  validateTheftVechile
+  validateTheftVechile,
 } from "@/utilities";
 import { validateIsTire } from "@/utilities/is-tire/validate-is-tire.utility.interface";
 import {
   ClientInspectedCreateReportValues,
-  ErrorsClientInspectedCreateReportValues
+  ErrorsClientInspectedCreateReportValues,
 } from "../..";
+import { validateDamageVehicle } from "@/utilities/damage-vehicle/validate-damage-vehicle.utility";
+import { validateDamageElectronic } from "@/utilities/damage-electronic/validate-damage-electronic.utility";
 
 interface Params {
   inputValues: ClientInspectedCreateReportValues;
@@ -35,6 +39,8 @@ export const validateClientInspectedCreateReport = ({
   inputValues: {
     theftVehicle,
     theftElectronic,
+    damageVehicle,
+    damageElectronic,
     isTire,
     fire,
     crash,
@@ -49,11 +55,13 @@ export const validateClientInspectedCreateReport = ({
   reportActive: {
     theft: theftSelected,
     fire: fireSelected,
-    crash: crashSelected,
+    crash: crashSelected,damage:damageSelected
   },
 }: Params) => {
   let theftVehicleErrors: Partial<ErrorsTheftVehiclesValues> | undefined;
   let theftElectronicErrors: Partial<ErrorsTheftElectronicValues> | undefined;
+  let damageVehicleErrors: Partial<ErrorsDamageVehiclesValues> | undefined;
+  let damageElectronicErrors: Partial<ErrorsDamageElectronicValues> | undefined;
   let isTireErrors: Partial<ErrorsIsTireValues> | undefined;
   let fireErrors: Partial<ErrorsFireVehicleValues> | undefined;
   let crashErrors: Partial<ErrorsCrashVehicleValues> | undefined;
@@ -64,8 +72,6 @@ export const validateClientInspectedCreateReport = ({
 
   const swornDeclarationError: Partial<ErrorsSwornDeclaration> | undefined =
     validateSwornDeclaration(swornDeclaration);
-
-
 
   if (theftSelected && vehicleSelected) {
     if (theftVehicle) {
@@ -79,9 +85,22 @@ export const validateClientInspectedCreateReport = ({
     }
   }
 
+  
   if (theftSelected) {
     if (theftVehicle.isTire) {
       isTireErrors = validateIsTire(isTire);
+    }
+  }
+
+  if (damageSelected && vehicleSelected) {
+    if (damageVehicle) {
+      damageVehicleErrors = validateDamageVehicle(damageVehicle);
+    }
+  }
+
+  if (damageSelected && electronicEA) {
+    if (damageElectronic) {
+      damageElectronicErrors = validateDamageElectronic(damageElectronic);
     }
   }
 
@@ -113,6 +132,8 @@ export const validateClientInspectedCreateReport = ({
   const errors: Partial<ErrorsClientInspectedCreateReportValues | null> = {
     theftVehicle: theftVehicleErrors,
     theftElectronic: theftElectronicErrors,
+    damageVehicle: damageVehicleErrors,
+    damageElectronic: damageElectronicErrors,
     isTire: isTireErrors,
     fire: fireErrors,
     crash: crashErrors,

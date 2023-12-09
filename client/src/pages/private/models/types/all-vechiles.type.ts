@@ -222,7 +222,7 @@ interface Damage {
   date: string;
   location: string;
   details: string;
-  reportPhoto: string;
+  reportPhoto: string[];
   budget: string;
 }
 

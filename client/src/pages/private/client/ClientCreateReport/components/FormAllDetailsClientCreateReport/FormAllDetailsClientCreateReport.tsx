@@ -1,5 +1,7 @@
 import {
   FormCrashVehicleDetail,
+  FormDamageElectronicDetail,
+  FormDamageVehicleDetail,
   FormElectronicDetail,
   FormFireVehicleDetail,
   FormTheftElectronicDetail,
@@ -52,12 +54,28 @@ function FormAllDetailsClientCreateReport({  element, report, inputValues }: Pro
           inputIsTireValues={inputValues.isTire}
         />,
       ];
+    }else if (report.damage && element.vehicleReport) {
+      elementsToRender = [
+        ...elementsToRender,
+        <FormDamageVehicleDetail
+          key={3}
+          inputDamageVehicleValues={inputValues.damageVehicle}
+        />,
+      ];
     } else if (report.theft && element.electronic) {
       elementsToRender = [
         ...elementsToRender,
         <FormTheftElectronicDetail
           key={3}
           inputTheftElectronicValues={inputValues.theftElectronic}
+        />,
+      ];
+    } else if (report.damage && element.electronic) {
+      elementsToRender = [
+        ...elementsToRender,
+        <FormDamageElectronicDetail
+          key={3}
+          inputDamageElectronicValues={inputValues.damageElectronic}
         />,
       ];
     } else if (report.fire) {

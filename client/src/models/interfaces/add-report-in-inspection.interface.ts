@@ -7,6 +7,8 @@ import {
   CrashVehicleValues,
   AllCrashVehiclesValues,
   TheftVehiclesValues,
+  DamageElectronicValues,
+  DamageVehiclesValues,
 } from ".";
 
 export type TheftType =
@@ -16,6 +18,14 @@ export type TheftType =
   | (ThirdPartyVehicleValues & IsTireValues)
   | TheftVehiclesValues
   | TheftElectronicValues;
+
+export type DamageType =
+  | ThirdPartyVehicleValues
+  | ThirdPartyVehicleValues
+  | (ThirdPartyVehicleValues & IsTireValues)
+  | (ThirdPartyVehicleValues & IsTireValues)
+  | DamageVehiclesValues
+  | DamageElectronicValues;
 
 export type FireType =
   | FireVehicleValues
