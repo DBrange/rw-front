@@ -1,8 +1,7 @@
 import { theme } from "@/styledComponents";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const DivMainName = styled.div<{ $public?: boolean }>`
+export const DivMessageBtn = styled.div<{ $public?: boolean }>`
   ${({ $public }) =>
     $public
       ? `   
@@ -10,37 +9,38 @@ export const DivMainName = styled.div<{ $public?: boolean }>`
     max-width: 260px;
     justify-content: space-evenly;`
       : `  
-  position: relative;
+  position: fixed;
   max-width: 100%;
   justify-content: center;
   white-space: nowrap;`}
 
   width: 100%;
-  padding: 2rem .2rem;
+  padding: 2rem 1rem;
   gap: 0rem;
   align-items: center;
-  display: flex; /* Agregamos esta propiedad */
+  display: none;
   align-items: center;
 
-  @media (min-width: 800px) {
-    position: static;
-    max-width: 260px;
-    justify-content: space-evenly;
-  }
+    @media (min-width: 1200px) {
+      display:flex
+    }
+
 `;
 
-export const BtnMainName = styled.button<{
+export const BtnMessageBtn = styled.button<{
   $public?: boolean;
   $side?: boolean;
 }>`
   position: absolute;
-  z-index: 1000;
+  z-index: 20;
   top: 50%;
-  ${({ $side }) => !$side ? `left: 1rem;` : `right: .2rem;`}
+  /* ${({ $side }) => (!$side ? `top: 50%;` : `top: 100%;`)} */
+  left: .8rem;
   transform: translateY(-50%);
   display: ${({ $public }) => ($public ? "none" : "flex")};
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -48,30 +48,15 @@ export const BtnMainName = styled.button<{
   margin-right: 0.8rem;
   padding: 0.6rem;
   border-radius: 0.4rem;
+  margin-left: 0.1rem;
 
   &:hover {
     background-color: #fff1;
   }
 
-  @media (min-width: 800px) {
+  @media (max-width: 1200px) {
     position: static;
-    margin-right: 0rem;
-    transform: translateX(-0.6rem);
+    /* transform: translateX(-0.6rem); */
+    margin-left: 1rem;
   }
-`;
-
-export const LinkMainName = styled(Link)`
-  display: inline-flex;
-  text-align: center;
-  gap: 0.4rem;
-  text-decoration: none;
-
-  @media (min-width: 800px) {
-    max-width: 260px;
-  }
-`;
-
-export const IconMainName = styled.i`
-  margin: auto 0;
-  height: 1.4rem;
 `;

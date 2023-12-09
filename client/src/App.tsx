@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Route, useLocation } from "react-router-dom";
-import { GlobalLoader, MainName } from "./components";
+import { GlobalLoader, MainName, MessageBtn, MessageBtnHeader } from "./components";
 import LoginBtn from "./components/LoginBtn/LoginBtn";
 import { PrivateRoutes, PublicRoutes } from './models/types/routes';
 import { Private } from "./pages/private";
@@ -22,8 +22,10 @@ function App() {
         <Header>
           <MainName />
           <LoginBtn />
+          <MessageBtnHeader/>
         </Header>
         <MainContent>
+          <MessageBtn/>
           <RoutesWithNotFound>
             <Route path='/' element={<Navigate to={PrivateRoutes.PRIVATE} />} />
             <Route path={`${PublicRoutes.PUBLIC}/*`} element={<Public />} />

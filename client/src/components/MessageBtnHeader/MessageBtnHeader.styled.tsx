@@ -1,8 +1,7 @@
 import { theme } from "@/styledComponents";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const DivMainName = styled.div<{ $public?: boolean }>`
+export const DivMessageBtnHeader= styled.div<{ $public?: boolean }>`
   ${({ $public }) =>
     $public
       ? `   
@@ -16,27 +15,28 @@ export const DivMainName = styled.div<{ $public?: boolean }>`
   white-space: nowrap;`}
 
   width: 100%;
-  padding: 2rem .2rem;
+  padding: 2rem 0.2rem;
   gap: 0rem;
   align-items: center;
   display: flex; /* Agregamos esta propiedad */
   align-items: center;
 
-  @media (min-width: 800px) {
+  @media (min-width: 1200px) {
+    display: none;
     position: static;
     max-width: 260px;
     justify-content: space-evenly;
   }
 `;
 
-export const BtnMainName = styled.button<{
+export const BtnMessageBtnHeader= styled.button<{
   $public?: boolean;
   $side?: boolean;
 }>`
   position: absolute;
   z-index: 1000;
   top: 50%;
-  ${({ $side }) => !$side ? `left: 1rem;` : `right: .2rem;`}
+  ${({ $side }) => (!$side ? `left: 1rem;` : `right: .2rem;`)}
   transform: translateY(-50%);
   display: ${({ $public }) => ($public ? "none" : "flex")};
   justify-content: center;
@@ -58,20 +58,4 @@ export const BtnMainName = styled.button<{
     margin-right: 0rem;
     transform: translateX(-0.6rem);
   }
-`;
-
-export const LinkMainName = styled(Link)`
-  display: inline-flex;
-  text-align: center;
-  gap: 0.4rem;
-  text-decoration: none;
-
-  @media (min-width: 800px) {
-    max-width: 260px;
-  }
-`;
-
-export const IconMainName = styled.i`
-  margin: auto 0;
-  height: 1.4rem;
 `;

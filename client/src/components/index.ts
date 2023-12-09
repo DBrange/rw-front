@@ -49,6 +49,8 @@ export * from './LoginBtn';
 export * from './Logo';
 export * from './Logo2';
 export * from './MainName';
+export * from './MessageBtn';
+export * from './MessageBtnHeader';
 export * from './ModalError';
 export * from './ModalSent';
 export * from './ModalSentLogin';

@@ -341,6 +341,7 @@ export const ClientInspectedCreateReportProvider = ({
       } else if (reportActive.theft && inputValues.theftVehicle.isTire) {
         errors = withTireTheftErrors;
       }
+      
 
       //damage vehicle
       if (reportActive.damage) {
@@ -350,24 +351,24 @@ export const ClientInspectedCreateReportProvider = ({
       }
 
       //fire vehicle
-      if (!reportActive.fire && !amountInjured) {
+      if (reportActive.fire && !amountInjured) {
         errors = withoutThirdPartyInjuredFireErrors;
       } else if (reportActive.fire && !amountInjured) {
         errors = withoutThirdPartyInjuredFireErrors;
-      } else if (!reportActive.fire && amountInjured) {
+      } else if (reportActive.fire && amountInjured) {
         errors = withThirdPartyInjuredFireErrors;
       } else if (reportActive.fire && amountInjured) {
         errors = withThirdPartyInjuredFireErrors;
       }
 
       //crahs vehicle
-      if (!reportActive.crash && !amountInjured && !amountVehicles) {
+      if (reportActive.crash && !amountInjured && !amountVehicles) {
         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
-      } else if (!reportActive.crash && amountInjured && !amountVehicles) {
+      } else if (reportActive.crash && amountInjured && !amountVehicles) {
         errors = withThirdPartyInjuredCrashErrors;
-      } else if (!reportActive.crash && !amountInjured && amountVehicles) {
+      } else if (reportActive.crash && !amountInjured && amountVehicles) {
         errors = withThirdPartyVehicleCrashErrors;
-      } else if (!reportActive.crash && amountInjured && amountVehicles) {
+      } else if (reportActive.crash && amountInjured && amountVehicles) {
         errors = withThirdPartyInjuredAndVehicleCrashErrors;
         //abajo
       } else if (reportActive.crash && amountInjured && !amountVehicles) {
@@ -395,10 +396,77 @@ export const ClientInspectedCreateReportProvider = ({
         errors = electronicDamageErrors;
       }
     }
+//           if (elementReportActive.vehicleReport) {
+//       //theft vehicle
+//       if (reportActive.theft && !inputValues.theftVehicle.isTire) {
+//         errors = withoutTireTheftErrors;
+//       } else if (reportActive.theft && !inputValues.theftVehicle.isTire) {
+//         errors = withoutTireTheftErrors;
+//       } else if (!reportActive.theft && inputValues.theftVehicle.isTire) {
+//         errors = withTireTheftErrors;
+//       } else if (reportActive.theft && inputValues.theftVehicle.isTire) {
+//         errors = withTireTheftErrors;
+//       }
+//       
+
+//       //damage vehicle
+//       if (reportActive.damage) {
+//         errors = vehicleDamageErrors;
+//       } else if (reportActive.damage) {
+//         errors = vehicleDamageErrors;
+//       }
+// 
+//       //fire vehicle
+//       if (!reportActive.fire && !amountInjured) {
+//         errors = withoutThirdPartyInjuredFireErrors;
+//       } else if (reportActive.fire && !amountInjured) {
+//         errors = withoutThirdPartyInjuredFireErrors;
+//       } else if (!reportActive.fire && amountInjured) {
+//         errors = withThirdPartyInjuredFireErrors;
+//       } else if (reportActive.fire && amountInjured) {
+//         errors = withThirdPartyInjuredFireErrors;
+//       }
+
+//       //crahs vehicle
+//       if (!reportActive.crash && !amountInjured && !amountVehicles) {
+//         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
+//       } else if (!reportActive.crash && amountInjured && !amountVehicles) {
+//         errors = withThirdPartyInjuredCrashErrors;
+//       } else if (!reportActive.crash && !amountInjured && amountVehicles) {
+//         errors = withThirdPartyVehicleCrashErrors;
+//       } else if (!reportActive.crash && amountInjured && amountVehicles) {
+//         errors = withThirdPartyInjuredAndVehicleCrashErrors;
+//         //abajo
+//       } else if (reportActive.crash && amountInjured && !amountVehicles) {
+//         errors = withThirdPartyInjuredCrashErrors;
+//       } else if (reportActive.crash && !amountInjured && amountVehicles) {
+//         errors = withThirdPartyVehicleCrashErrors;
+//       } else if (reportActive.crash && amountInjured && amountVehicles) {
+//         errors = withThirdPartyInjuredAndVehicleCrashErrors;
+//       } else if (reportActive.crash && !amountInjured && !amountVehicles) {
+//         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
+//       }
+//     } else if (elementReportActive.electronic) {
+//       // theft electronic
+//       if (reportActive.theft && !inputValues.theftElectronic.isTire) {
+//         errors = electronicTheft;
+//       } else if (reportActive.theft && !inputValues.theftElectronic.isTire) {
+//         errors = electronicTheft;
+//       }
+
+//       //damage electronic
+
+//       if (reportActive.damage) {
+//         errors = electronicDamageErrors;
+//       } else if (reportActive.damage) {
+//         errors = electronicDamageErrors;
+//       }
+//     }
 
     return errors;
   };
-
+// console.log(partialErrors(),'aca')
+// console.log(page,'aca')
   const typeOfToucheds = (): TouchedForms => {
     let toucheds: TouchedForms;
     toucheds =
