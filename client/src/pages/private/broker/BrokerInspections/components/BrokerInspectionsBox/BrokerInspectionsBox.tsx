@@ -40,12 +40,12 @@ function BrokerInspectionsBox() {
               id={el.id}
             />
           );
-        } else if (el.electronics) {
+        } else if (el.electronic) {
           return (
             <InspectionCard
               key={el.id}
-              type={el.electronics.type}
-              keyName={el.electronics.brand}
+              type={el.electronic.type}
+              keyName={el.electronic.brand}
               id={el.id}
             />
           );

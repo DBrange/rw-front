@@ -35,7 +35,7 @@ export const BrokerInspectionsProvider = ({ children }: ChildrenType) => {
       if (typeToFilter === "vehicle") {
         return el.vehicle;
       } else if (typeToFilter === "electronic") {
-        return el.electronics;
+        return el.electronic;
       }
     });
 
@@ -46,7 +46,7 @@ export const BrokerInspectionsProvider = ({ children }: ChildrenType) => {
         );
       } else if (typeToFilter === "electronic") {
         return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.electronics?.model as string)
+          regex.test(el?.electronic?.model as string)
         );
       }
     } else {

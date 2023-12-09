@@ -55,7 +55,8 @@ export const validateClientInspectedCreateReport = ({
   reportActive: {
     theft: theftSelected,
     fire: fireSelected,
-    crash: crashSelected,damage:damageSelected
+    crash: crashSelected,
+    damage: damageSelected
   },
 }: Params) => {
   let theftVehicleErrors: Partial<ErrorsTheftVehiclesValues> | undefined;

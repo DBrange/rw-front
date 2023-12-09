@@ -104,7 +104,7 @@ export const ClientInspectedCreateReportProvider = ({
 
   const [elementReportActive, setElementReportActive] =
     useState<ElementReportActive>({
-      vehicleReport: true,
+      vehicleReport: false,
       electronic: false,
     });
 
