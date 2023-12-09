@@ -16,6 +16,7 @@ export * from './ClientCreateReport/context';
 export * from './ClientCreateReport';
 export * from './ClientCreateReport/services';
 export * from './ClientCreateReport/utilities/validation-form-data-report.utility';
+export * from './ClientElements';
 export * from './ClientInspectedCreateReport/components/AllClientInspectedCreateReportPages';
 export * from './ClientInspectedCreateReport/components/ClientInspectedCreateReportBox';
 export * from './ClientInspectedCreateReport/components/ClientInspectedCreateReportContainer';

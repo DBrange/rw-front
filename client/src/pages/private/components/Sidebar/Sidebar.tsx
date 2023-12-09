@@ -57,6 +57,15 @@ function Sidebar() {
           </LinkNavigate>
 
           {/* <LinkNavigate
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ELEMENTS}`}
+          >
+            <LiSidebarItem>
+              <MdOutlineDashboard size={20} />
+              Vehiculos y electronicos
+            </LiSidebarItem>
+          </LinkNavigate> */}
+
+          {/* <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_INSURED}`}
           >
             <LiSidebarItem>

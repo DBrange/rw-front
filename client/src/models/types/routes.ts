@@ -11,6 +11,7 @@ export enum PrivateRoutes {
   PRIVATE = "private",
   BROKER = "broker",
   DASHBOARD = "dashboard",
+  ELEMENTS = 'elementos',
   CREATE_INSPECTION = "crear-inspeccion",
   CREATE_SINISTER = "crear-siniestro",
   CREATE_SINISTER_IN_INSURED = "crear-siniestro-en",

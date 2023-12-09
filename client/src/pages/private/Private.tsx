@@ -13,6 +13,7 @@ import {
   ClientReportDetail,
   ClientDetail,
   BrokerCreateReport,
+  ClientsElements,
 } from ".";
 import { ClientReports } from "..";
 import { PrivateRoutes } from "@/models/types/routes";
@@ -26,6 +27,7 @@ function Private() {
         element={<Navigate replace to={PrivateRoutes.DASHBOARD} />}
       />
       <Route path={PrivateRoutes.DASHBOARD} element={<ClientUser />} />
+      <Route path={PrivateRoutes.ELEMENTS} element={<ClientsElements />} />
       <Route
         path={PrivateRoutes.CREATE_INSPECTION}
         element={<ClientCreateInspection />}
