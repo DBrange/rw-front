@@ -1,4 +1,5 @@
 export enum NotificationResponse {
   ACCEPTED = "ACCEPTED",
-  REJECTED = "REJECTED"
+  REJECTED = "REJECTED",
+  NULL = 'null'
 }

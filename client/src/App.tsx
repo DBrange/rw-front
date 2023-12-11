@@ -22,7 +22,7 @@ function App() {
         <Header>
           <MainName />
           <LoginBtn />
-          <MessageBtnHeader/>
+          <MessageBtnHeader />
         </Header>
         <MainContent>
           <MessageBtn/>

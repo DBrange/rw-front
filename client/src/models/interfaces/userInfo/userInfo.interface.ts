@@ -83,6 +83,7 @@ export interface Notification {
   receiver: User;
   isRead: boolean;
   response?: NotificationResponse;
+  withOptions: boolean
 }
 
 // export interface ClientInfo {

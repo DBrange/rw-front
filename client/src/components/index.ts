@@ -55,4 +55,6 @@ export * from './ModalError';
 export * from './ModalSent';
 export * from './ModalSentLogin';
 export * from './ModalSuccessfulResgistration';
+export * from './NotificationCard';
+export * from './NotificationsBox';
 export * from './PageBtn';

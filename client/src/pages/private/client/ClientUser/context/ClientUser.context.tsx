@@ -1,6 +1,9 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { IClientUserContext } from ".";
 import { emptyClientUserContext } from "./empty-clientUser-context";
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewNotification } from "@/redux/slices/notificationSlice";
+import { AppStore } from "@/redux";
 
 export const ClientUserContext = createContext<IClientUserContext>(
   emptyClientUserContext
@@ -11,6 +14,13 @@ type ChildrenType = {
 };
 
 export const ClientUserProvider = ({ children }: ChildrenType) => {
+  const dispatch = useDispatch()
+
+  const user = useSelector((store: AppStore) => store.user);
+  
+  useEffect(() => {
+  dispatch(addNewNotification(user.user?.receivedNotifications))
+  }, [])
   const values = {};
 
   return (

@@ -21,7 +21,7 @@ export const EmptyUserState: ClientInfo = {
   userBroker: undefined,
   receivedNotifications: [],
   },
-  exp: undefined,
+  exp: 0,
 };
 
 export const clientKey = "client";
@@ -45,6 +45,7 @@ export const clientSlice = createSlice({
       clearLocalStorage(clientKey);
       return EmptyUserState;
     },
+    
   },
 });
 
