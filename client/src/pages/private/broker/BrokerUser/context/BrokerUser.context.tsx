@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
 import { IBrokerUserContext } from ".";
 import { emptyBrokerUserContext } from "./empty-BrokerUser-context";
-import { AppDispatch, AppStore } from "@/redux";
+import { AppStore } from "@/redux";
 import { addNotification } from "@/redux/slices/notificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Notification } from "@/models";
@@ -15,7 +15,7 @@ type ChildrenType = {
 };
 
 export const BrokerUserProvider = ({ children }: ChildrenType) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
 
   const user = useSelector((store: AppStore) => store.user);
 

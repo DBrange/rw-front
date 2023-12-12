@@ -1,5 +1,6 @@
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 import { InputValues } from "..";
+import { ClientInfo } from "@/models";
 
 export const baseUrl = "http://localhost:3001/v1";
 export const authUrl = `${baseUrl}/auth`
@@ -19,7 +20,7 @@ export const loginUrl = `${authUrl}/login`;
 export const loginClient = async (
   url: string,
   { arg }: { arg: InputValues }
-): Promise<Response | void> => {
+): Promise<ClientInfo | void> => {
   try {
     loaderImageService.setSubject(true);
     // modalSentService.setSubject(false);
