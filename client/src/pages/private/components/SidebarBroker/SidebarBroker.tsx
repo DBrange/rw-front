@@ -101,6 +101,16 @@ function Sidebar() {
               Denunciar
             </LiSidebarItem>
           </LinkNavigate>
+
+          <LinkNavigate
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}`}
+          >
+            <LiSidebarItem>
+              <IoPeople size={20} />
+              Clientes
+            </LiSidebarItem>
+          </LinkNavigate>
+          
         </UlSidebarList>
         <FooterSidebar>
           <UlSidebarList>

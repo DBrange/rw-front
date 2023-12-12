@@ -20,5 +20,6 @@ export enum PrivateRoutes {
   INSURED_DETAIL = "asegurados",
   SINISTER_DETAIL = "siniestros",
   MY_PROFILE = "perfil",
-  CLIENTS_OF_BROKER = 'clientes'
+  CLIENTS_OF_BROKER = 'clientes',
+  SEARCH_CLIENT = 'buscar-cliente',
 }

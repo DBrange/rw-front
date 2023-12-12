@@ -15,7 +15,8 @@ function InspectLogin({
   setSearchField,
   searchField,
   placeholder,
-  cards,name
+  cards,
+  name
 }: Props) {
   return (
     <>

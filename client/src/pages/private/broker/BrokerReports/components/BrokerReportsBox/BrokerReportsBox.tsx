@@ -66,7 +66,7 @@ function BrokerReportsBox() {
         placeholder={
           typeToFilter === "vehicle" ? "Buscar patente" : "Buscar modelo"
         }
-        name="allInspected"
+        name="BrokerReports"
         cards={cards}
       />
     </>

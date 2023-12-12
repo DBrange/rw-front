@@ -17,7 +17,7 @@ import {
 } from ".";
 import { ClientReports } from "..";
 import { PrivateRoutes } from "@/models/types/routes";
-import { BrokerClients, BrokerCreateInspection, BrokerInspections, BrokerReports } from "./broker";
+import { BrokerClients, BrokerCreateInspection, BrokerFindClients, BrokerInspections, BrokerReports } from "./broker";
 
 function Private() {
   return (
@@ -56,12 +56,7 @@ function Private() {
 
       <Route
         path="/"
-        element={
-          <Navigate
-            replace
-            to={`${PrivateRoutes.DASHBOARD}`}
-          />
-        }
+        element={<Navigate replace to={`${PrivateRoutes.DASHBOARD}`} />}
       />
       {/* <Route
         path={`${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`}
@@ -70,6 +65,10 @@ function Private() {
       <Route
         path={`${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}`}
         element={<BrokerClients />}
+      />
+      <Route
+        path={`${PrivateRoutes.BROKER}/${PrivateRoutes.SEARCH_CLIENT}`}
+        element={<BrokerFindClients />}
       />
       <Route
         path={`${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_INSPECTION}`}

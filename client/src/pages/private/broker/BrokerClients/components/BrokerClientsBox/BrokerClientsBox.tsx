@@ -67,7 +67,7 @@ function BrokerClientsBox() {
         placeholder={
           typeToFilter === "user" ? "Buscar por dni" : "Buscar por cuit"
         }
-        name="allInspected"
+        name="BrokerClients"
         cards={cards}
       />
     </>

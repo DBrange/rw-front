@@ -66,7 +66,7 @@ function BrokerCreateInspectionBox() {
         placeholder={
           typeToFilter === "user" ? "Buscar por dni" : "Buscar por cuit"
         }
-        name="allInspected"
+        name="BrokerCreateInspection"
         cards={cards}
       />
     </>

@@ -67,7 +67,7 @@ function ClientReportsBox() {
         placeholder={
           typeToFilter === "vehicle" ? "Buscar patente" : "Buscar modelo"
         }
-        name="allInspected"
+        name="ClientReports"
         cards={cards}
       />
     </>

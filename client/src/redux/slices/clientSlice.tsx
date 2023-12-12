@@ -1,6 +1,6 @@
 import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
 import { persistLocalStorage, clearLocalStorage } from "@/utilities";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export const EmptyUserState: ClientInfo = {
   accessToken: undefined,
@@ -32,11 +32,11 @@ export const clientSlice = createSlice({
     ? JSON.parse(localStorage.getItem("client") as string)
     : EmptyUserState,
   reducers: {
-    addClient: (state, action) => {
+    addClient: (state, action: PayloadAction<ClientInfo>) => {
       persistLocalStorage<ClientInfo>(clientKey, action.payload);
       return { ...state, ...action.payload };
     },
-    updateClient: (state, action) => {
+    updateClient: (state, action: PayloadAction<ClientInfo>) => {
       const result = { ...state, ...action.payload };
       persistLocalStorage<ClientInfo>(clientKey, result);
       return result;
@@ -45,7 +45,6 @@ export const clientSlice = createSlice({
       clearLocalStorage(clientKey);
       return EmptyUserState;
     },
-    
   },
 });
 

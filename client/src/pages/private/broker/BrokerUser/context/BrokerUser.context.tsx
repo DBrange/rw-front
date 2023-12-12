@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect } from "react";
 import { IBrokerUserContext } from ".";
 import { emptyBrokerUserContext } from "./empty-BrokerUser-context";
-import { AppStore } from "@/redux";
-import { addNewNotification } from "@/redux/slices/notificationSlice";
+import { AppDispatch, AppStore } from "@/redux";
+import { addNotification } from "@/redux/slices/notificationSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Notification } from "@/models";
 
 export const BrokerUserContext = createContext<IBrokerUserContext>(
   emptyBrokerUserContext
@@ -14,12 +15,12 @@ type ChildrenType = {
 };
 
 export const BrokerUserProvider = ({ children }: ChildrenType) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const user = useSelector((store: AppStore) => store.user);
 
   useEffect(() => {
-    dispatch(addNewNotification(user.user?.receivedNotifications));
+    dispatch(addNotification(user.user?.receivedNotifications as Notification[]));
   }, []);
 
   const values = {};

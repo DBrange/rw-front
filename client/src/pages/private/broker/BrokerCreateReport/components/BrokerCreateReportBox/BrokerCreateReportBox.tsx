@@ -67,7 +67,7 @@ function BrokerCreateReportBox() {
         placeholder={
           typeToFilter === "user" ? "Buscar por dni" : "Buscar por cuit"
         }
-        name="allInspected"
+        name="BrokerCreateReport"
         cards={cards}
       />
     </>
