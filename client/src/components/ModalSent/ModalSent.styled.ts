@@ -38,6 +38,11 @@ export const DivModalSent = styled.div<{
 
 `;
 
+export const TitleModal = styled.h3<{ $error?: boolean }>`
+  margin: 1.25rem 0;
+  color: ${({ $error }) => ($error ? `${theme.errColor}` : `${theme.sColor}`)};
+`;
+
 export const H3Modal = styled.h3<{ $error?: boolean }>`
   margin: 1.25rem 0;
   color: ${({ $error }) => ($error ? `${theme.errColor}` : `${theme.sColor}`)};

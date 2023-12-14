@@ -20,10 +20,10 @@ export const ClientUserProvider = ({ children }: ChildrenType) => {
   const user = useSelector((store: AppStore) => store.user);
   
   useEffect(() => {
-  dispatch(
-    addNotification(user.user?.receivedNotifications as Notification[])
-  );
-  }, [])
+    dispatch(
+      addNotification(user.user?.receivedNotifications as Notification[])
+    );
+  }, [user.user?.receivedNotifications]);
   const values = {};
 
   return (

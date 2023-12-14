@@ -18,7 +18,7 @@ function ClientCreateInspectionContainer({
       modalSentService.getSubject.subscribe((bol) => setModalSentActive(bol));
       loaderImageService.getSubject.subscribe((bol) => setLoaderImages(bol));
     }, []);
-  
+
   return (
     <>
       <LoaderImages modalActive={loaderImages} />

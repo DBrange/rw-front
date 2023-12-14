@@ -31,3 +31,21 @@ export interface AllBrokerClients {
   legalUser?: BrokerClientsLegalUser;
   personalUser?: BrokerClientsPersonalUser;
 }
+
+export interface ClientByEmail {
+  id: string;
+  email: string;
+  personalUser: ClientByEmailPersonalUser;
+  legalUser: ClientByEmailLegalUser;
+}
+
+export interface ClientByEmailPersonalUser{
+    name: string;
+    lastName: string;
+    dni: string;
+  }
+export interface ClientByEmailLegalUser{
+  
+  companyName: string;
+  cuit: string;
+}

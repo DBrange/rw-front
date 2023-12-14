@@ -21,7 +21,7 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     dispatch(addNotification(user.user?.receivedNotifications as Notification[]));
-  }, []);
+  }, [user]);
 
   const values = {};
 

@@ -2,28 +2,32 @@ import { ClientCard, InspectLogin, Sidebar, SidebarBroker } from "@/pages";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import { useBrokerFindClientsContext } from "../..";
+import ClientCardInFind from "@/pages/private/components/ClientCardInFind/ClientCardinFind";
 
 function BrokerFindClientsBox() {
-  const { setSearchField, searchField, client } = useBrokerFindClientsContext();
+  const { setSearchField, searchField, client, modalActive, setModalActive } =
+    useBrokerFindClientsContext();
 
   const userBroker = useSelector((store: AppStore) => store.user).user
     ?.userBroker;
 
   const cards = (): JSX.Element => {
-    if (client.personalUser?.dni) {
+    if (client?.personalUser?.dni) {
       return (
-        <ClientCard
-          name={client.personalUser?.name}
-          lastname={client.personalUser?.lastName}
-          keyName={client.personalUser?.dni}
+        <ClientCardInFind
+          name={client?.personalUser?.name}
+          lastname={client?.personalUser?.lastName}
+          dni={client?.personalUser.dni}
+          email={client?.email}
           id={client?.id}
         />
       );
-    } else if (client.legalUser?.cuit) {
+    } else if (client?.legalUser?.cuit) {
       return (
-        <ClientCard
-          companyName={client.legalUser?.companyName}
-          keyName={client.legalUser?.cuit}
+        <ClientCardInFind
+          companyName={client?.legalUser?.companyName}
+          cuit={client?.legalUser.cuit}
+          email={client?.email}
           id={client?.id}
         />
       );

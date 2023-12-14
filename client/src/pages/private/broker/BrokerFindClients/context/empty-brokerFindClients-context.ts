@@ -1,13 +1,19 @@
-import { AllBrokerClients } from "@/pages";
+import { ClientByEmail } from "@/pages";
 
 export interface IBrokerFindClientsContext {
   setSearchField: React.Dispatch<React.SetStateAction<string>>;
   searchField: string;
-  client: any
+  client: ClientByEmail | undefined | void;
+  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  modalActive: boolean;
+  activateTrigger: () => void
 }
 
 export const emptyBrokerFindClientsContext: IBrokerFindClientsContext = {
   setSearchField: () => {},
   searchField: "",
-  client: {}
+  client: undefined,
+  setModalActive: () => { },
+  modalActive: false,
+  activateTrigger: () => {}
 };

@@ -79,11 +79,27 @@ export interface Notification {
   updated_at: string;
   title: string;
   message: string;
-  sender: User;
-  receiver: User;
+  sender: string;
+  receiver: string;
   isRead: boolean;
   response?: NotificationResponse;
   withOptions: boolean
+  additional: string
+}
+
+export interface NotificationwithOptions {
+  brokerId: string;
+  clientId: string;
+  userBrokerId: string;
+  name: string;
+  lastname: string;
+  clientName: string;
+  clientLastname: string;
+}
+
+export interface Ids {
+  userBrokerId: string;
+  clientId: string;
 }
 
 // export interface ClientInfo {

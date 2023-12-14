@@ -1,4 +1,5 @@
 export * from './ClientCard';
+export * from './ClientCardInFind';
 export * from './ClientDetail/components/ClientDetailContainer';
 export * from './ClientDetail/components';
 export * from './ClientDetail';

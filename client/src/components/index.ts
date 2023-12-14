@@ -52,6 +52,7 @@ export * from './MainName';
 export * from './MessageBtn';
 export * from './MessageBtnHeader';
 export * from './ModalError';
+export * from './ModalSendRequest';
 export * from './ModalSent';
 export * from './ModalSentLogin';
 export * from './ModalSuccessfulResgistration';

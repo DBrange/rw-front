@@ -103,11 +103,11 @@ function Sidebar() {
           </LinkNavigate>
 
           <LinkNavigate
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}`}
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.SEARCH_CLIENT}`}
           >
             <LiSidebarItem>
               <IoPeople size={20} />
-              Clientes
+              Buscar Clientes
             </LiSidebarItem>
           </LinkNavigate>
           

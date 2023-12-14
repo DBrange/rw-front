@@ -5,10 +5,11 @@ import {
   PNotification,
   SpanNotification,
 } from "./NotificationCard.styled";
-import { updateNotification } from "@/redux/slices/notificationSlice";
-import { useDispatch } from "react-redux";
+import { addBrokerAsync, updateNotification, updateNotificationAsync } from "@/redux/slices/notificationSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { NotificationResponse } from "@/models/types/notification-response.enum";
 import { useState } from "react";
+import { AppDispatch, AppStore } from "@/redux";
 
 interface Props {
   notification: Notification;
@@ -16,8 +17,10 @@ interface Props {
 
 function NotificationCard({ notification }: Props) {
   const dispatch = useDispatch();
+  const dispatchAsync = useDispatch<AppDispatch>();
 
   const [state, setState] = useState<boolean | undefined>(undefined);
+  const user = useSelector((store: AppStore) => store.user);
 
   const update = (response: boolean) => {
     dispatch(
@@ -28,6 +31,23 @@ function NotificationCard({ notification }: Props) {
           : NotificationResponse.REJECTED,
       })
     );
+    // dispatchAsync(
+    //   updateNotificationAsync({
+    //     ...notification,
+    //     response: response
+    //       ? NotificationResponse.ACCEPTED
+    //       : NotificationResponse.REJECTED,
+    //   })
+    // );
+    dispatchAsync(
+      addBrokerAsync({
+        clientId: user.user?.id as string,
+        userBrokerId: notification?.additional,
+      })
+    );
+
+
+
 
     setState(response);
   };

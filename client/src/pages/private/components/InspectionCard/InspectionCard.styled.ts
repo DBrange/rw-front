@@ -29,3 +29,7 @@ export const CardText = styled(Link)`
 text-decoration: none;
 color: ${theme.textColor};
 `;
+export const CardTextNoLink = styled.div`
+text-decoration: none;
+color: ${theme.textColor};
+`;
