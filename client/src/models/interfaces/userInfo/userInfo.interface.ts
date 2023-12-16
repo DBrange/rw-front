@@ -22,7 +22,7 @@ export interface User {
   broker?: Broker;
   userBroker?: UserBroker;
   brokerUser?: BrokerUser
-  receivedNotifications: Notification[];
+  // receivedNotifications: Notification[];
 }
 interface BrokerUser {
   id: string;

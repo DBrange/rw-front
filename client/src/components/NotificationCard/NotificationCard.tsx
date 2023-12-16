@@ -5,11 +5,16 @@ import {
   PNotification,
   SpanNotification,
 } from "./NotificationCard.styled";
-import { addBrokerAsync, updateNotification, updateNotificationAsync } from "@/redux/slices/notificationSlice";
+import {
+  addBrokerAsync,
+  updateNotification,
+  updateNotificationAsync,
+} from "@/redux/slices/notificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { NotificationResponse } from "@/models/types/notification-response.enum";
 import { useState } from "react";
 import { AppDispatch, AppStore } from "@/redux";
+import { updateClient } from "@/redux/slices/clientSlice";
 
 interface Props {
   notification: Notification;
@@ -23,6 +28,20 @@ function NotificationCard({ notification }: Props) {
   const user = useSelector((store: AppStore) => store.user);
 
   const update = (response: boolean) => {
+    dispatchAsync(
+      updateNotificationAsync({
+        ...notification,
+        response: response
+          ? NotificationResponse.ACCEPTED
+          : NotificationResponse.REJECTED,
+      })
+    );
+    dispatchAsync(
+      addBrokerAsync({
+        clientId: user.user?.id as string,
+        userBrokerId: notification?.additional,
+      })
+    );
     dispatch(
       updateNotification({
         ...notification,
@@ -31,23 +50,8 @@ function NotificationCard({ notification }: Props) {
           : NotificationResponse.REJECTED,
       })
     );
-    // dispatchAsync(
-    //   updateNotificationAsync({
-    //     ...notification,
-    //     response: response
-    //       ? NotificationResponse.ACCEPTED
-    //       : NotificationResponse.REJECTED,
-    //   })
-    // );
-    dispatchAsync(
-      addBrokerAsync({
-        clientId: user.user?.id as string,
-        userBrokerId: notification?.additional,
-      })
-    );
 
-
-
+    // dispatch(updateClient({ brokerUser: notification?.additional }));
 
     setState(response);
   };
@@ -55,7 +59,10 @@ function NotificationCard({ notification }: Props) {
   return (
     <DivNotification>
       <h4>{notification.title}</h4>
-      <PNotification>{notification.message}</PNotification>
+      <PNotification>
+        {notification.message}
+        {notification.isRead ? " visto" : "no visto"}
+      </PNotification>
       <SpanNotification>
         {notification.withOptions && (
           <>

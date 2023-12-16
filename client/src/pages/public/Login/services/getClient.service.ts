@@ -23,7 +23,7 @@ export const loginClient = async (
 ): Promise<ClientInfo | void> => {
   try {
     loaderImageService.setSubject(true);
-    // modalSentService.setSubject(false);
+    // mogetinsdalSentService.setSubject(false);
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(arg),

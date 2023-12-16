@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 
 export const SectionMessageBtnHeader = styled.section`position: relative;`
+export const DivDivMessageBtnHeader = styled.section`position: relative;`
 
 export const DivMessageBtnHeader= styled.div<{ $public?: boolean }>`
   ${({ $public }) =>

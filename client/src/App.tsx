@@ -5,9 +5,10 @@ import LoginBtn from "./components/LoginBtn/LoginBtn";
 import { PrivateRoutes, PublicRoutes } from './models/types/routes';
 import { Private } from "./pages/private";
 import Public from "./pages/public/Public";
-import { Body, Footer, Header, MainContent } from "./styledComponents";
+import { Body, Footer, MainContent } from "./styledComponents";
 import RoutesWithNotFound from "./utilities/routes-with-not-found";
 import AuthGuard from "./guards/auth.guard";
+import Header from "./header/Header";
 
 const Home = lazy(() => import("./pages/public/Home/Home"));
 const Inspect = lazy(() => import("./pages/public/Inspect/Inspect"));
@@ -19,11 +20,7 @@ function App() {
   return (
     <Suspense fallback={<GlobalLoader />}>
       <Body>
-        <Header>
-          <MainName />
-          <LoginBtn />
-          <MessageBtnHeader />
-        </Header>
+        <Header />
         <MainContent>
           <MessageBtn/>
           <RoutesWithNotFound>

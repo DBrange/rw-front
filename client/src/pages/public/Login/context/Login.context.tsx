@@ -9,10 +9,13 @@ import {
   validateLogin,
 } from "..";
 import useSWRMutation from "swr/mutation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addClient } from "@/redux/slices/clientSlice";
 import { useNavigate } from "react-router-dom";
 import { PrivateRoutes } from "@/models/types/routes";
+import { AppStore } from "@/redux";
+import { addNotification } from "@/redux/slices/notificationSlice";
+import { Notification } from "@/models";
 
 const LoginContext = createContext<ILoginContext>(emptyLoginContext);
 
@@ -21,10 +24,9 @@ type ChildrenType = {
 };
 
 export const LoginProvider = ({ children }: ChildrenType) => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [inputValues, setInputValues] = useState<InputValues>({
     email: "",
@@ -72,9 +74,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
       if (fetchErrors[err]) {
         setFormNotFound(true);
       } else {
-        
         setFormNotFound(false);
-        
       }
     }
   }, [...fetchErrors]);
@@ -86,20 +86,23 @@ export const LoginProvider = ({ children }: ChildrenType) => {
       })
     );
   }, []);
+  // const user = useSelector((store: AppStore) => store.user);
 
   useEffect(() => {
-    if (data) { 
-
+    if (data) {
       dispatch(addClient(data));
+      // addNotification(user.user?.receivedNotifications as Notification[]);
+
       const client = JSON.parse(localStorage.getItem("client") as string);
       navigate(
         // client.userBroker
-        //   ?
-          `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`
-          // : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.DASHBOARD}`
+          // ?
+        // `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`
+          // :
+          `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.DASHBOARD}`
       );
     }
-  },[data])
+  }, [data]);
 
   const submitData = (e: SubmitEventType) => {
     e.preventDefault();
@@ -118,7 +121,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     setInputValues,
     errorValues,
     touchedValues,
-    formNotFound
+    formNotFound,
   };
 
   return (

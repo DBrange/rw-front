@@ -1,21 +1,33 @@
+import { useHeaderContext } from "@/header/context";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
-import { DivMainName, BtnMainName, NotificationsBox } from "..";
+import { NotificationsBox } from "..";
 import {
-  DivMessageBtnHeader,
   BtnMessageBtnHeader,
+  DivDivMessageBtnHeader,
+  DivMessageBtnHeader,
   SectionMessageBtnHeader,
 } from "./MessageBtnHeader.styled";
-import { useState } from "react";
-import { AppStore } from '../../redux/store';
+import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function MessageBtnHeader() {
   const path = useLocation().pathname;
-  const [modal, setModal] = useState<boolean>(false)
 
-  const notifications = useSelector((store: AppStore) => store?.notification?.receivedNotifications)
+  const {
+    modal,
+    newNotifications,
+    setModal,
+    refreshNotifications,
+    setNewNotifications,
+  } = useHeaderContext();
 
+  const notifications = useSelector((store: AppStore) => store.notification);
+
+  const s = notifications.map((el) => el.isRead).some((el) => !el);
+
+  
   return (
     <>
       {!(
@@ -26,20 +38,10 @@ function MessageBtnHeader() {
         path === "/public/registrarse"
       ) && (
         <SectionMessageBtnHeader>
-          <DivMessageBtnHeader
-            onClick={() => setModal(mod => !mod)}
-            $public={
-              !!(
-                path === "/public/home" ||
-                path === "/public/denunciar" ||
-                path === "/public/inspeccionar" ||
-                path === "/public/login" ||
-                path === "/public/registrarse"
-              )
-            }
-          >
-            <BtnMessageBtnHeader
-              $side={true}
+          {s && <p>nuevoo</p>}
+          <DivDivMessageBtnHeader onClick={refreshNotifications}>
+            <DivMessageBtnHeader
+              onClick={() => setModal((mod) => !mod)}
               $public={
                 !!(
                   path === "/public/home" ||
@@ -50,9 +52,22 @@ function MessageBtnHeader() {
                 )
               }
             >
-              <AiOutlineMessage size={25} />
-            </BtnMessageBtnHeader>
-          </DivMessageBtnHeader>
+              <BtnMessageBtnHeader
+                $side={true}
+                $public={
+                  !!(
+                    path === "/public/home" ||
+                    path === "/public/denunciar" ||
+                    path === "/public/inspeccionar" ||
+                    path === "/public/login" ||
+                    path === "/public/registrarse"
+                  )
+                }
+              >
+                <AiOutlineMessage size={25} />
+              </BtnMessageBtnHeader>
+            </DivMessageBtnHeader>
+          </DivDivMessageBtnHeader>
           {modal && <NotificationsBox notifications={notifications} />}
         </SectionMessageBtnHeader>
       )}

@@ -18,8 +18,10 @@ import { BsShieldCheck } from "react-icons/bs";
 import { LinkNavigate } from "@/styledComponents";
 import LogOut from "../LogOut/LogOut";
 import { PrivateRoutes } from "@/models/types/routes";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetClient } from "@/redux/slices/clientSlice";
+import { AppDispatch, AppStore } from "@/redux";
+import { addNotificationsAsync } from "@/redux/slices/notificationSlice";
 
 function Sidebar() {
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
@@ -42,6 +44,11 @@ function Sidebar() {
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => e.stopPropagation();
 
+    const dispatchAsync = useDispatch<AppDispatch>();
+    const user = useSelector((store: AppStore) => store.user);
+    const notis = () => {
+      dispatchAsync(addNotificationsAsync(user.user?.id));
+    };
   return (
     <SectionBgSidebar $isOpen={stateOfSidebar} onClick={toggleSidebar}>
       <DivSidebarWrapper $isOpen={stateOfSidebar} onClick={handleSidebarClick}>
@@ -49,6 +56,7 @@ function Sidebar() {
         <UlSidebarList>
           <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.DASHBOARD}`}
+            onClick={notis}
           >
             <LiSidebarItem>
               <MdOutlineDashboard size={20} />
@@ -58,6 +66,7 @@ function Sidebar() {
 
           {/* <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ELEMENTS}`}
+            onClick={notis}
           >
             <LiSidebarItem>
               <MdOutlineDashboard size={20} />
@@ -67,6 +76,7 @@ function Sidebar() {
 
           {/* <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_INSURED}`}
+            onClick={notis}
           >
             <LiSidebarItem>
               <TfiWrite size={20} />
@@ -76,6 +86,7 @@ function Sidebar() {
 
           <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_SINISTER}`}
+            onClick={notis}
           >
             <LiSidebarItem>
               <IoNewspaperOutline size={20} />
@@ -85,6 +96,7 @@ function Sidebar() {
 
           <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_INSPECTION}`}
+            onClick={notis}
           >
             <LiSidebarItem>
               <BsShieldCheck size={20} />
@@ -94,6 +106,7 @@ function Sidebar() {
 
           <LinkNavigate
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER}`}
+            onClick={notis}
           >
             <LiSidebarItem>
               <TbReportAnalytics size={20} />
@@ -105,6 +118,7 @@ function Sidebar() {
           <UlSidebarList>
             <LinkNavigate
               to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.MY_PROFILE}`}
+              onClick={notis}
             >
               <LiSidebarItem>
                 <BsFillPersonFill size={20} />

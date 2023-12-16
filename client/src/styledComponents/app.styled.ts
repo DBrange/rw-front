@@ -9,7 +9,7 @@ export const Body = styled.section`
   background: ${theme.pColor};
 `;
 
-export const Header = styled.div`
+export const HeaderStyle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

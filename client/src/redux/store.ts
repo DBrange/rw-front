@@ -5,7 +5,7 @@ import { ClientInfo, Notification } from "@/models/interfaces/userInfo/userInfo.
 
 export interface AppStore {
   user: ClientInfo;
-  notification: { receivedNotifications: Notification[] };
+  notification:  Notification[] ;
 }
 
 export const store =  configureStore<AppStore>({
