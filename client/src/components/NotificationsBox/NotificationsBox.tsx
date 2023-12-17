@@ -13,9 +13,7 @@ interface Props {
 
 function NotificationsBox({ notifications }: Props) {
   const date = (date: Date) => new Date(date).getTime();
-console.log(
-  [...notifications].sort((a, b) => date(b.created_at) - date(a.created_at))
-);
+
   return (
     <SectionNotificationsBox>
       <H3NotificationBox>Notificaciones</H3NotificationBox>
