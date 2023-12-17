@@ -12,26 +12,20 @@ interface Props {
 }
 
 function NotificationsBox({ notifications }: Props) {
-  const date = (date: string) => new Date(date).getTime();
-
+  const date = (date: Date) => new Date(date).getTime();
+console.log(
+  [...notifications].sort((a, b) => date(b.created_at) - date(a.created_at))
+);
   return (
     <SectionNotificationsBox>
       <H3NotificationBox>Notificaciones</H3NotificationBox>
       <DivNotificationsBox>
-        {notifications
-          ? notifications
-              // .sort(
-              //     (a, b) =>
-              //       date(b.creater_at) -
-              //       date(a.creater_at)
-              //   )
-              .map((el) => (
-                <NotificationCard
-                  key={el.id}
-                  notification={el}
-                />
-              ))
-          : []}
+        {[...notifications]
+          .sort((a, b) => date(b.created_at) - date(a.created_at))
+          .map((el) => (
+            <NotificationCard key={el.id} notification={el} />
+          ))}
+        
       </DivNotificationsBox>
     </SectionNotificationsBox>
   );

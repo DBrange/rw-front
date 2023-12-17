@@ -1,17 +1,10 @@
 import {
-  ClientInfo,
   Ids,
-  Notification,
-  NotificationwithOptions,
+  Notification
 } from "@/models";
 import { baseUrl } from "@/pages";
-import {
-  notificationsPersistLocalStorage,
-  persistLocalStorage,
-} from "@/utilities";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { clientKey } from "./clientSlice";
 
 export const EmptyNotificationState: Notification[] = [];
 export const receivedNotifications: Notification[] = [];

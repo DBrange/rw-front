@@ -8,12 +8,13 @@ export interface ClientInfo {
 
 export interface User {
   id?: string;
-  creater_at?: string;
-  updated_at?: string;
+  created_at?: Date;
+  updated_at?: Date;
   phoneNumber?: string;
   email?: string;
   altEmail?: string;
   address?: string;
+  lastRecord?: Date;
   role?: string;
   accessLevel?: number;
   authorization?: string;
@@ -21,13 +22,13 @@ export interface User {
   legalUser?: LegalUser;
   broker?: Broker;
   userBroker?: UserBroker;
-  brokerUser?: BrokerUser
+  brokerUser?: BrokerUser;
   // receivedNotifications: Notification[];
 }
 interface BrokerUser {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   phoneNumber: string;
   email: string;
   altEmail: string;
@@ -41,8 +42,8 @@ interface BrokerUser {
 
 export interface UserBroker {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   bussinesName: string;
   enrollment: string;
   card: string;
@@ -50,8 +51,8 @@ export interface UserBroker {
 
 export interface PersonalUser {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   name: string;
   lastName: string;
   birthDate: string;
@@ -61,8 +62,8 @@ export interface PersonalUser {
 
 export interface Broker {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   bussinesName: string;
   enrollment: string;
   card: string;
@@ -75,16 +76,16 @@ export interface LegalUser {
 
 export interface Notification {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   title: string;
   message: string;
   sender: string;
   receiver: string;
   isRead: boolean;
   response?: NotificationResponse;
-  withOptions: boolean
-  additional: string
+  withOptions: boolean;
+  additional: string;
 }
 
 export interface NotificationwithOptions {
@@ -102,6 +103,11 @@ export interface Ids {
   clientId: string;
 }
 
+// export interface UpdateLastRecord {
+//   userId: string;
+//   date: Date;
+// }
+
 // export interface ClientInfo {
 //   accessToken?: string;
 //   user: User;
@@ -110,8 +116,8 @@ export interface Ids {
 
 // export interface User {
 //   id?: string;
-//   creater_at?: string;
-//   updated_at?: string;
+//   created_at?: Date;
+//   updated_at?: Date;
 //   name?: string;
 //   lastName?: string;
 //   birthDate?: string;
@@ -129,8 +135,8 @@ export interface Ids {
 // }
 // interface UserBroker {
 //   id: string;
-//   creater_at: string;
-//   updated_at: string;
+//   created_at: Date;
+//   updated_at: Date;
 //   bussinesName: string;
 //   enrollment: string;
 //   card: string;

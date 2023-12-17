@@ -1,45 +1,18 @@
-import {
-  emptyAllCrashVehiclesValues,
-  emptyAllThirdPartyInjuredValues,
-  emptyCrashVehicleValues,
-  emptyDamageElectronicValues,
-  emptyDamageVehiclesValues,
-  emptyElectronicValues,
-  emptyFireVehiclesValues,
-  emptyGncValues,
-  emptyIsTireValues,
-  emptyPhoneValues,
-  emptyTheftElectronicValues,
-  emptyTheftVehiclesValues,
-  emptyVehicleReportValues,
-  touchedAllCrashVehiclesValues,
-  touchedAllCrashVehiclesValuesTrue,
-  touchedAllThirdPartyInjuredValues,
-  touchedAllThirdPartyInjuredValuesTrue,
-  touchedCrashVehicleValues,
-  touchedCrashVehicleValuesTrue,
-  touchedDamageElectronicValues,
-  touchedDamageElectronicValuesTrue,
-  touchedDamageVehiclesValues,
-  touchedDamageVehiclesValuesTrue,
-  touchedElectronicValues,
-  touchedElectronicValuesTrue,
-  touchedFireVehiclesValues,
-  touchedFireVehiclesValuesTrue,
-  touchedGncValues,
-  touchedGncValuesTrue,
-  touchedIsTireValues,
-  touchedIsTireValuesTrue,
-  touchedPhoneValues,
-  touchedPhoneValuesTrue,
-  touchedTheftElectronicValues,
-  touchedTheftElectronicValuesTrue,
-  touchedTheftVehiclesValues,
-  touchedTheftVehiclesValuesTrue,
-  touchedVehicleReportValues,
-  touchedVehicleReportValuesTrue
-} from "@/utilities";
+
+import { emptyVehicleReportValues, touchedVehicleReportValues, touchedVehicleReportValuesTrue } from "@/utilities/vehicle-report";
 import { ClientCreateReportValues, TouchedClientCreateReportValues } from "../..";
+import { emptyElectronicValues, touchedElectronicValues, touchedElectronicValuesTrue } from "@/utilities/electronic";
+import { emptyGncValues, touchedGncValues, touchedGncValuesTrue } from "@/utilities/gnc";
+import { emptyPhoneValues, touchedPhoneValues, touchedPhoneValuesTrue } from "@/utilities/phone";
+import { emptyTheftVehiclesValues, touchedTheftVehiclesValues, touchedTheftVehiclesValuesTrue } from '@/utilities/theft-vehicle';
+import { emptyTheftElectronicValues, touchedTheftElectronicValues, touchedTheftElectronicValuesTrue } from "@/utilities/theft-electronic";
+import { emptyDamageVehiclesValues, touchedDamageVehiclesValues, touchedDamageVehiclesValuesTrue } from "@/utilities/damage-vehicle";
+import { emptyDamageElectronicValues, touchedDamageElectronicValues, touchedDamageElectronicValuesTrue } from "@/utilities/damage-electronic";
+import { emptyIsTireValues, touchedIsTireValues, touchedIsTireValuesTrue } from "@/utilities/is-tire";
+import { emptyFireVehiclesValues, touchedFireVehiclesValues, touchedFireVehiclesValuesTrue } from "@/utilities/fire-vehicle";
+import { emptyCrashVehicleValues, touchedCrashVehicleValues, touchedCrashVehicleValuesTrue } from "@/utilities/crash-vehicle";
+import { emptyAllThirdPartyInjuredValues, touchedAllThirdPartyInjuredValues, touchedAllThirdPartyInjuredValuesTrue } from "@/utilities/all-third-party-injured";
+import { emptyAllCrashVehiclesValues, touchedAllCrashVehiclesValues, touchedAllCrashVehiclesValuesTrue } from "@/utilities/all-crash-vehicles";
 
 export const emptyClientCreateReportValues: ClientCreateReportValues = {
   vehicleReport: emptyVehicleReportValues,

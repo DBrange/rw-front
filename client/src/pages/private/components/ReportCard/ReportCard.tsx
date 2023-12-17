@@ -1,13 +1,8 @@
+import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BsPhone } from "react-icons/bs";
-import { AiOutlineTablet } from "react-icons/ai";
-import { AiOutlineLaptop } from "react-icons/ai";
 import { LiaCarSideSolid } from "react-icons/lia";
-import { RiTruckLine } from "react-icons/ri";
-import { RiMotorbikeFill } from "react-icons/ri";
-import { PrivateRoutes } from "@/models/types/routes";
+import { RiMotorbikeFill, RiTruckLine } from "react-icons/ri";
 import { CardText, DivCard, IconCard } from "..";
-import { AppStore } from "@/redux";
-import { useSelector } from "react-redux";
 
 interface Props {
   type: string;

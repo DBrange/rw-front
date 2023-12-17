@@ -1,17 +1,20 @@
 import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
+import { baseUrl } from "@/pages";
 import { persistLocalStorage, clearLocalStorage } from "@/utilities";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const EmptyUserState: ClientInfo = {
   accessToken: undefined,
   user: {
     id: undefined,
-    creater_at: undefined,
+    created_at: undefined,
     updated_at: undefined,
     phoneNumber: undefined,
     email: undefined,
     altEmail: undefined,
     address: undefined,
+    lastRecord: undefined,
     role: undefined,
     accessLevel: undefined,
     authorization: undefined,
@@ -37,10 +40,10 @@ export const clientSlice = createSlice({
       persistLocalStorage<ClientInfo>(clientKey, action.payload);
       return { ...state, ...action.payload };
     },
-    updateClient: (state, action: PayloadAction<{brokerUser: string}>) => {
+    updateClient: (state, action: PayloadAction<{ brokerUser: string }>) => {
       const result = { ...state, ...action.payload };
-      console.log(result)
-      persistLocalStorage<ClientInfo>(clientKey, result);
+      console.log(result);
+      // persistLocalStorage<ClientInfo>(clientKey, result);
       return result;
     },
     resetClient: () => {
@@ -48,7 +51,28 @@ export const clientSlice = createSlice({
       return EmptyUserState;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(
+      updateLastRecordAsync.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        persistLocalStorage<ClientInfo>(clientKey, {
+          ...state,
+          lastRecord: action.payload,
+        });
+        return { ...state, user: { ...state.user, lastRecord: action.payload } };
+      }
+    );
+  },
 });
+
+export const updateLastRecordAsync = createAsyncThunk(
+  "notification/updateLastRecord",
+  async (userId?: string) => {
+    const date = new Date().toISOString();
+    await axios.post(`${baseUrl}/user/last-record/${userId}?date=${date}`);
+    return date;
+  }
+);
 export const { addClient, updateClient, resetClient } = clientSlice.actions;
 
 export default clientSlice.reducer;

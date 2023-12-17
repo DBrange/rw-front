@@ -1,7 +1,7 @@
 interface BrokerClientsPersonalUser {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   name: string;
   lastName: string;
   birthDate: string;
@@ -11,20 +11,21 @@ interface BrokerClientsPersonalUser {
 
 interface BrokerClientsLegalUser {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   companyName: string;
   cuit: string;
 }
 
 export interface AllBrokerClients {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   phoneNumber: string;
   email: string;
   altEmail: string;
   address: string;
+  lastRecord: string | null;
   role: string;
   accessLevel: number;
   authorization: string;
@@ -39,13 +40,12 @@ export interface ClientByEmail {
   legalUser: ClientByEmailLegalUser;
 }
 
-export interface ClientByEmailPersonalUser{
-    name: string;
-    lastName: string;
-    dni: string;
-  }
-export interface ClientByEmailLegalUser{
-  
+export interface ClientByEmailPersonalUser {
+  name: string;
+  lastName: string;
+  dni: string;
+}
+export interface ClientByEmailLegalUser {
   companyName: string;
   cuit: string;
 }

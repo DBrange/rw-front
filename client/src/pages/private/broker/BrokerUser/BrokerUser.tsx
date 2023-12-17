@@ -1,12 +1,12 @@
 import { BrokerUserProvider, BrokerUserContainer } from ".";
-import { SidebarBroker } from "../..";
+import { BrokerDashboardBox, SidebarBroker } from "../..";
 
 function BrokerUser() {
   return (
     <BrokerUserProvider>
       <BrokerUserContainer>
         <SidebarBroker />
-        {/* <InspectLogin sectionName="Inspecciones" /> */}
+        <BrokerDashboardBox />
       </BrokerUserContainer>
     </BrokerUserProvider>
   );

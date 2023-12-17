@@ -9,8 +9,10 @@ export interface ClientDetailInBroker
 
 export interface AllClientAssets {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
+  insured: boolean;
+  inspection: boolean;
   vehicle: Vehicle | null;
   electronic: Electronic | null;
 }
@@ -29,8 +31,8 @@ export interface Electronic {
 
 export interface AllClientProfileSinisters {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   insured: false;
   inspection: false;
   vehicle: Vehicle | null;
@@ -42,8 +44,8 @@ export interface AllClientProfileSinisters {
 }
 export interface AllClientSinisters {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   time: string;
   date: string;
   location: string;
@@ -52,8 +54,8 @@ export interface AllClientSinisters {
 
 export interface AssetDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   // user: UserDetail | null;
   vehicle: VehicleDetail | null;
   electronic: ElectronicDetail | null;
@@ -65,8 +67,8 @@ export interface AssetDetail {
 
 interface ClientDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   phoneNumber: string;
   email: string;
   altEmail: string;
@@ -80,8 +82,8 @@ interface ClientDetail {
 
 interface Sinister {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   time: string;
   date: string;
   location: string;
@@ -89,8 +91,8 @@ interface Sinister {
 
 interface VehicleDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   year: number;
   color: string;
   brand: string;
@@ -112,8 +114,8 @@ interface VehicleDetail {
 }
 interface GncDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   expireDate: string;
   oblea: string;
   plate: string;
@@ -121,8 +123,8 @@ interface GncDetail {
 
 export interface UserDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   phoneNumber: string;
   email: string;
   altEmail: string;
@@ -134,8 +136,8 @@ export interface UserDetail {
 
 export interface PersonalUserDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   name: string;
   lastName: string;
   birthDate: string;
@@ -145,16 +147,16 @@ export interface PersonalUserDetail {
 
 export interface LegalUserDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   companyName: string;
   cuit: string;
 }
 
 interface ElectronicDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   type: string;
   brand: string;
   model: string;
@@ -163,8 +165,8 @@ interface ElectronicDetail {
 
 interface SmartphonesDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   imei: string;
   phoneNumber: string;
   phoneService: string;
@@ -196,8 +198,8 @@ export interface AllClientVehicles {
 
 export interface SinisterDetail {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   time: string;
   date: string;
   location: string;
@@ -209,8 +211,8 @@ export interface SinisterDetail {
 
 interface SinisterType {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   theft?: Theft;
   fire?: Fire;
   crash?: Crash;
@@ -228,8 +230,8 @@ interface Damage {
 
 interface ThirdPartyVehicle {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   brand: string;
   model: string;
   year: number;
@@ -244,16 +246,16 @@ interface ThirdPartyVehicle {
 
 export interface Injuredd {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   amount: number;
   injuredsInfo: InjuredsInfo[];
 }
 
 interface InjuredsInfo {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   name: string;
   lastName: string;
   birthDate: string;
@@ -266,8 +268,8 @@ interface InjuredsInfo {
 
 export interface Crash {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   time: string;
   date: string;
   location: string;
@@ -282,8 +284,8 @@ export interface Crash {
 
 export interface Fire {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   time: string;
   date: string;
   location: string;
@@ -297,8 +299,8 @@ export interface Fire {
 
 interface Theft {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   time: string;
   date: string;
   location: string;
@@ -316,8 +318,8 @@ interface TheftTire {
 
 interface ThirdPartyDriver {
   id: string;
-  creater_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   name: string;
   lastName: string;
   dni: string;

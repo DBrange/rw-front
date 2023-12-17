@@ -1,23 +1,5 @@
-import { baseUrl } from "@/pages";
-import { loaderImageService } from "./sharing-information.service";
-import { Notification } from "@/models";
 
-export const getNotificationsUrl = (userId?: string) =>
-  baseUrl + `/user/notifications/${userId}`;
 
-  export const getNotifications = async (
-    url: string
-  ): Promise<Notification[] | []> => {
-    try {
-      return fetch(url).then((res) => res.json());
-
-      // if (!response.ok) {
-      //   throw new Error(`Request failed with status: ${response.status}`);
-      // }
-    } catch (err) {
-      throw err;
-    }
-  };
 // export const getNotifications = async (
 //   url: string
 // ): Promise<Notification[] | []> => {
