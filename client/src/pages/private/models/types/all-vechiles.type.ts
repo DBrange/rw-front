@@ -49,7 +49,18 @@ export interface AllClientSinisters {
   time: string;
   date: string;
   location: string;
+  sinisterType: SinisterTypeAllClientSinister;
   asset: AllClientAssets;
+}
+
+export interface SinisterTypeAllClientSinister {
+  id: string;
+  created_at: Date;
+  updated_at: Date;
+  theft: string | null;
+  fire: string | null;
+  crash: string | null;
+  damage: string | null;
 }
 
 export interface AssetDetail {

@@ -1,13 +1,15 @@
 import { createContext, useContext, useState } from "react";
 
-import {
-  AllClientSinisters,
-} from "@/pages";
+import { AllClientSinisters } from "@/pages";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
-import { AllBrokerUserSinisterUrl, IBrokerReportsContext, allBrokerSinister } from "..";
-import {emptyBrokerReportsContext} from './empty-brokerReports-context'
+import {
+  AllBrokerUserSinisterUrl,
+  IBrokerReportsContext,
+  allBrokerSinister,
+} from "..";
+import { emptyBrokerReportsContext } from "./empty-brokerReports-context";
 
 export const BrokerReportsContext = createContext<IBrokerReportsContext>(
   emptyBrokerReportsContext
@@ -24,6 +26,10 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
     "vehicle"
   );
 
+  const [typeToFilterReport, setTypeToFilterReport] = useState<
+    "theft" | "damage" | "crash" | "fire" | undefined
+  >();
+
   const filterData = <T extends AllClientSinisters>(
     data: T[] | undefined,
     searchField: string
@@ -36,9 +42,25 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
 
     const dataFilteredToElement: T[] = data?.filter((el) => {
       if (typeToFilter === "vehicle") {
-        return el.asset.vehicle;
+        if (typeToFilterReport === "theft" && el.sinisterType.theft) {
+          return el.asset.vehicle;
+        } else if (typeToFilterReport === "fire" && el.sinisterType.fire) {
+          return el.asset.vehicle;
+        } else if (typeToFilterReport === "crash" && el.sinisterType.crash) {
+          return el.asset.vehicle;
+        } else if (typeToFilterReport === "damage" && el.sinisterType.damage) {
+          return el.asset.vehicle;
+        } else if (!typeToFilterReport) {
+          return el.asset.vehicle;
+        }
       } else if (typeToFilter === "electronic") {
-        return el.asset.electronic;
+        if (typeToFilterReport === "theft" && el.sinisterType.theft) {
+          return el.asset.electronic;
+        } else if (typeToFilterReport === "damage" && el.sinisterType.damage) {
+          return el.asset.electronic;
+        } else if (!typeToFilterReport) {
+          return el.asset.electronic;
+        }
       }
     });
 
@@ -61,16 +83,15 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
   const user = useSelector((store: AppStore) => store.user);
 
   const brokerType = () => {
-      const { data: allBrokerAssetsUser } = useSWR(
-        AllBrokerUserSinisterUrl(user.user?.id),
-        allBrokerSinister
-      );
+    const { data: allBrokerAssetsUser } = useSWR(
+      AllBrokerUserSinisterUrl(user.user?.id),
+      allBrokerSinister
+    );
 
-      const searchedUserAsset: AllClientSinisters[] =
-        filterData<AllClientSinisters>(allBrokerAssetsUser!, searchField);
+    const searchedUserAsset: AllClientSinisters[] =
+      filterData<AllClientSinisters>(allBrokerAssetsUser!, searchField);
 
-      return searchedUserAsset;
-   
+    return searchedUserAsset;
   };
 
   const assets = [...brokerType()]
@@ -80,7 +101,7 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
   const values = {
     setSearchField,
     searchField,
-    setTypeToFilter,
+    setTypeToFilter,setTypeToFilterReport,
     assets,
     typeToFilter,
   };
