@@ -2,10 +2,10 @@ import { theme } from "@/styledComponents";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const DivCard = styled.div`
+export const DivCard = styled.div<{ $noHover?: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   height: 4rem;
   text-align: end;
   /* line-height: 4rem; */
@@ -15,16 +15,18 @@ export const DivCard = styled.div`
   transition: all 0.2s linear;
   position: relative;
 
-  &:hover {
+  ${({ $noHover }) => $noHover ? `` : `  &:hover {
     transform: translateY(-1px);
     box-shadow: 0px 5px 10px 0 ${`${theme.sColor}66`};
     cursor: pointer;
-  }
+  }`}
+
 `;
 
 export const IconCard = styled.i`
   display: flex;
   align-items: center;
+  flex: 1;
 `;
 export const CardContent = styled(Link)`
   /* display:flex;
@@ -36,16 +38,19 @@ export const CardContent = styled(Link)`
 export const ContainerCardTextContainer = styled.div`
   display: flex;
   gap: 1rem;
+  flex: 1;
   /* flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative; */
 `;
 export const CardTextContainer = styled.div`
+width: 100%;
 display:flex;
 flex-direction: column;
-justify-content: center;
+justify-content: space-evenly;
 align-items: start;
+/* flex-wrap: wrap; */
 gap: 2px;
 /* position: relative; */
 `;

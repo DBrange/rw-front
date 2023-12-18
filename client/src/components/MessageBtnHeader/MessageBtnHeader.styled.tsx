@@ -70,7 +70,7 @@ export const BtnMessageBtnHeader = styled.button<{
 export const SpanNewNotificationsNumber = styled.span`
   height: 20px;
   width: 20px;
-  line-height: 16px;
+  line-height: 18px;
   text-align: center;
   position: absolute;
   background-color: ${theme.sColor};

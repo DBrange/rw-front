@@ -5,7 +5,6 @@ import {
   H3NotificationBox,
   SectionNotificationsBox,
 } from "./NotificationsBox.styled";
-import { useState } from "react";
 
 interface Props {
   notifications: Notification[];

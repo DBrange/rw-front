@@ -1,15 +1,18 @@
-import { modalSendRequest } from "@/services/sharing-information.service";
-import {
-  BtnModal,
-  DivModalSent,
-  H4Modal,
-  SectionModalBg,
-  TitleModal
-} from "..";
 import { useBrokerFindClientsContext } from "@/pages";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux";
-import { addNewNotification } from "@/redux/slices/notificationSlice";
+import { modalSendRequest } from "@/services/sharing-information.service";
+import { useDispatch } from "react-redux";
+import { SectionModalBg } from "..";
+import {
+  BtnModalSendRequest,
+  ConstainerInfoModalSendRequest,
+  ContainerMiniModal,
+  DivModalSendRequestSent,
+  InfoModalSendRequest,
+  LabelInfoModalSendRequest,
+  TitleModalSendRequest,
+} from "./ModalSendRequest.styled";
+import { useState } from "react";
 
 interface Props {
   modalActive: boolean;
@@ -31,29 +34,74 @@ function ModalSendRequest({
   lastname,
   companyName,
 }: Props) {
-  const dispatch = useDispatch<AppDispatch>()
-  const sent = () => {
-    
+  const [miniModal, setMiniModal] = useState<number>(0);
 
-    activateTrigger()
-    modalSendRequest.setSubject(false)
+  const sent = () => {
+    activateTrigger();
+    modalSendRequest.setSubject(false);
+    setMiniModal(2);
   };
   const close = () => modalSendRequest.setSubject(false);
 
-  const {activateTrigger} = useBrokerFindClientsContext()
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+    e.stopPropagation();
+
+  const { activateTrigger } = useBrokerFindClientsContext();
   return (
     <SectionModalBg $modalActive={modalActive} onClick={close}>
-      <DivModalSent $modalActive={modalActive}>
+      <DivModalSendRequestSent
+        $modalActive={modalActive}
+        onClick={handleModalClick}
+      >
         {/* <ImgModal src={person2} alt="" /> */}
-        <TitleModal>Cliente</TitleModal>
-        {email && <p>email: {email}</p>}
-        {dni && <p>dni: {dni}</p>}
-        {cuit && <p>cuit: {cuit}</p>}
-        {name && <p>name: {name}</p>}
-        {lastname && <p>lastname: {lastname}</p>}
-        {companyName && <p>companyName: {companyName}</p>}
-        <BtnModal onClick={sent}>Enviar solicitud</BtnModal>
-      </DivModalSent>
+        <TitleModalSendRequest>Cliente</TitleModalSendRequest>
+        <ConstainerInfoModalSendRequest>
+          {email && (
+            <div>
+              <LabelInfoModalSendRequest>Email:</LabelInfoModalSendRequest>{" "}
+              <InfoModalSendRequest>{email}</InfoModalSendRequest>
+            </div>
+          )}
+          {dni && (
+            <div>
+              <LabelInfoModalSendRequest>DNI:</LabelInfoModalSendRequest>{" "}
+              <InfoModalSendRequest>{dni}</InfoModalSendRequest>
+            </div>
+          )}
+          {cuit && (
+            <div>
+              <LabelInfoModalSendRequest>CUIT:</LabelInfoModalSendRequest>{" "}
+              <InfoModalSendRequest>{cuit}</InfoModalSendRequest>
+            </div>
+          )}
+          {name && (
+            <div>
+              <LabelInfoModalSendRequest>Nombre:</LabelInfoModalSendRequest>{" "}
+              <InfoModalSendRequest>{name}</InfoModalSendRequest>
+            </div>
+          )}
+          {lastname && (
+            <div>
+              <LabelInfoModalSendRequest>Apellido:</LabelInfoModalSendRequest>{" "}
+              <InfoModalSendRequest>{lastname}</InfoModalSendRequest>
+            </div>
+          )}
+          {companyName && (
+            <div>
+              <LabelInfoModalSendRequest>Compania:</LabelInfoModalSendRequest>{" "}
+              <InfoModalSendRequest>{companyName}</InfoModalSendRequest>
+            </div>
+          )}
+          {/* {dni && <p>dni: {dni}</p>}
+          {cuit && <p>cuit: {cuit}</p>}
+          {name && <p>name: {name}</p>}
+          {lastname && <p>lastname: {lastname}</p>}
+          {companyName && <p>companyName: {companyName}</p>} */}
+        </ConstainerInfoModalSendRequest>
+        <BtnModalSendRequest onClick={sent}>
+          Enviar solicitud
+        </BtnModalSendRequest>
+      </DivModalSendRequestSent>
     </SectionModalBg>
   );
 }

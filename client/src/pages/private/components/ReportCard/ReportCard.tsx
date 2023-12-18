@@ -34,14 +34,29 @@ function ReportCard({ type, keyName, id, dashboard, newCard,date }: Props) {
           {type === "MOTOCICLETA" && <RiMotorbikeFill size={30} />}
         </IconCard>
         <ContainerCardTextContainer>
-          <CardTextContainer>
-            <CardTextLabel>PATENTE:</CardTextLabel>
-            <CardText>{keyName}</CardText>
-          </CardTextContainer>
-          <CardTextContainer>
-            <CardTextLabel>FECHA:</CardTextLabel>
-            <CardText>{onlyDate(date)}</CardText>
-          </CardTextContainer>
+          {type === "CELULAR" || type === "TABLET" || type === "NOTEBOOK" ? (
+            <>
+              <CardTextContainer>
+                <CardTextLabel>MARCA:</CardTextLabel>
+                <CardText>{keyName}</CardText>
+              </CardTextContainer>
+              <CardTextContainer>
+                <CardTextLabel>FECHA:</CardTextLabel>
+                <CardText>{onlyDate(date)}</CardText>
+              </CardTextContainer>
+            </>
+          ) : (
+            <>
+              <CardTextContainer>
+                <CardTextLabel>PATENTE:</CardTextLabel>
+                <CardText>{keyName}</CardText>
+              </CardTextContainer>
+              <CardTextContainer>
+                <CardTextLabel>FECHA:</CardTextLabel>
+                <CardText>{onlyDate(date)}</CardText>
+              </CardTextContainer>
+            </>
+          )}
         </ContainerCardTextContainer>
         <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard>
       </DivCard>

@@ -79,23 +79,6 @@ function ClientCard({
         <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard>
       </DivCard>
     </CardContent>
-    // <CardText
-    //   to={
-    //     dashboard
-    //       ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}/${id}`
-    //       : `${id}`
-    //   }
-    // >
-    //   <DivCard>
-    //     <IconCard>
-    //       {companyName ? <PiBuildingsBold /> : <IoPersonSharp />}
-    //     </IconCard>
-    //     {companyName
-    //       ? `${companyName} ${keyName}`
-    //       : `${name} ${lastname} ${keyName}`}
-    //     <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard>
-    //   </DivCard>
-    // </CardText>
   );
 }
 export default ClientCard;
