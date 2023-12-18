@@ -65,8 +65,8 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
 
   const newData = (date: Date) => {
     if (user?.user?.lastRecord) {
-      const lastConnection = new Date(user.user?.lastRecord).getTime();
-      const objectDate = new Date(date).getTime();
+      const lastConnection = new Date(user.user?.lastRecord).getDay()-1;
+      const objectDate = new Date(date).getDay();
 
       const boolean = objectDate > lastConnection;
       return boolean;
@@ -74,10 +74,10 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
   };
 
   useEffect(() => {
-    // setTimeout(() => {
+    setTimeout(() => {
 
     dispatchAsyc(updateLastRecordAsync(user.user?.id));
-    // }, 2000);
+    }, 2000);
   }, []);
 
   useEffect(() => {

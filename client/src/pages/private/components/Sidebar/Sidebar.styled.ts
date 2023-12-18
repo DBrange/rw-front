@@ -65,7 +65,7 @@ export const LiSidebarItem = styled.li`
   white-space: nowrap;
   gap: 0.8rem;
   margin: 0 1rem;
-  padding: 1rem 0.7rem;
+  padding: .7rem 0.7rem;
   border-radius: 0.4rem;
   cursor: pointer;
   color: ${theme.textColor};

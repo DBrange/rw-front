@@ -2,18 +2,25 @@ import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BsPhone } from "react-icons/bs";
 import { LiaCarSideSolid } from "react-icons/lia";
 import { RiMotorbikeFill, RiTruckLine } from "react-icons/ri";
-import { CardText, DivCard, IconCard } from "..";
+import { CardText, DivCard, IconCard, SpanInspectionCard } from "..";
+import { PrivateRoutes } from "@/models/types/routes";
 
 interface Props {
   type: string;
   keyName: string;
   id: string;
+  dashboard?: boolean
+  newCard?:boolean
 }
 
-function ReportCard({ type, keyName, id }: Props) {
+function ReportCard({ type, keyName, id, dashboard, newCard }: Props) {
   return (
     <CardText
-      to={`${id}`}
+      to={
+        dashboard
+          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.SINISTER_DETAIL}/${id}`
+          : `${id}`
+      }
     >
       <DivCard>
         <IconCard>
@@ -25,6 +32,7 @@ function ReportCard({ type, keyName, id }: Props) {
           {type === "MOTOCICLETA" && <RiMotorbikeFill size={30} />}
         </IconCard>
         {`${type} ${keyName}`}
+        <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard>
       </DivCard>
     </CardText>
   );

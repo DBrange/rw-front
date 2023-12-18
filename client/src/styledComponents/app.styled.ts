@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import theme from "./theme";
 
 export const Body = styled.section`
-  min-height: 100vh;
+  /* min-height: 100vh; */
   height: 100%;
   color: ${theme.textColor};
   background: ${theme.pColor};

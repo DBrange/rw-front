@@ -56,7 +56,12 @@ function Private() {
 
       <Route
         path="/"
-        element={<Navigate replace to={`${PrivateRoutes.DASHBOARD}`} />}
+        element={
+          <Navigate
+            replace
+            to={`${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`}
+          />
+        }
       />
       <Route
         path={`${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`}

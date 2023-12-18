@@ -106,22 +106,24 @@ function ClientProfile({ data }: Props) {
       <h2>Siniestros</h2>
       {data?.sinisters &&
         data?.sinisters?.map((el) => {
-          if (el?.vehicle) {
+          if (el?.asset.vehicle) {
             return (
               <ReportCard
                 key={el.id}
-                type={el.vehicle.type}
-                keyName={el.vehicle.plate}
+                type={el.asset.vehicle.type}
+                keyName={el.asset.vehicle.plate}
                 id={el.id}
-              />
-            );
-          } else if (el?.electronic) {
-            return (
-              <ReportCard
-                key={el.id}
-                type={el.electronic.type}
-                keyName={el.electronic.brand}
-                id={el.id}
+                dashboard={true}
+                />
+                );
+              } else if (el?.asset.electronic) {
+                return (
+                  <ReportCard
+                  key={el.id}
+                  type={el.asset.electronic.type}
+                  keyName={el.asset.electronic.brand}
+                  id={el.id}
+                  dashboard={true}
               />
             );
           } else {

@@ -2,6 +2,8 @@ import { ClientCard, InspectionCard, ReportCard } from "@/pages";
 import { useBrokerUserContext } from "../..";
 import {
   BtnBrokerDashboardBox,
+  BtnLinkBrokerDashboardBox,
+  DivBtnsBrokerDashboardBox,
   DivContentBrokerDashboardBox,
   DivContentTitleBrokerDashboardBox,
   H2BrokerDashboardBox,
@@ -13,6 +15,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from "@/models/types/routes";
 import { date } from "@/utilities/date.utility";
+import { BsShieldCheck } from "react-icons/bs";
+import { TbReportAnalytics } from "react-icons/tb";
 
 function BrokerDashboardBox() {
   const {
@@ -22,8 +26,6 @@ function BrokerDashboardBox() {
     changeBtnActive,
     setButtonActive,
   } = useBrokerUserContext();
-
-
 
   const HTMLAssetData = () => (
     <div>
@@ -51,24 +53,26 @@ function BrokerDashboardBox() {
               if (el.vehicle) {
                 return (
                   <>
-                    {newData(el.created_at) && <h5>nuevoooo</h5>}
                     <InspectionCard
                       key={el.id}
                       type={el.vehicle.type}
                       keyName={el.vehicle.plate}
                       id={el.id}
+                      dashboard={true}
+                      newCard={newData(el.created_at)}
                     />
                   </>
                 );
               } else if (el.electronic) {
                 return (
                   <>
-                    {newData(el.created_at) && <h5>nuevoooo</h5>}
                     <InspectionCard
                       key={el.id}
                       type={el.electronic.type}
                       keyName={el.electronic.brand}
                       id={el.id}
+                      dashboard={true}
+                      newCard={newData(el.created_at)}
                     />
                   </>
                 );
@@ -103,27 +107,29 @@ function BrokerDashboardBox() {
           [...dataToDashboard?.sinistersLastWeek]
             .sort((a, b) => date(b.created_at) - date(a.created_at))
             .map((el) => {
-              if (el.vehicle) {
+              if (el.asset?.vehicle) {
                 return (
                   <>
-                    {newData(el.created_at) && <h5>nuevoooo</h5>}
                     <ReportCard
                       key={el.id}
-                      type={el.vehicle.type}
-                      keyName={el.vehicle.plate}
+                      type={el.asset.vehicle.type}
+                      keyName={el.asset.vehicle.plate}
                       id={el.id}
+                      dashboard={true}
+                      newCard={newData(el.created_at)}
                     />
                   </>
                 );
-              } else if (el.electronic) {
+              } else if (el.asset?.electronic) {
                 return (
                   <>
-                    {newData(el.created_at) && <h5>nuevoooo</h5>}
                     <ReportCard
                       key={el.id}
-                      type={el.electronic.type}
-                      keyName={el.electronic.brand}
+                      type={el.asset.electronic.type}
+                      keyName={el.asset.electronic.brand}
                       id={el.id}
+                      dashboard={true}
+                      newCard={newData(el.created_at)}
                     />
                   </>
                 );
@@ -161,25 +167,27 @@ function BrokerDashboardBox() {
               if (el.personalUser?.dni) {
                 return (
                   <>
-                    {newData(el.created_at) && <h5>nuevoooo</h5>}
                     <ClientCard
                       key={el.id}
                       name={el.personalUser?.name}
                       lastname={el.personalUser?.lastName}
                       keyName={el.personalUser?.dni}
                       id={el.id}
+                      dashboard={true}
+                      newCard={newData(el.created_at)}
                     />
                   </>
                 );
               } else if (el.legalUser?.cuit) {
                 return (
                   <>
-                    {newData(el.created_at) && <h5>nuevoooo</h5>}
                     <ClientCard
                       key={el.id}
                       companyName={el.legalUser?.companyName}
                       keyName={el.legalUser?.cuit}
                       id={el.id}
+                      dashboard={true}
+                      newCard={newData(el.created_at)}
                     />
                   </>
                 );
@@ -194,6 +202,20 @@ function BrokerDashboardBox() {
   const HTLMData = () => {
     return (
       <>
+        <DivBtnsBrokerDashboardBox>
+          <BtnLinkBrokerDashboardBox
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_INSPECTION}`}
+          >
+            <BsShieldCheck size={30} />
+            <h4>Inspeccionar</h4>
+          </BtnLinkBrokerDashboardBox>
+          <BtnLinkBrokerDashboardBox
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER}`}
+          >
+            <TbReportAnalytics size={30} />
+            <h4>Denunciar</h4>
+          </BtnLinkBrokerDashboardBox>
+        </DivBtnsBrokerDashboardBox>
         <SectionBrokerDashboardBox>
           {HTMLClientData()}
           {HTMLAssetData()}

@@ -24,8 +24,8 @@ export const Container = styled.section<{ $broad?: boolean }>`
 export const ContainerLogin = styled.section<{ $short?: boolean }>`
   max-width: ${({ $short }) => $short ? '800px' : '1000px'};
   width: 90%;
-
   margin: auto;
+
 `;
 
 export const SectionFormContainer = styled.section`

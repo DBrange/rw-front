@@ -1,7 +1,7 @@
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import { ClientUserProvider } from ".";
-import { Sidebar, SidebarBroker } from "../..";
+import { ClientDashboardBox, Sidebar, SidebarBroker } from "../..";
 import { ClientUserContainer } from "./components";
 
 const ClientUser = () => {
@@ -12,7 +12,7 @@ const ClientUser = () => {
     <ClientUserProvider>
       <ClientUserContainer>
         {userBroker ? <SidebarBroker /> : <Sidebar />}
-        {/* <InspectLogin sectionName="Inspecciones" /> */}
+        <ClientDashboardBox />
       </ClientUserContainer>
     </ClientUserProvider>
   );

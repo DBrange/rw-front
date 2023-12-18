@@ -1,10 +1,9 @@
 import { FUEL, VEHICLE_TYPE } from "@/models";
 import { User } from "@/models/interfaces/userInfo/userInfo.interface";
 
-export interface ClientDetailInBroker
-  extends Omit<User, "broker" | "userBroker"> {
+export interface ClientDetailInBroker extends Omit<User, "broker" | "userBroker"> {
   assets: AllClientAssets[];
-  sinisters: AllClientProfileSinisters[];
+  sinisters: AllClientSinisters[];
 }
 
 export interface AllClientAssets {

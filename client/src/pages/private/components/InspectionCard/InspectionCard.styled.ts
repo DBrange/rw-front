@@ -13,6 +13,7 @@ export const DivCard = styled.div`
   border: 2px solid ${theme.sColor};
   border-radius: 0.8rem;
   transition: all 0.2s linear;
+  position: relative;
 
   &:hover {
     transform: translateY(-1px);
@@ -26,10 +27,22 @@ export const IconCard = styled.i`
   align-items: center;
 `;
 export const CardText = styled(Link)`
-text-decoration: none;
-color: ${theme.textColor};
+  text-decoration: none;
+  color: ${theme.textColor};
 `;
 export const CardTextNoLink = styled.div`
-text-decoration: none;
-color: ${theme.textColor};
+  text-decoration: none;
+  color: ${theme.textColor};
+`;
+
+export const SpanInspectionCard = styled.span`
+  height: 100%;
+  font-size: 0.5rem;
+  position: absolute;
+  top: -2px;
+  left: -42px;
+  color: ${theme.sColor};
+  writing-mode: vertical-rl; /* Establece la escritura vertical de derecha a izquierda */
+  text-orientation: upright; /* Mantiene la orientación normal de las letras */
+  /* letter-spacing: 0.001em; */
 `;
