@@ -28,7 +28,6 @@ export const BrokerClientsProvider = ({ children }: ChildrenType) => {
     data: T[] | undefined,
     searchField: string
   ): T[] => {
-    console.log(data);
 
     if (!data) return [];
 

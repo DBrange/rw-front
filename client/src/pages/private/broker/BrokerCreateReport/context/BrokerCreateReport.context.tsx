@@ -25,7 +25,6 @@ export const BrokerCreateReportProvider = ({ children }: ChildrenType) => {
     data: T[] | undefined,
     searchField: string
   ): T[] => {
-    console.log(data);
 
     if (!data) return [];
 

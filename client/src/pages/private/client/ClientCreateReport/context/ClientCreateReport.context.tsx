@@ -1264,7 +1264,6 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     );
   }, [page]);
 
-  console.log(inputValues);
   const submitValues = (e: SubmitEventType) => {
     e.preventDefault();
     setErrorsInputValues(

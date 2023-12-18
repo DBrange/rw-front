@@ -28,7 +28,6 @@ const BrokerCreateInspectionContext =
       data: T[] | undefined,
       searchField: string
     ): T[] => {
-      console.log(data);
 
       if (!data) return [];
 

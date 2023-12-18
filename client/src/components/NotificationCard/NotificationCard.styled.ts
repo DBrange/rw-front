@@ -34,6 +34,11 @@ export const BtnNotification = styled.button<{ $yes?: boolean }>`
   cursor: pointer;
 `;
 
+export const SpanNewNotificationCard = styled.span`
+  color: ${theme.sColor};
+  font-size: 10px;
+`
+
 
 
 

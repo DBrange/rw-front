@@ -14,7 +14,7 @@ function BrokerFindClientsContainer({
   useEffect(() => {
     modalSendRequest.getSubject.subscribe((bol) => setModalSendActive(bol));
   }, []);
-  console.log(modalSendActive);
+
   return (
     <>
       <ModalSendRequest

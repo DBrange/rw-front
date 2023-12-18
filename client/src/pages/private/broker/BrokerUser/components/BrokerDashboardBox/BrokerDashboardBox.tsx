@@ -12,34 +12,18 @@ import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from "@/models/types/routes";
+import { date } from "@/utilities/date.utility";
 
 function BrokerDashboardBox() {
-  const { dataToDashboard, newData } = useBrokerUserContext();
-  const [buttonActive, setButtonActive] = useState({
-    inspection: false,
-    sinister: false,
-    client: false,
-  });
+  const {
+    dataToDashboard,
+    newData,
+    buttonActive,
+    changeBtnActive,
+    setButtonActive,
+  } = useBrokerUserContext();
 
-  const changeBtnActive = (value: string) => {
-    if (value === "inspection") {
-      setButtonActive({ inspection: true, sinister: false, client: false });
-    } else if (value === "sinister") {
-      setButtonActive({ inspection: false, sinister: true, client: false });
-    } else if (value === "client") {
-      setButtonActive({ inspection: false, sinister: false, client: true });
-    }
 
-    if (value === "inspection" && buttonActive.inspection) {
-      setButtonActive({ inspection: false, sinister: false, client: false });
-    } else if (value === "sinister" && buttonActive.sinister) {
-      setButtonActive({ inspection: false, sinister: false, client: false });
-    } else if (value === "client" && buttonActive.client) {
-      setButtonActive({ inspection: false, sinister: false, client: false });
-    }
-  };
-
-  const date = (date: Date) => new Date(date).getTime();
 
   const HTMLAssetData = () => (
     <div>

@@ -50,8 +50,10 @@ export const ClientInspectionsProvider = ({ children }: ChildrenType) => {
           regex.test(el?.vehicle?.plate as string)
         );
       } else if (typeToFilter === "electronic") {
-        return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.electronic?.model as string)
+        return dataFilteredToElement?.filter(
+          (el) =>
+            regex.test(el?.electronic?.model as string) ||
+            regex.test(el?.electronic?.smartphone.imei as string)
         );
       }
     } else {

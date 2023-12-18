@@ -9,6 +9,7 @@ import {
 import { useBrokerReportsContext } from "../..";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
+import { date } from "@/utilities/date.utility";
 
 function BrokerReportsBox() {
   const {
@@ -105,29 +106,31 @@ function BrokerReportsBox() {
         </>
       )}
 
-      {assets?.map((el: AllClientSinisters) => {
-        if (el.asset.vehicle) {
-          return (
-            <ReportCard
-              key={el.id}
-              type={el.asset.vehicle.type}
-              keyName={el.asset.vehicle.plate}
-              id={el.id}
-            />
-          );
-        } else if (el.asset.electronic) {
-          return (
-            <ReportCard
-              key={el.id}
-              type={el.asset.electronic.type}
-              keyName={el.asset.electronic.brand}
-              id={el.id}
-            />
-          );
-        } else {
-          return [];
-        }
-      })}
+      {[...assets]
+        ?.sort((a, b) => date(b.created_at) - date(a.created_at))
+        .map((el: AllClientSinisters) => {
+          if (el.asset.vehicle) {
+            return (
+              <ReportCard
+                key={el.id}
+                type={el.asset.vehicle.type}
+                keyName={el.asset.vehicle.plate}
+                id={el.id}
+              />
+            );
+          } else if (el.asset.electronic) {
+            return (
+              <ReportCard
+                key={el.id}
+                type={el.asset.electronic.type}
+                keyName={el.asset.electronic.brand}
+                id={el.id}
+              />
+            );
+          } else {
+            return [];
+          }
+        })}
     </>
   );
 
@@ -139,7 +142,7 @@ function BrokerReportsBox() {
         setSearchField={setSearchField}
         searchField={searchField}
         placeholder={
-          typeToFilter === "vehicle" ? "Buscar patente" : "Buscar modelo"
+          typeToFilter === "vehicle" ? "Buscar patente" : "Buscar modelo o IMEI"
         }
         name="BrokerReports"
         cards={cards}

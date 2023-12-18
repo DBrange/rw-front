@@ -465,8 +465,7 @@ export const ClientInspectedCreateReportProvider = ({
 
     return errors;
   };
-// console.log(partialErrors(),'aca')
-// console.log(page,'aca')
+
   const typeOfToucheds = (): TouchedForms => {
     let toucheds: TouchedForms;
     toucheds =

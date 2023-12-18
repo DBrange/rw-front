@@ -25,7 +25,6 @@ export const BrokerInspectionsProvider = ({ children }: ChildrenType) => {
     data: T[] | undefined,
     searchField: string
   ): T[] => {
-    console.log(data);
 
     if (!data) return [];
 
@@ -45,8 +44,10 @@ export const BrokerInspectionsProvider = ({ children }: ChildrenType) => {
           regex.test(el?.vehicle?.plate as string)
         );
       } else if (typeToFilter === "electronic") {
-        return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.electronic?.model as string)
+        return dataFilteredToElement?.filter(
+          (el) =>
+            regex.test(el?.electronic?.model as string) ||
+            regex.test(el?.electronic?.smartphone.imei as string)
         );
       }
     } else {

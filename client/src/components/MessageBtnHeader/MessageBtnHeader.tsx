@@ -7,6 +7,7 @@ import {
   DivDivMessageBtnHeader,
   DivMessageBtnHeader,
   SectionMessageBtnHeader,
+  SpanNewNotificationsNumber,
 } from "./MessageBtnHeader.styled";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
@@ -25,9 +26,8 @@ function MessageBtnHeader() {
 
   const notifications = useSelector((store: AppStore) => store.notification);
 
-  const s = notifications.map((el) => el.isRead).some((el) => !el);
+  const newNotification = notifications.filter((el) => !el.isRead).length;
 
-  
   return (
     <>
       {!(
@@ -38,7 +38,6 @@ function MessageBtnHeader() {
         path === "/public/registrarse"
       ) && (
         <SectionMessageBtnHeader>
-          {s && <p>nuevoo</p>}
           <DivDivMessageBtnHeader onClick={refreshNotifications}>
             <DivMessageBtnHeader
               onClick={() => setModal((mod) => !mod)}
@@ -64,6 +63,11 @@ function MessageBtnHeader() {
                   )
                 }
               >
+                {newNotification !== 0 && (
+                  <SpanNewNotificationsNumber>
+                    {newNotification}
+                  </SpanNewNotificationsNumber>
+                )}
                 <AiOutlineMessage size={25} />
               </BtnMessageBtnHeader>
             </DivMessageBtnHeader>

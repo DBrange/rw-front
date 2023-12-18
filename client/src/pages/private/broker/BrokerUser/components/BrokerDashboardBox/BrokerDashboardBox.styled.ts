@@ -2,6 +2,7 @@ import { theme } from "@/styledComponents";
 import styled from "styled-components";
 
 export const SectionBrokerDashboardBox = styled.section`
+z-index: 28;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -20,12 +21,14 @@ export const DivContentBrokerDashboardBox = styled.div`
 display: flex;
 justify-content: space-between;
 padding: 0 10px 20px 0px;
+z-index: 20;
 `
 export const H2BrokerDashboardBox = styled.h2`
   color: ${theme.sColor};
 `;
 
 export const BtnBrokerDashboardBox = styled.button`
+  z-index: 0;
   background-color: ${theme.sColor};
   line-height: .85rem;
   border-radius: 0.25rem;
@@ -43,7 +46,7 @@ width: 200px;
 line-height: 40px;
 background-color: ${theme.pColor};
 color: ${theme.textColor};
-z-index: 200;
+z-index: 20;
 border-radius: 0.25rem;
 border: 1px solid ${theme.sColor};
 position: absolute;

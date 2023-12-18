@@ -27,10 +27,32 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
   const dispatch = useDispatch();
   const dispatchAsyc = useDispatch<AppDispatch>();
   const [dataToDashboard, setDataToDashboard] = useState<DashboardInfo>();
+  const [buttonActive, setButtonActive] = useState({
+    inspection: false,
+    sinister: false,
+    client: false,
+  });
 
   const user = useSelector((store: AppStore) => store.user);
   const notifications = useSelector((store: AppStore) => store.notification);
 
+  const changeBtnActive = (value: string) => {
+    if (value === "inspection") {
+      setButtonActive({ inspection: true, sinister: false, client: false });
+    } else if (value === "sinister") {
+      setButtonActive({ inspection: false, sinister: true, client: false });
+    } else if (value === "client") {
+      setButtonActive({ inspection: false, sinister: false, client: true });
+    }
+
+    if (value === "inspection" && buttonActive.inspection) {
+      setButtonActive({ inspection: false, sinister: false, client: false });
+    } else if (value === "sinister" && buttonActive.sinister) {
+      setButtonActive({ inspection: false, sinister: false, client: false });
+    } else if (value === "client" && buttonActive.client) {
+      setButtonActive({ inspection: false, sinister: false, client: false });
+    }
+  };
   const { data: notificationsData } = useSWR(
     getNotificationsUrl(user.user?.id),
     getNotifications
@@ -45,22 +67,18 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
     if (user?.user?.lastRecord) {
       const lastConnection = new Date(user.user?.lastRecord).getTime();
       const objectDate = new Date(date).getTime();
-      
+
       const boolean = objectDate > lastConnection;
       return boolean;
     }
   };
 
-  const lastConnection = new Date(user.user?.lastRecord as Date).getTime();
-  const objectDate = new Date().getTime();
-  
   useEffect(() => {
     // setTimeout(() => {
-      
-      dispatchAsyc(updateLastRecordAsync(user.user?.id));
-    // }, 2000);
 
-  },[])
+    dispatchAsyc(updateLastRecordAsync(user.user?.id));
+    // }, 2000);
+  }, []);
 
   useEffect(() => {
     setDataToDashboard(dashboardData);
@@ -74,7 +92,13 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
   //   dispatch(addNotification(user.user?.receivedNotifications as Notification[]));
   // }, [user]);
 
-  const values = { dataToDashboard, newData };
+  const values = {
+    dataToDashboard,
+    newData,
+    buttonActive,
+    setButtonActive,
+    changeBtnActive,
+  };
 
   return (
     <BrokerUserContext.Provider value={values}>

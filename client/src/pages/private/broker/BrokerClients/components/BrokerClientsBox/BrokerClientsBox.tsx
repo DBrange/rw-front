@@ -2,6 +2,7 @@ import { ClientCard, InspectLogin, Sidebar, SidebarBroker } from "@/pages";
 import { useBrokerClientsContext } from "../..";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
+import { date } from "@/utilities/date.utility";
 
 function BrokerClientsBox() {
   const {
@@ -29,30 +30,32 @@ function BrokerClientsBox() {
       >
         juridica
       </button>
-      {clients?.map((client, i) => {
-        if (client.personalUser?.dni) {
-          return (
-            <ClientCard
-              key={i}
-              name={client.personalUser?.name}
-              lastname={client.personalUser?.lastName}
-              keyName={client.personalUser?.dni}
-              id={client?.id}
-            />
-          );
-        } else if (client.legalUser?.cuit) {
-          return (
-            <ClientCard
-              key={i}
-              companyName={client.legalUser?.companyName}
-              keyName={client.legalUser?.cuit}
-              id={client?.id}
-            />
-          );
-        } else {
-          return [];
-        }
-      })}
+      {[...clients]
+        ?.sort((a, b) => date(b.created_at) - date(a.created_at))
+        .map((client, i) => {
+          if (client.personalUser?.dni) {
+            return (
+              <ClientCard
+                key={i}
+                name={client.personalUser?.name}
+                lastname={client.personalUser?.lastName}
+                keyName={client.personalUser?.dni}
+                id={client?.id}
+              />
+            );
+          } else if (client.legalUser?.cuit) {
+            return (
+              <ClientCard
+                key={i}
+                companyName={client.legalUser?.companyName}
+                keyName={client.legalUser?.cuit}
+                id={client?.id}
+              />
+            );
+          } else {
+            return [];
+          }
+        })}
     </>
   );
 

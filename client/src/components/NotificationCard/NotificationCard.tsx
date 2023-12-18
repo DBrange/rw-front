@@ -3,6 +3,7 @@ import {
   BtnNotification,
   DivNotification,
   PNotification,
+  SpanNewNotificationCard,
   SpanNotification,
 } from "./NotificationCard.styled";
 import {
@@ -58,11 +59,10 @@ function NotificationCard({ notification }: Props) {
 
   return (
     <DivNotification>
-      <h4>{notification.title}</h4>
-      <PNotification>
-        {notification.message}
-        {notification.isRead ? " visto" : "no visto"}
-      </PNotification>
+      <h4>
+        {notification.title} {!notification.isRead ? <SpanNewNotificationCard>Nuevo</SpanNewNotificationCard> : ""}
+      </h4>
+      <PNotification>{notification.message}</PNotification>
       <SpanNotification>
         {notification.withOptions && (
           <>

@@ -1,12 +1,14 @@
 import { theme } from "@/styledComponents";
 import styled from "styled-components";
 
+export const SectionMessageBtnHeader = styled.section`
+  position: relative;
+`;
+export const DivDivMessageBtnHeader = styled.section`
+  position: relative;
+`;
 
-
-export const SectionMessageBtnHeader = styled.section`position: relative;`
-export const DivDivMessageBtnHeader = styled.section`position: relative;`
-
-export const DivMessageBtnHeader= styled.div<{ $public?: boolean }>`
+export const DivMessageBtnHeader = styled.div<{ $public?: boolean }>`
   ${({ $public }) =>
     $public
       ? `   
@@ -34,7 +36,7 @@ export const DivMessageBtnHeader= styled.div<{ $public?: boolean }>`
   }
 `;
 
-export const BtnMessageBtnHeader= styled.button<{
+export const BtnMessageBtnHeader = styled.button<{
   $public?: boolean;
   $side?: boolean;
 }>`
@@ -64,3 +66,28 @@ export const BtnMessageBtnHeader= styled.button<{
     transform: translateX(-0.6rem);
   }
 `;
+
+export const SpanNewNotificationsNumber = styled.span`
+  height: 20px;
+  width: 20px;
+  line-height: 16px;
+  text-align: center;
+  position: absolute;
+  background-color: ${theme.sColor};
+  right: 8%;
+  top: 8%;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 10px;
+`;
+
+// export const SpanNewNotificationsNumber = styled.span`
+//   position: absolute;
+//   background-color: ${theme.sColor};
+//   right: 10%;
+//   top: 10%;
+//   border-radius: 50%; /* Cambiado de 100% a 50% para que sea un círculo perfecto */
+//   padding: 4px; /* Ajusta el relleno según tus necesidades */
+//   color: white; /* Añadido para que el número sea visible en el círculo */
+//   /* font-size: 15px; Ajusta el tamaño del texto según tus necesidades */
+// `;

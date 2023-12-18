@@ -61,7 +61,6 @@ export const addNotificationsAsync = createAsyncThunk(
 export const addNewNotificationAsync = createAsyncThunk(
   "notification/addNewNotificationAsync",
   async (notification: Notification) => {
-    console.log(notification);
     await axios.post(`${baseUrl}/user-in-broker`, notification);
   }
 );

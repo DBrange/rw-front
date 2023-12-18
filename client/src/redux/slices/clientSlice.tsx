@@ -42,8 +42,6 @@ export const clientSlice = createSlice({
     },
     updateClient: (state, action: PayloadAction<{ brokerUser: string }>) => {
       const result = { ...state, ...action.payload };
-      console.log(result);
-      // persistLocalStorage<ClientInfo>(clientKey, result);
       return result;
     },
     resetClient: () => {

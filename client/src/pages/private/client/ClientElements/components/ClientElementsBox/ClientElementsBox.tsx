@@ -64,7 +64,7 @@ function ClientElementsBox() {
         setSearchField={setSearchField}
         searchField={searchField}
         placeholder={
-          typeToFilter === "vehicle" ? "Buscar patente" : "Buscar modelo"
+          typeToFilter === "vehicle" ? "Buscar patente" : "Buscar modelo o IMEI"
         }
         name="ClientElements"
         cards={cards}

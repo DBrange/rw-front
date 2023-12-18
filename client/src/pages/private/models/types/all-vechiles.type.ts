@@ -27,6 +27,11 @@ export interface Electronic {
   type: string;
   brand: string;
   model: string;
+  smartphone: IImei
+}
+
+interface IImei{
+  imei: string
 }
 
 export interface AllClientProfileSinisters {

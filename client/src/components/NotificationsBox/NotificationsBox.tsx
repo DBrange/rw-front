@@ -15,7 +15,7 @@ function NotificationsBox({ notifications }: Props) {
   const date = (date: Date) => new Date(date).getTime();
 
   return (
-    <SectionNotificationsBox>
+    <SectionNotificationsBox >
       <H3NotificationBox>Notificaciones</H3NotificationBox>
       <DivNotificationsBox>
         {[...notifications]

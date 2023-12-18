@@ -18,14 +18,11 @@ export const validateAllThirdPartyInjured = ({
     | undefined;
 
   if (injuredInfo.length > 0) {
-    // console.log('nose')
     thirdPartyVehiclesErrors = injuredInfo?.map((injured) => {
-      // console.log(validateThirdPartyInjured(injured));
       return validateThirdPartyInjured(injured);
     });
 
     errors.injuredInfo = thirdPartyVehiclesErrors;
-    // console.log(errors.injuredInfo);
   }
   return errors;
 };

@@ -8,7 +8,6 @@ export const allBrokerClientsForCreateInspection = async (
 ): Promise<AllBrokerClients[] | [] | undefined> => {
   try {
     return fetch(url).then((res) => {
-      console.log(res.json());
       return res.json();
     });
 

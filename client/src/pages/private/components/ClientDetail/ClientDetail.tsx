@@ -14,7 +14,7 @@ function ClientDetail() {
     clientDetailUrl(user.user?.id, clientId),
     clientDetail
   );
-console.log(clientData)
+
   return (
     <ClientDetailContainer>
       <SidebarBroker />

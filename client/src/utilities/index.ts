@@ -17,7 +17,6 @@ export * from './phone';
 export * from './register-legal-personal';
 export * from './register-personal';
 export { default as routesWithMotFound } from './routes-with-not-found';
-export * from './subject-manager.utility';
 export * from './theft-electronic';
 export * from './theft-vehicle';
 export * from './third-party-injured';

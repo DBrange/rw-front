@@ -1,17 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { IHeaderContext, emptyHeaderContext } from "./empty-header-context";
-import { AppStore, AppDispatch } from "@/redux";
+import { AppDispatch, AppStore } from "@/redux";
 import {
-  addNotification,
   addNotificationsAsync,
-  updateNotificationAllReadAsync,
+  updateNotificationAllReadAsync
 } from "@/redux/slices/notificationSlice";
-import {
-  getNotificationsUrl,
-  getNotifications,
-} from "@/services/get-notification.service";
-import { useSelector, useDispatch } from "react-redux";
-import useSWRMutation from "swr/mutation";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { IHeaderContext, emptyHeaderContext } from "./empty-header-context";
 
 export const HeaderContext = createContext<IHeaderContext>(emptyHeaderContext);
 
@@ -41,6 +35,7 @@ export const HeaderProvider = ({ children }: ChildrenType) => {
           const s = notifications.map((el) => el.isRead).some((el) => !el);
           if (s) setNewNotifications(true);
     dispatchAsync(updateNotificationAllReadAsync(user.user?.id));
+    console.log('acaaaaaaa')
   };
 
   useEffect(() => {

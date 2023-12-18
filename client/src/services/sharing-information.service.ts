@@ -1,4 +1,4 @@
-import { SubjectManager } from "@/utilities";
+import { SubjectManager } from '../utilities/subject-manager.utility';
 
 export const checkboxService = new SubjectManager<boolean>();
 export const modalSentService = new SubjectManager<boolean>();
