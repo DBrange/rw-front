@@ -88,6 +88,7 @@ function ClientProfile({ data }: Props) {
                 type={el.vehicle?.type}
                 keyName={el.vehicle?.plate}
                 id={el.id}
+                date={el.created_at}
               />
             );
           } else if (el?.electronic) {
@@ -97,6 +98,7 @@ function ClientProfile({ data }: Props) {
                 type={el.electronic?.type}
                 keyName={el.electronic?.brand}
                 id={el.id}
+                date={el.created_at}
               />
             );
           } else {
@@ -114,18 +116,20 @@ function ClientProfile({ data }: Props) {
                 keyName={el.asset.vehicle.plate}
                 id={el.id}
                 dashboard={true}
-                />
-                );
+                date={el.created_at}
+              />
+            );
               } else if (el?.asset.electronic) {
                 return (
                   <ReportCard
-                  key={el.id}
-                  type={el.asset.electronic.type}
-                  keyName={el.asset.electronic.brand}
-                  id={el.id}
-                  dashboard={true}
-              />
-            );
+                    key={el.id}
+                    type={el.asset.electronic.type}
+                    keyName={el.asset.electronic.brand}
+                    id={el.id}
+                    dashboard={true}
+                    date={el.created_at}
+                  />
+                );
           } else {
             return [];
           }

@@ -2,23 +2,25 @@ import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BsPhone } from "react-icons/bs";
 import { LiaCarSideSolid } from "react-icons/lia";
 import { RiMotorbikeFill, RiTruckLine } from "react-icons/ri";
-import { CardText, DivCard, IconCard, SpanInspectionCard } from "..";
+import { CardContent, CardText, CardTextContainer, CardTextLabel, ContainerCardTextContainer, DivCard, IconCard, SpanInspectionCard } from "..";
 import { PrivateRoutes } from "@/models/types/routes";
+import { onlyDate } from "@/utilities/date.utility";
 
 interface Props {
   type: string;
   keyName: string;
   id: string;
   dashboard?: boolean
-  newCard?:boolean
+  newCard?: boolean
+  date: Date
 }
 
-function ReportCard({ type, keyName, id, dashboard, newCard }: Props) {
+function ReportCard({ type, keyName, id, dashboard, newCard,date }: Props) {
   return (
-    <CardText
+    <CardContent
       to={
         dashboard
-          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.SINISTER_DETAIL}/${id}`
+          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}/${id}`
           : `${id}`
       }
     >
@@ -31,10 +33,19 @@ function ReportCard({ type, keyName, id, dashboard, newCard }: Props) {
           {type === "CAMIONETA" && <RiTruckLine size={30} />}
           {type === "MOTOCICLETA" && <RiMotorbikeFill size={30} />}
         </IconCard>
-        {`${type} ${keyName}`}
+        <ContainerCardTextContainer>
+          <CardTextContainer>
+            <CardTextLabel>PATENTE:</CardTextLabel>
+            <CardText>{keyName}</CardText>
+          </CardTextContainer>
+          <CardTextContainer>
+            <CardTextLabel>FECHA:</CardTextLabel>
+            <CardText>{onlyDate(date)}</CardText>
+          </CardTextContainer>
+        </ContainerCardTextContainer>
         <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard>
       </DivCard>
-    </CardText>
+    </CardContent>
   );
 }
 export default ReportCard;

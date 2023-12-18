@@ -60,7 +60,8 @@ function BrokerDashboardBox() {
                       id={el.id}
                       dashboard={true}
                       newCard={newData(el.created_at)}
-                    />
+                      date={el.created_at}
+                      />
                   </>
                 );
               } else if (el.electronic) {
@@ -73,6 +74,7 @@ function BrokerDashboardBox() {
                       id={el.id}
                       dashboard={true}
                       newCard={newData(el.created_at)}
+                      date={el.created_at}
                     />
                   </>
                 );
@@ -117,6 +119,7 @@ function BrokerDashboardBox() {
                       id={el.id}
                       dashboard={true}
                       newCard={newData(el.created_at)}
+                      date={el.created_at}
                     />
                   </>
                 );
@@ -130,6 +133,7 @@ function BrokerDashboardBox() {
                       id={el.id}
                       dashboard={true}
                       newCard={newData(el.created_at)}
+                      date={el.created_at}
                     />
                   </>
                 );

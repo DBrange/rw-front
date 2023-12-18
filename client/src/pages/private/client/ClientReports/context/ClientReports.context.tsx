@@ -19,21 +19,39 @@ export const ClientReportsProvider = ({ children }: ChildrenType) => {
   const [typeToFilter, setTypeToFilter] = useState<"vehicle" | "electronic">(
     "vehicle"
   );
+    const [typeToFilterReport, setTypeToFilterReport] = useState<
+      "theft" | "damage" | "crash" | "fire" | undefined
+    >();
 
   const filterData = <T extends AllClientSinisters>(
     data: T[] | undefined,
     searchField: string
   ): T[] => {
-
     if (!data) return [];
 
     const regex = new RegExp(`^${searchField}`, "i");
 
     const dataFilteredToElement: T[] = data?.filter((el) => {
       if (typeToFilter === "vehicle") {
-        return el.asset.vehicle;
+        if (typeToFilterReport === "theft" && el.sinisterType.theft) {
+          return el.asset.vehicle;
+        } else if (typeToFilterReport === "fire" && el.sinisterType.fire) {
+          return el.asset.vehicle;
+        } else if (typeToFilterReport === "crash" && el.sinisterType.crash) {
+          return el.asset.vehicle;
+        } else if (typeToFilterReport === "damage" && el.sinisterType.damage) {
+          return el.asset.vehicle;
+        } else if (!typeToFilterReport) {
+          return el.asset.vehicle;
+        }
       } else if (typeToFilter === "electronic") {
-        return el.asset.electronic;
+        if (typeToFilterReport === "theft" && el.sinisterType.theft) {
+          return el.asset.electronic;
+        } else if (typeToFilterReport === "damage" && el.sinisterType.damage) {
+          return el.asset.electronic;
+        } else if (!typeToFilterReport) {
+          return el.asset.electronic;
+        }
       }
     });
 
@@ -82,6 +100,8 @@ export const ClientReportsProvider = ({ children }: ChildrenType) => {
     setTypeToFilter,
     assets,
     typeToFilter,
+    setTypeToFilterReport,
+    typeToFilterReport,
   };
 
   return (

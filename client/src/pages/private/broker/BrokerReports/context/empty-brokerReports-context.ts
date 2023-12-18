@@ -9,6 +9,7 @@ export interface IBrokerReportsContext {
   setTypeToFilterReport: React.Dispatch<
     React.SetStateAction<"theft" | "damage" | "crash" | "fire" | undefined>
   >;
+  typeToFilterReport: "theft" | "damage" | "crash" | "fire"| undefined;
   assets: AllClientSinisters[];
   typeToFilter: "vehicle" | "electronic";
 }
@@ -17,7 +18,8 @@ export const emptyBrokerReportsContext: IBrokerReportsContext = {
   setSearchField: () => {},
   searchField: "",
   setTypeToFilter: () => {},
-  setTypeToFilterReport: () => {},
+  setTypeToFilterReport: () => { },
+  typeToFilterReport: undefined,
   assets: [],
   typeToFilter: "vehicle",
 };

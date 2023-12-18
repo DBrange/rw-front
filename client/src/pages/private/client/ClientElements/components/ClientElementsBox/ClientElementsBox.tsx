@@ -38,6 +38,7 @@ function ClientElementsBox() {
               type={el.vehicle.type}
               keyName={el.vehicle.plate}
               id={el.id}
+              date={el.created_at}
             />
           );
         } else if (el.electronic) {
@@ -47,6 +48,7 @@ function ClientElementsBox() {
               type={el.electronic.type}
               keyName={el.electronic.brand}
               id={el.id}
+              date={el.created_at}
             />
           );
         } else {

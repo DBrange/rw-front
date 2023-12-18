@@ -102,7 +102,7 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
   const values = {
     setSearchField,
     searchField,
-    setTypeToFilter,setTypeToFilterReport,
+    setTypeToFilter,setTypeToFilterReport,typeToFilterReport,
     assets,
     typeToFilter,
   };

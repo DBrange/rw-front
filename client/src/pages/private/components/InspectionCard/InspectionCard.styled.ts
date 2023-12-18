@@ -8,7 +8,7 @@ export const DivCard = styled.div`
   justify-content: space-between;
   height: 4rem;
   text-align: end;
-  line-height: 4rem;
+  /* line-height: 4rem; */
   padding: 0 1rem;
   border: 2px solid ${theme.sColor};
   border-radius: 0.8rem;
@@ -26,10 +26,40 @@ export const IconCard = styled.i`
   display: flex;
   align-items: center;
 `;
-export const CardText = styled(Link)`
+export const CardContent = styled(Link)`
+  /* display:flex;
+  flex-direction: column; */
   text-decoration: none;
   color: ${theme.textColor};
 `;
+
+export const ContainerCardTextContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  /* flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; */
+`;
+export const CardTextContainer = styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: start;
+gap: 2px;
+/* position: relative; */
+`;
+export const CardText = styled.h5`
+`;
+
+export const CardTextLabel = styled.label`
+font-size: .7rem;
+font-weight: 200;
+/* position: absolute; */
+top: -15px;
+left: 0;
+`;
+
 export const CardTextNoLink = styled.div`
   text-decoration: none;
   color: ${theme.textColor};

@@ -3,6 +3,7 @@ import { useBrokerClientsContext } from "../..";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import { date } from "@/utilities/date.utility";
+import { ContainerBtnBrokerSelection, BtnBrokerSelection } from "../../../BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
 
 function BrokerClientsBox() {
   const {
@@ -18,18 +19,22 @@ function BrokerClientsBox() {
 
   const cards: JSX.Element = (
     <>
-      <button
-        value="user"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "user")}
-      >
-        particular
-      </button>
-      <button
-        value="legalUser"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "legalUser")}
-      >
-        juridica
-      </button>
+      <ContainerBtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "user"}
+          value="user"
+          onClick={(e) => setTypeToFilter(e.currentTarget.value as "user")}
+        >
+          Particular
+        </BtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "legalUser"}
+          value="legalUser"
+          onClick={(e) => setTypeToFilter(e.currentTarget.value as "legalUser")}
+        >
+          Juridico
+        </BtnBrokerSelection>
+      </ContainerBtnBrokerSelection>
       {[...clients]
         ?.sort((a, b) => date(b.created_at) - date(a.created_at))
         .map((client, i) => {

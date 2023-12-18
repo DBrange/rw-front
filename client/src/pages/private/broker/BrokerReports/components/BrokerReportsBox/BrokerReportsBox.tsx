@@ -10,6 +10,7 @@ import { useBrokerReportsContext } from "../..";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import { date } from "@/utilities/date.utility";
+import { ContainerBtnBrokerSelection, BtnBrokerSelection } from "../../../BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
 
 function BrokerReportsBox() {
   const {
@@ -17,6 +18,7 @@ function BrokerReportsBox() {
     searchField,
     setTypeToFilter,
     setTypeToFilterReport,
+    typeToFilterReport,
     assets,
     typeToFilter,
   } = useBrokerReportsContext();
@@ -25,85 +27,88 @@ function BrokerReportsBox() {
 
   const cards: JSX.Element = (
     <>
-      <button
-        value="vehicle"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "vehicle")}
-      >
-        vehiculo
-      </button>
-
-      <button
-        value="electronic"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "electronic")}
-      >
-        electronico
-      </button>
+      <ContainerBtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "vehicle"}
+          value="vehicle"
+          onClick={(e) => setTypeToFilter(e.currentTarget.value as "vehicle")}
+        >
+          vehiculo
+        </BtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "electronic"}
+          value="electronic"
+          onClick={(e) =>
+            setTypeToFilter(e.currentTarget.value as "electronic")
+          }
+        >
+          electronico
+        </BtnBrokerSelection>
+      </ContainerBtnBrokerSelection>
       {typeToFilter === "vehicle" ? (
-        <>
-          <span>
-            <button
-              value="theft"
-              onClick={(e) =>
-                setTypeToFilterReport(e.currentTarget.value as "theft")
-              }
-            >
-              robo
-            </button>
-          </span>
-          <span>
-            <button
-              value="fire"
-              onClick={(e) =>
-                setTypeToFilterReport(e.currentTarget.value as "fire")
-              }
-            >
-              incendio
-            </button>
-          </span>
-          <span>
-            <button
-              value="crash"
-              onClick={(e) =>
-                setTypeToFilterReport(e.currentTarget.value as "crash")
-              }
-            >
-              choque
-            </button>
-          </span>
-          <span>
-            <button
-              value="damage"
-              onClick={(e) =>
-                setTypeToFilterReport(e.currentTarget.value as "damage")
-              }
-            >
-              daño
-            </button>
-          </span>
-        </>
+        <ContainerBtnBrokerSelection>
+          <BtnBrokerSelection
+            $active={typeToFilterReport === "theft"}
+            value="theft"
+            onClick={(e) =>
+              setTypeToFilterReport(e.currentTarget.value as "theft")
+            }
+          >
+            robo
+          </BtnBrokerSelection>
+
+          <BtnBrokerSelection
+            $active={typeToFilterReport === "fire"}
+            value="fire"
+            onClick={(e) =>
+              setTypeToFilterReport(e.currentTarget.value as "fire")
+            }
+          >
+            incendio
+          </BtnBrokerSelection>
+
+          <BtnBrokerSelection
+            $active={typeToFilterReport === "crash"}
+            value="crash"
+            onClick={(e) =>
+              setTypeToFilterReport(e.currentTarget.value as "crash")
+            }
+          >
+            choque
+          </BtnBrokerSelection>
+
+          <BtnBrokerSelection
+            $active={typeToFilterReport === "damage"}
+            value="damage"
+            onClick={(e) =>
+              setTypeToFilterReport(e.currentTarget.value as "damage")
+            }
+          >
+            daño
+          </BtnBrokerSelection>
+        </ContainerBtnBrokerSelection>
       ) : (
-        <>
-          <span>
-            <button
-              value="theft"
-              onClick={(e) =>
-                setTypeToFilterReport(e.currentTarget.value as "theft")
-              }
-            >
-              robo
-            </button>
-          </span>
-          <span>
-            <button
-              value="damage"
-              onClick={(e) =>
-                setTypeToFilterReport(e.currentTarget.value as "damage")
-              }
-            >
-              daño
-            </button>
-          </span>
-        </>
+        <ContainerBtnBrokerSelection>
+          <BtnBrokerSelection
+            $active={typeToFilterReport === "theft"}
+            value="theft"
+            onClick={(e) =>
+              setTypeToFilterReport(e.currentTarget.value as "theft")
+            }
+          >
+            robo
+          </BtnBrokerSelection>
+
+          <BtnBrokerSelection
+            $active={typeToFilterReport === "damage"}
+            value="damage"
+            onClick={(e) =>
+              setTypeToFilterReport(e.currentTarget.value as "damage")
+            }
+          >
+            daño
+          </BtnBrokerSelection>
+        </ContainerBtnBrokerSelection>
       )}
 
       {[...assets]
@@ -116,6 +121,7 @@ function BrokerReportsBox() {
                 type={el.asset.vehicle.type}
                 keyName={el.asset.vehicle.plate}
                 id={el.id}
+                date={el.created_at}
               />
             );
           } else if (el.asset.electronic) {
@@ -125,6 +131,7 @@ function BrokerReportsBox() {
                 type={el.asset.electronic.type}
                 keyName={el.asset.electronic.brand}
                 id={el.id}
+                date={el.created_at}
               />
             );
           } else {

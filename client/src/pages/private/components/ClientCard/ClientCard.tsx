@@ -1,7 +1,20 @@
 import { IoPersonSharp } from "react-icons/io5";
 import { PiBuildingsBold } from "react-icons/pi";
-import { CardText, DivCard, IconCard, SpanInspectionCard } from "..";
+import {
+  CardContent,
+  CardText,
+  CardTextContainer,
+  CardTextLabel,
+  ContainerCardTextContainer,
+  DivCard,
+  IconCard,
+  SpanInspectionCard,
+} from "..";
 import { PrivateRoutes } from "@/models/types/routes";
+import { AiOutlineTablet, AiOutlineLaptop } from "react-icons/ai";
+import { BsPhone } from "react-icons/bs";
+import { LiaCarSideSolid } from "react-icons/lia";
+import { RiTruckLine, RiMotorbikeFill } from "react-icons/ri";
 
 interface Props {
   name?: string;
@@ -10,7 +23,7 @@ interface Props {
   keyName: string;
   id: string;
   dashboard?: boolean;
-  newCard?: boolean
+  newCard?: boolean;
 }
 
 function ClientCard({
@@ -20,13 +33,13 @@ function ClientCard({
   keyName,
   id,
   dashboard,
-  newCard
+  newCard,
 }: Props) {
   return (
-    <CardText
+    <CardContent
       to={
         dashboard
-          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}/${id}`
+          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}/${id}`
           : `${id}`
       }
     >
@@ -34,12 +47,55 @@ function ClientCard({
         <IconCard>
           {companyName ? <PiBuildingsBold /> : <IoPersonSharp />}
         </IconCard>
-        {companyName
-          ? `${companyName} ${keyName}`
-          : `${name} ${lastname} ${keyName}`}
+        <ContainerCardTextContainer>
+          {companyName ? (
+            <>
+              <CardTextContainer>
+                <CardTextLabel>COMPANIA:</CardTextLabel>
+                <CardText>{companyName}</CardText>
+              </CardTextContainer>
+              <CardTextContainer>
+                <CardTextLabel>CUIT:</CardTextLabel>
+                <CardText>{keyName}</CardText>
+              </CardTextContainer>
+            </>
+          ) : (
+            <>
+              <CardTextContainer>
+                <CardTextLabel>NOMBRE:</CardTextLabel>
+                <CardText>{name}</CardText>
+              </CardTextContainer>
+              <CardTextContainer>
+                <CardTextLabel>APELLIDO:</CardTextLabel>
+                <CardText>{lastname}</CardText>
+              </CardTextContainer>
+              <CardTextContainer>
+                <CardTextLabel>DNI:</CardTextLabel>
+                <CardText>{keyName}</CardText>
+              </CardTextContainer>
+            </>
+          )}
+        </ContainerCardTextContainer>
         <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard>
       </DivCard>
-    </CardText>
+    </CardContent>
+    // <CardText
+    //   to={
+    //     dashboard
+    //       ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}/${id}`
+    //       : `${id}`
+    //   }
+    // >
+    //   <DivCard>
+    //     <IconCard>
+    //       {companyName ? <PiBuildingsBold /> : <IoPersonSharp />}
+    //     </IconCard>
+    //     {companyName
+    //       ? `${companyName} ${keyName}`
+    //       : `${name} ${lastname} ${keyName}`}
+    //     <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard>
+    //   </DivCard>
+    // </CardText>
   );
 }
 export default ClientCard;

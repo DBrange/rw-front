@@ -9,6 +9,10 @@ import { useBrokerInspectionsContext } from "../..";
 import { useSelector } from "react-redux";
 import { AppStore } from "@/redux/store";
 import { date } from "@/utilities/date.utility";
+import {
+  ContainerBtnBrokerSelection,
+  BtnBrokerSelection,
+} from "./BrokerInspectionsBox.styled";
 
 function BrokerInspectionsBox() {
   const { setSearchField, searchField, setTypeToFilter, assets, typeToFilter } =
@@ -19,18 +23,24 @@ function BrokerInspectionsBox() {
 
   const cards: JSX.Element = (
     <>
-      <button
-        value="vehicle"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "vehicle")}
-      >
-        vehiculo
-      </button>
-      <button
-        value="electronic"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "electronic")}
-      >
-        electronico
-      </button>
+      <ContainerBtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "vehicle"}
+          value="vehicle"
+          onClick={(e) => setTypeToFilter(e.currentTarget.value as "vehicle")}
+        >
+          vehiculo
+        </BtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "electronic"}
+          value="electronic"
+          onClick={(e) =>
+            setTypeToFilter(e.currentTarget.value as "electronic")
+          }
+        >
+          electronico
+        </BtnBrokerSelection>
+      </ContainerBtnBrokerSelection>
       {[...assets]
         ?.sort((a, b) => date(b.created_at) - date(a.created_at))
         .map((el: AllClientAssets) => {
@@ -41,6 +51,7 @@ function BrokerInspectionsBox() {
                 type={el.vehicle.type}
                 keyName={el.vehicle.plate}
                 id={el.id}
+                date={el.created_at}
               />
             );
           } else if (el.electronic) {
@@ -50,6 +61,7 @@ function BrokerInspectionsBox() {
                 type={el.electronic.type}
                 keyName={el.electronic.brand}
                 id={el.id}
+                date={el.created_at}
               />
             );
           } else {
