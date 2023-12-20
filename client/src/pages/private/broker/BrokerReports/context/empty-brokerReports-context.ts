@@ -9,17 +9,30 @@ export interface IBrokerReportsContext {
   setTypeToFilterReport: React.Dispatch<
     React.SetStateAction<"theft" | "damage" | "crash" | "fire" | undefined>
   >;
-  typeToFilterReport: "theft" | "damage" | "crash" | "fire"| undefined;
-  assets: AllClientSinisters[];
+  typeToFilterReport: "theft" | "damage" | "crash" | "fire" | undefined;
+  sinisters: AllClientSinisters[];
   typeToFilter: "vehicle" | "electronic";
+  size: number;
+  setSize: (
+    size: number | ((_size: number) => number)
+  ) => Promise<AllClientSinisters[][] | undefined>;
+  error: any;
+  isReachedEnd: boolean | undefined;
+  isLoading: boolean | undefined;
 }
 
 export const emptyBrokerReportsContext: IBrokerReportsContext = {
   setSearchField: () => {},
   searchField: "",
   setTypeToFilter: () => {},
-  setTypeToFilterReport: () => { },
+  setTypeToFilterReport: () => {},
   typeToFilterReport: undefined,
-  assets: [],
+  sinisters: [],
   typeToFilter: "vehicle",
+  size: 0,
+  setSize: async (_size: number | ((_size: number) => number)) =>
+    Promise.resolve([]),
+  error: undefined,
+  isReachedEnd: false,
+  isLoading: false,
 };

@@ -46,32 +46,7 @@ html {
 /**
 * Remove the margin in all browsers.
 */
-body {
-  overflow-y: scroll;
-  /* padding-right: 10px; Ajusta el padding para compensar el espacio ocupado por el scrollbar */
-  position: relative; /* Establece la posición relativa en el cuerpo */
-}
 
-body::after {
-  content: '';
-  position: fixed; /* Hace que el pseudo-elemento esté fijo en la ventana */
-  top: 0;
-  right: 0;
-  width: 10px;
-  height: 100%;
-  background-color: #2A2C33; /* Color del fondo del pseudo-scrollbar flotante */
-  z-index: 1; /* Ajusta según sea necesario para superponer el contenido */
-}
-
-body::-webkit-scrollbar {
-  display: none; /* Oculta el scrollbar nativo del navegador */
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: #8b5cf6;
-  border-radius: 14px;
-  border: 3px solid #2A2C33;
-}
 
 body {
  background: #2A2C33
@@ -416,4 +391,12 @@ template {
 
 [hidden] {
   display: none;
+}
+
+.infiniteScroll{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+  overflow-y: hidden;
 }

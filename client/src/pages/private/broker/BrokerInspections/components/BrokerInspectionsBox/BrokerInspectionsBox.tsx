@@ -2,6 +2,7 @@ import {
   AllClientAssets,
   InspectLogin,
   InspectionCard,
+  SectionCard,
   Sidebar,
   SidebarBroker,
 } from "@/pages";
@@ -13,10 +14,20 @@ import {
   ContainerBtnBrokerSelection,
   BtnBrokerSelection,
 } from "./BrokerInspectionsBox.styled";
+import { Loader } from "@/components";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function BrokerInspectionsBox() {
-  const { setSearchField, searchField, setTypeToFilter, assets, typeToFilter } =
-    useBrokerInspectionsContext();
+  const {
+    setSearchField,
+    searchField,
+    setTypeToFilter,
+    typeToFilter,
+    size,
+    setSize,
+    inspections,
+    isReachedEnd,
+  } = useBrokerInspectionsContext();
 
   const userBroker = useSelector((store: AppStore) => store.user).user
     ?.userBroker;
@@ -41,33 +52,41 @@ function BrokerInspectionsBox() {
           electronico
         </BtnBrokerSelection>
       </ContainerBtnBrokerSelection>
-      {[...assets]
-        ?.sort((a, b) => date(b.created_at) - date(a.created_at))
-        .map((el: AllClientAssets) => {
-          if (el.vehicle) {
-            return (
-              <InspectionCard
-                key={el.id}
-                type={el.vehicle.type}
-                keyName={el.vehicle.plate}
-                id={el.id}
-                date={el.created_at}
-              />
-            );
-          } else if (el.electronic) {
-            return (
-              <InspectionCard
-                key={el.id}
-                type={el.electronic.type}
-                keyName={el.electronic.brand}
-                id={el.id}
-                date={el.created_at}
-              />
-            );
-          } else {
-            return [];
-          }
-        })}
+      <InfiniteScroll
+        className="infiniteScroll"
+        next={() => setSize(size + 1)}
+        hasMore={!isReachedEnd}
+        loader={<Loader />}
+        dataLength={inspections.length ?? 0}
+      >
+          {[...inspections]
+            ?.sort((a, b) => date(b.created_at) - date(a.created_at))
+            .map((el: AllClientAssets) => {
+              if (el.vehicle) {
+                return (
+                  <InspectionCard
+                    key={el.vehicle.id}
+                    type={el.vehicle.type}
+                    keyName={el.vehicle.plate}
+                    id={el.vehicle.id}
+                    date={el.created_at}
+                  />
+                );
+              } else if (el.electronic) {
+                return (
+                  <InspectionCard
+                    key={el.electronic.id}
+                    type={el.electronic.type}
+                    keyName={el.electronic.brand}
+                    id={el.electronic.id}
+                    date={el.created_at}
+                  />
+                );
+              } else {
+                return <>No se han encontrado inspecciones</>;
+              }
+            })}
+      </InfiniteScroll>
     </>
   );
 

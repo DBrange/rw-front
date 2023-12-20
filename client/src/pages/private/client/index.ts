@@ -54,6 +54,7 @@ export * from './ClientReports/components';
 export * from './ClientReports/context';
 export * from './ClientReports';
 export * from './ClientReports/services';
+export * from './ClientReports/utilities';
 export * from './ClientUser/components/ClientDashboardBox';
 export * from './ClientUser/components/ClientUserContainer';
 export * from './ClientUser/components';

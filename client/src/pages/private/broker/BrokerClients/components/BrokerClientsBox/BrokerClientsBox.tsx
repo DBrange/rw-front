@@ -3,7 +3,12 @@ import { useBrokerClientsContext } from "../..";
 import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 import { date } from "@/utilities/date.utility";
-import { ContainerBtnBrokerSelection, BtnBrokerSelection } from "../../../BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
+import {
+  ContainerBtnBrokerSelection,
+  BtnBrokerSelection,
+} from "../../../BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
+import { Loader } from "@/components";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function BrokerClientsBox() {
   const {
@@ -12,8 +17,11 @@ function BrokerClientsBox() {
     setTypeToFilter,
     clients,
     typeToFilter,
+    setSize,
+    size,
+    isReachedEnd,
   } = useBrokerClientsContext();
-  
+
   const userBroker = useSelector((store: AppStore) => store.user).user
     ?.userBroker;
 
@@ -35,32 +43,40 @@ function BrokerClientsBox() {
           Juridico
         </BtnBrokerSelection>
       </ContainerBtnBrokerSelection>
-      {[...clients]
-        ?.sort((a, b) => date(b.created_at) - date(a.created_at))
-        .map((client, i) => {
-          if (client.personalUser?.dni) {
-            return (
-              <ClientCard
-                key={i}
-                name={client.personalUser?.name}
-                lastname={client.personalUser?.lastName}
-                keyName={client.personalUser?.dni}
-                id={client?.id}
-              />
-            );
-          } else if (client.legalUser?.cuit) {
-            return (
-              <ClientCard
-                key={i}
-                companyName={client.legalUser?.companyName}
-                keyName={client.legalUser?.cuit}
-                id={client?.id}
-              />
-            );
-          } else {
-            return [];
-          }
-        })}
+      <InfiniteScroll
+        className="infiniteScroll"
+        next={() => setSize(size + 1)}
+        hasMore={!isReachedEnd}
+        loader={<Loader />}
+        dataLength={clients.length ?? 0}
+      >
+        {[...clients]
+          ?.sort((a, b) => date(b.created_at) - date(a.created_at))
+          .map((client, i) => {
+            if (client.personalUser?.dni) {
+              return (
+                <ClientCard
+                  key={i}
+                  name={client.personalUser?.name}
+                  lastname={client.personalUser?.lastName}
+                  keyName={client.personalUser?.dni}
+                  id={client?.id}
+                />
+              );
+            } else if (client.legalUser?.cuit) {
+              return (
+                <ClientCard
+                  key={i}
+                  companyName={client.legalUser?.companyName}
+                  keyName={client.legalUser?.cuit}
+                  id={client?.id}
+                />
+              );
+            } else {
+              return [];
+            }
+          })}
+      </InfiniteScroll>
     </>
   );
 

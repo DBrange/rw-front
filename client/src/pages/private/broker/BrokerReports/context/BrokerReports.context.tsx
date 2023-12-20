@@ -1,13 +1,9 @@
 import { createContext, useContext, useState } from "react";
 
-import { AllClientSinisters } from "@/pages";
-import { AppStore } from "@/redux";
-import { useSelector } from "react-redux";
-import useSWR from "swr";
+import { AllClientAssets } from "@/pages";
 import {
-  AllBrokerUserSinisterUrl,
-  IBrokerReportsContext,
-  allBrokerSinister,
+  BrokerReportsHook,
+  IBrokerReportsContext
 } from "..";
 import { emptyBrokerReportsContext } from "./empty-brokerReports-context";
 
@@ -30,81 +26,32 @@ export const BrokerReportsProvider = ({ children }: ChildrenType) => {
     "theft" | "damage" | "crash" | "fire" | undefined
   >();
 
-  const filterData = <T extends AllClientSinisters>(
-    data: T[] | undefined,
-    searchField: string
-  ): T[] => {
-
-    if (!data) return [];
-
-    const regex = new RegExp(`^${searchField}`, "i");
-
-    const dataFilteredToElement: T[] = data?.filter((el) => {
-      if (typeToFilter === "vehicle") {
-        if (typeToFilterReport === "theft" && el.sinisterType.theft) {
-          return el.asset.vehicle;
-        } else if (typeToFilterReport === "fire" && el.sinisterType.fire) {
-          return el.asset.vehicle;
-        } else if (typeToFilterReport === "crash" && el.sinisterType.crash) {
-          return el.asset.vehicle;
-        } else if (typeToFilterReport === "damage" && el.sinisterType.damage) {
-          return el.asset.vehicle;
-        } else if (!typeToFilterReport) {
-          return el.asset.vehicle;
-        }
-      } else if (typeToFilter === "electronic") {
-        if (typeToFilterReport === "theft" && el.sinisterType.theft) {
-          return el.asset.electronic;
-        } else if (typeToFilterReport === "damage" && el.sinisterType.damage) {
-          return el.asset.electronic;
-        } else if (!typeToFilterReport) {
-          return el.asset.electronic;
-        }
-      }
-    });
-
-    if (searchField.trim().length) {
-      if (typeToFilter === "vehicle") {
-        return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.asset.vehicle?.plate as string)
-        );
-      } else if (typeToFilter === "electronic") {
-        return dataFilteredToElement?.filter(
-          (el) =>
-            regex.test(el?.asset.electronic?.model as string) ||
-            regex.test(el?.asset.electronic?.smartphone.imei as string)
-        );
-      }
-    } else {
-      return dataFilteredToElement;
-    }
-    return [];
-  };
-
-  const user = useSelector((store: AppStore) => store.user);
-
-  const brokerType = () => {
-    const { data: allBrokerAssetsUser } = useSWR(
-      AllBrokerUserSinisterUrl(user.user?.id),
-      allBrokerSinister
-    );
-
-    const searchedUserAsset: AllClientSinisters[] =
-      filterData<AllClientSinisters>(allBrokerAssetsUser!, searchField);
-
-    return searchedUserAsset;
-  };
-
-  const assets = [...brokerType()]
-    .filter((asset) => asset !== undefined)
-    .flat();
+  const {
+    paginatedData: sinisters,
+    error,
+    isReachedEnd,
+    isLoading,
+    setSize,
+    size,
+  } = BrokerReportsHook<AllClientAssets>(
+    searchField,
+    typeToFilter,
+    typeToFilterReport
+  );
 
   const values = {
     setSearchField,
     searchField,
-    setTypeToFilter,setTypeToFilterReport,typeToFilterReport,
-    assets,
+    setTypeToFilter,
+    setTypeToFilterReport,
+    typeToFilterReport,
     typeToFilter,
+    sinisters,
+    error,
+    isReachedEnd,
+    isLoading,
+    setSize,
+    size,
   };
 
   return (

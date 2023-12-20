@@ -1,4 +1,3 @@
-import { NotificationResponse } from "@/models/types/notification-response.enum";
 
 export interface ClientInfo {
   accessToken?: string;
@@ -83,7 +82,9 @@ export interface Notification {
   sender: string;
   receiver: string;
   isRead: boolean;
-  response?: NotificationResponse;
+  response?: "ACCEPTED" |
+  "REJECTED" |
+  "null" 
   withOptions: boolean;
   additional: string;
 }

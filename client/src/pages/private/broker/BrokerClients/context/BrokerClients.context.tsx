@@ -1,13 +1,10 @@
+import { AllBrokerClients } from "@/pages";
 import { createContext, useContext, useState } from "react";
+import { BrokerClientsHook } from "..";
 import {
   IBrokerClientsContext,
   emptyBrokerClientsContext,
 } from "./empty-brokerClients-context";
-import { AppStore } from "@/redux";
-import { useSelector } from "react-redux";
-import useSWR from "swr";
-import { AllBrokerClientsUrl, allBrokerClients } from "..";
-import { AllBrokerClients } from "@/pages";
 
 export const BrokerClientsContext = createContext<IBrokerClientsContext>(
   emptyBrokerClientsContext
@@ -24,58 +21,12 @@ export const BrokerClientsProvider = ({ children }: ChildrenType) => {
     "user"
   );
 
-  const filterData = <T extends AllBrokerClients>(
-    data: T[] | undefined,
-    searchField: string
-  ): T[] => {
-
-    if (!data) return [];
-
-    const regex = new RegExp(`^${searchField}`, "i");
-
-    const dataFilteredToElement: T[] = data?.filter((el) => {
-      if (typeToFilter === "user" && el.personalUser?.dni) {
-        return el.personalUser?.dni;
-      } else if (typeToFilter === "legalUser" && el.legalUser?.cuit) {
-        return el;
-      }
-    });
-
-    if (searchField.trim().length) {
-      if (typeToFilter === "user") {
-        return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.personalUser?.dni as string)
-        );
-      } else if (typeToFilter === "legalUser") {
-        return dataFilteredToElement?.filter((el) =>
-          regex.test(el?.legalUser?.cuit as string)
-        );
-      }
-    } else {
-      return dataFilteredToElement;
-    }
-    return [];
-  };
-
-  const user = useSelector((store: AppStore) => store.user);
-
-  const brokerType = () => {
-    const { data: allBrokerAssetsUser } = useSWR(
-      AllBrokerClientsUrl(user.user?.userBroker?.id),
-      allBrokerClients
-    );
-
-    const searchedUserAsset: AllBrokerClients[] = filterData<AllBrokerClients>(
-      allBrokerAssetsUser!,
-      searchField
-    );
-
-    return searchedUserAsset;
-  };
-  
-  const clients = [...brokerType()]
-    .filter((asset) => asset !== undefined)
-    .flat();
+    const {
+      paginatedData: clients,
+      isReachedEnd,
+      setSize,
+      size,
+    } = BrokerClientsHook<AllBrokerClients>(searchField, typeToFilter);
 
   const values = {
     setSearchField,
@@ -83,6 +34,9 @@ export const BrokerClientsProvider = ({ children }: ChildrenType) => {
     setTypeToFilter,
     clients,
     typeToFilter,
+    isReachedEnd,
+    setSize,
+    size,
   };
 
   // const user = useSelector((store: AppStore) => store.user);

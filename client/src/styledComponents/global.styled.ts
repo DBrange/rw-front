@@ -1,3 +1,4 @@
+import InfiniteScroll from "react-infinite-scroll-component";
 import { theme } from ".";
 import { styled } from "styled-components";
 
@@ -140,6 +141,7 @@ export const SectionFormDetailArrayContainer = styled.section`
   gap: 1.5rem;
   padding: 0.7rem 0;
 `;
+
 
 // export const AccordionContainer = styled.div<{
 //   checked: boolean;

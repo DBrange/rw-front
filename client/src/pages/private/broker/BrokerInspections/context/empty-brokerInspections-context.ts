@@ -6,14 +6,26 @@ export interface IBrokerInspectionsContext {
   setTypeToFilter: React.Dispatch<
     React.SetStateAction<"vehicle" | "electronic">
   >;
-  assets: AllClientAssets[];
+  inspections: AllClientAssets[];
   typeToFilter: "vehicle" | "electronic";
+  size: number;
+  setSize: (
+    size: number | ((_size: number) => number)
+  ) => Promise<AllClientAssets[][] | undefined>;
+  error: any;
+  isReachedEnd: boolean | undefined;
+  isLoading: boolean | undefined;
 }
 
 export const emptyBrokerInspectionsContext: IBrokerInspectionsContext = {
   setSearchField: () => {},
   searchField: "",
   setTypeToFilter: () => {},
-  assets: [],
+  inspections: [],
   typeToFilter: "vehicle",
+  size: 0,
+  setSize: async (_size: number | ((_size: number) => number)) => Promise.resolve([]),
+  error: undefined,
+  isReachedEnd: false,
+  isLoading: false,
 };

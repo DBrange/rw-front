@@ -16,6 +16,7 @@ export interface AllClientAssets {
   electronic: Electronic | null;
 }
 export interface Vehicle {
+  id: string
   brand: string;
   model: string;
   plate: string;
@@ -23,6 +24,7 @@ export interface Vehicle {
 }
 
 export interface Electronic {
+  id: string
   type: string;
   brand: string;
   model: string;

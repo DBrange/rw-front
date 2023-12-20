@@ -1,27 +1,33 @@
+import { Loader } from "@/components";
 import {
   AllClientSinisters,
   InspectLogin,
   ReportCard,
   Sidebar,
-  SidebarBroker,
-  allSinister,
+  SidebarBroker
 } from "@/pages";
+import {
+  BtnBrokerSelection,
+  ContainerBtnBrokerSelection,
+} from "@/pages/private/broker/BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
 import { AppStore } from "@/redux";
-import { useSelector } from "react-redux";
-import useSWR from "swr";
-import { useClientReportsContext } from "../../..";
 import { date } from "@/utilities/date.utility";
-import { ContainerBtnBrokerSelection, BtnBrokerSelection } from "@/pages/private/broker/BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useSelector } from "react-redux";
+import { useClientReportsContext } from "../../..";
 
 function ClientReportsBox() {
   const {
     setSearchField,
     searchField,
     setTypeToFilter,
-    assets,
+    sinisters,
     typeToFilter,
     setTypeToFilterReport,
     typeToFilterReport,
+    setSize,
+    size,
+    isReachedEnd,
   } = useClientReportsContext();
 
   const userBroker = useSelector((store: AppStore) => store.user).user
@@ -112,33 +118,41 @@ function ClientReportsBox() {
           </BtnBrokerSelection>
         </ContainerBtnBrokerSelection>
       )}
-      {[...assets]
-        ?.sort((a, b) => date(b.created_at) - date(a.created_at))
-        .map((el: AllClientSinisters) => {
-          if (el.asset.vehicle) {
-            return (
-              <ReportCard
-                key={el.id}
-                type={el.asset.vehicle.type}
-                keyName={el.asset.vehicle.plate}
-                id={el.id}
-                date={el.created_at}
-              />
-            );
-          } else if (el.asset.electronic) {
-            return (
-              <ReportCard
-                key={el.id}
-                type={el.asset.electronic.type}
-                keyName={el.asset.electronic.brand}
-                id={el.id}
-                date={el.created_at}
-              />
-            );
-          } else {
-            return [];
-          }
-        })}
+      <InfiniteScroll
+        className="infiniteScroll"
+        next={() => setSize(size + 1)}
+        hasMore={!isReachedEnd}
+        loader={<Loader />}
+        dataLength={sinisters.length ?? 0}
+      >
+        {[...sinisters]
+          ?.sort((a, b) => date(b.created_at) - date(a.created_at))
+          .map((el: AllClientSinisters) => {
+            if (el.asset.vehicle) {
+              return (
+                <ReportCard
+                  key={el.id}
+                  type={el.asset.vehicle.type}
+                  keyName={el.asset.vehicle.plate}
+                  id={el.id}
+                  date={el.created_at}
+                />
+              );
+            } else if (el.asset.electronic) {
+              return (
+                <ReportCard
+                  key={el.id}
+                  type={el.asset.electronic.type}
+                  keyName={el.asset.electronic.brand}
+                  id={el.id}
+                  date={el.created_at}
+                />
+              );
+            } else {
+              return [];
+            }
+          })}
+      </InfiniteScroll>
     </>
   );
 
