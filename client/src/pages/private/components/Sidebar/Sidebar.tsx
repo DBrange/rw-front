@@ -55,7 +55,7 @@ function Sidebar() {
         <MainName />
         <UlSidebarList>
           <LinkNavigate
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.DASHBOARD}`}
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CLIENT}/${PrivateRoutes.DASHBOARD}`}
             onClick={notis}
           >
             <LiSidebarItem>
@@ -85,7 +85,7 @@ function Sidebar() {
           </LinkNavigate> */}
 
           <LinkNavigate
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ALL_SINISTER}`}
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CLIENT}/${PrivateRoutes.ALL_SINISTER}`}
             onClick={notis}
           >
             <LiSidebarItem>
@@ -95,7 +95,7 @@ function Sidebar() {
           </LinkNavigate>
 
           <LinkNavigate
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_INSPECTION}`}
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CLIENT}/${PrivateRoutes.CREATE_INSPECTION}`}
             onClick={notis}
           >
             <LiSidebarItem>
@@ -105,7 +105,7 @@ function Sidebar() {
           </LinkNavigate>
 
           <LinkNavigate
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER}`}
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CLIENT}/${PrivateRoutes.CREATE_SINISTER}`}
             onClick={notis}
           >
             <LiSidebarItem>
@@ -117,7 +117,7 @@ function Sidebar() {
         <FooterSidebar>
           <UlSidebarList>
             <LinkNavigate
-              to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.MY_PROFILE}`}
+              to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CLIENT}/${PrivateRoutes.MY_PROFILE}`}
               onClick={notis}
             >
               <LiSidebarItem>
