@@ -1,3 +1,4 @@
+export { default as Client } from './Client';
 export * from './ClientCreateInspection/components/AllClientCreateInspectionPages';
 export * from './ClientCreateInspection/components/ClientCreateInspectionBox';
 export * from './ClientCreateInspection/components/ClientCreateInspectionContainer';

@@ -1,6 +1,9 @@
+import { PrivateRoutes } from "@/models/types/routes";
+import { addClient, clientKey } from "@/redux/slices/clientSlice";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { ILoginContext, emptyLoginContext } from "./empty-login-context";
-import { ChangeEventType, SubmitEventType } from "../../Inspect";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import useSWRMutation from "swr/mutation";
 import {
   InputValues,
   TouchedInputValues,
@@ -8,14 +11,9 @@ import {
   loginUrl,
   validateLogin,
 } from "..";
-import useSWRMutation from "swr/mutation";
-import { useDispatch, useSelector } from "react-redux";
-import { addClient } from "@/redux/slices/clientSlice";
-import { useNavigate } from "react-router-dom";
-import { PrivateRoutes } from "@/models/types/routes";
-import { AppStore } from "@/redux";
-import { addNotification } from "@/redux/slices/notificationSlice";
-import { Notification } from "@/models";
+import { ChangeEventType, SubmitEventType } from "../../Inspect";
+import { ILoginContext, emptyLoginContext } from "./empty-login-context";
+import { clearLocalStorage } from "@/utilities";
 
 const LoginContext = createContext<ILoginContext>(emptyLoginContext);
 
@@ -43,6 +41,10 @@ export const LoginProvider = ({ children }: ChildrenType) => {
   });
 
   const [formNotFound, setFormNotFound] = useState(false);
+
+  useEffect(() => {
+    clearLocalStorage(clientKey);
+  }, [])
 
   const loginData = (e: ChangeEventType) => {
     const { value, name } = e.target;
@@ -86,20 +88,11 @@ export const LoginProvider = ({ children }: ChildrenType) => {
       })
     );
   }, []);
-  // const user = useSelector((store: AppStore) => store.user);
 
   useEffect(() => {
     if (data) {
       dispatch(addClient(data));
-      // addNotification(user.user?.receivedNotifications as Notification[]);
-
-      const client = JSON.parse(localStorage.getItem("client") as string);
-      navigate(
-        // client.userBroker
-        // ?
-        // `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`
-        // :
-        `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`
+      navigate(`/${PrivateRoutes.PRIVATE}`
       );
     }
   }, [data]);

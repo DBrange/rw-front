@@ -16,7 +16,6 @@ type ChildrenType = {
 export const HeaderProvider = ({ children }: ChildrenType) => {
   const [modal, setModal] = useState<boolean>(false);
   const user = useSelector((store: AppStore) => store.user);
-  const dispatch = useDispatch();
   const dispatchAsync = useDispatch<AppDispatch>();
   const [newNotifications, setNewNotifications] = useState<boolean>(false);
   const notifications = useSelector((store: AppStore) => store.notification);
@@ -35,7 +34,6 @@ export const HeaderProvider = ({ children }: ChildrenType) => {
           const s = notifications.map((el) => el.isRead).some((el) => !el);
           if (s) setNewNotifications(true);
     dispatchAsync(updateNotificationAllReadAsync(user.user?.id));
-    console.log('acaaaaaaa')
   };
 
   useEffect(() => {

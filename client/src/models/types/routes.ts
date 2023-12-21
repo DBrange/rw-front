@@ -10,6 +10,8 @@ export enum PublicRoutes {
 export enum PrivateRoutes {
   PRIVATE = "private",
   BROKER = "broker",
+  ADMIN = 'admin',
+  CLIENT = "cliente",
   DASHBOARD = "dashboard",
   ELEMENTS = 'elementos',
   CREATE_INSPECTION = "crear-inspeccion",
