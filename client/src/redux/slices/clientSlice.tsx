@@ -1,4 +1,7 @@
-import { ClientInfo } from "@/models/interfaces/userInfo/userInfo.interface";
+import {
+  ClientInfo,
+  UpdateMyProfile,
+} from "@/models/interfaces/userInfo/userInfo.interface";
 import { baseUrl } from "@/pages";
 import { persistLocalStorage, clearLocalStorage } from "@/utilities";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -55,9 +58,43 @@ export const clientSlice = createSlice({
       (state, action: PayloadAction<string>) => {
         persistLocalStorage<ClientInfo>(clientKey, {
           ...state,
-          lastRecord: action.payload,
+          user: { ...state.user, lastRecord: action.payload },
         });
-        return { ...state, user: { ...state.user, lastRecord: action.payload } };
+        return {
+          ...state,
+          user: { ...state.user, lastRecord: action.payload },
+        };
+      }
+    );
+    builder.addCase(
+      updateMyProfileAsync.fulfilled,
+      (state: ClientInfo, action: PayloadAction<UpdateMyProfile>) => {
+        persistLocalStorage<ClientInfo>(clientKey, {
+          ...state,
+          user: {
+            ...state.user,
+            phoneNumber:
+              action.payload.phoneNumber
+                ? action.payload.phoneNumber
+                : state.user?.phoneNumber,
+            address:
+              action.payload.address
+                ? action.payload.address
+                : state.user?.address,
+          },
+        });
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            phoneNumber: action.payload.phoneNumber
+              ? action.payload.phoneNumber
+              : state.user?.phoneNumber,
+            address: action.payload.address
+              ? action.payload.address
+              : state.user?.address,
+          },
+        };
       }
     );
   },
@@ -69,6 +106,17 @@ export const updateLastRecordAsync = createAsyncThunk(
     const date = new Date().toISOString();
     await axios.post(`${baseUrl}/user/last-record/${userId}?date=${date}`);
     return date;
+  }
+);
+
+export const updateMyProfileAsync = createAsyncThunk(
+  "notification/updateMyProfileAsync",
+  async ({ userId, phoneNumber, address }: UpdateMyProfile) => {
+    console.log(phoneNumber, address);
+    await axios(
+      `${baseUrl}/user/profile/${userId}?phoneNumber=${phoneNumber}&address=${address}`
+    );
+    return { userId,phoneNumber, address };
   }
 );
 export const { addClient, updateClient, resetClient } = clientSlice.actions;

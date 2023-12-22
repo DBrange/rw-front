@@ -1,5 +1,7 @@
 const theme = {
-  // pColor: "#FAFAFA",
+  // pColor: "#EBEEF3",
+  // sColor: "#8b5cf6",
+  // tColor: "#52525b",
   pColor: "#2A2C33",
   sColor: "#8b5cf6",
   tColor: "#52525b",

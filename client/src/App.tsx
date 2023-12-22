@@ -4,7 +4,7 @@ import { GlobalLoader, MessageBtn } from "./components";
 import AuthGuard from "./guards/auth.guard";
 import Header from "./header/Header";
 import { PrivateRoutes, PublicRoutes } from "./models/types/routes";
-import { Private } from "./pages/private";
+import { BrokerPayment, Private } from "./pages/private";
 import Public from "./pages/public/Public";
 import { Body, Footer, MainContent } from "./styledComponents";
 import RoutesWithNotFound from "./utilities/routes-with-not-found";
@@ -27,6 +27,10 @@ function App() {
         <MainContent>
           <MessageBtn />
           <RoutesWithNotFound>
+            <Route
+              path={`${PublicRoutes.PUBLIC}/payment`}
+              element={<BrokerPayment />}
+            />
             <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
             {role === USER_ROLES.CLIENT ||
             role === USER_ROLES.BROKER ||

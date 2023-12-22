@@ -1,7 +1,8 @@
 import { theme } from "@/styledComponents";
 import styled from "styled-components";
 
-export const SectionMyProfile = styled.section``
+export const SectionMyProfile = styled.section`
+`
 
 export const DivImageMyProfile = styled.div`
 width: 200px;
@@ -16,24 +17,39 @@ export const DivAllNameContainer = styled.div`
 
 `
 
+export const TitleName = styled.div`
+padding-top: 1rem ;
+font-size: 2rem;
+align-items: flex-start;
+color: ${theme.sColor};
+`
+
 export const H2NameLastname = styled.h2`
 text-align: center;
-margin-top: 1rem;
+margin: 2rem 0;
 `
 
 export const DivInformationMyProfile = styled.div`
-margin-top: 3rem;
+margin-top: 5rem;
 display: flex;
 flex-direction: column;
-gap: .8rem;
+gap: 2rem;
 `
 
 export const DivInformationDetail = styled.div`
+display: flex;
+gap: 3rem;
+/* justify-content: space-between; */
+align-items: center;
   position: relative;
   width: 100%;
 `
 
-export const MyProfileEditInformaction = styled.p`
+export const MyProfileEditInformaction = styled.button`
+text-decoration: none;
+background-color: transparent;
+border: none;
+outline: none;
 font-size: .8rem;
 cursor: pointer;
 position: absolute;

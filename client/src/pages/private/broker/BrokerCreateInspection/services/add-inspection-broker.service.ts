@@ -1,11 +1,19 @@
 import { AllBrokerClients, baseUrl } from "@/pages";
 
-export const AllBrokerClientsForCreateInspectionUrl = (id?: string) =>
-  baseUrl + `/asset/broker-clients/${id}`;
 
+export const AllBrokerClientsForCreateInspectionUrl = (
+  id?: string,
+  searchField?: string,
+  typeToFilter?: string,
+  page?: number,
+  limit?: number
+) =>
+  baseUrl +
+  `/asset/broker-clients/${id}?searchField=${searchField}&typeToFilter=${typeToFilter}&page=${page}&limit=${limit}`;
+  
 export const allBrokerClientsForCreateInspection = async (
   url: string
-): Promise<AllBrokerClients[] | [] | undefined> => {
+): Promise<AllBrokerClients[]> => {
   try {
     return fetch(url).then((res) => {
       return res.json();

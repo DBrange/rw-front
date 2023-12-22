@@ -61,7 +61,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
 
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
 
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
 
   const changePage = (e: ClickEventType) => {
     const { value } = e.currentTarget;
@@ -177,11 +177,12 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
       })
     );
   };
+  console.log(inputValues?.vehicle?.images?.length)
 
   const changeInputForImages = (e: ChangeEventType, images: string[]) => {
     const { name } = e.target;
     const [type, key] = name.split(".");
-
+    console.log({[key]: [...images]})
     setInputValues({
       ...inputValues,
       [type]: {
@@ -250,7 +251,8 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     const { value, name } = e.target;
     const [type, key] = name.split(".");
 
-    const numberValue = Number(value);
+    const onlyNumbers = /^[0-9]+$/;
+    const numberValue = onlyNumbers.test(value) ? Number(value)  : '';
 
     setInputValues({
       ...inputValues,

@@ -8,27 +8,56 @@ import {
   ImgMyProfile,
   MyProfileEditInformaction,
   SectionMyProfile,
+  TitleName,
 } from "./MiProfile.styled";
+import { MdOutlineEmail } from "react-icons/md";
+import { FaPhone } from "react-icons/fa6";
+import { TiBusinessCard } from "react-icons/ti";
+import { MdDateRange } from "react-icons/md";
+import { CiLocationOn } from "react-icons/ci";
+import { FaGenderless } from "react-icons/fa";
+import { ModalUpdate } from "@/components";
+import { useEffect, useState } from "react";
+import { modalEditMyProfile } from "@/services/sharing-information.service";
 
 function MiProfile() {
   const user = useSelector((store: AppStore) => store.user.user);
+  {
+    /* <DivImageMyProfile>
+    <ImgMyProfile
+      src="https://i.pinimg.com/280x280_RS/42/03/a5/4203a57a78f6f1b1cc8ce5750f614656.jpg"
+      alt=""
+    />
+  </DivImageMyProfile> */
+  }
+  const [modalActive, setModalActive] = useState<boolean>(false);
+  const [label, setLabel] = useState<"address" | "phoneNumber" | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    modalEditMyProfile.getSubject.subscribe((bol) => setModalActive(bol));
+  }, []);
+  
+  useEffect(() => {
+
+  }, [user]);
+
+  const updateData = (value: "address" | "phoneNumber") => {
+    modalEditMyProfile.setSubject(true);
+    setLabel(value);
+  };
+
   return (
     <SectionMyProfile>
-      <div>
-        <DivImageMyProfile>
-          <ImgMyProfile
-            src="https://i.pinimg.com/280x280_RS/42/03/a5/4203a57a78f6f1b1cc8ce5750f614656.jpg"
-            alt=""
-          />
-        </DivImageMyProfile>
+      <ModalUpdate modalActive={modalActive} label={label} />
+      <TitleName>
         <div>
-          {user?.legalUser ? (
-            <H2NameLastname>{`${user?.legalUser?.companyName}`}</H2NameLastname>
-          ) : (
-            <H2NameLastname>{`${user?.personalUser?.name} ${user?.personalUser?.lastName}`}</H2NameLastname>
-          )}
+          {user?.legalUser
+            ? `${user?.legalUser?.companyName}`
+            : `${user?.personalUser?.name} ${user?.personalUser?.lastName}`}
         </div>
-      </div>
+      </TitleName>
       <DivInformationMyProfile>
         {user?.brokerUser && (
           <>
@@ -43,47 +72,55 @@ function MiProfile() {
           </>
         )}
         <DivInformationDetail>
-          <h4>Email</h4>
+          <MdOutlineEmail size={30} />
+          {/* <h4>Email</h4> */}
           <p>{user?.email}</p>
         </DivInformationDetail>
-        <DivInformationDetail>
+        {/* <DivInformationDetail>
+          <MdOutlineEmail size={30} />
           <h4>Email alternativo</h4>
           <p>{user?.altEmail}</p>
-        </DivInformationDetail>
+        </DivInformationDetail> */}
         <DivInformationDetail>
-          <h4>Genero</h4>
+          <FaGenderless size={30} />
+          {/* <h4>Genero</h4> */}
           <p>{user?.personalUser?.gender}</p>
         </DivInformationDetail>
         <DivInformationDetail>
-          <h4>Fecha de nacimiento</h4>
+          <MdDateRange size={30} />
+          {/* <h4>Fecha de nacimiento</h4> */}
           <p>{user?.personalUser?.birthDate}</p>
         </DivInformationDetail>
         {user?.personalUser?.dni ? (
           <DivInformationDetail>
-            <h4>DNI</h4>
+            <TiBusinessCard size={30} />
+            {/* <h4>DNI</h4> */}
             <p>{user?.personalUser?.dni}</p>
           </DivInformationDetail>
         ) : (
           <>
             <DivInformationDetail>
-              <h4>Nombre de compañia</h4>
-              <p>{user?.legalUser?.companyName}</p>
-            </DivInformationDetail>
-            <DivInformationDetail>
-              <h4>CUIT</h4>
+              <TiBusinessCard size={30} />
+              {/* <h4>CUIT</h4> */}
               <p>{user?.legalUser?.cuit}</p>
             </DivInformationDetail>
           </>
         )}
         <DivInformationDetail>
-          <h4>Numero telefonico</h4>
+          <FaPhone size={30} />
+          {/* <h4>Numero telefonico</h4> */}
           <p>{user?.phoneNumber}</p>
-          <MyProfileEditInformaction>Editar</MyProfileEditInformaction>
+          <MyProfileEditInformaction onClick={() => updateData("phoneNumber")}>
+            Editar
+          </MyProfileEditInformaction>
         </DivInformationDetail>
         <DivInformationDetail>
-          <h4>Residencia</h4>
+          <CiLocationOn size={30} />
+          {/* <h4>Residencia</h4> */}
           <p>{user?.address}</p>
-          <MyProfileEditInformaction>Editar</MyProfileEditInformaction>
+          <MyProfileEditInformaction onClick={() => updateData("address")}>
+            Editar
+          </MyProfileEditInformaction>
         </DivInformationDetail>
       </DivInformationMyProfile>
     </SectionMyProfile>

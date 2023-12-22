@@ -2,12 +2,19 @@
 
 import { AllBrokerClients, baseUrl } from "@/pages";
 
-export const AllBrokerClientsForCreateSinisterUrl = (id?: string) =>
-  baseUrl + `/asset/broker-clients/${id}`;
+export const AllBrokerClientsForCreateSinisterUrl = (
+  id?: string,
+  searchField?: string,
+  typeToFilter?: string,
+  page?: number,
+  limit?: number
+) =>
+  baseUrl +
+  `/asset/broker-clients/${id}?searchField=${searchField}&typeToFilter=${typeToFilter}&page=${page}&limit=${limit}`;
 
 export const allBrokerClientsForCreateSinister = async (
   url: string
-): Promise<AllBrokerClients[] | [] | undefined> => {
+): Promise<AllBrokerClients[]> => {
   try {
     return fetch(url).then((res) => {
       return res.json();

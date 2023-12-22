@@ -1,5 +1,13 @@
-import { ClientCard, InspectLogin, Sidebar, SidebarBroker, useBrokerCreateInspectionContext } from "@/pages"
+import { Loader } from "@/components";
+import {
+  ClientCard,
+  InspectLogin,
+  Sidebar,
+  SidebarBroker,
+  useBrokerCreateInspectionContext,
+} from "@/pages";
 import { AppStore } from "@/redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
 
 function BrokerCreateInspectionBox() {
@@ -9,6 +17,9 @@ function BrokerCreateInspectionBox() {
     setTypeToFilter,
     clients,
     typeToFilter,
+    setSize,
+    size,
+    isReachedEnd,
   } = useBrokerCreateInspectionContext();
 
   const userBroker = useSelector((store: AppStore) => store.user).user
@@ -28,30 +39,38 @@ function BrokerCreateInspectionBox() {
       >
         juridica
       </button>
-      {clients?.map((client, i) => {
-        if (client.personalUser?.dni) {
-          return (
-            <ClientCard
-              key={i}
-              name={client.personalUser?.name}
-              lastname={client.personalUser?.lastName}
-              keyName={client.personalUser?.dni}
-              id={client.id}
+      <InfiniteScroll
+        className="infiniteScroll"
+        next={() => setSize(size + 1)}
+        hasMore={!isReachedEnd}
+        loader={<Loader />}
+        dataLength={clients.length ?? 0}
+      >
+        {clients?.map((client, i) => {
+          if (client.personalUser?.dni) {
+            return (
+              <ClientCard
+                key={i}
+                name={client.personalUser?.name}
+                lastname={client.personalUser?.lastName}
+                keyName={client.personalUser?.dni}
+                id={client.id}
               />
-          );
-        } else if (client.legalUser?.cuit) {
-          return (
-            <ClientCard
-              key={i}
-              companyName={client.legalUser?.companyName}
-              keyName={client.legalUser?.cuit}
-              id={client.id}
-            />
-          );
-        } else {
-          return [];
-        }
-      })}
+            );
+          } else if (client.legalUser?.cuit) {
+            return (
+              <ClientCard
+                key={i}
+                companyName={client.legalUser?.companyName}
+                keyName={client.legalUser?.cuit}
+                id={client.id}
+              />
+            );
+          } else {
+            return [];
+          }
+        })}
+      </InfiniteScroll>
     </>
   );
 
@@ -72,4 +91,4 @@ function BrokerCreateInspectionBox() {
     </>
   );
 }
-export default BrokerCreateInspectionBox
+export default BrokerCreateInspectionBox;

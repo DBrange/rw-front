@@ -104,6 +104,12 @@ export interface Ids {
   clientId: string;
 }
 
+export interface UpdateMyProfile{
+  userId?: string;
+  phoneNumber?: string;
+  address?: string;
+}
+
 // export interface UpdateLastRecord {
 //   userId: string;
 //   date: Date;

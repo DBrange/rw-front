@@ -6,6 +6,7 @@ import {
   FormInput,
   FormOptional,
   FormSelect,
+  FormSeparateImages,
   FormTireInVehicle,
 } from "@/components";
 import {
@@ -131,14 +132,13 @@ function FormVehicleData({
         }
         checked={isDamaged}
       />
-
       <FormTireInVehicle
         inputValues={inputValues as AllInspectValues}
         inputTouched={inputTouched as TouchedAllInspectValues}
         changeInputValues={changeInputValues}
         errorsInputValues={errorsInputValues}
       />
-      <FormImages
+      <FormSeparateImages
         label="Añadir fotos del vehiculo*"
         error={errorsInputValues?.vehicle?.images}
         id="vehicle.images"
