@@ -1,24 +1,21 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { ObjForArr } from "@/models/interfaces/separateImages.interface";
 import { ChangeEventType } from "@/pages";
+import { loaderImageService } from "@/services/sharing-information.service";
 import { Label, P } from "@/styledComponents";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { PiWarningCircleFill } from "react-icons/pi";
 import {
   ButtonForUploading,
   FormImagesContainer,
-  Image,
-  ImagesContainer,
-  InputFile,
-  Instructions,
-  LabelButton,
+  InputFile
 } from "..";
-import { loaderImageService } from "@/services/sharing-information.service";
 import {
   DivImageInstructions,
   DivUploadImages,
   InstructionsUpload,
   LabelButtonImage,
 } from "./FormSeparateImages.styled";
-import { PiWarningCircleFill } from "react-icons/pi";
 
 interface Props {
   label: string;
@@ -27,17 +24,8 @@ interface Props {
   name: string;
   changeInputForImages: (e: ChangeEventType, images: string[]) => void;
   instructionsImages: string[];
-}
-
-interface alguito {
-  0?: string;
-  1?: string;
-  2?: string;
-  3?: string;
-  4?: string;
-  5?: string;
-  6?: string;
-  7?: string;
+  quantity: number;
+  objForArr: ObjForArr
 }
 
 function FormSeparateImages({
@@ -47,23 +35,53 @@ function FormSeparateImages({
   label,
   changeInputForImages,
   instructionsImages,
+  quantity,
+  objForArr
 }: Props) {
-  const [imagess, setImagess] = useState<alguito>({
-    0: undefined,
-    1: undefined,
-    2: undefined,
-    3: undefined,
-    4: undefined,
-    5: undefined,
-    6: undefined,
-    7: undefined,
-  });
+  const [_imagess, setImagess] = useState<ObjForArr>(objForArr);
   const [images, setImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [_loading, setLoading] = useState<boolean>(false);
   const [event, setEvent] =
     useState<ChangeEventType | null>(null);
   const preset_key = "denuncias-web";
   const cloud_name = "dhr6ywb8r";
+
+  const imagesQuantityHTML = (quantity: number) => {
+    let elements: JSX.Element[] = []
+    for (let i = 0; i < quantity; i++) {
+      const imagesContainer = (
+        <DivImageInstructions>
+          <ButtonForUploading>
+            <LabelButtonImage
+              $error={!!(!images?.[i]?.length && error)}
+              htmlFor={`${id}i`}
+            >
+              {images?.[i]?.length ? (
+                <div>{images?.[i]?.length && <img src={images?.[i]} />}</div>
+              ) : (
+                <h5>Subir imagen</h5>
+              )}
+            </LabelButtonImage>
+
+            <InputFile
+              type="file"
+              multiple
+              id={`${id}i`}
+              name={`${name}`}
+              onChange={(e) => transformFiles(e, i)}
+            />
+          </ButtonForUploading>
+          <InstructionsUpload $error={!!(!images?.[i]?.length && error)}>
+            {`${instructionsImages[i]}`}
+          </InstructionsUpload>
+        </DivImageInstructions>
+      );
+      elements = [...elements, imagesContainer]
+      
+    }
+
+    return elements
+  }
 
   const transformFiles = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -71,10 +89,7 @@ function FormSeparateImages({
   ) => {
     try {
       const files = e.target.files;
-
-      // const filesArr = []
-      // filesArr[position] = files?.[0]
-      // console.log(filesArr)
+      
       if (files) {
         const allImages = Array.from(files);
 
@@ -98,16 +113,14 @@ function FormSeparateImages({
 
         const imagesArr = imageRULs[0];
 
-        setImagess((el: alguito) => {
+        setImagess((el: ObjForArr) => {
           const prevImages = { ...el, [`${position}`]: imagesArr };
           const newArray = Object.values(prevImages);
           setImages(newArray);
           setEvent(e)
-          // changeInputForImages(e, images);
 
           return prevImages;
         });
-        // const [type, key] = name.split(".");
       }
     } catch (err) {
       console.log(err);
@@ -120,236 +133,16 @@ function FormSeparateImages({
     }
   }, [images]);
 
-  // const nose = (p: number) => {
-  //   const algo = ["hola"];
-  //   setImagess((el: alguito) => {
-  //     const im = {...el,[`${p}`]: algo};
-  //     const newArray = Object.values(im);
-  //     setImages(newArray as string[])
-  //     return im
-  //   });
-  // };
-  // console.log(images);
-
-  // console.log(images);
   return (
     <FormImagesContainer>
-      <Label $error={!!(images?.length === 8 && error)} htmlFor={id}>
+      <Label $error={!!(images?.length === quantity && error)} htmlFor={id}>
         {label}
       </Label>
 
-      <DivUploadImages>
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[0]?.length && error)}
-              htmlFor={`${id}0`}
-            >
-              {images?.[0]?.length ? (
-                <div>{images?.[0]?.length && <img src={images?.[0]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}0`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 0)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[0]?.length && error)}>
-            {`${instructionsImages[0]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[1]?.length && error)}
-              htmlFor={`${id}1`}
-            >
-              {images?.[1]?.length ? (
-                <div>{images?.[1]?.length && <img src={images?.[1]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}1`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 1)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[1]?.length && error)}>
-            {`${instructionsImages[1]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[2]?.length && error)}
-              htmlFor={`${id}2`}
-            >
-              {images?.[2]?.length ? (
-                <div>{images?.[2]?.length && <img src={images?.[2]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}2`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 2)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[2]?.length && error)}>
-            {`${instructionsImages[2]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[3]?.length && error)}
-              htmlFor={`${id}3`}
-            >
-              {images?.[3]?.length ? (
-                <div>{images?.[3]?.length && <img src={images?.[3]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}3`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 3)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[3]?.length && error)}>
-            {`${instructionsImages[3]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[4]?.length && error)}
-              htmlFor={`${id}4`}
-            >
-              {images?.[4]?.length ? (
-                <div>{images?.[4]?.length && <img src={images?.[4]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}4`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 4)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[4]?.length && error)}>
-            {`${instructionsImages[4]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[5]?.length && error)}
-              htmlFor={`${id}5`}
-            >
-              {images?.[5]?.length ? (
-                <div>{images?.[5]?.length && <img src={images?.[5]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}5`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 5)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[5]?.length && error)}>
-            {`${instructionsImages[5]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[6]?.length && error)}
-              htmlFor={`${id}6`}
-            >
-              {images?.[6]?.length ? (
-                <div>{images?.[6]?.length && <img src={images?.[6]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}6`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 6)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[6]?.length && error)}>
-            {`${instructionsImages[6]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-
-        <DivImageInstructions>
-          <ButtonForUploading>
-            <LabelButtonImage
-              $error={!!(!images?.[7]?.length && error)}
-              htmlFor={`${id}7`}
-            >
-              {images?.[7]?.length ? (
-                <div>{images?.[7]?.length && <img src={images?.[7]} />}</div>
-              ) : (
-                <h5>Subir imagen</h5>
-              )}
-            </LabelButtonImage>
-
-            <InputFile
-              type="file"
-              multiple
-              id={`${id}7`}
-              name={`${name}`}
-              onChange={(e) => transformFiles(e, 7)}
-            />
-          </ButtonForUploading>
-          <InstructionsUpload $error={!!(!images?.[7]?.length && error)}>
-            {`${instructionsImages[7]}`}
-          </InstructionsUpload>
-        </DivImageInstructions>
-      </DivUploadImages>
+      <DivUploadImages>{imagesQuantityHTML(quantity)}</DivUploadImages>
 
       <span>
-        <P $error={!!(images?.length === 8 && error)}>
+        <P $error={!!(images?.length === quantity && error)}>
           <PiWarningCircleFill />
           {"Debe completar todas las casillas" || "a"}
         </P>

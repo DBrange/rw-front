@@ -2,12 +2,11 @@ import {
   FormCheckbox,
   FormCheckboxOpenClose,
   FormGncData,
-  FormImages,
   FormInput,
   FormOptional,
   FormSelect,
   FormSeparateImages,
-  FormTireInVehicle,
+  FormTireInVehicle
 } from "@/components";
 import {
   AllInspectValues,
@@ -20,6 +19,7 @@ import {
   TouchedClientCreateInspectionValues,
 } from "@/pages";
 import { SectionFormContainer } from "@/styledComponents";
+import { objForArrOne } from "@/utilities/separateImages.utility";
 import { useState } from "react";
 
 interface Props {
@@ -154,6 +154,8 @@ function FormVehicleData({
           "Odómetro / Tablero en contacto",
           "Rueda auxilio",
         ]}
+        quantity={8}
+        objForArr={objForArrOne}
       />
       <FormCheckbox
         changeInputForCheckbox={changeInputForCheckbox}

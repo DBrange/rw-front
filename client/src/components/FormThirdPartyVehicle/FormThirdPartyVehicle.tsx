@@ -11,16 +11,17 @@ import {
   TouchedClientCreateReportValues,
   TouchedClientInspectedCreateReportValues,
 } from "@/pages";
+import { SectionFormContainer } from "@/styledComponents";
+import { objForArrFour } from "@/utilities/separateImages.utility";
+import { useState } from "react";
 import {
   FormCheckboxOpenClose,
-  FormImages,
   FormInput,
   FormOptional,
-  FormTitle,
+  FormSeparateImages,
+  FormTitle
 } from "..";
 import { DivSeparator } from "../FormThirdPartyInjured/FormThirdPartyInjured.styled";
-import { useState } from "react";
-import { SectionFormContainer } from "@/styledComponents";
 
 interface Props {
   inputValues:
@@ -189,7 +190,7 @@ function FormThirdPartyVehicle({
         type="text"
         placeholder="Ingresar numero telefonico"
       />
-      <FormImages
+      <FormSeparateImages
         label="Añadir fotos del registro y cedula verde*"
         error={objectError?.licensePhoto}
         name={`${stringValues}.licensePhoto`}
@@ -201,6 +202,8 @@ function FormThirdPartyVehicle({
           "Cedula frente",
           "Cedula dorso",
         ]}
+        objForArr={objForArrFour}
+        quantity={4}
       />
       <FormInput
         label="Email del conductor o propietario*"

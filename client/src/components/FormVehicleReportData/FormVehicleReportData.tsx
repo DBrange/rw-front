@@ -2,10 +2,10 @@ import {
   FormCheckbox,
   FormCheckboxOpenClose,
   FormGncData,
-  FormImages,
   FormInput,
   FormOptional,
   FormSelect,
+  FormSeparateImages
 } from "@/components";
 import {
   AllReportValues,
@@ -18,6 +18,7 @@ import {
   TouchedClientCreateReportValues,
 } from "@/pages";
 import { SectionFormContainer } from "@/styledComponents";
+import { objForArrEight } from "@/utilities/separateImages.utility";
 import { useState } from "react";
 
 interface Props {
@@ -130,7 +131,7 @@ function FormVehicleReportData({
         }
         checked={isDamaged}
       />
-      <FormImages
+      <FormSeparateImages
         label="Añadir fotos del vehiculo*"
         error={errorsInputValues?.vehicleReport?.images}
         id="vehicleReport.images"
@@ -146,6 +147,8 @@ function FormVehicleReportData({
           "Odómetro / Tablero en contacto",
           "Rueda auxilio",
         ]}
+        quantity={8}
+        objForArr={objForArrEight}
       />
       <FormCheckbox
         changeInputForCheckbox={changeInputForCheckbox}

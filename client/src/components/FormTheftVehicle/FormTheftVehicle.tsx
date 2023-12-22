@@ -17,9 +17,11 @@ import {
   FormOptional,
   FormRange,
   FormScheduleInput,
+  FormSeparateImages,
 } from "..";
 import { useState } from "react";
 import { SectionFormContainer } from "@/styledComponents";
+import { objForArrOne } from "@/utilities/separateImages.utility";
 
 interface Props {
   inputValues:
@@ -113,13 +115,15 @@ function FormTheftVehicle({
               name="isTire.tireWear"
               changeInputValues={changeInputValues}
             />
-            <FormImages
+            <FormSeparateImages
               label="Añadir foto de un neumatico*"
               error={errorsInputValues?.isTire?.tirePhoto}
               id="isTire.tirePhoto"
               name="isTire.tirePhoto"
               changeInputForImages={changeInputForImages}
               instructionsImages={['Donde se visible marca y modelo']}
+              objForArr={objForArrOne}
+              quantity={1}
             />
             <FormInput
               label="Localidad de reposicion*"
