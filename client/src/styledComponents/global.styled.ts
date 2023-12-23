@@ -99,6 +99,7 @@ export const P = styled.p<{ $error: boolean }>`
 export const AccordionContainer = styled.div<{
   checked: boolean;
   $openclose?: boolean;
+  $speed?: boolean;
 }>`
   display: grid;
   width: 100%;
@@ -113,7 +114,9 @@ export const AccordionContainer = styled.div<{
       `
       : `
       transition: grid-template-rows .4s ease;
-      transition-delay: .4s;
+      ${
+        props.$speed ? "transition-delay: .0s" : "transition-delay: .4s"
+      };
 
     `}
 `;

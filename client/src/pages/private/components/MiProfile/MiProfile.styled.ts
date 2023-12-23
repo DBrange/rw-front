@@ -57,3 +57,12 @@ right: 0;
 top: 0;
 color: ${theme.sColor};
 `
+
+export const BtonChangePassword = styled.button`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  text-decoration: underline;
+  color: ${theme.textColor};
+  cursor: pointer;
+`;

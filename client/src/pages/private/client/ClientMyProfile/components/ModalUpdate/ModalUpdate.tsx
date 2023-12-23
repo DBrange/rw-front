@@ -1,28 +1,17 @@
-import { LinkNavigate } from "@/styledComponents";
-import person2 from "../../../assets/person2.svg";
-import { PrivateRoutes } from "@/models/types/routes";
-import {
-  SectionModalBg,
-  DivModalSent,
-  ImgModal,
-  H3Modal,
-  H4Modal,
-  BtnModal,
-  FormInput,
-} from "..";
 import { ChangeEventType } from "@/pages";
+import { AppDispatch, AppStore } from "@/redux";
+import { updateMyProfileAsync } from "@/redux/slices/clientSlice";
+import { modalEditMyProfile } from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
+import { IoClose } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BtnModalUpdate,
   DivBtnModalUpdate,
   DivModalUpdate,
   SpanModalUpdate,
 } from "./ModalUpdate.styled";
-import { IoClose } from "react-icons/io5";
-import { modalEditMyProfile } from "@/services/sharing-information.service";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppStore } from "@/redux";
-import { updateMyProfileAsync } from "@/redux/slices/clientSlice";
+import { SectionModalBg, H3Modal, FormInput } from "@/components";
 
 interface Props {
   modalActive: boolean;

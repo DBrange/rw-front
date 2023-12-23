@@ -23,7 +23,7 @@ export const DivBtnModalUpdate = styled.div<{$done?: boolean}>`
 `;
 
 export const BtnModalUpdate = styled.button<{ $error?: boolean }>`
-  cursor:${({ $error }) => ($error ? "not-allowed" : "cursor")};
+  cursor:${({ $error }) => ($error ? "not-allowed" : "pointer")};
   pointer-events:${({ $error }) => ($error ? "none" : "auto")} ;
   width: 70%;
   max-width: 200px;

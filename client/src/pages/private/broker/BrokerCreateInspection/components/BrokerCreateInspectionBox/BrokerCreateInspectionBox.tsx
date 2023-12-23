@@ -9,6 +9,7 @@ import {
 import { AppStore } from "@/redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
+import { ContainerBtnBrokerSelection, BtnBrokerSelection } from "../../../BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
 
 function BrokerCreateInspectionBox() {
   const {
@@ -27,18 +28,22 @@ function BrokerCreateInspectionBox() {
 
   const cards: JSX.Element = (
     <>
-      <button
-        value="user"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "user")}
-      >
-        particular
-      </button>
-      <button
-        value="legalUser"
-        onClick={(e) => setTypeToFilter(e.currentTarget.value as "legalUser")}
-      >
-        juridica
-      </button>
+      <ContainerBtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "user"}
+          value="user"
+          onClick={(e) => setTypeToFilter(e.currentTarget.value as "user")}
+        >
+          Particular
+        </BtnBrokerSelection>
+        <BtnBrokerSelection
+          $active={typeToFilter === "legalUser"}
+          value="legalUser"
+          onClick={(e) => setTypeToFilter(e.currentTarget.value as "legalUser")}
+        >
+          Juridico
+        </BtnBrokerSelection>
+      </ContainerBtnBrokerSelection>
       <InfiniteScroll
         className="infiniteScroll"
         next={() => setSize(size + 1)}
