@@ -3,6 +3,10 @@ import {
   UpdateMyProfile,
 } from "@/models/interfaces/userInfo/userInfo.interface";
 import { baseUrl } from "@/pages";
+import {
+  modalToast,
+  modalToastError,
+} from "@/services/sharing-information.service";
 import { persistLocalStorage, clearLocalStorage } from "@/utilities";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -55,46 +59,51 @@ export const clientSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       updateLastRecordAsync.fulfilled,
-      (state, action: PayloadAction<string>) => {
-        persistLocalStorage<ClientInfo>(clientKey, {
-          ...state,
-          user: { ...state.user, lastRecord: action.payload },
-        });
-        return {
-          ...state,
-          user: { ...state.user, lastRecord: action.payload },
-        };
+      (state, action: PayloadAction<string | undefined>) => {
+        if (action.payload) {
+          persistLocalStorage<ClientInfo>(clientKey, {
+            ...state,
+            user: { ...state.user, lastRecord: action.payload },
+          });
+          return {
+            ...state,
+            user: { ...state.user, lastRecord: action.payload },
+          };
+        }
       }
     );
     builder.addCase(
       updateMyProfileAsync.fulfilled,
-      (state: ClientInfo, action: PayloadAction<UpdateMyProfile>) => {
-        persistLocalStorage<ClientInfo>(clientKey, {
-          ...state,
-          user: {
-            ...state.user,
-            phoneNumber:
-              action.payload.phoneNumber
+      (
+        state: ClientInfo,
+        action: PayloadAction<UpdateMyProfile | undefined>
+      ) => {
+        if (action.payload) {
+          persistLocalStorage<ClientInfo>(clientKey, {
+            ...state,
+            user: {
+              ...state.user,
+              phoneNumber: action.payload.phoneNumber
                 ? action.payload.phoneNumber
                 : state.user?.phoneNumber,
-            address:
-              action.payload.address
+              address: action.payload.address
                 ? action.payload.address
                 : state.user?.address,
-          },
-        });
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            phoneNumber: action.payload.phoneNumber
-              ? action.payload.phoneNumber
-              : state.user?.phoneNumber,
-            address: action.payload.address
-              ? action.payload.address
-              : state.user?.address,
-          },
-        };
+            },
+          });
+          return {
+            ...state,
+            user: {
+              ...state.user,
+              phoneNumber: action.payload.phoneNumber
+                ? action.payload.phoneNumber
+                : state.user?.phoneNumber,
+              address: action.payload.address
+                ? action.payload.address
+                : state.user?.address,
+            },
+          };
+        }
       }
     );
   },
@@ -103,20 +112,28 @@ export const clientSlice = createSlice({
 export const updateLastRecordAsync = createAsyncThunk(
   "notification/updateLastRecord",
   async (userId?: string) => {
-    const date = new Date().toISOString();
-    await axios.post(`${baseUrl}/user/last-record/${userId}?date=${date}`);
-    return date;
+    try {
+      const date = new Date().toISOString();
+      await axios.post(`${baseUrl}/user/last-record/${userId}?date=${date}`);
+      return date;
+    } catch (err) {
+      console.log(err);
+    }
   }
 );
 
 export const updateMyProfileAsync = createAsyncThunk(
   "notification/updateMyProfileAsync",
   async ({ userId, phoneNumber, address }: UpdateMyProfile) => {
-    console.log(phoneNumber, address);
-    await axios(
-      `${baseUrl}/user/profile/${userId}?phoneNumber=${phoneNumber}&address=${address}`
-    );
-    return { userId,phoneNumber, address };
+    try {
+      await axios(
+        `${baseUrl}/user/profile/${userId}?phoneNumber=${phoneNumber}&address=${address}`
+      );
+      modalToast.setSubject(true);
+      return { userId, phoneNumber, address };
+    } catch (error) {
+      modalToastError.setSubject(true);
+    }
   }
 );
 export const { addClient, updateClient, resetClient } = clientSlice.actions;

@@ -1,5 +1,5 @@
 import { baseUrl } from "@/pages";
-import { loaderImageService, modalSentService, modalEditPassword, modalEditPasswordError } from "@/services/sharing-information.service";
+import { loaderImageService, modalSentService, modalEditPassword, modalEditPasswordError, modalToast, modalToastError } from "@/services/sharing-information.service";
 import { NewPassword } from "..";
 
 
@@ -30,8 +30,10 @@ export const updatePassword = async (
     modalSentService.setSubject(true);
     modalEditPassword.setSubject(false);
     modalEditPasswordError.setSubject(false);
+    modalToast.setSubject(true)
   } catch (err) {
     modalEditPasswordError.setSubject(true);
+    modalToastError.setSubject(true)
     throw err;
   }
 };

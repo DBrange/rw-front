@@ -2,7 +2,9 @@ import { ChangeEventType } from "@/pages";
 import { AppStore } from "@/redux";
 import {
   modalEditPassword,
-  modalEditPasswordError
+  modalEditPasswordError,
+  modalToast,
+  modalToastError
 } from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";

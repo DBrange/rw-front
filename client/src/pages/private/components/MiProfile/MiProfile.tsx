@@ -20,6 +20,7 @@ import {
   TitleName,
 } from "./MiProfile.styled";
 import { ClientCard, ModalUpdate, ModalUpdatePassword } from "../..";
+import { ModalToast } from "@/components";
 
 function MiProfile() {
   const user = useSelector((store: AppStore) => store.user.user);
