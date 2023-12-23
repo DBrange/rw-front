@@ -1,5 +1,8 @@
 import { AppStore } from "@/redux";
-import { modalEditMyProfile, modalEditPassword } from "@/services/sharing-information.service";
+import {
+  modalEditMyProfile,
+  modalEditPassword,
+} from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaGenderless } from "react-icons/fa";
@@ -9,19 +12,21 @@ import { TiBusinessCard } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import {
   BtonChangePassword,
+  DivCardNoEvent,
   DivInformationDetail,
   DivInformationMyProfile,
   MyProfileEditInformaction,
   SectionMyProfile,
-  TitleName
+  TitleName,
 } from "./MiProfile.styled";
-import { ModalUpdate, ModalUpdatePassword } from "../..";
+import { ClientCard, ModalUpdate, ModalUpdatePassword } from "../..";
 
 function MiProfile() {
   const user = useSelector((store: AppStore) => store.user.user);
 
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [modalPasswordActive, setModalPasswordActive] = useState<boolean>(false);
+  const [modalPasswordActive, setModalPasswordActive] =
+    useState<boolean>(false);
   const [label, setLabel] = useState<"address" | "phoneNumber" | undefined>(
     undefined
   );
@@ -32,20 +37,17 @@ function MiProfile() {
       setModalPasswordActive(bol)
     );
   }, []);
-  
-  useEffect(() => {
 
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   const updateData = (value: "address" | "phoneNumber") => {
     modalEditMyProfile.setSubject(true);
     setLabel(value);
   };
-  
+
   const modalUpdatePassword = () => {
     modalEditPassword.setSubject(true);
-    
-  }
+  };
 
   return (
     <SectionMyProfile>
@@ -60,16 +62,20 @@ function MiProfile() {
       </TitleName>
       <DivInformationMyProfile>
         {user?.brokerUser && (
-          <>
-            <DivInformationDetail>
-              <h4>Broker</h4>
-              <p>
-                {user?.brokerUser?.personalUser
-                  ? `${user?.brokerUser?.personalUser.name} ${user?.brokerUser?.personalUser.lastName}`
-                  : `${user?.brokerUser?.legalUser?.companyName}`}
-              </p>
-            </DivInformationDetail>
-          </>
+          <DivCardNoEvent>
+            <h4>Broker</h4>
+            <ClientCard
+              name={user?.brokerUser?.personalUser.name}
+              lastname={user?.brokerUser?.personalUser.lastName}
+              companyName={user?.brokerUser?.legalUser?.companyName}
+              keyName={
+                (user?.brokerUser?.personalUser
+                  ? user?.brokerUser?.personalUser?.dni
+                  : user?.brokerUser?.legalUser?.cuit) as string
+              }
+              id={user?.brokerUser?.id}
+            />
+          </DivCardNoEvent>
         )}
         <DivInformationDetail>
           <MdOutlineEmail size={30} />
@@ -112,7 +118,9 @@ function MiProfile() {
           </MyProfileEditInformaction>
         </DivInformationDetail>
         <DivInformationDetail>
-          <BtonChangePassword onClick={modalUpdatePassword}>Cambiar contraseña</BtonChangePassword>
+          <BtonChangePassword onClick={modalUpdatePassword}>
+            Cambiar contraseña
+          </BtonChangePassword>
         </DivInformationDetail>
       </DivInformationMyProfile>
     </SectionMyProfile>

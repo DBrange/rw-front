@@ -2,6 +2,7 @@ import { theme } from "@/styledComponents";
 import styled from "styled-components";
 
 export const SectionMyProfile = styled.section`
+margin-bottom: 3rem;
 `
 
 export const DivImageMyProfile = styled.div`
@@ -66,3 +67,10 @@ export const BtonChangePassword = styled.button`
   color: ${theme.textColor};
   cursor: pointer;
 `;
+
+export const DivCardNoEvent = styled.div`
+pointer-events: none;
+h4{
+  margin-bottom: .5rem;
+}
+`
