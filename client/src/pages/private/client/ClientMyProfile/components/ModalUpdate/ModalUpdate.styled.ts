@@ -17,9 +17,9 @@ export const DivModalUpdate = styled.div<{
     $modalActive ? "scale(1)" : "scale(0.5)"};
 `;
 
-export const DivBtnModalUpdate = styled.div<{$done?: boolean}>`
+export const DivBtnModalUpdate = styled.div<{$right?: boolean}>`
   width: 100%;
-  text-align: end;
+  text-align: ${({$right}) => $right ? 'start' : 'end'};
 `;
 
 export const BtnModalUpdate = styled.button<{ $error?: boolean }>`

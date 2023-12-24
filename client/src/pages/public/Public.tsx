@@ -1,6 +1,6 @@
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
 import { Navigate, Route } from "react-router-dom";
-import { Home, Inspect, Login, Register, Report } from "..";
+import { Home, Inspect, Login, MissPassword, Register, Report } from "..";
 import { PublicRoutes } from "@/models/types/routes";
 
 function Public() {
@@ -12,6 +12,10 @@ function Public() {
       <Route path={PublicRoutes.REPORT} element={<Report />} />
       <Route path={PublicRoutes.LOGIN} element={<Login />} />
       <Route path={PublicRoutes.REGISTER} element={<Register />} />
+      <Route
+        path={PublicRoutes.FORGOTTEM_PASSWORD}
+        element={<MissPassword />}
+      />
     </RoutesWithNotFound>
   );
 }

@@ -35,7 +35,8 @@ function MessageBtnHeader() {
         path === "/public/denunciar" ||
         path === "/public/inspeccionar" ||
         path === "/public/login" ||
-        path === "/public/registrarse"
+        path === "/public/registrarse" ||
+        path === "/public/contraseña"
       ) && (
         <SectionMessageBtnHeader>
           <DivDivMessageBtnHeader onClick={refreshNotifications}>
@@ -47,7 +48,8 @@ function MessageBtnHeader() {
                   path === "/public/denunciar" ||
                   path === "/public/inspeccionar" ||
                   path === "/public/login" ||
-                  path === "/public/registrarse"
+                  path === "/public/registrarse" ||
+                  path === "/public/contraseña"
                 )
               }
             >
@@ -59,7 +61,8 @@ function MessageBtnHeader() {
                     path === "/public/denunciar" ||
                     path === "/public/inspeccionar" ||
                     path === "/public/login" ||
-                    path === "/public/registrarse"
+                    path === "/public/registrarse" ||
+                    path === "/public/contraseña"
                   )
                 }
               >

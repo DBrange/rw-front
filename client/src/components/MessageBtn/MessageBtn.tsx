@@ -11,7 +11,8 @@ function MessageBtn() {
         path === "/public/denunciar" ||
         path === "/public/inspeccionar" ||
         path === "/public/login" ||
-        path === "/public/registrarse"
+        path === "/public/registrarse" ||
+        path === "/public/contraseña"
       ) && (
         <div>
           <DivMessageBtn
@@ -21,7 +22,8 @@ function MessageBtn() {
                 path === "/public/denunciar" ||
                 path === "/public/inspeccionar" ||
                 path === "/public/login" ||
-                path === "/public/registrarse"
+                path === "/public/registrarse" ||
+                path === "/public/contraseña"
               )
             }
           >
@@ -33,10 +35,10 @@ function MessageBtn() {
                   path === "/public/denunciar" ||
                   path === "/public/inspeccionar" ||
                   path === "/public/login" ||
-                  path === "/public/registrarse"
+                  path === "/public/registrarse" ||
+                  path === "/public/contraseña"
                 )
               }
-              
             >
               <AiOutlineMessage size={25} />
             </BtnMessageBtn>

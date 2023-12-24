@@ -29,10 +29,10 @@ function App() {
         <MainContent>
           <MessageBtn />
           <RoutesWithNotFound>
-            <Route
+            {/* <Route
               path={`${PublicRoutes.PUBLIC}/payment`}
               element={<BrokerPayment />}
-            />
+            /> */}
             <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
             {role === USER_ROLES.CLIENT ||
             role === USER_ROLES.BROKER ||
@@ -62,7 +62,8 @@ function App() {
             path === "/public/denunciar" ||
             path === "/public/inspeccionar" ||
             path === "/public/login" ||
-            path === "/public/registrarse"
+            path === "/public/registrarse" ||
+            path === "/public/contraseña"
           )
         }
       />

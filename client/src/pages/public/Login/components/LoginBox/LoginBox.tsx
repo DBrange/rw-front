@@ -1,11 +1,25 @@
 import { FormInput, FormTitle } from "@/components";
 import { useLoginContext } from "@/pages";
 import { Form } from "@/styledComponents";
-import { BtnLogin, DivNoRegister, H6NoRegister, PNotFound, SectionLoginBox, SpanNoRegister } from "./LoginBox.styled";
+import {
+  BtnLogin,
+  DivNoRegister,
+  H6NoRegister,
+  PNotFound,
+  SectionLoginBox,
+  SpanNoRegister,
+} from "./LoginBox.styled";
 import { PublicRoutes } from "@/models/types/routes";
 
 function LoginBox() {
-  const {inputValues,loginData,submitData,errorValues,touchedValues,formNotFound} = useLoginContext()
+  const {
+    inputValues,
+    loginData,
+    submitData,
+    errorValues,
+    touchedValues,
+    formNotFound,
+  } = useLoginContext();
   return (
     <Form onSubmit={submitData}>
       <SectionLoginBox>
@@ -44,6 +58,15 @@ function LoginBox() {
             >
               {" "}
               Registrate aqui
+            </SpanNoRegister>
+          </H6NoRegister>
+        </DivNoRegister>
+        <DivNoRegister>
+          <H6NoRegister>
+            <SpanNoRegister
+              to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.FORGOTTEM_PASSWORD}`}
+            >
+              He olvidado mi contraseña
             </SpanNoRegister>
           </H6NoRegister>
         </DivNoRegister>

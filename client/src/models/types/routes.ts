@@ -5,15 +5,16 @@ export enum PublicRoutes {
   INSPECT = "inspeccionar",
   REPORT = "denunciar",
   REGISTER = "registrarse",
+  FORGOTTEM_PASSWORD = "contraseña",
 }
 
 export enum PrivateRoutes {
   PRIVATE = "private",
   BROKER = "broker",
-  ADMIN = 'admin',
+  ADMIN = "admin",
   CLIENT = "cliente",
   DASHBOARD = "dashboard",
-  ELEMENTS = 'elementos',
+  ELEMENTS = "elementos",
   CREATE_INSPECTION = "crear-inspeccion",
   CREATE_SINISTER = "crear-siniestro",
   CREATE_SINISTER_IN_INSURED = "crear-siniestro-en",
@@ -22,6 +23,6 @@ export enum PrivateRoutes {
   INSURED_DETAIL = "asegurados",
   SINISTER_DETAIL = "siniestros",
   MY_PROFILE = "perfil",
-  CLIENTS_OF_BROKER = 'clientes',
-  SEARCH_CLIENT = 'buscar-cliente',
+  CLIENTS_OF_BROKER = "clientes",
+  SEARCH_CLIENT = "buscar-cliente",
 }
