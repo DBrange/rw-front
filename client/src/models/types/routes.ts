@@ -24,5 +24,7 @@ export enum PrivateRoutes {
   SINISTER_DETAIL = "siniestros",
   MY_PROFILE = "perfil",
   CLIENTS_OF_BROKER = "clientes",
+  USERS_OF_ADMIN = "usuarios",
   SEARCH_CLIENT = "buscar-cliente",
+  SEARCH_USER = "buscar-usuario",
 }

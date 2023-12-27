@@ -13,4 +13,5 @@ export * from './MiProfile';
 export * from './ReportCard';
 export * from './ReportDetail';
 export * from './Sidebar';
+export * from './SidebarAdmin';
 export * from './SidebarBroker';

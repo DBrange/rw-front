@@ -11,6 +11,7 @@ import {
 import {
   Broker
 } from "./broker";
+import Admin from "./admin/Admin";
 
 function Private() {
   const path = useSelector((store: AppStore) => store.user.user?.role);
@@ -49,7 +50,7 @@ function Private() {
             element={<Navigate replace to={PrivateRoutes.ADMIN} />}
           />
           <Route element={<RoleGuard role={USER_ROLES.ADMIN} />}>
-            <Route path={`${PrivateRoutes.ADMIN}/*`} element={<Client />} />
+            <Route path={`${PrivateRoutes.ADMIN}/*`} element={<Admin />} />
           </Route>
         </>
       ) : (
