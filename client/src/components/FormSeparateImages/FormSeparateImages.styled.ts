@@ -52,11 +52,12 @@ export const InstructionsUpload = styled.span<{ $error?: boolean }>`
   position: absolute;
   left: 0;
   bottom: 20px;
-  background-color: #0006;
+  backdrop-filter: blur(15px);
   text-align: center;
   width: 6rem;
   white-space: pre-line;
   display: block;
   font-size: 0.6rem;
-  color: ${({ $error }) => ($error ? `${theme.errColor}` : "#aaa")};
+  color: ${({ $error }) =>
+    $error ? `${theme.errColor}` : `${theme.textColor}`};
 `;
