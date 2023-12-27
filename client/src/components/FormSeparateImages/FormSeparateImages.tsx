@@ -5,11 +5,7 @@ import { Label, P } from "@/styledComponents";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { PiWarningCircleFill } from "react-icons/pi";
-import {
-  ButtonForUploading,
-  FormImagesContainer,
-  InputFile
-} from "..";
+import { ButtonForUploading, FormImagesContainer, InputFile } from "..";
 import {
   DivImageInstructions,
   DivUploadImages,
@@ -25,7 +21,7 @@ interface Props {
   changeInputForImages: (e: ChangeEventType, images: string[]) => void;
   instructionsImages: string[];
   quantity: number;
-  objForArr: ObjForArr
+  objForArr: ObjForArr;
 }
 
 function FormSeparateImages({
@@ -36,25 +32,24 @@ function FormSeparateImages({
   changeInputForImages,
   instructionsImages,
   quantity,
-  objForArr
+  objForArr,
 }: Props) {
   const [_imagess, setImagess] = useState<ObjForArr>(objForArr);
   const [images, setImages] = useState<string[]>([]);
   const [_loading, setLoading] = useState<boolean>(false);
-  const [event, setEvent] =
-    useState<ChangeEventType | null>(null);
+  const [event, setEvent] = useState<ChangeEventType | null>(null);
   const preset_key = "denuncias-web";
   const cloud_name = "dhr6ywb8r";
 
   const imagesQuantityHTML = (quantity: number) => {
-    let elements: JSX.Element[] = []
+    let elements: JSX.Element[] = [];
     for (let i = 0; i < quantity; i++) {
       const imagesContainer = (
         <DivImageInstructions>
           <ButtonForUploading>
             <LabelButtonImage
               $error={!!(!images?.[i]?.length && error)}
-              htmlFor={`${id}i`}
+              htmlFor={id + i}
             >
               {images?.[i]?.length ? (
                 <div>{images?.[i]?.length && <img src={images?.[i]} />}</div>
@@ -66,7 +61,7 @@ function FormSeparateImages({
             <InputFile
               type="file"
               multiple
-              id={`${id}i`}
+              id={id + i}
               name={`${name}`}
               onChange={(e) => transformFiles(e, i)}
             />
@@ -76,12 +71,11 @@ function FormSeparateImages({
           </InstructionsUpload>
         </DivImageInstructions>
       );
-      elements = [...elements, imagesContainer]
-      
+      elements = [...elements, imagesContainer];
     }
 
-    return elements
-  }
+    return elements;
+  };
 
   const transformFiles = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -89,7 +83,7 @@ function FormSeparateImages({
   ) => {
     try {
       const files = e.target.files;
-      
+
       if (files) {
         const allImages = Array.from(files);
 
@@ -117,7 +111,7 @@ function FormSeparateImages({
           const prevImages = { ...el, [`${position}`]: imagesArr };
           const newArray = Object.values(prevImages);
           setImages(newArray);
-          setEvent(e)
+          setEvent(e);
 
           return prevImages;
         });

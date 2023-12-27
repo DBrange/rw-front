@@ -1,30 +1,24 @@
+import { FormContent, FormToOpen } from "@/components";
+import { ClickEventType } from "@/pages";
+import { AccordionContainer } from "@/styledComponents";
+import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaGenderless, FaPhone } from "react-icons/fa";
-import { MdOutlineEmail, MdDateRange } from "react-icons/md";
+import { MdDateRange, MdOutlineArrowForwardIos, MdOutlineEmail } from "react-icons/md";
 import { TiBusinessCard } from "react-icons/ti";
 import {
-  AllClientSinisters,
   ClientDetailInBroker,
   InspectionCard,
   ReportCard,
-  SectionCard,
+  SectionCard
 } from "../..";
 import {
-  DivImageMyProfile,
-  DivInformationDetail,
   DivInformationMyProfile,
-  H2NameLastname,
-  ImgMyProfile,
-  MyProfileEditInformaction,
+  DivInformationProfileDetail,
   SectionMyProfile,
-  TitleName,
+  TitleName
 } from "../MiProfile/MiProfile.styled";
 import { DivClientProfile, TitleClientProfile } from "./ClientProfile.styled";
-import { FormToOpen, FormTitle, FormContent } from "@/components";
-import { AccordionContainer } from "@/styledComponents";
-import { useState } from "react";
-import { ClickEventType } from "@/pages";
-import { MdOutlineArrowForwardIos } from "react-icons/md";
 
 interface Props {
   data: ClientDetailInBroker | undefined;
@@ -78,50 +72,50 @@ function ClientProfile({ data }: Props) {
       <DivInformationMyProfile>
         {data?.brokerUser && (
           <>
-            <DivInformationDetail>
+            <DivInformationProfileDetail>
               <h4>Broker</h4>
               <p>
                 {data?.brokerUser?.personalUser
                   ? `${data?.brokerUser?.personalUser.name} ${data?.brokerUser?.personalUser.lastName}`
                   : `${data?.brokerUser?.legalUser?.companyName}`}
               </p>
-            </DivInformationDetail>
+            </DivInformationProfileDetail>
           </>
         )}
-        <DivInformationDetail>
+        <DivInformationProfileDetail>
           <MdOutlineEmail size={30} />
           <p>{data?.email}</p>
-        </DivInformationDetail>
-        <DivInformationDetail>
+        </DivInformationProfileDetail>
+        <DivInformationProfileDetail>
           <FaGenderless size={30} />
           {/* <h4>Genero</h4> */}
           <p>{data?.personalUser?.gender}</p>
-        </DivInformationDetail>
-        <DivInformationDetail>
+        </DivInformationProfileDetail>
+        <DivInformationProfileDetail>
           <MdDateRange size={30} />
           <p>{data?.personalUser?.birthDate}</p>
-        </DivInformationDetail>
+        </DivInformationProfileDetail>
         {data?.personalUser?.dni ? (
-          <DivInformationDetail>
+          <DivInformationProfileDetail>
             <TiBusinessCard size={30} />
             <p>{data?.personalUser?.dni}</p>
-          </DivInformationDetail>
+          </DivInformationProfileDetail>
         ) : (
           <>
-            <DivInformationDetail>
+            <DivInformationProfileDetail>
               <TiBusinessCard size={30} />
               <p>{data?.legalUser?.cuit}</p>
-            </DivInformationDetail>
+            </DivInformationProfileDetail>
           </>
         )}
-        <DivInformationDetail>
+        <DivInformationProfileDetail>
           <FaPhone size={30} />
           <p>{data?.phoneNumber}</p>
-        </DivInformationDetail>
-        <DivInformationDetail>
+        </DivInformationProfileDetail>
+        <DivInformationProfileDetail>
           <CiLocationOn size={30} />
           <p>{data?.address}</p>
-        </DivInformationDetail>
+        </DivInformationProfileDetail>
       </DivInformationMyProfile>
       <DivClientProfile>
         <TitleClientProfile $open={!!open.inspection}>

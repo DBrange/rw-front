@@ -61,7 +61,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
 
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
 
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
 
   const changePage = (e: ClickEventType) => {
     const { value } = e.currentTarget;

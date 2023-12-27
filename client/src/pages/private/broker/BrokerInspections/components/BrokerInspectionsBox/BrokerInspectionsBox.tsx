@@ -68,7 +68,7 @@ function BrokerInspectionsBox() {
                     key={el.vehicle.id}
                     type={el.vehicle.type}
                     keyName={el.vehicle.plate}
-                    id={el.vehicle.id}
+                    id={el.id}
                     date={el.created_at}
                   />
                 );
@@ -78,7 +78,7 @@ function BrokerInspectionsBox() {
                     key={el.electronic.id}
                     type={el.electronic.type}
                     keyName={el.electronic.brand}
-                    id={el.electronic.id}
+                    id={el.id}
                     date={el.created_at}
                   />
                 );

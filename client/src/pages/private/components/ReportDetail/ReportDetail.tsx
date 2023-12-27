@@ -1,8 +1,13 @@
+import ModalImage from "@/components/ModalImage/ModalImage";
+import { modalImage } from "@/services/sharing-information.service";
+import { useEffect, useState } from "react";
 import { Crash, Fire, Injuredd, SinisterDetail } from "../..";
 import { DivHeaderInspectionDetail } from "../InspectionDetail/InspectionDetail.styled";
 import {
   DivInformationDetail,
+  DivInformationDetailImgsBox,
   DivInformationMyProfile,
+  ImageDetail,
 } from "../MiProfile/MiProfile.styled";
 
 function ReportnDetail({
@@ -12,9 +17,19 @@ function ReportnDetail({
   values: SinisterDetail | undefined;
   id: string | undefined;
 }) {
-  // const { data } = useSWR(detailAssetUrl(insuredId), inspectedDetail);
+  const [imageIndex, setImageIndex] = useState<number>(0);
 
-  // const vehicle
+  const open = (i: number) => {
+    setImageIndex(i);
+    modalImage.setSubject(true);
+  };
+
+  
+  const [modalActive, setModalActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    modalImage.getSubject.subscribe((bol) => setModalActive(bol));
+  }, []);
 
   const thirdInjuredHTML = (injuredd: Injuredd[]) =>
     injuredd.length && (
@@ -218,7 +233,7 @@ function ReportnDetail({
             gncId,
           },
         },
-        sinisterType: { theft, fire, crash,damage: damageSinister },
+        sinisterType: { theft, fire, crash, damage: damageSinister },
         injuredd,
         thirdPartyVehicle,
         date,
@@ -228,17 +243,18 @@ function ReportnDetail({
 
       return (
         <>
+          {" "}
+          <ModalImage
+            modalActive={modalActive}
+            images={images}
+            imageIndex={imageIndex}
+          />
           <DivHeaderInspectionDetail>
             <h2>{type}</h2>
             <h2>{`${brand} ${model}`}</h2>
             {/* <h2></h2> */}
             <h2>{plate}</h2>
           </DivHeaderInspectionDetail>
-          {/* <Link
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`}
-          >
-            Para denunciar
-          </Link> */}
           <DivInformationMyProfile>
             {dataClientHTML()}
             <h2>Siniestro</h2>
@@ -284,11 +300,13 @@ function ReportnDetail({
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Fotos del vehiculo</h4>
-              {images.map((el, i) => (
-                <div key={el + i}>
-                  <img src={el} />
-                </div>
-              ))}
+              <DivInformationDetailImgsBox>
+                {images.map((el: string, i: number) => (
+                  <div key={el + i}>
+                    <ImageDetail onClick={() => open(i)} src={el} />
+                  </div>
+                ))}
+              </DivInformationDetailImgsBox>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Okm</h4>
@@ -324,6 +342,11 @@ function ReportnDetail({
             )}
             {theft && (
               <>
+                <ModalImage
+                  modalActive={modalActive}
+                  images={theft?.reportPhoto}
+                  imageIndex={imageIndex}
+                />
                 <h2>{"Robo"}</h2>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
@@ -339,18 +362,21 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Foto de denuncia</h4>
-                  {theft?.reportPhoto.map((el, i) => (
-                    <div key={el + i}>
-                      <img src={el} />
-                    </div>
-                  ))}
+                  <DivInformationDetailImgsBox>
+                    {theft?.reportPhoto.map((el: string, i: number) => (
+                      <div key={el + i}>
+                        <ImageDetail onClick={() => open(i)} src={el} />
+                      </div>
+                    ))}
+                  </DivInformationDetailImgsBox>
                 </DivInformationDetail>
-                {/* <DivInformationDetail>
-                  <h4>Robo de neumaticos</h4>
-                  <p>{theft?.isTire ? "Si" : "No"}</p>
-                </DivInformationDetail> */}
                 {theft?.isTire && (
                   <>
+                    <ModalImage
+                      modalActive={modalActive}
+                      images={theft?.theftTire?.tirePhoto as string[]}
+                      imageIndex={imageIndex}
+                    />
                     <h2>Robo de neumaticos</h2>
                     <DivInformationDetail>
                       <h4>Cantidad</h4>
@@ -362,12 +388,15 @@ function ReportnDetail({
                     </DivInformationDetail>
                     <DivInformationDetail>
                       <h4>Fotos del neumatico</h4>
-
-                      {theft?.theftTire?.tirePhoto.map((el, i) => (
-                        <div key={el + i}>
-                          <img src={el} />
-                        </div>
-                      ))}
+                      <DivInformationDetailImgsBox>
+                        {theft?.theftTire?.tirePhoto.map(
+                          (el: string, i: number) => (
+                            <div key={el + i}>
+                              <ImageDetail onClick={() => open(i)} src={el} />
+                            </div>
+                          )
+                        )}
+                      </DivInformationDetailImgsBox>
                     </DivInformationDetail>
                     <DivInformationDetail>
                       <h4>Ubicacion de reemplazo</h4>
@@ -379,6 +408,11 @@ function ReportnDetail({
             )}
             {damageSinister && (
               <>
+                <ModalImage
+                  modalActive={modalActive}
+                  images={damageSinister?.reportPhoto}
+                  imageIndex={imageIndex}
+                />
                 <h2>{"Daño"}</h2>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
@@ -398,12 +432,16 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Foto de denuncia</h4>
-                  {damageSinister?.reportPhoto.map((el, i) => (
-                    <div key={el + i}>
-                      <img src={el} />
-                    </div>
-                  ))}
-                </DivInformationDetail>{" "}
+                  <DivInformationDetailImgsBox>
+                    {damageSinister?.reportPhoto.map(
+                      (el: string, i: number) => (
+                        <div key={el + i}>
+                          <ImageDetail onClick={() => open(i)} src={el} />
+                        </div>
+                      )
+                    )}
+                  </DivInformationDetailImgsBox>
+                </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Monto de reparacion</h4>
                   <p>{damageSinister?.budget}</p>
@@ -418,6 +456,11 @@ function ReportnDetail({
                   <>
                     {thirdPartyVehicle.map((el, i) => (
                       <>
+                        <ModalImage
+                          modalActive={modalActive}
+                          images={el.thirdPartyDriver.licensePhoto}
+                          imageIndex={imageIndex}
+                        />
                         <h2>Vehiculo n° {i + 1}</h2>
                         <DivInformationDetail>
                           <h4>Nombre del propietario</h4>
@@ -487,12 +530,18 @@ function ReportnDetail({
                         </DivInformationDetail>
                         <DivInformationDetail>
                           <h4>Fotos de licencia</h4>
-
-                          {el.thirdPartyDriver.licensePhoto.map((el) => (
-                            <div key={el + i}>
-                              <img src={el} />
-                            </div>
-                          ))}
+                          <DivInformationDetailImgsBox>
+                            {el.thirdPartyDriver.licensePhoto.map(
+                              (el: string, i: number) => (
+                                <div key={el + i}>
+                                  <ImageDetail
+                                    onClick={() => open(i)}
+                                    src={el}
+                                  />
+                                </div>
+                              )
+                            )}
+                          </DivInformationDetailImgsBox>
                         </DivInformationDetail>
                       </>
                     ))}
@@ -544,6 +593,11 @@ function ReportnDetail({
             )}
             {theft && (
               <>
+                <ModalImage
+                  modalActive={modalActive}
+                  images={theft?.reportPhoto}
+                  imageIndex={imageIndex}
+                />
                 <h2>{"Robo"}</h2>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
@@ -559,16 +613,23 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Foto de denuncia</h4>
-                  {theft?.reportPhoto.map((el, i) => (
-                    <div key={el + i}>
-                      <img src={el} />
-                    </div>
-                  ))}
+                  <DivInformationDetailImgsBox>
+                    {theft?.reportPhoto.map((el: string, i: number) => (
+                      <div key={el + i}>
+                        <ImageDetail onClick={() => open(i)} src={el} />
+                      </div>
+                    ))}
+                  </DivInformationDetailImgsBox>
                 </DivInformationDetail>
               </>
             )}
             {theft && (
               <>
+                <ModalImage
+                  modalActive={modalActive}
+                  images={damageSinister?.reportPhoto as string[]}
+                  imageIndex={imageIndex}
+                />
                 <h2>{"Daño"}</h2>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
@@ -588,12 +649,16 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Foto de denuncia</h4>
-                  {damageSinister?.reportPhoto.map((el, i) => (
-                    <div key={el + i}>
-                      <img src={el} />
-                    </div>
-                  ))}
-                </DivInformationDetail>{" "}
+                  <DivInformationDetailImgsBox>
+                    {damageSinister?.reportPhoto.map(
+                      (el: string, i: number) => (
+                        <div key={el + i}>
+                          <ImageDetail onClick={() => open(i)} src={el} />
+                        </div>
+                      )
+                    )}
+                  </DivInformationDetailImgsBox>
+                </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Monto de reparacion</h4>
                   <p>{damageSinister?.budget}</p>

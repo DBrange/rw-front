@@ -17,14 +17,14 @@ export const DivModalUpdate = styled.div<{
     $modalActive ? "scale(1)" : "scale(0.5)"};
 `;
 
-export const DivBtnModalUpdate = styled.div<{$right?: boolean}>`
+export const DivBtnModalUpdate = styled.div<{ $right?: boolean }>`
   width: 100%;
-  text-align: ${({$right}) => $right ? 'start' : 'end'};
+  text-align: ${({ $right }) => ($right ? "start" : "end")};
 `;
 
 export const BtnModalUpdate = styled.button<{ $error?: boolean }>`
-  cursor:${({ $error }) => ($error ? "not-allowed" : "pointer")};
-  pointer-events:${({ $error }) => ($error ? "none" : "auto")} ;
+  cursor: ${({ $error }) => ($error ? "not-allowed" : "pointer")};
+  pointer-events: ${({ $error }) => ($error ? "none" : "auto")};
   width: 70%;
   max-width: 200px;
   height: 2rem;
@@ -42,20 +42,21 @@ export const BtnModalUpdate = styled.button<{ $error?: boolean }>`
 `;
 
 export const SpanModalUpdate = styled.button`
-display: flex;
-align-items: center;
-justify-content: center;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    position: absolute;
-    padding: .25rem;
-color: ${theme.textColor};
-right: 1rem;
-top: 1rem;
-border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  position: absolute;
+  padding: 0.25rem;
+  color: ${theme.textColor};
+  right: 1rem;
+  top: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
 
-    &:hover {
+  &:hover {
     background-color: #fff1;
   }
 `;

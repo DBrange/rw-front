@@ -5,9 +5,14 @@ import { AssetDetail } from "../..";
 import { PrivateRoutes } from "../../../../models/types/routes";
 import {
   DivInformationDetail,
+  DivInformationDetailImgsBox,
   DivInformationMyProfile,
+  ImageDetail,
 } from "../MiProfile/MiProfile.styled";
 import { DivHeaderInspectionDetail } from "./InspectionDetail.styled";
+import ModalImage from "@/components/ModalImage/ModalImage";
+import { useEffect, useState } from "react";
+import { modalImage } from "@/services/sharing-information.service";
 
 function InspectionDetail({
   values,
@@ -19,6 +24,19 @@ function InspectionDetail({
   const userBroker = useSelector(
     (store: AppStore) => store.user.user?.userBroker
   );
+
+  const [modalActive, setModalActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    modalImage.getSubject.subscribe((bol) => setModalActive(bol));
+  }, []);
+
+  const [imageIndex, setImageIndex] = useState<number>(0);
+
+  const open = (i: number) => {
+    setImageIndex(i);
+    modalImage.setSubject(true);
+  };
 
   const dataVehicleHTML = () => {
     if (values?.vehicle) {
@@ -47,6 +65,11 @@ function InspectionDetail({
 
       return (
         <>
+          <ModalImage
+            modalActive={modalActive}
+            images={images}
+            imageIndex={imageIndex}
+          />
           <DivHeaderInspectionDetail>
             <h2>{type}</h2>
             <h2>{`${brand} ${model}`}</h2>
@@ -94,11 +117,13 @@ function InspectionDetail({
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Fotos del vehiculo</h4>
-              {images.map((el: string, i: number) => (
-                <div key={el + i}>
-                  <img src={el} />
-                </div>
-              ))}
+              <DivInformationDetailImgsBox>
+                {images.map((el: string, i: number) => (
+                  <div key={el + i}>
+                    <ImageDetail onClick={() => open(i)} src={el} />
+                  </div>
+                ))}
+              </DivInformationDetailImgsBox>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Okm</h4>
@@ -141,12 +166,7 @@ function InspectionDetail({
   const dataElectronicHTML = () => {
     if (values?.electronic) {
       const {
-        electronic: {
-          brand,
-          model,
-          type,
-          smartphone,
-        },
+        electronic: { brand, model, type, smartphone },
       } = values;
 
       return (

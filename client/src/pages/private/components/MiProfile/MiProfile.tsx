@@ -10,17 +10,16 @@ import { FaPhone } from "react-icons/fa6";
 import { MdDateRange, MdOutlineEmail } from "react-icons/md";
 import { TiBusinessCard } from "react-icons/ti";
 import { useSelector } from "react-redux";
+import { ClientCard, ModalUpdate, ModalUpdatePassword } from "../..";
 import {
   BtonChangePassword,
   DivCardNoEvent,
-  DivInformationDetail,
   DivInformationMyProfile,
+  DivInformationProfileDetail,
   MyProfileEditInformaction,
   SectionMyProfile,
   TitleName,
 } from "./MiProfile.styled";
-import { ClientCard, ModalUpdate, ModalUpdatePassword } from "../..";
-import { ModalToast } from "@/components";
 
 function MiProfile() {
   const user = useSelector((store: AppStore) => store.user.user);
@@ -78,51 +77,51 @@ function MiProfile() {
             />
           </DivCardNoEvent>
         )}
-        <DivInformationDetail>
+        <DivInformationProfileDetail>
           <MdOutlineEmail size={30} />
           <p>{user?.email}</p>
-        </DivInformationDetail>
-        <DivInformationDetail>
+        </DivInformationProfileDetail>
+        <DivInformationProfileDetail>
           <FaGenderless size={30} />
           {/* <h4>Genero</h4> */}
           <p>{user?.personalUser?.gender}</p>
-        </DivInformationDetail>
-        <DivInformationDetail>
+        </DivInformationProfileDetail>
+        <DivInformationProfileDetail>
           <MdDateRange size={30} />
           <p>{user?.personalUser?.birthDate}</p>
-        </DivInformationDetail>
+        </DivInformationProfileDetail>
         {user?.personalUser?.dni ? (
-          <DivInformationDetail>
+          <DivInformationProfileDetail>
             <TiBusinessCard size={30} />
             <p>{user?.personalUser?.dni}</p>
-          </DivInformationDetail>
+          </DivInformationProfileDetail>
         ) : (
           <>
-            <DivInformationDetail>
+            <DivInformationProfileDetail>
               <TiBusinessCard size={30} />
               <p>{user?.legalUser?.cuit}</p>
-            </DivInformationDetail>
+            </DivInformationProfileDetail>
           </>
         )}
-        <DivInformationDetail>
+        <DivInformationProfileDetail>
           <FaPhone size={30} />
           <p>{user?.phoneNumber}</p>
           <MyProfileEditInformaction onClick={() => updateData("phoneNumber")}>
             Editar
           </MyProfileEditInformaction>
-        </DivInformationDetail>
-        <DivInformationDetail>
+        </DivInformationProfileDetail>
+        <DivInformationProfileDetail>
           <CiLocationOn size={30} />
           <p>{user?.address}</p>
           <MyProfileEditInformaction onClick={() => updateData("address")}>
             Editar
           </MyProfileEditInformaction>
-        </DivInformationDetail>
-        <DivInformationDetail>
+        </DivInformationProfileDetail>
+        <DivInformationProfileDetail>
           <BtonChangePassword onClick={modalUpdatePassword}>
             Cambiar contraseña
           </BtonChangePassword>
-        </DivInformationDetail>
+        </DivInformationProfileDetail>
       </DivInformationMyProfile>
     </SectionMyProfile>
   );
