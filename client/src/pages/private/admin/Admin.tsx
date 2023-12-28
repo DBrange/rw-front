@@ -6,6 +6,8 @@ import {
   AdminUser,
 } from "..";
 import { AdminUsers } from "./AdminUsers";
+import { AdminInspections } from "./AdminInspections";
+import AdminReports from "./AdminReports/AdminReports";
 
 function Admin() {
   return (
@@ -19,6 +21,8 @@ function Admin() {
         path={`${PrivateRoutes.USERS_OF_ADMIN}`}
         element={<AdminUsers />}
       />
+      <Route path={`${PrivateRoutes.INSPECTIONS}`} element={<AdminInspections />} />
+      <Route path={`${PrivateRoutes.ALL_SINISTER}`} element={<AdminReports />} />
       {/* <Route
         path={`${PrivateRoutes.CLIENTS_OF_BROKER}`}
         element={<BrokerClients />}

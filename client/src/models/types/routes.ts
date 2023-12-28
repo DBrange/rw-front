@@ -27,4 +27,5 @@ export enum PrivateRoutes {
   USERS_OF_ADMIN = "usuarios",
   SEARCH_CLIENT = "buscar-cliente",
   SEARCH_USER = "buscar-usuario",
+  INSPECTIONS = "inspecciones",
 }

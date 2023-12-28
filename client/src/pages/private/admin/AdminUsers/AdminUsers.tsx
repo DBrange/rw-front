@@ -1,6 +1,12 @@
+import { AdminUsersProvider, AdminUsersContainer, AdminUsersBox } from ".";
+
 function AdminUsers() {
   return (
-    <div>AdminUsers</div>
-  )
+    <AdminUsersProvider>
+      <AdminUsersContainer>
+        <AdminUsersBox />
+      </AdminUsersContainer>
+    </AdminUsersProvider>
+  );
 }
 export default AdminUsers

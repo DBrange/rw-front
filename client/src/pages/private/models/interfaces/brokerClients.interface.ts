@@ -49,3 +49,27 @@ export interface ClientByEmailLegalUser {
   companyName: string;
   cuit: string;
 }
+
+export interface AllUsers {
+  id: string;
+  created_at: Date;
+  updated_at: Date;
+  personalUser?: AllUsersPersonalUser;
+  legalUser?: AllUsersLegalUser;
+  userBroker?: AllUsersUserBroker;
+}
+
+interface AllUsersPersonalUser {
+  name: string;
+  lastName: string;
+  dni: string;
+}
+
+interface AllUsersLegalUser {
+  companyName: string;
+  cuit: string;
+}
+
+interface AllUsersUserBroker {
+  id: string
+}

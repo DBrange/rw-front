@@ -78,7 +78,7 @@ function SidebarAdmin() {
           </LinkNavigate>
 
           <LinkNavigate
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.ALL_INSURED}`}
+            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.INSPECTIONS}`}
             onClick={notis}
           >
             <LiSidebarItem>

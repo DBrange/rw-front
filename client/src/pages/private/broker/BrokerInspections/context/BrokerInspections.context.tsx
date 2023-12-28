@@ -1,15 +1,10 @@
 import { AllClientAssets } from "@/pages";
-import { AppStore } from "@/redux";
-import { createContext, useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import useSWRInfinite from "swr/infinite";
+import { createContext, useContext, useState } from "react";
 import {
-  AllBrokerAssetsUserUrl,
-  IBrokerInspectionsContext,
-  allBrokerInspected,
+  IBrokerInspectionsContext
 } from "..";
-import { emptyBrokerInspectionsContext } from "./empty-brokerInspections-context";
 import InspectionsPaginationHook from "../utilities/InspectionPaginationHook.utility";
+import { emptyBrokerInspectionsContext } from "./empty-brokerInspections-context";
 
 export const BrokerInspectionsContext =
   createContext<IBrokerInspectionsContext>(emptyBrokerInspectionsContext);
