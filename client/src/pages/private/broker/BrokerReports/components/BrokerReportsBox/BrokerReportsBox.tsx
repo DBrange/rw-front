@@ -128,24 +128,24 @@ function BrokerReportsBox() {
         {[...sinisters]
           ?.sort((a, b) => date(b.created_at) - date(a.created_at))
           .map((el: AllClientSinisters) => {
-            if (el.asset.vehicle) {
+            if (el?.asset?.vehicle) {
               return (
                 <ReportCard
-                  key={el.id}
-                  type={el.asset.vehicle.type}
-                  keyName={el.asset.vehicle.plate}
-                  id={el.id}
-                  date={el.created_at}
+                  key={el?.id}
+                  type={el?.asset?.vehicle?.type}
+                  keyName={el?.asset?.vehicle?.plate}
+                  id={el?.id}
+                  date={el?.created_at}
                 />
               );
-            } else if (el.asset.electronic) {
+            } else if (el?.asset?.electronic) {
               return (
                 <ReportCard
-                  key={el.id}
-                  type={el.asset.electronic.type}
-                  keyName={el.asset.electronic.brand}
-                  id={el.id}
-                  date={el.created_at}
+                  key={el?.id}
+                  type={el?.asset?.electronic?.type}
+                  keyName={el?.asset?.electronic?.brand}
+                  id={el?.id}
+                  date={el?.created_at}
                 />
               );
             } else {

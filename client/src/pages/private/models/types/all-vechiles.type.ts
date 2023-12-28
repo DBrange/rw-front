@@ -73,7 +73,7 @@ export interface AssetDetail {
   id: string;
   created_at: Date;
   updated_at: Date;
-  // user: UserDetail | null;
+  user: UserDetail;
   vehicle: VehicleDetail | null;
   electronic: ElectronicDetail | null;
   insured: boolean;
