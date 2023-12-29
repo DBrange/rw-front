@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { ReportDetail, Sidebar, SidebarBroker } from "../..";
+import { ReportDetail, Sidebar, SidebarAdmin, SidebarBroker } from "../..";
 import ClientReportDetailContainer from "./components/ClientReportDetailContainer";
 import useSWR from "swr";
 import {
@@ -10,8 +10,7 @@ import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 
 function ClientReportDetail() {
-  const userBroker = useSelector((store: AppStore) => store.user).user
-    ?.userBroker;
+  const user = useSelector((store: AppStore) => store.user).user
 
   const { sinisterId } = useParams();
 
@@ -19,7 +18,9 @@ function ClientReportDetail() {
 
   return (
     <ClientReportDetailContainer>
-      {userBroker ? <SidebarBroker /> : <Sidebar />}
+      {user?.role === "CLIENT" ? <Sidebar /> : <></>}
+      {user?.role === "BROKER" ? <SidebarBroker /> : <></>}
+      {user?.role === "ADMIN" ? <SidebarAdmin /> : <></>}
       <ReportDetail values={data} id={sinisterId} />
     </ClientReportDetailContainer>
   );

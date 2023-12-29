@@ -2,7 +2,7 @@ import ModalImage from "@/components/ModalImage/ModalImage";
 import { modalImage } from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
 import { Crash, Fire, Injuredd, SinisterDetail } from "../..";
-import { DivHeaderInspectionDetail } from "../InspectionDetail/InspectionDetail.styled";
+import { DivHeaderInspectionDetail, H2InspectionDetail, SectionHeaderInspectionDetail } from "../InspectionDetail/InspectionDetail.styled";
 import {
   DivInformationDetail,
   DivInformationDetailImgsBox,
@@ -34,7 +34,7 @@ function ReportnDetail({
   const thirdInjuredHTML = (injuredd: Injuredd[]) =>
     injuredd.length && (
       <>
-        <h2>Terceros heridos</h2>
+        <H2InspectionDetail>Terceros heridos</H2InspectionDetail>
         {injuredd.map((el) => (
           <>
             <DivInformationDetail>
@@ -43,7 +43,7 @@ function ReportnDetail({
             </DivInformationDetail>
             {el.injuredsInfo.map((injured, i) => (
               <>
-                <h2>Herido n° {i + 1}</h2>
+                <H2InspectionDetail>Herido n° {i + 1}</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>Nombre</h4>
                   <p>{injured?.name}</p>
@@ -87,8 +87,7 @@ function ReportnDetail({
     const type = crash ? crash : fire;
     return (
       <>
-        {" "}
-        <h2>{"Incendio"}</h2>
+        <H2InspectionDetail>Incendio</H2InspectionDetail>
         <DivInformationDetail>
           <h4>Ubicacion</h4>
           <p>{type?.location}</p>
@@ -148,7 +147,7 @@ function ReportnDetail({
       return (
         <>
           <DivInformationMyProfile>
-            <h2>Persona</h2>
+            <H2InspectionDetail>Persona</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Numero telefonico</h4>
               <p>{phoneNumber}</p>
@@ -243,7 +242,6 @@ function ReportnDetail({
 
       return (
         <>
-          {" "}
           <ModalImage
             modalActive={modalActive}
             images={images}
@@ -256,8 +254,7 @@ function ReportnDetail({
             <h2>{plate}</h2>
           </DivHeaderInspectionDetail>
           <DivInformationMyProfile>
-            {dataClientHTML()}
-            <h2>Siniestro</h2>
+            <H2InspectionDetail>Siniestro</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Fecha de siniestro</h4>
               <p>{date}</p>
@@ -270,6 +267,8 @@ function ReportnDetail({
               <h4>Horario de siniestro</h4>
               <p>{time}</p>
             </DivInformationDetail>
+            {dataClientHTML()}
+            <H2InspectionDetail>Vehiculo</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Año</h4>
               <p>{year}</p>
@@ -347,7 +346,7 @@ function ReportnDetail({
                   images={theft?.reportPhoto}
                   imageIndex={imageIndex}
                 />
-                <h2>{"Robo"}</h2>
+                <H2InspectionDetail>Robo</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
                   <p>{theft?.location}</p>
@@ -377,7 +376,7 @@ function ReportnDetail({
                       images={theft?.theftTire?.tirePhoto as string[]}
                       imageIndex={imageIndex}
                     />
-                    <h2>Robo de neumaticos</h2>
+                    <H2InspectionDetail>Robo de neumaticos</H2InspectionDetail>
                     <DivInformationDetail>
                       <h4>Cantidad</h4>
                       <p>{theft?.theftTire?.tireAmount}</p>
@@ -413,7 +412,7 @@ function ReportnDetail({
                   images={damageSinister?.reportPhoto}
                   imageIndex={imageIndex}
                 />
-                <h2>{"Daño"}</h2>
+                <H2InspectionDetail>Daño</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
                   <p>{damageSinister?.location}</p>
@@ -461,7 +460,9 @@ function ReportnDetail({
                           images={el.thirdPartyDriver.licensePhoto}
                           imageIndex={imageIndex}
                         />
-                        <h2>Vehiculo n° {i + 1}</h2>
+                        <H2InspectionDetail>
+                          Vehiculo n° {i + 1}
+                        </H2InspectionDetail>
                         <DivInformationDetail>
                           <h4>Nombre del propietario</h4>
                           <p>{el.ownerName}</p>
@@ -558,6 +559,9 @@ function ReportnDetail({
           electronic: { brand, model, type, smartphone },
         },
         sinisterType: { theft, damage: damageSinister },
+        date,
+        location,
+        time,
       } = values;
 
       return (
@@ -565,18 +569,26 @@ function ReportnDetail({
           <DivHeaderInspectionDetail>
             <h2>{type}</h2>
             <h2>{`${brand} ${model}`}</h2>
-            {/* <h2></h2> */}
-            {/* <h2>{plate}</h2> */}
           </DivHeaderInspectionDetail>
-          {/* <Link
-            to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}`}
-          >
-            Para denunciar
-          </Link> */}
+
           <DivInformationMyProfile>
+            <H2InspectionDetail>Siniestro</H2InspectionDetail>
+            <DivInformationDetail>
+              <h4>Fecha de siniestro</h4>
+              <p>{date}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Ubicacion de siniestro</h4>
+              <p>{location}</p>
+            </DivInformationDetail>
+            <DivInformationDetail>
+              <h4>Horario de siniestro</h4>
+              <p>{time}</p>
+            </DivInformationDetail>
             {dataClientHTML()}
             {type === "CELULAR" && (
               <>
+              <H2InspectionDetail>Electrodomestico</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>IMEI</h4>
                   <p>{smartphone?.imei}</p>
@@ -598,7 +610,7 @@ function ReportnDetail({
                   images={theft?.reportPhoto}
                   imageIndex={imageIndex}
                 />
-                <h2>{"Robo"}</h2>
+                <H2InspectionDetail>Robo</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
                   <p>{theft?.location}</p>
@@ -623,14 +635,14 @@ function ReportnDetail({
                 </DivInformationDetail>
               </>
             )}
-            {theft && (
+            {damageSinister && (
               <>
                 <ModalImage
                   modalActive={modalActive}
                   images={damageSinister?.reportPhoto as string[]}
                   imageIndex={imageIndex}
                 />
-                <h2>{"Daño"}</h2>
+                <H2InspectionDetail>Daño</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>Ubicacion</h4>
                   <p>{damageSinister?.location}</p>
@@ -671,6 +683,6 @@ function ReportnDetail({
     }
   };
 
-  return <section>{dataInHTML()}</section>;
+  return <SectionHeaderInspectionDetail>{dataInHTML()}</SectionHeaderInspectionDetail>;
 }
 export default ReportnDetail;

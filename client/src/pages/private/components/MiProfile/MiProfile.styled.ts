@@ -29,7 +29,7 @@ export const H2NameLastname = styled.h2`
 `;
 
 export const DivInformationMyProfile = styled.div`
-  margin-top: 5rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;

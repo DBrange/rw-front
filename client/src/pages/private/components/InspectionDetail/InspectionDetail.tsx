@@ -9,7 +9,7 @@ import {
   DivInformationMyProfile,
   ImageDetail,
 } from "../MiProfile/MiProfile.styled";
-import { DivHeaderInspectionDetail } from "./InspectionDetail.styled";
+import { DivHeaderInspectionDetail, H2InspectionDetail, SectionHeaderInspectionDetail } from "./InspectionDetail.styled";
 import ModalImage from "@/components/ModalImage/ModalImage";
 import { useEffect, useState } from "react";
 import { modalImage } from "@/services/sharing-information.service";
@@ -76,17 +76,23 @@ function InspectionDetail({
             {/* <h2></h2> */}
             <h2>{plate}</h2>
           </DivHeaderInspectionDetail>
-          <Link
-            to={
-              userBroker
-                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
-                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
-            }
-          >
-            Para denunciar
-          </Link>
+          {userBroker ? (
+            <Link
+              to={
+                userBroker
+                  ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
+                  : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
+              }
+            >
+              Para denunciar
+            </Link>
+          ) : (
+            <></>
+          )}
+
           <DivInformationMyProfile>
             {dataClientHTML()}
+            <H2InspectionDetail>Vehiculo</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Año</h4>
               <p>{year}</p>
@@ -177,19 +183,25 @@ function InspectionDetail({
             {/* <h2></h2> */}
             {/* <h2>{plate}</h2> */}
           </DivHeaderInspectionDetail>
-          <Link
-            to={
-              userBroker
-                ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
-                : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
-            }
-          >
-            Para denunciar
-          </Link>
+          {userBroker ? (
+            <Link
+              to={
+                userBroker
+                  ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
+                  : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
+              }
+            >
+              Para denunciar
+            </Link>
+          ) : (
+            <></>
+          )}
+
           <DivInformationMyProfile>
             {dataClientHTML()}
             {type === "CELULAR" && (
               <>
+              <H2InspectionDetail>Electrodomestico</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>IMEI</h4>
                   <p>{smartphone?.imei}</p>
@@ -226,7 +238,7 @@ function InspectionDetail({
       return (
         <>
           <DivInformationMyProfile>
-            <h2>Persona</h2>
+            <H2InspectionDetail>Persona</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Numero telefonico</h4>
               <p>{phoneNumber}</p>
@@ -294,6 +306,6 @@ function InspectionDetail({
     }
   };
 
-  return <section>{dataInHTML()}</section>;
+  return <SectionHeaderInspectionDetail>{dataInHTML()}</SectionHeaderInspectionDetail>;
 }
 export default InspectionDetail;

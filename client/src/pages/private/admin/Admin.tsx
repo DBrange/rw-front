@@ -3,7 +3,11 @@ import RoutesWithNotFound from "@/utilities/routes-with-not-found";
 import { Navigate, Route } from "react-router-dom";
 
 import {
-  AdminUser, BrokerDetailAdmin, ClientDetail,
+  AdminUser,
+  BrokerDetailAdmin,
+  ClientDetail,
+  ClientInspectionDetail,
+  ClientReportDetail,
 } from "..";
 import { AdminUsers } from "./AdminUsers";
 import { AdminInspections } from "./AdminInspections";
@@ -26,6 +30,10 @@ function Admin() {
         element={<AdminInspections />}
       />
       <Route
+        path={`${PrivateRoutes.INSPECTIONS}/:insuredId`}
+        element={<ClientInspectionDetail />}
+      />
+      <Route
         path={`${PrivateRoutes.ALL_SINISTER}`}
         element={<AdminReports />}
       />
@@ -37,7 +45,10 @@ function Admin() {
         path={`${PrivateRoutes.USERS_OF_ADMIN}/:userId/:clientId`}
         element={<ClientDetail />}
       />
-
+      <Route
+        path={`${PrivateRoutes.SINISTER_DETAIL}/:sinisterId`}
+        element={<ClientReportDetail />}
+      />
     </RoutesWithNotFound>
   );
 }

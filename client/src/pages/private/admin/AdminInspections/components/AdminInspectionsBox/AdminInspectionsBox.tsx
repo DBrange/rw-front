@@ -1,19 +1,14 @@
+import { Loader } from "@/components";
 import {
   AllClientAssets,
   InspectLogin,
   InspectionCard,
-  SectionCard,
-  Sidebar,
-  SidebarAdmin,
-  SidebarBroker,
+  SidebarAdmin
 } from "@/pages";
-import { useAdminInspectionsContext } from "../..";
-import { useSelector } from "react-redux";
-import { AppStore } from "@/redux/store";
+import { BtnBrokerSelection, ContainerBtnBrokerSelection } from "@/pages/private/broker/BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
 import { date } from "@/utilities/date.utility";
-import { Loader } from "@/components";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { ContainerBtnBrokerSelection, BtnBrokerSelection } from "@/pages/private/broker/BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
+import { useAdminInspectionsContext } from "../..";
 
 function AdminInspectionsBox() {
   const {
@@ -26,9 +21,6 @@ function AdminInspectionsBox() {
     inspections,
     isReachedEnd,
   } = useAdminInspectionsContext();
-
-  const userBroker = useSelector((store: AppStore) => store.user).user
-    ?.userBroker;
 
   const cards: JSX.Element = (
     <>
