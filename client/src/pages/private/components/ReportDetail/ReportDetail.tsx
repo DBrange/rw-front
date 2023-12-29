@@ -2,7 +2,11 @@ import ModalImage from "@/components/ModalImage/ModalImage";
 import { modalImage } from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
 import { Crash, Fire, Injuredd, SinisterDetail } from "../..";
-import { DivHeaderInspectionDetail, H2InspectionDetail, SectionHeaderInspectionDetail } from "../InspectionDetail/InspectionDetail.styled";
+import {
+  DivHeaderInspectionDetail,
+  H2InspectionDetail,
+  SectionHeaderInspectionDetail,
+} from "../InspectionDetail/InspectionDetail.styled";
 import {
   DivInformationDetail,
   DivInformationDetailImgsBox,
@@ -12,10 +16,9 @@ import {
 
 function ReportnDetail({
   values,
-  id,
 }: {
   values: SinisterDetail | undefined;
-  id: string | undefined;
+  id?: string | undefined;
 }) {
   const [imageIndex, setImageIndex] = useState<number>(0);
 
@@ -24,7 +27,6 @@ function ReportnDetail({
     modalImage.setSubject(true);
   };
 
-  
   const [modalActive, setModalActive] = useState<boolean>(false);
 
   useEffect(() => {
@@ -66,7 +68,13 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Fecha de nacimiento</h4>
-                  <p>{injured?.birthDate}</p>
+                  <p>
+                    {injured?.birthDate
+                      .slice(0, 10)
+                      .split("-")
+                      .reverse()
+                      .join("-")}
+                  </p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Numero telefonico</h4>
@@ -176,7 +184,13 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Fecha de nacimiento</h4>
-                  <p>{personalUser?.birthDate}</p>
+                  <p>
+                    {personalUser?.birthDate
+                      .slice(0, 10)
+                      .split("-")
+                      .reverse()
+                      .join("-")}
+                  </p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Genero</h4>
@@ -257,7 +271,7 @@ function ReportnDetail({
             <H2InspectionDetail>Siniestro</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Fecha de siniestro</h4>
-              <p>{date}</p>
+              <p>{date.slice(0, 10).split("-").reverse().join("-")}</p>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Ubicacion de siniestro</h4>
@@ -335,7 +349,13 @@ function ReportnDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Fecha de vencimiento</h4>
-                  <p>{gncId?.expireDate}</p>
+                  <p>
+                    {gncId?.expireDate
+                      .slice(0, 10)
+                      .split("-")
+                      .reverse()
+                      .join("-")}
+                  </p>
                 </DivInformationDetail>
               </>
             )}
@@ -575,7 +595,7 @@ function ReportnDetail({
             <H2InspectionDetail>Siniestro</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Fecha de siniestro</h4>
-              <p>{date}</p>
+              <p>{date.slice(0, 10).split("-").reverse().join("-")}</p>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Ubicacion de siniestro</h4>
@@ -588,7 +608,7 @@ function ReportnDetail({
             {dataClientHTML()}
             {type === "CELULAR" && (
               <>
-              <H2InspectionDetail>Electrodomestico</H2InspectionDetail>
+                <H2InspectionDetail>Electrodomestico</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>IMEI</h4>
                   <p>{smartphone?.imei}</p>
@@ -683,6 +703,10 @@ function ReportnDetail({
     }
   };
 
-  return <SectionHeaderInspectionDetail>{dataInHTML()}</SectionHeaderInspectionDetail>;
+  return (
+    <SectionHeaderInspectionDetail>
+      {dataInHTML()}
+    </SectionHeaderInspectionDetail>
+  );
 }
 export default ReportnDetail;

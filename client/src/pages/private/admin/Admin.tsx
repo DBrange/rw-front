@@ -7,6 +7,7 @@ import {
   BrokerDetailAdmin,
   ClientDetail,
   ClientInspectionDetail,
+  ClientMyProfile,
   ClientReportDetail,
 } from "..";
 import { AdminUsers } from "./AdminUsers";
@@ -48,6 +49,10 @@ function Admin() {
       <Route
         path={`${PrivateRoutes.SINISTER_DETAIL}/:sinisterId`}
         element={<ClientReportDetail />}
+      />
+      <Route
+        path={`${PrivateRoutes.MY_PROFILE}`}
+        element={<ClientMyProfile />}
       />
     </RoutesWithNotFound>
   );

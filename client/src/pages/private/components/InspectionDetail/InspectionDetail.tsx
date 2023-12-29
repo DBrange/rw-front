@@ -159,7 +159,13 @@ function InspectionDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Fecha de vencimiento</h4>
-                  <p>{gncId.expireDate}</p>
+                  <p>
+                    {gncId.expireDate
+                      .slice(0, 10)
+                      .split("-")
+                      .reverse()
+                      .join("-")}
+                  </p>
                 </DivInformationDetail>
               </>
             )}
@@ -267,7 +273,13 @@ function InspectionDetail({
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Fecha de nacimiento</h4>
-                  <p>{personalUser?.birthDate}</p>
+                  <p>
+                    {personalUser?.birthDate
+                      .slice(0, 10)
+                      .split("-")
+                      .reverse()
+                      .join('-')}
+                  </p>
                 </DivInformationDetail>
                 <DivInformationDetail>
                   <h4>Genero</h4>
