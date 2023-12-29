@@ -10,6 +10,7 @@ import {
 function ClientMyProfile() {
   const userBroker = useSelector((store: AppStore) => store.user).user
     ?.userBroker;
+  
   return (
     <ClientMyProfileContainer>
       {userBroker ? <SidebarBroker /> : <Sidebar />}

@@ -1,4 +1,4 @@
-import { AllClientSinisters, ClientDetailInBroker, baseUrl } from "@/pages";
+import { ClientDetailInBroker, baseUrl } from "@/pages";
 
 // export const BaseUrlInspect = "http://localhost:3001/v1";
 // export const AllBrokerAssetsUserUrl = (id?: string) =>

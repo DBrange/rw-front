@@ -7,11 +7,11 @@ import { AppStore } from "@/redux";
 import { useSelector } from "react-redux";
 
 function ClientDetail() {
-  const { clientId } = useParams();
+  const { userId, clientId } = useParams();
   const user = useSelector((store: AppStore) => store.user);
 
   const { data: clientData } = useSWR(
-    clientDetailUrl(user.user?.id, clientId),
+    clientDetailUrl(userId || user.user?.id, clientId),
     clientDetail
   );
 

@@ -46,6 +46,23 @@ export interface UserBroker {
   bussinesName: string;
   enrollment: string;
   card: string;
+  clients: UserUserBoker[]
+}
+
+export interface UserUserBoker {
+  id: string;
+  created_at?: Date;
+  updated_at?: Date;
+  phoneNumber?: string;
+  email?: string;
+  altEmail?: string;
+  address?: string;
+  lastRecord?: Date;
+  role?: string;
+  accessLevel?: number;
+  authorization?: string;
+  personalUser?: PersonalUser;
+  legalUser?: LegalUser;
 }
 
 export interface PersonalUser {
