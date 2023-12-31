@@ -12,7 +12,8 @@ import { Line } from "react-chartjs-2";
 import { GraphFormatEnum, InfoLineGraph, colors, months, weeks } from "../..";
 import { theme } from "@/styledComponents";
 import { useMediaQuery } from "react-responsive";
-
+import { subMonths, format } from "date-fns";
+import esLocale from "date-fns/locale/es";
 interface Props {
   type: GraphFormatEnum;
   info: InfoLineGraph[];
@@ -20,6 +21,12 @@ interface Props {
 
 export default function LineGraph({ info, type }: Props) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
+
+    const last12Months = Array.from({ length: 12 }, (_, index) =>
+      format(subMonths(new Date(), 11 - index), "MMM", {
+        locale: esLocale,
+      })
+    ).reverse();
 
   const options = {
     responsive: true,
@@ -61,7 +68,7 @@ export default function LineGraph({ info, type }: Props) {
   );
 
   const data = {
-    labels: type === GraphFormatEnum.MONTHS ? months : weeks,
+    labels: type === GraphFormatEnum.MONTHS ? last12Months : weeks,
     datasets: info.map((el, i) => {
       return {
         label: el.label,

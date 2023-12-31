@@ -96,7 +96,7 @@ function AdminDashboardBox() {
             type={graphFormatType.income}
             info={[
               {
-                label: "Usuarios",
+                label: "Ganancias",
                 months: [1000, 500, 300, 100, 0, -100, -300, -500, -1000],
                 weeks: [
                   600, 350, 200, 800, 0, 100, -300, 500, -1000, 900, 700, 500,
@@ -141,7 +141,7 @@ function AdminDashboardBox() {
             info={[
               {
                 label: "Usuarios",
-                months: [1000, 500, 300, 100, 0, -100, -300, -500, -1000],
+                months: [1000, 500, 300, 100, 0, 100, 300, 500, 1000,900,876,540],
                 weeks: [
                   600, 350, 200, 800, 0, 100, -300, 500, -1000, 900, 700, 500,
                 ],
@@ -242,21 +242,28 @@ function AdminDashboardBox() {
             type={graphFormatType.brokerLevel}
             info={[
               {
-                label: "Basic",
+                label: "Free",
                 months: [1000, 500, 300, 100, 0, -100, -300, -500, -1000],
                 weeks: [
                   600, 350, 200, 800, 0, 100, -300, 500, -1000, 900, 700, 500,
                 ],
               },
               {
-                label: "Gold",
+                label: "Basico",
+                months: [1000, 500, 300, 100, 0, -100, -300, -500, -1000],
+                weeks: [
+                  600, 350, 200, 800, 0, 100, -300, 500, -1000, 900, 700, 500,
+                ],
+              },
+              {
+                label: "Premium",
                 months: [200, 100, 300, 0, 50, -100, -300, 500, 1000],
                 weeks: [
                   1000, 500, 300, 100, 0, -100, 300, -500, -1000, 700, 500,
                 ],
               },
               {
-                label: "Premium",
+                label: "Pro",
                 months: [20, 10, 30, 0, 40, -10, -30, 50, 100],
                 weeks: [
                   1000, 500, 300, 100, 0, -100, 300, -500, -1000, 700, 500,
@@ -367,7 +374,7 @@ function AdminDashboardBox() {
         graphActive={graphType.usersQuantity === GraphTypeEnum.CIRCULAR}
         firstComponent={
           <CircularGraph
-            labels={["Basic", "Gold", "Premium"]}
+            labels={["Clientes", "Brokers"]}
             info={[
               {
                 label: "Usuarios",
@@ -403,29 +410,29 @@ function AdminDashboardBox() {
         graphActive={graphType.actualUsers === GraphTypeEnum.CIRCULAR}
         firstComponent={
           <CircularGraph
-            labels={["Basic", "Gold", "Premium"]}
+            labels={["Free", "Basic", "Premium", "Pro"]}
             info={[
               {
                 label: "Servicios",
-                numbers: [1000, 800, 200],
+                numbers: [1000, 800, 200, 100],
               },
             ]}
           />
         }
         secondComponent={
           <BarGraphQuantity
-            labels={["Clientes", "Brokers"]}
+            labels={["Free", "Basic", "Premium", "Pro"]}
             info={[
               {
                 label: "Servicios",
-                numbers: [1000, 800, 200],
+                numbers: [1000, 800, 200, 100],
               },
             ]}
           />
         }
         graphLabel="Servicios actuales"
       />
-     </SectionAdminDashboard>
+    </SectionAdminDashboard>
   );
 }
 

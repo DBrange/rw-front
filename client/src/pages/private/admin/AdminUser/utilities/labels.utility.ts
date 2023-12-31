@@ -28,4 +28,4 @@ export const weeks = [
   "1 sem.",
 ];
 
-export const colors = ["#E4528D", "#306FD9", "#E34042"];
+export const colors = ["#E4528D", "#306FD9", "#E34042", "#4CDD1D "];
