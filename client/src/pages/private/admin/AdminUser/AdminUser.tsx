@@ -1,11 +1,15 @@
-import { SidebarAdmin } from "../.."
+import { AdminDashboardBox, AdminUserContainer, AdminUserProvider, SidebarAdmin } from "../.."
 
 function AdminUser() {
   return (
     <>
-      <SidebarAdmin />
-    <div>AdminUser</div>
+      <AdminUserProvider>
+        <AdminUserContainer>
+          <SidebarAdmin />
+          <AdminDashboardBox />
+        </AdminUserContainer>
+      </AdminUserProvider>
     </>
-  )
+  );
 }
 export default AdminUser

@@ -4,16 +4,18 @@ import {
   ClientMyProfileContainer,
   MiProfile,
   Sidebar,
+  SidebarAdmin,
   SidebarBroker,
 } from "../..";
 
 function ClientMyProfile() {
-  const userBroker = useSelector((store: AppStore) => store.user).user
-    ?.userBroker;
+  const user = useSelector((store: AppStore) => store.user).user
   
   return (
     <ClientMyProfileContainer>
-      {userBroker ? <SidebarBroker /> : <Sidebar />}
+      {user?.role === "CLIENT" ? <Sidebar /> : <></>}
+      {user?.role === "BROKER" ? <SidebarBroker /> : <></>}
+      {user?.role === "ADMIN" ? <SidebarAdmin /> : <></>}
       <MiProfile />
     </ClientMyProfileContainer>
   );
