@@ -2,9 +2,7 @@ import { theme } from "@/styledComponents";
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { InfoGraphQuantity, colors } from "../..";
-import {
-  DivCircularGraph
-} from "../AdminDashboardBox/AdminDashboardBox.styled";
+import { DivCircularGraph } from "../AdminDashboardBox/AdminDashboardBox.styled";
 
 interface Props {
   info: InfoGraphQuantity[];
@@ -30,13 +28,12 @@ export function CircularGraph({ info, labels }: Props) {
     scales: {
       x: {
         ticks: {
+          display: false,
           color: theme.textColor,
         },
       },
       y: {
-        ticks: {
-          color: theme.textColor,
-        },
+        ticks: { display: false, color: theme.textColor },
       },
     },
   };

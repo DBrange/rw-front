@@ -1,7 +1,7 @@
-export interface InfoLineGraph{
-  label: string,
-  months: number[]
-  weeks: number[]
+export interface InfoLineGraph {
+  label: string;
+  months: number[];
+  weeks: number[];
 }
 
 export interface InfoGraphQuantity {
@@ -9,14 +9,26 @@ export interface InfoGraphQuantity {
   numbers: number[];
 }
 
+export interface AccesLevelNumber {
+  '0': DataDate;
+  '10': DataDate;
+  '20': DataDate;
+  '30': DataDate;
+}
+
+interface DataDate {
+  months: number[];
+  weeks: number[];
+}
+
 export enum GraphTypeEnum {
-  LINE = 'LINE',
-  BAR = 'BAR',
-  CIRCULAR = 'CIRCULAR',
+  LINE = "LINE",
+  BAR = "BAR",
+  CIRCULAR = "CIRCULAR",
 }
 export enum GraphFormatEnum {
-  MONTHS = 'MONTHS',
-  WEEKS = 'WEEKS',
+  MONTHS = "MONTHS",
+  WEEKS = "WEEKS",
 }
 
 export interface GraphType {
@@ -28,7 +40,6 @@ export interface GraphType {
   usersQuantity: GraphTypeEnum;
   actualUsers: GraphTypeEnum;
 }
-
 
 export interface GraphFormat {
   income: GraphFormatEnum;

@@ -22,11 +22,11 @@ interface Props {
 export default function LineGraph({ info, type }: Props) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
-    const last12Months = Array.from({ length: 12 }, (_, index) =>
-      format(subMonths(new Date(), 11 - index), "MMM", {
-        locale: esLocale,
-      })
-    ).reverse();
+  const last12Months = Array.from({ length: 12 }, (_, index) =>
+    format(subMonths(new Date(), 12 - index), "MMM", {
+      locale: esLocale,
+    })
+  ).reverse();
 
   const options = {
     responsive: true,
@@ -68,7 +68,7 @@ export default function LineGraph({ info, type }: Props) {
   );
 
   const data = {
-    labels: type === GraphFormatEnum.MONTHS ? last12Months : weeks,
+    labels: type === GraphFormatEnum.MONTHS ? last12Months.reverse() : weeks,
     datasets: info.map((el, i) => {
       return {
         label: el.label,

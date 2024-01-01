@@ -17,9 +17,9 @@ interface Props {
   labels: string[];
 }
 
-export function BarGraphQuantity({ info, labels }: Props) {
+export function BarInfoGraphQuantity({ info, labels }: Props) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  
+
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -57,8 +57,6 @@ export function BarGraphQuantity({ info, labels }: Props) {
       },
     },
   };
-
-
 
   const data = {
     labels,

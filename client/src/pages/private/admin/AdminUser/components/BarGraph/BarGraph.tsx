@@ -11,7 +11,8 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useMediaQuery } from "react-responsive";
 import { GraphFormatEnum, InfoLineGraph, colors, months, weeks } from "../..";
-
+import { subMonths, format } from "date-fns";
+import esLocale from "date-fns/locale/es";
 interface Props {
   type: string;
   info: InfoLineGraph[];
@@ -20,6 +21,12 @@ interface Props {
 export function BarGraph({ info, type }: Props) {
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
+  const last12Months = Array.from({ length: 12 }, (_, index) =>
+    format(subMonths(new Date(), 11 - index), "MMM", {
+      locale: esLocale,
+    })
+  ).reverse();
+  
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -59,7 +66,7 @@ export function BarGraph({ info, type }: Props) {
   };
 
   const data = {
-    labels: type === GraphFormatEnum.MONTHS ? months : weeks,
+    labels: type === GraphFormatEnum.MONTHS ? last12Months : weeks,
     datasets: info.map((el, i) => {
       return {
         label: el.label,
