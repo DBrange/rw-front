@@ -14,7 +14,7 @@ interface Props {
 }
 
 function FormLegalVehicleDetail({ inputVehicleValues, inputGncValues }: Props) {
-  const expireDate = inputGncValues.expireDate.split("-").reverse().join("-");
+  const expireDate = inputGncValues.expireDate.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>

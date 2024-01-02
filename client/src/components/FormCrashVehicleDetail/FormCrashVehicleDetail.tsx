@@ -23,7 +23,7 @@ function FormCrashVehicleDetail({
   thirdPartyInjured,
   thirdPartyVehicle,
 }: Props) {
-  const date = inputCrashValues?.date.split("-").reverse().join("-");
+  const date = inputCrashValues?.date.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>

@@ -21,7 +21,7 @@ function AdminDashboardBox() {
     changeGraphType,
     changeGraphFormatType,
   } = useAdminUserContext();
-console.log(levellData())
+
   return (
     <SectionAdminDashboard>
       <GraphBox

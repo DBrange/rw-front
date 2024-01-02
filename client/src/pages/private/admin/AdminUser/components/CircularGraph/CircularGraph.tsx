@@ -27,12 +27,14 @@ export function CircularGraph({ info, labels }: Props) {
     },
     scales: {
       x: {
+        display: false,
         ticks: {
           display: false,
           color: theme.textColor,
         },
       },
       y: {
+        display: false,
         ticks: { display: false, color: theme.textColor },
       },
     },

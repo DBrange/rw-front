@@ -75,7 +75,7 @@ export const SpanInspectionCard = styled.span`
   font-size: 0.5rem;
   position: absolute;
   top: -2px;
-  left: -42px;
+  left: -15px;
   color: ${theme.sColor};
   writing-mode: vertical-rl; /* Establece la escritura vertical de derecha a izquierda */
   text-orientation: upright; /* Mantiene la orientación normal de las letras */

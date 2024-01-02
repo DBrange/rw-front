@@ -12,10 +12,8 @@ interface Props {
   inputTheftElectronicValues: TheftElectronicValues;
 }
 
-function FormTheftElectronicDetail({
-  inputTheftElectronicValues,
-}: Props) {
-  const date = inputTheftElectronicValues.date.split("-").reverse().join("-");
+function FormTheftElectronicDetail({ inputTheftElectronicValues }: Props) {
+  const date = inputTheftElectronicValues.date.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>

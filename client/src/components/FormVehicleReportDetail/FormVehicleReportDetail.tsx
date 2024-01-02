@@ -13,8 +13,11 @@ interface Props {
   inputGncValues: GncValues;
 }
 
-function FormLegalVehicleReportDetail({ inputVehicleReportValues, inputGncValues }: Props) {
-  const expireDate = inputGncValues.expireDate.split("-").reverse().join("-");
+function FormLegalVehicleReportDetail({
+  inputVehicleReportValues,
+  inputGncValues,
+}: Props) {
+  const expireDate = inputGncValues.expireDate.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>

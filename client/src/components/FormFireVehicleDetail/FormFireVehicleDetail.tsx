@@ -13,7 +13,7 @@ interface Props {
 }
 
 function FormFireVehicleDetail({ inputFireValues, thirdPartyInjured }: Props) {
-  const date = inputFireValues.date.split("-").reverse().join("-");
+  const date = inputFireValues.date.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>

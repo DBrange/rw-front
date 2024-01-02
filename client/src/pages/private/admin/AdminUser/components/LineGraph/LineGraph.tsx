@@ -44,12 +44,18 @@ export default function LineGraph({ info, type }: Props) {
     },
     scales: {
       x: {
+        grid: {
+          color: theme.tColor,
+        },
         ticks: {
           color: theme.textColor,
           maxTicksLimit: isMobile ? 6 : undefined,
         },
       },
       y: {
+        grid: {
+          color: theme.tColor,
+        },
         ticks: {
           color: theme.textColor,
         },

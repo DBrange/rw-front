@@ -271,7 +271,7 @@ function ReportnDetail({
             <H2InspectionDetail>Siniestro</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Fecha de siniestro</h4>
-              <p>{date.slice(0, 10).split("-").reverse().join("-")}</p>
+              <p>{date.slice(0, 10).split("-").reverse().join("/")}</p>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Ubicacion de siniestro</h4>
@@ -595,7 +595,7 @@ function ReportnDetail({
             <H2InspectionDetail>Siniestro</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Fecha de siniestro</h4>
-              <p>{date.slice(0, 10).split("-").reverse().join("-")}</p>
+              <p>{date.slice(0, 10).split("-").reverse().join("/")}</p>
             </DivInformationDetail>
             <DivInformationDetail>
               <h4>Ubicacion de siniestro</h4>

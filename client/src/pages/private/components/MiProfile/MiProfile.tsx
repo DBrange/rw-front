@@ -8,6 +8,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaGenderless } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { MdDateRange, MdOutlineEmail } from "react-icons/md";
+import { MdCake } from "react-icons/md";
 import { TiBusinessCard } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import { ClientCard, ModalUpdate, ModalUpdatePassword } from "../..";
@@ -87,8 +88,14 @@ function MiProfile() {
           <p>{user?.personalUser?.gender}</p>
         </DivInformationProfileDetail>
         <DivInformationProfileDetail>
-          <MdDateRange size={30} />
-          <p>{user?.personalUser?.birthDate}</p>
+          <MdCake size={30} />
+          <p>
+            {user?.personalUser?.birthDate
+              .slice(0, 10)
+              .split("-")
+              .reverse()
+              .join("/")}
+          </p>
         </DivInformationProfileDetail>
         {user?.personalUser?.dni ? (
           <DivInformationProfileDetail>

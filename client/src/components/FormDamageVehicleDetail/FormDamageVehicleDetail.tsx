@@ -12,10 +12,8 @@ interface Props {
   inputDamageVehicleValues: DamageVehiclesValues;
 }
 
-function FormDamageVehicleDetail({
-  inputDamageVehicleValues
-}: Props) {
-  const date = inputDamageVehicleValues.date.split("-").reverse().join("-");
+function FormDamageVehicleDetail({ inputDamageVehicleValues }: Props) {
+  const date = inputDamageVehicleValues.date.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>

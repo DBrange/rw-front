@@ -13,7 +13,7 @@ interface Props {
 }
 
 function FormDamageElectronicDetail({ inputDamageElectronicValues }: Props) {
-  const date = inputDamageElectronicValues.date.split("-").reverse().join("-");
+  const date = inputDamageElectronicValues.date.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>

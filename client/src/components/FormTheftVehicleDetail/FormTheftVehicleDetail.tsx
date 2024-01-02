@@ -6,10 +6,7 @@ import {
   Image,
   ImagesContainer,
 } from "@/components";
-import {
-  IsTireValues,
-  TheftVehiclesValues,
-} from "@/models";
+import { IsTireValues, TheftVehiclesValues } from "@/models";
 
 interface Props {
   inputTheftVehicleValues: TheftVehiclesValues;
@@ -20,7 +17,7 @@ function FormTheftVehicleDetail({
   inputTheftVehicleValues,
   inputIsTireValues,
 }: Props) {
-  const date = inputTheftVehicleValues.date.split("-").reverse().join("-");
+  const date = inputTheftVehicleValues.date.split("-").reverse().join("/");
 
   return (
     <DivRenderPropertys>
