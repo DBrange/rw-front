@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaGenderless } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
-import { MdDateRange, MdOutlineEmail } from "react-icons/md";
-import { MdCake } from "react-icons/md";
+import { MdCake, MdOutlineEmail } from "react-icons/md";
 import { TiBusinessCard } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import { ClientCard, ModalUpdate, ModalUpdatePassword } from "../..";
@@ -86,21 +85,28 @@ function MiProfile() {
           <MdOutlineEmail size={30} />
           <p>{user?.email}</p>
         </DivInformationProfileDetail>
-        <DivInformationProfileDetail>
-          <FaGenderless size={30} />
-          {/* <h4>Genero</h4> */}
-          <p>{user?.personalUser?.gender}</p>
-        </DivInformationProfileDetail>
-        <DivInformationProfileDetail>
-          <MdCake size={30} />
-          <p>
-            {user?.personalUser?.birthDate
-              .slice(0, 10)
-              .split("-")
-              .reverse()
-              .join("/")}
-          </p>
-        </DivInformationProfileDetail>
+        {user?.personalUser ? (
+          <>
+            <DivInformationProfileDetail>
+              <FaGenderless size={30} />
+              {/* <h4>Genero</h4> */}
+              <p>{user?.personalUser?.gender}</p>
+            </DivInformationProfileDetail>
+            <DivInformationProfileDetail>
+              <MdCake size={30} />
+              <p>
+                {user?.personalUser?.birthDate
+                  .slice(0, 10)
+                  .split("-")
+                  .reverse()
+                  .join("/")}
+              </p>
+            </DivInformationProfileDetail>
+          </>
+        ) : (
+          <></>
+        )}
+
         {user?.personalUser?.dni ? (
           <DivInformationProfileDetail>
             <TiBusinessCard size={30} />

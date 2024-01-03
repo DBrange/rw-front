@@ -24,8 +24,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetClient } from "@/redux/slices/clientSlice";
 import { AppDispatch, AppStore } from "@/redux";
 import { addNotificationsAsync } from "@/redux/slices/notificationSlice";
+import { useLocation } from "react-router-dom";
 
 function Sidebar() {
+const path = useLocation().pathname;
+
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
   const dispatch = useDispatch();
   const dispatchAsync = useDispatch<AppDispatch>();
@@ -50,6 +53,7 @@ function Sidebar() {
 
   const notis = () => {
     dispatchAsync(addNotificationsAsync(user.user?.id));
+    sidebarService.setSubject(false);
   }
   return (
     <SectionBgSidebar $isOpen={stateOfSidebar} onClick={toggleSidebar}>
@@ -60,7 +64,14 @@ function Sidebar() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.DASHBOARD}`
+                )
+              }
+            >
               <MdOutlineDashboard size={20} />
               Inicio
             </LiSidebarItem>
@@ -70,7 +81,14 @@ function Sidebar() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}`
+                )
+              }
+            >
               <IoPeople size={20} />
               Clientes
             </LiSidebarItem>
@@ -80,7 +98,14 @@ function Sidebar() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}`
+                )
+              }
+            >
               <TfiWrite size={20} />
               Inspecciones
             </LiSidebarItem>
@@ -90,7 +115,14 @@ function Sidebar() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_SINISTER}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_SINISTER}`
+                )
+              }
+            >
               <IoNewspaperOutline size={20} />
               Denuncias
             </LiSidebarItem>
@@ -100,7 +132,14 @@ function Sidebar() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_INSPECTION}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_INSPECTION}`
+                )
+              }
+            >
               <BsShieldCheck size={20} />
               Inspeccionar
             </LiSidebarItem>
@@ -110,7 +149,14 @@ function Sidebar() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER}`
+                )
+              }
+            >
               <TbReportAnalytics size={20} />
               Denunciar
             </LiSidebarItem>
@@ -120,12 +166,18 @@ function Sidebar() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.SEARCH_CLIENT}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.SEARCH_CLIENT}`
+                )
+              }
+            >
               <IoPeople size={20} />
               Buscar Clientes
             </LiSidebarItem>
           </LinkNavigate>
-          
         </UlSidebarList>
         <FooterSidebar>
           <UlSidebarList>
@@ -133,7 +185,14 @@ function Sidebar() {
               to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.MY_PROFILE}`}
               onClick={notis}
             >
-              <LiSidebarItem>
+              <LiSidebarItem
+                $active={
+                  !!(
+                    path ===
+                    `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.MY_PROFILE}`
+                  )
+                }
+              >
                 <BsFillPersonFill size={20} />
                 Mi perfil
               </LiSidebarItem>

@@ -9,13 +9,13 @@ function ClientDashboardBox() {
     <ClientUserContainer>
       <DivClientDashboardBox>
         <BtnClientDashboardBox
-          to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_INSPECTION}`}
+          to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CLIENT}/${PrivateRoutes.CREATE_INSPECTION}`}
         >
           <BsShieldCheck size={50} />
           <h4>Inspeccionar</h4>
         </BtnClientDashboardBox>
         <BtnClientDashboardBox
-          to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER}`}
+          to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CLIENT}/${PrivateRoutes.CREATE_SINISTER}`}
         >
           <TbReportAnalytics size={50} />
           <h4>Denunciar</h4>

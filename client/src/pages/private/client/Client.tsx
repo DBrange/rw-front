@@ -1,18 +1,17 @@
 import { PrivateRoutes } from "@/models/types/routes";
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate, Route } from "react-router-dom";
 import {
-  ClientUser,
-  ClientsElements,
+  ClientChooseBroker,
   ClientCreateInspection,
   ClientCreateReport,
   ClientInspectedCreateReport,
   ClientInspectionDetail,
-  ClientReportDetail,
   ClientInspections,
-  ClientReports,
   ClientMyProfile,
-  ClientChooseBroker,
+  ClientReportDetail,
+  ClientReports,
+  ClientUser
 } from ".";
 
 function Client() {
@@ -23,7 +22,7 @@ function Client() {
         element={<Navigate replace to={PrivateRoutes.DASHBOARD} />}
       />
       <Route path={PrivateRoutes.DASHBOARD} element={<ClientUser />} />
-      <Route path={PrivateRoutes.ELEMENTS} element={<ClientsElements />} />
+      {/* <Route path={PrivateRoutes.ELEMENTS} element={<ClientsElements />} /> */}
       <Route
         path={PrivateRoutes.CREATE_INSPECTION}
         element={<ClientChooseBroker />}

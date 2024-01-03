@@ -39,7 +39,7 @@ function ClientCard({
     <CardContent
       to={
         dashboard
-          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}/${id}`
+          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CLIENTS_OF_BROKER}/${id}`
           : `${id}`
       }
     >

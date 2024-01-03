@@ -59,17 +59,18 @@ export const UlSidebarList = styled.ul`
   gap: 1rem;
 `;
 
-export const LiSidebarItem = styled.li`
+export const LiSidebarItem = styled.li<{ $active: boolean }>`
   display: flex;
   align-items: center;
   white-space: nowrap;
   gap: 0.8rem;
   margin: 0 1rem;
-  padding: .7rem 0.7rem;
+  padding: 0.7rem 0.7rem;
   border-radius: 0.4rem;
   cursor: pointer;
   color: ${theme.textColor};
   transition: all 0.2s linear;
+  background-color: ${({ $active }) => ($active ? "#fff1" : "")};
 
   &:hover {
     background-color: #fff1;

@@ -127,6 +127,14 @@ export interface UpdateMyProfile{
   address?: string;
 }
 
+
+export interface ISidebar {
+  first: boolean;
+  second: boolean;
+  third: boolean;
+  fourth: boolean;
+  fifth: boolean;
+}
 // export interface UpdateLastRecord {
 //   userId: string;
 //   date: Date;

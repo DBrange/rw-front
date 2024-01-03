@@ -1,14 +1,14 @@
+import { ClientInfo, Notification } from "@/models/interfaces/userInfo/userInfo.interface";
 import { configureStore } from "@reduxjs/toolkit";
 import clientSliceReducer from "./slices/clientSlice";
 import notificationSliceReducer from "./slices/notificationSlice";
-import { ClientInfo, Notification } from "@/models/interfaces/userInfo/userInfo.interface";
 
 export interface AppStore {
   user: ClientInfo;
-  notification:  Notification[] ;
+  notification: Notification[];
 }
 
-export const store =  configureStore<AppStore>({
+export const store = configureStore<AppStore>({
   reducer: {
     user: clientSliceReducer,
     notification: notificationSliceReducer,

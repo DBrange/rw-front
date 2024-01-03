@@ -84,7 +84,7 @@ function BrokerCreateInspectionBox() {
       {userBroker ? <SidebarBroker /> : <Sidebar />}
 
       <InspectLogin
-        sectionName="Clientes"
+        sectionName="Elegir cliente"
         setSearchField={setSearchField}
         searchField={searchField}
         placeholder={

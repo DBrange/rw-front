@@ -24,8 +24,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetClient } from "@/redux/slices/clientSlice";
 import { AppDispatch, AppStore } from "@/redux";
 import { addNotificationsAsync } from "@/redux/slices/notificationSlice";
+import { useLocation } from "react-router-dom";
 
 function SidebarAdmin() {
+const path = useLocation().pathname;
+
   const [stateOfSidebar, setStateOfSidebar] = useState<boolean>(false);
   const dispatch = useDispatch();
   const dispatchAsync = useDispatch<AppDispatch>();
@@ -34,22 +37,23 @@ function SidebarAdmin() {
   useEffect(() => {
     sidebarService.setSubject(false);
   }, []);
-
+  
   useEffect(() => {
     sidebarService.getSubject.subscribe((bol) => setStateOfSidebar(bol));
   }, [stateOfSidebar]);
-
+  
   const toggleSidebar = () => {
     sidebarService.setSubject(!stateOfSidebar);
     setStateOfSidebar(!stateOfSidebar);
   };
-
+  
   const handleSidebarClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => e.stopPropagation();
-
-  const notis = () => {
-    dispatchAsync(addNotificationsAsync(user.user?.id));
+    ) => e.stopPropagation();
+    
+    const notis = () => {
+      dispatchAsync(addNotificationsAsync(user.user?.id));
+      sidebarService.setSubject(false);
   };
 
   return (
@@ -61,7 +65,14 @@ function SidebarAdmin() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.DASHBOARD}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.DASHBOARD}`
+                )
+              }
+            >
               <MdOutlineDashboard size={20} />
               Inicio
             </LiSidebarItem>
@@ -71,7 +82,14 @@ function SidebarAdmin() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.USERS_OF_ADMIN}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.USERS_OF_ADMIN}`
+                )
+              }
+            >
               <IoPeople size={20} />
               Usuarios
             </LiSidebarItem>
@@ -81,7 +99,14 @@ function SidebarAdmin() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.INSPECTIONS}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.INSPECTIONS}`
+                )
+              }
+            >
               <TfiWrite size={20} />
               Inspecciones
             </LiSidebarItem>
@@ -91,7 +116,14 @@ function SidebarAdmin() {
             to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.ALL_SINISTER}`}
             onClick={notis}
           >
-            <LiSidebarItem>
+            <LiSidebarItem
+              $active={
+                !!(
+                  path ===
+                  `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.ALL_SINISTER}`
+                )
+              }
+            >
               <IoNewspaperOutline size={20} />
               Denuncias
             </LiSidebarItem>
@@ -103,7 +135,14 @@ function SidebarAdmin() {
               to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.MY_PROFILE}`}
               onClick={notis}
             >
-              <LiSidebarItem>
+              <LiSidebarItem
+                $active={
+                  !!(
+                    path ===
+                    `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.ADMIN}/${PrivateRoutes.MY_PROFILE}`
+                  )
+                }
+              >
                 <BsFillPersonFill size={20} />
                 Mi perfil
               </LiSidebarItem>

@@ -4,19 +4,23 @@ import { AccordionContainer } from "@/styledComponents";
 import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaGenderless, FaPhone } from "react-icons/fa";
-import { MdDateRange, MdOutlineArrowForwardIos, MdOutlineEmail } from "react-icons/md";
+import {
+  MdDateRange,
+  MdOutlineArrowForwardIos,
+  MdOutlineEmail,
+} from "react-icons/md";
 import { TiBusinessCard } from "react-icons/ti";
 import {
   ClientDetailInBroker,
   InspectionCard,
   ReportCard,
-  SectionCard
+  SectionCard,
 } from "../..";
 import {
   DivInformationMyProfile,
   DivInformationProfileDetail,
   SectionMyProfile,
-  TitleName
+  TitleName,
 } from "../MiProfile/MiProfile.styled";
 import { DivClientProfile, TitleClientProfile } from "./ClientProfile.styled";
 
@@ -72,16 +76,15 @@ function ClientProfile({ data }: Props) {
       <DivInformationMyProfile>
         {data?.brokerUser && (
           <>
-            {data?.brokerUser.map(el => (
-            <DivInformationProfileDetail>
-              <h4>Broker</h4>
-              <p>
-                {el?.personalUser
-                  ? `${el?.personalUser.name} ${el?.personalUser.lastName}`
-                  : `${el?.legalUser?.companyName}`}
-              </p>
-            </DivInformationProfileDetail>
-
+            {data?.brokerUser.map((el) => (
+              <DivInformationProfileDetail>
+                <h4>Broker</h4>
+                <p>
+                  {el?.personalUser
+                    ? `${el?.personalUser.name} ${el?.personalUser.lastName}`
+                    : `${el?.legalUser?.companyName}`}
+                </p>
+              </DivInformationProfileDetail>
             ))}
           </>
         )}
@@ -89,15 +92,22 @@ function ClientProfile({ data }: Props) {
           <MdOutlineEmail size={30} />
           <p>{data?.email}</p>
         </DivInformationProfileDetail>
-        <DivInformationProfileDetail>
-          <FaGenderless size={30} />
-          {/* <h4>Genero</h4> */}
-          <p>{data?.personalUser?.gender}</p>
-        </DivInformationProfileDetail>
-        <DivInformationProfileDetail>
-          <MdDateRange size={30} />
-          <p>{data?.personalUser?.birthDate}</p>
-        </DivInformationProfileDetail>
+        {data?.personalUser ? (
+          <>
+            <DivInformationProfileDetail>
+              <FaGenderless size={30} />
+              {/* <h4>Genero</h4> */}
+              <p>{data?.personalUser?.gender}</p>
+            </DivInformationProfileDetail>
+            <DivInformationProfileDetail>
+              <MdDateRange size={30} />
+              <p>{data?.personalUser?.birthDate}</p>
+            </DivInformationProfileDetail>
+          </>
+        ) : (
+          <></>
+        )}
+
         {data?.personalUser?.dni ? (
           <DivInformationProfileDetail>
             <TiBusinessCard size={30} />
