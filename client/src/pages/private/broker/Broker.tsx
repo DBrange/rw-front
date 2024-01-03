@@ -9,6 +9,8 @@ import {
   BrokerCreateReport,
   BrokerInspections,
   BrokerReports,
+  BrokerCreateInspectionLink,
+  BrokerCreateReportLink,
 } from ".";
 import {
   ClientCreateInspection,
@@ -42,16 +44,24 @@ function Broker() {
       />
       <Route
         path={`${PrivateRoutes.CREATE_INSPECTION}/:clientId`}
-        element={<ClientCreateInspection />}
+        element={<BrokerCreateInspectionLink />}
       />
+      {/* <Route
+        path={`${PrivateRoutes.CREATE_INSPECTION}/:clientId`}
+        element={<ClientCreateInspection />}
+      /> */}
       <Route
         path={`${PrivateRoutes.CREATE_SINISTER}`}
         element={<BrokerCreateReport />}
       />
       <Route
         path={`${PrivateRoutes.CREATE_SINISTER}/:clientId`}
-        element={<ClientCreateReport />}
+        element={<BrokerCreateReportLink />}
       />
+      {/* <Route
+        path={`${PrivateRoutes.CREATE_SINISTER}/:clientId`}
+        element={<ClientCreateReport />}
+      /> */}
       <Route
         path={`${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/:insuredId/:type`}
         element={<ClientInspectedCreateReport />}

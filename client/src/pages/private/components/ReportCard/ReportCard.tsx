@@ -2,7 +2,16 @@ import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BsPhone } from "react-icons/bs";
 import { LiaCarSideSolid } from "react-icons/lia";
 import { RiMotorbikeFill, RiTruckLine } from "react-icons/ri";
-import { CardContent, CardText, CardTextContainer, CardTextLabel, ContainerCardTextContainer, DivCard, IconCard, SpanInspectionCard } from "..";
+import {
+  CardContent,
+  CardText,
+  CardTextContainer,
+  CardTextLabel,
+  ContainerCardTextContainer,
+  DivCard,
+  IconCard,
+  SpanInspectionCard,
+} from "..";
 import { PrivateRoutes } from "@/models/types/routes";
 import { onlyDate } from "@/utilities/date.utility";
 
@@ -10,17 +19,17 @@ interface Props {
   type: string;
   keyName: string;
   id: string;
-  dashboard?: boolean
-  newCard?: boolean
-  date: Date
+  dashboard?: boolean;
+  newCard?: boolean;
+  date: Date;
 }
 
-function ReportCard({ type, keyName, id, dashboard, newCard,date }: Props) {
+function ReportCard({ type, keyName, id, dashboard, newCard, date }: Props) {
   return (
     <CardContent
       to={
         dashboard
-          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}/${id}`
+          ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_SINISTER}/${id}`
           : `${id}`
       }
     >

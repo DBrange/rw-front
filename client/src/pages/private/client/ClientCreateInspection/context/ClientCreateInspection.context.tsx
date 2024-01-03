@@ -177,12 +177,12 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
       })
     );
   };
-  console.log(inputValues?.vehicle?.images?.length)
+  console.log(inputValues?.vehicle?.images?.length);
 
   const changeInputForImages = (e: ChangeEventType, images: string[]) => {
     const { name } = e.target;
     const [type, key] = name.split(".");
-    console.log({[key]: [...images]})
+    console.log({ [key]: [...images] });
     setInputValues({
       ...inputValues,
       [type]: {
@@ -252,7 +252,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     const [type, key] = name.split(".");
 
     const onlyNumbers = /^[0-9]+$/;
-    const numberValue = onlyNumbers.test(value) ? Number(value)  : '';
+    const numberValue = onlyNumbers.test(value) ? Number(value) : "";
 
     setInputValues({
       ...inputValues,
@@ -319,13 +319,22 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
   };
 
   const { clientId, brokerId } = useParams();
+  
   const user = useSelector((store: AppStore) => store.user);
 
-  const selectBrokerUrl = user.user?.userBroker ? user.user?.id : brokerId;
-  // const selectBrokerUrl = user.user?.userBroker
-  //   ? user.user?.id
-  //   : user.user?.brokerUser?.id;
-  const selectClientUrl = user.user?.userBroker ? clientId : user?.user?.id;
+  const selectBrokerUrl =
+    brokerId && clientId
+      ? brokerId
+      : user.user?.userBroker
+      ? user.user?.id
+      : brokerId;
+
+  const selectClientUrl =
+    brokerId && clientId
+      ? clientId
+      : user.user?.userBroker
+      ? clientId
+      : user?.user?.id;
 
   const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =
     useSWRMutation(
@@ -364,7 +373,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
         elementActive,
       })
     );
-
+console.log('que onda loquitoo')
     validationFormDataInspection({
       inputValues,
       errorsInputValues,

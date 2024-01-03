@@ -6,6 +6,8 @@ export enum PublicRoutes {
   REPORT = "denunciar",
   REGISTER = "registrarse",
   FORGOTTEM_PASSWORD = "contraseña",
+  CREATE_INSPECTION = "crear-inspeccion",
+  CREATE_SINISTER = "crear-siniestro",
 }
 
 export enum PrivateRoutes {

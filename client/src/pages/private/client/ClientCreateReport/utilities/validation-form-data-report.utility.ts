@@ -109,7 +109,6 @@ const validationWithInjuries = ({
   };
 
   if (
-    user.user?.id &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
@@ -168,61 +167,6 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user?.legalUser?.cuit &&
-    errorsInputValues?.vehicleReport &&
-    errorsInputValues?.crash &&
-    errorsInputValues?.thirdPartyInjured
-  ) {
-    if (vehicleReport.gnc) {
-      if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-
-          gncDTO: gnc,
-          crashDTO: crashWithoutAmounts,
-          injuredDTO: injuredDTOObj,
-          thirdPartyVehicleDTO: thirdPartyVehicle,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjuredExtra<
-          ErrorsVehicleReportValues,
-          ErrorsCrashVehicleValues,
-          ErrorsAllThirdPartyInjuredValues,
-          ErrorsGncValues,
-          any
-        >(
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.crash,
-          errorsInputValues?.thirdPartyInjured,
-          errorsInputValues?.gnc,
-          triggerReportLegalVehicleCrash(dataObj)
-        );
-      }
-    } else {
-      const dataObj = {
-        vehicleDTO: vehicleReport,
-
-        crashDTO: crashWithoutAmounts,
-        injuredDTO: injuredDTOObj,
-        thirdPartyVehicleDTO: thirdPartyVehicle,
-        swornDeclaration: swornDeclaration.swornDeclaration,
-      };
-
-      userElementReportInjured<
-        ErrorsVehicleReportValues,
-        ErrorsCrashVehicleValues,
-        ErrorsAllThirdPartyInjuredValues,
-        any
-      >(
-        errorsInputValues?.vehicleReport,
-        errorsInputValues?.crash,
-        errorsInputValues?.thirdPartyInjured,
-        triggerReportLegalVehicleCrash(dataObj)
-      );
-    }
-  } else if (
-    user.user?.id &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.fire &&
     errorsInputValues?.thirdPartyInjured
@@ -274,59 +218,6 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user?.legalUser?.cuit &&
-    errorsInputValues?.vehicleReport &&
-    errorsInputValues?.fire &&
-    errorsInputValues?.thirdPartyInjured
-  ) {
-    if (vehicleReport.gnc) {
-      if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-
-          gncDTO: gnc,
-          fireDTO: fireWithoutAmounts,
-          injuredDTO: injuredDTOObjFire,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjuredExtra<
-          ErrorsVehicleReportValues,
-          ErrorsFireVehicleValues,
-          ErrorsAllThirdPartyInjuredValues,
-          ErrorsGncValues,
-          any
-        >(
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.fire,
-          errorsInputValues?.thirdPartyInjured,
-          errorsInputValues?.gnc,
-          triggerReportLegalVehicleFire(dataObj)
-        );
-      }
-    } else {
-      const dataObj = {
-        vehicleDTO: vehicleReport,
-
-        fireDTO: fireWithoutAmounts,
-        injuredDTO: injuredDTOObjFire,
-        swornDeclaration: swornDeclaration.swornDeclaration,
-      };
-      console.log(dataObj);
-      userElementReportInjured<
-        ErrorsVehicleReportValues,
-        ErrorsFireVehicleValues,
-        ErrorsAllThirdPartyInjuredValues,
-        any
-      >(
-        errorsInputValues?.vehicleReport,
-        errorsInputValues?.fire,
-        errorsInputValues?.thirdPartyInjured,
-        triggerReportLegalVehicleFire(dataObj)
-      );
-    }
-  } else if (
-    user.user?.id &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured &&
@@ -385,7 +276,6 @@ const validationWithInjuries = ({
       );
     }
   } else if (
-    user.user?.id &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyInjured
@@ -499,7 +389,6 @@ const validationWithoutInjuries = ({
 
   //vehicle
   if (
-    user.user?.id &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.crash &&
     errorsInputValues?.thirdPartyVehicle
@@ -549,63 +438,7 @@ const validationWithoutInjuries = ({
         triggerReportVehicleCrash(dataObj)
       );
     }
-  } else if (
-    user.user?.legalUser?.cuit &&
-    errorsInputValues?.vehicleReport &&
-    errorsInputValues?.crash &&
-    errorsInputValues?.thirdPartyVehicle
-  ) {
-    if (vehicleReport.gnc) {
-      if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-
-          gncDTO: gnc,
-          crashDTO: crashWithoutAmounts,
-          thirdPartyVehicleDTO: thirdPartyVehicle,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportInjuredExtra<
-          ErrorsVehicleReportValues,
-          ErrorsCrashVehicleValues,
-          ErrorsAllCrashVehiclesValues,
-          ErrorsGncValues,
-          any
-        >(
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.crash,
-          errorsInputValues?.thirdPartyVehicle,
-          errorsInputValues?.gnc,
-          triggerReportLegalVehicleCrash(dataObj)
-        );
-      }
-    } else {
-      const dataObj = {
-        vehicleDTO: vehicleReport,
-
-        crashDTO: crashWithoutAmounts,
-        thirdPartyVehicleDTO: thirdPartyVehicle,
-        swornDeclaration: swornDeclaration.swornDeclaration,
-      };
-
-      userElementReportInjured<
-        ErrorsVehicleReportValues,
-        ErrorsCrashVehicleValues,
-        ErrorsAllCrashVehiclesValues,
-        any
-      >(
-        errorsInputValues?.vehicleReport,
-        errorsInputValues?.crash,
-        errorsInputValues?.thirdPartyVehicle,
-        triggerReportLegalVehicleCrash(dataObj)
-      );
-    }
-  } else if (
-    user.user?.id &&
-    errorsInputValues?.vehicleReport &&
-    errorsInputValues?.fire
-  ) {
+  } else if (errorsInputValues?.vehicleReport && errorsInputValues?.fire) {
     if (vehicleReport.gnc) {
       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
         const dataObj = {
@@ -647,52 +480,6 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user?.legalUser?.cuit &&
-    errorsInputValues?.vehicleReport &&
-    errorsInputValues?.fire
-  ) {
-    if (vehicleReport.gnc) {
-      if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-
-          gncDTO: gnc,
-          fireDTO: fireWithoutAmounts,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportExtra<
-          ErrorsVehicleReportValues,
-          ErrorsFireVehicleValues,
-          ErrorsGncValues,
-          any
-        >(
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.fire,
-          errorsInputValues?.gnc,
-          triggerReportLegalVehicleFire(dataObj)
-        );
-      }
-    } else {
-      const dataObj = {
-        vehicleDTO: vehicleReport,
-
-        fireDTO: fireWithoutAmounts,
-        swornDeclaration: swornDeclaration.swornDeclaration,
-      };
-
-      userElementReport<
-        ErrorsVehicleReportValues,
-        ErrorsFireVehicleValues,
-        any
-      >(
-        errorsInputValues?.vehicleReport,
-        errorsInputValues?.fire,
-        triggerReportLegalVehicleFire(dataObj)
-      );
-    }
-  } else if (
-    user.user?.id &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.theftVehicle
   ) {
@@ -791,105 +578,6 @@ const validationWithoutInjuries = ({
       }
     } //abajo
   } else if (
-    user.user?.legalUser?.cuit &&
-    errorsInputValues?.vehicleReport &&
-    errorsInputValues?.theftVehicle
-  ) {
-    if (vehicleReport.gnc) {
-      if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
-        if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
-          const dataObj = {
-            vehicleDTO: vehicleReport,
-            gncDTO: gnc,
-            electronicDTO: null,
-            smartphoneDTO: null,
-            theftDTO: theftVehicle,
-            theftTireDTO: isTire,
-            swornDeclaration: swornDeclaration.swornDeclaration,
-          };
-
-          userElementReportTwoExtra<
-            ErrorsVehicleReportValues,
-            ErrorsTheftVehiclesValues,
-            ErrorsGncValues,
-            ErrorsIsTireValues,
-            any
-          >(
-            errorsInputValues?.vehicleReport,
-            errorsInputValues?.theftVehicle,
-            errorsInputValues?.gnc,
-            errorsInputValues?.isTire,
-            triggerReportLegalVehicleTheft(dataObj)
-          );
-        } else {
-          const dataObj = {
-            vehicleDTO: vehicleReport,
-            gncDTO: gnc,
-            electronicDTO: null,
-            smartphoneDTO: null,
-            theftDTO: theftVehicle,
-            swornDeclaration: swornDeclaration.swornDeclaration,
-          };
-
-          userElementReportExtra<
-            ErrorsVehicleReportValues,
-            ErrorsTheftVehiclesValues,
-            ErrorsGncValues,
-            any
-          >(
-            errorsInputValues?.vehicleReport,
-            errorsInputValues?.theftVehicle,
-            errorsInputValues?.gnc,
-            triggerReportLegalVehicleTheft(dataObj)
-          );
-        }
-      }
-    } else {
-      if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-          gncDTO: null,
-          electronicDTO: null,
-          smartphoneDTO: null,
-          theftDTO: theftVehicle,
-          theftTireDTO: isTire,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportExtra<
-          ErrorsVehicleReportValues,
-          ErrorsTheftVehiclesValues,
-          ErrorsIsTireValues,
-          any
-        >(
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.theftVehicle,
-          errorsInputValues?.isTire,
-          triggerReportLegalVehicleTheft(dataObj)
-        );
-      } else {
-        const dataObj = {
-          vehicleDTO: vehicleReport,
-          gncDTO: null,
-          electronicDTO: null,
-          smartphoneDTO: null,
-          theftDTO: theftVehicle,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReport<
-          ErrorsVehicleReportValues,
-          ErrorsTheftVehiclesValues,
-          any
-        >(
-          errorsInputValues?.vehicleReport,
-          errorsInputValues?.theftVehicle,
-          triggerReportLegalVehicleTheft(dataObj)
-        );
-      }
-    }
-  } else if (
-    user.user?.id &&
     errorsInputValues?.vehicleReport &&
     errorsInputValues?.damageVehicle
   ) {
@@ -937,7 +625,6 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user?.id &&
     errorsInputValues?.electronic &&
     errorsInputValues?.theftElectronic
   ) {
@@ -985,55 +672,6 @@ const validationWithoutInjuries = ({
       );
     }
   } else if (
-    user.user?.legalUser?.cuit &&
-    errorsInputValues?.electronic &&
-    errorsInputValues?.theftElectronic
-  ) {
-    if (electronic.type === "CELULAR") {
-      if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
-        const dataObj = {
-          vehicleDTO: null,
-          gncDTO: null,
-          electronicDTO: electronic,
-          theftDTO: theftElectronic,
-          smartphoneDTO: phone,
-          swornDeclaration: swornDeclaration.swornDeclaration,
-        };
-
-        userElementReportExtra<
-          ErrorsElectronicValues,
-          ErrorsTheftElectronicValues,
-          ErrorsPhoneValues,
-          any
-        >(
-          errorsInputValues?.electronic,
-          errorsInputValues?.theftElectronic,
-          errorsInputValues?.phone,
-          triggerReportLegalVehicleTheft(dataObj)
-        );
-      }
-    } else {
-      const dataObj = {
-        vehicleDTO: null,
-        gncDTO: null,
-        electronicDTO: electronic,
-        smartphoneDTO: null,
-        theftDTO: theftElectronic,
-        swornDeclaration: swornDeclaration.swornDeclaration,
-      };
-
-      userElementReport<
-        ErrorsElectronicValues,
-        ErrorsTheftElectronicValues,
-        any
-      >(
-        errorsInputValues?.electronic,
-        errorsInputValues?.theftElectronic,
-        triggerReportLegalVehicleTheft(dataObj)
-      );
-    }
-  } else if (
-    user.user?.id &&
     errorsInputValues?.electronic &&
     errorsInputValues?.damageElectronic
   ) {
@@ -1193,3 +831,1056 @@ const userElementReport = <U, V, E>(
     console.log("tamosss");
   }
 };
+
+// export const validationFormDataReportClient = ({
+//   inputValues,
+//   errorsInputValues,
+//   triggers,
+//   amountInjured,
+//   user,
+// }: Params) => {
+//   if (inputValues.swornDeclaration.swornDeclaration) {
+//     if ((amountInjured as number) > 0) {
+//       validationWithInjuries({
+//         inputValues,
+//         errorsInputValues,
+//         triggers,
+//         user,
+//       });
+//     } else {
+//       validationWithoutInjuries({
+//         inputValues,
+//         errorsInputValues,
+//         triggers,
+//         user,
+//       });
+//     }
+//   }
+// };
+
+// const validationWithInjuries = ({
+//   inputValues: {
+//     vehicleReport,
+//     gnc,
+//     fire,
+//     crash,
+//     thirdPartyInjured,
+//     thirdPartyVehicle,
+//     swornDeclaration,
+//   },
+//   errorsInputValues,
+//   triggers: {
+//     triggerReportVehicleCrash,
+//     triggerReportVehicleFire,
+//     triggerReportLegalVehicleCrash,
+//     triggerReportLegalVehicleFire,
+//   },
+//   user,
+// }: Params) => {
+//   const crashWithoutAmounts = {
+//     ambulance: crash.ambulance,
+//     ambulanceTo: crash.ambulanceTo,
+//     date: crash.date,
+//     details: crash.details,
+//     friendlyStatement: crash.friendlyStatement,
+//     injured: crash.injured,
+//     injuries: crash.injuries,
+//     location: crash.location,
+//     thirdInjured: crash.thirdInjured,
+//     time: crash.time,
+//   };
+
+//   const fireWithoutAmounts = {
+//     ambulance: fire.ambulance,
+//     ambulanceTo: fire.ambulanceTo,
+//     date: fire.date,
+//     details: fire.details,
+//     injured: fire.injured,
+//     injuries: fire.injuries,
+//     location: fire.location,
+//     thirdInjured: fire.thirdInjured,
+//     time: fire.time,
+//   };
+
+//   const injuredDTOObjFire = {
+//     amount: fire.amount,
+//     injuredInfo: thirdPartyInjured.injuredInfo,
+//   };
+
+//   const injuredDTOObj = {
+//     amount: crash.amount,
+//     injuredInfo: thirdPartyInjured.injuredInfo,
+//   };
+
+//   if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.crash &&
+//     errorsInputValues?.thirdPartyInjured &&
+//     errorsInputValues?.thirdPartyVehicle
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           crashDTO: crashWithoutAmounts,
+//           injuredDTO: injuredDTOObj,
+//           thirdPartyVehicleDTO: thirdPartyVehicle,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredVehiclesExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsCrashVehicleValues,
+//           ErrorsAllThirdPartyInjuredValues,
+//           ErrorsAllCrashVehiclesValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.crash,
+//           errorsInputValues?.thirdPartyInjured,
+//           errorsInputValues?.thirdPartyVehicle,
+//           errorsInputValues?.gnc,
+//           triggerReportVehicleCrash(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         crashDTO: crashWithoutAmounts,
+//         injuredDTO: injuredDTOObj,
+//         thirdPartyVehicleDTO: thirdPartyVehicle,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReportInjuredExtra<
+//         ErrorsVehicleReportValues,
+//         ErrorsCrashVehicleValues,
+//         ErrorsAllThirdPartyInjuredValues,
+//         ErrorsAllCrashVehiclesValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.crash,
+//         errorsInputValues?.thirdPartyInjured,
+//         errorsInputValues?.thirdPartyVehicle,
+//         triggerReportVehicleCrash(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.legalUser?.cuit &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.crash &&
+//     errorsInputValues?.thirdPartyInjured
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+//           gncDTO: gnc,
+//           crashDTO: crashWithoutAmounts,
+//           injuredDTO: injuredDTOObj,
+//           thirdPartyVehicleDTO: thirdPartyVehicle,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsCrashVehicleValues,
+//           ErrorsAllThirdPartyInjuredValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.crash,
+//           errorsInputValues?.thirdPartyInjured,
+//           errorsInputValues?.gnc,
+//           triggerReportLegalVehicleCrash(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+//         crashDTO: crashWithoutAmounts,
+//         injuredDTO: injuredDTOObj,
+//         thirdPartyVehicleDTO: thirdPartyVehicle,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReportInjured<
+//         ErrorsVehicleReportValues,
+//         ErrorsCrashVehicleValues,
+//         ErrorsAllThirdPartyInjuredValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.crash,
+//         errorsInputValues?.thirdPartyInjured,
+//         triggerReportLegalVehicleCrash(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.fire &&
+//     errorsInputValues?.thirdPartyInjured
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           fireDTO: fireWithoutAmounts,
+//           injuredDTO: injuredDTOObj,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsFireVehicleValues,
+//           ErrorsAllThirdPartyInjuredValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.fire,
+//           errorsInputValues?.thirdPartyInjured,
+//           errorsInputValues?.gnc,
+//           triggerReportVehicleFire(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         fireDTO: fireWithoutAmounts,
+//         injuredDTO: injuredDTOObjFire,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReportInjured<
+//         ErrorsVehicleReportValues,
+//         ErrorsFireVehicleValues,
+//         ErrorsAllThirdPartyInjuredValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.fire,
+//         errorsInputValues?.thirdPartyInjured,
+//         triggerReportVehicleFire(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.legalUser?.cuit &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.fire &&
+//     errorsInputValues?.thirdPartyInjured
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           fireDTO: fireWithoutAmounts,
+//           injuredDTO: injuredDTOObjFire,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsFireVehicleValues,
+//           ErrorsAllThirdPartyInjuredValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.fire,
+//           errorsInputValues?.thirdPartyInjured,
+//           errorsInputValues?.gnc,
+//           triggerReportLegalVehicleFire(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         fireDTO: fireWithoutAmounts,
+//         injuredDTO: injuredDTOObjFire,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+//       console.log(dataObj);
+//       userElementReportInjured<
+//         ErrorsVehicleReportValues,
+//         ErrorsFireVehicleValues,
+//         ErrorsAllThirdPartyInjuredValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.fire,
+//         errorsInputValues?.thirdPartyInjured,
+//         triggerReportLegalVehicleFire(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.crash &&
+//     errorsInputValues?.thirdPartyInjured &&
+//     errorsInputValues?.thirdPartyVehicle
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           crashDTO: crashWithoutAmounts,
+//           injuredDTO: injuredDTOObj,
+//           thirdPartyVehicleDTO: thirdPartyVehicle,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredVehiclesExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsCrashVehicleValues,
+//           ErrorsAllThirdPartyInjuredValues,
+//           ErrorsAllCrashVehiclesValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.crash,
+//           errorsInputValues?.thirdPartyInjured,
+//           errorsInputValues?.thirdPartyVehicle,
+//           errorsInputValues?.gnc,
+//           triggerReportVehicleCrash(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         crashDTO: crashWithoutAmounts,
+//         injuredDTO: injuredDTOObj,
+//         thirdPartyVehicleDTO: thirdPartyVehicle.thirdPartyVehicleInfo,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReportInjuredExtra<
+//         ErrorsVehicleReportValues,
+//         ErrorsCrashVehicleValues,
+//         ErrorsAllThirdPartyInjuredValues,
+//         ErrorsAllCrashVehiclesValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.crash,
+//         errorsInputValues?.thirdPartyInjured,
+//         errorsInputValues?.thirdPartyVehicle,
+//         triggerReportVehicleCrash(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.crash &&
+//     errorsInputValues?.thirdPartyInjured
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           crashDTO: crashWithoutAmounts,
+//           injuredDTO: injuredDTOObj,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsCrashVehicleValues,
+//           ErrorsAllThirdPartyInjuredValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.crash,
+//           errorsInputValues?.thirdPartyInjured,
+//           errorsInputValues?.gnc,
+//           triggerReportVehicleCrash(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         crashDTO: crashWithoutAmounts,
+//         injuredDTO: injuredDTOObj,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReportInjured<
+//         ErrorsVehicleReportValues,
+//         ErrorsCrashVehicleValues,
+//         ErrorsAllThirdPartyInjuredValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.crash,
+//         errorsInputValues?.thirdPartyInjured,
+//         triggerReportVehicleCrash(dataObj)
+//       );
+//     }
+//   }
+// };
+
+// const validationWithoutInjuries = ({
+//   inputValues: {
+//     vehicleReport,
+//     electronic,
+//     gnc,
+//     phone,
+//     theftVehicle,
+//     theftElectronic,
+//     damageVehicle,
+//     damageElectronic,
+//     isTire,
+//     fire,
+//     crash,
+//     thirdPartyVehicle,
+//     swornDeclaration,
+//   },
+//   errorsInputValues,
+//   triggers: {
+//     triggerReportVehicleCrash,
+//     triggerReportVehicleTheft,
+//     triggerReportVehicleDamage,
+//     triggerReportVehicleFire,
+//     triggerReportLegalVehicleCrash,
+//     triggerReportLegalVehicleTheft,
+//     triggerReportLegalVehicleFire,
+//   },
+//   user,
+// }: Params) => {
+//   const crashWithoutAmounts = {
+//     ambulance: crash.ambulance,
+//     ambulanceTo: crash.ambulanceTo,
+//     date: crash.date,
+//     details: crash.details,
+//     friendlyStatement: crash.friendlyStatement,
+//     injured: crash.injured,
+//     injuries: crash.injuries,
+//     location: crash.location,
+//     thirdInjured: crash.thirdInjured,
+//     time: crash.time,
+//   };
+
+//   const fireWithoutAmounts = {
+//     ambulance: fire.ambulance,
+//     ambulanceTo: fire.ambulanceTo,
+//     date: fire.date,
+//     details: fire.details,
+//     injured: fire.injured,
+//     injuries: fire.injuries,
+//     location: fire.location,
+//     thirdInjured: fire.thirdInjured,
+//     time: fire.time,
+//   };
+
+//   // const injuredDTOObj = {
+//   //   amount: crash.amount,
+//   //   thirdPartyInjured: thirdPartyInjured.injuredInfo,
+//   // };
+
+//   //vehicle
+//   if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.crash &&
+//     errorsInputValues?.thirdPartyVehicle
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           crashDTO: crashWithoutAmounts,
+//           thirdPartyVehicleDTO: thirdPartyVehicle,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsCrashVehicleValues,
+//           ErrorsAllCrashVehiclesValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.crash,
+//           errorsInputValues?.thirdPartyVehicle,
+//           errorsInputValues?.gnc,
+//           triggerReportVehicleCrash(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         crashDTO: crashWithoutAmounts,
+//         thirdPartyVehicleDTO: thirdPartyVehicle,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+//       userElementReportInjured<
+//         ErrorsVehicleReportValues,
+//         ErrorsCrashVehicleValues,
+//         ErrorsAllCrashVehiclesValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.crash,
+//         errorsInputValues?.thirdPartyVehicle,
+//         triggerReportVehicleCrash(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.legalUser?.cuit &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.crash &&
+//     errorsInputValues?.thirdPartyVehicle
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           crashDTO: crashWithoutAmounts,
+//           thirdPartyVehicleDTO: thirdPartyVehicle,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportInjuredExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsCrashVehicleValues,
+//           ErrorsAllCrashVehiclesValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.crash,
+//           errorsInputValues?.thirdPartyVehicle,
+//           errorsInputValues?.gnc,
+//           triggerReportLegalVehicleCrash(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         crashDTO: crashWithoutAmounts,
+//         thirdPartyVehicleDTO: thirdPartyVehicle,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReportInjured<
+//         ErrorsVehicleReportValues,
+//         ErrorsCrashVehicleValues,
+//         ErrorsAllCrashVehiclesValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.crash,
+//         errorsInputValues?.thirdPartyVehicle,
+//         triggerReportLegalVehicleCrash(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.fire
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           fireDTO: fireWithoutAmounts,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsFireVehicleValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.fire,
+//           errorsInputValues?.gnc,
+//           triggerReportVehicleFire(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         fireDTO: fireWithoutAmounts,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReport<
+//         ErrorsVehicleReportValues,
+//         ErrorsFireVehicleValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.fire,
+//         triggerReportVehicleFire(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.legalUser?.cuit &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.fire
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+
+//           gncDTO: gnc,
+//           fireDTO: fireWithoutAmounts,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsFireVehicleValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.fire,
+//           errorsInputValues?.gnc,
+//           triggerReportLegalVehicleFire(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+
+//         fireDTO: fireWithoutAmounts,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReport<
+//         ErrorsVehicleReportValues,
+//         ErrorsFireVehicleValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.fire,
+//         triggerReportLegalVehicleFire(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.theftVehicle
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
+//           const dataObj = {
+//             vehicleDTO: vehicleReport,
+//             gncDTO: gnc,
+//             electronicDTO: null,
+//             smartphoneDTO: null,
+//             theftDTO: theftVehicle,
+//             theftTireDTO: isTire,
+//             swornDeclaration: swornDeclaration.swornDeclaration,
+//           };
+
+//           userElementReportTwoExtra<
+//             ErrorsVehicleReportValues,
+//             ErrorsTheftVehiclesValues,
+//             ErrorsGncValues,
+//             ErrorsIsTireValues,
+//             any
+//           >(
+//             errorsInputValues?.vehicleReport,
+//             errorsInputValues?.theftVehicle,
+//             errorsInputValues?.gnc,
+//             errorsInputValues?.isTire,
+//             triggerReportVehicleTheft(dataObj)
+//           );
+//         } else {
+//           const dataObj = {
+//             vehicleDTO: vehicleReport,
+//             gncDTO: gnc,
+//             electronicDTO: null,
+//             smartphoneDTO: null,
+//             theftDTO: theftVehicle,
+//             swornDeclaration: swornDeclaration.swornDeclaration,
+//           };
+
+//           userElementReportExtra<
+//             ErrorsVehicleReportValues,
+//             ErrorsTheftVehiclesValues,
+//             ErrorsGncValues,
+//             any
+//           >(
+//             errorsInputValues?.vehicleReport,
+//             errorsInputValues?.theftVehicle,
+//             errorsInputValues?.gnc,
+//             triggerReportVehicleTheft(dataObj)
+//           );
+//         }
+//       }
+//     } else {
+//       if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+//           gncDTO: null,
+//           electronicDTO: null,
+//           smartphoneDTO: null,
+//           theftDTO: theftVehicle,
+//           theftTireDTO: isTire,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsTheftVehiclesValues,
+//           ErrorsIsTireValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.theftVehicle,
+//           errorsInputValues?.isTire,
+//           triggerReportVehicleTheft(dataObj)
+//         );
+//       } else {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+//           gncDTO: null,
+//           electronicDTO: null,
+//           smartphoneDTO: null,
+//           theftDTO: theftVehicle,
+//           theftTireDTO: isTire,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReport<
+//           ErrorsVehicleReportValues,
+//           ErrorsTheftVehiclesValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.theftVehicle,
+//           triggerReportVehicleTheft(dataObj)
+//         );
+//       }
+//     } //abajo
+//   } else if (
+//     user.user?.legalUser?.cuit &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.theftVehicle
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
+//           const dataObj = {
+//             vehicleDTO: vehicleReport,
+//             gncDTO: gnc,
+//             electronicDTO: null,
+//             smartphoneDTO: null,
+//             theftDTO: theftVehicle,
+//             theftTireDTO: isTire,
+//             swornDeclaration: swornDeclaration.swornDeclaration,
+//           };
+
+//           userElementReportTwoExtra<
+//             ErrorsVehicleReportValues,
+//             ErrorsTheftVehiclesValues,
+//             ErrorsGncValues,
+//             ErrorsIsTireValues,
+//             any
+//           >(
+//             errorsInputValues?.vehicleReport,
+//             errorsInputValues?.theftVehicle,
+//             errorsInputValues?.gnc,
+//             errorsInputValues?.isTire,
+//             triggerReportLegalVehicleTheft(dataObj)
+//           );
+//         } else {
+//           const dataObj = {
+//             vehicleDTO: vehicleReport,
+//             gncDTO: gnc,
+//             electronicDTO: null,
+//             smartphoneDTO: null,
+//             theftDTO: theftVehicle,
+//             swornDeclaration: swornDeclaration.swornDeclaration,
+//           };
+
+//           userElementReportExtra<
+//             ErrorsVehicleReportValues,
+//             ErrorsTheftVehiclesValues,
+//             ErrorsGncValues,
+//             any
+//           >(
+//             errorsInputValues?.vehicleReport,
+//             errorsInputValues?.theftVehicle,
+//             errorsInputValues?.gnc,
+//             triggerReportLegalVehicleTheft(dataObj)
+//           );
+//         }
+//       }
+//     } else {
+//       if (!validate(errorsInputValues?.isTire) && errorsInputValues?.isTire) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+//           gncDTO: null,
+//           electronicDTO: null,
+//           smartphoneDTO: null,
+//           theftDTO: theftVehicle,
+//           theftTireDTO: isTire,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsTheftVehiclesValues,
+//           ErrorsIsTireValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.theftVehicle,
+//           errorsInputValues?.isTire,
+//           triggerReportLegalVehicleTheft(dataObj)
+//         );
+//       } else {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+//           gncDTO: null,
+//           electronicDTO: null,
+//           smartphoneDTO: null,
+//           theftDTO: theftVehicle,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReport<
+//           ErrorsVehicleReportValues,
+//           ErrorsTheftVehiclesValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.theftVehicle,
+//           triggerReportLegalVehicleTheft(dataObj)
+//         );
+//       }
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.vehicleReport &&
+//     errorsInputValues?.damageVehicle
+//   ) {
+//     if (vehicleReport.gnc) {
+//       if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//         const dataObj = {
+//           vehicleDTO: vehicleReport,
+//           gncDTO: gnc,
+//           electronicDTO: null,
+//           smartphoneDTO: null,
+//           damageDTO: damageVehicle,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportExtra<
+//           ErrorsVehicleReportValues,
+//           ErrorsDamageVehiclesValues,
+//           ErrorsGncValues,
+//           any
+//         >(
+//           errorsInputValues?.vehicleReport,
+//           errorsInputValues?.damageVehicle,
+//           errorsInputValues?.gnc,
+//           triggerReportVehicleDamage(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: vehicleReport,
+//         gncDTO: null,
+//         electronicDTO: null,
+//         smartphoneDTO: null,
+//         damageDTO: damageVehicle,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReport<
+//         ErrorsVehicleReportValues,
+//         ErrorsDamageVehiclesValues,
+//         any
+//       >(
+//         errorsInputValues?.vehicleReport,
+//         errorsInputValues?.damageVehicle,
+//         triggerReportVehicleDamage(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.electronic &&
+//     errorsInputValues?.theftElectronic
+//   ) {
+//     if (electronic.type === "CELULAR") {
+//       if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
+//         const dataObj = {
+//           vehicleDTO: null,
+//           gncDTO: null,
+//           electronicDTO: electronic,
+//           theftDTO: theftElectronic,
+//           smartphoneDTO: phone,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+//         console.log(dataObj);
+//         userElementReportExtra<
+//           ErrorsElectronicValues,
+//           ErrorsTheftElectronicValues,
+//           ErrorsPhoneValues,
+//           any
+//         >(
+//           errorsInputValues?.electronic,
+//           errorsInputValues?.theftElectronic,
+//           errorsInputValues?.phone,
+//           triggerReportVehicleTheft(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: null,
+//         gncDTO: null,
+//         electronicDTO: electronic,
+//         smartphoneDTO: null,
+//         theftDTO: theftElectronic,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReport<
+//         ErrorsElectronicValues,
+//         ErrorsTheftElectronicValues,
+//         any
+//       >(
+//         errorsInputValues?.electronic,
+//         errorsInputValues?.theftElectronic,
+//         triggerReportVehicleTheft(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.legalUser?.cuit &&
+//     errorsInputValues?.electronic &&
+//     errorsInputValues?.theftElectronic
+//   ) {
+//     if (electronic.type === "CELULAR") {
+//       if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
+//         const dataObj = {
+//           vehicleDTO: null,
+//           gncDTO: null,
+//           electronicDTO: electronic,
+//           theftDTO: theftElectronic,
+//           smartphoneDTO: phone,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+
+//         userElementReportExtra<
+//           ErrorsElectronicValues,
+//           ErrorsTheftElectronicValues,
+//           ErrorsPhoneValues,
+//           any
+//         >(
+//           errorsInputValues?.electronic,
+//           errorsInputValues?.theftElectronic,
+//           errorsInputValues?.phone,
+//           triggerReportLegalVehicleTheft(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: null,
+//         gncDTO: null,
+//         electronicDTO: electronic,
+//         smartphoneDTO: null,
+//         theftDTO: theftElectronic,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReport<
+//         ErrorsElectronicValues,
+//         ErrorsTheftElectronicValues,
+//         any
+//       >(
+//         errorsInputValues?.electronic,
+//         errorsInputValues?.theftElectronic,
+//         triggerReportLegalVehicleTheft(dataObj)
+//       );
+//     }
+//   } else if (
+//     user.user?.id &&
+//     errorsInputValues?.electronic &&
+//     errorsInputValues?.damageElectronic
+//   ) {
+//     if (electronic.type === "CELULAR") {
+//       if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
+//         const dataObj = {
+//           vehicleDTO: null,
+//           gncDTO: null,
+//           electronicDTO: electronic,
+//           damageDTO: damageElectronic,
+//           smartphoneDTO: phone,
+//           swornDeclaration: swornDeclaration.swornDeclaration,
+//         };
+//         console.log(dataObj);
+//         userElementReportExtra<
+//           ErrorsElectronicValues,
+//           ErrorsDamageElectronicValues,
+//           ErrorsPhoneValues,
+//           any
+//         >(
+//           errorsInputValues?.electronic,
+//           errorsInputValues?.damageElectronic,
+//           errorsInputValues?.phone,
+//           triggerReportVehicleDamage(dataObj)
+//         );
+//       }
+//     } else {
+//       const dataObj = {
+//         vehicleDTO: null,
+//         gncDTO: null,
+//         electronicDTO: electronic,
+//         smartphoneDTO: null,
+//         damageDTO: damageElectronic,
+//         swornDeclaration: swornDeclaration.swornDeclaration,
+//       };
+
+//       userElementReport<
+//         ErrorsElectronicValues,
+//         ErrorsDamageElectronicValues,
+//         any
+//       >(
+//         errorsInputValues?.electronic,
+//         errorsInputValues?.damageElectronic,
+//         triggerReportVehicleDamage(dataObj)
+//       );
+//     }
+//   }
+// };

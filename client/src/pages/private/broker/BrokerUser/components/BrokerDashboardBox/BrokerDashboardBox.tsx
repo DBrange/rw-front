@@ -1,3 +1,4 @@
+import { PrivateRoutes } from "@/models/types/routes";
 import {
   AllBrokerClients,
   AllClientAssets,
@@ -6,6 +7,11 @@ import {
   InspectionCard,
   ReportCard,
 } from "@/pages";
+import { date } from "@/utilities/date.utility";
+import { BsShieldCheck } from "react-icons/bs";
+import { IoIosMore } from "react-icons/io";
+import { TbReportAnalytics } from "react-icons/tb";
+import { Link } from "react-router-dom";
 import { useBrokerUserContext } from "../..";
 import {
   BtnBrokerDashboardBox,
@@ -17,13 +23,6 @@ import {
   SectionBrokerDashboardBox,
   SpanBrokerDashboardBox,
 } from "./BrokerDashboardBox.styled";
-import { IoIosMore } from "react-icons/io";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { PrivateRoutes } from "@/models/types/routes";
-import { date } from "@/utilities/date.utility";
-import { BsShieldCheck } from "react-icons/bs";
-import { TbReportAnalytics } from "react-icons/tb";
 
 function BrokerDashboardBox() {
   const {
@@ -120,7 +119,7 @@ function BrokerDashboardBox() {
       sinisters
     );
   };
-  
+
   const clientsArr = (clientsLastWeek: AllBrokerClients[]) => {
     const clients = [...clientsLastWeek]
       ?.sort((a, b) => date(b.created_at) - date(a.created_at))

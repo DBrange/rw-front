@@ -9,7 +9,12 @@ import {
   DivInformationMyProfile,
   ImageDetail,
 } from "../MiProfile/MiProfile.styled";
-import { DivHeaderInspectionDetail, H2InspectionDetail, SectionHeaderInspectionDetail } from "./InspectionDetail.styled";
+import {
+  BtnInspectionDetail,
+  DivHeaderInspectionDetail,
+  H2InspectionDetail,
+  SectionHeaderInspectionDetail,
+} from "./InspectionDetail.styled";
 import ModalImage from "@/components/ModalImage/ModalImage";
 import { useEffect, useState } from "react";
 import { modalImage } from "@/services/sharing-information.service";
@@ -84,7 +89,7 @@ function InspectionDetail({
                   : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
               }
             >
-              Para denunciar
+              <BtnInspectionDetail>Denunciar</BtnInspectionDetail>
             </Link>
           ) : (
             <></>
@@ -197,7 +202,9 @@ function InspectionDetail({
                   : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
               }
             >
-              Para denunciar
+              <BtnInspectionDetail>
+                <p>Denunciar</p>
+              </BtnInspectionDetail>
             </Link>
           ) : (
             <></>
@@ -207,7 +214,7 @@ function InspectionDetail({
             {dataClientHTML()}
             {type === "CELULAR" && (
               <>
-              <H2InspectionDetail>Electrodomestico</H2InspectionDetail>
+                <H2InspectionDetail>Electrodomestico</H2InspectionDetail>
                 <DivInformationDetail>
                   <h4>IMEI</h4>
                   <p>{smartphone?.imei}</p>
@@ -278,7 +285,7 @@ function InspectionDetail({
                       .slice(0, 10)
                       .split("-")
                       .reverse()
-                      .join('-')}
+                      .join("-")}
                   </p>
                 </DivInformationDetail>
                 <DivInformationDetail>
@@ -318,6 +325,10 @@ function InspectionDetail({
     }
   };
 
-  return <SectionHeaderInspectionDetail>{dataInHTML()}</SectionHeaderInspectionDetail>;
+  return (
+    <SectionHeaderInspectionDetail>
+      {dataInHTML()}
+    </SectionHeaderInspectionDetail>
+  );
 }
 export default InspectionDetail;

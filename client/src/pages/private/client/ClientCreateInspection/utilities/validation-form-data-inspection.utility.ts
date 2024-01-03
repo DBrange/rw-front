@@ -25,7 +25,7 @@ export const validationFormDataInspection = ({
   user,
 }: Params) => {
   if (swornDeclaration.swornDeclaration) {
-    if (user.user?.id && errorsInputValues?.vehicle) {
+    if (errorsInputValues?.vehicle) {
       if (vehicle.gnc) {
         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
           const dataObj = {
@@ -56,38 +56,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (user.user?.legalUser?.cuit && errorsInputValues?.vehicle) {
-      if (vehicle.gnc) {
-        if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
-          const dataObj = {
-            vehicleDTO: vehicle,
-            gncDTO: gnc,
-            electronicDTO: null,
-            smartphoneDTO: null,
-            swornDeclaration: swornDeclaration,
-          };
-
-          userElementExtra<ErrorsVehicleValues, ErrorsGncValues, any>(
-            errorsInputValues?.vehicle,
-            errorsInputValues?.gnc,
-            triggerInspectionPersonal(dataObj)
-          );
-        }
-      } else {
-        const dataObj = {
-          vehicleDTO: vehicle,
-          gncDTO: null,
-          electronicDTO: null,
-          smartphoneDTO: null,
-          swornDeclaration: swornDeclaration,
-        };
-
-        userElement<ErrorsVehicleValues, any>(
-          errorsInputValues?.vehicle,
-          triggerInspectionPersonal(dataObj)
-        );
-      }
-    } else if (user.user?.id && errorsInputValues?.electronic) {
+    }  else if (user.user?.id && errorsInputValues?.electronic) {
       if (electronic.type === "CELULAR") {
         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
           const dataObj = {
@@ -118,38 +87,7 @@ export const validationFormDataInspection = ({
           triggerInspectionPersonal(dataObj)
         );
       }
-    } else if (user.user?.legalUser?.cuit && errorsInputValues?.electronic) {
-      if (electronic.type === "CELULAR") {
-        if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
-          const dataObj = {
-            vehicleDTO: null,
-            gncDTO: null,
-            electronicDTO: electronic,
-            smartphoneDTO: phone,
-            swornDeclaration: swornDeclaration,
-          };
-
-          userElementExtra<ErrorsElectronicValues, ErrorsPhoneValues, any>(
-            errorsInputValues?.electronic,
-            errorsInputValues?.phone,
-            triggerInspectionPersonal(dataObj)
-          );
-        }
-      } else {
-        const dataObj = {
-          vehicleDTO: null,
-          gncDTO: null,
-          electronicDTO: electronic,
-          smartphoneDTO: null,
-          swornDeclaration: swornDeclaration,
-        };
-
-        userElement<ErrorsElectronicValues, any>(
-          errorsInputValues?.electronic,
-          triggerInspectionPersonal(dataObj)
-        );
-      }
-    }
+    } 
   }
 };
 
@@ -172,3 +110,138 @@ const userElement = <U, V>(element: Partial<U>, trigger: V): void => {
     trigger;
   }
 };
+
+// export const validationFormDataInspection = ({
+//   inputValues: { vehicle, electronic, gnc, phone, swornDeclaration },
+//   errorsInputValues,
+//   triggers: { triggerInspectionPersonal },
+//   user,
+// }: Params) => {
+//   if (swornDeclaration.swornDeclaration) {
+//     if (user.user?.id && errorsInputValues?.vehicle) {
+//       if (vehicle.gnc) {
+//         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//           const dataObj = {
+//             vehicleDTO: vehicle,
+//             gncDTO: gnc,
+//             electronicDTO: null,
+//             smartphoneDTO: null,
+//             swornDeclaration: swornDeclaration,
+//           };
+
+//           userElementExtra<ErrorsVehicleValues, ErrorsGncValues, any>(
+//             errorsInputValues?.vehicle,
+//             errorsInputValues?.gnc,
+//             triggerInspectionPersonal(dataObj)
+//           );
+//         }
+//       } else {
+//         const dataObj = {
+//           vehicleDTO: vehicle,
+//           gncDTO: null,
+//           electronicDTO: null,
+//           smartphoneDTO: null,
+//           swornDeclaration: swornDeclaration,
+//         };
+
+//         userElement<ErrorsVehicleValues, any>(
+//           errorsInputValues?.vehicle,
+//           triggerInspectionPersonal(dataObj)
+//         );
+//       }
+//     } else if (user.user?.legalUser?.cuit && errorsInputValues?.vehicle) {
+//       if (vehicle.gnc) {
+//         if (!validate(errorsInputValues?.gnc) && errorsInputValues?.gnc) {
+//           const dataObj = {
+//             vehicleDTO: vehicle,
+//             gncDTO: gnc,
+//             electronicDTO: null,
+//             smartphoneDTO: null,
+//             swornDeclaration: swornDeclaration,
+//           };
+
+//           userElementExtra<ErrorsVehicleValues, ErrorsGncValues, any>(
+//             errorsInputValues?.vehicle,
+//             errorsInputValues?.gnc,
+//             triggerInspectionPersonal(dataObj)
+//           );
+//         }
+//       } else {
+//         const dataObj = {
+//           vehicleDTO: vehicle,
+//           gncDTO: null,
+//           electronicDTO: null,
+//           smartphoneDTO: null,
+//           swornDeclaration: swornDeclaration,
+//         };
+
+//         userElement<ErrorsVehicleValues, any>(
+//           errorsInputValues?.vehicle,
+//           triggerInspectionPersonal(dataObj)
+//         );
+//       }
+//     } else if (user.user?.id && errorsInputValues?.electronic) {
+//       if (electronic.type === "CELULAR") {
+//         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
+//           const dataObj = {
+//             vehicleDTO: null,
+//             gncDTO: null,
+//             electronicDTO: electronic,
+//             smartphoneDTO: phone,
+//             swornDeclaration: swornDeclaration,
+//           };
+
+//           userElementExtra<ErrorsElectronicValues, ErrorsPhoneValues, any>(
+//             errorsInputValues?.electronic,
+//             errorsInputValues?.phone,
+//             triggerInspectionPersonal(dataObj)
+//           );
+//         }
+//       } else {
+//         const dataObj = {
+//           vehicleDTO: null,
+//           gncDTO: null,
+//           electronicDTO: electronic,
+//           smartphoneDTO: null,
+//           swornDeclaration: swornDeclaration,
+//         };
+
+//         userElement<ErrorsElectronicValues, any>(
+//           errorsInputValues?.electronic,
+//           triggerInspectionPersonal(dataObj)
+//         );
+//       }
+//     } else if (user.user?.legalUser?.cuit && errorsInputValues?.electronic) {
+//       if (electronic.type === "CELULAR") {
+//         if (!validate(errorsInputValues?.phone) && errorsInputValues?.phone) {
+//           const dataObj = {
+//             vehicleDTO: null,
+//             gncDTO: null,
+//             electronicDTO: electronic,
+//             smartphoneDTO: phone,
+//             swornDeclaration: swornDeclaration,
+//           };
+
+//           userElementExtra<ErrorsElectronicValues, ErrorsPhoneValues, any>(
+//             errorsInputValues?.electronic,
+//             errorsInputValues?.phone,
+//             triggerInspectionPersonal(dataObj)
+//           );
+//         }
+//       } else {
+//         const dataObj = {
+//           vehicleDTO: null,
+//           gncDTO: null,
+//           electronicDTO: electronic,
+//           smartphoneDTO: null,
+//           swornDeclaration: swornDeclaration,
+//         };
+
+//         userElement<ErrorsElectronicValues, any>(
+//           errorsInputValues?.electronic,
+//           triggerInspectionPersonal(dataObj)
+//         );
+//       }
+//     }
+//   }
+// };

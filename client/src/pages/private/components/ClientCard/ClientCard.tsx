@@ -51,7 +51,7 @@ function ClientCard({
           {companyName ? (
             <>
               <CardTextContainer>
-                <CardTextLabel>COMPANIA:</CardTextLabel>
+                <CardTextLabel>COMPAÑIA:</CardTextLabel>
                 <CardText>{companyName}</CardText>
               </CardTextContainer>
               <CardTextContainer>

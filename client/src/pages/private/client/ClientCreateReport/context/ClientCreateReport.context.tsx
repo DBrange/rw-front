@@ -1201,13 +1201,22 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
   };
 
   const { clientId, brokerId } = useParams();
+  
   const user = useSelector((store: AppStore) => store.user);
 
-  const selectBrokerUrl = user.user?.userBroker ? user.user?.id : brokerId;
-  // const selectBrokerUrl = user.user?.userBroker
-  //   ? user.user?.id
-  //   : user.user?.brokerUser?.id;
-  const selectClientUrl = user.user?.userBroker ? clientId : user?.user?.id;
+  const selectBrokerUrl =
+    brokerId && clientId
+      ? brokerId
+      : user.user?.userBroker
+      ? user.user?.id
+      : brokerId;
+
+  const selectClientUrl =
+    brokerId && clientId
+      ? clientId
+      : user.user?.userBroker
+      ? clientId
+      : user?.user?.id;
 
   const { error: errorReportVehicleTheft, trigger: triggerReportVehicleTheft } =
     useSWRMutation(
