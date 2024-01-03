@@ -1,15 +1,11 @@
 import { ChildrenType } from "@/models";
 import { AllBrokerClients } from "@/pages";
-import { AppStore } from "@/redux";
 import { createContext, useContext, useState } from "react";
-import { useSelector } from "react-redux";
-import useSWR from "swr";
 import {
   IBrokerCreateReportContext,
 } from "..";
-import { emptyBrokerCreateReportContext } from "./empty-brokerCreateReport-context";
-import { AllBrokerClientsForCreateSinisterUrl, allBrokerClientsForCreateSinister } from "../services/add-report-broker.service";
 import BrokerCreateReportHook from "../utilities/BrokerCreateReportHook.utility";
+import { emptyBrokerCreateReportContext } from "./empty-brokerCreateReport-context";
 
 const BrokerCreateReportContext =
   createContext<IBrokerCreateReportContext>(

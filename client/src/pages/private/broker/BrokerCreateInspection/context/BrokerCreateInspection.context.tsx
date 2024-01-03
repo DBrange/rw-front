@@ -1,20 +1,13 @@
 import { ChildrenType } from "@/models";
+import {
+  AllBrokerClients
+} from "@/pages";
 import { createContext, useContext, useState } from "react";
 import {
-  AllBrokerClientsForCreateInspectionUrl,
-  IBrokerCreateInspectionContext,
-  allBrokerClientsForCreateInspection,
+  IBrokerCreateInspectionContext
 } from "..";
-import { emptyBrokerCreateInspectionContext } from "./empty-brokerCreateInspection-context";
-import {
-  AllBrokerClients,
-  AllBrokerClientsUrl,
-  allBrokerClients,
-} from "@/pages";
-import { AppStore } from "@/redux";
-import { useSelector } from "react-redux";
-import useSWR from "swr";
 import BrokerCreateInspectionHook from "../utilities/BrokerCreateInspectionHook.utility";
+import { emptyBrokerCreateInspectionContext } from "./empty-brokerCreateInspection-context";
 
 const BrokerCreateInspectionContext =
   createContext<IBrokerCreateInspectionContext>(

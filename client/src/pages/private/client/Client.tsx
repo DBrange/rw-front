@@ -1,7 +1,19 @@
 import { PrivateRoutes } from "@/models/types/routes";
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
 import { Route, Navigate } from "react-router-dom";
-import { ClientUser, ClientsElements, ClientCreateInspection, ClientCreateReport, ClientInspectedCreateReport, ClientInspectionDetail, ClientReportDetail, ClientInspections, ClientReports, ClientMyProfile } from ".";
+import {
+  ClientUser,
+  ClientsElements,
+  ClientCreateInspection,
+  ClientCreateReport,
+  ClientInspectedCreateReport,
+  ClientInspectionDetail,
+  ClientReportDetail,
+  ClientInspections,
+  ClientReports,
+  ClientMyProfile,
+  ClientChooseBroker,
+} from ".";
 
 function Client() {
   return (
@@ -14,10 +26,18 @@ function Client() {
       <Route path={PrivateRoutes.ELEMENTS} element={<ClientsElements />} />
       <Route
         path={PrivateRoutes.CREATE_INSPECTION}
+        element={<ClientChooseBroker />}
+      />
+      <Route
+        path={`${PrivateRoutes.CREATE_INSPECTION}/:brokerId`}
         element={<ClientCreateInspection />}
       />
       <Route
         path={PrivateRoutes.CREATE_SINISTER}
+        element={<ClientChooseBroker />}
+      />
+      <Route
+        path={`${PrivateRoutes.CREATE_SINISTER}/:brokerId`}
         element={<ClientCreateReport />}
       />
       <Route
@@ -38,4 +58,4 @@ function Client() {
     </RoutesWithNotFound>
   );
 }
-export default Client
+export default Client;

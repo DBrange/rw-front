@@ -64,22 +64,22 @@ function MiProfile() {
       <DivInformationMyProfile>
         {user?.brokerUser && (
           <>
-            {user?.brokerUser.map(el => (
             <DivCardNoEvent>
-              <h4>Broker</h4>
-              <ClientCard
-                name={el?.personalUser.name}
-                lastname={el?.personalUser.lastName}
-                companyName={el?.legalUser?.companyName}
-                keyName={
-                  (el?.personalUser
-                    ? el?.personalUser?.dni
-                    : el?.legalUser?.cuit) as string
-                }
-                id={el?.id}
-              />
+              <h4>Brokers</h4>
+              {user?.brokerUser.map((el) => (
+                <ClientCard
+                  name={el?.personalUser.name}
+                  lastname={el?.personalUser.lastName}
+                  companyName={el?.legalUser?.companyName}
+                  keyName={
+                    (el?.personalUser
+                      ? el?.personalUser?.dni
+                      : el?.legalUser?.cuit) as string
+                  }
+                  id={el?.id}
+                />
+              ))}
             </DivCardNoEvent>
-            ))}
           </>
         )}
         <DivInformationProfileDetail>

@@ -90,6 +90,9 @@ export const BtonChangePassword = styled.button`
 
 export const DivCardNoEvent = styled.div`
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   h4 {
     margin-bottom: 0.5rem;
   }
