@@ -318,12 +318,13 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     );
   };
 
-  const { clientId } = useParams();
+  const { clientId, brokerId } = useParams();
   const user = useSelector((store: AppStore) => store.user);
 
-  const selectBrokerUrl = user.user?.userBroker
-    ? user.user?.id
-    : user.user?.brokerUser?.id;
+  const selectBrokerUrl = user.user?.userBroker ? user.user?.id : brokerId;
+  // const selectBrokerUrl = user.user?.userBroker
+  //   ? user.user?.id
+  //   : user.user?.brokerUser?.id;
   const selectClientUrl = user.user?.userBroker ? clientId : user?.user?.id;
 
   const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =

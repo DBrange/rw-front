@@ -90,14 +90,17 @@ function BrokerProfile({ data }: Props) {
       <DivInformationMyProfile>
         {data?.brokerUser && (
           <>
+            {data?.brokerUser.map(el => (
+
             <DivInformationProfileDetail>
               <h4>Broker</h4>
               <p>
-                {data?.brokerUser?.personalUser
-                  ? `${data?.brokerUser?.personalUser.name} ${data?.brokerUser?.personalUser.lastName}`
-                  : `${data?.brokerUser?.legalUser?.companyName}`}
+                {el?.personalUser
+                  ? `${el?.personalUser.name} ${el?.personalUser.lastName}`
+                  : `${el?.legalUser?.companyName}`}
               </p>
             </DivInformationProfileDetail>
+            ))}
           </>
         )}
         <DivInformationProfileDetail>

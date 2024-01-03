@@ -21,7 +21,7 @@ export interface User {
   legalUser?: LegalUser;
   broker?: Broker;
   userBroker?: UserBroker;
-  brokerUser?: BrokerUser;
+  brokerUser?: BrokerUser[];
   // receivedNotifications: Notification[];
 }
 interface BrokerUser {

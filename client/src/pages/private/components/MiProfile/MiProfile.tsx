@@ -63,20 +63,24 @@ function MiProfile() {
       </TitleName>
       <DivInformationMyProfile>
         {user?.brokerUser && (
-          <DivCardNoEvent>
-            <h4>Broker</h4>
-            <ClientCard
-              name={user?.brokerUser?.personalUser.name}
-              lastname={user?.brokerUser?.personalUser.lastName}
-              companyName={user?.brokerUser?.legalUser?.companyName}
-              keyName={
-                (user?.brokerUser?.personalUser
-                  ? user?.brokerUser?.personalUser?.dni
-                  : user?.brokerUser?.legalUser?.cuit) as string
-              }
-              id={user?.brokerUser?.id}
-            />
-          </DivCardNoEvent>
+          <>
+            {user?.brokerUser.map(el => (
+            <DivCardNoEvent>
+              <h4>Broker</h4>
+              <ClientCard
+                name={el?.personalUser.name}
+                lastname={el?.personalUser.lastName}
+                companyName={el?.legalUser?.companyName}
+                keyName={
+                  (el?.personalUser
+                    ? el?.personalUser?.dni
+                    : el?.legalUser?.cuit) as string
+                }
+                id={el?.id}
+              />
+            </DivCardNoEvent>
+            ))}
+          </>
         )}
         <DivInformationProfileDetail>
           <MdOutlineEmail size={30} />
