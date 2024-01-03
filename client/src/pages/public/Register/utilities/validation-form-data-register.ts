@@ -29,12 +29,25 @@ export const validationFormDataRegister = ({
     userType.client &&
     userActive.personal
   ) {
-    const dataObj: RegisterUser = {
-      userDTO: { ...registerPersonal, role: USER_ROLES.CLIENT },
+    const dataObj = {
+      userDTO: {
+        phoneNumber: registerPersonal.phoneNumber,
+        email: registerPersonal.email,
+        altEmail: registerPersonal.altEmail,
+        password: registerPersonal.password,
+        address: registerPersonal.address,
+      },
+      personalUseDTO: {
+        name: registerPersonal.name,
+        lastName: registerPersonal.lastName,
+        birthDate: registerPersonal.birthDate,
+        gender: registerPersonal.gender,
+        dni: registerPersonal.dni,
+      },
       legalUserDTO: null,
       userBrokerDTO: null,
     };
-
+    console.log(dataObj);
     userValidation<ErrorsRegisterPersonalValues, any>(
       errorsInputValues?.registerPersonal,
       trigger(dataObj)
@@ -44,12 +57,21 @@ export const validationFormDataRegister = ({
     userType.client &&
     userActive.legalPersonal
   ) {
-    const dataObj: RegisterUser = {
-      userDTO: null,
-      legalUserDTO: { ...registerLegalPersonal, role: USER_ROLES.CLIENT },
+    const dataObj = {
+      userDTO: {
+        phoneNumber: registerLegalPersonal.phoneNumber,
+        email: registerLegalPersonal.email,
+        altEmail: registerLegalPersonal.altEmail,
+        password: registerLegalPersonal.password,
+        address: registerLegalPersonal.address,
+      },
+      legalUserDTO: {
+        companyName: registerLegalPersonal.companyName,
+        cuit: registerLegalPersonal.cuit,
+      },
       userBrokerDTO: null,
     };
-
+    console.log(dataObj);
     userValidation<ErrorsRegisterPersonalValues, any>(
       errorsInputValues?.registerLegalPersonal,
       trigger(dataObj)
@@ -59,8 +81,21 @@ export const validationFormDataRegister = ({
     userType.broker &&
     brokerActive.personal
   ) {
-    const dataObj: RegisterUser = {
-      userDTO: { ...registerBrokerPersonal, role: USER_ROLES.BROKER },
+    const dataObj = {
+      userDTO: {
+        phoneNumber: registerPersonal.phoneNumber,
+        email: registerPersonal.email,
+        altEmail: registerPersonal.altEmail,
+        password: registerPersonal.password,
+        address: registerPersonal.address,
+      },
+      personalUseDTO: {
+        name: registerPersonal.name,
+        lastName: registerPersonal.lastName,
+        birthDate: registerPersonal.birthDate,
+        gender: registerPersonal.gender,
+        dni: registerPersonal.dni,
+      },
       legalUserDTO: null,
       userBrokerDTO: {
         bussinesName: registerBrokerLegalPersonal.bussinesName,
@@ -68,7 +103,7 @@ export const validationFormDataRegister = ({
         card: "",
       },
     };
-
+    console.log(dataObj);
     userValidation<ErrorsRegisterPersonalValues, any>(
       errorsInputValues?.registerBrokerPersonal,
       trigger(dataObj)
@@ -78,16 +113,25 @@ export const validationFormDataRegister = ({
     userType.broker &&
     brokerActive.legalPersonal
   ) {
-    const dataObj: RegisterUser = {
-      userDTO: null,
-      legalUserDTO: { ...registerBrokerLegalPersonal, role: USER_ROLES.BROKER },
+    const dataObj = {
+      userDTO: {
+        phoneNumber: registerLegalPersonal.phoneNumber,
+        email: registerLegalPersonal.email,
+        altEmail: registerLegalPersonal.altEmail,
+        password: registerLegalPersonal.password,
+        address: registerLegalPersonal.address,
+      },
+      legalUserDTO: {
+        companyName: registerLegalPersonal.companyName,
+        cuit: registerLegalPersonal.cuit,
+      },
       userBrokerDTO: {
         bussinesName: registerBrokerLegalPersonal.bussinesName,
         enrollment: registerBrokerLegalPersonal.enrollment,
         card: "",
       },
     };
-
+    console.log(dataObj);
     userValidation<ErrorsRegisterPersonalValues, any>(
       errorsInputValues?.registerBrokerLegalPersonal,
       trigger(dataObj)

@@ -135,6 +135,11 @@ export interface ISidebar {
   fourth: boolean;
   fifth: boolean;
 }
+
+export interface RefreshToken{
+  accessToken: string
+  exp: number
+}
 // export interface UpdateLastRecord {
 //   userId: string;
 //   date: Date;

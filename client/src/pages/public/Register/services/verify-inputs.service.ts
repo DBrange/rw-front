@@ -4,12 +4,8 @@ import {
   modalSentService,
 } from "@/services/sharing-information.service";
 
-export const usersUrl = `${baseUrl}/users`;
-export const verifyUserUrl = (
-  email?: string,
-  dni?: string,
-  enrollment?: string
-) => `${usersUrl}/verify?email=${email}&dni=${dni}&enrollment=${enrollment}`;
+export const verifyUserUrl = (email?: string, dni?: string, enrollment?: string) =>
+  `${baseUrl}/verify-email-dni?email=${email}&dni=${dni}&enrollment=${enrollment}`;
 
 export const verifyUserInputs = async (
   url: string,
@@ -36,6 +32,7 @@ export const verifyUserInputs = async (
     
     return await response.json();
   } catch (err) {
+    loaderImageService.setSubject(false);
     throw err;
   }
 };

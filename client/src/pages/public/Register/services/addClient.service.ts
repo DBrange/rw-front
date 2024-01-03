@@ -5,8 +5,7 @@ import {
 import { RegisterUser } from "..";
 import { baseUrl } from "@/pages";
 
-export const clientsUrl = `${baseUrl}/users`;
-export const registerUrl = `${clientsUrl}/register-login`;
+export const registerUrl = `${baseUrl}/register`;
 
 export const addUser = async (
   url: string,
@@ -30,9 +29,10 @@ export const addUser = async (
 
     loaderImageService.setSubject(false);
     modalSuccessfulRegistration.setSubject(true);
-
+    
     return await response.json();
   } catch (err) {
+    loaderImageService.setSubject(false);
     throw err;
   }
 };

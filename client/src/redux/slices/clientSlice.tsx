@@ -1,5 +1,6 @@
 import {
   ClientInfo,
+  RefreshToken,
   UpdateMyProfile,
 } from "@/models/interfaces/userInfo/userInfo.interface";
 import { baseUrl } from "@/pages";
@@ -106,6 +107,21 @@ export const clientSlice = createSlice({
         }
       }
     );
+    builder.addCase(
+      updateTokenAsync.fulfilled,
+      (state, action: PayloadAction<RefreshToken | undefined>) => {
+        persistLocalStorage<ClientInfo>(clientKey, {
+          ...state,
+          accessToken: action.payload?.accessToken,
+          exp: action.payload?.exp,
+        });
+        return {
+          ...state,
+          accessToken: action.payload?.accessToken,
+          exp: action.payload?.exp,
+        };
+      }
+    );
   },
 });
 
@@ -133,6 +149,22 @@ export const updateMyProfileAsync = createAsyncThunk(
       return { userId, phoneNumber, address };
     } catch (error) {
       modalToastError.setSubject(true);
+    }
+  }
+);
+
+export const updateTokenAsync = createAsyncThunk(
+  "notification/updateTokenAsync",
+  async (id: string) => {
+    try {
+      const newToken: RefreshToken = await axios(
+        `${baseUrl}/auth/refresh-token/${id}`
+      );
+      // modalToast.setSubject(true);
+
+      return newToken;
+    } catch (error) {
+      // modalToastError.setSubject(true);
     }
   }
 );
