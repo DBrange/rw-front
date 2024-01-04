@@ -19,7 +19,7 @@ import {
   TouchedClientCreateInspectionValues,
 } from "@/pages";
 import { SectionFormContainer } from "@/styledComponents";
-import { objForArrOne } from "@/utilities/separateImages.utility";
+import { objForArrEight } from "@/utilities/separateImages.utility";
 import { useState } from "react";
 
 interface Props {
@@ -155,7 +155,7 @@ function FormVehicleData({
           "Rueda auxilio",
         ]}
         quantity={8}
-        objForArr={objForArrOne}
+        objForArr={objForArrEight}
       />
       <FormCheckbox
         changeInputForCheckbox={changeInputForCheckbox}

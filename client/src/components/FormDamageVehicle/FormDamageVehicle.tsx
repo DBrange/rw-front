@@ -11,10 +11,11 @@ import {
   TouchedClientInspectedCreateReportValues,
 } from "@/pages";
 import { SectionFormContainer } from "@/styledComponents";
+import { objForArrOne } from "@/utilities/separateImages.utility";
 import {
-  FormImages,
   FormInput,
-  FormScheduleInput
+  FormScheduleInput,
+  FormSeparateImages
 } from "..";
 
 interface Props {
@@ -86,13 +87,15 @@ function FormDamageVehicle({
         type="text"
         placeholder="Ingresar daño"
       />
-      <FormImages
-        label="Añadir foto de la denuncia*"
+      <FormSeparateImages
+        label="Añadir foto del lugar dañado*"
         error={errorsInputValues?.damageVehicle?.reportPhoto}
         id="damageVehicle.reportPhoto"
         name="damageVehicle.reportPhoto"
         changeInputForImages={changeInputForImages}
         instructionsImages={["Daño"]}
+        objForArr={objForArrOne}
+        quantity={1}
       />
       <FormInput
         label="Monto de reparacion (si lo hubo)"

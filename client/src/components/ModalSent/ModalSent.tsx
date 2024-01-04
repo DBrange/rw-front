@@ -19,7 +19,7 @@ function ModalSent({ modalActive }: { modalActive: boolean }) {
         <H4Modal>Pronto le llegara un mail con toda la informacion.</H4Modal>
         <H4Modal>Nos estaremos comunicando con usted a la brevedad.</H4Modal>
         <LinkNavigate
-          to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.DASHBOARD}`}
+          to={`/${PrivateRoutes.PRIVATE}`}
         >
           <BtnModal>Aceptar</BtnModal>
         </LinkNavigate>

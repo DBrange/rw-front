@@ -1,5 +1,7 @@
 import {
+  BrokerUser,
   ClientInfo,
+  Ids,
   RefreshToken,
   UpdateMyProfile,
 } from "@/models/interfaces/userInfo/userInfo.interface";
@@ -122,6 +124,25 @@ export const clientSlice = createSlice({
         };
       }
     );
+    builder.addCase(
+      addBrokerAsync.fulfilled,
+      (state, action: PayloadAction<BrokerUser[] | undefined>) => {
+        persistLocalStorage<ClientInfo>(clientKey, {
+          ...state,
+          user: {
+            ...state.user,
+            brokerUser: action.payload,
+          },
+        });
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            brokerUser: action.payload,
+          },
+        };
+      }
+    );
   },
 });
 
@@ -165,6 +186,20 @@ export const updateTokenAsync = createAsyncThunk(
       return newToken;
     } catch (error) {
       // modalToastError.setSubject(true);
+    }
+  }
+);
+
+export const addBrokerAsync = createAsyncThunk(
+  "notification/addBrokerAsync",
+  async ({ clientId, userBrokerId }: Ids) => {
+    try {
+      const brokers = await axios.post(
+        `${baseUrl}/user-in-broker/${userBrokerId}/${clientId}`
+      );
+      return brokers.data;
+    } catch (error) {
+      console.log(error);
     }
   }
 );

@@ -23,8 +23,14 @@ export const validateDamageVehicle = ({
   if (!details?.trim().length) errors.details = "No puede estar vacio";
   if (!regex.date.test(date)) errors.date = "Debe contener un fecha valida";
   if (!regex.time.test(time)) errors.time = "Debe contener un horario valido";
-  if (reportPhoto.length < 1)
-    errors.reportPhoto =
-      "Debe agregar las images correspondientes, un total de 2";
+    if (!reportPhoto.length)
+      errors.reportPhoto =
+        "Debe agregar las images correspondientes, un total de 1";
+    if (reportPhoto.length !== 1)
+      errors.reportPhoto =
+        "Debe agregar las images correspondientes, un total de 1";
+    if (reportPhoto.some((el) => !el))
+      errors.reportPhoto =
+        "Debe agregar las images correspondientes, un total de 1";
   return errors;
 };

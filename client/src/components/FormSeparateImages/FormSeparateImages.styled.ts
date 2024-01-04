@@ -16,6 +16,7 @@ position: relative;
 `;
 
 export const LabelButtonImage = styled.label<{ $error: boolean }>`
+overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: flex-start;

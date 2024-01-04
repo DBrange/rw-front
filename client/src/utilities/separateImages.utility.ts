@@ -16,9 +16,10 @@ export const objForArrFour = {
     3: undefined,
 }
   
-export const objForArrOne = {
+export const objForArrTwo = {
     0: undefined,
     1: undefined,
-    2: undefined,
-    3: undefined,
+  }
+export const objForArrOne = {
+    0: undefined,
   }

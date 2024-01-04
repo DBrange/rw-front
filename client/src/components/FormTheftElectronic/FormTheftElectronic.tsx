@@ -10,8 +10,9 @@ import {
   TouchedClientCreateReportValues,
   TouchedClientInspectedCreateReportValues,
 } from "@/pages";
-import { FormImages, FormInput, FormScheduleInput } from "..";
 import { SectionFormContainer } from "@/styledComponents";
+import { objForArrTwo } from "@/utilities/separateImages.utility";
+import { FormInput, FormScheduleInput, FormSeparateImages } from "..";
 
 interface Props {
   inputValues:
@@ -72,13 +73,15 @@ function FormTheftElectronic({
         type="text"
         placeholder="Ingresar ubicacion"
       />
-      <FormImages
+      <FormSeparateImages
         label="Añadir foto de la denuncia*"
         error={errorsInputValues?.theftElectronic?.reportPhoto}
         id="theftElectronic.reportPhoto"
         name="theftElectronic.reportPhoto"
         changeInputForImages={changeInputForImages}
-        instructionsImages={['Frente','Dorso']}
+        instructionsImages={["Frente", 'Dorso']}
+        objForArr={objForArrTwo}
+        quantity={2}
       />
     </SectionFormContainer>
   );

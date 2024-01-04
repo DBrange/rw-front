@@ -18,13 +18,19 @@ export const validateTheftElectronic = ({
 
   const currentDate = new Date();
   const userDate = new Date(date);
-  
+
   if (userDate > currentDate || userDate.getFullYear() < 1900)
     errors.date = "Debe contener un fecha valida";
   if (!location?.trim().length) errors.location = "No puede estar vacio";
   if (!regex.date.test(date)) errors.date = "Debe contener un fecha valida";
   if (!regex.time.test(time)) errors.time = "Debe contener un horario valido";
-  if (reportPhoto.length < 2)
+  if (!reportPhoto.length)
+    errors.reportPhoto =
+      "Debe agregar las images correspondientes, un total de 2";
+  if (reportPhoto.length !== 2)
+    errors.reportPhoto =
+      "Debe agregar las images correspondientes, un total de 2";
+  if (reportPhoto.some((el) => !el))
     errors.reportPhoto =
       "Debe agregar las images correspondientes, un total de 2";
   return errors;

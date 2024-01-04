@@ -8,6 +8,8 @@ export enum PublicRoutes {
   FORGOTTEM_PASSWORD = "contraseña",
   CREATE_INSPECTION = "crear-inspeccion",
   CREATE_SINISTER = "crear-siniestro",
+  VERIFIED = 'verificado',
+  NOT_VERIFIED = 'no-verificado',
 }
 
 export enum PrivateRoutes {

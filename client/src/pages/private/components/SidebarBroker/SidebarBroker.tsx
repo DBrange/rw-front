@@ -36,6 +36,7 @@ const path = useLocation().pathname;
 
   useEffect(() => {
     sidebarService.setSubject(false);
+    dispatchAsync(addNotificationsAsync(user.user?.id));
   }, []);
 
   useEffect(() => {

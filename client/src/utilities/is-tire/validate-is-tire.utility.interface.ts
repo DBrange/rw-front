@@ -17,9 +17,15 @@ export const validateIsTire = ({
   if (!regex.tireAmount.test(tireAmount.toString()))
     errors.tireAmount = "No puede estar vacio";
 
-  if (tirePhoto.length < 8)
+  if (!tirePhoto.length)
     errors.tirePhoto =
-      "Debe agregar las images correspondientes, un total de 8";
+      "Debe agregar las images correspondientes, un total de 1";
+  if (tirePhoto.length !== 1)
+    errors.tirePhoto =
+      "Debe agregar las images correspondientes, un total de 1";
+  if (tirePhoto.some((el) => !el))
+    errors.tirePhoto =
+      "Debe agregar las images correspondientes, un total de 1";
 
   return errors;
 };

@@ -10,18 +10,17 @@ import {
   TouchedClientCreateReportValues,
   TouchedClientInspectedCreateReportValues,
 } from "@/pages";
+import { SectionFormContainer } from "@/styledComponents";
+import { objForArrOne, objForArrTwo } from "@/utilities/separateImages.utility";
+import { useState } from "react";
 import {
   FormCheckboxOpenClose,
-  FormImages,
   FormInput,
   FormOptional,
   FormRange,
   FormScheduleInput,
-  FormSeparateImages,
+  FormSeparateImages
 } from "..";
-import { useState } from "react";
-import { SectionFormContainer } from "@/styledComponents";
-import { objForArrOne } from "@/utilities/separateImages.utility";
 
 interface Props {
   inputValues:
@@ -121,7 +120,7 @@ function FormTheftVehicle({
               id="isTire.tirePhoto"
               name="isTire.tirePhoto"
               changeInputForImages={changeInputForImages}
-              instructionsImages={['Donde se visible marca y modelo']}
+              instructionsImages={["Donde sea visible marca y modelo"]}
               objForArr={objForArrOne}
               quantity={1}
             />
@@ -140,13 +139,16 @@ function FormTheftVehicle({
         }
         checked={isTire}
       />
-      <FormImages
+
+      <FormSeparateImages
         label="Añadir foto de la denuncia*"
         error={errorsInputValues?.theftVehicle?.reportPhoto}
         id="theftVehicle.reportPhoto"
         name="theftVehicle.reportPhoto"
         changeInputForImages={changeInputForImages}
-        instructionsImages={["Frente", "Dorso"]}
+        instructionsImages={["Frente",'Dorso']}
+        objForArr={objForArrTwo}
+        quantity={2}
       />
     </SectionFormContainer>
   );

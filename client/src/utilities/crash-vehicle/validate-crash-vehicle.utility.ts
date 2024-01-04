@@ -28,6 +28,9 @@ export const validateCrashVehicle = ({
     errors.date = "Debe contener un fecha valida";
   if (!regex.amount.test(amount.toString().trim()))
     errors.amount = "Solo puede contener numeros";
+  if (amountVehicles.toString().trim().length > 2)
+    errors.amountVehicles = "Dos cifras maximo";
+  if (amount.toString().length > 2) errors.amount = "Dos cifras maximo";
   if (!amountVehicles.toString()?.trim().length)
     errors.amountVehicles = "No puede estar vacio";
   if (amountVehicles <= 0)

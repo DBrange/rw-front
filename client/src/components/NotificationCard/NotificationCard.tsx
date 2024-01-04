@@ -7,15 +7,14 @@ import {
   SpanNotification,
 } from "./NotificationCard.styled";
 import {
-  addBrokerAsync,
   updateNotification,
   updateNotificationAsync,
 } from "@/redux/slices/notificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { NotificationResponse } from "@/models/types/notification-response.enum";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppDispatch, AppStore } from "@/redux";
-import { updateClient } from "@/redux/slices/clientSlice";
+import { addBrokerAsync, updateClient } from "@/redux/slices/clientSlice";
 
 interface Props {
   notification: Notification;
@@ -56,6 +55,7 @@ function NotificationCard({ notification }: Props) {
 
     setState(response);
   };
+
 
   return (
     <DivNotification>

@@ -922,16 +922,18 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     });
   };
 
-  const createArraysToInjured = (value: number) => {
-    setAmountInjured(value);
-
-    inputValues.thirdPartyInjured.injuredInfo = [];
-
-    let cleanInjuredInfo: ThirdPartyInjuredValues[] = [];
-    const trueInjuredInfo: TouchedThirdPartyInjuredValues[] = [];
-
-    for (let i = 0; i < value; i++) {
-      inputValues.thirdPartyInjured.injuredInfo.push({
+  const createArraysToInjured = (value: number | string) => {
+    if (typeof value === 'number') {
+      const valueSlice = Number(value.toString().slice(0, 2))
+      setAmountInjured(valueSlice);
+      
+      inputValues.thirdPartyInjured.injuredInfo = [];
+      
+      let cleanInjuredInfo: ThirdPartyInjuredValues[] = [];
+      const trueInjuredInfo: TouchedThirdPartyInjuredValues[] = [];
+      
+      for (let i = 0; i < valueSlice; i++) {
+        inputValues.thirdPartyInjured.injuredInfo.push({
         name: "",
         lastName: "",
         location: "",
@@ -943,8 +945,8 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
         injuries: "",
       });
     }
-
-    for (let i = 0; i < value; i++) {
+    
+    for (let i = 0; i < valueSlice; i++) {
       inputTouched.thirdPartyInjured.injuredInfo.push({
         name: false,
         lastName: false,
@@ -957,14 +959,14 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
         injuries: false,
       });
     }
-
+    
     setInputValues({
       ...inputValues,
       thirdPartyInjured: {
         injuredInfo: cleanInjuredInfo,
       },
     });
-
+    
     setInputsTouched({
       ...inputTouched,
       thirdPartyInjured: {
@@ -972,71 +974,75 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
       },
     });
   };
+}
 
-  const createArraysToVehicles = (value: number) => {
-    setAmountVehicles(value);
+  const createArraysToVehicles = (value: number | string) => {
+    if (typeof value === 'number') {
+      const valueSlice = Number(value.toString().slice(0, 2))
+      setAmountVehicles(valueSlice);
 
-    inputValues.thirdPartyVehicle.thirdPartyVehicleInfo = [];
+      inputValues.thirdPartyVehicle.thirdPartyVehicleInfo = [];
 
-    // let cleanVehicleInfo: ThirdPartyVehicleValues[] = [];
-    // const trueVehicleInfo: TouchedThirdPartyVehicleValues[] = [];
-    setInputValues({
-      ...inputValues,
-      thirdPartyVehicle: {
-        thirdPartyVehicleInfo: [],
-      },
-    });
-
-    setInputsTouched({
-      ...inputTouched,
-      thirdPartyVehicle: {
-        thirdPartyVehicleInfo: [],
-      },
-    });
-
-    for (let i = 0; i < value; i++) {
-      inputValues.thirdPartyVehicle.thirdPartyVehicleInfo.push({
-        year: 0,
-        brand: "",
-        model: "",
-        plate: "",
-        insuranceCompany: "",
-        insurancePolicy: "",
-        ownerName: "",
-        ownerLastName: "",
-        ownerDni: "",
-        address: "",
-        phoneNumber: "",
-        licensePhoto: [],
-        email: "",
-        owner: false,
-        name: "",
-        lastName: "",
-        dni: "",
+      // let cleanVehicleInfo: ThirdPartyVehicleValues[] = [];
+      // const trueVehicleInfo: TouchedThirdPartyVehicleValues[] = [];
+      setInputValues({
+        ...inputValues,
+        thirdPartyVehicle: {
+          thirdPartyVehicleInfo: [],
+        },
       });
-    }
 
-    for (let i = 0; i < value; i++) {
-      inputTouched.thirdPartyVehicle.thirdPartyVehicleInfo.push({
-        year: false,
-        brand: false,
-        model: false,
-        plate: false,
-        insuranceCompany: false,
-        insurancePolicy: false,
-        ownerName: false,
-        ownerLastName: false,
-        ownerDni: false,
-        address: false,
-        phoneNumber: false,
-        licensePhoto: false,
-        email: false,
-        name: false,
-        lastName: false,
-        dni: false,
+      setInputsTouched({
+        ...inputTouched,
+        thirdPartyVehicle: {
+          thirdPartyVehicleInfo: [],
+        },
       });
-    }
-  };
+
+      for (let i = 0; i < valueSlice; i++) {
+        inputValues.thirdPartyVehicle.thirdPartyVehicleInfo.push({
+          year: 0,
+          brand: "",
+          model: "",
+          plate: "",
+          insuranceCompany: "",
+          insurancePolicy: "",
+          ownerName: "",
+          ownerLastName: "",
+          ownerDni: "",
+          address: "",
+          phoneNumber: "",
+          licensePhoto: [],
+          email: "",
+          owner: false,
+          name: "",
+          lastName: "",
+          dni: "",
+        });
+      }
+
+      for (let i = 0; i < valueSlice; i++) {
+        inputTouched.thirdPartyVehicle.thirdPartyVehicleInfo.push({
+          year: false,
+          brand: false,
+          model: false,
+          plate: false,
+          insuranceCompany: false,
+          insurancePolicy: false,
+          ownerName: false,
+          ownerLastName: false,
+          ownerDni: false,
+          address: false,
+          phoneNumber: false,
+          licensePhoto: false,
+          email: false,
+          name: false,
+          lastName: false,
+          dni: false,
+        });
+      }
+    };
+  }
 
   const changeInputValues = (e: ChangeEventType) => {
     const { value, name } = e.target;
@@ -1091,7 +1097,8 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     const { value, name } = e.target;
     const [type, key] = name.split(".");
 
-    const numberValue = Number(value);
+     const onlyNumbers = /^[0-9]+$/;
+     const numberValue = onlyNumbers.test(value) ? Number(value) : "";
 
     if ((reportActive.crash || reportActive.fire) && key === "amount") {
       createArraysToInjured(numberValue);

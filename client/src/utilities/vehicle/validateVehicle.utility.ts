@@ -35,6 +35,8 @@ export const validateVehicle = ({
     errors.fuel = "Debe seleccionar un tipo de combustible";
   if (type === "default") errors.type = "Debe seleccionar un tipo de vehiculo";
   if (!images.length) errors.images = "Debe agregar las images correspondientes, un total de 8";
+  if (images.length !== 8) errors.images = "Debe agregar las images correspondientes, un total de 8";
+  console.log(images)
   if (images.some( el => !el ))
     errors.images = "Debe agregar las images correspondientes, un total de 8";
 

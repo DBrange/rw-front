@@ -41,7 +41,9 @@ export const notificationSlice = createSlice({
     builder.addCase(addNewNotificationAsync.fulfilled, () => {});
     builder.addCase(updateNotificationAsync.fulfilled, () => {});
     builder.addCase(updateNotificationAllReadAsync.fulfilled, () => {});
-    builder.addCase(addBrokerAsync.fulfilled, () => {});
+    // builder.addCase(addBrokerAsync.fulfilled, (state, action) => {
+
+    // });
   },
 });
 
@@ -95,16 +97,17 @@ export const updateNotificationAllReadAsync = createAsyncThunk(
   }
 );
 
-export const addBrokerAsync = createAsyncThunk(
-  "notification/addBrokerAsync",
-  async ({ clientId, userBrokerId }: Ids) => {
-    try {
-      await axios.post(`${baseUrl}/user-in-broker/${userBrokerId}/${clientId}`);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
+// export const addBrokerAsync = createAsyncThunk(
+//   "notification/addBrokerAsync",
+//   async ({ clientId, userBrokerId }: Ids) => {
+//     try {
+//       const brokers = await axios.post(`${baseUrl}/user-in-broker/${userBrokerId}/${clientId}`);
+//       return brokers
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );
 
 export const { addNotification, addNewNotification, updateNotification } =
   notificationSlice.actions;

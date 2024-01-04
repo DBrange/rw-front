@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 
 export const FormImagesContainer = styled.div`
   width: 100%;
+  
 `;
 
 export const ButtonForUploading = styled.div`

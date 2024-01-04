@@ -26,6 +26,7 @@ export const validateFireVehicle = ({
     errors.date = "Debe contener un fecha valida";
   if (!regex.amount.test(amount.toString().trim()))
     errors.amount = "Solo puede contener numeros";
+  if(amount.toString().trim().length > 2)  errors.amount = "Dos cifras maximo";
   if (!location?.trim().length) errors.location = "No puede estar vacio";
   if (!details?.trim().length) errors.details = "No puede estar vacio";
   // if (!ambulanceTo?.trim().length) errors.details = "No puede estar vacio";

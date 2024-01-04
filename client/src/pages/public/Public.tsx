@@ -1,7 +1,8 @@
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
 import { Navigate, Route } from "react-router-dom";
-import { ClientCreateInspection, ClientCreateReport, Home, Inspect, Login, MissPassword, Register, Report } from "..";
+import { ClientCreateInspection, ClientCreateReport, Home, Inspect, Login, MissPassword, Register, Report, Verified } from "..";
 import { PublicRoutes } from "@/models/types/routes";
+import NotVerified from "./NotVerified/NotVerified";
 
 function Public() {
   return (
@@ -24,6 +25,8 @@ function Public() {
         path={`${PublicRoutes.CREATE_SINISTER}/:brokerId/:clientId`}
         element={<ClientCreateReport />}
       />
+      <Route path={`${PublicRoutes.VERIFIED}`} element={<Verified />} />
+      <Route path={`${PublicRoutes.NOT_VERIFIED}`} element={<NotVerified />} />
     </RoutesWithNotFound>
   );
 }

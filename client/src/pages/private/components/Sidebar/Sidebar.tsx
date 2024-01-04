@@ -29,6 +29,7 @@ function Sidebar() {
 
   useEffect(() => {
     sidebarService.setSubject(false);
+    dispatchAsync(addNotificationsAsync(user.user?.id));
   }, []);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useBrokerFindClientsContext } from "@/pages";
 import { AppDispatch } from "@/redux";
-import { modalSendRequest } from "@/services/sharing-information.service";
+import { modalSendRequest, modalToast } from "@/services/sharing-information.service";
 import { useDispatch } from "react-redux";
 import { SectionModalBg } from "..";
 import {
@@ -34,12 +34,11 @@ function ModalSendRequest({
   lastname,
   companyName,
 }: Props) {
-  const [miniModal, setMiniModal] = useState<number>(0);
 
   const sent = () => {
     activateTrigger();
     modalSendRequest.setSubject(false);
-    setMiniModal(2);
+    modalToast.setSubject(true);
   };
   const close = () => modalSendRequest.setSubject(false);
 

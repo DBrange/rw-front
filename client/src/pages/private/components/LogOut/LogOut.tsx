@@ -6,7 +6,7 @@ import { clientKey } from "@/redux/slices/clientSlice";
 function LogOut() {
   const logOut = () => clearLocalStorage(clientKey)
   return (
-    <LiSidebarItem onClick={logOut}>
+    <LiSidebarItem $active={false} onClick={logOut}>
       <CgLogOut size={20} />
       Salir
     </LiSidebarItem>

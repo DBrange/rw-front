@@ -55,7 +55,13 @@ export const validateThirdPartyVehicle = ({
   if (!email?.trim().length) errors.email = "No puede estar vacio";
   if (!regex.phoneNumber.test(phoneNumber))
     errors.phoneNumber = "Solo puede contener numeros";
-  if (licensePhoto.length < 4)
+  if (!licensePhoto.length)
+    errors.licensePhoto =
+      "Debe agregar las images correspondientes, un total de 4";
+  if (licensePhoto.length !== 4)
+    errors.licensePhoto =
+      "Debe agregar las images correspondientes, un total de 4";
+  if (licensePhoto.some((el) => !el))
     errors.licensePhoto =
       "Debe agregar las images correspondientes, un total de 4";
   if (!owner) {

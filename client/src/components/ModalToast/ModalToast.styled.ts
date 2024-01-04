@@ -1,5 +1,5 @@
 import { theme } from "@/styledComponents";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 const fadeIn = keyframes`
   from {
@@ -40,10 +40,17 @@ export const DivModalToast = styled.div<{ $visible: boolean }>`
   left: 50%;
   transform: translate(-50%, 0);
   transition: all 0.2s linear;
-  animation: ${({ $visible }) => ($visible ? fadeIn : fadeOut)} 1s ease-in-out;
+  animation: ${({ $visible }) =>
+    $visible
+      ? css`
+          ${$visible ? fadeIn : fadeOut} 1s ease-in-out
+        `
+      : css`
+          ${$visible ? fadeIn : fadeOut} 0s ease-in-out
+        `};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   z-index: ${({ $visible }) => ($visible ? 1000 : 0)};
-  
+
   p {
     font-size: 0.7rem;
   }

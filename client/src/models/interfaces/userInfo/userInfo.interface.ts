@@ -24,7 +24,7 @@ export interface User {
   brokerUser?: BrokerUser[];
   // receivedNotifications: Notification[];
 }
-interface BrokerUser {
+export interface BrokerUser {
   id: string;
   created_at: Date;
   updated_at: Date;

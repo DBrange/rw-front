@@ -12,6 +12,8 @@ function MessageBtn() {
         path === "/public/inspeccionar" ||
         path === "/public/login" ||
         path === "/public/registrarse" ||
+        path === "/public/verificado" ||
+        path === "/public/no-verificado" ||
         path === "/public/contraseña"
       ) && (
         <div>
@@ -23,6 +25,8 @@ function MessageBtn() {
                 path === "/public/inspeccionar" ||
                 path === "/public/login" ||
                 path === "/public/registrarse" ||
+                path === "/public/verificado" ||
+                path === "/public/no-verificado" ||
                 path === "/public/contraseña"
               )
             }
@@ -36,6 +40,8 @@ function MessageBtn() {
                   path === "/public/inspeccionar" ||
                   path === "/public/login" ||
                   path === "/public/registrarse" ||
+                  path === "/public/verificado" ||
+                  path === "/public/no-verificado" ||
                   path === "/public/contraseña"
                 )
               }
