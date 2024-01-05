@@ -1,19 +1,24 @@
 import { PrivateRoutes } from "@/models/types/routes";
-import { addClient, clientKey } from "@/redux/slices/clientSlice";
+import { addClient, clientKey, cookieKey } from "@/redux/slices/clientSlice";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useSWRMutation from "swr/mutation";
 import {
   InputValues,
   TouchedInputValues,
   loginClient,
+  loginGoogleUrl,
   loginUrl,
   validateLogin,
 } from "..";
 import { ChangeEventType, SubmitEventType } from "../../Inspect";
 import { ILoginContext, emptyLoginContext } from "./empty-login-context";
 import { clearLocalStorage } from "@/utilities";
+import { ClientInfo } from "@/models";
+import useSWR from "swr";
+import { loginGoogle } from '../services/getClient.service';
+import Cookies from "js-cookie";
 
 const LoginContext = createContext<ILoginContext>(emptyLoginContext);
 
@@ -89,13 +94,29 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     );
   }, []);
 
+  // const { googleLoginData } = useParams();
+  
   useEffect(() => {
     if (data) {
       dispatch(addClient(data));
-      navigate(`/${PrivateRoutes.PRIVATE}`
-      );
+      navigate(`/${PrivateRoutes.PRIVATE}`);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (Cookies.get(cookieKey)) {
+      const data: ClientInfo = JSON.parse(Cookies.get(cookieKey) as string);
+      
+      if (data.accessToken) {
+        dispatch(addClient(data));
+        navigate(`/${PrivateRoutes.PRIVATE}`);
+      }
+    }
+    // if (googleLoginData) {
+    //   dispatch(addClient(googleLoginData as unknown as ClientInfo));
+    //   navigate(`/${PrivateRoutes.PRIVATE}`);
+    // }
+  }, [Cookies.get(cookieKey)]);
 
   const submitData = (e: SubmitEventType) => {
     e.preventDefault();

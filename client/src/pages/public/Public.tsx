@@ -12,6 +12,7 @@ function Public() {
       <Route path={PublicRoutes.INSPECT} element={<Inspect />} />
       <Route path={PublicRoutes.REPORT} element={<Report />} />
       <Route path={PublicRoutes.LOGIN} element={<Login />} />
+      {/* <Route path={`${PublicRoutes.LOGIN}/:googleLoginData`} element={<Login />} /> */}
       <Route path={PublicRoutes.REGISTER} element={<Register />} />
       <Route
         path={PublicRoutes.FORGOTTEM_PASSWORD}

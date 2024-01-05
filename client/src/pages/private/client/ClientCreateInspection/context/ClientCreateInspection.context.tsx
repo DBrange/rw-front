@@ -177,12 +177,11 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
       })
     );
   };
-  console.log(inputValues?.vehicle?.images?.length);
 
   const changeInputForImages = (e: ChangeEventType, images: string[]) => {
     const { name } = e.target;
     const [type, key] = name.split(".");
-    console.log({ [key]: [...images] });
+
     setInputValues({
       ...inputValues,
       [type]: {
@@ -373,7 +372,6 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
         elementActive,
       })
     );
-console.log('que onda loquitoo')
     validationFormDataInspection({
       inputValues,
       errorsInputValues,

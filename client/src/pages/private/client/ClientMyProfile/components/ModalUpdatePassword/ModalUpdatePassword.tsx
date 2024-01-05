@@ -130,7 +130,6 @@ function ModalUpdatePassword({ modalActive }: Props) {
     });
   }, []);
 
-  console.log(passwordError);
   return (
     <SectionModalBg $modalActive={modalActive}>
       <DivModalUpdate $modalActive={modalActive}>

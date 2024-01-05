@@ -13,6 +13,8 @@ import {
 import { persistLocalStorage, clearLocalStorage } from "@/utilities";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Cookies from "js-cookie";
+
 
 export const EmptyUserState: ClientInfo = {
   accessToken: undefined,
@@ -39,6 +41,7 @@ export const EmptyUserState: ClientInfo = {
 };
 
 export const clientKey = "client";
+export const cookieKey = 'loginGoogle'
 
 export const clientSlice = createSlice({
   name: "client",
@@ -56,6 +59,7 @@ export const clientSlice = createSlice({
     },
     resetClient: () => {
       clearLocalStorage(clientKey);
+      Cookies.remove(cookieKey);
       return EmptyUserState;
     },
   },

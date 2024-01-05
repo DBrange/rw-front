@@ -109,7 +109,6 @@ export const AdminUserProvider = ({ children }: ChildrenType) => {
     AdminDashBoardDocumentsUrl(),
     adminDashBoardDocuments
   );
-  console.log(levelData,'-----');
 
   const levellData = (
     levelData: any

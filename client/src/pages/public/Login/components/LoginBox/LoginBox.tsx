@@ -20,10 +20,50 @@ function LoginBox() {
     touchedValues,
     formNotFound,
   } = useLoginContext();
+
+ const handleGoogleLoginClick = () => {
+   const newWindow = window.open(
+     "http://localhost:3001/v1/auth/google",
+     "_BLANK",
+     "height=500,width=600,left=0,top=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no"
+   );
+
+   if (newWindow) {
+     newWindow.onload = () => {
+       newWindow.document.write(`
+        <script>
+          window.onload = function() {
+            window.opener = null;
+            window.open('', '_self');
+            window.close();
+            localStorage.setItem('tabClosed', 'true');
+          };
+        </script>
+      `);
+     };
+   }
+  };
+  
+  window.addEventListener("message", (event) => {
+    if (event.data.type === "loginComplete") {
+      const loginGoogleData = event.data.data;
+
+      // Realiza la redirección en la ventana principal
+      // Puedes usar el enlace proporcionado o cualquier otra lógica de redirección
+      window.location.href = `http://localhost:5173/public/login`;
+    }
+  });
+
   return (
     <Form onSubmit={submitData}>
+      {/* <a href="http://localhost:3001/v1/auth/google" target="_BLANK">
+        Google
+      </a> */}
       <SectionLoginBox>
         <FormTitle>Ingresa a tu perfil</FormTitle>
+      <button onClick={handleGoogleLoginClick}>
+        Iniciar sesión con Google
+      </button>
         <FormInput
           label="Email"
           value={inputValues.email}
