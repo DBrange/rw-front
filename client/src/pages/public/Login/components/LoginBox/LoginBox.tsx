@@ -1,8 +1,11 @@
-import { FormInput, FormTitle } from "@/components";
-import { useLoginContext } from "@/pages";
+import { FormInput, FormInputPassword, FormTitle } from "@/components";
+import { ChangeEventType, useLoginContext } from "@/pages";
 import { Form } from "@/styledComponents";
 import {
+  BrnLoginGoogle,
   BtnLogin,
+  DivBtnLogin,
+  DivKeepLoggedIn,
   DivNoRegister,
   H6NoRegister,
   PNotFound,
@@ -10,6 +13,12 @@ import {
   SpanNoRegister,
 } from "./LoginBox.styled";
 import { PublicRoutes } from "@/models/types/routes";
+import { FcGoogle } from "react-icons/fc";
+import { useEffect, useState } from "react";
+import { storageType } from "@/utilities/storageType.utility";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux";
+import { clientKey, resetClient } from "@/redux/slices/clientSlice";
 
 function LoginBox() {
   const {
@@ -21,16 +30,16 @@ function LoginBox() {
     formNotFound,
   } = useLoginContext();
 
- const handleGoogleLoginClick = () => {
-   const newWindow = window.open(
-     "http://localhost:3001/v1/auth/google",
-     "_BLANK",
-     "height=500,width=600,left=0,top=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no"
-   );
+  const handleGoogleLoginClick = () => {
+    const newWindow = window.open(
+      "http://localhost:3001/v1/auth/google",
+      "_BLANK",
+      "height=500,width=600,left=0,top=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no"
+    );
 
-   if (newWindow) {
-     newWindow.onload = () => {
-       newWindow.document.write(`
+    if (newWindow) {
+      newWindow.onload = () => {
+        newWindow.document.write(`
         <script>
           window.onload = function() {
             window.opener = null;
@@ -40,10 +49,10 @@ function LoginBox() {
           };
         </script>
       `);
-     };
-   }
+      };
+    }
   };
-  
+
   window.addEventListener("message", (event) => {
     if (event.data.type === "loginComplete") {
       const loginGoogleData = event.data.data;
@@ -53,6 +62,33 @@ function LoginBox() {
       window.location.href = `http://localhost:5173/public/login`;
     }
   });
+  const nose = (e: ChangeEventType) => {
+    changeSession(e);
+    // setKeepLoggedIn((el) => !el);
+  };
+
+  const changeSession = (e: ChangeEventType) => {
+    const { checked } = e.target;
+    if (checked) {
+      sessionStorage.setItem(
+        "keepLoggedIn",
+        JSON.stringify({ value: checked })
+      );
+    } else {
+      sessionStorage.removeItem("keepLoggedIn");
+    }
+  };
+
+  const handleBeforeUnload = () => {
+    const value  = JSON.parse(sessionStorage.getItem("keepLoggedIn") as string)?.value
+    if (!value)
+      localStorage.removeItem(clientKey);
+    else return;
+  };
+  
+  window.addEventListener("beforeunload", handleBeforeUnload);
+
+
 
   return (
     <Form onSubmit={submitData}>
@@ -61,9 +97,6 @@ function LoginBox() {
       </a> */}
       <SectionLoginBox>
         <FormTitle>Ingresa a tu perfil</FormTitle>
-      <button onClick={handleGoogleLoginClick}>
-        Iniciar sesión con Google
-      </button>
         <FormInput
           label="Email"
           value={inputValues.email}
@@ -75,7 +108,7 @@ function LoginBox() {
           type="text"
           placeholder="Ingresar email"
         />
-        <FormInput
+        <FormInputPassword
           label="Contraseña"
           value={inputValues.password}
           error={errorValues?.password}
@@ -86,10 +119,36 @@ function LoginBox() {
           type="password"
           placeholder="Ingresar contraseña"
         />
-        <BtnLogin>Ingresar</BtnLogin>
+        <DivKeepLoggedIn>
+          <label htmlFor="keepLoggedIn">Mantener sesion iniciada</label>
+          <input
+            type="checkbox"
+            onChange={(e) => nose(e)}
+            name="keepLoggedIn"
+            id="keepLoggedIn"
+          />
+        </DivKeepLoggedIn>
+        <DivBtnLogin>
+          <BtnLogin>Ingresar</BtnLogin>
+        </DivBtnLogin>
+        <BrnLoginGoogle type="button" onClick={handleGoogleLoginClick}>
+          <i>
+            <FcGoogle size={20} />
+          </i>
+          <p>Iniciar con Google</p>
+        </BrnLoginGoogle>
         <PNotFound $notFound={formNotFound}>
           Verifique si el email o contraseña ingresados son correctos
         </PNotFound>
+        <DivNoRegister>
+          <H6NoRegister>
+            <SpanNoRegister
+              to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.FORGOTTEM_PASSWORD}`}
+            >
+              He olvidado mi contraseña
+            </SpanNoRegister>
+          </H6NoRegister>
+        </DivNoRegister>
         <DivNoRegister>
           <H6NoRegister>
             ¿Aun no estas registrado?
@@ -98,15 +157,6 @@ function LoginBox() {
             >
               {" "}
               Registrate aqui
-            </SpanNoRegister>
-          </H6NoRegister>
-        </DivNoRegister>
-        <DivNoRegister>
-          <H6NoRegister>
-            <SpanNoRegister
-              to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.FORGOTTEM_PASSWORD}`}
-            >
-              He olvidado mi contraseña
             </SpanNoRegister>
           </H6NoRegister>
         </DivNoRegister>

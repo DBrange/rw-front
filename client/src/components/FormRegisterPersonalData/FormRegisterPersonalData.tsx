@@ -1,5 +1,5 @@
 import { SectionFormContainer } from "@/styledComponents";
-import { FormInput, FormSelect } from "..";
+import { FormInput, FormInputPassword, FormSelect } from "..";
 import { ChangeEventType, SelectEventType } from "@/pages";
 import {
   RegisterValues,
@@ -126,7 +126,7 @@ function FormRegisterPersonalData({
         type="text"
         placeholder="Ingresar email alternativo"
       />
-      <FormInput
+      <FormInputPassword
         label="Contraseña"
         value={inputValues?.[objectName]?.password}
         touched={inputTouched?.[objectName]?.password}

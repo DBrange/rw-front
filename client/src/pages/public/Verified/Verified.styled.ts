@@ -2,7 +2,7 @@ import { theme } from "@/styledComponents";
 import styled from "styled-components";
 
 export const SectionVerified = styled.section`
-  height: 83vh;
+  height: 84vh;
   width: 100vw;
   display: flex;
   flex-direction: column;

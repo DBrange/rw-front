@@ -11,7 +11,7 @@ import { IoClose } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import useSWRMutation from "swr/mutation";
 
-import { FormInput, H3Modal, SectionModalBg } from "@/components";
+import { FormInput, FormInputPassword, H3Modal, SectionModalBg } from "@/components";
 import { P } from "@/styledComponents";
 import { PiWarningCircleFill } from "react-icons/pi";
 import {
@@ -137,7 +137,7 @@ function ModalUpdatePassword({ modalActive }: Props) {
           <IoClose size={20} />
         </SpanModalUpdate>
         <H3Modal>Actualice su informacion</H3Modal>
-        <FormInput
+        <FormInputPassword
           label="Contraseña actual"
           value={password.oldPassword}
           touched={passwordTouched.oldPassword}
@@ -148,7 +148,7 @@ function ModalUpdatePassword({ modalActive }: Props) {
           placeholder="Ingresar contraseña"
           error={passwordError?.oldPassword}
         />
-        <FormInput
+        <FormInputPassword
           label="Nueva contraseña"
           value={password.newPassword}
           touched={passwordTouched.newPassword}

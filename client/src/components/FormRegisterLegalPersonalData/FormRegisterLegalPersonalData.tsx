@@ -1,5 +1,5 @@
 import { SectionFormContainer } from "@/styledComponents";
-import { FormInput } from "..";
+import { FormInput, FormInputPassword } from "..";
 import { ChangeEventType } from "@/pages";
 import { RegisterValues, TouchedRegisterValues, ErrorsRegisterValues } from "@/pages/public/Register";
 interface Props {
@@ -88,7 +88,7 @@ function FormRegisterLegalPersonalData({
         type="text"
         placeholder="Ingresar email alternativo"
       />
-      <FormInput
+      <FormInputPassword
         label="Contraseña"
         value={inputValues?.[objectName]?.password}
         touched={inputTouched?.[objectName]?.password}

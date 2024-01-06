@@ -18,7 +18,7 @@ function Private() {
 
   useEffect(() => {
     dispatchAsync(updateTokenAsync(user.user?.id as string));
-  },[])
+  }, []);
 
   return (
     <RoutesWithNotFound>
