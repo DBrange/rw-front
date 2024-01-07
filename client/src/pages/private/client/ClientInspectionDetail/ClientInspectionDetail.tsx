@@ -26,7 +26,7 @@ function ClientInspectionDetail() {
       {user?.role === "CLIENT" ? <Sidebar /> : <></>}
       {user?.role === "BROKER" ? <SidebarBroker /> : <></>}
       {user?.role === "ADMIN" ? <SidebarAdmin /> : <></>}
-      <InspectionDetail values={data} id={insuredId} />
+      <InspectionDetail values={data} assetId={insuredId} clientId={data?.client.id} />
     </ClientInspectionDetailContainer>
   );
 }

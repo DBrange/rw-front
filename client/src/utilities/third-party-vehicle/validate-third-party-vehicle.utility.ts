@@ -52,7 +52,11 @@ export const validateThirdPartyVehicle = ({
     errors.ownerLastName = "No puede estar vacio";
   if (!regex.dni.test(ownerDni)) errors.ownerDni = "Debe contener 8 digitos";
   if (!address?.trim().length) errors.address = "No puede estar vacio";
-  if (!email?.trim().length) errors.email = "No puede estar vacio";
+  
+  if (!email.trim().length) errors.email = "No puede estar vacio";
+  if (!regex.email.test(email))
+    errors.email = "Debe tener un formato de email";
+  
   if (!regex.phoneNumber.test(phoneNumber))
     errors.phoneNumber = "Solo puede contener numeros";
   if (!licensePhoto.length)

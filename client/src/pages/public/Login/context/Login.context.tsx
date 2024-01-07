@@ -1,24 +1,21 @@
+import { ClientInfo } from "@/models";
 import { PrivateRoutes } from "@/models/types/routes";
 import { addClient, clientKey, cookieKey } from "@/redux/slices/clientSlice";
+import { clearLocalStorage } from "@/utilities";
+import Cookies from "js-cookie";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useSWRMutation from "swr/mutation";
 import {
   InputValues,
   TouchedInputValues,
   loginClient,
-  loginGoogleUrl,
   loginUrl,
-  validateLogin,
+  validateLogin
 } from "..";
 import { ChangeEventType, SubmitEventType } from "../../Inspect";
 import { ILoginContext, emptyLoginContext } from "./empty-login-context";
-import { clearLocalStorage } from "@/utilities";
-import { ClientInfo } from "@/models";
-import useSWR from "swr";
-import { loginGoogle } from '../services/getClient.service';
-import Cookies from "js-cookie";
 
 const LoginContext = createContext<ILoginContext>(emptyLoginContext);
 

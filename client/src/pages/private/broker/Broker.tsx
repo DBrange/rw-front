@@ -63,7 +63,7 @@ function Broker() {
         element={<ClientCreateReport />}
       />
       <Route
-        path={`${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/:insuredId/:type`}
+        path={`${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/:clientId/:insuredId/:type`}
         element={<ClientInspectedCreateReport />}
       />
       <Route

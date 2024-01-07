@@ -41,8 +41,9 @@ export const validateThirdPartyInjured = ({
   if (!lastName?.trim().length) errors.lastName = "No puede estar vacio";
   if (!location?.trim().length) errors.location = "No puede estar vacio";
   if (!injuries?.trim().length) errors.injuries = "No puede estar vacio";
-  if (!email?.trim().length) errors.email = "No puede estar vacio";
+  if (!email.trim().length) errors.email = "No puede estar vacio";
   if (!regex.email.test(email)) errors.email = "Debe tener un formato de email";
+  
 
   return errors;
 };

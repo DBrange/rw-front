@@ -9,10 +9,9 @@ export const validateLogin = (values: InputValues) => {
   };
 
   if (!values.email?.trim().length) errors.email = "No puede estar vacio";
-  if (errors.email) {
-    if (!regex.email.test(errors.email))
+    if (!regex.email.test(values.email))
       errors.email = "Debe tener un formato de email";
-  }
+  
   if (!values.password?.trim().length) errors.password = "No puede estar vacio";
   if (!regex.password.test(values.password))
     errors.password =

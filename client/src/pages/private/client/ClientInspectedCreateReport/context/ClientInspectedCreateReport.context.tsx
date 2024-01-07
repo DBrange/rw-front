@@ -122,15 +122,15 @@ export const ClientInspectedCreateReportProvider = ({
   const [amountInjured, setAmountInjured] = useState<number>(0);
   const [amountVehicles, setAmountVehicles] = useState<number>(0);
 
-    const { insuredId, type } = useParams();
+  const { clientId, insuredId, type } = useParams();
 
   useEffect(() => {
-    if (type === 'electronic') {
+    if (type === "electronic") {
       setElementReportActive({ vehicleReport: false, electronic: true });
     } else {
       setElementReportActive({ vehicleReport: true, electronic: false });
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     setAmountInjured(0);
@@ -341,7 +341,6 @@ export const ClientInspectedCreateReportProvider = ({
       } else if (reportActive.theft && inputValues.theftVehicle.isTire) {
         errors = withTireTheftErrors;
       }
-      
 
       //damage vehicle
       if (reportActive.damage) {
@@ -396,72 +395,72 @@ export const ClientInspectedCreateReportProvider = ({
         errors = electronicDamageErrors;
       }
     }
-//           if (elementReportActive.vehicleReport) {
-//       //theft vehicle
-//       if (reportActive.theft && !inputValues.theftVehicle.isTire) {
-//         errors = withoutTireTheftErrors;
-//       } else if (reportActive.theft && !inputValues.theftVehicle.isTire) {
-//         errors = withoutTireTheftErrors;
-//       } else if (!reportActive.theft && inputValues.theftVehicle.isTire) {
-//         errors = withTireTheftErrors;
-//       } else if (reportActive.theft && inputValues.theftVehicle.isTire) {
-//         errors = withTireTheftErrors;
-//       }
-//       
+    //           if (elementReportActive.vehicleReport) {
+    //       //theft vehicle
+    //       if (reportActive.theft && !inputValues.theftVehicle.isTire) {
+    //         errors = withoutTireTheftErrors;
+    //       } else if (reportActive.theft && !inputValues.theftVehicle.isTire) {
+    //         errors = withoutTireTheftErrors;
+    //       } else if (!reportActive.theft && inputValues.theftVehicle.isTire) {
+    //         errors = withTireTheftErrors;
+    //       } else if (reportActive.theft && inputValues.theftVehicle.isTire) {
+    //         errors = withTireTheftErrors;
+    //       }
+    //
 
-//       //damage vehicle
-//       if (reportActive.damage) {
-//         errors = vehicleDamageErrors;
-//       } else if (reportActive.damage) {
-//         errors = vehicleDamageErrors;
-//       }
-// 
-//       //fire vehicle
-//       if (!reportActive.fire && !amountInjured) {
-//         errors = withoutThirdPartyInjuredFireErrors;
-//       } else if (reportActive.fire && !amountInjured) {
-//         errors = withoutThirdPartyInjuredFireErrors;
-//       } else if (!reportActive.fire && amountInjured) {
-//         errors = withThirdPartyInjuredFireErrors;
-//       } else if (reportActive.fire && amountInjured) {
-//         errors = withThirdPartyInjuredFireErrors;
-//       }
+    //       //damage vehicle
+    //       if (reportActive.damage) {
+    //         errors = vehicleDamageErrors;
+    //       } else if (reportActive.damage) {
+    //         errors = vehicleDamageErrors;
+    //       }
+    //
+    //       //fire vehicle
+    //       if (!reportActive.fire && !amountInjured) {
+    //         errors = withoutThirdPartyInjuredFireErrors;
+    //       } else if (reportActive.fire && !amountInjured) {
+    //         errors = withoutThirdPartyInjuredFireErrors;
+    //       } else if (!reportActive.fire && amountInjured) {
+    //         errors = withThirdPartyInjuredFireErrors;
+    //       } else if (reportActive.fire && amountInjured) {
+    //         errors = withThirdPartyInjuredFireErrors;
+    //       }
 
-//       //crahs vehicle
-//       if (!reportActive.crash && !amountInjured && !amountVehicles) {
-//         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
-//       } else if (!reportActive.crash && amountInjured && !amountVehicles) {
-//         errors = withThirdPartyInjuredCrashErrors;
-//       } else if (!reportActive.crash && !amountInjured && amountVehicles) {
-//         errors = withThirdPartyVehicleCrashErrors;
-//       } else if (!reportActive.crash && amountInjured && amountVehicles) {
-//         errors = withThirdPartyInjuredAndVehicleCrashErrors;
-//         //abajo
-//       } else if (reportActive.crash && amountInjured && !amountVehicles) {
-//         errors = withThirdPartyInjuredCrashErrors;
-//       } else if (reportActive.crash && !amountInjured && amountVehicles) {
-//         errors = withThirdPartyVehicleCrashErrors;
-//       } else if (reportActive.crash && amountInjured && amountVehicles) {
-//         errors = withThirdPartyInjuredAndVehicleCrashErrors;
-//       } else if (reportActive.crash && !amountInjured && !amountVehicles) {
-//         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
-//       }
-//     } else if (elementReportActive.electronic) {
-//       // theft electronic
-//       if (reportActive.theft && !inputValues.theftElectronic.isTire) {
-//         errors = electronicTheft;
-//       } else if (reportActive.theft && !inputValues.theftElectronic.isTire) {
-//         errors = electronicTheft;
-//       }
+    //       //crahs vehicle
+    //       if (!reportActive.crash && !amountInjured && !amountVehicles) {
+    //         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
+    //       } else if (!reportActive.crash && amountInjured && !amountVehicles) {
+    //         errors = withThirdPartyInjuredCrashErrors;
+    //       } else if (!reportActive.crash && !amountInjured && amountVehicles) {
+    //         errors = withThirdPartyVehicleCrashErrors;
+    //       } else if (!reportActive.crash && amountInjured && amountVehicles) {
+    //         errors = withThirdPartyInjuredAndVehicleCrashErrors;
+    //         //abajo
+    //       } else if (reportActive.crash && amountInjured && !amountVehicles) {
+    //         errors = withThirdPartyInjuredCrashErrors;
+    //       } else if (reportActive.crash && !amountInjured && amountVehicles) {
+    //         errors = withThirdPartyVehicleCrashErrors;
+    //       } else if (reportActive.crash && amountInjured && amountVehicles) {
+    //         errors = withThirdPartyInjuredAndVehicleCrashErrors;
+    //       } else if (reportActive.crash && !amountInjured && !amountVehicles) {
+    //         errors = withoutThirdPartyInjuredAndVehicleCrashErrors;
+    //       }
+    //     } else if (elementReportActive.electronic) {
+    //       // theft electronic
+    //       if (reportActive.theft && !inputValues.theftElectronic.isTire) {
+    //         errors = electronicTheft;
+    //       } else if (reportActive.theft && !inputValues.theftElectronic.isTire) {
+    //         errors = electronicTheft;
+    //       }
 
-//       //damage electronic
+    //       //damage electronic
 
-//       if (reportActive.damage) {
-//         errors = electronicDamageErrors;
-//       } else if (reportActive.damage) {
-//         errors = electronicDamageErrors;
-//       }
-//     }
+    //       if (reportActive.damage) {
+    //         errors = electronicDamageErrors;
+    //       } else if (reportActive.damage) {
+    //         errors = electronicDamageErrors;
+    //       }
+    //     }
 
     return errors;
   };
@@ -1182,20 +1181,28 @@ export const ClientInspectedCreateReportProvider = ({
 
   const user = useSelector((store: AppStore) => store.user);
 
-
   const { error: errorReportTheft, trigger: triggerReportTheft } =
-    useSWRMutation(reportInInspectionTheftUrl(insuredId), addReportTheft);
+    useSWRMutation(
+      reportInInspectionTheftUrl(user.user?.id, clientId, insuredId),
+      addReportTheft
+    );
 
   const { error: errorReportDamage, trigger: triggerReportDamage } =
-    useSWRMutation(reportInInspectionDamageUrl(insuredId), addReportDamage);
+    useSWRMutation(
+      reportInInspectionDamageUrl(user.user?.id, clientId, insuredId),
+      addReportDamage
+    );
 
   const { error: errorReportFire, trigger: triggerReportFire } = useSWRMutation(
-    reportInInspectionFireUrl(insuredId),
+    reportInInspectionFireUrl(user.user?.id, clientId, insuredId),
     addReportFire
   );
 
   const { error: errorReportCrash, trigger: triggerReportCrash } =
-    useSWRMutation(reportInInspectionCrashUrl(insuredId), addReportCrash);
+    useSWRMutation(
+      reportInInspectionCrashUrl(user.user?.id, clientId, insuredId),
+      addReportCrash
+    );
 
   const triggers = {
     triggerReportTheft,

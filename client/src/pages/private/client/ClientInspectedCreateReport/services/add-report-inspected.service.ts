@@ -3,8 +3,11 @@ import { baseUrl } from "@/pages";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
 
-export const reportInInspectionTheftUrl = (id?: string) =>
-  `${baseUrl}/sinister/theft-inspection/${id}`;
+export const reportInInspectionTheftUrl = (
+  brokerId?: string,
+  clietnId?: string,
+  assetId?: string
+) => `${baseUrl}/sinister/theft-inspection/${brokerId}/${clietnId}/${assetId}`;
 
 export const addReportTheft = async (
   url: string,
@@ -33,8 +36,11 @@ export const addReportTheft = async (
   }
 };
 
-export const reportInInspectionDamageUrl = (id?: string) =>
-  `${baseUrl}/sinister/damage-inspection/${id}`;
+export const reportInInspectionDamageUrl = (
+  brokerId?: string,
+  clietnId?: string,
+  assetId?: string
+) => `${baseUrl}/sinister/damage-inspection/${brokerId}/${clietnId}/${assetId}`;
 
 export const addReportDamage = async (
   url: string,
@@ -63,8 +69,11 @@ export const addReportDamage = async (
   }
 };
 
-export const reportInInspectionFireUrl = (id?: string) =>
-  `${baseUrl}/sinister/fire-inspection/${id}`;
+export const reportInInspectionFireUrl = (
+  brokerId?: string,
+  clietnId?: string,
+  assetId?: string
+) => `${baseUrl}/sinister/fire-inspection/${brokerId}/${clietnId}/${assetId}`;
 
 export const addReportFire = async (
   url: string,
@@ -93,8 +102,8 @@ export const addReportFire = async (
   }
 };
 
-export const reportInInspectionCrashUrl = (id?: string) =>
-  `${baseUrl}/sinister/crash-inspection/${id}`;
+export const reportInInspectionCrashUrl = (brokerId?:string,clietnId?: string,assetId?: string) =>
+  `${baseUrl}/sinister/crash-inspection/${brokerId}/${clietnId}/${assetId}`;
 
 export const addReportCrash = async (
   url: string,

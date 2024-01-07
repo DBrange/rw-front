@@ -21,10 +21,12 @@ import { modalImage } from "@/services/sharing-information.service";
 
 function InspectionDetail({
   values,
-  id,
+  assetId,
+  clientId,
 }: {
   values: AssetDetail | undefined;
-  id: string | undefined;
+  assetId: string | undefined;
+  clientId: string | undefined;
 }) {
   const userBroker = useSelector(
     (store: AppStore) => store.user.user?.userBroker
@@ -85,8 +87,8 @@ function InspectionDetail({
             <Link
               to={
                 userBroker
-                  ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
-                  : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/vehicle`
+                  ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${clientId}/${assetId}/vehicle`
+                  : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${clientId}/${assetId}/vehicle`
               }
             >
               <BtnInspectionDetail>Denunciar</BtnInspectionDetail>
@@ -198,8 +200,8 @@ function InspectionDetail({
             <Link
               to={
                 userBroker
-                  ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
-                  : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${id}/electronic`
+                  ? `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${clientId}/${assetId}/electronic`
+                  : `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/${clientId}/${assetId}/electronic`
               }
             >
               <BtnInspectionDetail>
