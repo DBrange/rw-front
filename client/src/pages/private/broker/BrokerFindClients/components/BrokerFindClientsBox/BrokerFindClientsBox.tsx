@@ -49,13 +49,6 @@ function BrokerFindClientsBox() {
         name="getClient"
         cards={cards()}
       />
-      <ClientCardInFind
-        name={'Didier'}
-        lastname={'Brange'}
-        dni={'41027406'}
-        email={'godofwarelmejorjuegodelmundo@hotmail.ocm'}
-        id={'client?.id'}
-      />
     </>
   );
 }

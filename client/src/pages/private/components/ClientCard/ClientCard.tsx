@@ -8,6 +8,7 @@ import {
   ContainerCardTextContainer,
   DivCard,
   IconCard,
+  IconDeleteCard,
   SpanInspectionCard,
 } from "..";
 import { PrivateRoutes } from "@/models/types/routes";
@@ -15,6 +16,7 @@ import { AiOutlineTablet, AiOutlineLaptop } from "react-icons/ai";
 import { BsPhone } from "react-icons/bs";
 import { LiaCarSideSolid } from "react-icons/lia";
 import { RiTruckLine, RiMotorbikeFill } from "react-icons/ri";
+import { IoClose } from "react-icons/io5";
 
 interface Props {
   name?: string;

@@ -1,6 +1,9 @@
 import { FormInput, FormInputPassword, FormTitle } from "@/components";
+import { PublicRoutes } from "@/models/types/routes";
 import { ChangeEventType, useLoginContext } from "@/pages";
+import { clientKey } from "@/redux/slices/clientSlice";
 import { Form } from "@/styledComponents";
+import { FcGoogle } from "react-icons/fc";
 import {
   BrnLoginGoogle,
   BtnLogin,
@@ -12,13 +15,6 @@ import {
   SectionLoginBox,
   SpanNoRegister,
 } from "./LoginBox.styled";
-import { PublicRoutes } from "@/models/types/routes";
-import { FcGoogle } from "react-icons/fc";
-import { useEffect, useState } from "react";
-import { storageType } from "@/utilities/storageType.utility";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux";
-import { clientKey, resetClient } from "@/redux/slices/clientSlice";
 
 function LoginBox() {
   const {

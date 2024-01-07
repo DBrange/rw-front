@@ -87,7 +87,7 @@ width: 100%;
   border-radius: 3rem;
   background-color: #ddd;
   margin-top: 2rem;
-
+border: none;
   p {
     font-size: 0.8rem;
   }

@@ -30,7 +30,7 @@ export const DivModalSent = styled.div<{
     $error ? `${theme.errBgColor}` : `${theme.pColor}`};
   border-radius: 0.375rem;
   padding: 2.25rem;
-  text-align: center;
+  text-align: start;
   transition: all 0.2s linear 0.15s;
   transform: ${({ $modalActive }) =>
     $modalActive ? "scale(1)" : "scale(0.5)"};

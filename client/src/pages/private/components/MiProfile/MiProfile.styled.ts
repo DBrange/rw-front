@@ -88,8 +88,8 @@ export const BtonChangePassword = styled.button`
   cursor: pointer;
 `;
 
-export const DivCardNoEvent = styled.div`
-  pointer-events: none;
+
+export const DivCardCards = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;

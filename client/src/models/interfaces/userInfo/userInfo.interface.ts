@@ -37,6 +37,7 @@ export interface BrokerUser {
   authorization: string;
   legalUser?: LegalUser;
   personalUser: PersonalUser;
+  userBroker: UserBroker 
 }
 
 export interface UserBroker {
@@ -117,8 +118,8 @@ export interface NotificationwithOptions {
 }
 
 export interface Ids {
-  userBrokerId: string;
-  clientId: string;
+  userBrokerId?: string;
+  clientId?: string;
 }
 
 export interface UpdateMyProfile{

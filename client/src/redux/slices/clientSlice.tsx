@@ -15,7 +15,6 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-
 export const EmptyUserState: ClientInfo = {
   accessToken: undefined,
   user: {
@@ -41,7 +40,7 @@ export const EmptyUserState: ClientInfo = {
 };
 
 export const clientKey = "client";
-export const cookieKey = 'loginGoogle'
+export const cookieKey = "loginGoogle";
 
 export const clientSlice = createSlice({
   name: "client",
@@ -147,6 +146,28 @@ export const clientSlice = createSlice({
         };
       }
     );
+    builder.addCase(
+      deleteBrokerAsync.fulfilled,
+      (state: ClientInfo, action: PayloadAction<Ids | undefined>) => {
+        const deleteBroker = state?.user?.brokerUser?.filter(
+          (el) => el.userBroker.id !== action.payload?.userBrokerId
+        );
+        persistLocalStorage<ClientInfo>(clientKey, {
+          ...state,
+          user: {
+            ...state.user,
+            brokerUser: deleteBroker,
+          },
+        });
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            brokerUser: deleteBroker,
+          },
+        };
+      }
+    );
   },
 });
 
@@ -203,6 +224,22 @@ export const addBrokerAsync = createAsyncThunk(
       );
       return brokers.data;
     } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteBrokerAsync = createAsyncThunk(
+  "notification/deleteBrokerAsync",
+  async ({ clientId, userBrokerId }: Ids) => {
+    try {
+      console.log(clientId, userBrokerId);
+      await axios.post(`${baseUrl}/user/delete-broker/${clientId}/${userBrokerId}`);
+      modalToast.setSubject(true);
+      return { clientId, userBrokerId };
+    } catch (error) {
+      
+      modalToastError.setSubject(true);
       console.log(error);
     }
   }

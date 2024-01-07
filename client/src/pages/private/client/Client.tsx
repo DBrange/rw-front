@@ -54,6 +54,10 @@ function Client() {
       <Route path={PrivateRoutes.ALL_INSURED} element={<ClientInspections />} />
       <Route path={PrivateRoutes.ALL_SINISTER} element={<ClientReports />} />
       <Route path={PrivateRoutes.MY_PROFILE} element={<ClientMyProfile />} />
+      <Route
+        path={`${PrivateRoutes.MY_PROFILE}/:userBrokerId`}
+        element={<ClientMyProfile />}
+      />
     </RoutesWithNotFound>
   );
 }

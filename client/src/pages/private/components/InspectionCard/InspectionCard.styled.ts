@@ -81,3 +81,26 @@ export const SpanInspectionCard = styled.span`
   text-orientation: upright; /* Mantiene la orientación normal de las letras */
   /* letter-spacing: 0.001em; */
 `;
+
+export const IconDeleteCard = styled.div`
+padding: 3px;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+i{
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+&:hover{
+  i{
+    /* pointer-events: auto; */
+    background-color: #fff1;
+
+  }
+}
+
+`

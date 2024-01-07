@@ -1,4 +1,5 @@
 export * from './BtnChoice';
+export * from './ClientCardMiProfile';
 export * from './FooterContent';
 export * from './FormBrokerLegalPersonalData';
 export * from './FormBrokerPersonalData';
@@ -57,6 +58,7 @@ export * from './MessageBtnHeader';
 export * from './ModalError';
 export * from './ModalImage/ModalImage.styled';
 export { default as ModalImage } from './ModalImage/ModalImage';
+export * from './ModalNotAccess';
 export * from './ModalSendRequest';
 export * from './ModalSent';
 export * from './ModalSentLogin';

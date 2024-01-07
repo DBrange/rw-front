@@ -13,13 +13,14 @@ import { useSelector } from "react-redux";
 import { ClientCard, ModalUpdate, ModalUpdatePassword } from "../..";
 import {
   BtonChangePassword,
-  DivCardNoEvent,
+  DivCardCards,
   DivInformationMyProfile,
   DivInformationProfileDetail,
   MyProfileEditInformaction,
   SectionMyProfile,
   TitleName,
 } from "./MiProfile.styled";
+import { ClientCardMiProfile, DivCardNoEvent } from "@/components";
 
 function MiProfile() {
   const user = useSelector((store: AppStore) => store.user.user);
@@ -61,12 +62,13 @@ function MiProfile() {
         </div>
       </TitleName>
       <DivInformationMyProfile>
+        
         {user?.brokerUser && (
           <>
-            <DivCardNoEvent>
+            <DivCardCards>
               <h4>Brokers</h4>
               {user?.brokerUser.map((el) => (
-                <ClientCard
+                <ClientCardMiProfile
                   name={el?.personalUser.name}
                   lastname={el?.personalUser.lastName}
                   companyName={el?.legalUser?.companyName}
@@ -75,10 +77,12 @@ function MiProfile() {
                       ? el?.personalUser?.dni
                       : el?.legalUser?.cuit) as string
                   }
-                  id={el?.id}
+                  id={el?.userBroker.id}
+                  key={el?.id}
                 />
               ))}
-            </DivCardNoEvent>
+              {!user?.brokerUser.length && <>Aun no posee broker/s</>}
+            </DivCardCards>
           </>
         )}
         <DivInformationProfileDetail>
