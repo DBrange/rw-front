@@ -91,6 +91,7 @@ function BrokerCreateReportBox() {
         name="BrokerCreateReport"
         cards={cards}
       />
+     
     </>
   );
 }

@@ -1,13 +1,13 @@
 import { PrivateRoutes, PublicRoutes } from "@/models/types/routes";
 import { AppStore } from "@/redux";
 import { ContainerLogin } from "@/styledComponents";
-import { RefObject, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { H3InspectionDetail } from "../../admin/AdminUser/components/AdminDashboardBox/AdminDashboardBox.styled";
-import { BtnBrokerCreateInspectionLink, BtnContainerBrokerCreateInspectionLink, DivBrokerCreateInspectionLink, DivInfoBrokerCreateInspectionLink } from "./BrokerCreateInspectionLink.styled";
+import { useRef, useState } from "react";
 import { MdContentCopy } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { SidebarBroker } from "../..";
+import { H3InspectionDetail } from "../../admin/AdminUser/components/AdminDashboardBox/AdminDashboardBox.styled";
+import { BtnBrokerCreateInspectionLink, BtnContainerBrokerCreateInspectionLink, BtnCreate, DivBrokerCreateInspectionLink, DivInfoBrokerCreateInspectionLink } from "./BrokerCreateInspectionLink.styled";
 
 function BrokerCreateInspectionLink() {
   const { clientId } = useParams();
@@ -67,6 +67,11 @@ function BrokerCreateInspectionLink() {
             </div>
           </DivInfoBrokerCreateInspectionLink>
         </DivBrokerCreateInspectionLink>
+        <Link
+          to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_INSPECTION_MANUAL}/${clientId}`}
+        >
+          <BtnCreate>Crear sin link</BtnCreate>
+        </Link>
       </ContainerLogin>
     </>
   );

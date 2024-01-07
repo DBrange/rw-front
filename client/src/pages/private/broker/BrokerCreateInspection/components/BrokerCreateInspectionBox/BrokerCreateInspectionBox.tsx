@@ -94,6 +94,7 @@ function BrokerCreateInspectionBox() {
         name="BrokerCreateInspection"
         cards={cards}
       />
+      
     </>
   );
 }

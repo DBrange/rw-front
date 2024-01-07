@@ -56,7 +56,7 @@ export const H4Modal = styled.h5<{ $error?: boolean }>`
 
 export const BtnModal = styled.button<{ $error?: boolean }>`
   cursor: pointer;
-  width: 70%;
+  width: 100%;
   max-width: 200px;
   height: 2rem;
   margin-top: 1.25rem;

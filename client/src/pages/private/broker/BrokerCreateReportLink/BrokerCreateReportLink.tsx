@@ -3,12 +3,12 @@ import { AppStore } from "@/redux";
 import { ContainerLogin } from "@/styledComponents";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { H3InspectionDetail } from "../../admin/AdminUser/components/AdminDashboardBox/AdminDashboardBox.styled";
 
 import { MdContentCopy } from "react-icons/md";
 import { SidebarBroker } from "../..";
-import { BtnBrokerCreateInspectionLink, BtnContainerBrokerCreateInspectionLink, DivBrokerCreateInspectionLink, DivInfoBrokerCreateInspectionLink } from "../BrokerCreateInspectionLink/BrokerCreateInspectionLink.styled";
+import { BtnBrokerCreateInspectionLink, BtnContainerBrokerCreateInspectionLink, BtnCreate, DivBrokerCreateInspectionLink, DivInfoBrokerCreateInspectionLink } from "../BrokerCreateInspectionLink/BrokerCreateInspectionLink.styled";
 
 function BrokerCreateReportLink() {
   const { clientId } = useParams();
@@ -67,6 +67,11 @@ function BrokerCreateReportLink() {
             </div>
           </DivInfoBrokerCreateInspectionLink>
         </DivBrokerCreateInspectionLink>
+        <Link
+          to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.CREATE_SINISTER_MANUAL}/${clientId}`}
+        >
+          <BtnCreate>Crear sin link</BtnCreate>
+        </Link>
       </ContainerLogin>
     </>
   );

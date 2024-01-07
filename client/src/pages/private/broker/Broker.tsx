@@ -46,10 +46,10 @@ function Broker() {
         path={`${PrivateRoutes.CREATE_INSPECTION}/:clientId`}
         element={<BrokerCreateInspectionLink />}
       />
-      {/* <Route
-        path={`${PrivateRoutes.CREATE_INSPECTION}/:clientId`}
+      <Route
+        path={`${PrivateRoutes.CREATE_INSPECTION_MANUAL}/:clientId`}
         element={<ClientCreateInspection />}
-      /> */}
+      />
       <Route
         path={`${PrivateRoutes.CREATE_SINISTER}`}
         element={<BrokerCreateReport />}
@@ -58,10 +58,10 @@ function Broker() {
         path={`${PrivateRoutes.CREATE_SINISTER}/:clientId`}
         element={<BrokerCreateReportLink />}
       />
-      {/* <Route
-        path={`${PrivateRoutes.CREATE_SINISTER}/:clientId`}
+      <Route
+        path={`${PrivateRoutes.CREATE_SINISTER_MANUAL}/:clientId`}
         element={<ClientCreateReport />}
-      /> */}
+      />
       <Route
         path={`${PrivateRoutes.CREATE_SINISTER_IN_INSURED}/:insuredId/:type`}
         element={<ClientInspectedCreateReport />}
