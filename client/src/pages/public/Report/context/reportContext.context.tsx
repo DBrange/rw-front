@@ -110,6 +110,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
     theft: true,
     fire: false,
     crash: false,
+    damage: false
   });
 
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
@@ -238,6 +239,7 @@ export const ReportProvider = ({ children }: ChildrenType) => {
         theft: value === "theft",
         fire: value === "fire",
         crash: value === "crash",
+        damage: value === "crash",
       });
     }
   };

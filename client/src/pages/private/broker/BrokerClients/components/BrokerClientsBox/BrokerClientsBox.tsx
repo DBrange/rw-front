@@ -77,6 +77,9 @@ function BrokerClientsBox() {
             }
           })}
       </InfiniteScroll>
+      {!clients?.length && (
+        <>No se han encontrado clientes</>
+      )}
     </>
   );
 

@@ -153,6 +153,9 @@ function BrokerReportsBox() {
             }
           })}
       </InfiniteScroll>
+      {!sinisters?.length && (
+        <>No se han encontrado siniestros</>
+      )}
     </>
   );
 

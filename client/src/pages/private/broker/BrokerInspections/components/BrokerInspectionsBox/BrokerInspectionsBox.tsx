@@ -59,34 +59,37 @@ function BrokerInspectionsBox() {
         loader={<Loader />}
         dataLength={inspections.length ?? 0}
       >
-          {[...inspections]
-            ?.sort((a, b) => date(b.created_at) - date(a.created_at))
-            .map((el: AllClientAssets) => {
-              if (el.vehicle) {
-                return (
-                  <InspectionCard
-                    key={el.vehicle.id}
-                    type={el.vehicle.type}
-                    keyName={el.vehicle.plate}
-                    id={el.id}
-                    date={el.created_at}
-                  />
-                );
-              } else if (el.electronic) {
-                return (
-                  <InspectionCard
-                    key={el.electronic.id}
-                    type={el.electronic.type}
-                    keyName={el.electronic.brand}
-                    id={el.id}
-                    date={el.created_at}
-                  />
-                );
-              } else {
-                return <>No se han encontrado inspecciones</>;
-              }
-            })}
-      </InfiniteScroll>
+        {[...inspections]
+          ?.sort((a, b) => date(b.created_at) - date(a.created_at))
+          .map((el: AllClientAssets) => {
+            if (el.vehicle) {
+              return (
+                <InspectionCard
+                  key={el.vehicle.id}
+                  type={el.vehicle.type}
+                  keyName={el.vehicle.plate}
+                  id={el.id}
+                  date={el.created_at}
+                />
+              );
+            } else if (el.electronic) {
+              return (
+                <InspectionCard
+                  key={el.electronic.id}
+                  type={el.electronic.type}
+                  keyName={el.electronic.brand}
+                  id={el.id}
+                  date={el.created_at}
+                />
+              );
+            } else {
+              return <>No se han encontrado inspecciones</>;
+            }
+          })}
+      </InfiniteScroll>{" "}
+      {!inspections?.length && (
+        <>No se han encontrado inspecciones</>
+      )}
     </>
   );
 

@@ -121,4 +121,23 @@ export const BtnHome = styled.button`
   }
 `;
 
+export const BtnScrollToTopHome = styled.button`
+  position: fixed;
+  right: 3vh;
+  bottom: 3vh;
+  padding: .5rem;
+  background-color: ${theme.sColor};
+  color: ${theme.pColor};
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px;
+  
+  i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: .85px;
+  }
+`
+
 

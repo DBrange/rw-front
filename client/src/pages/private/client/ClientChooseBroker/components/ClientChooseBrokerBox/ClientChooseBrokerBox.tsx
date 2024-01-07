@@ -76,6 +76,9 @@ function ClientChooseBrokerBox() {
           }
         })}
       </InfiniteScroll>
+      {!brokers?.length && (
+        <>Necesita al menos un broker para poder continuar</>
+      )}
     </>
   );
 

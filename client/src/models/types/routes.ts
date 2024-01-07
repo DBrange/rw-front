@@ -10,6 +10,8 @@ export enum PublicRoutes {
   CREATE_SINISTER = "crear-siniestro",
   VERIFIED = 'verificado',
   NOT_VERIFIED = 'no-verificado',
+  ABOUT_US = 'sobre-nosotros',
+  FREQUENT_QUESTIONS = 'preguntas-frecuentes'
 }
 
 export enum PrivateRoutes {

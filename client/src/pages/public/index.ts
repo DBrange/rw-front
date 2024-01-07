@@ -1,3 +1,5 @@
+export * from './AboutUs';
+export * from './FrequentsQuestions';
 export * from './Home/components/HomeContainer';
 export * from './Home/components';
 export * from './Home';

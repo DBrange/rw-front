@@ -28,6 +28,8 @@ function LoginBtn() {
         path === "/public/registrarse" ||
         path === "/public/verificado" ||
         path === "/public/no-verificado" ||
+        path === "/public/preguntas-frecuentes" ||
+        path === "/public/sobre-nosotros" ||
         path === "/public/contraseña"
       ) && (
         <LinkNavigate to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.LOGIN}`}>

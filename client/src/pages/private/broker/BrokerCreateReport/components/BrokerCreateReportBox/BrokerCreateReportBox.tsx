@@ -71,6 +71,9 @@ function BrokerCreateReportBox() {
           }
         })}
       </InfiniteScroll>
+      {!clients?.length && (
+        <>Necesita al menos un cliente para poder continuar</>
+      )}
     </>
   );
 

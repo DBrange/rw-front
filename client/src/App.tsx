@@ -1,6 +1,12 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Route, useLocation } from "react-router-dom";
-import { GlobalLoader, MessageBtn, ModalToast, ModalToastError } from "./components";
+import {
+  FooterContent,
+  GlobalLoader,
+  MessageBtn,
+  ModalToast,
+  ModalToastError,
+} from "./components";
 import AuthGuard from "./guards/auth.guard";
 import Header from "./header/Header";
 import { PrivateRoutes, PublicRoutes } from "./models/types/routes";
@@ -66,7 +72,9 @@ function App() {
             path === "/public/contraseña"
           )
         }
-      />
+      >
+        <FooterContent />
+      </Footer>
     </Suspense>
   );
 }

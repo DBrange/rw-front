@@ -1,4 +1,5 @@
 export * from './BtnChoice';
+export * from './FooterContent';
 export * from './FormBrokerLegalPersonalData';
 export * from './FormBrokerPersonalData';
 export * from './FormCheckbox';

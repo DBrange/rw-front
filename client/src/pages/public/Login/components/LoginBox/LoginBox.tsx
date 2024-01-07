@@ -46,6 +46,10 @@ function LoginBox() {
             window.open('', '_self');
             window.close();
             localStorage.setItem('tabClosed', 'true');
+            sessionStorage.setItem(
+        "keepLoggedIn",
+        JSON.stringify({ value: checked })
+      );
           };
         </script>
       `);

@@ -1,5 +1,7 @@
 import { useHeaderContext } from "@/header/context";
+import { AppStore } from "@/redux";
 import { AiOutlineMessage } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { NotificationsBox } from "..";
 import {
@@ -9,9 +11,6 @@ import {
   SectionMessageBtnHeader,
   SpanNewNotificationsNumber,
 } from "./MessageBtnHeader.styled";
-import { AppStore } from "@/redux";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 function MessageBtnHeader() {
   const path = useLocation().pathname;
@@ -38,6 +37,8 @@ function MessageBtnHeader() {
         path === "/public/registrarse" ||
         path === "/public/verificado" ||
         path === "/public/no-verificado" ||
+        path === "/public/preguntas-frecuentes" ||
+        path === "/public/sobre-nosotros" ||
         path === "/public/contraseña"
       ) && (
         <SectionMessageBtnHeader>
@@ -53,6 +54,8 @@ function MessageBtnHeader() {
                   path === "/public/registrarse" ||
                   path === "/public/verificado" ||
                   path === "/public/no-verificado" ||
+                  path === "/public/preguntas-frecuentes" ||
+                  path === "/public/sobre-nosotros" ||
                   path === "/public/contraseña"
                 )
               }
@@ -68,6 +71,8 @@ function MessageBtnHeader() {
                     path === "/public/registrarse" ||
                     path === "/public/verificado" ||
                     path === "/public/no-verificado" ||
+                    path === "/public/preguntas-frecuentes" ||
+                    path === "/public/sobre-nosotros" ||
                     path === "/public/contraseña"
                   )
                 }

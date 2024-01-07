@@ -23,3 +23,9 @@ export const DivNotificationsBox = styled.div`
 export const H3NotificationBox = styled.h3`
   padding: 0.7rem;
   `;
+
+export const PEmptyNotifications = styled.p`
+  font-size: .8rem;
+  margin-left: .9rem;
+  margin-top: 2rem;
+  `

@@ -77,6 +77,7 @@ width: 100%;
 `
 
 export const BrnLoginGoogle = styled.button`
+cursor: pointer;
 width: 100%;
   display: flex;
   align-items: center;

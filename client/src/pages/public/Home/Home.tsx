@@ -1,5 +1,6 @@
 import {
   BtnHome,
+  BtnScrollToTopHome,
   DivBtnHome,
   DivHome,
   DivSection,
@@ -16,41 +17,45 @@ import { LinkNavigate } from "@/styledComponents";
 import person1 from "../../../../assets/person1.svg";
 import person5 from "../../../../assets/person5.svg";
 import person4 from "../../../../assets/person4.svg";
+import { useState, useEffect } from "react";
+import { ImArrowUp2 } from "react-icons/im";
 
 function Home() {
-  // const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // const toggleVisibility = () => {
-  //   if (window.scrollY > 300) {
-  //     setIsVisible(true);
-  //   } else {
-  //     setIsVisible(false);
-  //   }
-  // };
+  const toggleVisibility = () => {
+    if (window.scrollY > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
 
-  // const scrollToTop = () => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: "smooth",
-  //   });
-  // };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", toggleVisibility);
-  //   return () => {
-  //     window.removeEventListener("scroll", toggleVisibility);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
   return (
     <>
-      {/* <button
+      <BtnScrollToTopHome
         className={`fixed right-4 bottom-4 p-4 rounded-full shadow-md bg-violet-500 text-white ${
           isVisible ? "block" : "hidden"
         }`}
         onClick={scrollToTop}
-        >
-        <BsArrowUp />
-      </button> */}
+      >
+        <i>
+          <ImArrowUp2 size={20} />
+        </i>
+      </BtnScrollToTopHome>
       {/* <ImgHome src={person1} alt="" /> */}
       <HomeContainer>
         <SectionHome>
@@ -87,8 +92,9 @@ function Home() {
           <DivSection>
             <DivHome $right>
               <H3Home>
-                Podras realizar tus<SpanHome> DENUNCIAS</SpanHome> de robo, incendio o choque de la forma
-                mas sencilla y rapida<SpanHome>.</SpanHome>
+                Podras realizar tus<SpanHome> DENUNCIAS</SpanHome> de robo,
+                incendio o choque de la forma mas sencilla y rapida
+                <SpanHome>.</SpanHome>
               </H3Home>
               <LinkNavigate to="/denunciar">
                 <DivBtnHome>
@@ -104,7 +110,8 @@ function Home() {
             <DivHome>
               <H3Home>
                 Tambien podras realizar inspecciones, para poder
-                <SpanHome> ASEGURAR</SpanHome> de la forma mas sencilla y rapida tus electrodomesticos  o vehiculos
+                <SpanHome> ASEGURAR</SpanHome> de la forma mas sencilla y rapida
+                tus electrodomesticos o vehiculos
                 <SpanHome>.</SpanHome>
               </H3Home>
               <LinkNavigate to="/inspeccionar">

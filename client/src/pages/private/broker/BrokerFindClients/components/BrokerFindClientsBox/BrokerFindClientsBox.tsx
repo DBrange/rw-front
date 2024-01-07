@@ -34,6 +34,7 @@ function BrokerFindClientsBox() {
     } else {
       return <>No se ha encontrado el cliente</>;
     }
+    
   };
 
   return (
@@ -47,6 +48,13 @@ function BrokerFindClientsBox() {
         placeholder="Buscar por email"
         name="getClient"
         cards={cards()}
+      />
+      <ClientCardInFind
+        name={'Didier'}
+        lastname={'Brange'}
+        dni={'41027406'}
+        email={'godofwarelmejorjuegodelmundo@hotmail.ocm'}
+        id={'client?.id'}
       />
     </>
   );

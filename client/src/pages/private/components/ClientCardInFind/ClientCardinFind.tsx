@@ -1,22 +1,14 @@
+import {
+  modalSendRequest
+} from "@/services/sharing-information.service";
 import { IoPersonSharp } from "react-icons/io5";
 import { PiBuildingsBold } from "react-icons/pi";
 import {
   CardText,
   CardTextContainer,
-  CardTextLabel,
-  CardTextNoLink,
-  ContainerCardTextContainer,
-  DivCard,
-  IconCard,
-  SpanInspectionCard,
+  CardTextLabel
 } from "..";
-import { BtnClientCardFind } from "./ClientCardFind.styled";
-import {
-  modalSendRequest,
-  modalSentService,
-} from "@/services/sharing-information.service";
-import { PrivateRoutes } from "@/models/types/routes";
-import { useState } from "react";
+import { BtnClientCardFind, ContainerCardFindText, ContainerCardFindTextContainer, DivCardFind, IconCardFind } from "./ClientCardFind.styled";
 
 interface Props {
   name?: string;
@@ -43,12 +35,12 @@ function ClientCardInFind({
   };
 
   return (
-    <CardTextNoLink>
-      <DivCard $noHover>
-        <IconCard>
+    <ContainerCardFindText>
+      <DivCardFind $noHover>
+        <IconCardFind>
           {companyName ? <PiBuildingsBold /> : <IoPersonSharp />}
-        </IconCard>
-        <ContainerCardTextContainer>
+        </IconCardFind>
+        <ContainerCardFindTextContainer>
           {companyName ? (
             <>
               <CardTextContainer>
@@ -73,10 +65,10 @@ function ClientCardInFind({
             </>
           )}
           <BtnClientCardFind onClick={openModal}>Agregar</BtnClientCardFind>
-        </ContainerCardTextContainer>
+        </ContainerCardFindTextContainer>
         {/* <SpanInspectionCard>{newCard && "Nuevo"}</SpanInspectionCard> */}
-      </DivCard>
-    </CardTextNoLink>
+      </DivCardFind>
+    </ContainerCardFindText>
 
     // <CardTextNoLink>
     //   <DivCard>
