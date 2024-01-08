@@ -1,4 +1,7 @@
+import ModalImage from "@/components/ModalImage/ModalImage";
 import { AppStore } from "@/redux";
+import { modalImage } from "@/services/sharing-information.service";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AssetDetail } from "../..";
@@ -15,9 +18,6 @@ import {
   H2InspectionDetail,
   SectionHeaderInspectionDetail,
 } from "./InspectionDetail.styled";
-import ModalImage from "@/components/ModalImage/ModalImage";
-import { useEffect, useState } from "react";
-import { modalImage } from "@/services/sharing-information.service";
 
 function InspectionDetail({
   values,
@@ -330,6 +330,7 @@ function InspectionDetail({
   return (
     <SectionHeaderInspectionDetail>
       {dataInHTML()}
+      {/* <a href={values?.pdf}>Imprimir</a> */}
     </SectionHeaderInspectionDetail>
   );
 }

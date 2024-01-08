@@ -93,7 +93,7 @@ const validationWithInjuries = ({
     amount: crash.amount,
     injuredInfo: thirdPartyInjured.injuredInfo,
   };
-  
+
   if (
     errorsInputValues?.personal &&
     errorsInputValues?.vehicleReport &&
@@ -312,7 +312,7 @@ const validationWithInjuries = ({
         injuredDTO: injuredDTOObjFire,
         swornDeclaration: swornDeclaration.swornDeclaration,
       };
-console.log(dataObj)
+      console.log(dataObj);
       userElementReportInjured<
         ErrorsLegalPersonalValues,
         ErrorsVehicleReportValues,
@@ -929,10 +929,10 @@ const validationWithoutInjuries = ({
           electronicDTO: electronic,
           userDTO: personal,
           theftDTO: theftElectronic,
-          smartPhoneDTO: phone,
+          smartphoneDTO: phone,
           swornDeclaration: swornDeclaration.swornDeclaration,
         };
-console.log(dataObj)
+        console.log(dataObj);
         userElementReportExtra<
           ErrorsPersonalValues,
           ErrorsElectronicValues,
@@ -978,7 +978,7 @@ console.log(dataObj)
           electronicDTO: electronic,
           legalUserDTO: legalPersonal,
           theftDTO: theftElectronic,
-          smartPhoneDTO: phone,
+          smartphoneDTO: phone,
           swornDeclaration: swornDeclaration.swornDeclaration,
         };
 

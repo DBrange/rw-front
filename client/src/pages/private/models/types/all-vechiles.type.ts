@@ -17,6 +17,7 @@ export interface AllClientAssets {
   updated_at: Date;
   insured: boolean;
   inspection: boolean;
+  psdf: string
   vehicle: Vehicle | null;
   electronic: Electronic | null;
 }
@@ -60,6 +61,7 @@ export interface AllClientSinisters {
   time: string;
   date: string;
   location: string;
+  pdf: string
   sinisterType: SinisterTypeAllClientSinister;
   asset: AllClientAssets;
 }
@@ -83,6 +85,7 @@ export interface AssetDetail {
   electronic: ElectronicDetail | null;
   insured: boolean;
   inspection: boolean;
+  pdf: string
   client: ClientDetail;
   sinisters: Sinister[];
 }
@@ -109,6 +112,7 @@ interface Sinister {
   time: string;
   date: string;
   location: string;
+  pdf: string
 }
 
 interface VehicleDetail {
@@ -225,6 +229,7 @@ export interface SinisterDetail {
   time: string;
   date: string;
   location: string;
+  pdf: string
   asset: AssetDetail;
   injuredd: Injuredd[];
   thirdPartyVehicle: ThirdPartyVehicle[];

@@ -706,6 +706,7 @@ function ReportnDetail({
   return (
     <SectionHeaderInspectionDetail>
       {dataInHTML()}
+      {/* <a href={values?.pdf}>Imprimir</a> */}
     </SectionHeaderInspectionDetail>
   );
 }
