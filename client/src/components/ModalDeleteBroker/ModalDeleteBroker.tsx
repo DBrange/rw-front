@@ -29,7 +29,6 @@ function ModalDeleteBroker({ modalActive }: { modalActive: boolean }) {
       deleteBrokerAsync({ clientId: user.user?.id, userBrokerId: userBrokerId })
     );
     close()
-    
   };
 
   const close = () => {
