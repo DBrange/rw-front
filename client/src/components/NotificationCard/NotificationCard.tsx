@@ -18,9 +18,10 @@ import { addBrokerAsync, updateClient } from "@/redux/slices/clientSlice";
 
 interface Props {
   notification: Notification;
+  mutate: any
 }
 
-function NotificationCard({ notification }: Props) {
+function NotificationCard({ notification, mutate }: Props) {
   const dispatch = useDispatch();
   const dispatchAsync = useDispatch<AppDispatch>();
 
@@ -34,33 +35,46 @@ function NotificationCard({ notification }: Props) {
         response: response
           ? NotificationResponse.ACCEPTED
           : NotificationResponse.REJECTED,
+        mutate,
       })
     );
     dispatchAsync(
-      addBrokerAsync({
-        clientId: user.user?.id as string,
-        userBrokerId: notification?.additional,
-      })
+      addBrokerAsync(
+        {
+          clientId: user.user?.id as string,
+          userBrokerId: notification?.additional,
+         
+        },
+      )
     );
     dispatch(
-      updateNotification({
-        ...notification,
-        response: response
-          ? NotificationResponse.ACCEPTED
-          : NotificationResponse.REJECTED,
-      })
+      updateNotification(
+        {
+          ...notification,
+          response: response
+            ? NotificationResponse.ACCEPTED
+            : NotificationResponse.REJECTED,
+        }
+      )
     );
-
+    // setTimeout(() => {
+      
+    //   mutate()
+    // }, 2000);
     // dispatch(updateClient({ brokerUser: notification?.additional }));
 
     setState(response);
   };
 
-
   return (
     <DivNotification>
       <h4>
-        {notification.title} {!notification.isRead ? <SpanNewNotificationCard>Nuevo</SpanNewNotificationCard> : ""}
+        {notification.title}{" "}
+        {!notification.isRead ? (
+          <SpanNewNotificationCard>Nuevo</SpanNewNotificationCard>
+        ) : (
+          ""
+        )}
       </h4>
       <PNotification>{notification.message}</PNotification>
       <SpanNotification>

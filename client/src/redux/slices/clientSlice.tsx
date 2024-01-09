@@ -15,6 +15,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+
 export const EmptyUserState: ClientInfo = {
   accessToken: undefined,
   user: {

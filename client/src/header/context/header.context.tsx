@@ -1,11 +1,13 @@
 import { AppDispatch, AppStore } from "@/redux";
 import {
   addNotificationsAsync,
-  updateNotificationAllReadAsync
+  updateNotificationAllReadAsync,
 } from "@/redux/slices/notificationSlice";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IHeaderContext, emptyHeaderContext } from "./empty-header-context";
+import { Notification } from "@/models";
+import HeaderHook from "../utilities/header.hook";
 
 export const HeaderContext = createContext<IHeaderContext>(emptyHeaderContext);
 
@@ -17,38 +19,48 @@ export const HeaderProvider = ({ children }: ChildrenType) => {
   const [modal, setModal] = useState<boolean>(false);
   const user = useSelector((store: AppStore) => store.user);
   const dispatchAsync = useDispatch<AppDispatch>();
-  const [newNotifications, setNewNotifications] = useState<boolean>(false);
-  const notifications = useSelector((store: AppStore) => store.notification);
+  //   const [newNotifications, setNewNotifications] = useState<boolean>(false);
+  //   const notifications = useSelector((store: AppStore) => store.notification);
 
-  // const { data, trigger } = useSWRMutation(getNotificationsUrl(user.user?.id), getNotifications);
-  // const notifications = useSelector((store: AppStore) => store?.user.user?.receivedNotifications)
-  const refreshNotifications2 = () => {
-    dispatchAsync(addNotificationsAsync(user.user?.id));
-          const s = notifications.map((el) => el.isRead).some((el) => !el);
-    if (s) setNewNotifications(true);
-    // dispatchAsync(updateNotificationAllReadAsync(user.user?.id));
-  };
-  
+  //   const refreshNotifications2 = () => {
+  //     dispatchAsync(addNotificationsAsync(user.user?.id));
+  //           const s = notifications.map((el) => el.isRead).some((el) => !el);
+  //     if (s) setNewNotifications(true);
+  //   };
+
   const refreshNotifications = () => {
     dispatchAsync(addNotificationsAsync(user.user?.id));
-          const s = notifications.map((el) => el.isRead).some((el) => !el);
-          if (s) setNewNotifications(true);
+    const s = notifications.map((el) => el.isRead).some((el) => !el);
+    // if (s) setNewNotifications(true);
     dispatchAsync(updateNotificationAllReadAsync(user.user?.id));
+    mutate()
   };
 
-  useEffect(() => {
-  refreshNotifications2()
-},[])
+  //   useEffect(() => {
+  //   refreshNotifications2()
+  // },[])
 
+  const {
+    paginatedData: notifications,
+    isReachedEnd,
+    setSize,
+    size,
+    mutate
+  } = HeaderHook<Notification>();
 
+  //   useEffect(() => {
+  // dispatch(addNotification(notificationsData))
+  //   },[notificationsData])
 
   const values = {
+    notifications,
+    isReachedEnd,
+    setSize,
+    size,
     modal,
     setModal,
-    newNotifications,
-    notifications,
     refreshNotifications,
-    setNewNotifications,
+    mutate
   };
 
   return (

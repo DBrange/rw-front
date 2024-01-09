@@ -175,7 +175,9 @@ function BrokerDashboardBox() {
             <Link
               to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}`}
             >
-              <SpanBrokerDashboardBox>Buscar inspeccion</SpanBrokerDashboardBox>
+              <SpanBrokerDashboardBox>
+                Buscar inspeccion
+              </SpanBrokerDashboardBox>
             </Link>
           )}
           <IoIosMore size={25} />

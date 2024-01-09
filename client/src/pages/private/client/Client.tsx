@@ -1,18 +1,32 @@
 import { PrivateRoutes } from "@/models/types/routes";
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
+import { lazy } from "react";
 import { Navigate, Route } from "react-router-dom";
-import {
-  ClientChooseBroker,
-  ClientCreateInspection,
-  ClientCreateReport,
-  ClientInspectedCreateReport,
-  ClientInspectionDetail,
-  ClientInspections,
-  ClientMyProfile,
-  ClientReportDetail,
-  ClientReports,
-  ClientUser
-} from ".";
+
+const ClientUser = lazy(() => import("./ClientUser/ClientUser"));
+const ClientReports = lazy(() => import("./ClientReports/ClientReports"));
+const ClientMyProfile = lazy(() => import("./ClientMyProfile/ClientMyProfile"));
+const ClientInspections = lazy(
+  () => import("./ClientInspections/ClientInspections")
+);
+const ClientReportDetail = lazy(
+  () => import("./ClientReportDetail/ClientReportDetail")
+);
+const ClientChooseBroker = lazy(
+  () => import("./ClientChooseBroker/ClientChooseBroker")
+);
+const ClientCreateReport = lazy(
+  () => import("./ClientCreateReport/ClientCreateReport")
+);
+const ClientInspectionDetail = lazy(
+  () => import("./ClientInspectionDetail/ClientInspectionDetail")
+);
+const ClientCreateInspection = lazy(
+  () => import("./ClientCreateInspection/ClientCreateInspection")
+);
+const ClientInspectedCreateReport = lazy(
+  () => import("./ClientInspectedCreateReport/ClientInspectedCreateReport")
+);
 
 function Client() {
   return (

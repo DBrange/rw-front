@@ -53,10 +53,10 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
       setButtonActive({ inspection: false, sinister: false, client: false });
     }
   };
-  const { data: notificationsData } = useSWR(
-    getNotificationsUrl(user.user?.id),
-    getNotifications
-  );
+  // const { data: notificationsData } = useSWR(
+  //   getNotificationsUrl(user.user?.id),
+  //   getNotifications
+  // );
 
   const { data: dashboardData } = useSWR(
     DashBoardInfoUrl(user.user?.id, user.user?.userBroker?.id),
@@ -84,9 +84,9 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
     setDataToDashboard(dashboardData);
   }, [dashboardData]);
 
-  useEffect(() => {
-    dispatch(addNotification(notificationsData));
-  }, [notifications]);
+  // useEffect(() => {
+  //   dispatch(addNotification(notificationsData));
+  // }, [notifications]);
 
   // useEffect(() => {
   //   dispatch(addNotification(user.user?.receivedNotifications as Notification[]));

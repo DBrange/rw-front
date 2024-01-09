@@ -52,7 +52,7 @@ export const addNotificationsAsync = createAsyncThunk(
   async (userId: string | undefined) => {
     try {
       const notifications = await axios(
-        `${baseUrl}/user/notifications/${userId}`
+        `${baseUrl}/user/notifications/${userId}?page=${1}&limit=${20}`
       );
       return notifications.data;
     } catch (error) {
@@ -74,12 +74,14 @@ export const addNewNotificationAsync = createAsyncThunk(
 
 export const updateNotificationAsync = createAsyncThunk(
   "notification/updateNotificationAsync",
-  async (notification: Notification) => {
+  async (notification: Notification & { mutate: any }) => {
+    const {mutate,id, ...rest} = notification
     try {
       await axios.put(
-        `${baseUrl}/notification/${notification.id}`,
+        `${baseUrl}/notification/${id}`,
         notification
       );
+      notification.mutate()
     } catch (error) {
       console.log(error);
     }

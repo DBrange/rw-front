@@ -77,7 +77,7 @@ function MiProfile() {
                       ? el?.personalUser?.dni
                       : el?.legalUser?.cuit) as string
                   }
-                  id={el?.userBroker.id}
+                  id={el?.userBroker?.id}
                   key={el?.id}
                 />
               ))}

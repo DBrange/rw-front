@@ -1,26 +1,25 @@
 import { PrivateRoutes } from "@/models/types/routes";
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
 import { Route, Navigate } from "react-router-dom";
-import {
-  BrokerUser,
-  BrokerClients,
-  BrokerFindClients,
-  BrokerCreateInspection,
-  BrokerCreateReport,
-  BrokerInspections,
-  BrokerReports,
-  BrokerCreateInspectionLink,
-  BrokerCreateReportLink,
-} from ".";
-import {
-  ClientCreateInspection,
-  ClientCreateReport,
-  ClientInspectedCreateReport,
-  ClientInspectionDetail,
-  ClientReportDetail,
-  ClientMyProfile,
-  ClientDetail,
-} from "..";
+import { lazy } from "react";
+
+const BrokerUser = lazy(() => import("./BrokerUser/BrokerUser"));
+const BrokerReports = lazy(() => import("./BrokerReports/BrokerReports"));
+const BrokerClients = lazy(() => import("./BrokerClients/BrokerClients"));
+const ClientDetail = lazy(() => import("../components/ClientDetail/ClientDetail"));
+const BrokerFindClients = lazy(() => import("./BrokerFindClients/BrokerFindClients"));
+const BrokerInspections = lazy(() => import("./BrokerInspections/BrokerInspections"));
+const ClientMyProfile = lazy(() => import("../client/ClientMyProfile/ClientMyProfile"));
+const BrokerCreateReport = lazy(() => import("./BrokerCreateReport/BrokerCreateReport"));
+const ClientReportDetail = lazy(() => import("../client/ClientReportDetail/ClientReportDetail"));
+const ClientCreateReport = lazy(() => import("../client/ClientCreateReport/ClientCreateReport"));
+const BrokerCreateReportLink = lazy(() => import("./BrokerCreateReportLink/BrokerCreateReportLink"));
+const BrokerCreateInspection = lazy(() => import("./BrokerCreateInspection/BrokerCreateInspection"));
+const ClientCreateInspection = lazy(() => import("../client/ClientCreateInspection/ClientCreateInspection"));
+const ClientInspectionDetail = lazy(() => import("../client/ClientInspectionDetail/ClientInspectionDetail"));
+const BrokerCreateInspectionLink = lazy(() => import("./BrokerCreateInspectionLink/BrokerCreateInspectionLink"));
+const ClientInspectedCreateReport = lazy(() => import("../client/ClientInspectedCreateReport/ClientInspectedCreateReport"));
+
 
 function Broker() {
   return (

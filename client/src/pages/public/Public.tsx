@@ -1,8 +1,27 @@
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
 import { Navigate, Route } from "react-router-dom";
-import { AboutUs, ClientCreateInspection, ClientCreateReport, FrequentsQuestions, Home, Inspect, Login, MissPassword, Register, Report, Verified } from "..";
 import { PublicRoutes } from "@/models/types/routes";
-import NotVerified from "./NotVerified/NotVerified";
+import { lazy } from "react";
+
+const Home = lazy(() => import("./Home/Home"));
+const Login = lazy(() => import("./Login/Login"));
+const Report = lazy(() => import("./Report/Report"));
+const AboutUs = lazy(() => import("./AboutUs/AboutUs"));
+const Inspect = lazy(() => import("./Inspect/Inspect"));
+const Register = lazy(() => import("./Register/Register"));
+const Verified = lazy(() => import("./Verified/Verified"));
+const NotVerified = lazy(() => import("./NotVerified/NotVerified"));
+const MissPassword = lazy(() => import("./MissPassword/MissPassword"));
+const FrequentsQuestions = lazy(
+  () => import("./FrequentsQuestions/FrequentsQuestions")
+);
+const ClientCreateReport = lazy(
+  () => import("../private/client/ClientCreateReport/ClientCreateReport")
+);
+const ClientCreateInspection = lazy(
+  () =>
+    import("../private/client/ClientCreateInspection/ClientCreateInspection")
+);
 
 function Public() {
   return (
@@ -27,7 +46,10 @@ function Public() {
         element={<ClientCreateReport />}
       />
       <Route path={`${PublicRoutes.ABOUT_US}`} element={<AboutUs />} />
-      <Route path={`${PublicRoutes.FREQUENT_QUESTIONS}`} element={<FrequentsQuestions />} />
+      <Route
+        path={`${PublicRoutes.FREQUENT_QUESTIONS}`}
+        element={<FrequentsQuestions />}
+      />
       <Route path={`${PublicRoutes.VERIFIED}`} element={<Verified />} />
       <Route path={`${PublicRoutes.NOT_VERIFIED}`} element={<NotVerified />} />
     </RoutesWithNotFound>

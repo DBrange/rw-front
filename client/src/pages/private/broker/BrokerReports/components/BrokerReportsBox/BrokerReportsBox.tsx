@@ -32,7 +32,7 @@ function BrokerReportsBox() {
   } = useBrokerReportsContext();
   const userBroker = useSelector((store: AppStore) => store.user).user
     ?.userBroker;
-  
+
   const cards: JSX.Element = (
     <>
       <ContainerBtnBrokerSelection>
@@ -153,9 +153,7 @@ function BrokerReportsBox() {
             }
           })}
       </InfiniteScroll>
-      {!sinisters?.length && (
-        <>No se han encontrado siniestros</>
-      )}
+      {!sinisters?.length && <>No se han encontrado siniestros</>}
     </>
   );
 

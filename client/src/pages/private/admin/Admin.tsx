@@ -1,18 +1,29 @@
 import { PrivateRoutes } from "@/models/types/routes";
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
+import { lazy } from "react";
 import { Navigate, Route } from "react-router-dom";
 
-import {
-  AdminUser,
-  BrokerDetailAdmin,
-  ClientDetail,
-  ClientInspectionDetail,
-  ClientMyProfile,
-  ClientReportDetail,
-} from "..";
-import { AdminUsers } from "./AdminUsers";
-import { AdminInspections } from "./AdminInspections";
-import AdminReports from "./AdminReports/AdminReports";
+const AdminUser = lazy(() => import("./AdminUser/AdminUser"));
+const AdminUsers = lazy(() => import("./AdminUsers/AdminUsers"));
+const AdminReports = lazy(() => import("./AdminReports/AdminReports"));
+const AdminInspections = lazy(
+  () => import("./AdminInspections/AdminInspections")
+);
+const ClientDetail = lazy(
+  () => import("../components/ClientDetail/ClientDetail")
+);
+const ClientMyProfile = lazy(
+  () => import("../client/ClientMyProfile/ClientMyProfile")
+);
+const BrokerDetailAdmin = lazy(
+  () => import("../components/BrokerDetailAdmin/BrokerDetailAdmin")
+);
+const ClientReportDetail = lazy(
+  () => import("../client/ClientReportDetail/ClientReportDetail")
+);
+const ClientInspectionDetail = lazy(
+  () => import("../client/ClientInspectionDetail/ClientInspectionDetail")
+);
 
 function Admin() {
   return (

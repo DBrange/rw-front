@@ -29,7 +29,7 @@ export const H2BrokerDashboardBox = styled.h2`
 `;
 
 export const BtnBrokerDashboardBox = styled.button`
-  z-index: 0;
+  z-index: 9;
   background-color: ${theme.sColor};
   line-height: 0.85rem;
   border-radius: 0.25rem;
@@ -48,7 +48,7 @@ export const SpanBrokerDashboardBox = styled.span`
   line-height: 40px;
   background-color: ${theme.pColor};
   color: ${theme.textColor};
-  z-index: 20;
+  /* z-index: 20; */
   border-radius: 0.25rem;
   border: 1px solid ${theme.sColor};
   position: absolute;

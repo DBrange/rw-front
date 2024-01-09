@@ -16,14 +16,17 @@ function MessageBtnHeader() {
   const path = useLocation().pathname;
 
   const {
+    isReachedEnd,
+    notifications,
+    setSize,
+    size,
     modal,
-    newNotifications,
     setModal,
     refreshNotifications,
-    setNewNotifications,
+    mutate,
   } = useHeaderContext();
 
-  const notifications = useSelector((store: AppStore) => store.notification);
+  // const notifications = useSelector((store: AppStore) => store.notification);
 
   const newNotification = notifications.filter((el) => !el.isRead).length;
 
@@ -86,7 +89,15 @@ function MessageBtnHeader() {
               </BtnMessageBtnHeader>
             </DivMessageBtnHeader>
           </DivDivMessageBtnHeader>
-          {modal && <NotificationsBox notifications={notifications} />}
+          {modal && (
+            <NotificationsBox
+              notifications={notifications}
+              setSize={setSize}
+              isReachedEnd={isReachedEnd}
+              size={size}
+              mutate={mutate}
+            />
+          )}
         </SectionMessageBtnHeader>
       )}
     </>

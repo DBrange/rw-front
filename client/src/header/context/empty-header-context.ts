@@ -1,19 +1,27 @@
 import { Notification } from "@/models";
+import { KeyedMutator } from "swr";
 
 export interface IHeaderContext {
+  notifications: Notification[];
+  size: number;
+  setSize: (
+    size: number | ((_size: number) => number)
+  ) => Promise<Notification[][] | undefined>;
+  isReachedEnd: boolean | undefined;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  newNotifications: boolean;
-  notifications: Notification[];
-  refreshNotifications: () => void
-  setNewNotifications: React.Dispatch<React.SetStateAction<boolean>>;
+  refreshNotifications: () => void;
+  mutate: any // KeyedMutator<Notification[][]>;
 }
 
 export const emptyHeaderContext: IHeaderContext = {
+  notifications: [],
+  size: 0,
+  setSize: async (_size: number | ((_size: number) => number)) =>
+    Promise.resolve([]),
+  isReachedEnd: false,
   modal: false,
   setModal: () => {},
-  newNotifications: false,
-  notifications: [],
-  refreshNotifications: () => {},
-  setNewNotifications: () => {}
+  refreshNotifications: () => { },
+  mutate: ''
 };
