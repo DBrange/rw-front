@@ -1,6 +1,7 @@
 import { baseUrl } from "@/pages";
 import { loaderImageService, modalSentService, modalEditPassword, modalEditPasswordError, modalToast, modalToastError } from "@/services/sharing-information.service";
 import { NewPassword } from "..";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 
 
 export const UpdatePasswordtUrl = (userId?: string) =>
@@ -19,6 +20,7 @@ export const updatePassword = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 

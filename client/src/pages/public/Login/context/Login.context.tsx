@@ -103,7 +103,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
   useEffect(() => {
     if (Cookies.get(cookieKey)) {
       const data: ClientInfo = JSON.parse(Cookies.get(cookieKey) as string);
-      console.log('esto', data)
+
       if (data.accessToken) {
         dispatch(addClient(data));
         navigate(`/${PrivateRoutes.PRIVATE}`);

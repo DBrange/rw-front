@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, useLocation } from "react-router-dom";
 import {
@@ -12,11 +12,12 @@ import AuthGuard from "./guards/auth.guard";
 import Header from "./header/Header";
 import { PrivateRoutes, PublicRoutes } from "./models/types/routes";
 import { USER_ROLES } from "./models/types/users-roles.type";
-import { Private } from "./pages/private";
-import Public from "./pages/public/Public";
 import { AppStore } from "./redux";
 import { Body, Footer, MainContent } from "./styledComponents";
 import RoutesWithNotFound from "./utilities/routes-with-not-found";
+
+const Public = lazy(() => import("./pages/public/Public"));
+const Private = lazy(() => import("./pages/private/Private"));
 
 function App() {
   const path = useLocation().pathname;

@@ -1,5 +1,6 @@
 import { CreateInspectionValues } from "@/models";
 import { baseUrl } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
 
@@ -19,6 +20,7 @@ export const createAssetInClientUser = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 

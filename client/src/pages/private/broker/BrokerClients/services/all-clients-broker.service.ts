@@ -1,4 +1,5 @@
-import { AllBrokerClients, baseUrl } from "@/pages";
+import { baseUrl, AllBrokerClients } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 
 export const AllBrokerClientsUrl = (
   id?: string,
@@ -9,12 +10,18 @@ export const AllBrokerClientsUrl = (
 ) =>
   baseUrl +
   `/asset/broker-clients/${id}?searchField=${searchField}&typeToFilter=${typeToFilter}&page=${page}&limit=${limit}`;
-
+console.log(accessToken)
 export const allBrokerClients = async (
   url: string
 ): Promise<AllBrokerClients[]> => {
   try {
-    return fetch(url).then((res) => res.json());
+    return fetch(url, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        rw_token: accessToken as string
+      },
+    }).then((res) => res.json());
 
     // if (!response.ok) {
     //   throw new Error(`Request failed with status: ${response.status}`);

@@ -5,11 +5,12 @@ import { AppDispatch, AppStore } from "@/redux";
 import RoutesWithNotFound from "@/utilities/routes-with-not-found";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route } from "react-router-dom";
-import { Client } from ".";
-import { Broker } from "./broker";
-import Admin from "./admin/Admin";
 import { updateTokenAsync } from "@/redux/slices/clientSlice";
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
+
+const Admin = lazy(() => import("./admin/Admin"));
+const Broker = lazy(() => import("./broker/Broker"));
+const Client = lazy(() => import("./client/Client"));
 
 function Private() {
   const path = useSelector((store: AppStore) => store.user.user?.role);

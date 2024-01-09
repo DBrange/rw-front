@@ -1,6 +1,7 @@
 import { baseUrl } from "@/pages";
 import { DashboardInfo } from "../interfaces/dashboard.interface";
 import { Notification } from "@/models";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 
 export const DashBoardInfoUrl = (brokerId?: string, userBrokerId?: string) =>
   baseUrl + `/sinister/dashboard/${brokerId}/${userBrokerId}`;
@@ -9,7 +10,13 @@ export const getDashBoardInfo = async (
   url: string
 ): Promise<DashboardInfo | undefined> => {
   try {
-    return fetch(url).then((res) => res.json());
+    return fetch(url, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        rw_token: accessToken as string,
+      },
+    }).then((res) => res.json());
 
     // if (!response.ok) {
     //   throw new Error(`Request failed with status: ${response.status}`);
@@ -27,7 +34,13 @@ export const getNotifications = async (
   url: string
 ): Promise<Notification[] | []> => {
   try {
-    return fetch(url).then((res) => res.json());
+    return fetch(url, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        rw_token: accessToken as string,
+      },
+    }).then((res) => res.json());
 
     // if (!response.ok) {
     //   throw new Error(`Request failed with status: ${response.status}`);

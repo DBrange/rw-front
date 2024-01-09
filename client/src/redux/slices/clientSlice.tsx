@@ -6,6 +6,7 @@ import {
   UpdateMyProfile,
 } from "@/models/interfaces/userInfo/userInfo.interface";
 import { baseUrl } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 import {
   modalToast,
   modalToastError,
@@ -14,7 +15,6 @@ import { persistLocalStorage, clearLocalStorage } from "@/utilities";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
-
 
 export const EmptyUserState: ClientInfo = {
   accessToken: undefined,
@@ -172,12 +172,24 @@ export const clientSlice = createSlice({
   },
 });
 
+const config = {
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+    rw_token: accessToken as string,
+  },
+};
+
 export const updateLastRecordAsync = createAsyncThunk(
-  "notification/updateLastRecord",
+  "client/updateLastRecord",
   async (userId?: string) => {
     try {
       const date = new Date().toISOString();
-      await axios.post(`${baseUrl}/user/last-record/${userId}?date=${date}`);
+      await axios.post(
+        `${baseUrl}/user/last-record/${userId}?date=${date}`,
+        null,
+        config
+      );
       return date;
     } catch (err) {
       console.log(err);
@@ -186,11 +198,12 @@ export const updateLastRecordAsync = createAsyncThunk(
 );
 
 export const updateMyProfileAsync = createAsyncThunk(
-  "notification/updateMyProfileAsync",
+  "client/updateMyProfileAsync",
   async ({ userId, phoneNumber, address }: UpdateMyProfile) => {
     try {
       await axios(
-        `${baseUrl}/user/profile/${userId}?phoneNumber=${phoneNumber}&address=${address}`
+        `${baseUrl}/user/profile/${userId}?phoneNumber=${phoneNumber}&address=${address}`,
+        config
       );
       modalToast.setSubject(true);
       return { userId, phoneNumber, address };
@@ -201,15 +214,16 @@ export const updateMyProfileAsync = createAsyncThunk(
 );
 
 export const updateTokenAsync = createAsyncThunk(
-  "notification/updateTokenAsync",
+  "client/updateTokenAsync",
   async (id: string) => {
     try {
-      const newToken: RefreshToken = await axios(
-        `${baseUrl}/auth/refresh-token/${id}`
+      const newToken = await axios.post(
+        `${baseUrl}/auth/refresh-token/${id}`,
+        null,
+        config
       );
       // modalToast.setSubject(true);
-
-      return newToken;
+      return newToken.data;
     } catch (error) {
       // modalToastError.setSubject(true);
     }
@@ -217,11 +231,13 @@ export const updateTokenAsync = createAsyncThunk(
 );
 
 export const addBrokerAsync = createAsyncThunk(
-  "notification/addBrokerAsync",
+  "client/addBrokerAsync",
   async ({ clientId, userBrokerId }: Ids) => {
     try {
       const brokers = await axios.post(
-        `${baseUrl}/user-in-broker/${userBrokerId}/${clientId}`
+        `${baseUrl}/user-in-broker/${userBrokerId}/${clientId}`,
+        null,
+        config
       );
       return brokers.data;
     } catch (error) {
@@ -231,15 +247,18 @@ export const addBrokerAsync = createAsyncThunk(
 );
 
 export const deleteBrokerAsync = createAsyncThunk(
-  "notification/deleteBrokerAsync",
+  "client/deleteBrokerAsync",
   async ({ clientId, userBrokerId }: Ids) => {
     try {
       console.log(clientId, userBrokerId);
-      await axios.post(`${baseUrl}/user/delete-broker/${clientId}/${userBrokerId}`);
+      await axios.post(
+        `${baseUrl}/user/delete-broker/${clientId}/${userBrokerId}`,
+        null,
+        config
+      );
       modalToast.setSubject(true);
       return { clientId, userBrokerId };
     } catch (error) {
-      
       modalToastError.setSubject(true);
       console.log(error);
     }

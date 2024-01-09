@@ -25,7 +25,6 @@ export const BrokerFindClientsProvider = ({ children }: ChildrenType) => {
   const [searchField, setSearchField] = useState<string>("");
   const [modalActive, setModalActive] = useState<boolean>(false);
   // const [client, setClient] = useState<ClientByEmail | undefined | void>();
-
   const user = useSelector((store: AppStore) => store.user);
 
   const { data: client, trigger } = useSWRMutation(

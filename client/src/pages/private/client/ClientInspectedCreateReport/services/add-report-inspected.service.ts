@@ -1,5 +1,6 @@
 import { TheftType, FireType, CrashType, DamageType } from "@/models/interfaces/add-report-in-inspection.interface";
 import { baseUrl } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 import { loaderImageService, modalSentService } from "@/services/sharing-information.service";
 
 
@@ -22,6 +23,7 @@ export const addReportTheft = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 
@@ -55,6 +57,7 @@ export const addReportDamage = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 
@@ -88,6 +91,7 @@ export const addReportFire = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 
@@ -118,6 +122,7 @@ export const addReportCrash = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 

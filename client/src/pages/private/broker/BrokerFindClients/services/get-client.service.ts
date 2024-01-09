@@ -1,4 +1,5 @@
 import { AllBrokerClients, ClientByEmail, baseUrl } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 import { loaderImageService } from "@/services/sharing-information.service";
 
 export const sendNotificationUrl = () => baseUrl + `/user-in-broker`;
@@ -15,6 +16,7 @@ export const sendNotification = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string
       },
     });
 

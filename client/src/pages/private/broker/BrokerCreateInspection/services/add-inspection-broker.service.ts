@@ -1,4 +1,5 @@
 import { AllBrokerClients, baseUrl } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 
 
 export const AllBrokerClientsForCreateInspectionUrl = (
@@ -15,7 +16,13 @@ export const allBrokerClientsForCreateInspection = async (
   url: string
 ): Promise<AllBrokerClients[]> => {
   try {
-    return fetch(url).then((res) => {
+    return fetch(url, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        rw_token: accessToken as string,
+      },
+    }).then((res) => {
       return res.json();
     });
 

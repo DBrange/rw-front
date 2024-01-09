@@ -1,5 +1,6 @@
-import { Ids, Notification } from "@/models";
+import { Notification } from "@/models";
 import { baseUrl } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -47,12 +48,21 @@ export const notificationSlice = createSlice({
   },
 });
 
+const config = {
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+    rw_token: accessToken as string,
+  },
+};
+
 export const addNotificationsAsync = createAsyncThunk(
   "notification/addNotificationsAsync",
   async (userId: string | undefined) => {
     try {
       const notifications = await axios(
-        `${baseUrl}/user/notifications/${userId}?page=${1}&limit=${20}`
+        `${baseUrl}/user/notifications/${userId}?page=${1}&limit=${20}`,
+        config
       );
       return notifications.data;
     } catch (error) {
@@ -65,7 +75,7 @@ export const addNewNotificationAsync = createAsyncThunk(
   "notification/addNewNotificationAsync",
   async (notification: Notification) => {
     try {
-      await axios.post(`${baseUrl}/user-in-broker`, notification);
+      await axios.post(`${baseUrl}/user-in-broker`, notification, config);
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +89,7 @@ export const updateNotificationAsync = createAsyncThunk(
     try {
       await axios.put(
         `${baseUrl}/notification/${id}`,
-        notification
+        notification,config
       );
       notification.mutate()
     } catch (error) {
@@ -91,7 +101,7 @@ export const updateNotificationAllReadAsync = createAsyncThunk(
   "notification/updateNotificationAllReadAsync",
   async (userId?: string) => {
     try {
-      const notis = await axios(`${baseUrl}/asset/all-read/${userId}`);
+      const notis = await axios(`${baseUrl}/asset/all-read/${userId}`, config);
       return notis.data;
     } catch (error) {
       console.log(error);

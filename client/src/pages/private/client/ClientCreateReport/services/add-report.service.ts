@@ -5,6 +5,7 @@ import {
   VehicleTheftType,
 } from "@/models/interfaces/add-report.interface";
 import { baseUrl } from "@/pages";
+import { accessToken } from "@/pages/private/utilities/accesToken.utility";
 import {
   loaderImageService,
   modalSentService,
@@ -12,7 +13,7 @@ import {
 
 export const reportInClientUserTheftUrl = (
   brokerId?: string,
-  clientId?: string,
+  clientId?: string
 ) => `${baseUrl}/sinister/theft/${brokerId}/${clientId}`;
 
 export const addReportVehicleTheft = async (
@@ -28,6 +29,7 @@ export const addReportVehicleTheft = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 
@@ -44,7 +46,7 @@ export const addReportVehicleTheft = async (
 
 export const reportInClientUserDamageUrl = (
   brokerId?: string,
-  clientId?: string,
+  clientId?: string
 ) => `${baseUrl}/sinister/damage/${brokerId}/${clientId}`;
 
 export const addReportVehicleDamage = async (
@@ -60,6 +62,7 @@ export const addReportVehicleDamage = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 
@@ -74,8 +77,10 @@ export const addReportVehicleDamage = async (
   }
 };
 
-export const reportInClientUserFireUrl = (brokerId?: string, clientId?: string) =>
-  `${baseUrl}/sinister/fire/${brokerId}/${clientId}`;
+export const reportInClientUserFireUrl = (
+  brokerId?: string,
+  clientId?: string
+) => `${baseUrl}/sinister/fire/${brokerId}/${clientId}`;
 
 export const addReportVehicleFire = async (
   url: string,
@@ -90,6 +95,7 @@ export const addReportVehicleFire = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 
@@ -104,8 +110,10 @@ export const addReportVehicleFire = async (
   }
 };
 
-export const reportInClientUserCrashUrl = (brokerId?: string, clientId?: string) =>
-  `${baseUrl}/sinister/crash/${brokerId}/${clientId}`;
+export const reportInClientUserCrashUrl = (
+  brokerId?: string,
+  clientId?: string
+) => `${baseUrl}/sinister/crash/${brokerId}/${clientId}`;
 
 export const addReportVehicleCrash = async (
   url: string,
@@ -120,6 +128,7 @@ export const addReportVehicleCrash = async (
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        rw_token: accessToken as string,
       },
     });
 
