@@ -1,10 +1,15 @@
+import { resetClient } from "@/redux/slices/clientSlice";
 import { CgLogOut } from "react-icons/cg";
+import { useDispatch } from "react-redux";
 import { LiSidebarItem } from "..";
-import { clearLocalStorage } from "@/utilities";
-import { clientKey } from "@/redux/slices/clientSlice";
 
 function LogOut() {
-  const logOut = () => { clearLocalStorage(clientKey) }
+  const dispatch = useDispatch()
+  
+  const logOut = () => {
+    dispatch(resetClient())
+  }
+  
   return (
     <LiSidebarItem $active={false} onClick={logOut}>
       <CgLogOut size={20} />

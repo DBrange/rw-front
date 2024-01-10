@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IHeaderContext, emptyHeaderContext } from "./empty-header-context";
 import { Notification } from "@/models";
 import HeaderHook from "../utilities/header.hook";
+import { notificationsModal } from "@/services/sharing-information.service";
 
 export const HeaderContext = createContext<IHeaderContext>(emptyHeaderContext);
 
@@ -29,6 +30,7 @@ export const HeaderProvider = ({ children }: ChildrenType) => {
   //   };
 
   const refreshNotifications = () => {
+    console.log('holis')
     dispatchAsync(addNotificationsAsync(user.user?.id));
     const s = notifications.map((el) => el.isRead).some((el) => !el);
     // if (s) setNewNotifications(true);
@@ -36,16 +38,21 @@ export const HeaderProvider = ({ children }: ChildrenType) => {
     mutate()
   };
 
-  //   useEffect(() => {
-  //   refreshNotifications2()
-  // },[])
+    useEffect(() => {
+    notificationsModal.getSubject.subscribe(bol => setModal(bol))
+    }, [])
+  
+    useEffect(() => {
+    refreshNotifications()
+  },[modal])
 
   const {
     paginatedData: notifications,
     isReachedEnd,
     setSize,
     size,
-    mutate
+    mutate,
+    isLoading,
   } = HeaderHook<Notification>();
 
   //   useEffect(() => {
@@ -60,7 +67,8 @@ export const HeaderProvider = ({ children }: ChildrenType) => {
     modal,
     setModal,
     refreshNotifications,
-    mutate
+    mutate,
+    isLoading,
   };
 
   return (

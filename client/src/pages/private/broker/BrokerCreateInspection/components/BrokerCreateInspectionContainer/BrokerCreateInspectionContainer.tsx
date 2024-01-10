@@ -1,10 +1,9 @@
-import { LoaderImages, ModalNotAccess } from "@/components";
+import { LoaderImages } from "@/components";
 import {
   loaderImageService,
 } from "@/services/sharing-information.service";
-import { Container } from "@/styledComponents";
+import { ContainerLogin } from "@/styledComponents";
 import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
 
 function BrokerCreateInspectionContainer({
   children,
@@ -13,17 +12,17 @@ function BrokerCreateInspectionContainer({
 }) {
   // const { formNotFound } = useBrokerCreateInspectionContext();
   const [loaderImages, setLoaderImages] = useState<boolean>(false);
-const isMobile = useMediaQuery({ maxWidth: 768 });
+// const isMobile = useMediaQuery({ maxWidth: 768 });
   useEffect(() => {
     loaderImageService.getSubject.subscribe((bol) => setLoaderImages(bol));
   }, []);
 
   return (
     <>
-      {!isMobile && <ModalNotAccess />}
+      {/* {!isMobile && <ModalNotAccess />} */}
       <LoaderImages modalActive={loaderImages} />
       {/* <ModalError modalActive={formNotFound} /> */}
-      <Container>{children}</Container>
+      <ContainerLogin>{children}</ContainerLogin>
     </>
   );
 }

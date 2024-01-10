@@ -85,13 +85,17 @@ export const addNewNotificationAsync = createAsyncThunk(
 export const updateNotificationAsync = createAsyncThunk(
   "notification/updateNotificationAsync",
   async (notification: Notification & { mutate: any }) => {
-    const {mutate,id, ...rest} = notification
+    const { mutate, ...rest } = notification;
+    const notificationId = notification.id
+    console.log()
     try {
       await axios.put(
-        `${baseUrl}/notification/${id}`,
-        notification,config
+        `${baseUrl}/notification/${notificationId}`,
+        {...rest},
+        config
       );
-      notification.mutate()
+      notification.mutate();
+      
     } catch (error) {
       console.log(error);
     }

@@ -13,6 +13,8 @@ export function CircularGraph({ info, labels }: Props) {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,

@@ -23,6 +23,7 @@ export const DivContentTitleBrokerDashboardBox = styled.h2`
   justify-content: space-between;
   padding: 0 0px 20px 0px;
   z-index: 20;
+
 `;
 export const H2BrokerDashboardBox = styled.h2`
   color: ${theme.sColor};
@@ -54,6 +55,10 @@ export const SpanBrokerDashboardBox = styled.span`
   position: absolute;
   top: 30px;
   right: 0;
+
+  &:hover {
+    background-color: #444;
+  }
 `;
 
 export const DivBtnsBrokerDashboardBox = styled.div`
@@ -62,6 +67,10 @@ export const DivBtnsBrokerDashboardBox = styled.div`
   gap: 1rem;
   flex-direction: column;
   justify-content: space-evenly;
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+  }
 `;
 export const BtnLinkBrokerDashboardBox = styled(Link)`
   color: ${theme.pColor};
@@ -76,6 +85,7 @@ export const BtnLinkBrokerDashboardBox = styled(Link)`
   padding: 0.5rem;
   cursor: pointer;
   text-decoration: none;
+  width: 100%;
 
   &:hover {
     transform: translateY(-1px);

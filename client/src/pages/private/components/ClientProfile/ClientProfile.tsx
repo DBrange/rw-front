@@ -1,5 +1,5 @@
 import { FormContent, FormToOpen } from "@/components";
-import { ClickEventType } from "@/pages";
+import { BoxQuestion, ClickEventType } from "@/pages";
 import { AccordionContainer } from "@/styledComponents";
 import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
@@ -131,12 +131,14 @@ function ClientProfile({ data }: Props) {
         </DivInformationProfileDetail>
       </DivInformationMyProfile>
       <DivClientProfile>
-        <TitleClientProfile $open={!!open.inspection}>
-          <h2>Inspecciones</h2>{" "}
+        <BoxQuestion $open={!!open.inspection}>
           <button value={"inspection"} onClick={(e) => selectOpen(e)}>
-            <MdOutlineArrowForwardIos size={20} />
+            <h2>Inspecciones</h2>
+            <i>
+              <MdOutlineArrowForwardIos size={20} />
+            </i>
           </button>
-        </TitleClientProfile>
+        </BoxQuestion>
         <AccordionContainer $speed checked={open.inspection} $openclose>
           <FormToOpen>
             <FormContent>
@@ -164,19 +166,21 @@ function ClientProfile({ data }: Props) {
                         />
                       );
                     } else {
-                      return [];
+                      return <>No se han encontrado inspecciones</>;
                     }
                   })}
               </SectionCard>
             </FormContent>
           </FormToOpen>
         </AccordionContainer>
-        <TitleClientProfile $open={!!open.sinister}>
-          <h2>Siniestros</h2>{" "}
+        <BoxQuestion $open={!!open.sinister}>
           <button value={"sinister"} onClick={(e) => selectOpen(e)}>
-            <MdOutlineArrowForwardIos size={20} />
+            <h2>Siniestros</h2>{" "}
+            <i>
+              <MdOutlineArrowForwardIos size={20} />
+            </i>
           </button>
-        </TitleClientProfile>
+        </BoxQuestion>
         <AccordionContainer $speed checked={open.sinister} $openclose>
           <FormToOpen>
             <FormContent>
@@ -206,7 +210,7 @@ function ClientProfile({ data }: Props) {
                         />
                       );
                     } else {
-                      return [];
+                      return <>No se han encontrado siniestros</>;
                     }
                   })}
               </SectionCard>

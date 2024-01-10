@@ -1,18 +1,15 @@
 import { useBrokerFindClientsContext } from "@/pages";
-import { AppDispatch } from "@/redux";
 import { modalSendRequest, modalToast } from "@/services/sharing-information.service";
-import { useDispatch } from "react-redux";
 import { SectionModalBg } from "..";
 import {
   BtnModalSendRequest,
   ConstainerInfoModalSendRequest,
-  ContainerMiniModal,
   DivModalSendRequestSent,
   InfoModalSendRequest,
+  InfoWrappedModalSendRequest,
   LabelInfoModalSendRequest,
-  TitleModalSendRequest,
+  TitleModalSendRequest
 } from "./ModalSendRequest.styled";
-import { useState } from "react";
 
 interface Props {
   modalActive: boolean;
@@ -56,10 +53,10 @@ function ModalSendRequest({
         <TitleModalSendRequest>Cliente</TitleModalSendRequest>
         <ConstainerInfoModalSendRequest>
           {email && (
-            <div>
+            <InfoWrappedModalSendRequest>
               <LabelInfoModalSendRequest>Email:</LabelInfoModalSendRequest>{" "}
               <InfoModalSendRequest>{email}</InfoModalSendRequest>
-            </div>
+            </InfoWrappedModalSendRequest>
           )}
           {dni && (
             <div>

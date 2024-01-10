@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const SectionLoginBox = styled.section`
-height: 84vh;
+min-height: 84vh;
   /* display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,7 @@ height: 84vh;
 `
 
 export const DivBtnLogin = styled.div`
-margin-top: 3rem;
+margin-top: 6rem;
 width: 100%;
 /* background-color: transparent; */
 `
@@ -98,4 +98,9 @@ border: none;
     border-radius: 100%;
     padding: .4rem;
   } */
+`;
+
+export const FormLoginTitle = styled.h2`
+  margin-bottom: 4rem;
+  color: ${theme.sColor};
 `;

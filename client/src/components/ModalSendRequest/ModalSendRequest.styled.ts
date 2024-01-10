@@ -6,7 +6,7 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 align-items: flex-start;
-gap: 10px;
+gap: 2rem;
 `
 export const LabelInfoModalSendRequest = styled.h4`
 display: inline-block;
@@ -16,16 +16,15 @@ display: inline-block;
 `
 
 export const TitleModalSendRequest = styled.h3<{ $error?: boolean }>`
-  margin-bottom: 1.25rem;
+  margin-bottom: 3rem;
   text-align: start;
   color: ${theme.sColor}
 `;
 
 export const BtnModalSendRequest = styled.button<{ $error?: boolean }>`
   cursor: pointer;
-  width: 70%;
-  max-width: 200px;
-  align-items: flex-end;
+  width: 100%;
+  align-items: center;
   height: 2rem;
   margin-top: 2rem;
   border-radius: 0.75rem;
@@ -38,14 +37,18 @@ export const BtnModalSendRequest = styled.button<{ $error?: boolean }>`
     transform: translateY(0.25rem);
   }
   ${({ $error }) => ($error ? `color: ${theme.errBgColor}` : "")}
+
+  @media (min-width: 800px) {
+    max-width: 200px;
+  }
 `;
 
 export const DivModalSendRequestSent = styled.div<{
   $modalActive: boolean;
   $error?: boolean;
 }>`
-  width: 300px;
-  /* max-width: 500px; */
+  width: 90%;
+  max-width: 700px;
   background-color: ${({ $error }) =>
     $error ? `${theme.errBgColor}` : `${theme.pColor}`};
   border-radius: 0.375rem;
@@ -61,3 +64,9 @@ export const ContainerMiniModal = styled.div<{$time: number}>`
   visibility: ${({ $time }) => $time ? 'visible' : 'hidden'};
   transition: opacity 2s ease-in-out; 
 `;
+
+export const InfoWrappedModalSendRequest = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 5px;
+`

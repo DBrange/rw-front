@@ -2,6 +2,7 @@ import { PublicRoutes } from "@/models/types/routes";
 import { LinkNavigate, theme } from "@/styledComponents";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { BoxBtnsLogin } from "./LoginBtn.styled";
 
 const BtnLogin = styled.button`
   padding: 0.5rem 2rem;
@@ -30,12 +31,16 @@ function LoginBtn() {
         path === "/public/no-verificado" ||
         path === "/public/preguntas-frecuentes" ||
         path === "/public/sobre-nosotros" ||
-        path === "/public/contraseña"
+        path === "/public/nueva-clave"
       ) && (
+        <BoxBtnsLogin>
         <LinkNavigate to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.LOGIN}`}>
           <BtnLogin>Login</BtnLogin>
         </LinkNavigate>
-      )}
+        {/* <LinkNavigate to={`/${PublicRoutes.PUBLIC}/${PublicRoutes.LOGIN}`}>
+          <BtnLogin>Registrarse</BtnLogin>
+        </LinkNavigate> */}
+      </BoxBtnsLogin>)}
     </>
   );
 }

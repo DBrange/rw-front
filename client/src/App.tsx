@@ -30,7 +30,7 @@ function App() {
         <ModalToastError />
         <Header />
         <MainContent>
-          <MessageBtn />
+          {/* <MessageBtn /> */}
           <RoutesWithNotFound>
             {/* <Route
               path={`${PublicRoutes.PUBLIC}/payment`}
@@ -66,7 +66,7 @@ function App() {
             path === "/public/inspeccionar" ||
             path === "/public/login" ||
             path === "/public/registrarse" ||
-            path === "/public/contraseña"
+            path === "/public/nueva-clave"
           )
         }
       >

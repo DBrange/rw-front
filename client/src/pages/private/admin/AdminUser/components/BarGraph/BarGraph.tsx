@@ -38,6 +38,7 @@ export function BarGraph({ info, type }: Props) {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,

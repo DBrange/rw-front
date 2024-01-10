@@ -4,7 +4,7 @@ import {
   GraphTypeEnum,
   useAdminUserContext
 } from "../..";
-import { SectionAdminDashboard } from "./AdminDashboardBox.styled";
+import { DivGraphBox, SectionAdminDashboard } from "./AdminDashboardBox.styled";
 
 function AdminDashboardBox() {
   const {
@@ -24,6 +24,7 @@ function AdminDashboardBox() {
 
   return (
     <SectionAdminDashboard>
+
       <GraphBox
         isActiveGraphTypeLine={graphType.income === GraphTypeEnum.LINE}
         isActiveGraphTypeBar={graphType.income === GraphTypeEnum.BAR}

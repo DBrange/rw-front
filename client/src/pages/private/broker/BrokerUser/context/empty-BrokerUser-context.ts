@@ -17,6 +17,7 @@ export interface IBrokerUserContext {
   >;
 
   changeBtnActive: (value: string) => void;
+  isLoading: boolean
 }
 
 export const emptyBrokerUserContext: IBrokerUserContext = {
@@ -29,4 +30,5 @@ export const emptyBrokerUserContext: IBrokerUserContext = {
   },
   setButtonActive: () => {},
   changeBtnActive: () => {},
+  isLoading: false
 };

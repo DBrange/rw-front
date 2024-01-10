@@ -1,5 +1,5 @@
 import { FormContent, FormToOpen } from "@/components";
-import { ClickEventType } from "@/pages";
+import { BoxQuestion, ClickEventType } from "@/pages";
 import { AccordionContainer } from "@/styledComponents";
 import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
@@ -23,7 +23,10 @@ import {
   SectionMyProfile,
   TitleName,
 } from "../MiProfile/MiProfile.styled";
-import { DivClientProfile, TitleClientProfile } from "../ClientProfile/ClientProfile.styled";
+import {
+  DivClientProfile,
+  TitleClientProfile,
+} from "../ClientProfile/ClientProfile.styled";
 
 interface Props {
   data: BrokerDetailInBroker | undefined;
@@ -33,7 +36,7 @@ function BrokerProfile({ data }: Props) {
   const [open, setOpen] = useState<any>({
     inspection: false,
     sinister: false,
-    client: false
+    client: false,
   });
 
   const selectOpen = (e: ClickEventType) => {
@@ -90,16 +93,15 @@ function BrokerProfile({ data }: Props) {
       <DivInformationMyProfile>
         {data?.brokerUser && (
           <>
-            {data?.brokerUser.map(el => (
-
-            <DivInformationProfileDetail>
-              <h4>Broker</h4>
-              <p>
-                {el?.personalUser
-                  ? `${el?.personalUser.name} ${el?.personalUser.lastName}`
-                  : `${el?.legalUser?.companyName}`}
-              </p>
-            </DivInformationProfileDetail>
+            {data?.brokerUser.map((el) => (
+              <DivInformationProfileDetail>
+                <h4>Broker</h4>
+                <p>
+                  {el?.personalUser
+                    ? `${el?.personalUser.name} ${el?.personalUser.lastName}`
+                    : `${el?.legalUser?.companyName}`}
+                </p>
+              </DivInformationProfileDetail>
             ))}
           </>
         )}
@@ -141,12 +143,14 @@ function BrokerProfile({ data }: Props) {
       <DivClientProfile>
         {data?.userBroker ? (
           <>
-            <TitleClientProfile $open={!!open.client}>
-              <h2>Clientes</h2>
+            <BoxQuestion $open={!!open.client}>
               <button value={"client"} onClick={(e) => selectOpen(e)}>
-                <MdOutlineArrowForwardIos size={20} />
+                <h2>Clientes</h2>
+                <i>
+                  <MdOutlineArrowForwardIos size={20} />
+                </i>
               </button>
-            </TitleClientProfile>
+            </BoxQuestion>
             <AccordionContainer $speed checked={open.client} $openclose>
               <FormToOpen>
                 <FormContent>
@@ -180,12 +184,14 @@ function BrokerProfile({ data }: Props) {
                 </FormContent>
               </FormToOpen>
             </AccordionContainer>
-            <TitleClientProfile $open={!!open.inspection}>
-              <h2>Inspecciones</h2>{" "}
+            <BoxQuestion $open={!!open.inspection}>
               <button value={"inspection"} onClick={(e) => selectOpen(e)}>
-                <MdOutlineArrowForwardIos size={20} />
+                <h2>Inspecciones</h2>
+                <i>
+                  <MdOutlineArrowForwardIos size={20} />
+                </i>
               </button>
-            </TitleClientProfile>
+            </BoxQuestion>
             <AccordionContainer $speed checked={open.inspection} $openclose>
               <FormToOpen>
                 <FormContent>
@@ -225,12 +231,14 @@ function BrokerProfile({ data }: Props) {
           <></>
         )}
 
-        <TitleClientProfile $open={!!open.sinister}>
-          <h2>Siniestros</h2>{" "}
+        <BoxQuestion $open={!!open.sinister}>
           <button value={"sinister"} onClick={(e) => selectOpen(e)}>
-            <MdOutlineArrowForwardIos size={20} />
+            <h2>Siniestros</h2>
+            <i>
+              <MdOutlineArrowForwardIos size={20} />
+            </i>
           </button>
-        </TitleClientProfile>
+        </BoxQuestion>
         <AccordionContainer $speed checked={open.sinister} $openclose>
           <FormToOpen>
             <FormContent>

@@ -10,7 +10,7 @@ export const AllBrokerClientsUrl = (
 ) =>
   baseUrl +
   `/asset/broker-clients/${id}?searchField=${searchField}&typeToFilter=${typeToFilter}&page=${page}&limit=${limit}`;
-console.log(accessToken)
+
 export const allBrokerClients = async (
   url: string
 ): Promise<AllBrokerClients[]> => {

@@ -1,7 +1,7 @@
 import { FormInput, FormInputPassword, FormTitle } from "@/components";
 import { PublicRoutes } from "@/models/types/routes";
 import { ChangeEventType, useLoginContext } from "@/pages";
-import { clientKey } from "@/redux/slices/clientSlice";
+import { addClient, clientKey } from "@/redux/slices/clientSlice";
 import { Form } from "@/styledComponents";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -10,11 +10,13 @@ import {
   DivBtnLogin,
   DivKeepLoggedIn,
   DivNoRegister,
+  FormLoginTitle,
   H6NoRegister,
   PNotFound,
   SectionLoginBox,
   SpanNoRegister,
 } from "./LoginBox.styled";
+import { useDispatch } from "react-redux";
 
 function LoginBox() {
   const {
@@ -52,16 +54,20 @@ function LoginBox() {
       };
     }
   };
+const dispatch = useDispatch()
+window.addEventListener("message", (event) => {
+  if (event.data.type === "loginComplete") {
+    const loginGoogleData = event.data.data;
+    console.log(loginGoogleData);
+    // Almacena los datos en el localStorage
+    dispatch(addClient(loginGoogleData));
+    // localStorage.setItem("client", JSON.stringify(loginGoogleData));
+    
+    // Realiza la redirección o acciones adicionales según sea necesario
+    // window.location.href = `http://localhost:5173/public/login`;
+  }
+});
 
-  window.addEventListener("message", (event) => {
-    if (event.data.type === "loginComplete") {
-      const loginGoogleData = event.data.data;
-
-      // Realiza la redirección en la ventana principal
-      // Puedes usar el enlace proporcionado o cualquier otra lógica de redirección
-      window.location.href = `http://localhost:5173/public/login`;
-    }
-  });
   const nose = (e: ChangeEventType) => {
     changeSession(e);
     // setKeepLoggedIn((el) => !el);
@@ -96,7 +102,7 @@ function LoginBox() {
         Google
       </a> */}
       <SectionLoginBox>
-        <FormTitle>Ingresa a tu perfil</FormTitle>
+        <FormLoginTitle>Ingresa a tu perfil</FormLoginTitle>
         <FormInput
           label="Email"
           value={inputValues.email}

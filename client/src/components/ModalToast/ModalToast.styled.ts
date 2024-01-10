@@ -29,6 +29,7 @@ export const DivModalToast = styled.div<{ $visible: boolean }>`
   justify-content: center;
   gap: 1rem;
   width: 90%;
+  max-width: 600px;
   padding: 1rem 2rem;
   background-color: ${theme.pColor};
   border: 2px solid ${theme.sColor};
@@ -49,11 +50,15 @@ export const DivModalToast = styled.div<{ $visible: boolean }>`
           ${$visible ? fadeIn : fadeOut} 0s ease-in-out
         `};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  z-index: ${({ $visible }) => ($visible ? 1000 : 0)};
+  z-index: ${({ $visible }) => ($visible ? 1000 : -1)};
 
   p {
     font-size: 0.7rem;
   }
+
+    @media (min-width: 800px) {
+
+    }
 `;
 
 export const IToast = styled.i<{ $green?: boolean }>`

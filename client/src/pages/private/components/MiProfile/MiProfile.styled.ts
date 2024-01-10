@@ -21,6 +21,10 @@ export const TitleName = styled.div`
   font-size: 2rem;
   align-items: flex-start;
   color: ${theme.sColor};
+
+  @media (min-width: 800px) {
+    margin-bottom: 6rem;
+  }
 `;
 
 export const H2NameLastname = styled.h2`
@@ -33,6 +37,14 @@ export const DivInformationMyProfile = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  flex-wrap: wrap;
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+    justify-content: space-between;
+    row-gap: 5rem;
+    
+  }
 `;
 
 export const DivInformationProfileDetail = styled.div`
@@ -41,6 +53,10 @@ export const DivInformationProfileDetail = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
+
+  @media (min-width: 800px) {
+    width: 40%;
+  }
 `;
 
 export const DivInformationDetail = styled.div`
@@ -93,6 +109,8 @@ export const DivCardCards = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
+  
   h4 {
     margin-bottom: 0.5rem;
   }

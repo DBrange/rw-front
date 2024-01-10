@@ -1,22 +1,17 @@
-import { LinkNavigate } from "@/styledComponents";
+import { AppDispatch, AppStore } from "@/redux";
+import { deleteBrokerAsync } from "@/redux/slices/clientSlice";
+import { modalDeleteBroker } from "@/services/sharing-information.service";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  BtnModal,
   DivModalSent,
   H3Modal,
-  H4Modal,
-  ImgModal,
-  SectionModalBg,
+  SectionModalBg
 } from "..";
-import error from "../../../assets/error.svg";
 import {
   BtnModalDeleteBroker,
   DivBtnsModalDeleteBroker,
 } from "./ModalDeleteBroker.styled";
-import { AppDispatch, AppStore } from "@/redux";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteBrokerAsync } from "@/redux/slices/clientSlice";
-import { useNavigate, useParams } from "react-router-dom";
-import { modalDeleteBroker } from "@/services/sharing-information.service";
 
 function ModalDeleteBroker({ modalActive }: { modalActive: boolean }) {
   const user = useSelector((store: AppStore) => store.user);

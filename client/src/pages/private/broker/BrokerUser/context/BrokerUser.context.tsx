@@ -58,7 +58,7 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
   //   getNotifications
   // );
 
-  const { data: dashboardData } = useSWR(
+  const { data: dashboardData,isLoading } = useSWR(
     DashBoardInfoUrl(user.user?.id, user.user?.userBroker?.id),
     getDashBoardInfo
   );
@@ -98,6 +98,7 @@ export const BrokerUserProvider = ({ children }: ChildrenType) => {
     buttonActive,
     setButtonActive,
     changeBtnActive,
+    isLoading,
   };
 
   return (

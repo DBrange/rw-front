@@ -3,7 +3,7 @@ import { PrivateRoutes } from "@/models/types/routes";
 import { AppDispatch, AppStore } from "@/redux";
 import { resetClient } from "@/redux/slices/clientSlice";
 import { addNotificationsAsync } from "@/redux/slices/notificationSlice";
-import { sidebarService } from "@/services/sharing-information.service";
+import { notificationsModal, sidebarService } from "@/services/sharing-information.service";
 import { LinkNavigate } from "@/styledComponents";
 import { useEffect, useState } from "react";
 import { BsFillPersonFill, BsShieldCheck } from "react-icons/bs";
@@ -38,6 +38,7 @@ function Sidebar() {
 
   const toggleSidebar = () => {
     sidebarService.setSubject(!stateOfSidebar);
+    
     setStateOfSidebar(!stateOfSidebar);
   };
 
@@ -50,6 +51,7 @@ function Sidebar() {
   const notis = () => {
     dispatchAsync(addNotificationsAsync(user.user?.id));
     sidebarService.setSubject(false);
+    notificationsModal.setSubject(false);
   };
 
   return (

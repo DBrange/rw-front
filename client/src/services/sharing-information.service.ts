@@ -13,3 +13,4 @@ export const modalImage = new SubjectManager<boolean>();
 export const modalDeleteBroker = new SubjectManager<boolean>();
 export const loaderImageService = new SubjectManager<boolean>();
 export const sidebarService = new SubjectManager<boolean>();
+export const notificationsModal = new SubjectManager<boolean>();

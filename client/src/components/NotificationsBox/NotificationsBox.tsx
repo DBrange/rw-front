@@ -3,48 +3,51 @@ import { useCallback, useEffect, useRef } from "react";
 import NotificationCard from "../NotificationCard/NotificationCard";
 import {
   DivNotificationsBox,
+  DivNotificationsBoxLoader,
   H3NotificationBox,
   PEmptyNotifications,
   SectionNotificationsBox,
 } from "./NotificationsBox.styled";
+import { useHeaderContext } from "@/header";
+import { Loader } from "..";
 
 interface Props {
   notifications: Notification[];
-  setSize: any
-  isReachedEnd: any
-  size: any
-  mutate: any
 }
 
-function NotificationsBox({ notifications,setSize,size,mutate }: Props) {
+function NotificationsBox({ notifications }: Props) {
+  const { isReachedEnd, setSize, size, mutate, isLoading } = useHeaderContext();
+
   const date = (date: Date) => new Date(date).getTime();
 
-  const divRef = useRef<HTMLDivElement>(null);
+  // const divRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = useCallback(() => {
-    if (divRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = divRef.current;
+  // const handleScroll = useCallback(() => {
+  //   if (divRef.current) {
+  //     const { scrollTop, scrollHeight, clientHeight } = divRef.current;
+  //     console.log(scrollTop);
+  //     console.log(clientHeight);
+  //     console.log("total =", scrollHeight);
+  //     if (scrollTop + clientHeight >= scrollHeight) {
+  //       setSize(size + 1);
+  //     }
+  //   }
+  // }, [size]);
+  // console.log("acaaaa", size);
+  // useEffect(() => {
+  //   const divElement = divRef.current;
 
-      if (scrollTop + clientHeight >= scrollHeight) {
-        setSize(size + 1);
-      }
-    }
-  }, [size]);
+  //   if (divElement) {
+  //     divElement.addEventListener("scroll", handleScroll);
 
-  useEffect(() => {
-    const divElement = divRef.current;
-
-    if (divElement) {
-      divElement.addEventListener("scroll", handleScroll);
-
-      // return () => divElement.removeEventListener("scroll", handleScroll);
-    }
-  }, [handleScroll]);
+  //     // return () => divElement.removeEventListener("scroll", handleScroll);
+  //   }
+  // }, [handleScroll]);
 
   return (
     <SectionNotificationsBox>
       <H3NotificationBox>Notificaciones</H3NotificationBox>
-      <DivNotificationsBox ref={divRef}>
+      <DivNotificationsBox >
         {/* <InfiniteScroll
           className="infiniteScroll"
           next={() => console.log()}
@@ -54,14 +57,21 @@ function NotificationsBox({ notifications,setSize,size,mutate }: Props) {
         > */}
         {[...notifications]
           .sort((a, b) => date(b.created_at) - date(a.created_at))
-          .map((el) => (
-            <NotificationCard key={el.id} notification={el} mutate={mutate} />
+          .map((el, i) => (
+            <NotificationCard
+              key={`${el.id + i}`}
+              notification={el}
+              mutate={mutate}
+            />
           ))}
         {![...notifications].length && (
           <PEmptyNotifications>
             No se han encontrado notificaciones
           </PEmptyNotifications>
         )}
+        {/* <DivNotificationsBoxLoader>
+          <Loader />
+        </DivNotificationsBoxLoader> */}
         {/* </InfiniteScroll> */}
       </DivNotificationsBox>
     </SectionNotificationsBox>

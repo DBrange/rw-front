@@ -15,8 +15,8 @@ function ModalSentLogin({ modalActive,type }: Props) {
         <ImgModal src={person2} alt="" />
         <H3Modal>Su {type} fue realizada con exito</H3Modal>
         {/* <H4Modal>Pronto le llegara un mail con toda la informacion.</H4Modal> */}
-        <H4Modal>Nos estaremos comunicando con usted a la brevedad.</H4Modal>
-        <LinkNavigate to={`/${PrivateRoutes.PRIVATE}`}>
+        <H4Modal>Su broker se encargara del resto del tramite.</H4Modal>
+        <LinkNavigate $large to={`/${PrivateRoutes.PRIVATE}`}>
           <BtnModal>Aceptar</BtnModal>
         </LinkNavigate>
       </DivModalSent>

@@ -42,10 +42,10 @@ function MessageBtnHeader() {
         path === "/public/no-verificado" ||
         path === "/public/preguntas-frecuentes" ||
         path === "/public/sobre-nosotros" ||
-        path === "/public/contraseña"
+        path === "/public/nueva-clave"
       ) && (
-        <SectionMessageBtnHeader>
-          <DivDivMessageBtnHeader onClick={refreshNotifications}>
+        <SectionMessageBtnHeader  >
+          <DivDivMessageBtnHeader>
             <DivMessageBtnHeader
               onClick={() => setModal((mod) => !mod)}
               $public={
@@ -59,7 +59,7 @@ function MessageBtnHeader() {
                   path === "/public/no-verificado" ||
                   path === "/public/preguntas-frecuentes" ||
                   path === "/public/sobre-nosotros" ||
-                  path === "/public/contraseña"
+                  path === "/public/nueva-clave"
                 )
               }
             >
@@ -76,7 +76,7 @@ function MessageBtnHeader() {
                     path === "/public/no-verificado" ||
                     path === "/public/preguntas-frecuentes" ||
                     path === "/public/sobre-nosotros" ||
-                    path === "/public/contraseña"
+                    path === "/public/nueva-clave"
                   )
                 }
               >
@@ -92,10 +92,7 @@ function MessageBtnHeader() {
           {modal && (
             <NotificationsBox
               notifications={notifications}
-              setSize={setSize}
-              isReachedEnd={isReachedEnd}
-              size={size}
-              mutate={mutate}
+            
             />
           )}
         </SectionMessageBtnHeader>

@@ -16,7 +16,7 @@ function MessageBtn() {
         path === "/public/no-verificado" ||
         path === "/public/preguntas-frecuentes" ||
         path === "/public/sobre-nosotros" ||
-        path === "/public/contraseña"
+        path === "/public/nueva-clave"
       ) && (
         <div>
           <DivMessageBtn
@@ -31,7 +31,7 @@ function MessageBtn() {
                 path === "/public/no-verificado" ||
                 path === "/public/preguntas-frecuentes" ||
                 path === "/public/sobre-nosotros" ||
-                path === "/public/contraseña"
+                path === "/public/nueva-clave"
               )
             }
           >
@@ -48,7 +48,7 @@ function MessageBtn() {
                   path === "/public/no-verificado" ||
                   path === "/public/preguntas-frecuentes" ||
                   path === "/public/sobre-nosotros" ||
-                  path === "/public/contraseña"
+                  path === "/public/nueva-clave"
                 )
               }
             >

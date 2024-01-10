@@ -13,18 +13,23 @@ export const HeaderStyle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 10;
+  z-index: 11;
   width: 100%;
   position: fixed;
   top: 0;
   text-align: start;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   background-color: ${theme.pColor};
+
+  @media(min-width: 800px){
+
+  }
 `;
 
-export const LinkNavigate = styled(Link)`
+export const LinkNavigate = styled(Link)<{$large?: boolean}>`
   text-decoration: none;
   color: ${theme.textColor};
+${({$large}) => $large ? 'width: 100%;' : ''}
+  
 `;
 
 export const LogoText = styled.h2`

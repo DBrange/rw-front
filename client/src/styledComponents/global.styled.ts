@@ -1,6 +1,5 @@
-import InfiniteScroll from "react-infinite-scroll-component";
-import { theme } from ".";
 import { styled } from "styled-components";
+import { theme } from ".";
 
 export const Label = styled.label<{ $error: boolean }>`
   width: 100%;
@@ -12,6 +11,7 @@ export const Label = styled.label<{ $error: boolean }>`
 
 export const Form = styled.form`
   width: 100%;
+  min-height: 84vh;
   height: auto;
 `;
 

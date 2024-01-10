@@ -1,5 +1,5 @@
 import { MainName } from "@/components";
-import { sidebarService } from "@/services/sharing-information.service";
+import { notificationsModal, sidebarService } from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
 
 import { MdOutlineDashboard } from "react-icons/md";
@@ -55,6 +55,7 @@ const path = useLocation().pathname;
   const notis = () => {
     dispatchAsync(addNotificationsAsync(user.user?.id));
     sidebarService.setSubject(false);
+    notificationsModal.setSubject(false);
   }
   return (
     <SectionBgSidebar $isOpen={stateOfSidebar} onClick={toggleSidebar}>

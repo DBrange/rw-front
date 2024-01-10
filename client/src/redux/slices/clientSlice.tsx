@@ -59,7 +59,7 @@ export const clientSlice = createSlice({
     },
     resetClient: () => {
       clearLocalStorage(clientKey);
-      Cookies.remove(cookieKey);
+      // Cookies.remove(cookieKey);
       return EmptyUserState;
     },
   },
@@ -186,9 +186,7 @@ export const updateLastRecordAsync = createAsyncThunk(
     try {
       const date = new Date().toISOString();
       await axios.post(
-        `${baseUrl}/user/last-record/${userId}?date=${date}`,
-        null,
-        config
+        `${baseUrl}/user/last-record/${userId}?date=${date}`,{},config
       );
       return date;
     } catch (err) {
@@ -202,8 +200,7 @@ export const updateMyProfileAsync = createAsyncThunk(
   async ({ userId, phoneNumber, address }: UpdateMyProfile) => {
     try {
       await axios(
-        `${baseUrl}/user/profile/${userId}?phoneNumber=${phoneNumber}&address=${address}`,
-        config
+        `${baseUrl}/user/profile/${userId}?phoneNumber=${phoneNumber}&address=${address}`,config
       );
       modalToast.setSubject(true);
       return { userId, phoneNumber, address };
@@ -219,7 +216,7 @@ export const updateTokenAsync = createAsyncThunk(
     try {
       const newToken = await axios.post(
         `${baseUrl}/auth/refresh-token/${id}`,
-        null,
+        {},
         config
       );
       // modalToast.setSubject(true);
@@ -236,7 +233,7 @@ export const addBrokerAsync = createAsyncThunk(
     try {
       const brokers = await axios.post(
         `${baseUrl}/user-in-broker/${userBrokerId}/${clientId}`,
-        null,
+        {},
         config
       );
       return brokers.data;
@@ -253,7 +250,7 @@ export const deleteBrokerAsync = createAsyncThunk(
       console.log(clientId, userBrokerId);
       await axios.post(
         `${baseUrl}/user/delete-broker/${clientId}/${userBrokerId}`,
-        null,
+        {},
         config
       );
       modalToast.setSubject(true);

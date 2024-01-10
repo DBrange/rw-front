@@ -26,6 +26,8 @@ export const DivModalSent = styled.div<{
 }>`
   width: 90%;
   max-width: 700px;
+  /* max-height: 80vh; */
+  /* max-height: 80%; */
   background-color: ${({ $error }) =>
     $error ? `${theme.errBgColor}` : `${theme.pColor}`};
   border-radius: 0.375rem;
@@ -35,7 +37,10 @@ export const DivModalSent = styled.div<{
   transform: ${({ $modalActive }) =>
     $modalActive ? "scale(1)" : "scale(0.5)"};
 
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TitleModal = styled.h3<{ $error?: boolean }>`
@@ -57,7 +62,7 @@ export const H4Modal = styled.h5<{ $error?: boolean }>`
 export const BtnModal = styled.button<{ $error?: boolean }>`
   cursor: pointer;
   width: 100%;
-  max-width: 200px;
+  /* max-width: 200px; */
   height: 2rem;
   margin-top: 1.25rem;
   border-radius: 0.75rem;
@@ -69,16 +74,17 @@ export const BtnModal = styled.button<{ $error?: boolean }>`
   &:active {
     transform: translateY(0.25rem);
   }
-  ${({$error}) => $error ? `color: ${theme.errBgColor}` : ''}
+  ${({ $error }) => ($error ? `color: ${theme.errBgColor}` : "")}
 `;
 
 export const ImgModal = styled.img`
   height: 80%;
   width: 80%;
-  
-  @media (min-width: 1200px) {
-    height: 50%;
-    width: 50%;
+
+  max-width: 300px;
+  @media (min-width: 800px) {
+    height: 40%;
+    width: 40%;
     margin: 2rem 0;
   }
 `;

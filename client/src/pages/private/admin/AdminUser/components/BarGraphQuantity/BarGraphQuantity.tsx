@@ -31,6 +31,7 @@ export function BarInfoGraphQuantity({ info, labels }: Props) {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,

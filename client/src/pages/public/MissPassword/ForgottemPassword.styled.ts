@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 export const PForgottemPassword = styled.p`
   display: flex;
+  height: 84vh;
   align-items: center;
   gap: 1px;
   margin-top: 2rem;

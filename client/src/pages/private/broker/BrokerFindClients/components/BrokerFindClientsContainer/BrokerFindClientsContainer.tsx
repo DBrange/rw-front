@@ -25,7 +25,7 @@ function BrokerFindClientsContainer({
         name={client?.personalUser?.name}
         lastname={client?.personalUser?.lastName}
         companyName={client?.legalUser?.companyName}
-      ></ModalSendRequest>
+      />
       <ContainerLogin>{children}</ContainerLogin>
     </>
   );

@@ -30,6 +30,7 @@ export default function LineGraph({ info, type }: Props) {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,
@@ -85,5 +86,5 @@ export default function LineGraph({ info, type }: Props) {
     }),
   };
 
-  return <Line data={data} options={options} />;
+  return <Line  data={data} options={options} />;
 }

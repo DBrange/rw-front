@@ -12,7 +12,7 @@ import {
   TouchedInputValues,
   loginClient,
   loginUrl,
-  validateLogin
+  validateLogin,
 } from "..";
 import { ChangeEventType, SubmitEventType } from "../../Inspect";
 import { ILoginContext, emptyLoginContext } from "./empty-login-context";
@@ -46,7 +46,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     clearLocalStorage(clientKey);
-  }, [])
+  }, []);
 
   const loginData = (e: ChangeEventType) => {
     const { value, name } = e.target;
@@ -92,7 +92,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
   }, []);
 
   // const { googleLoginData } = useParams();
-  
+
   useEffect(() => {
     if (data) {
       dispatch(addClient(data));
@@ -100,20 +100,21 @@ export const LoginProvider = ({ children }: ChildrenType) => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (Cookies.get(cookieKey)) {
-      const data: ClientInfo = JSON.parse(Cookies.get(cookieKey) as string);
+  // useEffect(() => {
+  //   if (Cookies.get(cookieKey)) {
+  //     const cookieData: ClientInfo = JSON.parse(Cookies.get(cookieKey) as string);
 
-      if (data.accessToken) {
-        dispatch(addClient(data));
-        navigate(`/${PrivateRoutes.PRIVATE}`);
-      }
-    }
-    // if (googleLoginData) {
-    //   dispatch(addClient(googleLoginData as unknown as ClientInfo));
-    //   navigate(`/${PrivateRoutes.PRIVATE}`);
-    // }
-  }, [Cookies.get(cookieKey)]);
+  //     if (cookieData.accessToken) {
+  //       localStorage.setItem(clientKey, JSON.stringify(cookieData));
+  //       dispatch(addClient(cookieData));
+  //       navigate(`/${PrivateRoutes.PRIVATE}`);
+  //     }
+  //   }
+  //   // if (googleLoginData) {
+  //   //   dispatch(addClient(googleLoginData as unknown as ClientInfo));
+  //   //   navigate(`/${PrivateRoutes.PRIVATE}`);
+  //   // }
+  // }, [Cookies.get(cookieKey)]);
 
   const submitData = (e: SubmitEventType) => {
     e.preventDefault();

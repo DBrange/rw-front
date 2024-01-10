@@ -12,6 +12,7 @@ export interface IHeaderContext {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   refreshNotifications: () => void;
   mutate: any // KeyedMutator<Notification[][]>;
+  isLoading: boolean
 }
 
 export const emptyHeaderContext: IHeaderContext = {
@@ -23,5 +24,6 @@ export const emptyHeaderContext: IHeaderContext = {
   modal: false,
   setModal: () => {},
   refreshNotifications: () => { },
-  mutate: ''
+  mutate: '',
+  isLoading: false
 };

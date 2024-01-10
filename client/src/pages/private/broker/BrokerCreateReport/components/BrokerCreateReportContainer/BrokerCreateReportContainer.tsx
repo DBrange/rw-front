@@ -1,8 +1,7 @@
-import { Container } from "@/styledComponents";
-import { LoaderImages, ModalError, ModalNotAccess, ModalSentLogin } from "@/components";
+import { LoaderImages } from "@/components";
 import { loaderImageService } from "@/services/sharing-information.service";
-import { useState, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
+import { ContainerLogin } from "@/styledComponents";
+import { useEffect, useState } from "react";
 
 function BrokerCreateReportContainer({
   children,
@@ -15,15 +14,15 @@ function BrokerCreateReportContainer({
   useEffect(() => {
     loaderImageService.getSubject.subscribe((bol) => setLoaderImages(bol));
   }, []);
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  // const isMobile = useMediaQuery({ maxWidth: 768 });
   return (
     <>
       <LoaderImages modalActive={loaderImages} />
       {/* <ModalError modalActive={formNotFound} /> */}
-      <Container>
-        {!isMobile && <ModalNotAccess/>}
+      <ContainerLogin>
+        {/* {!isMobile && <ModalNotAccess/>} */}
         {children}
-      </Container>
+      </ContainerLogin>
     </>
   );
 }

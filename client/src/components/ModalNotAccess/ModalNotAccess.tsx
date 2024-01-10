@@ -10,7 +10,7 @@ function ModalNotAccess() {
         <h2>No habilitado</h2>
         <p>
           Esta seccion solo se encuentra habilitada para celulares o tablets, ya que
-          necesitara tomar fotos desde los mis mismos
+          necesitara tomar fotos desde los mis mismos.
         </p>
       </DivNotAccessBrokerCreateReportContainer>
     </NotAccessBrokerCreateReportContainer>

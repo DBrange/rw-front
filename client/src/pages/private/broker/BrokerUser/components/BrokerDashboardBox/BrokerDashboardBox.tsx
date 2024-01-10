@@ -1,3 +1,4 @@
+import { Loader } from "@/components";
 import { PrivateRoutes } from "@/models/types/routes";
 import {
   AllBrokerClients,
@@ -25,13 +26,8 @@ import {
 } from "./BrokerDashboardBox.styled";
 
 function BrokerDashboardBox() {
-  const {
-    dataToDashboard,
-    newData,
-    buttonActive,
-    changeBtnActive,
-    setButtonActive,
-  } = useBrokerUserContext();
+  const { dataToDashboard, newData, buttonActive, changeBtnActive, isLoading } =
+    useBrokerUserContext();
 
   const assetsArr = (assetsLastWeek: AllClientAssets[]) => {
     const assets = [...assetsLastWeek]
@@ -175,16 +171,18 @@ function BrokerDashboardBox() {
             <Link
               to={`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.ALL_INSURED}`}
             >
-              <SpanBrokerDashboardBox>
-                Buscar inspeccion
-              </SpanBrokerDashboardBox>
+              <SpanBrokerDashboardBox>Buscar inspeccion</SpanBrokerDashboardBox>
             </Link>
           )}
           <IoIosMore size={25} />
         </BtnBrokerDashboardBox>
       </DivContentTitleBrokerDashboardBox>
       <DivContentBrokerDashboardBox>
-        {dataToDashboard && assetsArr(dataToDashboard?.assetsLastWeek)}
+        {dataToDashboard && !isLoading ? (
+          assetsArr(dataToDashboard?.assetsLastWeek)
+        ) : (
+          <Loader />
+        )}
       </DivContentBrokerDashboardBox>
     </div>
   );
@@ -208,7 +206,11 @@ function BrokerDashboardBox() {
         </BtnBrokerDashboardBox>
       </DivContentTitleBrokerDashboardBox>
       <DivContentBrokerDashboardBox>
-        {dataToDashboard && sinistersArr(dataToDashboard?.sinistersLastWeek)}
+        {dataToDashboard && !isLoading ? (
+          sinistersArr(dataToDashboard?.sinistersLastWeek)
+        ) : (
+          <Loader />
+        )}
       </DivContentBrokerDashboardBox>
     </div>
   );
@@ -232,7 +234,11 @@ function BrokerDashboardBox() {
         </BtnBrokerDashboardBox>
       </DivContentTitleBrokerDashboardBox>
       <DivContentBrokerDashboardBox>
-        {dataToDashboard && clientsArr(dataToDashboard.clientsLastWeek)}
+        {dataToDashboard && !isLoading ? (
+          clientsArr(dataToDashboard.clientsLastWeek)
+        ) : (
+          <Loader />
+        )}
       </DivContentBrokerDashboardBox>
     </div>
   );

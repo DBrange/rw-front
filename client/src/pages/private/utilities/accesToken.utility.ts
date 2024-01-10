@@ -1,6 +1,5 @@
 import { ClientInfo } from "@/models";
-import { clientKey } from "@/redux/slices/clientSlice";
 
-const clientInfo: ClientInfo = JSON.parse(localStorage.getItem(clientKey) as string)
+const clientInfo: ClientInfo = JSON.parse(localStorage.getItem('client') as string)
 
 export const accessToken = clientInfo?.accessToken

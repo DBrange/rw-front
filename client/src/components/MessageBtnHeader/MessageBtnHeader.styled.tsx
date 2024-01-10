@@ -1,10 +1,23 @@
 import { theme } from "@/styledComponents";
 import styled from "styled-components";
-
-export const SectionMessageBtnHeader = styled.section`
+// export const Nose = styled.section`
+//   @media (min-width: 1200px) {
+//     display: flex;
+//     position: static;
+//     max-width: 260px;
+//     justify-content: space-evenly;
+//   }
+// `;
+export const SectionMessageBtnHeader = styled.div`
   position: relative;
+
+  @media (min-width: 1200px) {
+    position: fixed;
+    left: 1.3rem;
+    top: 5.5rem;
+  }
 `;
-export const DivDivMessageBtnHeader = styled.section`
+export const DivDivMessageBtnHeader = styled.div`
   position: relative;
 `;
 
@@ -29,7 +42,7 @@ export const DivMessageBtnHeader = styled.div<{ $public?: boolean }>`
   align-items: center;
 
   @media (min-width: 1200px) {
-    display: none;
+    display: flex;
     position: static;
     max-width: 260px;
     justify-content: space-evenly;

@@ -8,6 +8,7 @@ import {
   SectionModalBg,
 } from "..";
 import error from "../../../assets/error.svg";
+import { PrivateRoutes } from "@/models/types/routes";
 
 function ModalError({ modalActive }: { modalActive: boolean }) {
   return (
@@ -19,7 +20,7 @@ function ModalError({ modalActive }: { modalActive: boolean }) {
           Lo sentimos, hubo un error al enviar el formulario.
         </H4Modal>
         <H4Modal $error>Intente enviarlo nuevamente, gracias.</H4Modal>
-        <LinkNavigate to="/home">
+        <LinkNavigate $large to={`/${PrivateRoutes.PRIVATE}`}>
           <BtnModal $error>Aceptar</BtnModal>
         </LinkNavigate>
       </DivModalSent>

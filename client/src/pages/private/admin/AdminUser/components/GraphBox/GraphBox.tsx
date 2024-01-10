@@ -1,6 +1,10 @@
 import { ClickEventType } from "@/pages";
 import { DashboardBtnsBox } from "..";
-import { DivGraphBox, H3InspectionDetail } from "../AdminDashboardBox/AdminDashboardBox.styled";
+import {
+  DivGraphBox,
+  DivOnlyGraphBox,
+  H3InspectionDetail,
+} from "../AdminDashboardBox/AdminDashboardBox.styled";
 
 interface Props {
   isActiveGraphTypeLine?: boolean;
@@ -44,7 +48,7 @@ function GraphBox({
         changeGraphFormatType={changeGraphFormatType}
         name={name}
       />
-      {graphActive ? firstComponent : secondComponent}
+      <DivOnlyGraphBox>{graphActive ? firstComponent : secondComponent}</DivOnlyGraphBox>
     </DivGraphBox>
   );
 }

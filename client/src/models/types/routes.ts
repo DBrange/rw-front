@@ -5,7 +5,7 @@ export enum PublicRoutes {
   INSPECT = "inspeccionar",
   REPORT = "denunciar",
   REGISTER = "registrarse",
-  FORGOTTEM_PASSWORD = "contraseña",
+  FORGOTTEM_PASSWORD = "nueva-clave",
   CREATE_INSPECTION = "crear-inspeccion",
   CREATE_SINISTER = "crear-siniestro",
   VERIFIED = 'verificado',
