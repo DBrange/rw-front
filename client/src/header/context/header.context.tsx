@@ -30,7 +30,6 @@ export const HeaderProvider = ({ children }: ChildrenType) => {
   //   };
 
   const refreshNotifications = () => {
-    console.log('holis')
     dispatchAsync(addNotificationsAsync(user.user?.id));
     const s = notifications.map((el) => el.isRead).some((el) => !el);
     // if (s) setNewNotifications(true);

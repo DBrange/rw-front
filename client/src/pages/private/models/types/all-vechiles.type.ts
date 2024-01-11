@@ -17,7 +17,7 @@ export interface AllClientAssets {
   updated_at: Date;
   insured: boolean;
   inspection: boolean;
-  psdf: string
+  pdf: string
   vehicle: Vehicle | null;
   electronic: Electronic | null;
 }
@@ -59,7 +59,7 @@ export interface AllClientSinisters {
   created_at: Date;
   updated_at: Date;
   time: string;
-  date: string;
+  date: Date;
   location: string;
   pdf: string
   sinisterType: SinisterTypeAllClientSinister;

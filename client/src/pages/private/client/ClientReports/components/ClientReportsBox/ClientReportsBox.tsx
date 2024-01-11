@@ -4,7 +4,7 @@ import {
   InspectLogin,
   ReportCard,
   Sidebar,
-  SidebarBroker
+  SidebarBroker,
 } from "@/pages";
 import {
   BtnBrokerSelection,
@@ -135,7 +135,7 @@ function ClientReportsBox() {
                   type={el?.asset?.vehicle?.type}
                   keyName={el?.asset?.vehicle?.plate}
                   id={el?.id}
-                  date={el?.created_at}
+                  date={el?.date}
                 />
               );
             } else if (el?.asset?.electronic) {
@@ -145,7 +145,7 @@ function ClientReportsBox() {
                   type={el?.asset?.electronic.type}
                   keyName={el?.asset?.electronic?.brand}
                   id={el?.id}
-                  date={el?.created_at}
+                  date={el?.date}
                 />
               );
             } else {

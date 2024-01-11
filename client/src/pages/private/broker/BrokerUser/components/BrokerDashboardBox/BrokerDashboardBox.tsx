@@ -87,7 +87,7 @@ function BrokerDashboardBox() {
                 id={el.id}
                 dashboard={true}
                 newCard={newData(el.created_at)}
-                date={el.created_at}
+                date={el?.date}
               />
             </>
           );
@@ -101,7 +101,7 @@ function BrokerDashboardBox() {
                 id={el.id}
                 dashboard={true}
                 newCard={newData(el.created_at)}
-                date={el.created_at}
+                date={el?.date}
               />
             </>
           );

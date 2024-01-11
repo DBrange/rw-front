@@ -44,9 +44,9 @@ export const LoginProvider = ({ children }: ChildrenType) => {
 
   const [formNotFound, setFormNotFound] = useState(false);
 
-  useEffect(() => {
-    clearLocalStorage(clientKey);
-  }, []);
+  // useEffect(() => {
+  //   clearLocalStorage(clientKey);
+  // }, []);
 
   const loginData = (e: ChangeEventType) => {
     const { value, name } = e.target;
@@ -95,6 +95,7 @@ export const LoginProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     if (data) {
+      console.log(data,'estita')
       dispatch(addClient(data));
       navigate(`/${PrivateRoutes.PRIVATE}`);
     }

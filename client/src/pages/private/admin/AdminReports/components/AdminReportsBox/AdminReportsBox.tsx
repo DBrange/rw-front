@@ -2,11 +2,14 @@ import {
   AllClientSinisters,
   InspectLogin,
   ReportCard,
-  SidebarAdmin
+  SidebarAdmin,
 } from "@/pages";
 
 import { Loader } from "@/components";
-import { BtnBrokerSelection, ContainerBtnBrokerSelection } from "@/pages/private/broker/BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
+import {
+  BtnBrokerSelection,
+  ContainerBtnBrokerSelection,
+} from "@/pages/private/broker/BrokerInspections/components/BrokerInspectionsBox/BrokerInspectionsBox.styled";
 import { date } from "@/utilities/date.utility";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useAdminReportsContext } from "../..";
@@ -127,7 +130,7 @@ function BrokerReportsBox() {
                   type={el?.asset?.vehicle?.type}
                   keyName={el?.asset?.vehicle?.plate}
                   id={el?.id}
-                  date={el?.created_at}
+                  date={el?.date}
                 />
               );
             } else if (el?.asset?.electronic) {
@@ -137,7 +140,7 @@ function BrokerReportsBox() {
                   type={el?.asset?.electronic?.type}
                   keyName={el?.asset?.electronic?.brand}
                   id={el?.id}
-                  date={el?.created_at}
+                  date={el?.date}
                 />
               );
             } else {
@@ -150,7 +153,7 @@ function BrokerReportsBox() {
 
   return (
     <>
-      <SidebarAdmin/>
+      <SidebarAdmin />
       <InspectLogin
         sectionName="Siniestros"
         setSearchField={setSearchField}

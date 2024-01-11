@@ -20,34 +20,34 @@ function NotificationsBox({ notifications }: Props) {
 
   const date = (date: Date) => new Date(date).getTime();
 
-  // const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLDivElement>(null);
 
-  // const handleScroll = useCallback(() => {
-  //   if (divRef.current) {
-  //     const { scrollTop, scrollHeight, clientHeight } = divRef.current;
-  //     console.log(scrollTop);
-  //     console.log(clientHeight);
-  //     console.log("total =", scrollHeight);
-  //     if (scrollTop + clientHeight >= scrollHeight) {
-  //       setSize(size + 1);
-  //     }
-  //   }
-  // }, [size]);
-  // console.log("acaaaa", size);
-  // useEffect(() => {
-  //   const divElement = divRef.current;
+  const handleScroll = useCallback(() => {
+    if (divRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = divRef.current;
+      console.log(scrollTop);
+      console.log(clientHeight);
+      console.log("total =", scrollHeight);
+      if (scrollTop + clientHeight >= scrollHeight) {
+        setSize(size + 1);
+      }
+    }
+  }, [size]);
+  console.log("acaaaa", size);
+  useEffect(() => {
+    const divElement = divRef.current;
 
-  //   if (divElement) {
-  //     divElement.addEventListener("scroll", handleScroll);
+    if (divElement) {
+      divElement.addEventListener("scroll", handleScroll);
 
-  //     // return () => divElement.removeEventListener("scroll", handleScroll);
-  //   }
-  // }, [handleScroll]);
+      return () => divElement.removeEventListener("scroll", handleScroll);
+    }
+  }, [handleScroll]);
 
   return (
-    <SectionNotificationsBox>
+    <SectionNotificationsBox >
       <H3NotificationBox>Notificaciones</H3NotificationBox>
-      <DivNotificationsBox >
+      <DivNotificationsBox ref={divRef}>
         {/* <InfiniteScroll
           className="infiniteScroll"
           next={() => console.log()}

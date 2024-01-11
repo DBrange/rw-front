@@ -195,7 +195,7 @@ function ClientProfile({ data }: Props) {
                           keyName={el.asset.vehicle.plate}
                           id={el.id}
                           dashboard={true}
-                          date={el.created_at}
+                          date={el?.date}
                         />
                       );
                     } else if (el?.asset.electronic) {
@@ -206,7 +206,7 @@ function ClientProfile({ data }: Props) {
                           keyName={el.asset.electronic.brand}
                           id={el.id}
                           dashboard={true}
-                          date={el.created_at}
+                          date={el?.date}
                         />
                       );
                     } else {
