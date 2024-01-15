@@ -32,8 +32,11 @@ import {
   createAssetInClientUserUrl,
   createAssetInClientUser,
   validationFormDataInspection,
+  inspectionQuantity,
+  InspectionQuantityUrl,
 } from "..";
 import { useParams } from "react-router-dom";
+import useSWR from "swr";
 
 const ClientCreateInspectionContext =
   createContext<IClientCreateInspectionContext>(
@@ -44,6 +47,49 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
   const [inputValues, setInputValues] = useState<ClientCreateInspectionValues>(
     emptyClientCreateInspectionValues
   );
+
+  const user = useSelector((store: AppStore) => store.user);
+
+  const { clientId, brokerId } = useParams();
+
+  const selectBrokerUrl =
+    brokerId && clientId
+      ? brokerId
+      : user.user?.userBroker
+      ? user.user?.id
+      : brokerId;
+
+  const selectClientUrl =
+    brokerId && clientId
+      ? clientId
+      : user.user?.userBroker
+      ? clientId
+      : user?.user?.id;
+
+  const { data: inspQuantity } = useSWR(
+    InspectionQuantityUrl(brokerId),
+    inspectionQuantity
+  );
+
+  const accessLevelVerify = () => {
+    console.log(inspQuantity?.quantity);
+    if (inspQuantity?.quantity && user.user?.accessLevel?.toString().length) {
+      if (inspQuantity?.quantity > 5 && user.user?.accessLevel === 0) {
+        setModalAccessLevel(true);
+      } else if (inspQuantity?.quantity > 10 && user.user?.accessLevel === 10) {
+        setModalAccessLevel(true);
+      } else if (inspQuantity?.quantity > 15 && user.user?.accessLevel === 20) {
+        setModalAccessLevel(true);
+      } else {
+        setModalAccessLevel(false);
+      }
+    }
+  };
+  useEffect(() => {
+    accessLevelVerify();
+  }, [inspQuantity]);
+
+  const [modalAccessLevel, setModalAccessLevel] = useState<boolean>(false);
 
   const [inputTouched, setInputsTouched] =
     useState<TouchedClientCreateInspectionValues>(
@@ -61,7 +107,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
 
   const [formNotFound, setFormNotFound] = useState<boolean>(false);
 
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(2);
 
   const changePage = (e: ClickEventType) => {
     const { value } = e.currentTarget;
@@ -317,24 +363,6 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     );
   };
 
-  const { clientId, brokerId } = useParams();
-  
-  const user = useSelector((store: AppStore) => store.user);
-
-  const selectBrokerUrl =
-    brokerId && clientId
-      ? brokerId
-      : user.user?.userBroker
-      ? user.user?.id
-      : brokerId;
-
-  const selectClientUrl =
-    brokerId && clientId
-      ? clientId
-      : user.user?.userBroker
-      ? clientId
-      : user?.user?.id;
-
   const { error: errorInspectionPersonal, trigger: triggerInspectionPersonal } =
     useSWRMutation(
       createAssetInClientUserUrl(selectBrokerUrl, selectClientUrl),
@@ -402,6 +430,7 @@ export const ClientCreateInspectionProvider = ({ children }: ChildrenType) => {
     changeInputForImages,
     markedTouches,
     changeInputValuesNumber,
+    modalAccessLevel,
   };
 
   return (

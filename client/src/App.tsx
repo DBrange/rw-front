@@ -15,6 +15,7 @@ import { USER_ROLES } from "./models/types/users-roles.type";
 import { AppStore } from "./redux";
 import { Body, Footer, MainContent } from "./styledComponents";
 import RoutesWithNotFound from "./utilities/routes-with-not-found";
+import { BrokerPayment } from "./pages";
 
 const Public = lazy(() => import("./pages/public/Public"));
 const Private = lazy(() => import("./pages/private/Private"));
@@ -32,10 +33,6 @@ function App() {
         <MainContent>
           {/* <MessageBtn /> */}
           <RoutesWithNotFound>
-            {/* <Route
-              path={`${PublicRoutes.PUBLIC}/payment`}
-              element={<BrokerPayment />}
-            /> */}
             <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
             {role === USER_ROLES.CLIENT ||
             role === USER_ROLES.BROKER ||

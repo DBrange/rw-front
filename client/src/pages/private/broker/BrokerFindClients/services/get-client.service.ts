@@ -26,6 +26,7 @@ export const sendNotification = async (
 
     loaderImageService.setSubject(false);
   } catch (err) {
+    console.log(err)
     throw err;
   }
 };
@@ -60,6 +61,7 @@ export const getClientForEmail = async (
 
     // localStorage.setItem("client", JSON.stringify(res));
   } catch (err) {
+    console.log(err)
     throw err;
   }
 };

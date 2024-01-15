@@ -1,13 +1,25 @@
 import { PrivateRoutes, PublicRoutes } from "@/models/types/routes";
 import { AppStore } from "@/redux";
 import { ContainerLogin } from "@/styledComponents";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdContentCopy } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { SidebarBroker } from "../..";
 import { H3InspectionDetail } from "../../admin/AdminUser/components/AdminDashboardBox/AdminDashboardBox.styled";
-import { BtnBrokerCreateInspectionLink, BtnContainerBrokerCreateInspectionLink, BtnCreate, DivBrokerCreateInspectionLink, DivInfoBrokerCreateInspectionLink } from "./BrokerCreateInspectionLink.styled";
+import {
+  BtnBrokerCreateInspectionLink,
+  BtnContainerBrokerCreateInspectionLink,
+  BtnCreate,
+  DivBrokerCreateInspectionLink,
+  DivInfoBrokerCreateInspectionLink,
+} from "./BrokerCreateInspectionLink.styled";
+import useSWR from "swr";
+import {
+  InspectionQuantityLinkUrl,
+  inspectionQuantityLink,
+} from "./services/inspectionQuantity-get.service";
+import { ModalAccessLevel } from "@/components";
 
 function BrokerCreateInspectionLink() {
   const { clientId } = useParams();
@@ -21,8 +33,7 @@ function BrokerCreateInspectionLink() {
   const divRef = useRef<HTMLDivElement>(null);
 
   const handleCopyClick = () => {
-
-    setCopyPaste(true)
+    setCopyPaste(true);
     const divContent = divRef.current?.innerText;
     const textToCopy = divContent;
 
@@ -37,12 +48,47 @@ function BrokerCreateInspectionLink() {
       document.body.removeChild(tempTextArea);
     }
     setTimeout(() => {
-      setCopyPaste(false)
+      setCopyPaste(false);
     }, 3000);
   };
 
+  const user = useSelector((store: AppStore) => store.user);
+
+  const { data: inspQuantity } = useSWR(
+    InspectionQuantityLinkUrl(user.user?.id),
+    inspectionQuantityLink
+  );
+
+  const accessLevelVerify = () => {
+    console.log(inspQuantity?.quantity);
+    if (inspQuantity?.quantity && user.user?.accessLevel?.toString().length) {
+      if (inspQuantity?.quantity > 5 && user.user?.accessLevel === 0) {
+        setModalAccessLevel(true);
+      } else if (inspQuantity?.quantity > 10 && user.user?.accessLevel === 10) {
+        setModalAccessLevel(true);
+      } else if (inspQuantity?.quantity > 15 && user.user?.accessLevel === 20) {
+        setModalAccessLevel(true);
+      } else {
+        setModalAccessLevel(false);
+      }
+    }
+  };
+  useEffect(() => {
+    accessLevelVerify();
+  }, [inspQuantity]);
+
+  const [modalAccessLevel, setModalAccessLevel] = useState<boolean>(false);
+
   return (
     <>
+      <ModalAccessLevel
+        modalActive={modalAccessLevel}
+        title={"No pueden realizar inspecciones"}
+        text={
+          "Su nivel de cuenta ha llegado al limite de inspecciones posibles"
+        }
+        broker={true}
+      />
       <SidebarBroker />
       <ContainerLogin>
         <H3InspectionDetail>Link a compartir</H3InspectionDetail>

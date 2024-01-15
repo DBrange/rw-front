@@ -49,6 +49,7 @@ export interface IClientCreateReportContext {
   amountInjured: number;
   amountVehicles: number;
   changeInputValuesNumber: (e: ChangeEventType) => void;
+  modalAccessLevel: boolean
 }
 
 export const emptyClientCreateReportContext: IClientCreateReportContext = {
@@ -83,7 +84,7 @@ export const emptyClientCreateReportContext: IClientCreateReportContext = {
     theft: true,
     fire: false,
     crash: false,
-    damage: false
+    damage: false,
   },
   changeInputForSchedule: () => {},
   creatingThirdPartyInjuredContainer: () => null,
@@ -91,4 +92,5 @@ export const emptyClientCreateReportContext: IClientCreateReportContext = {
   amountInjured: 0,
   amountVehicles: 0,
   changeInputValuesNumber: () => {},
+  modalAccessLevel: false
 };

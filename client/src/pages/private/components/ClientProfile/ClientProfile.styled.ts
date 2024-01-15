@@ -33,3 +33,18 @@ export const DivClientProfile = styled.div`
   flex-direction: column;
   gap: 2rem;
 `;
+
+
+export const DivInformationClientProfile = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  /* @media (min-width: 800px) {
+    flex-direction: row;
+    justify-content: space-between;
+    row-gap: 5rem;
+  } */
+`;

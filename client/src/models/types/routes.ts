@@ -36,4 +36,5 @@ export enum PrivateRoutes {
   SEARCH_CLIENT = "buscar-cliente",
   SEARCH_USER = "buscar-usuario",
   INSPECTIONS = "inspecciones",
+  PAYMENT = "pago",
 }

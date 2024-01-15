@@ -7,7 +7,7 @@ export const NotAccessBrokerCreateReportContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff1;
+  background-color: #fff8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,19 +15,21 @@ export const NotAccessBrokerCreateReportContainer = styled.div`
 `;
 
 export const DivNotAccessBrokerCreateReportContainer = styled.div`
-  background-color: ${theme.pColor};
+  background-color: ${theme.pColor};  
+  width: 90%;
   max-width: 600px;
   padding: 2rem;
   border-radius: 1rem;
 
-  h2{
+  h2 {
     color: ${theme.sColor};
     margin-bottom: 2rem;
   }
 
-  p{
-    
+  p {
   }
-`
+
+
+`;
 
 

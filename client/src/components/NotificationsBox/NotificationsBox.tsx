@@ -25,9 +25,9 @@ function NotificationsBox({ notifications }: Props) {
   const handleScroll = useCallback(() => {
     if (divRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = divRef.current;
-      console.log(scrollTop);
-      console.log(clientHeight);
-      console.log("total =", scrollHeight);
+      // console.log(scrollTop);
+      // console.log(clientHeight);
+      // console.log("total =", scrollHeight);
       if (scrollTop + clientHeight >= scrollHeight) {
         setSize(size + 1);
       }

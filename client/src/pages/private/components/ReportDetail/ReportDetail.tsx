@@ -3,6 +3,7 @@ import { modalImage } from "@/services/sharing-information.service";
 import { useEffect, useState } from "react";
 import { Crash, Fire, Injuredd, SinisterDetail } from "../..";
 import {
+  AInspectionDetail,
   DivHeaderInspectionDetail,
   H2InspectionDetail,
   SectionHeaderInspectionDetail,
@@ -706,7 +707,7 @@ function ReportnDetail({
   return (
     <SectionHeaderInspectionDetail>
       {dataInHTML()}
-      {/* <a href={values?.pdf}>Imprimir</a> */}
+      {/* <AInspectionDetail target="_BLANK" href={values?.pdf}>Imprimir</AInspectionDetail> */}
     </SectionHeaderInspectionDetail>
   );
 }

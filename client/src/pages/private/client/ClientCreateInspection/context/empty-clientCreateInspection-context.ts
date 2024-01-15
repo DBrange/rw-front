@@ -36,35 +36,36 @@ export interface IClientCreateInspectionContext {
   changeInputForImages: (e: ChangeEventType, images: string[]) => void;
   markedTouches: () => void;
   changeInputValuesNumber: (e: ChangeEventType) => void;
+  modalAccessLevel: boolean
 }
 
-export const emptyClientCreateInspectionContext: IClientCreateInspectionContext =
-  {
-    submitValues: () => {},
-    changeInputValues: () => {},
-    changeSelectValues: () => {},
-    inputValues: emptyClientCreateInspectionValues,
-    inputTouched: touchedTouchedClientCreateInspectionValues,
-    errorsInputValues: undefined,
-    setInputValues: () => emptyClientCreateInspectionValues,
-    setElementActive: () => ({
-      vehicle: true,
-      electronic: false,
-    }),
-    elementActive: {
-      vehicle: true,
-      electronic: false,
-    },
-    setPage: () => 0,
-    page: 0,
-    changePage: () => {},
-    changeForm: () => {},
-    setInputsTouched: () => touchedTouchedClientCreateInspectionValues,
-    partialErrors: () => false,
-    typeOfToucheds: () => "" as TouchedForms,
-    formNotFound: false,
-    changeInputForCheckbox: () => {},
-    changeInputForImages: () => {},
-    markedTouches: () => {},
-    changeInputValuesNumber: () => {},
-  };
+export const emptyClientCreateInspectionContext: IClientCreateInspectionContext = {
+  submitValues: () => {},
+  changeInputValues: () => {},
+  changeSelectValues: () => {},
+  inputValues: emptyClientCreateInspectionValues,
+  inputTouched: touchedTouchedClientCreateInspectionValues,
+  errorsInputValues: undefined,
+  setInputValues: () => emptyClientCreateInspectionValues,
+  setElementActive: () => ({
+    vehicle: true,
+    electronic: false,
+  }),
+  elementActive: {
+    vehicle: true,
+    electronic: false,
+  },
+  setPage: () => 0,
+  page: 0,
+  changePage: () => {},
+  changeForm: () => {},
+  setInputsTouched: () => touchedTouchedClientCreateInspectionValues,
+  partialErrors: () => false,
+  typeOfToucheds: () => "" as TouchedForms,
+  formNotFound: false,
+  changeInputForCheckbox: () => {},
+  changeInputForImages: () => {},
+  markedTouches: () => {},
+  changeInputValuesNumber: () => {},
+  modalAccessLevel: false,
+};

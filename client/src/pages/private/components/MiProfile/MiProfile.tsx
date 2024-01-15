@@ -21,9 +21,12 @@ import {
   TitleName,
 } from "./MiProfile.styled";
 import { ClientCardMiProfile, DivCardNoEvent } from "@/components";
+import { useNavigate } from "react-router-dom";
+import { PrivateRoutes } from "@/models/types/routes";
 
 function MiProfile() {
   const user = useSelector((store: AppStore) => store.user.user);
+const navigate  = useNavigate()
 
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [modalPasswordActive, setModalPasswordActive] =
@@ -62,7 +65,29 @@ function MiProfile() {
         </div>
       </TitleName>
       <DivInformationMyProfile>
-        
+        {user?.userBroker && (
+          <>
+            <DivInformationProfileDetail>
+              Nivel de usuario:
+              {/* <h4>Genero</h4> */}
+              <p>
+                {user?.accessLevel === 0
+                  ? "Free"
+                  : user?.accessLevel === 10
+                  ? "Basic"
+                  : user?.accessLevel === 20
+                  ? "Premium"
+                  : user?.accessLevel === 30
+                  ? "Gold"
+                  : ""}
+              </p>
+              <MyProfileEditInformaction onClick={() => navigate(`/${PrivateRoutes.PRIVATE}/${PrivateRoutes.BROKER}/${PrivateRoutes.PAYMENT}`)}>
+                Ver niveles
+              </MyProfileEditInformaction>
+            </DivInformationProfileDetail>
+            <DivInformationProfileDetail></DivInformationProfileDetail>
+          </>
+        )}
         {user?.brokerUser && (
           <>
             <DivCardCards>

@@ -45,7 +45,7 @@ function FormSeparateImages({
     let elements: JSX.Element[] = [];
     for (let i = 0; i < quantity; i++) {
       const imagesContainer = (
-        <DivImageInstructions>
+        <DivImageInstructions key={i}>
           <ButtonForUploading>
             <LabelButtonImage
               $error={!!(!images?.[i]?.length && error)}

@@ -48,6 +48,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import useSWRMutation from "swr/mutation";
 import {
+  ReportQuantityUrl,
   addReportVehicleCrash,
   addReportVehicleDamage,
   addReportVehicleFire,
@@ -56,6 +57,7 @@ import {
   reportInClientUserDamageUrl,
   reportInClientUserFireUrl,
   reportInClientUserTheftUrl,
+  reportQuantity,
 } from "..";
 import {
   emptyClientCreateReportValues,
@@ -66,6 +68,7 @@ import {
   IClientCreateReportContext,
   emptyClientCreateReportContext,
 } from "./empty-ClientCreatesReport-context";
+import useSWR from "swr";
 
 type onlyOwner = Pick<ThirdPartyVehicleValues, "owner">;
 type onlyLicensePhoto = Pick<ThirdPartyVehicleValues, "licensePhoto">;
@@ -85,6 +88,49 @@ const ClientCreateReportContext = createContext<IClientCreateReportContext>(
 );
 
 export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
+    const user = useSelector((store: AppStore) => store.user);
+
+    const { clientId, brokerId } = useParams();
+
+    const selectBrokerUrl =
+      brokerId && clientId
+        ? brokerId
+        : user.user?.userBroker
+        ? user.user?.id
+        : brokerId;
+
+    const selectClientUrl =
+      brokerId && clientId
+        ? clientId
+        : user.user?.userBroker
+        ? clientId
+        : user?.user?.id;
+
+    const { data: sinisQuantity } = useSWR(
+      ReportQuantityUrl(brokerId),
+      reportQuantity
+  );
+  
+  const accessLevelVerify = () => {
+    if (sinisQuantity?.quantity && user.user?.accessLevel?.toString().length) {
+      if (sinisQuantity?.quantity > 5 && user.user?.accessLevel === 0) {
+        setModalAccessLevel(true);
+      } else if (sinisQuantity?.quantity > 10 && user.user?.accessLevel === 10) {
+        setModalAccessLevel(true);
+      } else if (sinisQuantity?.quantity > 15 && user.user?.accessLevel === 20) {
+        setModalAccessLevel(true);
+      } else {
+        setModalAccessLevel(false);
+      }
+    }
+  };
+  useEffect(() => {
+    accessLevelVerify();
+  }, [sinisQuantity]);
+
+  const [modalAccessLevel, setModalAccessLevel] = useState<boolean>(false);
+
+
   const [inputValues, setInputValues] = useState<ClientCreateReportValues>(
     emptyClientCreateReportValues
   );
@@ -1207,24 +1253,6 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     }
   };
 
-  const { clientId, brokerId } = useParams();
-  
-  const user = useSelector((store: AppStore) => store.user);
-
-  const selectBrokerUrl =
-    brokerId && clientId
-      ? brokerId
-      : user.user?.userBroker
-      ? user.user?.id
-      : brokerId;
-
-  const selectClientUrl =
-    brokerId && clientId
-      ? clientId
-      : user.user?.userBroker
-      ? clientId
-      : user?.user?.id;
-
   const { error: errorReportVehicleTheft, trigger: triggerReportVehicleTheft } =
     useSWRMutation(
       reportInClientUserTheftUrl(selectBrokerUrl, selectClientUrl),
@@ -1329,6 +1357,7 @@ export const ClientCreateReportProvider = ({ children }: ChildrenType) => {
     amountInjured,
     amountVehicles,
     changeInputValuesNumber,
+    modalAccessLevel,
   };
 
   return (

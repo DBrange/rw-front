@@ -9,15 +9,16 @@ import { PrivateRoutes } from "../../../../models/types/routes";
 import {
   DivInformationDetail,
   DivInformationDetailImgsBox,
-  DivInformationMyProfile,
   ImageDetail,
 } from "../MiProfile/MiProfile.styled";
 import {
+  AInspectionDetail,
   BtnInspectionDetail,
   DivHeaderInspectionDetail,
   H2InspectionDetail,
   SectionHeaderInspectionDetail,
 } from "./InspectionDetail.styled";
+import { DivInformationClientProfile } from "../ClientProfile/ClientProfile.styled";
 
 function InspectionDetail({
   values,
@@ -97,7 +98,7 @@ function InspectionDetail({
             <></>
           )}
 
-          <DivInformationMyProfile>
+          <DivInformationClientProfile>
             {dataClientHTML()}
             <H2InspectionDetail>Vehiculo</H2InspectionDetail>
             <DivInformationDetail>
@@ -176,7 +177,7 @@ function InspectionDetail({
                 </DivInformationDetail>
               </>
             )}
-          </DivInformationMyProfile>
+          </DivInformationClientProfile>
         </>
       );
     }
@@ -212,7 +213,7 @@ function InspectionDetail({
             <></>
           )}
 
-          <DivInformationMyProfile>
+          <DivInformationClientProfile>
             {dataClientHTML()}
             {type === "CELULAR" && (
               <>
@@ -231,7 +232,7 @@ function InspectionDetail({
                 </DivInformationDetail>
               </>
             )}
-          </DivInformationMyProfile>
+          </DivInformationClientProfile>
         </>
       );
     }
@@ -252,7 +253,7 @@ function InspectionDetail({
 
       return (
         <>
-          <DivInformationMyProfile>
+          <DivInformationClientProfile>
             <H2InspectionDetail>Persona</H2InspectionDetail>
             <DivInformationDetail>
               <h4>Numero telefonico</h4>
@@ -313,7 +314,7 @@ function InspectionDetail({
                 </DivInformationDetail>
               </>
             )}
-          </DivInformationMyProfile>
+          </DivInformationClientProfile>
         </>
       );
     }
@@ -327,10 +328,11 @@ function InspectionDetail({
     }
   };
 
+
   return (
     <SectionHeaderInspectionDetail>
       {dataInHTML()}
-      {/* <a href={values?.pdf}>Imprimir</a> */}
+      {/* <AInspectionDetail href={values?.pdf}>Imprimir</AInspectionDetail> */}
     </SectionHeaderInspectionDetail>
   );
 }

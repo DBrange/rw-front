@@ -16,6 +16,8 @@ function ClientCreateInspectionBox() {
   } = useClientCreateInspectionContext();
   const userBroker = useSelector((store: AppStore) => store.user).user
     ?.userBroker;
+  
+  
   return (
     <>
       {userBroker ? <SidebarBroker /> : <Sidebar />}

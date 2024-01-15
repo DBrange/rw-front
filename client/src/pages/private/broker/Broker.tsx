@@ -5,6 +5,7 @@ import { lazy } from "react";
 
 const BrokerUser = lazy(() => import("./BrokerUser/BrokerUser"));
 const BrokerReports = lazy(() => import("./BrokerReports/BrokerReports"));
+const BrokerPayment = lazy(() => import("./BrokerPayment/BrokerPayment"));
 const BrokerClients = lazy(() => import("./BrokerClients/BrokerClients"));
 const ClientDetail = lazy(() => import("../components/ClientDetail/ClientDetail"));
 const BrokerFindClients = lazy(() => import("./BrokerFindClients/BrokerFindClients"));
@@ -96,6 +97,10 @@ function Broker() {
       <Route
         path={`${PrivateRoutes.CLIENTS_OF_BROKER}/:clientId/:sinisterId`}
         element={<ClientReportDetail />}
+      />
+      <Route
+        path={`${PrivateRoutes.PAYMENT}`}
+        element={<BrokerPayment />}
       />
     </RoutesWithNotFound>
   );
